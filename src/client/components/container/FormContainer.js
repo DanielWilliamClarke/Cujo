@@ -19,11 +19,12 @@ export default class FormContainer extends Component {
   }
   
   render() {
-    const {seo_title} = this.state;
+    const {seo_title} = this.state; 
+    
     return (
       <form id="article-form">
       <Input 
-        text="Daniels title"
+        text="Big Boy title"
         label="seo_title"
         type="text"
         id="seo_title"
