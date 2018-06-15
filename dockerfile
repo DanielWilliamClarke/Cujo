@@ -1,6 +1,6 @@
 FROM node:10
 
-RUN npm install webpack webpack-cli -g
+RUN npm install webpack webpack-cli nodemon -g
 
 WORKDIR /tmp
 COPY package.json /tmp/
@@ -12,8 +12,7 @@ RUN cp -a /tmp/node_modules /usr/src/app/
 
 RUN webpack
 
-ENV NODE_ENV=production 
 ENV PORT=4000
 
-CMD [ "/usr/local/bin/node", "./index.js" ]
+CMD [ "npm", "run", "start-nodemon" ]
 EXPOSE 4000
