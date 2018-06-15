@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./src/index.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/client/index.js");
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -20543,28 +20543,10 @@ if (false) {} else {
 
 /***/ }),
 
-/***/ "./src/index.js":
-/*!**********************!*\
-  !*** ./src/index.js ***!
-  \**********************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _FormContainer = __webpack_require__(/*! ./js/components/container/FormContainer */ "./src/js/components/container/FormContainer.js");
-
-var _FormContainer2 = _interopRequireDefault(_FormContainer);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/***/ }),
-
-/***/ "./src/js/components/container/FormContainer.js":
-/*!******************************************************!*\
-  !*** ./src/js/components/container/FormContainer.js ***!
-  \******************************************************/
+/***/ "./src/client/components/container/FormContainer.js":
+/*!**********************************************************!*\
+  !*** ./src/client/components/container/FormContainer.js ***!
+  \**********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -20585,7 +20567,7 @@ var _reactDom = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/i
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _Input = __webpack_require__(/*! ../presentational/Input */ "./src/js/components/presentational/Input.js");
+var _Input = __webpack_require__(/*! ../presentational/Input */ "./src/client/components/presentational/Input.js");
 
 var _Input2 = _interopRequireDefault(_Input);
 
@@ -20625,11 +20607,12 @@ var FormContainer = function (_Component) {
     value: function render() {
       var seo_title = this.state.seo_title;
 
+
       return _react2.default.createElement(
         "form",
         { id: "article-form" },
         _react2.default.createElement(_Input2.default, {
-          text: "Daniels title",
+          text: "Big Boy title",
           label: "seo_title",
           type: "text",
           id: "seo_title",
@@ -20651,10 +20634,10 @@ wrapper ? _reactDom2.default.render(_react2.default.createElement(FormContainer,
 
 /***/ }),
 
-/***/ "./src/js/components/presentational/Input.js":
-/*!***************************************************!*\
-  !*** ./src/js/components/presentational/Input.js ***!
-  \***************************************************/
+/***/ "./src/client/components/presentational/Input.js":
+/*!*******************************************************!*\
+  !*** ./src/client/components/presentational/Input.js ***!
+  \*******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -20711,6 +20694,24 @@ Input.propTypes = {
 };
 
 exports.default = Input;
+
+/***/ }),
+
+/***/ "./src/client/index.js":
+/*!*****************************!*\
+  !*** ./src/client/index.js ***!
+  \*****************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _FormContainer = __webpack_require__(/*! ./components/container/FormContainer */ "./src/client/components/container/FormContainer.js");
+
+var _FormContainer2 = _interopRequireDefault(_FormContainer);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ })
 
