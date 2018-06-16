@@ -24,7 +24,7 @@ export default class FormContainer extends Component {
     return (
       <form id="article-form">
       <Input 
-        text="Big Boy title"
+        text="Bad man title"
         label="seo_title"
         type="text"
         id="seo_title"
