@@ -6,8 +6,9 @@
   "scripts": {
     "setup": "npm install webpack webpack-cli karma-cli nodemon -g",
     "build": "webpack --mode development",
-    "start": "webpack-dev-server --open --mode development",
-    "start-nodemon": "nodemon src/server/index.js",
+    "start:dev:client": "webpack-dev-server --open --mode development",
+    "start:dev:server": "nodemon src/server/index.js",
+    "start:prod": "node src/server/index.js",
     "test": "karma start",
     "coverage": "karma start --no-auto-watch --coverage=true || echo done"
   },
