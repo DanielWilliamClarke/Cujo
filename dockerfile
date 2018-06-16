@@ -14,5 +14,5 @@ RUN webpack
 
 ENV PORT=4000
 
-CMD [ "npm", "run", "start-nodemon" ]
+CMD [ "node", "usr/src/app/src/server/index.js" ]
 EXPOSE 4000
