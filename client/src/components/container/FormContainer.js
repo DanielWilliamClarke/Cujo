@@ -8,11 +8,14 @@ export default class FormContainer extends Component {
     super();
 
     this.state = {
-      seo_title: "",
-    };
+      seo_title: "", 
+    };  
 
     this.handleChange = this.handleChange.bind(this);
   }
+
+
+
 
   handleChange (event) {
       this.setState({[event.target.id]: event.target.value});
@@ -22,15 +25,16 @@ export default class FormContainer extends Component {
     const {seo_title} = this.state; 
     
     return (
-      <form id="article-form">
+      <form id="article-form"> 
       <Input 
-        text="Bad man title"
+        text="Form Title"
         label="seo_title"
         type="text"
         id="seo_title"
         value={seo_title}
         handleChange={this.handleChange}
       />
+      <p>Compile Test - Boom</p>
       </form>
     );
   }
