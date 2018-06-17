@@ -1,13 +1,13 @@
 {
   "name": "modern-cv-client",
   "version": "0.0.1",
-  "description": "",
-  "main": "src/index.js",
+  "description": "A modern CV app client implemented using React, GraphQL",
+  "main": "index.js",
   "scripts": {
     "setup": "npm install webpack webpack-cli karma-cli nodemon -g && npm install",
     "build": "webpack --mode development",
     "start:dev": "webpack-dev-server --open --mode development",
-    "start:prod": "node index.js",
+    "start:prod": "node ./index.js",
     "test": "karma start",
     "coverage": "karma start --no-auto-watch --coverage=true || echo done"
   },
