@@ -1,0 +1,30 @@
+{
+  "name": "modern-cv-server",
+  "version": "0.0.1",
+  "description": "A modern CV app server implemented using Express, graphQL and a MongoDB data store",
+  "main": "index.js",
+  "scripts": {
+    "setup": "npm install nodemon -g && npm install",
+    "start:dev": "nodemon ./index.js",
+    "start:prod": "node ./index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DanielWilliamClarke/modern-cv-app.git"
+  },
+  "keywords": [
+    "Express",
+    "GraphQL",
+    "CV",
+    "MERN"
+  ],
+  "author": "Daniel Clarke",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DanielWilliamClarke/modern-cv-app/issues"
+  },
+  "homepage": "https://github.com/DanielWilliamClarke/modern-cv-app#readme",
+  "devDependencies": {
+    "express": "^4.16.3"
+  }
+}
