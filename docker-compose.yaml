@@ -1,13 +1,17 @@
-version: '3'
+version: '3.6'
+
 services: 
   client: 
     build: ./client
-    restart: always
     ports:
       - "3001:4000"
+      - "8080:8080"
+    volumes: 
+      - ./client/src:/usr/src/app/src:rw
+      - ./client/node_modules:/usr/src/app/node_modules
+    command: npm run start:watch
   server: 
     build: ./server
-    restart: always
     ports:
       - "3002:4000"
     links:
