@@ -15,5 +15,5 @@ RUN webpack
 
 ENV PORT=4000
 
-CMD [ "npm", "start:prod" ]
+CMD [ "npm", "run", "start:prod" ]
 EXPOSE 4000
