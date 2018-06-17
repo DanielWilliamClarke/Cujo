@@ -1,4 +1,4 @@
-import Input from "../src/client/components/presentational/Input";
+import Input from "../src/components/presentational/Input";
 
 describe("A Sample Test Suite", () => {
   it("Evaluates to true", () => {

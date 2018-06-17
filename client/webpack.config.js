@@ -1,8 +1,8 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 var path = require('path');
 
-var BUILD_DIR = path.resolve(__dirname, './dist');
-var APP_DIR = path.resolve(__dirname, './src/client');
+var BUILD_DIR = path.resolve(__dirname, './public');
+var APP_DIR = path.resolve(__dirname, './src');
 
 module.exports = {
   devtool: 'source-map',
@@ -16,7 +16,7 @@ module.exports = {
   module: {
     rules: [{
         test: /\.js$/,
-        exclude: /node_modules|test|dist|coverage/,
+        exclude: /node_modules|test/,
         use: {
           loader: "babel-loader"
         }

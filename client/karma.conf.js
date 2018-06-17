@@ -1,6 +1,5 @@
 // Karma configuration
 // Generated on Sat Jun 16 2018 00:22:01 GMT+0100 (GMT Summer Time)
-var webpackConfig = require('./webpack.config.js');
 
 module.exports = function (config) {
   config.set({
@@ -79,6 +78,7 @@ module.exports = function (config) {
 
     webpack: {
       cache: true,
+      mode: "development",
       devtool: 'inline-source-map',
       module: {
         rules: [
