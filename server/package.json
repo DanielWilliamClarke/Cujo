@@ -6,7 +6,9 @@
   "scripts": {
     "setup": "npm install nodemon -g && npm install",
     "start:dev": "nodemon ./index.js",
-    "start:prod": "node ./index.js"
+    "start:prod": "node ./index.js",
+    "test": "karma start",
+    "coverage": "karma start --no-auto-watch --coverage=true || echo done"
   },
   "repository": {
     "type": "git",
@@ -25,6 +27,14 @@
   },
   "homepage": "https://github.com/DanielWilliamClarke/modern-cv-app#readme",
   "devDependencies": {
-    "express": "^4.16.3"
+    "express": "^4.16.3",
+    "istanbul-instrumenter-loader": "^3.0.1",
+    "jasmine-core": "^3.1.0",
+    "karma": "^2.0.3",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-coverage": "^1.1.2",
+    "karma-jasmine": "^1.1.2",
+    "karma-jasmine-html-reporter": "^1.1.0",
+    "karma-mocha-reporter": "^2.2.5"
   }
 }
