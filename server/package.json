@@ -28,6 +28,8 @@
   "homepage": "https://github.com/DanielWilliamClarke/modern-cv-app#readme",
   "devDependencies": {
     "express": "^4.16.3",
+    "express-graphql": "^0.6.12",
+    "graphql": "^0.13.2",
     "istanbul-instrumenter-loader": "^3.0.1",
     "jasmine-core": "^3.1.0",
     "karma": "^2.0.3",
