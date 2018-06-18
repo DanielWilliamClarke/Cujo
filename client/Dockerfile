@@ -1,6 +1,6 @@
 FROM node:10
 
-RUN npm install webpack webpack-cli -g
+RUN npm install webpack webpack-cli webpack-dev-server -g
 
 WORKDIR /tmp
 COPY package.json /tmp/
