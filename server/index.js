@@ -1,31 +1,20 @@
 const express = require('express');
 const graphqlHTTP = require('express-graphql');
-const { buildSchema } = require('graphql');
+const mongoose = require("mongoose");
 
-// Construct a schema, using GraphQL schema language
-var schema = buildSchema(`
-  type Query {
-    hello: String
-  }
-`);
+const schema = require("./src/graphql");
 
-// The root provides a resolver function for each API endpoint
-var root = {
-  hello: () => {
-    return 'Hello world!';
-  },
-};
-
-var app = express();
-
-const port = process.env.PORT || 3001;
-
+const app = express();
 app.use("/", graphqlHTTP({
   schema: schema,
-  rootValue: root,
   graphiql: true
-})); 
+}));  
 
+// Connect mongo database
+const mongoPort = process.env.MONGOPRORT || 27017;
+mongoose.connect(`mongodb://localhost/${mongoPort}`);
+
+const port = process.env.PORT || 3001;
 app.listen(port, () => {
   console.log(`Running a GraphQL API server at localhost:${port}/`);
 });
