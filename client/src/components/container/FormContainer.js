@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
 import Input from "../presentational/Input";
 import ReactMarkdown from 'react-markdown';
 
@@ -9,7 +8,7 @@ export default class FormContainer extends Component {
     super();
 
     this.state = {
-      seo_title: "",
+      markdown: "",
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -20,27 +19,21 @@ export default class FormContainer extends Component {
   }
 
   render() {
-    const { seo_title } = this.state;
+    /* figured out how to style the markdown */
+    /* https://github.com/rexxars/react-markdown */
+    const strong = props => <strong className="asd">{props.children}</strong>;
+    const heading = props => <h2 className="asd">{props.children}</h2>;
 
-    const markdown = '## Reasons React is great   \n' + 
-    '**I am the next line**\n' +
-    '---\n' + 
-    '- I am a list **item**\n' + 
-    '- I am another list **item**\n' +
-    '![alt text](https://media.licdn.com/dms/image/C5603AQH1jMzGibRNHw/profile-displayphoto-shrink_200_200/0?e=1534982400&v=beta&t=JMyBNrBDUhwNHkLGA9VQE61zNbpE--yljnwalK3Dkp4 "King of SW")'
-    
-
+    const { markdown } = this.state;
     return (
       <form id="article-form">
-
-        <ReactMarkdown source={markdown} />
-
+        <ReactMarkdown source={markdown} renderers={{heading, strong}} />
         <Input
-          text="My Title yo"
-          label="seo_title"
+          text="Write your own markdown son!" 
+          label="markdown"
           type="text"
-          id="seo_title"
-          value={seo_title}
+          id="markdown"
+          value={markdown}
           handleChange={this.handleChange}
         />
         <p>Compile Test - Boom</p>
@@ -49,5 +42,3 @@ export default class FormContainer extends Component {
   }
 }
 
-const wrapper = document.getElementById("create-article-form");
-wrapper ? ReactDOM.render(<FormContainer />, wrapper) : false;
