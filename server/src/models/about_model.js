@@ -1,17 +1,7 @@
 var mongoose = require("mongoose");
 
 const aboutSchema = new mongoose.Schema({
-  id: {
-    type: mongoose.Schema.Types.ObjectId,
-    required: true,
-  },
-  about: {
-    type: String,
-    required: true
-  }
-});
+  about: String
+}, {collection: "cvData"});
 
-const aboutModel = mongoose.model("about", aboutSchema)
-const GetAbout = () => aboutModel.find();
-
-module.exports = GetAbout;
+module.exports = mongoose.model("about", aboutSchema);
