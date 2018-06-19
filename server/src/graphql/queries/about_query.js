@@ -1,11 +1,11 @@
 
-const aboutBlogType = require("../types/about_type");
-const GetAbout = require("../../models/about_model");
+const aboutType = require("../types/about_type");
+const aboutModel = require("../../models/about_model");
 
 module.exports = {
   GetAbout: {
     description: "Get about block",
-    type: aboutBlogType,
-    resolve: GetAbout
+    type: aboutType,
+    resolve: () => aboutModel.findOne() 
   }
 };

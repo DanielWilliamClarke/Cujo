@@ -7,10 +7,7 @@ module.exports = new GraphQLObjectType({
   name: "About",
   description: "markdown for about section",
   fields: {
-    id: {
-      type: new GraphQLNonNull(GraphQLID),
-    },
-    content: {
+    about: {
       type: GraphQLString
     }
   }

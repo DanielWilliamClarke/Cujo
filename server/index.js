@@ -12,7 +12,7 @@ app.use("/", graphqlHTTP({
 
 // Connect mongo database
 const mongoPort = process.env.MONGOPRORT || 27017;
-mongoose.connect(`mongodb://localhost/${mongoPort}`);
+mongoose.connect(`mongodb://external:readOnly@localhost:${mongoPort}/moderncvapp`);
 
 const port = process.env.PORT || 3001;
 app.listen(port, () => {
