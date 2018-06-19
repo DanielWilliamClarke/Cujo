@@ -4,4 +4,7 @@ const aboutSchema = new mongoose.Schema({
   about: String
 }, {collection: "cvData"});
 
-module.exports = mongoose.model("about", aboutSchema);
+const aboutModel = mongoose.model("about", aboutSchema);
+const GetAbout = () => aboutModel.findOne();
+
+module.exports = GetAbout;
