@@ -21,6 +21,7 @@ services:
     image: mongo
     volumes:
       - mongodbvolume:/data/db
+      - ./mongo:/setup
     ports:
       - "27017:27017"
 
