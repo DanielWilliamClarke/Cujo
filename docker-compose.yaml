@@ -1,6 +1,7 @@
 version: '3.6'
 
 services: 
+
   client: 
     build: ./client
     ports:
@@ -10,12 +11,14 @@ services:
       - ./client/src:/usr/src/app/src:rw
       - ./client/node_modules:/usr/src/app/node_modules
     command: npm run start:watch
+
   server: 
     build: ./server
     ports:
       - "3002:4000"
     links:
       - mongo
+
   mongo:
     container_name: mongo
     image: mongo
@@ -24,7 +27,41 @@ services:
       - ./mongo:/setup
     ports:
       - "27017:27017"
-      
 
+  minio:
+    image: minio/minio
+    container_name: minioserver
+    ports:
+      - 9000:9000
+    env_file:
+      - ./minio.env
+    command: server /data
+    volumes:
+      - minio:/root/.minio/ 
+    networks: 
+      - minio
+
+  # mc:
+  #   image: minio/mc
+  #   depends_on:
+  #     - minio
+  #   container_name: minioclient
+  #   env_file:
+  #     - ./minio.env
+  #   networks: 
+  #     - minio
+  #   entrypoint: >
+  #     /bin/sh -c "
+  #     /usr/bin/mc config host list;
+  #     /usr/bin/mc admin info local;
+  #     echo $${MINIO_ACCESS_KEY} $${MINIO_SECRET_KEY};
+  #     /usr/bin/mc config host add devminio http://172.19.0.2:9000 $${MINIO_ACCESS_KEY} $${MINIO_SECRET_KEY};
+  #     usr/bin/mc mb devminio/devpublic;
+  #     /usr/bin/mc policy public devminio/devpublic;"
+      
 volumes:
-  mongodbvolume: 
+  mongodb: 
+  minio:
+
+networks: 
+  minio:
