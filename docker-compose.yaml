@@ -24,7 +24,7 @@ services:
     image: mongo
     volumes:
       - mongodbvolume:/data/db
-      - ./mongo:/setup
+      - ./storage/mongo:/setup
     ports:
       - "27017:27017"
 
@@ -34,31 +34,29 @@ services:
     ports:
       - 9000:9000
     env_file:
-      - ./minio.env
+      - ./storage/minio/minio.env
     command: server /data
     volumes:
       - minio:/root/.minio/ 
     networks: 
       - minio
-
-  # mc:
-  #   image: minio/mc
-  #   depends_on:
-  #     - minio
-  #   container_name: minioclient
-  #   env_file:
-  #     - ./minio.env
-  #   networks: 
-  #     - minio
-  #   entrypoint: >
-  #     /bin/sh -c "
-  #     /usr/bin/mc config host list;
-  #     /usr/bin/mc admin info local;
-  #     echo $${MINIO_ACCESS_KEY} $${MINIO_SECRET_KEY};
-  #     /usr/bin/mc config host add devminio http://172.19.0.2:9000 $${MINIO_ACCESS_KEY} $${MINIO_SECRET_KEY};
-  #     usr/bin/mc mb devminio/devpublic;
-  #     /usr/bin/mc policy public devminio/devpublic;"
       
+  createbuckets:
+    image: minio/mc
+    depends_on:
+      - minio
+    env_file:
+      - ./storage/minio/minio.env
+    networks: 
+      - minio
+    entrypoint: >
+      /bin/sh -c "
+      sleep 2;
+      /usr/bin/mc config host add devminio $${MINIO_DEV_HOST}:$${MINIO_PORT} $${MINIO_ACCESS_KEY} $${MINIO_SECRET_KEY};
+      /usr/bin/mc mb devminio/devpublic;
+      /usr/bin/mc policy download devminio/devpublic;
+      exit 0;"
+
 volumes:
   mongodb: 
   minio:
