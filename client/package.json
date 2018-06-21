@@ -23,6 +23,12 @@
     "url": "https://github.com/DanielWilliamClarke/modern-cv-app/issues"
   },
   "homepage": "https://github.com/DanielWilliamClarke/modern-cv-app#readme",
+  "dependencies": {
+    "prop-types": "^15.6.1",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "react-markdown": "^3.3.3"
+  },
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.4",
@@ -41,10 +47,6 @@
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^3.0.0",
     "nodemon": "^1.17.5",
-    "prop-types": "^15.6.1",
-    "react": "^16.4.1",
-    "react-dom": "^16.4.1",
-    "react-markdown": "^3.3.3",
     "webpack": "^4.12.0",
     "webpack-cli": "^3.0.7",
     "webpack-dev-server": "^3.1.4"

@@ -24,6 +24,7 @@ services:
       - ./mongo:/setup
     ports:
       - "27017:27017"
+      
 
 volumes:
   mongodbvolume: 
