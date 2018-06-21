@@ -2,64 +2,68 @@ version: '3.6'
 
 services: 
 
-  client: 
-    build: ./client
-    ports:
-      - "3001:4000"
-      - "8080:8080"
-    volumes: 
-      - ./client/src:/usr/src/app/src:rw
-      - ./client/node_modules:/usr/src/app/node_modules
-    command: npm run start:watch
+  # client: 
+  #   build: ./client
+  #   ports:
+  #     - "3001:4000"
+  #     - "8080:8080"
+  #   volumes: 
+  #     - ./client/src:/usr/src/app/src:rw
+  #     - ./client/node_modules:/usr/src/app/node_modules
+  #   command: npm run start:watch
 
-  server: 
-    build: ./server
-    ports:
-      - "3002:4000"
-    links:
-      - mongo
+  # server: 
+  #   build: ./server
+  #   ports:
+  #     - "3002:4000"
+  #   depends_on:
+  #     - mongosetup
+  #   command: npm run start:dev
 
   mongo:
     container_name: mongo
     image: mongo
     volumes:
-      - mongodbvolume:/data/db
+      - mongodb:/data/db
       - ./storage/mongo:/setup
+    networks: 
+      - mongodb
     ports:
       - "27017:27017"
 
-  minio:
-    image: minio/minio
-    container_name: minioserver
-    ports:
-      - 9000:9000
-    env_file:
-      - ./storage/minio/minio.env
-    command: server /data
-    volumes:
-      - minio:/root/.minio/ 
-    networks: 
-      - minio
+  # minio:
+  #   image: minio/minio
+  #   container_name: minioserver
+  #   ports:
+  #     - 9000:9000
+  #   env_file:
+  #     - ./storage/minio/minio.env
+  #   command: server /data
+  #   volumes:
+  #     - minio:/root/.minio/ 
+  #   networks: 
+  #     - minio
       
-  createbuckets:
-    image: minio/mc
-    depends_on:
-      - minio
-    env_file:
-      - ./storage/minio/minio.env
-    networks: 
-      - minio
-    entrypoint: >
-      /bin/sh -c "
-      sleep 2;
-      /usr/bin/mc config host add devminio $${MINIO_DEV_HOST}:$${MINIO_PORT} $${MINIO_ACCESS_KEY} $${MINIO_SECRET_KEY};
-      /usr/bin/mc mb devminio/devpublic;
-      /usr/bin/mc policy download devminio/devpublic;
-      exit 0;"
+  # createbuckets:
+  #   image: minio/mc
+  #   depends_on:
+  #     - minio
+  #   env_file:
+  #     - ./storage/minio/minio.env
+  #   networks: 
+  #     - minio
+  #   entrypoint: >
+  #     /bin/sh -c "
+  #     sleep 2;
+  #     /usr/bin/mc config host add devminio $${MINIO_DEV_HOST}:9000 $${MINIO_ACCESS_KEY} $${MINIO_SECRET_KEY};
+  #     /usr/bin/mc mb devminio/devpublic;
+  #     /usr/bin/mc policy download devminio/devpublic;
+  #     exit 0;"
 
 volumes:
   mongodb: 
   minio:
 
 networks: 
+  mongodb:
   minio:

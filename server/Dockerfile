@@ -1,5 +1,7 @@
 FROM node:10
 
+RUN npm install nodemon -g
+
 WORKDIR /tmp
 COPY package.json /tmp/
 RUN npm config set registry https://registry.npmjs.org/
