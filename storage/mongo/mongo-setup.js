@@ -1,11 +1,3 @@
-
-db.createUser(
-  {
-      user: "DWC",
-      pwd: "readWritePass",
-      roles: ["readWrite", "dbAdmin"]
-  })
-
 db.createUser(
   {
       user: "external",
