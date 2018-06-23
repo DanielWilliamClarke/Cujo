@@ -13,5 +13,8 @@ RUN cp -a /tmp/node_modules /usr/src/app/
 
 ENV PORT=4000
 
+ENV MONGOHOST=localhost
+ENV MONGOPORT=27017
+
 CMD [ "npm", "run", "start:prod" ]
 EXPOSE 4000
