@@ -26,8 +26,8 @@ services:
     env_file: 
       - ./server/server.env
     environment:
-      - MONGOPORT=27017
-      - MONGOHOST=mongo
+      - MONGOHOST=mongo # override the mongo host
+      - NODEENV=docker # override the node env
     command: npm run start:dev
 
   mongo:
