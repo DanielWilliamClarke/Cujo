@@ -8,7 +8,7 @@
     "build": "webpack --mode development",
     "start:dev": "webpack-dev-server --open --mode development",
     "start:watch": "webpack-dev-server --mode development --host 0.0.0.0 --hot --inline",
-    "start:prod": "node ./index.js",
+    "start:docker": "npm run build && nodemon ./index.js",
     "test": "karma start",
     "coverage": "karma start --no-auto-watch --coverage=true || echo done"
   },
@@ -24,6 +24,9 @@
   },
   "homepage": "https://github.com/DanielWilliamClarke/modern-cv-app#readme",
   "dependencies": {
+    "apollo-fetch": "^0.7.0",
+    "graphql": "^0.13.2",
+    "graphql-tag": "^2.9.2",
     "prop-types": "^15.6.1",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
