@@ -10,7 +10,9 @@ services:
     volumes: 
       - ./client/src:/usr/src/app/src:rw
       - ./client/node_modules:/usr/src/app/node_modules
-    command: npm run start:watch
+    networks: 
+      - server
+    command: npm run start:docker
 
   server: 
     build: ./server
@@ -23,6 +25,7 @@ services:
       - ./server/index.js:/usr/src/app/index.js:rw
     networks: 
       - mongodb
+      - server
     env_file: 
       - ./server/server.env
     environment:
@@ -78,4 +81,5 @@ volumes:
 
 networks: 
   mongodb:
-  minio:
+  minio: 
+  server:
