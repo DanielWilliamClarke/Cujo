@@ -11,7 +11,7 @@ FROM clientBase as clientDependencies
 RUN npm install --only=production 
 RUN cp -R node_modules prod_node_modules
 
-RUN npm install
+RUN npm install --only=dev
 
 #BUILD -----------------------------------
 FROM clientDependencies as clientBuild
