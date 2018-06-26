@@ -18,7 +18,6 @@ app.use("/", graphqlHTTP({
 
 const mongoSetup = new MongoSetup({
   host: process.env.MONGOHOST,
-  port: process.env.MONGOPORT,
   user: process.env.MONGOUSER,
   pass: process.env.MONGOPASS,
   collection: process.env.MONGOCOLLECTION
