@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const ConstructURI = config => `mongodb://${config.user}:${config.pass}@${config.host}:${config.port}/${config.collection}`
+const ConstructURI = config => `mongodb://${config.user}:${config.pass}@${config.host}/${config.collection}`
 
 module.exports = class MongoSetup {
 

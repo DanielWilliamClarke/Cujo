@@ -12,7 +12,7 @@ app.get("/cvdata", (req, res) => {
   /* it appears that when client(server) and server(server) containers are in
   a network (networks: server) then the internal exposed port should be used to connect,
   not the exposed external port of the container as prescribed in docker-compose */
-  const uri = 'http://server:4000/';
+  const uri = 'http://server/';
 
   const query = `
     query {
