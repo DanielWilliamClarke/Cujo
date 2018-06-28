@@ -7,7 +7,7 @@ jobs:
       - checkout
       - run:
           name: Setup Environment
-          command: cd ./client && npm run setup
+          command: cd ./client && sudo npm run setup
 
   server:
     working_directory: ~/server
