@@ -24,7 +24,6 @@ jobs:
           command: cd ./client && sudo npm run coverage
 
   server:
-    working_directory: ~/server
     docker:
       - image: circleci/node:10-browsers
     steps:
@@ -35,17 +34,17 @@ jobs:
           - v1-dependencies-
       - run:
           name: Setup Environment
-          command: cd ./client && sudo npm run setup
+          command: cd ./server && sudo npm run setup
       - save_cache:
           paths:
             - ./client/node_modules
           key: v1-dependencies-{{ checksum "./server/package.json" }}
       - run:
           name: Run Tests
-          command: cd ./client && sudo npm run test
+          command: cd ./server && sudo npm run test
       - run:
           name: Run Coverage
-          command: cd ./client && sudo npm run coverage
+          command: cd ./server && sudo npm run coverage
 
 workflows:
   version: 2
