@@ -7,7 +7,7 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "package.json" }}
+          - v1-dependencies-{{ checksum "./client/package.json" }}
           - v1-dependencies-
       - run:
           name: Setup Environment
@@ -15,7 +15,7 @@ jobs:
       - save_cache:
           paths:
             - ./client/node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
+          key: v1-dependencies-{{ checksum "./client/package.json" }}
       - run:
           name: Run Tests
           command: cd ./client && sudo npm run test
