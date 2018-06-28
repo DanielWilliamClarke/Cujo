@@ -1,14 +1,13 @@
 version: 2
 jobs:
   client:
-    working_directory: ~/client
     docker:
       - image: circleci/node:10
     steps:
       - checkout
       - run:
           name: Setup Environment
-          command: npm run setup
+          command: cd ./client && npm run setup
 
   server:
     working_directory: ~/server
