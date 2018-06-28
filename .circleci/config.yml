@@ -7,7 +7,7 @@ jobs:
     steps:
       - checkout
   server:
-    working_directory: ~/client
+    working_directory: ~/server
     docker:
       - image: circleci/node:10
     steps:
