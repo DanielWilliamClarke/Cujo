@@ -1,18 +1,21 @@
 version: 2
 jobs:
   client:
-    dependencies:
-      cache_directories:
-        - "~/.google-chrome"
-      pre:
-        - ${HOME}/${CIRCLE_PROJECT_REPONAME}/get-chrome.sh .google-chrome
     docker:
-      - image: circleci/node:10
+      - image: circleci/node:10-browsers
     steps:
       - checkout
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          - v1-dependencies-
       - run:
           name: Setup Environment
           command: cd ./client && sudo npm run setup
+      - save_cache:
+          paths:
+            - ./client/node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
       - run:
           name: Run Tests
           command: cd ./client && sudo npm run test
