@@ -6,8 +6,17 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Move To Client
+          command: cd ./client
+      - run:
           name: Setup Environment
-          command: cd ./client && sudo npm run setup
+          command: sudo npm run setup
+      - run:
+          name: Run Tests
+          command: sudo npm run test
+      - run:
+          name: Run Coverage
+          command: sudo npm run coverage
 
   server:
     working_directory: ~/server
