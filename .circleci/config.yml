@@ -1,0 +1,23 @@
+version: 2
+jobs:
+  client:
+    working_directory: ~/client
+    docker:
+      - image: circleci/node:10-alpine
+    steps:
+      - checkout
+      - run:
+          name: update-npm 
+          command: npm run setup
+      - run: # run tests
+          name: test
+          command: npm run test
+      - run: # run coverage report
+          name: code-coverage
+          command: npm run coverage
+      
+workflows:
+  version: 2
+  build_test_client_server:
+    jobs:
+      - client
