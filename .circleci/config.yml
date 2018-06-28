@@ -1,13 +1,11 @@
 version: 2
-
-dependencies:
-  cache_directories:
-    - "~/.google-chrome"
-  pre:
-    - ${HOME}/${CIRCLE_PROJECT_REPONAME}/get-chrome.sh .google-chrome
-
 jobs:
   client:
+    dependencies:
+      cache_directories:
+        - "~/.google-chrome"
+      pre:
+        - ${HOME}/${CIRCLE_PROJECT_REPONAME}/get-chrome.sh .google-chrome
     docker:
       - image: circleci/node:10
     steps:
