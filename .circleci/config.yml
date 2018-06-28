@@ -6,6 +6,10 @@ jobs:
       - image: circleci/node:10
     steps:
       - checkout
+      - run:
+          name: Setup Environment
+          command: npm run setup
+
   server:
     working_directory: ~/server
     docker:
