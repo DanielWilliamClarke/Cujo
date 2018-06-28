@@ -6,9 +6,16 @@ jobs:
       - image: circleci/node:10
     steps:
       - checkout
+  server:
+    working_directory: ~/client
+    docker:
+      - image: circleci/node:10
+    steps:
+      - checkout
 
 workflows:
   version: 2
   build_test_client_server:
     jobs:
       - client
+      - server
