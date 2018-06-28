@@ -1,4 +1,11 @@
 version: 2
+
+dependencies:
+  cache_directories:
+    - "~/.google-chrome"
+  pre:
+    - ${HOME}/${CIRCLE_PROJECT_REPONAME}/get-chrome.sh .google-chrome
+
 jobs:
   client:
     docker:
@@ -13,7 +20,7 @@ jobs:
           command: cd ./client && sudo npm run test
       - run:
           name: Run Coverage
-          command: cd ./client&& sudo npm run coverage
+          command: cd ./client && sudo npm run coverage
 
   server:
     working_directory: ~/server
