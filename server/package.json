@@ -4,7 +4,7 @@
   "description": "A modern CV app server implemented using Express, graphQL and a MongoDB data store",
   "main": "index.js",
   "scripts": {
-    "setup": "npm install nodemon -g && npm install",
+    "setup": "npm install karma-cli nodemon -g && npm install",
     "start:dev": "nodemon ./index.js",
     "start:prod": "node ./index.js",
     "test": "karma start",
