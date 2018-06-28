@@ -37,7 +37,7 @@ jobs:
           command: cd ./server && sudo npm run setup
       - save_cache:
           paths:
-            - ./client/node_modules
+            - ./server/node_modules
           key: v1-dependencies-{{ checksum "./server/package.json" }}
       - run:
           name: Run Tests
