@@ -1,7 +1,7 @@
 version: 2
 jobs:
   client:
-    working_directory: ~/../client
+    working_directory: ~/client
     docker:
       - image: circleci/node:10
     steps:
