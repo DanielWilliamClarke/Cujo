@@ -5,7 +5,7 @@ module.exports = new GraphQLObjectType({
   name: "CV",
   description: "contains all aspects of the cv",
   fields: {
-    statement: {
+    cv: {
       type: GraphQLString
     }
   }
