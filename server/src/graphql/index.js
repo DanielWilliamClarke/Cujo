@@ -1,10 +1,10 @@
 const { GraphQLObjectType, GraphQLSchema } = require("graphql");
-const { GetAbout } = require("./queries/about_query");
+const { GetCV } = require("./queries/cv_query");
 
 const RootQuery = new GraphQLObjectType({
   name: 'RootQuery',
   fields: () => ({
-    GetAbout: GetAbout
+    GetCV: GetCV
   })
 });
 

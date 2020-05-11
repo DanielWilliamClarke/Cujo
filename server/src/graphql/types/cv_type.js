@@ -2,10 +2,10 @@ const { GraphQLObjectType } = require("graphql");
 const { GraphQLString } = require("graphql");
 
 module.exports = new GraphQLObjectType({
-  name: "About",
-  description: "markdown for about section",
+  name: "CV",
+  description: "contains all aspects of the cv",
   fields: {
-    about: {
+    statement: {
       type: GraphQLString
     }
   }
