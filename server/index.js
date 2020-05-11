@@ -1,7 +1,7 @@
 const dotenv = require("dotenv");
 const path = require("path");
 if (process.env.NODE_ENV !== 'prod' || process.env.NODE_ENV !== 'docker') {
-    dotenv.config({path: path.resolve(__dirname, 'server.env')});
+  dotenv.config({ path: path.resolve(__dirname, 'server.env') });
 }
 
 const express = require('express');
@@ -11,7 +11,7 @@ const MongoSetup = require("./src/connection/mongo_setup");
 const schema = require("./src/graphql");
 
 const app = express();
-app.use("/", graphqlHTTP({
+app.use("/cv", graphqlHTTP({
   schema: schema,
   graphiql: true
 }));
