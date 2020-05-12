@@ -3,3 +3,5 @@ coverage/
 public/
 .data/
 package-lock.json
+*.exe
+.env
