@@ -1,8 +1,13 @@
 db.createUser(
   {
-    user: "external",
-    pwd: "readOnly",
-    roles: ["read"]
+    user: "test_user",
+    pwd: "123456",
+    roles: [
+      {
+        role: "read",
+        db: "moderncvapp"
+      }
+    ]
   })
 
 db.createCollection("data")

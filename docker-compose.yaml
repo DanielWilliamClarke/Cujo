@@ -1,33 +1,33 @@
 version: '3.6'
 
-services: 
+services:
 
-  client: 
+  client:
     build: ./client
     ports:
       - "3001:4000" # nodemon / node
       - "8080:8080" # webpack-dev-server
-    volumes: 
+    volumes:
       - ./client/src:/usr/src/app/src:rw
       - ./client/node_modules:/usr/src/app/node_modules
-    networks: 
+    networks:
       - server
     command: npm run start:docker
 
-  server: 
+  server:
     build: ./server
     ports:
       - "3002:4000" # nodemon / node
     depends_on:
       - mongo
-    volumes: 
+    volumes:
       - ./server/src:/usr/src/app/src:rw
       - ./server/index.js:/usr/src/app/index.js:rw
-    networks: 
+    networks:
       - mongodb
       - server
-    env_file: 
-      - ./server/server.env
+    env_file:
+      - ./server/.env
     environment:
       - MONGOHOST=mongo # override the mongo host
       - NODEENV=docker # override the node env
@@ -39,11 +39,11 @@ services:
     volumes:
       - mongodb:/data/db
       - ./storage/mongo/mongo-setup.js:/docker-entrypoint-initdb.d/mongo-setup.js:ro
-    networks: 
+    networks:
       - mongodb
     ports:
-      - "27017:27017"   
-    env_file: 
+      - "27017:27017"
+    env_file:
       - ./storage/mongo/mongo.env
 
   minio:
@@ -55,17 +55,17 @@ services:
       - ./storage/minio/minio.env
     command: server /data
     volumes:
-      - minio:/root/.minio/ 
-    networks: 
+      - minio:/root/.minio/
+    networks:
       - minio
-      
+
   createbuckets:
     image: minio/mc
     depends_on:
       - minio
     env_file:
       - ./storage/minio/minio.env
-    networks: 
+    networks:
       - minio
     entrypoint: >
       /bin/sh -c "
@@ -76,10 +76,10 @@ services:
       exit 0;"
 
 volumes:
-  mongodb: 
+  mongodb:
   minio:
 
-networks: 
+networks:
   mongodb:
-  minio: 
+  minio:
   server:
