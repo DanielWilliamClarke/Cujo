@@ -13,10 +13,21 @@ import (
 	"github.com/danielwilliamclarke/cv_server/mongo"
 )
 
+type serverConfig struct {
+	Port string `env:"PORT,required"`
+}
+
 func main() {
+	// Parse server configuration
+	config := serverConfig{}
+	err := env.Parse(&config)
+	if err != nil {
+		log.Fatalf("%+v\n", err)
+	}
+
 	// Parse mongo configuration
 	mongoConfig := mongo.MongoConfig{}
-	err := env.Parse(&mongoConfig)
+	err = env.Parse(&mongoConfig)
 	if err != nil {
 		log.Fatalf("%+v\n", err)
 	}
@@ -30,5 +41,5 @@ func main() {
 	r.HandleFunc("/cv", cv.RouteHandler{Conn: client}.Get).Methods("GET")
 
 	loggedRouter := handlers.LoggingHandler(os.Stdout, r)
-	log.Fatal(http.ListenAndServe(":8000", loggedRouter))
+	log.Fatal(http.ListenAndServe(":"+config.Port, loggedRouter))
 }

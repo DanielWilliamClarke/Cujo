@@ -1,33 +1,28 @@
-#BASE -----------------------------------
-FROM node:10-alpine as serverBase
-
-WORKDIR /usr/src/app
-COPY package.json .
-
 #DEPENDENCIES -----------------------------------
-FROM serverBase as serverDependencies
+FROM golang:1.13-alpine as builder
 
-# copy production node_modules aside
-RUN npm install --only=production 
-RUN cp -R node_modules prod_node_modules
+LABEL maintainer="Daniel Clarke (clarkit@gmail.com)"
 
-RUN npm install --only=dev
+COPY /src /cv_svc
+WORKDIR /cv_svc
+
+RUN go mod tidy && go build
 
 #RELEASE -----------------------------------
-FROM serverBase AS serverRelease
+FROM alpine:3.11.6
 
-RUN npm install nodemon -g
+RUN mkdir ./cv_svc
+WORKDIR /cv_svc
 
-COPY --from=serverDependencies /usr/src/app/prod_node_modules ./node_modules
+COPY --from=builder /cv_svc/cv_server cv_server
 
-COPY src /usr/src/app/src
-COPY index.js /usr/src/app
-COPY package.json /usr/src/app
-COPY server.env /usr/src/app
+# Create user
+RUN adduser -D user && \
+  chown -R user /cv_svc
+USER user
 
-ENV PORT=4000
-ENV MONGOHOST=localhost
-ENV MONGOPORT=27017
-EXPOSE 4000
+# Set ports
+ENV PORT 5000
+EXPOSE 5000
 
-CMD ["npm", "run", "start:prod"]
+ENTRYPOINT ./cv_server

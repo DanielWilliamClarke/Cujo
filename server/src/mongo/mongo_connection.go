@@ -12,7 +12,6 @@ import (
 
 type MongoConfig struct {
 	Host     string `env:"MONGO_HOST,required"`
-	Port     string `env:"MONGO_PORT,required"`
 	User     string `env:"MONGO_USER,required"`
 	Pass     string `env:"MONGO_PASS,required"`
 	Database string `env:"MONGO_DATABASE,required"`
@@ -23,7 +22,7 @@ func (m MongoConfig) Connect(collectionName string) (*mongo.Collection, error) {
 	// Set client options
 	clientOptions := options.
 		Client().
-		ApplyURI(fmt.Sprintf("mongodb://%s:%s@%s:%s/%s", m.User, m.Pass, m.Host, m.Port, m.Database))
+		ApplyURI(fmt.Sprintf("mongodb://%s:%s@%s:%s/%s", m.User, m.Pass, m.Host, m.Database))
 
 	client, err := mongo.NewClient(clientOptions)
 	if err != nil {
