@@ -1,4 +1,5 @@
-# modern-cv-app
+# Cujo
+
 A Dockerised CV/Portfolio application built using a MGRN (Mongodb, Golang, React, Node) Technology stack.
 
 The app is arranged into a small microservice architecture.
