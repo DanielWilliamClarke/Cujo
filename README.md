@@ -1,23 +1,15 @@
 # modern-cv-app
-A Dockerised CV/Portfolio application built using a MERN Technology stack.
-
-The projects main purpose is to build experience with cutting edge web technologies and containerization.
+A Dockerised CV/Portfolio application built using a MGRN (Mongodb, Golang, React, Node) Technology stack.
 
 The app is arranged into a small microservice architecture.
 
 # Microservices
 
-**Client** - React / GraphQL / Material UI / Webpack
+**Client** - React / Webpack 
 
-**Server** - Express / GraphQL / Mongoose 
+**Server** - Golang
 
 **Storage** - MongoDB / Minio
-
-# Cross cutting concerns
-
-**Test** - Karma / Jasmine
-
-**Containerization** - Docker / Docker-Compose
 
 ---
 
