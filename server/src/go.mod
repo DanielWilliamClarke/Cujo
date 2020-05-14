@@ -1,4 +1,4 @@
-module github.com/danielwilliamclarke/cv_server
+module github.com/danielwilliamclarke/cujo_server
 
 go 1.13
 

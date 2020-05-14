@@ -7,8 +7,8 @@ import (
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 
-	"github.com/danielwilliamclarke/cv_server/cv"
-	"github.com/danielwilliamclarke/cv_server/mongo"
+	"github.com/danielwilliamclarke/cujo_server/cv"
+	"github.com/danielwilliamclarke/cujo_server/mongo"
 )
 
 type serverConfig struct {
