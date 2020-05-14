@@ -1,10 +1,11 @@
 package cv
 
 import (
-	"context"
+	ctx "context"
 	"log"
 	"net/http"
 
+	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 )
@@ -13,14 +14,14 @@ type RouteHandler struct {
 	Conn *mongo.Collection
 }
 
-func (r RouteHandler) Get(res http.ResponseWriter, req *http.Request) {
+func (r RouteHandler) Get(context *gin.Context) {
 
-	var cv TestModel
-	err := r.Conn.FindOne(context.TODO(), &bson.M{}).Decode(&cv)
+	var cv CurriculumVitae
+	err := r.Conn.FindOne(ctx.Background(), &bson.M{}).Decode(&cv)
 
 	if err != nil {
 		log.Printf("%+v\n", err)
 	}
 
-	res.Write([]byte(cv.CV))
+	context.JSON(http.StatusOK, cv)
 }
