@@ -1,15 +1,5 @@
 package cv
 
-import (
-	"go.mongodb.org/mongo-driver/bson/primitive"
-)
-
-type TestModel struct {
-	ID   primitive.ObjectID `json:"_id,omitempty" bson:"_id,omitempty"`
-	Isbn string             `json:"isbn,omitempty" bson:"isbn,omitempty"`
-	CV   string             `json:"cv" bson:"cv,omitempty"`
-}
-
 type CurriculumVitae struct {
 	Basics       Basics         `json:"basics"`
 	Work         []Work         `json:"work"`

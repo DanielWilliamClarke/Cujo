@@ -2,12 +2,10 @@ package main
 
 import (
 	"log"
-	"net/http"
-	"os"
 
 	"github.com/caarlos0/env/v6"
-	"github.com/gorilla/handlers"
-	"github.com/gorilla/mux"
+	"github.com/gin-contrib/cors"
+	"github.com/gin-gonic/gin"
 
 	"github.com/danielwilliamclarke/cv_server/cv"
 	"github.com/danielwilliamclarke/cv_server/mongo"
@@ -36,10 +34,18 @@ func main() {
 		log.Fatalf("%+v\n", err)
 	}
 
-	//Init Router
-	r := mux.NewRouter()
-	r.HandleFunc("/cv", cv.RouteHandler{Conn: client}.Get).Methods("GET")
+	// Create web server
+	gin.SetMode(gin.ReleaseMode)
+	router := gin.Default()
+	router.Use(cors.Default())
+	apiRoutingGroup := router.Group("/api/v1")
+	{
+		apiRoutingGroup.GET("/cv", cv.RouteHandler{Conn: client}.Get)
+	}
 
-	loggedRouter := handlers.LoggingHandler(os.Stdout, r)
-	log.Fatal(http.ListenAndServe(":"+config.Port, loggedRouter))
+	log.Printf("Cujo server started on port %s", config.Port)
+	err = router.Run(":" + config.Port)
+	if err != nil {
+		log.Fatalf("Error in starting server: %s", err)
+	}
 }
