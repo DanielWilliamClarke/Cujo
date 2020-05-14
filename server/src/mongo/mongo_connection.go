@@ -22,7 +22,7 @@ func (m MongoConfig) Connect(collectionName string) (*mongo.Collection, error) {
 	// Set client options
 	clientOptions := options.
 		Client().
-		ApplyURI(fmt.Sprintf("mongodb://%s:%s@%s:%s/%s", m.User, m.Pass, m.Host, m.Database))
+		ApplyURI(fmt.Sprintf("mongodb://%s:%s@%s/%s", m.User, m.Pass, m.Host, m.Database))
 
 	client, err := mongo.NewClient(clientOptions)
 	if err != nil {
