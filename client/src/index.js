@@ -4,7 +4,7 @@ import axios from 'axios';
 import './index.css';
 import App from './App';
 
-axios.get("http://localhost:5000/api/v1/cv")
+axios.get("/api/v1/cv")
   .then(res => {
     ReactDOM.render(
       <React.StrictMode>

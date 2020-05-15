@@ -1,41 +1,28 @@
-#BASE -----------------------------------
-FROM node:10-alpine as clientBase
-
-WORKDIR /usr/src/app
-COPY package.json .
-
-#DEPENDENCIES -----------------------------------
-FROM clientBase as clientDependencies
-
-# copy production node_modules aside
-RUN npm install --only=production 
-RUN cp -R node_modules prod_node_modules
-
-RUN npm install --only=dev
-
 #BUILD -----------------------------------
-FROM clientDependencies as clientBuild
+FROM node:10-alpine as build
 
-COPY . .
+WORKDIR /cloudl-client
+
+COPY package.json /cloudl-client/package.json
+
+RUN npm install
+
+RUN npm install react-scripts -g
+
+COPY . /cloudl-client
 
 RUN npm run build
 
-RUN mkdir build_result
-
-RUN cp -R index.js build_result/ && \
-        cp -R package.json build_result/ && \
-        cp -R public build_result/
-
 #RELEASE -----------------------------------
-FROM clientBase AS clientRelease
+FROM nginx:1.16.0
 
-RUN npm install webpack-dev-server nodemon -g
+COPY --from=build /cloudl-client/build /usr/share/nginx/html
 
-COPY --from=clientDependencies /usr/src/app/prod_node_modules ./node_modules
-COPY --from=clientBuild /usr/src/app/build_result .
+RUN rm /etc/nginx/conf.d/default.conf
 
-ENV PORT=4000
-EXPOSE 4000
-EXPOSE 8080
+COPY nginx/nginx.conf /etc/nginx/conf.d
 
-CMD ["npm", "run", "start:docker"]
+EXPOSE 80
+
+# Start Nginx server
+CMD ["/bin/bash", "-c", "nginx -g \"daemon off;\""]
