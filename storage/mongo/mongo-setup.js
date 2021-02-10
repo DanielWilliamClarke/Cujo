@@ -16,7 +16,7 @@ db.data.insertOne({
   basics: {
     name: "Daniel William Clarke",
     label: "Full Stack Software Engineer",
-    picture: "https://media-exp1.licdn.com/dms/image/C5603AQH1jMzGibRNHw/profile-displayphoto-shrink_200_200/0?e=1594857600&v=beta&t=9zjXcYKrGtbkdmKKowGExVauNzMSD7DS3oeKOIwnGno",
+    picture: "/assets/headshot.jpg",
     email: "clarkit@gmail.com",
     phone: "07123456789",
     website: "https://www.danielwilliamclarke.com",
