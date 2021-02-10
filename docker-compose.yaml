@@ -41,35 +41,6 @@ services:
     env_file:
       - ./storage/mongo/mongo.env
 
-  minio:
-    image: minio/minio
-    container_name: minioserver
-    ports:
-      - 9001:9000
-    env_file:
-      - ./storage/minio/minio.env
-    command: server /data
-    volumes:
-      - minio:/root/.minio/
-    networks:
-      - minio
-
-  createbuckets:
-    image: minio/mc
-    depends_on:
-      - minio
-    env_file:
-      - ./storage/minio/minio.env
-    networks:
-      - minio
-    entrypoint: >
-      /bin/sh -c "
-      sleep 2;
-      /usr/bin/mc config host add devminio http://minio:9000 $${MINIO_ACCESS_KEY} $${MINIO_SECRET_KEY};
-      /usr/bin/mc mb devminio/devpublic;
-      /usr/bin/mc policy download devminio/devpublic;
-      exit 0;"
-
 volumes:
   mongodb:
   minio:
