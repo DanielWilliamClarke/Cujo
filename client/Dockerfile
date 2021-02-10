@@ -1,22 +1,20 @@
 #BUILD -----------------------------------
-FROM node:10-alpine as build
+FROM node:15.8.0 as build
 
-WORKDIR /cloudl-client
+WORKDIR /client
 
-COPY package.json /cloudl-client/package.json
+COPY package.json /client/package.json
 
 RUN npm install
 
-RUN npm install react-scripts -g
-
-COPY . /cloudl-client
+COPY . /client
 
 RUN npm run build
 
 #RELEASE -----------------------------------
-FROM nginx:1.16.0
+FROM nginx:1.9.15
 
-COPY --from=build /cloudl-client/build /usr/share/nginx/html
+COPY --from=build /client/build /usr/share/nginx/html
 
 RUN rm /etc/nginx/conf.d/default.conf
 

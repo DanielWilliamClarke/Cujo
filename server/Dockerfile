@@ -1,5 +1,5 @@
 #DEPENDENCIES -----------------------------------
-FROM golang:1.13-alpine as builder
+FROM golang:1.16-rc-alpine as builder
 
 LABEL maintainer="Daniel Clarke (clarkit@gmail.com)"
 
