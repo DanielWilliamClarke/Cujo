@@ -5,11 +5,11 @@ WORKDIR /client
 
 COPY package.json /client/package.json
 
-RUN npm install
+RUN yarn install && yarn add create-react-app 
 
 COPY . /client
 
-RUN npm run build
+RUN yarn run build
 
 #RELEASE -----------------------------------
 FROM nginx:1.9.15
