@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 import "./NavPanel.css";
 import logo from "../assets/logo.png";
@@ -14,13 +14,13 @@ export class NavPanel extends Component<{}> {
         <div className="Nav-container">
           <ul>
             <li className="option">
-              <Link to="/">Home</Link>
+              <NavLink exact activeClassName='Nav-active' to="/">Home</NavLink>
             </li>
             <li className="option">
-              <Link to="/blog">Blog</Link>
+              <NavLink exact activeClassName='Nav-active' to="/blog">Blog</NavLink>
             </li>
             <li className="option">
-              <Link to="/contact">Contact</Link>
+              <NavLink exact activeClassName='Nav-active' to="/contact">Contact</NavLink>
             </li>
           </ul>
         </div>
