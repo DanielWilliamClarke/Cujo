@@ -1,6 +1,6 @@
 # Cujo
 
-A Dockerised CV/Portfolio application built using a MGRN (Mongodb, Golang, React, Node) Technology stack.
+A Dockerised CV/Portfolio application built using a MGR (Mongodb, Golang, React) Technology stack.
 
 The app is arranged into a small microservice architecture.
 
@@ -10,7 +10,7 @@ The app is arranged into a small microservice architecture.
 
 **Server** - Golang
 
-**Storage** - MongoDB / Minio
+**Storage** - MongoDB
 
 ---
 
