@@ -2,3 +2,42 @@
   text-align: center;
   color: #ffffff;
 }
+
+.Backstretch {
+  height: calc(100vh - 99px);
+  width: 100%;
+
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background: rgb(51, 51, 51);
+  background: linear-gradient(
+    180deg,
+    rgba(51, 51, 51, 1) 0%,
+    rgba(244, 133, 153, 1) 0%,
+    rgba(254, 166, 182, 1) 100%,
+    rgba(2, 0, 36, 1) 223322%
+  );
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #ffffff;
+}
+
+.Backstretch-main {
+  font-size: 100px;
+  text-decoration: underline;
+  transform: rotate(-1deg);
+}
+
+.Backstretch-tag {
+  font-size: 40px;
+  top: -20px;
+  text-align: right;
+  transform: rotate(-1deg);
+  position: relative;
+}
