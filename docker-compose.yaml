@@ -1,11 +1,10 @@
-version: '3.6'
+version: "3.6"
 
 services:
-
   client:
     build: ./client
     ports:
-      - "80:80"
+      - "5001:5000"
     depends_on:
       - server
     volumes:

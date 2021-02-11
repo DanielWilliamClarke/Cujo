@@ -9,15 +9,17 @@
 
 .Home .Home-container {
   display: flex;
-  align-items: center;
   margin: 10px;
+}
+
+.Headshot {
+  height: 400px;
 }
 
 .Card {
   background-color: rgba(77, 168, 202, 1);
   width: 500px;
   height: 100%;
-  margin: 20px;
   color: #fff;
   border-radius: 3px;
 }
