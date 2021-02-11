@@ -1,11 +1,10 @@
-import { Component } from "react";
+import React, { Component } from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import logo from "./logo.svg";
-import headshot from "./assets/headshot.jpg"
+import { CV } from "./model/CV";
+import { NavPanel } from "./nav/NavPanel";
 
 import "./App.css";
-
-import { CV } from "./CVModel";
 
 type AppProps = {
   cv: CV;
@@ -14,17 +13,36 @@ type AppProps = {
 class App extends Component<AppProps> {
   render(): JSX.Element {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>{this.props.cv.basics.name}</p>
-          <p>{this.props.cv.basics.label}</p>
-          <p>{this.props.cv.basics.email}</p>
-          <img src={headshot}/> 
-        </header>
+      <div>
+        <Router>
+          <NavPanel></NavPanel>
+          <Switch>
+            <Route exact path="/">
+              <Home />
+            </Route>
+            <Route exact path="/blog">
+              <About />
+            </Route>
+            <Route exact path="/contact">
+              <Users />
+            </Route>
+          </Switch>
+        </Router>
       </div>
     );
   }
+}
+
+function Home() {
+  return <h2>Home</h2>;
+}
+
+function About() {
+  return <h2>About</h2>;
+}
+
+function Users() {
+  return <h2>Users</h2>;
 }
 
 export default App;
