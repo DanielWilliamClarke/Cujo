@@ -2,13 +2,24 @@
   padding: 10px;
   height: 62px;
   background-color: #333333;
+  overflow: hidden;
+}
+
+.Nav-sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.Nav-sticky + .Nav-container {
+  padding-top: 60px;
 }
 
 .Nav-container {
   height: 100%;
   display: flex;
   align-items: center;
-  float: right;
+  float: left;
 }
 
 .Nav-panel ul {
