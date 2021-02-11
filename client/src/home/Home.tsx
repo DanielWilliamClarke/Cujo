@@ -10,7 +10,7 @@ export class Home extends Component<CVProps> {
 
   constructor(props: CVProps) {
     super(props);
-    
+
     this.lorem = new LoremIpsum({
       sentencesPerParagraph: {
         max: 8,
@@ -25,21 +25,23 @@ export class Home extends Component<CVProps> {
 
   render(): JSX.Element {
     return (
-      <div className="Home">
-        <div className="Home-container">
-          <div className="Headshot">
-            <img src={headshot} alt="headshot" />
+      <section className="Home">
+        <section id="about">
+          <div className="section-title">About</div>
+
+          <div className="Home-container">
+            <img className="Headshot" src={headshot} alt="headshot" />
           </div>
-        </div>
-        <div className="Home-container">
-          <div className="Card">
-            <div className="Card-title">
-              Hi, name is {this.props.cv.basics.name}!
+          <div className="Home-container">
+            <div className="Card">
+              <div className="Card-title">
+                Hi, name is {this.props.cv.basics.name}!
+              </div>
+              {this.lorem.generateParagraphs(1000)}
             </div>
-            {this.lorem.generateParagraphs(1000)}
           </div>
-        </div>
-      </div>
+        </section>
+      </section>
     );
   }
 }

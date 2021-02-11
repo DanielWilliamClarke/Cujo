@@ -7,17 +7,22 @@ import { NavPanel } from "./nav/NavPanel";
 import { Home } from "./home/Home";
 
 import "./App.css";
+import { Container, Row } from "react-bootstrap";
 class App extends Component<CVProps> {
   render(): JSX.Element {
     return (
       <div>
         <Router>
-          <div className="Backstretch">
-            <div>
-              <div className="Backstretch-main">{this.props.cv.basics.name}</div>
-              <div className="Backstretch-tag">{this.props.cv.basics.label}</div>
-            </div>
-          </div>
+          <Container className="Backstretch">
+            <Row>
+              <Row className="Backstretch-main">
+                {this.props.cv.basics.name}
+              </Row>
+              <Row className="Backstretch-tag">
+                {this.props.cv.basics.label}
+              </Row>
+            </Row>
+          </Container>
 
           <StickyContainer>
             <Sticky>
