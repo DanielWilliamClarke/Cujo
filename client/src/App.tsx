@@ -1,16 +1,12 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import { CV } from "./model/CV";
+import { CVProps } from "./model/CV";
 import { NavPanel } from "./nav/NavPanel";
-
+import { Home } from "./home/Home"
+ 
 import "./App.css";
-
-type AppProps = {
-  cv: CV;
-};
-
-class App extends Component<AppProps> {
+class App extends Component<CVProps> {
   render(): JSX.Element {
     return (
       <div>
@@ -19,7 +15,7 @@ class App extends Component<AppProps> {
           <div className="App">
             <Switch>
               <Route exact path="/">
-                <Home />
+                <Home cv={this.props.cv} />
               </Route>
               <Route exact path="/blog">
                 <About />
@@ -33,10 +29,6 @@ class App extends Component<AppProps> {
       </div>
     );
   }
-}
-
-function Home() {
-  return <h2>Home</h2>;
 }
 
 function About() {

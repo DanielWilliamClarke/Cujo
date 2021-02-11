@@ -69,3 +69,7 @@ export interface CV {
   interests: Interest[];
 }
 
+
+export type CVProps = {
+  cv: CV;
+};
