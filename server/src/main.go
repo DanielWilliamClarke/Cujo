@@ -4,8 +4,8 @@ import (
 	"log"
 
 	"github.com/caarlos0/env/v6"
-	"github.com/gin-contrib/cors"
-	"github.com/gin-gonic/gin"
+	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/logger"
 
 	"github.com/danielwilliamclarke/cujo_server/cv"
 	"github.com/danielwilliamclarke/cujo_server/mongo"
@@ -35,16 +35,14 @@ func main() {
 	}
 
 	// Create web server
-	gin.SetMode(gin.ReleaseMode)
-	router := gin.Default()
-	router.Use(cors.Default())
-	apiRoutingGroup := router.Group("/api/v1")
-	{
-		apiRoutingGroup.GET("/cv", cv.RouteHandler{Conn: client}.Get)
-	}
+	app := fiber.New()
+	app.Use(logger.New())
+
+	api := app.Group("/api/v1")
+	api.Get("/cv", cv.RouteHandler{Conn: client}.Get)
 
 	log.Printf("Cujo server started on port %s", config.Port)
-	err = router.Run(":" + config.Port)
+	err = app.Listen(":" + config.Port)
 	if err != nil {
 		log.Fatalf("Error in starting server: %s", err)
 	}

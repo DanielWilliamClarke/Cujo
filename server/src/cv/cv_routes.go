@@ -3,25 +3,27 @@ package cv
 import (
 	ctx "context"
 	"log"
-	"net/http"
 
-	"github.com/gin-gonic/gin"
+	"github.com/gofiber/fiber/v2"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
+// RouteHandler implements route handler for CV
 type RouteHandler struct {
 	Conn *mongo.Collection
 }
 
-func (r RouteHandler) Get(context *gin.Context) {
+// Get fetchs CV data from mongo
+func (r RouteHandler) Get(context *fiber.Ctx) error {
 
 	var cv CurriculumVitae
 	err := r.Conn.FindOne(ctx.Background(), &bson.M{}).Decode(&cv)
-
 	if err != nil {
 		log.Printf("%+v\n", err)
+		return err
 	}
 
-	context.JSON(http.StatusOK, cv)
+	context.Status(fiber.StatusOK).JSON(cv)
+	return nil
 }
