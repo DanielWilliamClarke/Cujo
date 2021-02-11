@@ -2,7 +2,7 @@ import React, { Component, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 
 import "./NavPanel.css";
-import logo from "../assets/logo.png";
+import logo from "../assets/logo_blue.png";
 
 interface StyleProps {
   style: React.CSSProperties
