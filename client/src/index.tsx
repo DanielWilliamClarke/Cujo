@@ -4,7 +4,7 @@ import axios from "axios";
 import "./index.css";
 import App from "./App";
 
-import { CV } from "./CVModel";
+import { CV } from "./model/CV";
 
 axios.get("/api/v1/cv").then((res: { data: CV }): void => {
   ReactDOM.render(

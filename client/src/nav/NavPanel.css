@@ -1,0 +1,44 @@
+.Nav-panel {
+  background-color: #333333;
+  height: 100px;
+}
+
+.Nav-container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  float: left;
+}
+
+.Nav-container img {
+  margin: 0 10px;
+}
+
+.Nav-panel ul {
+  list-style-type: none;
+  color: #fff;
+  padding: 0 10px;
+  margin: 0;
+  display: flex;
+}
+
+.Nav-panel li::after {
+  content: "|";
+  font-weight: ultrabold;
+  padding: 0 10px;
+}
+
+.Nav-panel li:last-child:after {
+  content: "";
+}
+
+.option a:link,
+.option a:visited,
+.option a:active {
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.option a:hover {
+  text-decoration: underline;
+}
