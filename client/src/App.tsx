@@ -16,17 +16,19 @@ class App extends Component<AppProps> {
       <div>
         <Router>
           <NavPanel></NavPanel>
-          <Switch>
-            <Route exact path="/">
-              <Home />
-            </Route>
-            <Route exact path="/blog">
-              <About />
-            </Route>
-            <Route exact path="/contact">
-              <Users />
-            </Route>
-          </Switch>
+          <div className="App">
+            <Switch>
+              <Route exact path="/">
+                <Home />
+              </Route>
+              <Route exact path="/blog">
+                <About />
+              </Route>
+              <Route exact path="/contact">
+                <Users />
+              </Route>
+            </Switch>
+          </div>
         </Router>
       </div>
     );

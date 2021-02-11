@@ -1,17 +1,14 @@
 .Nav-panel {
+  padding: 10px;
+  height: 62px;
   background-color: #333333;
-  height: 100px;
 }
 
 .Nav-container {
   height: 100%;
   display: flex;
   align-items: center;
-  float: left;
-}
-
-.Nav-container img {
-  margin: 0 10px;
+  float: right;
 }
 
 .Nav-panel ul {
@@ -22,23 +19,26 @@
   display: flex;
 }
 
-.Nav-panel li::after {
-  content: "|";
-  font-weight: ultrabold;
-  padding: 0 10px;
+.Nav-panel li {
+  font-weight: 500;
 }
 
-.Nav-panel li:last-child:after {
-  content: "";
+.option a {
+  padding: 21px;
 }
 
 .option a:link,
-.option a:visited,
-.option a:active {
+.option a:visited {
   text-decoration: none;
   color: #ffffff;
 }
 
 .option a:hover {
   text-decoration: underline;
+  background-color: #ddd;
+  color: black;
+}
+
+.Nav-active {
+  background-color: #f48599;
 }
