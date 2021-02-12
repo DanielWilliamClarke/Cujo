@@ -7,7 +7,7 @@ type CurriculumVitae struct {
 	Education    []Education    `json:"education"`
 	Awards       []Awards       `json:"awards"`
 	Publications []Publications `json:"publications"`
-	Skills       []Skills       `json:"skills"`
+	Skills       Skills         `json:"skills"`
 	Languages    []Languages    `json:"languages"`
 	Interests    []string       `json:"interests"`
 	References   []References   `json:"references"`
@@ -83,9 +83,11 @@ type Publications struct {
 }
 
 type Skills struct {
-	Name     string   `json:"name"`
-	Level    string   `json:"level"`
-	Keywords []string `json:"keywords"`
+	Programming []string `json:"programming"`
+	Frameworks  []string `json:"frameworks"`
+	Tools       []string `json:"tools"`
+	Software    []string `json:"software"`
+	Devtools    []string `json:"devtools"`
 }
 
 type Languages struct {

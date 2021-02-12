@@ -42,10 +42,12 @@ export interface Education {
   courses: string[];
 }
 
-export interface Skill {
-  name: string;
-  level: string;
-  keywords: string[];
+export interface Skills {
+  programming: string[];
+  frameworks: string[];
+  tools: string[];
+  software: string[];
+  devtools: string[];
 }
 
 export interface Language {
@@ -57,7 +59,7 @@ export interface CV {
   basics: Basics;
   work: Work[];
   education: Education[];
-  skills: Skill[];
+  skills: Skills;
   languages: Language[];
   interests: string[];
 }
