@@ -4,47 +4,36 @@ import { StickyContainer, Sticky } from "react-sticky";
 
 import { CVProps } from "./model/CV";
 import { NavPanel } from "./components/nav/NavPanel";
-import { Home } from "./components/home/Home";
+import { About } from "./components/about/About";
 import { Backstretch } from "./components/backstretch/Backstretch";
 
 import "./App.css";
+
+const Fade = require("react-reveal/Fade");
 
 class App extends Component<CVProps> {
   render(): JSX.Element {
     return (
       <div>
         <Backstretch cv={this.props.cv}></Backstretch>
-        <Router>
-          <StickyContainer>
+        <StickyContainer>
+          <Router>
             <Sticky>
               {({ style }) => <NavPanel style={style}></NavPanel>}
             </Sticky>
             <div className="App">
               <Switch>
                 <Route exact path="/">
-                  <Home cv={this.props.cv} />
-                </Route>
-                <Route exact path="/blog">
-                  <About />
-                </Route>
-                <Route exact path="/contact">
-                  <Users />
+                  <Fade bottom>
+                    <About cv={this.props.cv} />
+                  </Fade>
                 </Route>
               </Switch>
             </div>
-          </StickyContainer>
-        </Router>
+          </Router>
+        </StickyContainer>
       </div>
     );
   }
 }
-
-function About() {
-  return <h2>About</h2>;
-}
-
-function Users() {
-  return <h2>Users</h2>;
-}
-
 export default App;

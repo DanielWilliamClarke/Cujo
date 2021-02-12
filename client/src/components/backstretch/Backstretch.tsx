@@ -1,22 +1,22 @@
 import React, { Component } from "react";
 import { CVProps } from "../../model/CV";
 
-import { Container, Row } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 
 import "./Backstretch.css";
 
 export class Backstretch extends Component<CVProps> {
   render(): JSX.Element {
     return (
-        <Container className="Backstretch">
-        <Row>
+        <Container fluid className="Backstretch">
+        <div>
           <Row className="Backstretch-main">
-            {this.props.cv.basics.name}
+            <Col>{this.props.cv.basics.name}</Col>
           </Row>
           <Row className="Backstretch-tag">
-            {this.props.cv.basics.label}
+            <Col>{this.props.cv.basics.label}</Col>
           </Row>
-        </Row>
+        </div>
       </Container>
     );
   }

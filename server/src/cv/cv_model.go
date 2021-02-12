@@ -9,16 +9,14 @@ type CurriculumVitae struct {
 	Publications []Publications `json:"publications"`
 	Skills       []Skills       `json:"skills"`
 	Languages    []Languages    `json:"languages"`
-	Interests    []Interests    `json:"interests"`
+	Interests    []string       `json:"interests"`
 	References   []References   `json:"references"`
 }
 
 type Location struct {
-	Address     string `json:"address"`
-	PostalCode  string `json:"postalCode"`
 	City        string `json:"city"`
-	CountryCode string `json:"countryCode"`
 	Region      string `json:"region"`
+	CountryCode string `json:"countryCode"`
 }
 
 type Profiles struct {
@@ -93,11 +91,6 @@ type Skills struct {
 type Languages struct {
 	Language string `json:"language"`
 	Fluency  string `json:"fluency"`
-}
-
-type Interests struct {
-	Name     string   `json:"name"`
-	Keywords []string `json:"keywords"`
 }
 
 type References struct {

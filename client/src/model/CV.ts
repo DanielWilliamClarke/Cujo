@@ -1,6 +1,4 @@
 export interface Location {
-  address: string;
-  postalCode: string;
   city: string;
   countryCode: string;
   region: string;
@@ -55,18 +53,13 @@ export interface Language {
   fluency: string;
 }
 
-export interface Interest {
-  name: string;
-  keywords: string[];
-}
-
 export interface CV {
   basics: Basics;
   work: Work[];
   education: Education[];
   skills: Skill[];
   languages: Language[];
-  interests: Interest[];
+  interests: string[];
 }
 
 

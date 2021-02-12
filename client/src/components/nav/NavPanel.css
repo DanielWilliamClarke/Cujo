@@ -3,6 +3,7 @@
   height: 62px;
   background-color: #333333;
   overflow: hidden;
+  z-index: 1;
 }
 
 .Nav-sticky {
@@ -51,5 +52,5 @@
 }
 
 .Nav-active {
-  background-color: rgba(97, 192, 191, 1);
+  background-color: rgba(75, 108, 183, 1);
 }
