@@ -1,0 +1,17 @@
+.About {
+}
+
+.About .Line {
+  background-color: #f08b65
+}
+
+.Headshot {
+  object-fit: cover;
+
+  width: 300px;
+  height: 400px;
+}
+
+.Interests p {
+  margin-bottom: 0.5rem;
+}

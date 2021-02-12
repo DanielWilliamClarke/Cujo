@@ -1,44 +1,41 @@
-db.createUser(
-  {
-    user: "test_user",
-    pwd: "123456",
-    roles: [
-      {
-        role: "read",
-        db: "moderncvapp"
-      }
-    ]
-  })
+db.createUser({
+  user: "test_user",
+  pwd: "123456",
+  roles: [
+    {
+      role: "read",
+      db: "moderncvapp",
+    },
+  ],
+});
 
-db.createCollection("data")
+db.createCollection("data");
 
 db.data.insertOne({
   basics: {
     name: "Daniel William Clarke",
-    label: "Full Stack Software Engineer",
-    picture: "/assets/headshot.jpg",
+    label: "Software Engineer",
     email: "clarkit@gmail.com",
-    phone: "07123456789",
+    phone: "07411259330",
     website: "https://www.danielwilliamclarke.com",
-    summary: "Software Engineer trying to become the very best, like no one ever was!",
+    summary:
+      "I am a engaged and quality focused full stack software engineer.\n\nI am always seeking to grasp bleeding edge technologies and practices in cloud, microservice architecture. software development, cyber security, CI/CD, SOLID and TDD.\n\nI am currently leading a team of 4 software engineers, though I never thought that managemen would be something I would want to venture into, I am enjoying the challenge, and looking forward to the oppurtunities this role may yield!\n\nI enjoy building software as I see both the art and science that it requires. I find it very enjoyable to see how a particular project or problem can captivate me.",
     location: {
-      address: "101 street road",
-      postalCode: "post code",
-      city: "Crawsley",
+      city: "Crawley",
+      region: "West Sussex",
       countryCode: "GB",
-      region: "us-central1-c"
     },
     profiles: [
       {
         network: "Linkedin",
         username: "danielclarkesoftwareengineer",
-        url: "https://www.linkedin.com/in/danielclarkesoftwareengineer/"
+        url: "https://www.linkedin.com/in/danielclarkesoftwareengineer/",
       },
       {
         network: "Github",
         username: "DanielWilliamClarke",
-        url: "https://github.com/DanielWilliamClarke"
-      }
+        url: "https://github.com/DanielWilliamClarke",
+      },
     ],
   },
   work: [
@@ -49,9 +46,7 @@ db.data.insertOne({
       startDate: "01/07/2012",
       endDate: "15/09/2013",
       summary: "Internship...",
-      highlights: [
-        "Started the company"
-      ]
+      highlights: ["Started the company"],
     },
     {
       company: "Schlumberger",
@@ -60,9 +55,7 @@ db.data.insertOne({
       startDate: "14/09/2014",
       endDate: "01/01/2019",
       summary: "Software Engineer!!...",
-      highlights: [
-        "Rejoined the company"
-      ]
+      highlights: ["Rejoined the company"],
     },
     {
       company: "Schlumberger",
@@ -71,10 +64,8 @@ db.data.insertOne({
       startDate: "01/01/2019",
       endDate: "Present",
       summary: "Full Stack Software Engineer!!...",
-      highlights: [
-        "Changed Roles"
-      ]
-    }
+      highlights: ["Changed Roles"],
+    },
   ],
   education: [
     {
@@ -84,10 +75,8 @@ db.data.insertOne({
       startDate: "20/09/2010",
       endDate: "20/05/2014",
       gpa: "First Class",
-      courses: [
-        "DB1101 - Basic SQL"
-      ]
-    }
+      courses: ["DB1101 - Basic SQL"],
+    },
   ],
   skills: [
     {
@@ -107,7 +96,7 @@ db.data.insertOne({
         "HTML5",
         "CSS",
         "Sass",
-      ]
+      ],
     },
     {
       name: "Technologies",
@@ -127,7 +116,7 @@ db.data.insertOne({
         "THREEJS / WebGL",
         "GruntJS",
         "Webpack",
-      ]
+      ],
     },
     {
       name: "Test Frameworks",
@@ -139,7 +128,7 @@ db.data.insertOne({
         "Jasmine",
         "Google Test / Mock",
         "Microsoft Unit Testing Framework For C++",
-      ]
+      ],
     },
     {
       name: "Development Tools",
@@ -151,30 +140,20 @@ db.data.insertOne({
         "Git",
         "Azure Devops",
         "CircleCI",
-      ]
-    }
+      ],
+    },
   ],
   languages: [
     {
       language: "English",
-      fluency: "Native speaker"
-    }
+      fluency: "Native speaker",
+    },
   ],
   interests: [
-    {
-      name: "Living my best life",
-      keywords: [
-        "My partner and I have recently had our first child, so being the best dad I can is my foremost interest",
-        "Magic the Gathering",
-        "Home Automation",
-        "Virtual Reality.",
-        "Cooking",
-        "Guitar",
-        "Cycling",
-        "Retro Games",
-        "Gardening",
-        "Reading and Audiobooks",
-      ]
-    }
-  ]
-})
+    "My partner and I have recently had our first child, so being the **best dad I can be** is my foremost interest",
+    "I love to play **Magic the Gathering**",
+    "**Cooking** new and intesting meals for my Family and I",
+    "Learning how to not suck at **Guitar**",
+    "**Developing** my own indie games in my spare time",
+  ],
+});
