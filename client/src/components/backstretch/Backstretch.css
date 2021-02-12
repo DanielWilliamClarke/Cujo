@@ -1,0 +1,35 @@
+.Backstretch {
+    height: calc(100vh - 99px);
+  
+    background: rgb(51, 51, 51);
+    background: linear-gradient(
+        -180deg,
+        rgba(75, 108, 183, 0.7),
+        rgba(24, 40, 72, 0.7)
+      ),
+      url(https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/3b8b89fd-6745-4187-aa5f-f75edc8b95e2/d2nrebr-7a1685b8-db66-4ae5-8254-6985251a39cf.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3sicGF0aCI6IlwvZlwvM2I4Yjg5ZmQtNjc0NS00MTg3LWFhNWYtZjc1ZWRjOGI5NWUyXC9kMm5yZWJyLTdhMTY4NWI4LWRiNjYtNGFlNS04MjU0LTY5ODUyNTFhMzljZi5qcGcifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6ZmlsZS5kb3dubG9hZCJdfQ.NjrQu2_j2u5NjpBAWFh9uuUNTnh6M9f2w0jdZua7G08);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #ffffff;
+  }
+  
+  .Backstretch-main {
+    font-size: 100px;
+    text-decoration: underline;
+    font-weight: 700;
+  }
+  
+  .Backstretch-tag {
+    font-size: 29px;
+    text-align: right;
+    position: relative;
+    font-weight: 200;
+    line-height: 10px;
+  }
+  

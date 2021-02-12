@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import { CVProps } from "../model/CV";
+import { CVProps } from "../../model/CV";
+import { LoremIpsum } from "lorem-ipsum";
 
 import "./Home.css";
-import headshot from "../assets/headshot.jpg";
-import { LoremIpsum } from "lorem-ipsum";
+import headshot from "../../assets/headshot.jpg";
 
 export class Home extends Component<CVProps> {
   private lorem: LoremIpsum;
@@ -29,7 +29,7 @@ export class Home extends Component<CVProps> {
         <section id="about">
           <div className="section-title">About</div>
 
-          <div className="Home-container">
+          <div className="Home-container"> 
             <img className="Headshot" src={headshot} alt="headshot" />
           </div>
           <div className="Home-container">

@@ -3,27 +3,18 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { StickyContainer, Sticky } from "react-sticky";
 
 import { CVProps } from "./model/CV";
-import { NavPanel } from "./nav/NavPanel";
-import { Home } from "./home/Home";
+import { NavPanel } from "./components/nav/NavPanel";
+import { Home } from "./components/home/Home";
+import { Backstretch } from "./components/backstretch/Backstretch";
 
 import "./App.css";
-import { Container, Row } from "react-bootstrap";
+
 class App extends Component<CVProps> {
   render(): JSX.Element {
     return (
       <div>
+        <Backstretch cv={this.props.cv}></Backstretch>
         <Router>
-          <Container className="Backstretch">
-            <Row>
-              <Row className="Backstretch-main">
-                {this.props.cv.basics.name}
-              </Row>
-              <Row className="Backstretch-tag">
-                {this.props.cv.basics.label}
-              </Row>
-            </Row>
-          </Container>
-
           <StickyContainer>
             <Sticky>
               {({ style }) => <NavPanel style={style}></NavPanel>}
