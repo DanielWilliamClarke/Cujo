@@ -8,6 +8,7 @@ import { About } from "./components/about/About";
 import { Backstretch } from "./components/backstretch/Backstretch";
 
 import "./App.css";
+import { Technical } from "./components/about/Technical";
 
 const Fade = require("react-reveal/Fade");
 
@@ -26,6 +27,9 @@ class App extends Component<CVProps> {
                 <Route exact path="/">
                   <Fade bottom>
                     <About cv={this.props.cv} />
+                  </Fade>
+                  <Fade bottom>
+                    <Technical cv={this.props.cv} />
                   </Fade>
                 </Route>
               </Switch>

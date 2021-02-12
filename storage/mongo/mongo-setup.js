@@ -19,7 +19,7 @@ db.data.insertOne({
     phone: "07411259330",
     website: "https://www.danielwilliamclarke.com",
     summary:
-      "I am a engaged and quality focused full stack software engineer.\n\nI am always seeking to grasp bleeding edge technologies and practices in cloud, microservice architecture. software development, cyber security, CI/CD, SOLID and TDD.\n\nI am currently leading a team of 4 software engineers, though I never thought that managemen would be something I would want to venture into, I am enjoying the challenge, and looking forward to the oppurtunities this role may yield!\n\nI enjoy building software as I see both the art and science that it requires. I find it very enjoyable to see how a particular project or problem can captivate me.",
+      "*I enjoy building software as I see both the art and science that it requires. I find it very enjoyable to see how a particular project or problem captivates me.*\n\nI am a engaged and quality focused full stack software engineer.\n\nI am always seeking to grasp bleeding edge technologies and practices in cloud, microservice architecture. software development, cyber security, CI/CD, SOLID and TDD.\n\nI am currently leading a team of 4 software engineers, though I never thought that management would be something I would venture into, I am enjoying the challenge, and looking forward to the oppurtunities this role may yield!",
     location: {
       city: "Crawley",
       region: "West Sussex",
@@ -78,71 +78,45 @@ db.data.insertOne({
       courses: ["DB1101 - Basic SQL"],
     },
   ],
-  skills: [
-    {
-      name: "Programming Languages",
-      level: "Advanced",
-      keywords: [
-        "Golang",
-        "C++",
-        "C",
-        "JavaScript ES6+",
-        "TypeScript",
-        "Python",
-        "PHP",
-        "Powershell",
-        "Bash",
-        "Matlab / Simulink",
-        "HTML5",
-        "CSS",
-        "Sass",
-      ],
-    },
-    {
-      name: "Technologies",
-      level: "Advanced",
-      keywords: [
-        "Windows",
-        "Linux",
-        "Google Cloud Platform",
-        "Docker",
-        "Kubernetes",
-        "Seleium Webdriver",
-        "NodeJS / NPM ",
-        "Composer (PHP)",
-        "React",
-        "KnockoutJS",
-        "RequireJS",
-        "THREEJS / WebGL",
-        "GruntJS",
-        "Webpack",
-      ],
-    },
-    {
-      name: "Test Frameworks",
-      level: "Advanced",
-      keywords: [
-        "Go test",
-        "Mocha",
-        "Karma",
-        "Jasmine",
-        "Google Test / Mock",
-        "Microsoft Unit Testing Framework For C++",
-      ],
-    },
-    {
-      name: "Development Tools",
-      level: "Advanced",
-      keywords: [
-        "VSCode",
-        "Visual Studio",
-        "Jetbrains PHPStorm",
-        "Git",
-        "Azure Devops",
-        "CircleCI",
-      ],
-    },
-  ],
+  skills: {
+    programming: [
+      "Golang",
+      "C++",
+      "TypeScript",
+      "Node JS",
+      "Python",
+      "PHP"
+    ],
+    frameworks: [
+      "React",
+      "Angular",
+      "KnockoutJS",
+      "THREEJS"
+    ],
+    tools: [
+      "NPM",
+      "Webpack",
+      "Grunt",
+      "Composer (PHP)",
+      "MongoDB",
+      "MySQL"
+    ],
+    software: [
+      "Windows",
+      "Linux",
+      "Docker",
+      "Kubernetes",
+      "Google Cloud Platform"
+    ],
+    devtools: [
+      "Git",
+      "Azure Devops",
+      "CircleCI",
+      "VS Code",
+      "Visual Studio",
+      "Jetbrains"
+    ]
+  },
   languages: [
     {
       language: "English",
