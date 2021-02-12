@@ -1,7 +1,35 @@
 .Technical .Line {
-  background-color: #61C0BF;
+  background-color: #61c0bf;
 }
 
 .Technical .Langauges {
-    font-weight: 500;
+  font-weight: 500;
+}
+
+.Technical .Language-item {
+  display: flex;
+  padding: 0;
+}
+
+.Technical .Language-item p {
+  width: 100%;
+}
+
+.Language-item::after {
+  content: "•";
+  color: #61c0bf;
+}
+
+.Language-item:last-child::after {
+  content: "";
+}
+
+.Technical .Skills {
+  list-style-type: none;
+  padding: 0 10px;
+  margin: 0;
+}
+
+.Technical .Skills p {
+  margin-bottom: 0.5rem;
 }
