@@ -12,10 +12,10 @@ export class NavPanel extends Component<StyleProps> {
   render(): JSX.Element {
     return (
       <nav style={this.props.style} className="Nav-panel">
-        <div className="Nav-container">
+        <div className="Nav-container Nav-logo">
           <img src={logo} alt="logo" />
         </div>
-        <div className="Nav-container">
+        <div className="Nav-container Nav-buttons">
           <ul>
             <li className="option">
               <NavLink exact activeClassName="Nav-active" to="/">
