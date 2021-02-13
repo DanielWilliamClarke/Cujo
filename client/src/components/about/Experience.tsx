@@ -62,6 +62,18 @@ export class Experience extends Component<CVProps> {
                     </Col>
                   </Row>
 
+                  <Row className="Images">
+                    {work.images.map((image) => (
+                      <Col className="Col-item">
+                        <img
+                          className="Centered Work-image"
+                          src={image}
+                          alt="not found..."
+                        />
+                      </Col>
+                    ))}
+                  </Row>
+
                   <div className="Centered Short-line"></div>
                 </div>
               )
