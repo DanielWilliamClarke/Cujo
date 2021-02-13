@@ -45,6 +45,15 @@
   letter-spacing: 0.1em;
 }
 
+.Section h6,
+.Section-alt h6 {
+  font-size: 0.75em;
+  color: #222;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+
 .Centered {
   margin-left: auto;
   margin-right: auto;
@@ -59,10 +68,23 @@
   background: #ccc;
 }
 
+.Short-line {
+  display: block;
+  width: 30px;
+  height: 3px;
+  padding: 0 !important;
+  background: #ccc;
+}
+
 .Text-column {
   text-align: left;
 }
 
-.Text-column p {
-    
+.Col-item {
+  display: flex;
+  padding: 0;
+}
+
+.Col-item p {
+  width: 100%;
 }
