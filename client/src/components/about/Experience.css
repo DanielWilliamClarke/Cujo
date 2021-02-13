@@ -27,3 +27,14 @@
 .Experience .Period span {
   margin: 0 5px;
 }
+
+.Experience .Images {
+  margin-bottom: 20px;
+}
+
+.Experience .Work-image {
+  border-radius: 50%;
+  object-fit: cover;
+  width: 150px;
+  height: 150px;
+}

@@ -45,6 +45,7 @@ type Work struct {
 	EndDate    string   `json:"endDate"`
 	Summary    string   `json:"summary"`
 	Highlights []string `json:"highlights"`
+	Images     []string `json:"images"`
 }
 
 type Volunteer struct {

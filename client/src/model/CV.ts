@@ -30,6 +30,7 @@ export interface Work {
   endDate: string;
   summary: string;
   highlights: string[];
+  images: string[];
 }
 
 export interface Education {
