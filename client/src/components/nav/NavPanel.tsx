@@ -5,7 +5,7 @@ import "./NavPanel.css";
 import logo from "../../assets/logo_blue.png";
 
 interface StyleProps {
-  style: React.CSSProperties
+  style: React.CSSProperties;
 }
 
 export class NavPanel extends Component<StyleProps> {
@@ -19,7 +19,7 @@ export class NavPanel extends Component<StyleProps> {
           <ul>
             <li className="option">
               <NavLink exact activeClassName="Nav-active" to="/">
-                Home
+                About
               </NavLink>
             </li>
             <li className="option">

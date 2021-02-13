@@ -3,14 +3,15 @@
   margin: 0 auto;
   padding: 75px 0;
   position: relative;
+  color: #eeeeee;
 }
 
 .Section {
-  background-color: #fff;
+  background-color: #222222;
 }
 
 .Section-alt {
-  background-color: #eee;
+  background-color: #111111;
 }
 
 .Section-title {
@@ -18,7 +19,7 @@
   padding: 0;
   font-size: 2.25em;
   font-weight: 300;
-  color: #0f1025;
+  color: #cccccc;
   text-transform: uppercase;
   display: block;
   text-align: center;
@@ -32,7 +33,7 @@
 .Section h3,
 .Section-alt h3 {
   font-size: 1.5em;
-  color: #222;
+  color: #dddddd;
   text-transform: uppercase;
   letter-spacing: 0.1em;
 }
@@ -40,7 +41,7 @@
 .Section h4,
 .Section-alt h4 {
   font-size: 1em;
-  color: #222;
+  color: #dddddd;
   text-transform: uppercase;
   letter-spacing: 0.1em;
 }
@@ -48,11 +49,10 @@
 .Section h6,
 .Section-alt h6 {
   font-size: 0.75em;
-  color: #222;
+  color: #dddddd;
   text-transform: uppercase;
   letter-spacing: 0.1em;
 }
-
 
 .Centered {
   margin-left: auto;

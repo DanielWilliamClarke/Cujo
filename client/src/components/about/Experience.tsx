@@ -32,20 +32,15 @@ export class Experience extends Component<CVProps> {
                   <Row className="Section-content">
                     <Col className="Centered">
                       <h4>{work.position}</h4>
-                      <h6>{work.company}</h6>
-                    </Col>
-                  </Row>
-                  <Row className="Highlights">
-                    {work.highlights.map((highlight) => (
-                      <Col className="Col-item">
-                        <p>{highlight}</p>
-                      </Col>
-                    ))}
-                  </Row>
-
-                  <Row>
-                    <Col>
-                      <ReactMarkdown source={work.summary} plugins={[breaks]} />
+                      <h6>
+                        <a
+                          href={work.website}
+                          rel="noopener noreferrer"
+                          target="_blank"
+                        >
+                          {work.company}
+                        </a>
+                      </h6>
                     </Col>
                   </Row>
 
@@ -59,6 +54,20 @@ export class Experience extends Component<CVProps> {
                       <span>
                         {this.toDuration(work.startDate, work.endDate)}
                       </span>
+                    </Col>
+                  </Row>
+
+                  <Row className="Highlights">
+                    {work.highlights.map((highlight) => (
+                      <Col className="Col-item">
+                        <p>{highlight}</p>
+                      </Col>
+                    ))}
+                  </Row>
+
+                  <Row>
+                    <Col>
+                      <ReactMarkdown source={work.summary} plugins={[breaks]} />
                     </Col>
                   </Row>
 
