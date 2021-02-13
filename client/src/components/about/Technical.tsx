@@ -31,7 +31,7 @@ export class Technical extends Component<CVProps> {
 
           <Row className="Langauges">
             {this.props.cv.skills.programming.map((lang) => (
-              <Col className="Language-item">
+              <Col className="Col-item">
                 <p>{lang}</p>
               </Col>
             ))}

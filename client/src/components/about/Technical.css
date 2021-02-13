@@ -6,21 +6,12 @@
   font-weight: 500;
 }
 
-.Technical .Language-item {
-  display: flex;
-  padding: 0;
-}
-
-.Technical .Language-item p {
-  width: 100%;
-}
-
-.Language-item::after {
+.Technical .Col-item::after {
   content: "•";
   color: #61c0bf;
 }
 
-.Language-item:last-child::after {
+.Technical .Col-item:last-child::after {
   content: "";
 }
 

@@ -3,12 +3,14 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { StickyContainer, Sticky } from "react-sticky";
 
 import { CVProps } from "./model/CV";
+import { Backstretch } from "./components/backstretch/Backstretch";
 import { NavPanel } from "./components/nav/NavPanel";
 import { About } from "./components/about/About";
-import { Backstretch } from "./components/backstretch/Backstretch";
+import { Experience } from "./components/about/Experience";
 
 import "./App.css";
 import { Technical } from "./components/about/Technical";
+
 
 const Fade = require("react-reveal/Fade");
 
@@ -30,6 +32,9 @@ class App extends Component<CVProps> {
                   </Fade>
                   <Fade bottom>
                     <Technical cv={this.props.cv} />
+                  </Fade>
+                  <Fade bottom>
+                    <Experience cv={this.props.cv} />
                   </Fade>
                 </Route>
               </Switch>
