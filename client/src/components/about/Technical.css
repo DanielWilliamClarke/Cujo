@@ -1,18 +1,5 @@
-.Technical .Line {
-  background-color: #61c0bf;
-}
-
-.Technical .Langauges {
+.Technical .Languages {
   font-weight: 500;
-}
-
-.Technical .Col-item::after {
-  content: "•";
-  color: #61c0bf;
-}
-
-.Technical .Col-item:last-child::after {
-  content: "";
 }
 
 .Technical .Skills {

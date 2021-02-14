@@ -5,7 +5,7 @@ import ReactMarkdown from "react-markdown";
 import breaks from "remark-breaks";
 import moment from "moment";
 
-import "../../shared/Section.css";
+import "../../shared/Section.scss";
 import "./Experience.css";
 
 export class Experience extends Component<CVProps> {

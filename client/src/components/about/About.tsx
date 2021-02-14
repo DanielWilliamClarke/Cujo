@@ -4,7 +4,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import ReactMarkdown from "react-markdown";
 import breaks from "remark-breaks";
 
-import "../../shared/Section.css";
+import "../../shared/Section.scss";
 import "./About.css";
 
 import headshot from "../../assets/headshot.jpg";
