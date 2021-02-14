@@ -1,0 +1,121 @@
+.Section {
+  margin: 0 auto;
+  padding: 75px 0;
+  position: relative;
+  color: #eeeeee;
+
+  .Section-title {
+    margin: 0 0 15px;
+    padding: 0;
+    font-size: 2.25em;
+    font-weight: 300;
+    color: #cccccc;
+    text-transform: uppercase;
+    display: block;
+    text-align: center;
+    letter-spacing: 0.1em;
+  }
+
+  .Section-content {
+    margin-top: 30px;
+  }
+
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: #dddddd;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  h3 {
+    font-size: 1.5em;
+  }
+
+  h4 {
+    font-size: 1em;
+  }
+
+  h5 {
+    font-size: 0.85em;
+  }
+
+  h6 {
+    font-size: 0.75em;
+  }
+}
+
+.Centered {
+  margin-left: auto;
+  margin-right: auto;
+  float: none;
+}
+
+.Line {
+  display: block;
+  width: 290px;
+  height: 3px;
+  padding: 0 !important;
+  background: #ccc;
+}
+
+.Short-line {
+  display: block;
+  width: 30px;
+  height: 3px;
+  padding: 0 !important;
+  background: #ccc;
+}
+
+.Text-column {
+  text-align: left;
+}
+
+.Col-item {
+  display: flex;
+  padding: 0;
+
+  p {
+    width: 100%;
+  }
+
+  &::after {
+    content: "•";
+  }
+
+  &:last-child::after {
+    content: "";
+  }
+}
+
+@mixin section-coloring($bg, $color) {
+  background-color: $bg;
+
+  .Short-line,
+  .Line {
+    background-color: $color;
+  }
+
+  .Col-item::after {
+    color: $color;
+  }
+}
+
+@mixin alternating-section($side, $bg, $color) {
+  div:nth-child(#{$side}) {
+    .Section {
+      @include section-coloring($bg, $color);
+    }
+  }
+  .container {
+    .Section:nth-child(#{$side}) {
+      @include section-coloring($bg, $color);
+    }
+  }
+}
+
+.App {
+  @include alternating-section("odd", #222222, #f08b65);
+  @include alternating-section("even", #111111, #61c0bf);
+}

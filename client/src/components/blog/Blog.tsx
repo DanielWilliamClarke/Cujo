@@ -5,7 +5,7 @@ import Interweave from "interweave";
 
 import { BlogPost } from "./BlogModel";
 
-import "../../shared/Section.css";
+import "../../shared/Section.scss";
 import "./Blog.css";
 
 type BlogState = {
@@ -42,7 +42,9 @@ export class Blog extends Component<{}, BlogState> {
             <Row className="Section-content">
               <Col className="Centered">
                 <h2>{post.title.rendered}</h2>
+                <div className="Centered Line"></div>
                 <Interweave content={post.content.rendered} />
+                <div className="Centered Short-line"></div>
               </Col>
             </Row>
           </section>

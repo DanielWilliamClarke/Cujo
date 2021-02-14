@@ -3,13 +3,13 @@ import { CVProps } from "../../model/CV";
 import { Container, Row, Col } from "react-bootstrap";
 import ReactMarkdown from "react-markdown";
 
-import "../../shared/Section.css";
+import "../../shared/Section.scss";
 import "./Technical.css";
 
 export class Technical extends Component<CVProps> {
   render(): JSX.Element {
     return (
-      <section className="Section-alt Technical">
+      <section className="Section Technical">
         <Container>
           <Row>
             <Col>
@@ -29,7 +29,7 @@ export class Technical extends Component<CVProps> {
             </p>
           </Row>
 
-          <Row className="Langauges">
+          <Row className="Languages">
             {this.props.cv.skills.programming.map((lang) => (
               <Col className="Col-item">
                 <p>{lang}</p>
@@ -39,7 +39,7 @@ export class Technical extends Component<CVProps> {
 
           <Row className="Section-content">
             <h4 className="Centered">Frequently used Technologies</h4>
-          </Row> 
+          </Row>
 
           <Row className="Section-content">
             <Col>

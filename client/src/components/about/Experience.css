@@ -1,20 +1,3 @@
-.Experience {
-}
-
-.Experience .Line,
-.Experience .Short-line {
-  background-color: #f08b65;
-}
-
-.Experience .Col-item::after {
-  content: "•";
-  color: #f08b65;
-}
-
-.Experience .Col-item:last-child::after {
-  content: "";
-}
-
 .Experience .Highlights {
   font-weight: 500;
   margin-top: 10px;
