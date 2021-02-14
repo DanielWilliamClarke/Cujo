@@ -5,20 +5,14 @@ import { StickyContainer, Sticky } from "react-sticky";
 import { CVProps } from "./model/CV";
 import { Backstretch } from "./components/backstretch/Backstretch";
 import { NavPanel } from "./components/nav/NavPanel";
+
 import { About } from "./components/about/About";
 import { Experience } from "./components/about/Experience";
-
-import WPAPI from "wpapi";
-
-import "./App.css";
 import { Technical } from "./components/about/Technical";
 
-const wp: WPAPI = new WPAPI({
-  endpoint: "http://localhost:8000/wp-json",
-});
-wp.posts()
-  .then((data) => console.log(data))
-  .catch((err) => console.log(err));
+import { Blog } from "./components/blog/Blog";
+
+import "./App.css";
 
 const Fade = require("react-reveal/Fade");
 
@@ -44,6 +38,10 @@ class App extends Component<CVProps> {
                   <Fade bottom>
                     <Experience cv={this.props.cv} />
                   </Fade>
+                </Route>
+
+                <Route exact path="/blog">
+                  <Blog />
                 </Route>
               </Switch>
             </div>
