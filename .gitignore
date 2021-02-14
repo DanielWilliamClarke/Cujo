@@ -4,3 +4,8 @@ coverage/
 package-lock.json
 *.exe
 .env
+
+vendor
+blog
+
+composer.*
