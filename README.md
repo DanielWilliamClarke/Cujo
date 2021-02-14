@@ -2,16 +2,8 @@
 
 A Dockerised CV/Portfolio application built using a MGR (Mongodb, Golang, React) Technology stack.
 
-The app is arranged into a small microservice architecture.
+The app is arranged into a small micro service architecture.
 
-# Microservices
+**Client** - React / Webpack
 
-**Client** - React / Webpack 
-
-**Server** - Golang
-
-**Storage** - MongoDB
-
----
-
-Please feel free to fork this repo, or hit me up with any suggestions.
+**Blog** - Wordpress - https://cloud.google.com/community/tutorials/run-wordpress-on-appengine-standard
