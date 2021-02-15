@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { CVProps } from "../../model/CV";
+import { Basics } from "../../model/CV";
 import { Container, Row, Col } from "react-bootstrap";
 import ReactMarkdown from "react-markdown";
 import breaks from "remark-breaks";
@@ -9,7 +9,12 @@ import "./About.scss";
 
 import headshot from "../../assets/headshot.jpg";
 
-export class About extends Component<CVProps> {
+type AboutProps = {
+  basics: Basics,
+  interests: string[]
+}
+
+export class About extends Component<AboutProps> {
   render(): JSX.Element {
     return (
       <section className="Section About">
@@ -29,7 +34,7 @@ export class About extends Component<CVProps> {
             <Col className="Text-column">
               <h4>A little about me!</h4>
               <ReactMarkdown
-                source={this.props.cv.basics.summary}
+                source={this.props.basics.summary}
                 plugins={[breaks]}
               />
             </Col>
@@ -41,7 +46,7 @@ export class About extends Component<CVProps> {
                 any of the following: the following:
               </p>
               <ul className="Interests">
-                {this.props.cv.interests.map((interest: string) => (
+                {this.props.interests.map((interest: string) => (
                   <li>
                     <ReactMarkdown source={interest} />
                   </li>

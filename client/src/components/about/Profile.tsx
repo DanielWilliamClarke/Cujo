@@ -14,16 +14,16 @@ export class Profile extends Component<CVProps> {
     return (
       <div>
         <Fade bottom>
-          <About cv={this.props.cv} />
+          <About basics={this.props.cv.basics} interests={this.props.cv.interests} />
         </Fade>
         <Fade bottom>
-          <Technical cv={this.props.cv} />
+          <Technical skills={this.props.cv.skills} />
         </Fade>
         <Fade bottom>
-          <Experience cv={this.props.cv} />
+          <Experience work={this.props.cv.work} />
         </Fade>{" "}
         <Fade bottom>
-          <Education cv={this.props.cv} />
+          <Education education={this.props.cv.education} />
         </Fade>
       </div>
     );

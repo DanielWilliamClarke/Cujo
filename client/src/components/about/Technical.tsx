@@ -1,12 +1,16 @@
 import React, { Component } from "react";
-import { CVProps } from "../../model/CV";
+import { Skills } from "../../model/CV";
 import { Container, Row, Col } from "react-bootstrap";
 import ReactMarkdown from "react-markdown";
 
 import "../../shared/Section.scss";
 import "./Technical.scss";
 
-export class Technical extends Component<CVProps> {
+type SkillsProps = {
+  skills: Skills
+}
+
+export class Technical extends Component<SkillsProps> {
   render(): JSX.Element {
     return (
       <section className="Section Technical">
@@ -30,7 +34,7 @@ export class Technical extends Component<CVProps> {
           </Row>
 
           <Row className="Languages">
-            {this.props.cv.skills.programming.map((lang) => (
+            {this.props.skills.programming.map((lang) => (
               <Col className="Col-item">
                 <p>{lang}</p>
               </Col>
@@ -44,19 +48,19 @@ export class Technical extends Component<CVProps> {
           <Row className="Section-content">
             <Col>
               <h4>Frameworks</h4>
-              {this.renderSkills(this.props.cv.skills.frameworks)}
+              {this.renderSkills(this.props.skills.frameworks)}
             </Col>
             <Col>
               <h4>Tools</h4>
-              {this.renderSkills(this.props.cv.skills.tools)}
+              {this.renderSkills(this.props.skills.tools)}
             </Col>
             <Col>
               <h4>CI/CD</h4>
-              {this.renderSkills(this.props.cv.skills.devtools)}
+              {this.renderSkills(this.props.skills.devtools)}
             </Col>
             <Col>
               <h4>Software</h4>
-              {this.renderSkills(this.props.cv.skills.software)}
+              {this.renderSkills(this.props.skills.software)}
             </Col>
           </Row>
         </Container>

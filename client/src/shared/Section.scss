@@ -72,6 +72,14 @@
   background: #ccc;
 }
 
+.Dot:after {
+  content: "•";
+}
+
+.Dash:after {
+  content: "-";
+}
+
 .Text-column {
   text-align: left;
 }
@@ -95,6 +103,21 @@
   }
 }
 
+.Images {
+  margin: 20px 0;
+
+  .Col-item::after {
+    content: "";
+  }
+  
+  .Image-item {
+    border-radius: 50%;
+    object-fit: cover;
+    width: 150px;
+    height: 150px;
+  }
+}
+
 @mixin section-coloring($bg, $color) {
   background-color: $bg;
 
@@ -104,6 +127,16 @@
   }
 
   .Col-item::after {
+    color: $color;
+  }
+
+  .Dot:after,
+  .Dash:after {
+    color: $color;
+    margin: 0px 10px;
+  }
+
+  li::marker {
     color: $color;
   }
 }
