@@ -4,7 +4,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import ReactMarkdown from "react-markdown";
 
 import "../../shared/Section.scss";
-import "./Technical.css";
+import "./Technical.scss";
 
 export class Technical extends Component<CVProps> {
   render(): JSX.Element {

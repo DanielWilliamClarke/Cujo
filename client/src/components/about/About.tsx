@@ -5,7 +5,7 @@ import ReactMarkdown from "react-markdown";
 import breaks from "remark-breaks";
 
 import "../../shared/Section.scss";
-import "./About.css";
+import "./About.scss";
 
 import headshot from "../../assets/headshot.jpg";
 

@@ -3,7 +3,7 @@ import { CVProps } from "../../model/CV";
 
 import { Container, Row, Col } from "react-bootstrap";
 
-import "./Backstretch.css";
+import "./Backstretch.scss";
 
 export class Backstretch extends Component<CVProps> {
   render(): JSX.Element {
@@ -17,7 +17,7 @@ export class Backstretch extends Component<CVProps> {
             <Col>{this.props.cv.basics.label}</Col>
           </Row>
         </div>
-      </Container>
+      </Container> 
     );
   }
 }

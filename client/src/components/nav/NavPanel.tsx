@@ -1,7 +1,7 @@
 import React, { Component, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 
-import "./NavPanel.css";
+import "./NavPanel.scss";
 import logo from "../../assets/logo_blue.png";
 
 interface StyleProps {

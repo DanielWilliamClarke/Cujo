@@ -17,19 +17,19 @@
   align-items: center;
   text-align: center;
   color: #ffffff;
-}
 
-.Backstretch-main {
-  font-size: 100px;
-  text-decoration: underline;
-  font-weight: 700;
-}
+  .Backstretch-main {
+    font-size: 100px;
+    text-decoration: underline;
+    font-weight: 700;
+  }
 
-.Backstretch-tag {
-  font-size: 29px;
-  text-align: right;
-  position: relative;
-  font-weight: 200;
-  line-height: 10px;
-  top: -10px;
+  .Backstretch-tag {
+    font-size: 29px;
+    text-align: right;
+    position: relative;
+    font-weight: 200;
+    line-height: 10px;
+    top: -10px;
+  }
 }
