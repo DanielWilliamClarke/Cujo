@@ -7,8 +7,8 @@ import "../../shared/Section.scss";
 import "./Technical.scss";
 
 type SkillsProps = {
-  skills: Skills
-}
+  skills: Skills;
+};
 
 export class Technical extends Component<SkillsProps> {
   render(): JSX.Element {
@@ -23,14 +23,16 @@ export class Technical extends Component<SkillsProps> {
           </Row>
 
           <Row className="Section-content">
-            <p className="Centered">
-              I have worked with and are proficient with a varity of programming
-              languages. For backend web applications I use Golang and Nodejs.
-              For frontend; TypeScript and JavaScript, and for performant apps,
-              services and games I use C++. I feel most at home with C++ and
-              Golang, but I am trying to learn a few <i>esoteric</i> languages
-              such as Rust and Assembly.
-            </p>
+            <Col className="Text-column">
+              <p className="Centered">
+                I have worked with and are proficient with a varity of
+                programming languages. For backend web applications I use Golang
+                and Nodejs. For frontend; TypeScript and JavaScript, and for
+                performant apps, services and games I use C++. I feel most at
+                home with C++ and Golang, but I am trying to learn a few{" "}
+                <i>esoteric</i> languages such as Rust and Assembly.
+              </p>
+            </Col>
           </Row>
 
           <Row className="Languages">
@@ -45,21 +47,25 @@ export class Technical extends Component<SkillsProps> {
             <h4 className="Centered">Frequently used Technologies</h4>
           </Row>
 
-          <Row className="Section-content">
+          <Row className="Section-content Skills">
             <Col>
               <h4>Frameworks</h4>
+              <div className="Centered Short-line" />
               {this.renderSkills(this.props.skills.frameworks)}
             </Col>
             <Col>
               <h4>Tools</h4>
+              <div className="Centered Short-line" />
               {this.renderSkills(this.props.skills.tools)}
             </Col>
             <Col>
               <h4>CI/CD</h4>
+              <div className="Centered Short-line" />
               {this.renderSkills(this.props.skills.devtools)}
             </Col>
             <Col>
               <h4>Software</h4>
+              <div className="Centered Short-line" />
               {this.renderSkills(this.props.skills.software)}
             </Col>
           </Row>

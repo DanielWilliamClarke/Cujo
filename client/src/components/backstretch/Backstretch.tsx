@@ -13,6 +13,7 @@ export class Backstretch extends Component<CVProps> {
           <Row className="Backstretch-main">
             <Col>{this.props.cv.basics.name}</Col>
           </Row>
+          <div className="Centered Line"></div>
           <Row className="Backstretch-tag">
             <Col>{this.props.cv.basics.label}</Col>
           </Row>

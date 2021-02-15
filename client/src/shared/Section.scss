@@ -17,7 +17,7 @@
   }
 
   .Section-content {
-    margin-top: 30px;
+    margin-top: 20px;
   }
 
   h3,
@@ -109,7 +109,7 @@
   .Col-item::after {
     content: "";
   }
-  
+
   .Image-item {
     border-radius: 50%;
     object-fit: cover;
@@ -157,4 +157,40 @@
 .App {
   @include alternating-section("odd", #222222, #f08b65);
   @include alternating-section("even", #111111, #61c0bf);
+}
+
+@media screen and (max-width: 700px) {
+  .col {
+    width: 100%;
+    flex-basis: revert;
+
+    ul {
+      margin: 20px 0 !important;
+    }
+  }
+
+  .Section {
+    text-align: left;
+    padding: 30px 0 0 0;
+  }
+
+  .Text-column,
+  .Section-content {
+    margin: 10px 0;
+  }
+
+  .Col-item {
+    display: block;
+  }
+
+  .Images {
+
+    .col {
+      flex-basis: 0;
+    }
+
+    .Col-item {
+      display: flex !important;
+    }
+  }
 }
