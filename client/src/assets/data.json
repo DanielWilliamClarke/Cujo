@@ -100,11 +100,17 @@
     {
       "institution": "The Nottingham Trent University",
       "area": "Computer Science",
-      "studyType": "Bachelor",
+      "studyType": "Bachelors Of Science",
       "startDate": "20/09/2010",
       "endDate": "20/05/2014",
-      "gpa": "First Class",
-      "courses": ["DB1101 - Basic SQL"]
+      "grade": "First Class With Honours",
+      "courses": ["DB1101 - Basic SQL"],
+      "summary": "BSc (Hons) Computer Science BCS accredited course, I achieved the second highest grade of my cohort  in my final year, graduating with a 1st",
+      "images": [
+        "https://scontent-frx5-1.xx.fbcdn.net/v/t1.0-9/1454597_10153424900735442_1962198186_n.jpg?_nc_cat=111&ccb=3&_nc_sid=cdbe9c&_nc_ohc=dK_PIRZFex4AX-yMjVY&_nc_ht=scontent-frx5-1.xx&oh=2103eeffc6da919b9b67f90334cc987e&oe=60507228",
+        "https://scontent-frx5-1.xx.fbcdn.net/v/t31.0-8/10495010_520025638130641_5597080034247240678_o.jpg?_nc_cat=111&ccb=3&_nc_sid=cdbe9c&_nc_ohc=TYEk0lu5jrgAX9wfENY&_nc_ht=scontent-frx5-1.xx&oh=d8b98f62250a675163669ffd827ddef0&oe=6051082D",
+        "https://scontent-frt3-1.xx.fbcdn.net/v/t31.0-0/c0.23.206.206a/p206x206/1504207_10204697546103776_3633676655567884565_o.jpg?_nc_cat=108&ccb=3&_nc_sid=da31f3&_nc_ohc=aEwZpZslXC0AX8UOrjO&_nc_ht=scontent-frt3-1.xx&tp=27&oh=173af330501f1b5a6da46e0c1d00d728&oe=604E8E90"
+      ]
     }
   ],
   "skills": {

@@ -39,8 +39,10 @@ export interface Education {
   studyType: string;
   startDate: string;
   endDate: string;
-  gpa: string;
+  grade: string;
+  summary: string;
   courses: string[];
+  images: string[];
 }
 
 export interface Skills {
