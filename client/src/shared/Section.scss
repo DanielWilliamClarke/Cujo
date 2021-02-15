@@ -147,10 +147,8 @@
       @include section-coloring($bg, $color);
     }
   }
-  .container {
-    .Section:nth-child(#{$side}) {
-      @include section-coloring($bg, $color);
-    }
+  .Section:nth-child(#{$side}) {
+    @include section-coloring($bg, $color);
   }
 }
 
@@ -184,7 +182,6 @@
   }
 
   .Images {
-
     .col {
       flex-basis: 0;
     }
@@ -193,4 +190,11 @@
       display: flex !important;
     }
   }
+}
+
+.hcb_wrap {
+  background: white;
+  text-align: left;
+
+  
 }
