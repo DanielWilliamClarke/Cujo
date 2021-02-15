@@ -22,7 +22,7 @@ export class About extends Component<AboutProps> {
           <Row>
             <Col>
               <h2 className="Section-title">About</h2>
-              <div className="Centered Line"></div>
+              <div className="Centered Line"/>
             </Col>
           </Row>
 

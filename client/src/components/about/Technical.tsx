@@ -18,12 +18,12 @@ export class Technical extends Component<SkillsProps> {
           <Row>
             <Col>
               <h2 className="Section-title">Technical Skills</h2>
-              <div className="Centered Line"></div>
+              <div className="Centered Line"/>
             </Col>
           </Row>
 
           <Row className="Section-content">
-            <Col className="Text-column">
+            <Col>
               <p className="Centered">
                 I have worked with and are proficient with a varity of
                 programming languages. For backend web applications I use Golang
@@ -43,6 +43,8 @@ export class Technical extends Component<SkillsProps> {
             ))}
           </Row>
 
+
+          <div className="Centered Short-line" />
           <Row className="Section-content">
             <h4 className="Centered">Frequently used Technologies</h4>
           </Row>

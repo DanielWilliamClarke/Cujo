@@ -22,7 +22,7 @@ export class Education extends Component<EducationProps> {
           <Row>
             <Col>
               <h2 className="Section-title">Education</h2>
-              <div className="Centered Line"></div>
+              <div className="Centered Line"/>
             </Col>
           </Row>
 
@@ -78,7 +78,7 @@ export class Education extends Component<EducationProps> {
                 ))}
               </Row>
 
-              <div className="Centered Short-line"></div>
+              <div className="Centered Short-line"/>
             </div>
           ))}
         </Container>
