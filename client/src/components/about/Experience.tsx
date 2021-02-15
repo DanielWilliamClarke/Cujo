@@ -23,7 +23,7 @@ export class Experience extends Component<WorkProps> {
           <Row>
             <Col>
               <h2 className="Section-title">Experience</h2>
-              <div className="Centered Line"></div>
+              <div className="Centered Line"/>
             </Col>
           </Row>
 
@@ -92,7 +92,7 @@ export class Experience extends Component<WorkProps> {
                     ))}
                   </Row>
 
-                  <div className="Centered Short-line"></div>
+                  <div className="Centered Short-line"/>
                 </div>
               )
             )}
