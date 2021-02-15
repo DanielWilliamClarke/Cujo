@@ -1,0 +1,30 @@
+.Experience {
+
+  .Highlights {
+    font-weight: 500;
+    margin-top: 10px;
+  }
+
+  .Period {
+    margin-bottom: 20px;
+
+    span {
+      margin: 0 5px;
+    }
+  }
+  
+  .Images {
+    margin-bottom: 20px;
+  
+    .Col-item::after {
+      content: "";
+    }
+    
+    .Work-image {
+      border-radius: 50%;
+      object-fit: cover;
+      width: 150px;
+      height: 150px;
+    }
+  }
+}

@@ -6,7 +6,7 @@ import breaks from "remark-breaks";
 import moment from "moment";
 
 import "../../shared/Section.scss";
-import "./Experience.css";
+import "./Experience.scss";
 
 export class Experience extends Component<CVProps> {
   private dateFormat = "DD/MM/YYYY";

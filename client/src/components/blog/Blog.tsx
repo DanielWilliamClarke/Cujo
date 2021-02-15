@@ -6,7 +6,7 @@ import Interweave from "interweave";
 import { BlogPost } from "./BlogModel";
 
 import "../../shared/Section.scss";
-import "./Blog.css";
+import "./Blog.scss";
 
 type BlogState = {
   posts: BlogPost[];

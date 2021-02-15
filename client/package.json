@@ -62,6 +62,7 @@
     "@types/wpapi": "^1.1.0",
     "html-webpack-plugin": "^5.0.0",
     "npm-watch": "^0.7.0",
-    "react-scripts": "^4.0.2"
+    "react-scripts": "^4.0.2",
+    "sass": "^1.32.7"
   }
 }
