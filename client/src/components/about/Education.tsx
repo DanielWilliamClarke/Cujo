@@ -28,7 +28,7 @@ export class Education extends Component<EducationProps> {
 
           {this.props.education.map((e) => (
             <div>
-              <Row className="Section-content ">
+              <Row className="Section-content">
                 <Col className="Centered Qualification-type">
                   <h4>{e.institution}</h4>
                   <h6>
@@ -39,7 +39,7 @@ export class Education extends Component<EducationProps> {
                 </Col>
               </Row>
 
-              <Row>
+              <Row className="Section-content">
                 <Col className="Centered">
                   <h5>
                     <b>{e.grade}</b>
@@ -47,7 +47,7 @@ export class Education extends Component<EducationProps> {
                 </Col>
               </Row>
 
-              <Row className="Period">
+              <Row className="Section-content Period">
                 <Col className="Centered">
                   <span>
                     <b>Period:</b>
@@ -60,7 +60,7 @@ export class Education extends Component<EducationProps> {
                 </Col>
               </Row>
 
-              <Row>
+              <Row className="Section-content Period">
                 <Col className="Centered">
                   <p>{e.summary}</p>
                 </Col>

@@ -10,9 +10,9 @@ import "./About.scss";
 import headshot from "../../assets/headshot.jpg";
 
 type AboutProps = {
-  basics: Basics,
-  interests: string[]
-}
+  basics: Basics;
+  interests: string[];
+};
 
 export class About extends Component<AboutProps> {
   render(): JSX.Element {

@@ -49,7 +49,7 @@ export class Experience extends Component<WorkProps> {
                     </Col>
                   </Row>
 
-                  <Row className="Period">
+                  <Row className="Section-content Period">
                     <Col className="Centered">
                       <span>
                         <b>Period:</b>
@@ -66,7 +66,7 @@ export class Experience extends Component<WorkProps> {
                     </Col>
                   </Row>
 
-                  <Row className="Highlights">
+                  <Row className="Section-content Highlights">
                     {work.highlights.map((highlight) => (
                       <Col className="Col-item">
                         <p>{highlight}</p>
@@ -74,7 +74,7 @@ export class Experience extends Component<WorkProps> {
                     ))}
                   </Row>
 
-                  <Row>
+                  <Row className="Section-content">
                     <Col>
                       <ReactMarkdown source={work.summary} plugins={[breaks]} />
                     </Col>
@@ -117,11 +117,17 @@ export class Experience extends Component<WorkProps> {
     if (end === "Present") {
       endMoment = moment();
     }
-    const difference = moment.duration(endMoment.diff(moment(start, this.dateFormat)));
-    const years = difference.years()
+    const difference = moment.duration(
+      endMoment.diff(moment(start, this.dateFormat))
+    );
+    const years = difference.years();
     const months = difference.months();
-    const yearFormat = years ? util.format('%d year%s', years, years === 1 ? '' : 's') : "";
-    const monthFormat = months ? util.format('%d month%s', months, months === 1 ? '' : 's') : "";
+    const yearFormat = years
+      ? util.format("%d year%s", years, years === 1 ? "" : "s")
+      : "";
+    const monthFormat = months
+      ? util.format("%d month%s", months, months === 1 ? "" : "s")
+      : "";
     return `${yearFormat} ${monthFormat}`;
   }
 }
