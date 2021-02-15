@@ -43,8 +43,6 @@ export class Technical extends Component<SkillsProps> {
             ))}
           </Row>
 
-
-          <div className="Centered Short-line" />
           <Row className="Section-content">
             <h4 className="Centered">Frequently used Technologies</h4>
           </Row>
