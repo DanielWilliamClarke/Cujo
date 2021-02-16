@@ -2,9 +2,12 @@ version: "3.6"
 
 services:
   client:
-    build: ./client
+    build: 
+      context: ./client
     ports:
       - "5000:5000"
+    environment:
+      WORDPRESS_HOST: http://localhost:8000
     volumes:
       - ./client/build:/usr/share/nginx/html
     networks:

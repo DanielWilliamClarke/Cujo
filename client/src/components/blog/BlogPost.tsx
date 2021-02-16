@@ -1,42 +1,74 @@
-import React, { Component } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import React, { Component, Fragment, MouseEvent } from "react";
+import { Button, Container, Row, Col } from "react-bootstrap";
 
-import { Post } from "./BlogPostModel";
-import { Media } from "./BlogMediaModel";
-import { Tag } from "./BlogTagModel";
+import { BlogServiceProps, BlogPostData } from "./BlogService";
 
 import "../../shared/Section.scss";
 import "./BlogPost.scss";
 import "highlight.js/scss/tomorrow-night-eighties.scss";
 import moment from "moment";
+import { RouteComponentProps, withRouter } from "react-router-dom";
+import { Tag } from "./BlogTagModel";
 
-export interface BlogPostData {
-  post: Post;
-  media: Media;
-  tags: Tag[];
-}
-
-type BlogPostProps = {
-  p: BlogPostData;
+type BlogIDProps = {
+  id: number;
 };
 
-export class BlogPost extends Component<BlogPostProps> {
-  render(): JSX.Element {
+type BlogPostState = {
+  post: BlogPostData | null;
+};
+
+class BlogPost extends Component<
+  BlogServiceProps & BlogIDProps & RouteComponentProps,
+  BlogPostState
+> {
+  setPostState(post: BlogPostData | null) {
+    this.setState({ post });
+  }
+
+  componentWillMount(): void {
+    this.setPostState(null);
+    this.props.service
+      .FetchBlogPost(this.props.id)
+      .then(this.setPostState.bind(this))
+      .catch((err) => console.log(err));
+  }
+
+  handleClick(event: MouseEvent<HTMLButtonElement>) {
+    event.stopPropagation();
+    this.props.history.goBack();
+  }
+
+  backButton(): JSX.Element {
+    return (
+      <Button
+        className="Blog-back"
+        variant="link"
+        onClick={this.handleClick.bind(this)}
+      >
+        {`< Back`}
+      </Button>
+    );
+  }
+
+  displayPost(p: BlogPostData): JSX.Element {
     return (
       <section className="Section Blog-post">
         <Container>
+          {this.backButton()}
+
           <Row>
             <Col>
-              <h2 className="Section-title">{this.props.p.post.title.rendered}</h2>
+              <h2 className="Section-title">{p.post.title.rendered}</h2>
               <h4 className="Blog-modified">
-                Last updated {this.toDateSentence(this.props.p.post.modified)}
+                Last updated {this.toDateSentence(p.post.modified)}
               </h4>
               <div className="Line"></div>
             </Col>
           </Row>
 
           <Row className="Tags">
-            {this.props.p.tags.map(
+            {p.tags.map(
               (t: Tag): JSX.Element => (
                 <span className="Col-item">{t.name}</span>
               )
@@ -47,16 +79,16 @@ export class BlogPost extends Component<BlogPostProps> {
             <Col>
               <div
                 dangerouslySetInnerHTML={{
-                  __html: this.props.p.post.excerpt.rendered,
+                  __html: p.post.excerpt.rendered,
                 }}
               ></div>
             </Col>
           </Row>
 
-          {this.props.p.media && (
+          {p.media && (
             <Row className="Section-content">
               <Col className="Centered Featured">
-                <img src={this.props.p.media.source_url} alt="not found..." />
+                <img src={p.media.source_url} alt="not found..." />
               </Col>
             </Row>
           )}
@@ -65,15 +97,24 @@ export class BlogPost extends Component<BlogPostProps> {
             <Col>
               <div
                 dangerouslySetInnerHTML={{
-                  __html: this.props.p.post.content.rendered,
+                  __html: p.post.content.rendered,
                 }}
               ></div>
             </Col>
           </Row>
 
           <div className="Short-line"></div>
+          {this.backButton()}
         </Container>
       </section>
+    );
+  }
+
+  render(): JSX.Element {
+    return (
+      <Fragment>
+        {this.state.post && this.displayPost(this.state.post)}
+      </Fragment>
     );
   }
 
@@ -84,3 +125,5 @@ export class BlogPost extends Component<BlogPostProps> {
     return moment(date).format("Do MMMM YYYY HH:mm:ss");
   }
 }
+
+export default withRouter(BlogPost);

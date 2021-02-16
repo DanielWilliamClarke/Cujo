@@ -3,11 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "react-scripts start",
+    "start": "npm run genenv && react-scripts start",
     "build": "react-scripts build",
     "watch": "npm-watch",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "genenv": "chmod +x ./env.sh && ./env.sh && cp env-config.js ./public/"
   },
   "eslintConfig": {
     "extends": "react-app"

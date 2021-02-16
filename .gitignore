@@ -6,3 +6,6 @@ package-lock.json
 .env
 vendor
 composer.*
+
+/public/env-config.js
+env-config.js
