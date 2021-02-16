@@ -11,9 +11,12 @@ import moment from "moment";
 
 import { BlogServiceProps, BlogPostData } from "./BlogService";
 import BlogPost from "./BlogPost";
+import { SharePanel } from "../nav/SharePanel";
 
 import "../../shared/Section.scss";
 import "./Blog.scss";
+
+const Fade = require("react-reveal/Fade");
 
 type BlogState = {
   blog: BlogPostData[];
@@ -95,19 +98,26 @@ class Blog extends Component<
   private blogPosts(): JSX.Element {
     return (
       <section className="Section Blog">
-        <Row>
-          <Col>
-            <h2 className="Section-title">Blog</h2>
-            <div className="Centered Line" />
-          </Col>
-        </Row>
-        <CardColumns className="Section-content">
-          {this.state.blog.map(
-            (data: BlogPostData): JSX.Element => (
-              <Fragment>{this.blogSummaryPanel(data)}</Fragment>
-            )
-          )}
-        </CardColumns>
+        <SharePanel
+          url={window.location.href}
+          body="A blog about software engineering, magic, family life and other hobbies"
+          hashtag="DWCBlog"
+        />
+        <Fade bottom>
+          <Row>
+            <Col>
+              <h2 className="Section-title">Blog</h2>
+              <div className="Centered Line" />
+            </Col>
+          </Row>
+          <CardColumns className="Section-content">
+            {this.state.blog.map(
+              (data: BlogPostData): JSX.Element => (
+                <Fragment>{this.blogSummaryPanel(data)}</Fragment>
+              )
+            )}
+          </CardColumns>
+        </Fade>
       </section>
     );
   }
