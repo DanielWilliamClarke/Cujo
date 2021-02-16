@@ -1,10 +1,18 @@
 .Blog-post {
   text-align: left;
+  padding: 30px 0;
 
   .Section-title {
     text-align: left;
     text-transform: none;
     margin-bottom: 5px;
+  }
+
+  .Blog-back
+  {
+    font-size: 20px;
+    padding: 0;
+    font-style: italic;
   }
 
   .Tags {
