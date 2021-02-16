@@ -54,7 +54,7 @@ class BlogPost extends Component<
         <Container>
           <SharePanel
             url={window.location.href}
-            title={p.post.title.rendered}
+            title={`Blog - ${p.post.title.rendered}`}
             body={p.post.excerpt.rendered}
             hashtag="DWCBlog"
           />

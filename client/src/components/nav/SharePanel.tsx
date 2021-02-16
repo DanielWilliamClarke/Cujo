@@ -77,6 +77,7 @@ export class SharePanel extends Component<ShareProps> {
             url={this.props.url}
             subject={this.prepareTitle(this.props.title)}
             body={this.sanitize(this.props.body)}
+            separator=" - "
           >
             <EmailIcon size={this.size} />
           </EmailShareButton>
@@ -90,7 +91,7 @@ export class SharePanel extends Component<ShareProps> {
   }
 
   private prepareTitle(title: string | undefined): string {
-    const prefix = "Daniel William Clarke - Blog";
+    const prefix = "DanielWilliamClarke.com";
     return title ? `${prefix} - ${title}` : prefix;
   }
 }

@@ -100,6 +100,7 @@ class Blog extends Component<
       <section className="Section Blog">
         <SharePanel
           url={window.location.href}
+          title="Blog"
           body="A blog about software engineering, magic, family life and other hobbies"
           hashtag="DWCBlog"
         />
