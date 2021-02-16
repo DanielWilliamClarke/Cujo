@@ -1,0 +1,12 @@
+.Blog {
+  text-align: left;
+  padding: 30px 0;
+  width: 75%;
+}
+
+@media (min-width: 576px) {
+  .card-columns {
+    column-count: 4 !important;
+    padding: 10px;
+  }
+}
