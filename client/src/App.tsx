@@ -7,7 +7,7 @@ import { Backstretch } from "./components/backstretch/Backstretch";
 import { NavPanel } from "./components/nav/NavPanel";
 
 import { Profile } from "./components/about/Profile";
-import { Blog } from "./components/blog/Blog";
+import Blog from "./components/blog/Blog";
 
 import "./App.css";
 
@@ -26,7 +26,7 @@ export class App extends Component<CVProps> {
                 <Route exact path="/">
                   <Profile cv={this.props.cv} />
                 </Route>
-                <Route exact path="/blog">
+                <Route path="/blog">
                   <Blog />
                 </Route>
               </Switch>

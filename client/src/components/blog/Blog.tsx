@@ -1,7 +1,8 @@
 import React, { Component, Fragment } from "react";
+import { Link, Route, RouteComponentProps, Switch, withRouter } from "react-router-dom";
 import WPAPI from "wpapi";
 
-import { BlogPost, BlogPostData } from "./BlogPost"
+import { BlogPost, BlogPostData } from "./BlogPost";
 import { Post } from "./BlogPostModel";
 import { Media } from "./BlogMediaModel";
 import { Tag } from "./BlogTagModel";
@@ -13,10 +14,12 @@ type BlogState = {
   blog: BlogPostData[];
 };
 
-export class Blog extends Component<{}, BlogState> {
+type BlogRouteParams = { id: string };
+
+class Blog extends Component<RouteComponentProps, BlogState> {
   private wp: WPAPI;
 
-  constructor(props: {}) {
+  constructor(props: RouteComponentProps) {
     super(props);
     this.wp = new WPAPI({
       endpoint: "http://localhost:8000/wp-json",
@@ -44,15 +47,38 @@ export class Blog extends Component<{}, BlogState> {
       .catch((err) => console.log(err));
   }
 
+  showPost({ match }: RouteComponentProps<BlogRouteParams>): JSX.Element {
+    return (
+      <BlogPost
+        p={
+          this.state.blog.find(
+            (data) => data.post.id === parseInt(match.params.id)
+          ) as BlogPostData
+        }
+      />
+    );
+  }
+
   render(): JSX.Element {
     return (
       <Fragment>
-        {this.state.blog.map(
-          (post: BlogPostData): JSX.Element => (
-            <BlogPost p={post} />
-          )
-        )}
+        <ul>
+          {this.state.blog.map(
+            (data: BlogPostData): JSX.Element => (
+              <li key={data.post.id}>
+                <Link to={`${this.props.match.url}/${data.post.id}`}>
+                  {data.post.title.rendered}
+                </Link>
+              </li>
+            )
+          )}
+        </ul>
+        <Switch>
+          <Route path={`${this.props.match.path}/:id`} component={this.showPost.bind(this)} />
+        </Switch>
       </Fragment>
     );
   }
 }
+
+export default withRouter(Blog);
