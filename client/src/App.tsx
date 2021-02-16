@@ -13,13 +13,17 @@ import { BlogService } from "./components/blog/BlogService";
 
 import "./App.css";
 
+declare global {
+  interface Window { _env_: any; }
+}
+
 export class App extends Component<CVProps> {
   private bService: BlogService;
 
   constructor(props: CVProps) {
     super(props);
     this.bService = new BlogService(new WPAPI({
-      endpoint: `${process.env.WORDPRESS_HOST}/wp-json`,
+      endpoint: `${window._env_.WORDPRESS_HOST}/wp-json`,
     }));
   }
 
