@@ -1,14 +1,15 @@
 import React, { Component, Fragment, MouseEvent } from "react";
+import { RouteComponentProps, withRouter } from "react-router-dom";
 import { Button, Container, Row, Col } from "react-bootstrap";
+import moment from "moment";
 
 import { BlogServiceProps, BlogPostData } from "./BlogService";
+import { Tag } from "./BlogTagModel";
+import { SharePanel } from "../nav/SharePanel";
 
 import "../../shared/Section.scss";
 import "./BlogPost.scss";
 import "highlight.js/scss/tomorrow-night-eighties.scss";
-import moment from "moment";
-import { RouteComponentProps, withRouter } from "react-router-dom";
-import { Tag } from "./BlogTagModel";
 
 type BlogIDProps = {
   id: number;
@@ -51,6 +52,13 @@ class BlogPost extends Component<
     return (
       <section className="Section Blog-post">
         <Container>
+          <SharePanel
+            url={window.location.href}
+            title={p.post.title.rendered}
+            body={p.post.excerpt.rendered}
+            hashtag="DWCBlog"
+          />
+
           {this.backButton()}
 
           <Row>
@@ -116,7 +124,7 @@ class BlogPost extends Component<
         {`< Back`}
       </Button>
     );
-  }  
+  }
 
   private toDateSentence(date: string): string {
     if (date === "Present") {
