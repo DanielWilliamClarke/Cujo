@@ -22,10 +22,6 @@ class BlogPost extends Component<
   BlogServiceProps & BlogIDProps & RouteComponentProps,
   BlogPostState
 > {
-  setPostState(post: BlogPostData | null) {
-    this.setState({ post });
-  }
-
   componentWillMount(): void {
     this.setPostState(null);
     this.props.service
@@ -39,19 +35,19 @@ class BlogPost extends Component<
     this.props.history.goBack();
   }
 
-  backButton(): JSX.Element {
+  render(): JSX.Element {
     return (
-      <Button
-        className="Blog-back"
-        variant="link"
-        onClick={this.handleClick.bind(this)}
-      >
-        {`< Back`}
-      </Button>
+      <Fragment>
+        {this.state.post && this.displayPost(this.state.post)}
+      </Fragment>
     );
   }
 
-  displayPost(p: BlogPostData): JSX.Element {
+  private setPostState(post: BlogPostData | null) {
+    this.setState({ post });
+  }
+
+  private displayPost(p: BlogPostData): JSX.Element {
     return (
       <section className="Section Blog-post">
         <Container>
@@ -110,13 +106,17 @@ class BlogPost extends Component<
     );
   }
 
-  render(): JSX.Element {
+  private backButton(): JSX.Element {
     return (
-      <Fragment>
-        {this.state.post && this.displayPost(this.state.post)}
-      </Fragment>
+      <Button
+        className="Blog-back"
+        variant="link"
+        onClick={this.handleClick.bind(this)}
+      >
+        {`< Back`}
+      </Button>
     );
-  }
+  }  
 
   private toDateSentence(date: string): string {
     if (date === "Present") {

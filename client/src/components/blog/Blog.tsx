@@ -25,69 +25,12 @@ class Blog extends Component<
   BlogServiceProps & RouteComponentProps,
   BlogState
 > {
-  setBlogState(blog: BlogPostData[]) {
-    this.setState({ blog });
-  }
-
   componentWillMount(): void {
     this.setBlogState([]);
     this.props.service
       .FetchAllBlogPosts()
       .then(this.setBlogState.bind(this))
       .catch((err) => console.log(err));
-  }
-
-  showPost({ match }: RouteComponentProps<BlogRouteParams>): JSX.Element {
-    return (
-      <BlogPost service={this.props.service} id={parseInt(match.params.id)} />
-    );
-  }
-
-  blogSummaryPanel(data: BlogPostData): JSX.Element {
-    return (
-      <Card key={data.post.id} bg="dark">
-        <Link to={`${this.props.match.url}/${data.post.id}`}>
-          {data.media && <Card.Img variant="top" src={data.media.source_url} />}
-        </Link>
-        <Card.Body>
-          <Link to={`${this.props.match.url}/${data.post.id}`}>
-            <Card.Title>{data.post.title.rendered}</Card.Title>
-          </Link>
-          <Card.Text>Published updated {this.toDateSentence(data.post.date)} </Card.Text>
-          <Card.Text
-            className="text-muted"
-            dangerouslySetInnerHTML={{
-              __html: data.post.excerpt.rendered,
-            }}
-          />
-        </Card.Body>
-        <Card.Footer>
-          <small className="text-muted">
-            Last updated {this.toDateSentence(data.post.modified)}
-          </small>
-        </Card.Footer>
-      </Card>
-    );
-  }
-
-  blogPosts(): JSX.Element {
-    return (
-      <section className="Section Blog">
-        <Row>
-          <Col>
-            <h2 className="Section-title">Blog</h2>
-            <div className="Centered Line" />
-          </Col>
-        </Row>
-        <CardColumns className="Section-content">
-          {this.state.blog.map(
-            (data: BlogPostData): JSX.Element => (
-              <Fragment>{this.blogSummaryPanel(data)}</Fragment>
-            )
-          )}
-        </CardColumns>
-      </section>
-    );
   }
 
   render(): JSX.Element {
@@ -105,6 +48,67 @@ class Blog extends Component<
           />
         </Switch>
       </Fragment>
+    );
+  }
+
+  private setBlogState(blog: BlogPostData[]) {
+    this.setState({ blog });
+  }
+
+  private showPost({
+    match,
+  }: RouteComponentProps<BlogRouteParams>): JSX.Element {
+    return (
+      <BlogPost service={this.props.service} id={parseInt(match.params.id)} />
+    );
+  }
+
+  private blogSummaryPanel(data: BlogPostData): JSX.Element {
+    return (
+      <Card key={data.post.id} bg="dark">
+        <Link to={`${this.props.match.url}/${data.post.id}`}>
+          {data.media && <Card.Img variant="top" src={data.media.source_url} />}
+        </Link>
+        <Card.Body>
+          <Link to={`${this.props.match.url}/${data.post.id}`}>
+            <Card.Title>{data.post.title.rendered}</Card.Title>
+          </Link>
+          <Card.Text>
+            Published {this.toDateSentence(data.post.date)}{" "}
+          </Card.Text>
+          <Card.Text
+            className="text-muted"
+            dangerouslySetInnerHTML={{
+              __html: data.post.excerpt.rendered,
+            }}
+          />
+        </Card.Body>
+        <Card.Footer>
+          <small className="text-muted">
+            Last updated {this.toDateSentence(data.post.modified)}
+          </small>
+        </Card.Footer>
+      </Card>
+    );
+  }
+
+  private blogPosts(): JSX.Element {
+    return (
+      <section className="Section Blog">
+        <Row>
+          <Col>
+            <h2 className="Section-title">Blog</h2>
+            <div className="Centered Line" />
+          </Col>
+        </Row>
+        <CardColumns className="Section-content">
+          {this.state.blog.map(
+            (data: BlogPostData): JSX.Element => (
+              <Fragment>{this.blogSummaryPanel(data)}</Fragment>
+            )
+          )}
+        </CardColumns>
+      </section>
     );
   }
 
