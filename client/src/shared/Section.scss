@@ -118,7 +118,7 @@
   }
 }
 
-@mixin section-coloring($bg, $color) {
+@mixin section-coloring($bg, $color, $cardColor) {
   background-color: $bg;
 
   .Short-line,
@@ -139,21 +139,25 @@
   li::marker {
     color: $color;
   }
+
+  .bg-dark {
+    background-color: $cardColor !important;
+  }
 }
 
-@mixin alternating-section($side, $bg, $color) {
+@mixin alternating-section($side, $bg, $color, $cardColor: #222222) {
   div:nth-child(#{$side}) {
     .Section {
-      @include section-coloring($bg, $color);
+      @include section-coloring($bg, $color, $cardColor);
     }
   }
   .Section:nth-child(#{$side}) {
-    @include section-coloring($bg, $color);
+    @include section-coloring($bg, $color, $cardColor);
   }
 }
 
 .App {
-  @include alternating-section("odd", #222222, #f08b65);
+  @include alternating-section("odd", #222222, #f08b65, #111111);
   @include alternating-section("even", #111111, #61c0bf);
 }
 

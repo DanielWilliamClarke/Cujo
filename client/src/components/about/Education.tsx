@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import { Education as EducationData } from "../../model/CV";
 import { Container, Row, Col } from "react-bootstrap";
-import ReactMarkdown from "react-markdown";
-import breaks from "remark-breaks";
 import moment from "moment";
 
 import "../../shared/Section.scss";
 import "./Education.scss";
+import { DynamicImage } from "../shared/DynamicImage";
 
 type EducationProps = {
   education: EducationData[];
@@ -17,12 +16,12 @@ export class Education extends Component<EducationProps> {
 
   render(): JSX.Element {
     return (
-      <section className="Section Education">
+      <section id="education" className="Section Education">
         <Container>
           <Row>
             <Col>
               <h2 className="Section-title">Education</h2>
-              <div className="Centered Line"/>
+              <div className="Centered Line" />
             </Col>
           </Row>
 
@@ -69,16 +68,16 @@ export class Education extends Component<EducationProps> {
               <Row className="Images">
                 {e.images.map((image) => (
                   <Col className="Col-item">
-                    <img
-                      className="Centered Image-item"
-                      src={image}
+                    <DynamicImage
+                      image={image}
                       alt="not found..."
+                      className="Centered Image-item"
                     />
                   </Col>
                 ))}
               </Row>
 
-              <div className="Centered Short-line"/>
+              <div className="Centered Short-line" />
             </div>
           ))}
         </Container>

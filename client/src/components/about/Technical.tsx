@@ -13,7 +13,7 @@ type SkillsProps = {
 export class Technical extends Component<SkillsProps> {
   render(): JSX.Element {
     return (
-      <section className="Section Technical">
+      <section id="technical" className="Section Technical">
         <Container>
           <Row>
             <Col>

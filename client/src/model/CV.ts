@@ -58,6 +58,13 @@ export interface Language {
   fluency: string;
 }
 
+export interface Project {
+  name: string;
+  link: string;
+  image: string;
+  summary: string;
+}
+
 export interface CV {
   basics: Basics;
   work: Work[];
@@ -65,6 +72,7 @@ export interface CV {
   skills: Skills;
   languages: Language[];
   interests: string[];
+  projects: Project[];
 }
 
 

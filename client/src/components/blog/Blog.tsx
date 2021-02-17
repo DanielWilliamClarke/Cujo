@@ -1,11 +1,11 @@
 import React, { Component, Fragment } from "react";
 import {
-  Link,
   Route,
   RouteComponentProps,
   Switch,
   withRouter,
 } from "react-router-dom";
+import { HashLink } from "react-router-hash-link";
 import { Card, CardColumns, Col, Row } from "react-bootstrap";
 import moment from "moment";
 
@@ -15,6 +15,7 @@ import { SharePanel } from "../nav/SharePanel";
 
 import "../../shared/Section.scss";
 import "./Blog.scss";
+
 
 const Fade = require("react-reveal/Fade");
 
@@ -69,13 +70,13 @@ class Blog extends Component<
   private blogSummaryPanel(data: BlogPostData): JSX.Element {
     return (
       <Card key={data.post.id} bg="dark">
-        <Link to={`${this.props.match.url}/${data.post.id}`}>
+        <HashLink smooth to={`${this.props.match.url}/${data.post.id}#blogpost`}>
           {data.media && <Card.Img variant="top" src={data.media.source_url} />}
-        </Link>
+        </HashLink>
         <Card.Body>
-          <Link to={`${this.props.match.url}/${data.post.id}`}>
+          <HashLink smooth to={`${this.props.match.url}/${data.post.id}#blogpost`}>
             <Card.Title>{data.post.title.rendered}</Card.Title>
-          </Link>
+          </HashLink>
           <Card.Text>
             Published {this.toDateSentence(data.post.date)}{" "}
           </Card.Text>
@@ -97,7 +98,7 @@ class Blog extends Component<
 
   private blogPosts(): JSX.Element {
     return (
-      <section className="Section Blog">
+      <section id="blog" className="Section Blog">
         <SharePanel
           url={window.location.href}
           title="Blog"

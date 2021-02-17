@@ -4,10 +4,10 @@ import { Container, Row, Col } from "react-bootstrap";
 import ReactMarkdown from "react-markdown";
 import breaks from "remark-breaks";
 
+import { DynamicImage } from "../shared/DynamicImage";
+
 import "../../shared/Section.scss";
 import "./About.scss";
-
-import headshot from "../../assets/headshot.jpg";
 
 type AboutProps = {
   basics: Basics;
@@ -17,7 +17,7 @@ type AboutProps = {
 export class About extends Component<AboutProps> {
   render(): JSX.Element {
     return (
-      <section className="Section About">
+      <section id="about" className="Section About">
         <Container>
           <Row>
             <Col>
@@ -28,7 +28,7 @@ export class About extends Component<AboutProps> {
 
           <Row className="Section-content">
             <Col>
-              <img src={headshot} alt="its, me!" className="Headshot" />
+              <DynamicImage image="headshot.jpg" alt="its, me!" className="Headshot" />
             </Col>
 
             <Col className="Text-column">

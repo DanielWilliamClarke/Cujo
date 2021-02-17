@@ -4,6 +4,7 @@
   background-color: #333333;
   overflow: hidden;
   z-index: 1;
+  text-transform: capitalize !important;
 
   .Nav-container {
     height: 100%;
@@ -28,6 +29,7 @@
 
     li {
       font-weight: 500;
+
     }
   }
 
