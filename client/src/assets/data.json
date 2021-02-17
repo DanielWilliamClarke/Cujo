@@ -84,7 +84,7 @@
     {
       "company": "Schlumberger",
       "position": "Full Stack Software Engineer: GAIA Core",
-      "website": "https://www.slb.com/reservoir-characterization/seismic/gaia-digital-subsurface-platform",
+      "website": "https://www.software.slb.com/delfi/delfi-experience/gaia",
       "startDate": "20/11/2020",
       "endDate": "Present",
       "summary": "Full stack software engineer leading a team of 4 software engineers for the GAIA Data discovery and marketplace platform.",
@@ -154,20 +154,32 @@
     {
       "name": "Semi Autonomous Finite State Machines",
       "link": "https://github.com/DanielWilliamClarke/SemiAutonomousFSMs",
-      "image": "g1.jpg",
+      "image": "p3.gif",
       "summary": "To complete my final year at Nottingham Trent University, I researched and developed an application capable of the generation and deployment of semi-autonomous supervisory controllers for process automation. Upon completion I was then able return to Schlumberger Gould Research to demonstrate and integrate my solution with their drilling simulation test platform and autonomously drove a physical miniature drilling rig live."
     },
     {
       "name": "Untitled Indie Space Shooter",
       "link": "https://github.com/DanielWilliamClarke/Annatar",
-      "image": "g2.jpg",
+      "image": "p1.gif",
       "summary": "My very own indie space shooter I built in my spare time using C++ and SFML, Based on my first year university programming class project submission."
+    },
+    { 
+      "name": "Predator/Prey Simulation",
+      "link": "https://github.com/DanielWilliamClarke/Cujo",
+      "image": "p4.jpg",
+      "summary": "A predator / prey simulation with AI"
     },
     { 
       "name": "This Very Portfolio",
       "link": "https://github.com/DanielWilliamClarke/Cujo",
-      "image": "https://media.tenor.com/images/469b67dbd67a29d1de1e8108ff7eff59/tenor.gif",
+      "image": "p2.gif",
       "summary": "I have made this Portfolio's code avaiable for all to see!"
+    },
+    { 
+      "name": "Various Projects",
+      "link": "https://github.com/DanielWilliamClarke",
+      "image": "p5.jpg",
+      "summary": "Everything else on my Github"
     }
   ]
 }
