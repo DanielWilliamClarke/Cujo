@@ -43,7 +43,7 @@ export class App extends Component<CVProps> {
                 </Route>
                 <Route path="/blog">
                   <Blog service={this.bService} />
-                </Route>
+                </Route> 
               </Switch>
             </div>
           </Router>

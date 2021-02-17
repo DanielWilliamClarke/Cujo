@@ -1,13 +1,15 @@
 import React, { Component } from "react";
-import { CVProps, Work } from "../../model/CV";
 import { Container, Row, Col } from "react-bootstrap";
 import ReactMarkdown from "react-markdown";
 import breaks from "remark-breaks";
 import moment from "moment";
 import util from "util";
 
+import { Work } from "../../model/CV";
+
 import "../../shared/Section.scss";
 import "./Experience.scss";
+import { DynamicImage } from "../shared/DynamicImage";
 
 type WorkProps = {
   work: Work[];
@@ -18,12 +20,12 @@ export class Experience extends Component<WorkProps> {
 
   render(): JSX.Element {
     return (
-      <section className="Section Experience">
+      <section id="experience" className="Section Experience">
         <Container>
           <Row>
             <Col>
               <h2 className="Section-title">Experience</h2>
-              <div className="Centered Line"/>
+              <div className="Centered Line" />
             </Col>
           </Row>
 
@@ -83,16 +85,16 @@ export class Experience extends Component<WorkProps> {
                   <Row className="Images">
                     {work.images.map((image) => (
                       <Col className="Col-item">
-                        <img
-                          className="Centered Image-item"
-                          src={image}
+                        <DynamicImage
+                          image={image}
                           alt="not found..."
+                          className="Centered Image-item"
                         />
                       </Col>
                     ))}
                   </Row>
 
-                  <div className="Centered Short-line"/>
+                  <div className="Centered Short-line" />
                 </div>
               )
             )}

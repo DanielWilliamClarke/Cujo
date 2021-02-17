@@ -1,11 +1,11 @@
-
-import { Component } from "react";
+import React, { Component } from "react";
 
 import { SharePanel } from "../nav/SharePanel";
 import { About } from "./About";
 import { Experience } from "./Experience";
 import { Technical } from "./Technical";
 import { Education } from "./Education";
+import { Projects } from "./Projects";
 
 import { CVProps } from "../../model/CV";
 
@@ -34,6 +34,9 @@ export class Profile extends Component<CVProps> {
         </Fade>{" "}
         <Fade bottom>
           <Education education={this.props.cv.education} />
+        </Fade>
+        <Fade bottom>
+          <Projects projects={this.props.cv.projects} />
         </Fade>
       </div>
     );

@@ -50,7 +50,7 @@ class BlogPost extends Component<
 
   private displayPost(p: BlogPostData): JSX.Element {
     return (
-      <section className="Section Blog-post">
+      <section id="blogpost" className="Section Blog-post">
         <Container>
           <SharePanel
             url={window.location.href}
@@ -65,7 +65,7 @@ class BlogPost extends Component<
             <Col>
               <h2 className="Section-title">{p.post.title.rendered}</h2>
               <h4 className="Blog-modified">
-                Last updated {this.toDateSentence(p.post.modified)}
+                Published {this.toDateSentence(p.post.date)}
               </h4>
               <div className="Line"></div>
             </Col>
