@@ -36,6 +36,7 @@ services:
     environment:
       - WORDPRESS_HOST=https://blog.${DOMAIN}
       - VIRTUAL_HOST=${DOMAIN}
+      - VIRTUAL_PORT=80
       # - LETSENCRYPT_HOST=${DOMAIN}
     # volumes:
     #   - ./portfolio/build:/usr/share/nginx/html
