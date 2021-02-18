@@ -29,8 +29,8 @@ services:
     # build: 
     #   context: ./portfolio
     image: dclarkious/cujo-portfolio:latest
-    ports:
-      - '5001:5000'
+    expose:
+      - "5001"
     environment:
       - WORDPRESS_HOST=https://blog.${DOMAIN}
       - VIRTUAL_HOST=${DOMAIN}
