@@ -26,8 +26,9 @@ services:
       - proxy
 
   portfolio:
-    build: 
-      context: ./portfolio
+    # build: 
+    #   context: ./portfolio
+    image: cujo-portfolio:latest
     ports:
       - "5000:5000"
     environment:
