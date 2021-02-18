@@ -20,10 +20,10 @@ COPY --from=build /portfolio/build .
 COPY --from=build /portfolio/env.sh .
 COPY --from=build /portfolio/app.env .
 
-EXPOSE 5000
+EXPOSE 80
 
 RUN rm /etc/nginx/conf.d/default.conf
 COPY nginx/nginx.conf /etc/nginx/conf.d
 
 # Start Nginx server
-CMD ["/bin/bash", "-c", "/usr/share/nginx/html/env.sh && nginx -g \"daemon off;\""]
+CMD ["/bin/bash", "-c", "echo \"Starting Portfolio...\" && /usr/share/nginx/html/env.sh && nginx -g \"daemon off;\""]
