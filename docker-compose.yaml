@@ -15,8 +15,6 @@ services:
       - ./docker/certs:/etc/nginx/certs:ro
     networks:
       - proxy
-    depends_on:
-      - portfolio
 
   # ssl-companion:
   #   image: jrcs/letsencrypt-nginx-proxy-companion
@@ -40,6 +38,8 @@ services:
       - 8080  
     expose:
       - 8080
+    depends_on:
+      - proxy
     environment:
     - WORDPRESS_HOST=https://blog.${DOMAIN}
     - VIRTUAL_HOST=${DOMAIN}
