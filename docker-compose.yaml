@@ -51,7 +51,7 @@ services:
     #   - ./portfolio/app.env:/usr/share/nginx/html/app.env
     networks:
      - wordpress
-     - proxy
+    #  - proxy
 
   # wordpress:
   #   depends_on:
