@@ -1,17 +1,41 @@
 version: "3.6"
 
 services:
-  client:
+
+ proxy:
+    image: jwilder/nginx-proxy
+    container_name: nginx-proxy
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - /etc/nginx/vhost.d
+      - /usr/share/nginx/html
+      - ./docker/certs:/etc/nginx/certs:ro
+
+  ssl-companion:
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    container_name: ssl-companion
+    volumes:
+      - ./docker/certs:/etc/nginx/certs:rw
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    volumes_from:
+      - proxy
+    depends_on:
+      - proxy
+
+  portfolio:
     build: 
-      context: ./client
+      context: ./portfolio
     ports:
       - "5000:5000"
     environment:
       WORDPRESS_HOST: http://localhost:8000
     volumes:
-      - ./client/build:/usr/share/nginx/html
-      - ./client/env.sh:/usr/share/nginx/html/env.sh
-      - ./client/app.env:/usr/share/nginx/html/app.env
+      - ./portfolio/build:/usr/share/nginx/html
+      - ./portfolio/env.sh:/usr/share/nginx/html/env.sh
+      - ./portfolio/app.env:/usr/share/nginx/html/app.env
     networks:
       - wordpress
 

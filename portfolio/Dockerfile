@@ -1,13 +1,13 @@
 #BUILD -----------------------------------
 FROM node:15.8.0 as build
 
-WORKDIR /client
+WORKDIR /portfolio
 
-COPY package.json /client/package.json
+COPY package.json /portfolio/package.json
 
 RUN yarn install && yarn add create-react-app 
 
-COPY . /client
+COPY . /portfolio
 
 RUN yarn run build
 
@@ -16,9 +16,9 @@ FROM nginx:1.9.15
 
 WORKDIR /usr/share/nginx/html
 
-COPY --from=build /client/build .
-COPY --from=build /client/env.sh .
-COPY --from=build /client/app.env .
+COPY --from=build /portfolio/build .
+COPY --from=build /portfolio/env.sh .
+COPY --from=build /portfolio/app.env .
 
 EXPOSE 80
 
