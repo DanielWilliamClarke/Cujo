@@ -34,11 +34,11 @@ services:
     #   context: ./portfolio
     image: dclarkious/cujo-portfolio:latest
     expose:                 # <--- the important bit here
-      - "80"              # <--- and here
+      - "8080"              # <--- and here
     environment:
     - WORDPRESS_HOST=https://blog.${DOMAIN}
-    - VIRTUAL_HOST=portfolio.${DOMAIN}
-    - VIRTUAL_PORT=80
+    - VIRTUAL_HOST=${DOMAIN}
+    - VIRTUAL_PORT=8080
       # - LETSENCRYPT_HOST=${DOMAIN}
     # volumes:
     #   - ./portfolio/build:/usr/share/nginx/html
