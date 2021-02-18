@@ -33,8 +33,8 @@ services:
       - WORDPRESS_HOST=https://blog.${DOMAIN}
       - VIRTUAL_HOST=${DOMAIN}
       - VIRTUAL_PORT=5000
-      # - LETSENCRYPT_HOST=${DOMAIN}
-      # - LETSENCRYPT_EMAIL=dc@${DOMAIN}
+      - LETSENCRYPT_HOST=${DOMAIN}
+      - LETSENCRYPT_EMAIL=dc@${DOMAIN}
     # volumes:
     #   - ./portfolio/build:/usr/share/nginx/html
     #   - ./portfolio/env.sh:/usr/share/nginx/html/env.sh
