@@ -35,7 +35,7 @@ services:
     image: dclarkious/cujo-portfolio:latest
     environment:
       - WORDPRESS_HOST=https://blog.${DOMAIN}
-      - VIRTUAL_HOST=${DOMAIN}
+      - VIRTUAL_HOST=portfolio.${DOMAIN}
       - VIRTUAL_PORT=80
       # - LETSENCRYPT_HOST=${DOMAIN}
     # volumes:
