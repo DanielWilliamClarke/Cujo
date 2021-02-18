@@ -29,6 +29,8 @@ services:
     # build: 
     #   context: ./portfolio
     image: dclarkious/cujo-portfolio:latest
+    expose: 
+    - "5000"
     environment:
       - WORDPRESS_HOST=https://blog.${DOMAIN}
       - VIRTUAL_HOST=${DOMAIN}
@@ -47,6 +49,8 @@ services:
       - db
     image: wordpress:latest
     restart: always
+    expose: 
+    - "80"
     environment:
       - WORDPRESS_DB_HOST=db:3306
       - WORDPRESS_DB_NAME=${WORDPRESS_DB_NAME}
