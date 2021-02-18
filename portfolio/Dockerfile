@@ -20,7 +20,7 @@ COPY --from=build /portfolio/build .
 COPY --from=build /portfolio/env.sh .
 COPY --from=build /portfolio/app.env .
 
-EXPOSE 5001
+EXPOSE 5000
 
 RUN rm /etc/nginx/conf.d/default.conf
 COPY nginx/nginx.conf /etc/nginx/conf.d
