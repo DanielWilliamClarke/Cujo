@@ -33,10 +33,12 @@ services:
     # build: 
     #   context: ./portfolio
     image: dclarkious/cujo-portfolio:latest
+    expose:                 # <--- the important bit here
+      - "80"              # <--- and here
     environment:
-      - WORDPRESS_HOST=https://blog.${DOMAIN}
-      - VIRTUAL_HOST=portfolio.${DOMAIN}
-      - VIRTUAL_PORT=80
+    - WORDPRESS_HOST=https://blog.${DOMAIN}
+    - VIRTUAL_HOST=portfolio.${DOMAIN}
+    - VIRTUAL_PORT=80
       # - LETSENCRYPT_HOST=${DOMAIN}
     # volumes:
     #   - ./portfolio/build:/usr/share/nginx/html
