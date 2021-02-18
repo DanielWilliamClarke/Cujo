@@ -13,7 +13,9 @@ services:
       - /etc/nginx/vhost.d
       - /usr/share/nginx/html
       - ./docker/certs:/etc/nginx/certs:ro
-
+    networks:
+      - proxy
+      
   # ssl-companion:
   #   image: jrcs/letsencrypt-nginx-proxy-companion
   #   container_name: ssl-companion
@@ -47,6 +49,7 @@ services:
     #   - ./portfolio/app.env:/usr/share/nginx/html/app.env
     networks:
      - wordpress
+     - proxy
 
   # wordpress:
   #   depends_on:
@@ -85,6 +88,4 @@ volumes:
 
 networks:
   wordpress:
-  default:
-    external:
-      name: nginx-proxy
+  proxy:
