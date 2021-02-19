@@ -22,13 +22,17 @@ export class About extends Component<AboutProps> {
           <Row>
             <Col>
               <h2 className="Section-title">About</h2>
-              <div className="Centered Line"/>
+              <div className="Centered Line" />
             </Col>
           </Row>
 
           <Row className="Section-content">
             <Col>
-              <DynamicImage image="headshot.jpg" alt="its, me!" className="Headshot" />
+              <DynamicImage
+                image="headshot.jpg"
+                alt="its, me!"
+                className="Headshot"
+              />
             </Col>
 
             <Col className="Text-column">
@@ -53,6 +57,10 @@ export class About extends Component<AboutProps> {
                 ))}
               </ul>
             </Col>
+          </Row>
+
+          <Row className="Section-content">
+            <Col>dc@danielclarke.tech</Col>
           </Row>
         </Container>
       </section>
