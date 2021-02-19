@@ -33,7 +33,7 @@ export class SharePanel extends Component<ShareProps> {
   render(): JSX.Element {
     return (
       <Container className="Share-panel">
-        <Slide right>
+        <Slide left>
           <FacebookShareButton
             url={this.props.url}
             quote={this.prepareTitle(this.props.title)}

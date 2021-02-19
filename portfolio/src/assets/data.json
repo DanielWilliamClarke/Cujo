@@ -57,9 +57,8 @@
         "Geoscience"
       ],
       "images": [
-        "o1.jpg",
-        "o2.jpg",
-        "o3.jpg"
+        "o3.jpg",
+        "o1.jpg" 
       ]
     },
     {
@@ -76,9 +75,7 @@
         "Seismic Processing"
       ],
       "images": [
-        "z1.jpg",
-        "z2.jpg",
-        "z3.jpg"
+        "z1.jpg"
       ]
     },
     {
@@ -94,9 +91,7 @@
         "Data Integration and Visualisation"
       ],
       "images": [
-        "g1.jpg",
-        "g2.jpg",
-        "g3.jpg"
+        "g1.jpg"
       ]
     }
   ],

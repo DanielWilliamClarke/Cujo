@@ -6,19 +6,22 @@ A Dockerised CV/Portfolio/Blog built using React using Wordpress for blog posts 
 
 ## // Todo
 
-- [ ] Add asset citations
+- [x] Add asset citations (now using my own images or free stock images only)
 - [ ] Fix grammar
-- [ ] Produce production build for deployment
+- [x] Produce production build for deployment
 - [ ] Finish contact page
-- [ ] Move sharing bar to bottom on mobile devices
+- [x] Move sharing bar to bottom on mobile devices
 - [ ] Get own logo and assets from designer
 - [ ] Fix predator/prey image asset
 
 ## Build
 
 ```bash
-# build image
+# Build: Dev
 docker build -f portfolio/Dockerfile -t cujo-portfolio ./portfolio
+
+# Build: Prod
+docker build -f portfolio/Dockerfile -t cujo-portfolio --build-arg BUILD_MODE=":prod" ./portfolio
 
 # Tag image
 docker tag cujo-portfolio:latest <DOCKER_HUB_USER_REGISTRY>/cujo-portfolio:latest
@@ -30,10 +33,10 @@ docker push <DOCKER_HUB_USER_REGISTRY>/cujo-portfolio:latest
 ## Deploy
 
 ```bash
-# Dev
+# Deploy: Dev
 docker-compose -f dev.compose.yaml up --build
 
-# Prod
+# Deploy: Prod
 docker-compose -f prod.compose.yaml up
 
 # Trash
@@ -44,6 +47,7 @@ docker-compose down -v
 
 - Simple Website Redirect - https://wordpress.org/plugins/simple-website-redirect/
 - Disable Comments - https://wordpress.org/plugins/disable-comments/
+- Syntax-highlighting Code Block (with Server-side Rendering) - https://en-gb.wordpress.org/plugins/syntax-highlighting-code-block/
 
 ## Urls
 

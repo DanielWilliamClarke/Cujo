@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import { NavLink } from "react-router-dom";
+import { Container, Row, Col } from "react-bootstrap";
 import { NavHashLink } from "react-router-hash-link";
 
 import "./NavPanel.scss";
@@ -16,48 +16,33 @@ export class NavPanel extends Component<StyleProps> {
         <div className="Nav-container Nav-logo">
           <img src={logo} alt="logo" />
         </div>
-        <div className="Nav-container Nav-buttons">
-          <ul>
-            {this.profileNav()}
-            <li className="option">
-              <NavHashLink activeClassName="Nav-active" smooth to="/blog#blog">
-                Blog
-              </NavHashLink>
-            </li>
-            <li className="option">
-              <NavHashLink
-                activeClassName="Nav-active"
-                smooth
-                to="/contact#contact"
-              >
-                Contact
-              </NavHashLink>
-            </li>
-          </ul>
-        </div>
+        <Container>
+          <Row className="Nav-container">
+            {["about", "technical", "experience", "education", "projects"].map(
+              (hash: string): JSX.Element => this.createLink("", hash)
+            )}
+            {this.createLink("blog", "blog")}
+            {this.createLink("contact", "contact")}
+          </Row>
+        </Container>
       </nav>
     );
   }
 
-  private profileNav(): JSX.Element {
+  private createLink(link: string, hash: string): JSX.Element {
     return (
-      <Fragment>
-        {["about", "technical", "experience", "education", "projects"].map(
-          (link: string): JSX.Element => {
-            return (
-              <li className="option">
-                <NavHashLink
-                  activeClassName="Nav-active"
-                  smooth
-                  to={`/#${link}`}
-                >
-                  {link}
-                </NavHashLink>
-              </li>
-            );
-          }
-        )}
-      </Fragment>
+      <Col className="Col-item option">
+        <div className="Nav-button">
+          <NavHashLink
+            activeClassName="Nav-active"
+            smooth
+            to={`/${link}#${hash}`}
+          >
+            {hash}
+          </NavHashLink>
+          <div className="active" />
+        </div>
+      </Col>
     );
   }
 }
