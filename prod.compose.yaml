@@ -30,8 +30,6 @@ services:
   #     - proxy
 
   portfolio:
-    # build: 
-    #   context: ./portfolio
     image: dclarkious/cujo-portfolio:latest
     restart: always
     depends_on:
@@ -43,10 +41,6 @@ services:
     - VIRTUAL_HOST=${DOMAIN}
     - VIRTUAL_PORT=8080
       # - LETSENCRYPT_HOST=${DOMAIN}
-    # volumes:
-    #   - ./portfolio/build:/usr/share/nginx/html
-    #   - ./portfolio/env.sh:/usr/share/nginx/html/env.sh
-    #   - ./portfolio/app.env:/usr/share/nginx/html/app.env
     networks:
      - wordpress
      - proxy
