@@ -54,3 +54,10 @@ docker-compose down -v
 
 - danielclarke.tech - Portfolio
 - blog.danielclarke.tech - Wordpress
+
+# Setup
+
+https://stackoverflow.com/questions/22345483/jenkins-publish-over-ssh-authentification-failed-with-private-key
+https://nozaki.me/roller/kyle/entry/articles-jenkins-sshdeploy
+https://stackoverflow.com/questions/48330402/secret-text-git-credentials-not-showing-up-in-jenkins-project-source-code-mana/49571986
+https://linuxize.com/post/how-to-add-user-to-sudoers-in-ubuntu/
