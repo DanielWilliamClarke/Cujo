@@ -13,6 +13,7 @@ A Dockerised CV/Portfolio/Blog built using React using Wordpress for blog posts 
 - [x] Move sharing bar to bottom on mobile devices
 - [ ] Get own logo and assets from designer
 - [ ] Fix predator/prey image asset
+- [ ] Add jenkins machine to deployment to CI/CD
 
 ## Build
 

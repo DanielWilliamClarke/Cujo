@@ -40,7 +40,8 @@ services:
     - WORDPRESS_HOST=http://blog.${DOMAIN}
     - VIRTUAL_HOST=${DOMAIN}
     - VIRTUAL_PORT=8080
-      # - LETSENCRYPT_HOST=${DOMAIN}
+    # - LETSENCRYPT_HOST=${DOMAIN}
+    # - LETSENCRYPT_EMAIL=dc@${DOMAIN}
     networks:
      - wordpress
      - proxy
