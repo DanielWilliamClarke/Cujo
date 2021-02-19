@@ -1,6 +1,6 @@
 # Cujo
 
-A Dockerised CV/Portfolio/Blog application built using a React using Wordpress for blog posts and CDN.
+A Dockerised CV/Portfolio/Blog built using React using Wordpress for blog posts and CDN.
 
 ![](./portfolio/src/assets/p2.gif)
 
