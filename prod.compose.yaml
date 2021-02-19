@@ -30,7 +30,7 @@ services:
   #     - proxy
 
   jenkins:
-    image: jenkins
+    image: jenkins/jenkins
     container_name: cujo-jenkins
     restart: always
     volumes:
