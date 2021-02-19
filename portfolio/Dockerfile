@@ -1,6 +1,8 @@
 #BUILD -----------------------------------
 FROM node:15.8.0 as build
 
+ARG BUILD_MODE
+
 WORKDIR /portfolio
 
 COPY package.json /portfolio/package.json
@@ -9,7 +11,7 @@ RUN yarn install && yarn add create-react-app
 
 COPY . /portfolio
 
-RUN yarn run build
+RUN yarn run build$BUILD_MODE
 
 #RELEASE -----------------------------------
 FROM nginx:1.9.15

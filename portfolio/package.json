@@ -5,6 +5,7 @@
   "scripts": {
     "start": "npm run genenv && react-scripts start",
     "build": "react-scripts build",
+    "build:prod": "GENERATE_SOURCEMAP=false npm run build",
     "watch": "npm-watch",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
@@ -34,11 +35,6 @@
     }
   },
   "dependencies": {
-    "@types/jest": "^26.0.20",
-    "@types/node": "^14.14.25",
-    "@types/react": "^17.0.1",
-    "@types/react-dom": "^17.0.0",
-    "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
     "moment": "^2.29.1",
     "react": "^17.0.1",
@@ -52,10 +48,13 @@
     "react-share": "^4.3.1",
     "react-sticky": "^6.0.3",
     "remark-breaks": "^2.0.1",
-    "typescript": "^4.1.4",
     "wpapi": "^1.2.1"
   },
   "devDependencies": {
+    "@types/jest": "^26.0.20",
+    "@types/node": "^14.14.25",
+    "@types/react": "^17.0.1",
+    "@types/react-dom": "^17.0.0",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.6.3",
@@ -66,6 +65,7 @@
     "html-webpack-plugin": "^5.0.0",
     "npm-watch": "^0.7.0",
     "react-scripts": "^4.0.2",
+    "typescript": "^4.1.4",
     "sass": "^1.32.7"
   }
 }

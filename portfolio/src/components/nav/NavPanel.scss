@@ -1,5 +1,4 @@
 .Nav-panel {
-  padding: 10px;
   height: 62px;
   background-color: #333333;
   overflow: hidden;
@@ -14,22 +13,21 @@
 
   .Nav-logo {
     float: left;
+    display: none;
   }
 
-  .Nav-buttons {
-    float: right;
+  .Col-item:after {
+    content: "";
   }
 
   ul {
     list-style-type: none;
     color: #fff;
-    padding: 0 10px;
     margin: 0;
     display: flex;
 
     li {
       font-weight: 500;
-
     }
   }
 
@@ -51,15 +49,57 @@
     }
   }
 
-  .Nav-active {
-    background-color: rgba(75, 108, 183, 1);
+  .Nav-button {
+    display: block;
+    padding: 17px;
+    text-align: center;
+
+    .Nav-active + .active {
+      background-color: rgba(75, 108, 183, 1);
+      height: 3px;
+      position: relative;
+      top: 18px;
+    }
   }
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 1024px) {
   .Nav-panel {
     .Nav-logo {
       display: none;
+    }
+
+    .Nav-button {
+      padding: 17px 3px;
+
+      .Nav-active + .active {
+        top: 23px;
+      }
+    }
+
+    .col {
+      flex-basis: 0;
+      font-size: 12px;
+      padding: 0;
+    }
+
+    .Col-item {
+      display: flex;
+    }
+
+    .option {
+      a {
+        padding: 25px 0px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .Nav-panel {
+    .Nav-button {
+      padding: 17px 1px;
+      font-size: 11px;
     }
   }
 }
