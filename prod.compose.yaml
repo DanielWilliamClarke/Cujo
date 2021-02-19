@@ -53,6 +53,8 @@ services:
 
   portfolio:
     image: dclarkious/cujo-portfolio:latest
+    build: ./portfolio
+    container_name: portfolio
     restart: always
     depends_on:
       - reverseproxy
