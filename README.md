@@ -31,7 +31,7 @@ docker push <DOCKER_HUB_USER_REGISTRY>/cujo-portfolio:latest
 
 ```bash
 # Dev
-docker-compose -f dev.compose.yaml up
+docker-compose -f dev.compose.yaml up --build
 
 # Prod
 docker-compose -f prod.compose.yaml up
