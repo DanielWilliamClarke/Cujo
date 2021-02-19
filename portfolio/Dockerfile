@@ -7,7 +7,7 @@ WORKDIR /portfolio
 
 COPY package.json /portfolio/package.json
 
-RUN yarn install && yarn add create-react-app 
+RUN yarn install --network-timeout 100000
 
 COPY . /portfolio
 

@@ -29,31 +29,8 @@ services:
   #   networks:
   #     - proxy
 
-  jenkins:
-    image: jenkins/jenkins:lts
-    container_name: jenkins
-    privileged: true
-    restart: always
-    depends_on:
-      - reverseproxy
-    volumes:
-    - /opt/jenkins:/var/jenkins_home
-    - /var/run/docker.sock:/var/run/docker.sock
-    - /usr/local/bin/docker:/usr/local/bin/docker
-    expose:
-      - 50000
-      - 8080
-    environment:
-      - VIRTUAL_HOST=jenkins.${DOMAIN}
-      - VIRTUAL_PORT=8080
-      # - LETSENCRYPT_HOST=jenkins.${DOMAIN}
-      # - LETSENCRYPT_EMAIL=dc@${DOMAIN}
-    networks:
-      - proxy
-
   portfolio:
     image: dclarkious/cujo-portfolio:latest
-    build: ./portfolio
     container_name: portfolio
     restart: always
     depends_on:
