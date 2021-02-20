@@ -47,7 +47,7 @@ export class About extends Component<AboutProps> {
               <h4>My Interests</h4>
               <p>
                 Outside of my professional work, I enjoy spending my time doing
-                any of the following: the following:
+                any of the following:
               </p>
               <ul className="Interests">
                 {this.props.interests.map((interest: string) => (
@@ -60,8 +60,10 @@ export class About extends Component<AboutProps> {
           </Row>
 
           <Row className="Section-content">
-            <Col>dc@danielclarke.tech</Col>
+            <Col>
+            <a href="mailto:dc@danielclarke.tech">dc@danielclarke.tech</a></Col>
           </Row>
+          <div className="Centered Short-line" />
         </Container>
       </section>
     );
