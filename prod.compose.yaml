@@ -38,7 +38,7 @@ services:
     expose:
       - 8080
     environment:
-    - WORDPRESS_HOST=http://blog.${DOMAIN}
+    - WORDPRESS_HOST=https://blog.${DOMAIN}
     - VIRTUAL_HOST=${DOMAIN}
     - VIRTUAL_PORT=8080
     - LETSENCRYPT_HOST=${DOMAIN}
