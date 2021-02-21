@@ -5,9 +5,8 @@ export interface Location {
 }
 
 export interface Profile {
-  network: string;
-  username: string;
   url: string;
+  brand: DevIcon;
 }
 
 export interface Basics {

@@ -13,14 +13,25 @@
     },
     "profiles": [
       {
-        "network": "Linkedin",
-        "username": "danielclarkesoftwareengineer",
+        "brand": {
+          "name": "Linkedin",
+          "icon": "linkedin-plain"
+        },
         "url": "https://www.linkedin.com/in/danielclarkesoftwareengineer/"
       },
       {
-        "network": "Github",
-        "username": "DanielWilliamClarke",
+        "brand": {
+          "name": "Github",
+          "icon": "github-plain"
+        },
         "url": "https://github.com/DanielWilliamClarke"
+      },
+      {
+        "brand": {
+          "name": "Blog",
+          "icon": "wordpress-plain"
+        },
+        "url": "https://danielclarke.tech/blog"
       }
     ]
   },
