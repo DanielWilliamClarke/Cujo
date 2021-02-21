@@ -18,11 +18,10 @@ export class NavPanel extends Component<StyleProps> {
         </div>
         <Container>
           <Row className="Nav-container">
-            {["about", "technical", "experience", "education", "projects"].map(
+            {["about", "technical", "experience", "education", "projects", "contact"].map(
               (hash: string): JSX.Element => this.createLink("", hash)
             )}
             {this.createLink("blog", "blog")}
-            {this.createLink("contact", "contact")}
           </Row>
         </Container>
       </nav>
@@ -31,7 +30,7 @@ export class NavPanel extends Component<StyleProps> {
 
   private createLink(link: string, hash: string): JSX.Element {
     return (
-      <Col className="Nav-button option">
+      <Col md="auto" className="Nav-button option">
         <NavHashLink
           activeClassName="Nav-active"
           smooth
@@ -39,7 +38,6 @@ export class NavPanel extends Component<StyleProps> {
         >
           {hash}
         </NavHashLink>
-        <div className="active" />
       </Col>
     );
   }
