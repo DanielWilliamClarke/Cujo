@@ -22,8 +22,11 @@
 
 @media screen and (max-width: 700px) {
   .Technical {
-    .Skills,
-    .Languages {
+    .col {
+      flex-basis: 0;
+    }
+
+    .Dev-icon {
       text-align: center;
     }
   }

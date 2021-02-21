@@ -60,8 +60,9 @@ export class About extends Component<AboutProps> {
           </Row>
 
           <Row className="Section-content">
-            <Col>
-            <a href="mailto:dc@danielclarke.tech">dc@danielclarke.tech</a></Col>
+            <Col className="Mailto">
+              <a href="mailto:dc@danielclarke.tech">dc@danielclarke.tech</a>
+            </Col>
           </Row>
           <div className="Centered Short-line" />
         </Container>
