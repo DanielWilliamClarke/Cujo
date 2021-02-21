@@ -75,6 +75,14 @@
   }
 }
 
+@media screen and (max-width: 445px) {
+  .nav-panel {
+    .nav-button {
+      padding: 16px .2em;
+    }
+  }
+}
+
 @media screen and (max-width: 360px) {
   .nav-panel {
     .nav-button {
