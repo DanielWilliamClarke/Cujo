@@ -16,9 +16,11 @@
     display: flex;
     flex-direction: unset;
 
+    justify-content: center;
     padding: 0;
     position: fixed;
-    top: 97%;
+    top: 97.5%;
+    width: 100%;
     z-index: 10;
   }
 }
