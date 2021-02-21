@@ -31,17 +31,15 @@ export class NavPanel extends Component<StyleProps> {
 
   private createLink(link: string, hash: string): JSX.Element {
     return (
-      <Col className="Col-item option">
-        <div className="Nav-button">
-          <NavHashLink
-            activeClassName="Nav-active"
-            smooth
-            to={`/${link}#${hash}`}
-          >
-            {hash}
-          </NavHashLink>
-          <div className="active" />
-        </div>
+      <Col className="Nav-button option">
+        <NavHashLink
+          activeClassName="Nav-active"
+          smooth
+          to={`/${link}#${hash}`}
+        >
+          {hash}
+        </NavHashLink>
+        <div className="active" />
       </Col>
     );
   }
