@@ -45,12 +45,9 @@ export interface Education {
   images: string[];
 }
 
-export interface Skills {
-  programming: string[];
-  frameworks: string[];
-  tools: string[];
-  software: string[];
-  devtools: string[];
+export interface DevIcon {
+  icon: string;
+  name: string
 }
 
 export interface Language {
@@ -69,7 +66,7 @@ export interface CV {
   basics: Basics;
   work: Work[];
   education: Education[];
-  skills: Skills;
+  skills: DevIcon[];
   languages: Language[];
   interests: string[];
   projects: Project[];

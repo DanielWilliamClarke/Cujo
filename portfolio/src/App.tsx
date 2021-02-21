@@ -11,10 +11,13 @@ import { Profile } from "./components/about/Profile";
 import Blog from "./components/blog/Blog";
 import { BlogService } from "./components/blog/BlogService";
 
-import "./App.css";
+import "./App.scss";
+import { Copyright } from "./components/backstretch/Copyright";
 
 declare global {
-  interface Window { _env_: any; }
+  interface Window {
+    _env_: any;
+  }
 }
 
 export class App extends Component<CVProps> {
@@ -22,9 +25,11 @@ export class App extends Component<CVProps> {
 
   constructor(props: CVProps) {
     super(props);
-    this.bService = new BlogService(new WPAPI({
-      endpoint: `${window._env_.WORDPRESS_HOST}/wp-json`,
-    }));
+    this.bService = new BlogService(
+      new WPAPI({
+        endpoint: `${window._env_.WORDPRESS_HOST}/wp-json`,
+      })
+    );
   }
 
   render(): JSX.Element {
@@ -43,8 +48,11 @@ export class App extends Component<CVProps> {
                 </Route>
                 <Route path="/blog">
                   <Blog service={this.bService} />
-                </Route> 
+                </Route>
               </Switch>
+              <footer id="footer">
+                <Copyright />
+              </footer>
             </div>
           </Router>
         </StickyContainer>
