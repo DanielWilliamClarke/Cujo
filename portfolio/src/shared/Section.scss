@@ -56,19 +56,19 @@
   margin-right: auto;
 }
 
-.line {
+.line, 
+.short-line {
   background: rgb(204, 204, 204);
   display: block;
-  height: 3px;
+  height: 1px;
   padding: 0 !important;
-  width: 290px;
+}
+
+.line {
+  width: 200px;
 }
 
 .short-line {
-  background: #ccc;
-  display: block;
-  height: 3px;
-  padding: 0 !important;
   width: 30px;
 }
 

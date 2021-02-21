@@ -30,6 +30,7 @@ export interface Work {
   endDate: string;
   summary: string;
   highlights: string[];
+  logo: string;
   images: string[];
 }
 

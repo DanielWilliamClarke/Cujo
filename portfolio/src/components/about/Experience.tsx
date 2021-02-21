@@ -38,24 +38,25 @@ export class Experience extends Component<WorkProps> {
                 <div>
                   <Row className="section-content">
                     <Col className="centered">
-                      <h4>{work.position}</h4>
                       <h6>
                         <a
                           href={work.website}
                           rel="noopener noreferrer"
                           target="_blank"
                         >
-                          {work.company}
+                          <DynamicImage
+                            image={work.logo}
+                            alt={work.company}
+                            className="centered image-item work-logo"
+                          />
                         </a>
                       </h6>
+                      <h4>{work.position}</h4>
                     </Col>
                   </Row>
 
-                  <Row className="section-content period">
+                  <Row className="period">
                     <Col className="centered">
-                      <span>
-                        <b>Period:</b>
-                      </span>
                       <span className="date-range">
                         <span>{this.toDateSentence(work.startDate)}</span>
                         <span className="dash" />

@@ -38,6 +38,7 @@
         "Model Integration",
         "Public Speaking"
       ],
+      "logo": "slb.svg",
       "images": ["i1.jpg", "i2.jpg"]
     },
     {
@@ -53,6 +54,7 @@
         "Client Facing",
         "Geoscience"
       ],
+      "logo": "slb.svg",
       "images": ["o3.jpg", "o1.jpg"]
     },
     {
@@ -68,6 +70,7 @@
         "Cloud",
         "Seismic Processing"
       ],
+      "logo": "slb.svg",
       "images": ["z1.jpg"]
     },
     {
@@ -82,6 +85,7 @@
         "High Visibility",
         "Data Integration and Visualisation"
       ],
+      "logo": "slb.svg",
       "images": ["g1.jpg"]
     }
   ],
