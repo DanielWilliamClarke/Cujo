@@ -16,16 +16,18 @@
   height: calc(100vh - 50px);
   justify-content: center;
   text-align: center;
-  transition: 0.5;
+  transition: .5;
 
   .backstretch-main {
     font-size: 75px;
     font-weight: 700;
+    text-shadow: 0px 0px 50px #000;
   }
 
   .backstretch-tag {
     font-size: 25px;
     font-weight: 400;
+    text-shadow: 0px 0px 50px #000;
   }
 
   .line {
