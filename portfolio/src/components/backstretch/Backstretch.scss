@@ -1,22 +1,22 @@
 .backstretch {
   align-items: center;
-  transition: 0.5;
   background: rgb(51, 51, 51);
   background: linear-gradient(
+  background-attachment: fixed;
       -180deg,
-      rgba(75, 108, 183, 0.7),
-      rgba(24, 40, 72, 0.7)
+      rgba(75, 108, 183, .3),
+      rgba(24, 40, 72, .3)
     ),
     url("../../assets/backstretch.jpg");
-  background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   color: rgb(255, 255, 255);
   display: flex;
-  height: calc(100vh - 62px);
+  height: calc(100vh - 50px);
   justify-content: center;
   text-align: center;
+  transition: 0.5;
 
   .backstretch-main {
     font-size: 75px;
