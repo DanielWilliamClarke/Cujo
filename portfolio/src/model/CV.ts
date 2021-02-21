@@ -42,8 +42,8 @@ export interface Education {
   endDate: string;
   grade: string;
   summary: string;
-  courses: string[];
   images: string[];
+  link: string;
 }
 
 export interface DevIcon {

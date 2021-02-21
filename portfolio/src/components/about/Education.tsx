@@ -38,13 +38,13 @@ export class Education extends Component<EducationProps> {
                 </Col>
               </Row>
 
-              <Row className="section-content">
+              {!!e.grade.length && <Row className="section-content">
                 <Col className="centered">
                   <h5>
                     <b>{e.grade}</b>
                   </h5>
                 </Col>
-              </Row>
+              </Row>}
 
               <Row className="period">
                 <Col className="centered">
@@ -65,11 +65,13 @@ export class Education extends Component<EducationProps> {
               <Row className="images">
                 {e.images.map((image) => (
                   <Col className="col-item">
-                    <DynamicImage
-                      image={image}
-                      alt="not found..."
-                      className="centered image-item"
-                    />
+                    <a href={e.link} rel="noopener noreferrer" target="_blank">
+                      <DynamicImage
+                        image={image}
+                        alt="not found..."
+                        className="centered image-item"
+                      />
+                    </a>
                   </Col>
                 ))}
               </Row>
