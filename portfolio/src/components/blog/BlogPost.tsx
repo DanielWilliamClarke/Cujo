@@ -7,7 +7,7 @@ import { BlogServiceProps, BlogPostData } from "./BlogService";
 import { Tag } from "./BlogTagModel";
 import { SharePanel } from "../nav/SharePanel";
 
-import "../../shared/Section.scss";
+import "../../shared/section.scss";
 import "./BlogPost.scss";
 import "highlight.js/scss/tomorrow-night-eighties.scss";
 
@@ -50,7 +50,7 @@ class BlogPost extends Component<
 
   private displayPost(p: BlogPostData): JSX.Element {
     return (
-      <section id="blogpost" className="Section Blog-post">
+      <section id="blogpost" className="section blog-post">
         <Container>
           <SharePanel
             url={window.location.href}
@@ -63,23 +63,23 @@ class BlogPost extends Component<
 
           <Row>
             <Col>
-              <h2 className="Section-title">{p.post.title.rendered}</h2>
-              <h4 className="Blog-modified">
+              <h2 className="section-title">{p.post.title.rendered}</h2>
+              <h4 className="blog-modified">
                 Published {this.toDateSentence(p.post.date)}
               </h4>
-              <div className="Line"></div>
+              <div className="line"></div>
             </Col>
           </Row>
 
-          <Row className="Tags">
+          <Row className="tags">
             {p.tags.map(
               (t: Tag): JSX.Element => (
-                <span className="Col-item">{t.name}</span>
+                <span className="col-item">{t.name}</span>
               )
             )}
           </Row>
 
-          <Row className="Section-content Blog-excerpt">
+          <Row className="section-content blog-excerpt">
             <Col>
               <div
                 dangerouslySetInnerHTML={{
@@ -90,14 +90,14 @@ class BlogPost extends Component<
           </Row>
 
           {p.media && (
-            <Row className="Section-content">
-              <Col className="Centered Featured">
+            <Row className="section-content">
+              <Col className="centered Featured">
                 <img src={p.media.source_url} alt="not found..." />
               </Col>
             </Row>
           )}
 
-          <Row className="Section-content Blog-content">
+          <Row className="section-content blog-content">
             <Col>
               <div
                 dangerouslySetInnerHTML={{
@@ -107,7 +107,7 @@ class BlogPost extends Component<
             </Col>
           </Row>
 
-          <div className="Short-line"></div>
+          <div className="short-line"></div>
           {this.backButton()}
         </Container>
       </section>
@@ -117,7 +117,7 @@ class BlogPost extends Component<
   private backButton(): JSX.Element {
     return (
       <Button
-        className="Blog-back"
+        className="blog-back"
         variant="link"
         onClick={this.handleClick.bind(this)}
       >

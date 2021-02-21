@@ -8,13 +8,13 @@ import "./Backstretch.scss";
 export class Backstretch extends Component<CVProps> {
   render(): JSX.Element {
     return (
-        <Container fluid className="Backstretch">
+        <Container fluid className="backstretch">
         <div>
-          <Row className="Backstretch-main">
+          <Row className="backstretch-main">
             <Col>{this.props.cv.basics.name}</Col>
           </Row>
-          <div className="Centered Line"></div>
-          <Row className="Backstretch-tag">
+          <div className="centered line"></div>
+          <Row className="backstretch-tag">
             <Col>{this.props.cv.basics.label}</Col>
           </Row>
         </div>

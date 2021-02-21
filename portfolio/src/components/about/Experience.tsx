@@ -7,7 +7,7 @@ import util from "util";
 
 import { Work } from "../../model/CV";
 
-import "../../shared/Section.scss";
+import "../../shared/section.scss";
 import "./Experience.scss";
 import { DynamicImage } from "../shared/DynamicImage";
 
@@ -20,12 +20,12 @@ export class Experience extends Component<WorkProps> {
 
   render(): JSX.Element {
     return (
-      <section id="experience" className="Section Experience">
+      <section id="experience" className="section experience">
         <Container>
           <Row>
             <Col>
-              <h2 className="Section-title">Experience</h2>
-              <div className="Centered Line" />
+              <h2 className="section-title">Experience</h2>
+              <div className="centered line" />
             </Col>
           </Row>
 
@@ -36,8 +36,8 @@ export class Experience extends Component<WorkProps> {
             .map(
               (work: Work): JSX.Element => (
                 <div>
-                  <Row className="Section-content">
-                    <Col className="Centered">
+                  <Row className="section-content">
+                    <Col className="centered">
                       <h4>{work.position}</h4>
                       <h6>
                         <a
@@ -51,16 +51,16 @@ export class Experience extends Component<WorkProps> {
                     </Col>
                   </Row>
 
-                  <Row className="Section-content Period">
-                    <Col className="Centered">
+                  <Row className="section-content period">
+                    <Col className="centered">
                       <span>
                         <b>Period:</b>
                       </span>
-                      <span className="Date-range">
+                      <span className="date-range">
                         <span>{this.toDateSentence(work.startDate)}</span>
-                        <span className="Dash" />
+                        <span className="dash" />
                         <span>{this.toDateSentence(work.endDate)}</span>
-                        <span className="Dot" />
+                        <span className="dot" />
                         <span>
                           <b>{this.toDuration(work.startDate, work.endDate)}</b>
                         </span>
@@ -68,33 +68,33 @@ export class Experience extends Component<WorkProps> {
                     </Col>
                   </Row>
 
-                  <Row className="Section-content Highlights">
+                  <Row className="section-content highlights">
                     {work.highlights.map((highlight) => (
-                      <Col className="Col-item">
+                      <Col className="col-item">
                         <p>{highlight}</p>
                       </Col>
                     ))}
                   </Row>
 
-                  <Row className="Section-content">
+                  <Row className="section-content">
                     <Col>
                       <ReactMarkdown source={work.summary} plugins={[breaks]} />
                     </Col>
                   </Row>
 
-                  <Row className="Images">
+                  <Row className="images">
                     {work.images.map((image) => (
-                      <Col className="Col-item">
+                      <Col className="col-item">
                         <DynamicImage
                           image={image}
                           alt="not found..."
-                          className="Centered Image-item"
+                          className="centered image-item"
                         />
                       </Col>
                     ))}
                   </Row>
 
-                  <div className="Centered Short-line" />
+                  <div className="centered short-line" />
                 </div>
               )
             )}

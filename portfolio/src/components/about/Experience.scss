@@ -1,21 +1,21 @@
-.Experience {
-  .Highlights {
+.experience {
+  .highlights {
     font-weight: 500;
     margin-top: 10px;
   }
 
-  .Period {
+  .period {
     margin-bottom: 20px;
 
-    .Date-range {
+    .date-range {
       margin: 0 10px;
     }
   }
 }
 
 @media screen and (max-width: 700px) {
-  .Experience {
-    .Highlights {
+  .experience {
+    .highlights {
       text-align: center;
     }
   }

@@ -32,7 +32,7 @@ export class SharePanel extends Component<ShareProps> {
 
   render(): JSX.Element {
     return (
-      <Container className="Share-panel">
+      <Container className="share-panel">
         <Slide left>
           <FacebookShareButton
             url={this.props.url}
@@ -91,7 +91,7 @@ export class SharePanel extends Component<ShareProps> {
   }
 
   private prepareTitle(title: string | undefined): string {
-    const prefix = "DanielWilliamClarke.com";
+    const prefix = "DanielClarke.tech";
     return title ? `${prefix} - ${title}` : prefix;
   }
 }
