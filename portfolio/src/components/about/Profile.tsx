@@ -6,6 +6,7 @@ import { Experience } from "./Experience";
 import { Technical } from "./Technical";
 import { Education } from "./Education";
 import { Projects } from "./Projects";
+import { Contact } from "./Contact";
 
 import { CVProps } from "../../model/CV";
 
@@ -31,13 +32,16 @@ export class Profile extends Component<CVProps> {
         </Fade>
         <Fade bottom>
           <Experience work={this.props.cv.work} />
-        </Fade>{" "}
+        </Fade>
         <Fade bottom>
           <Education education={this.props.cv.education} />
         </Fade>
         <Fade bottom>
           <Projects projects={this.props.cv.projects} />
         </Fade>
+        <Fade bottom>
+          <Contact profiles={this.props.cv.basics.profiles} />
+        </Fade> 
       </div>
     );
   }
