@@ -3,7 +3,7 @@ import { Project } from "../../model/CV";
 import { Container, Row, Col, Card, CardColumns } from "react-bootstrap";
 import { ImageLocator } from "../shared/DynamicImage";
 
-import "../../shared/Section.scss";
+import "../../shared/section.scss";
 import "./Education.scss";
 
 type ProjectProps = {
@@ -13,15 +13,15 @@ type ProjectProps = {
 export class Projects extends Component<ProjectProps> {
   render(): JSX.Element {
     return (
-      <section id="projects" className="Section Projects">
+      <section id="projects" className="section Projects">
         <Container>
           <Row>
             <Col>
-              <h2 className="Section-title">Projects</h2>
-              <div className="Centered Line" />
+              <h2 className="section-title">Projects</h2>
+              <div className="centered line" />
             </Col>
           </Row>
-          <CardColumns className="Section-content">
+          <CardColumns className="section-content">
             {this.props.projects.map(
               (p: Project): JSX.Element => this.projectCard(p)
             )}

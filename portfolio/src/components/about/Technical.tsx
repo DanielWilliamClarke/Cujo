@@ -3,7 +3,7 @@ import { DevIcon } from "../../model/CV";
 import { Container, Row, Col } from "react-bootstrap";
 import ReactMarkdown from "react-markdown";
 
-import "../../shared/Section.scss";
+import "../../shared/section.scss";
 import "./Technical.scss";
 
 type SkillsProps = {
@@ -13,18 +13,18 @@ type SkillsProps = {
 export class Technical extends Component<SkillsProps> {
   render(): JSX.Element {
     return (
-      <section id="technical" className="Section Technical">
+      <section id="technical" className="section technical">
         <Container>
           <Row>
             <Col>
-              <h2 className="Section-title">Technical Skills</h2>
-              <div className="Centered Line" />
+              <h2 className="section-title">Technical Skills</h2>
+              <div className="centered line" />
             </Col>
           </Row>
 
-          <Row className="Section-content">
+          <Row className="section-content">
             <Col>
-              <p className="Centered">
+              <p className="centered">
                 I have worked with and are proficient with a large varity of
                 programming languages, frameworks and tools. For backend web applications I use Golang
                 and Nodejs. For frontend; TypeScript and JavaScript, and for
@@ -35,41 +35,29 @@ export class Technical extends Component<SkillsProps> {
             </Col>
           </Row>
 
-          <Row className="Skills">
+          <Row className="skills">
             {this.props.skills.map(
               ({ icon, name }: DevIcon): JSX.Element => (
                 <Col>
-                  <div className="Dev-icon">
-                    <span className={`Icon devicon-${icon}`} />
-                    <p className="Icon-name">{name}</p>
+                  <div className="dev-icon">
+                    <span className={`icon devicon-${icon}`} />
+                    <p className="icon-name">{name}</p>
                   </div>
                 </Col>
               )
             )}
           </Row>
 
-          <Row className="Section-content">
+          <Row className="section-content">
             <Col>
-              <p className="Centered">
+              <p className="centered">
                 <i>And many more!</i>
               </p>
             </Col>
           </Row>
         </Container>
-        <div className="Centered Short-line" />
+        <div className="centered short-line" />
       </section>
-    );
-  }
-
-  private renderSkills(skills: string[]): JSX.Element {
-    return (
-      <ul className="Skills">
-        {skills.map((item: string) => (
-          <li>
-            <ReactMarkdown source={item} />
-          </li>
-        ))}
-      </ul>
     );
   }
 }

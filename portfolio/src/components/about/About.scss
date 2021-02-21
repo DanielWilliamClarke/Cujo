@@ -1,18 +1,18 @@
-.About {
-  .Headshot {
-    object-fit: cover;
-
-    width: 300px;
+.about {
+  .headshot {
     height: 400px;
+
+    object-fit: cover;
+    width: 300px;
   }
 
-  .Interests {
+  .interests {
     p {
-      margin-bottom: 0.5rem;
+      margin-bottom: .5rem;
     }
   }
 
-  .Mailto {
+  .mailto {
     text-align: center;
   }
 }

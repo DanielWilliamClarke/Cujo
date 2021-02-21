@@ -12,12 +12,12 @@ interface StyleProps {
 export class NavPanel extends Component<StyleProps> {
   render(): JSX.Element {
     return (
-      <nav style={this.props.style} className="Nav-panel">
-        <div className="Nav-container Nav-logo">
+      <nav style={this.props.style} className="nav-panel">
+        <div className="nav-container nav-logo">
           <img src={logo} alt="logo" />
         </div>
         <Container>
-          <Row className="Nav-container">
+          <Row className="nav-container">
             {["about", "technical", "experience", "education", "projects", "contact"].map(
               (hash: string): JSX.Element => this.createLink("", hash)
             )}
@@ -30,9 +30,9 @@ export class NavPanel extends Component<StyleProps> {
 
   private createLink(link: string, hash: string): JSX.Element {
     return (
-      <Col md="auto" className="Nav-button option">
+      <Col md="auto" className="nav-button option">
         <NavHashLink
-          activeClassName="Nav-active"
+          activeClassName="nav-active"
           smooth
           to={`/${link}#${hash}`}
         >

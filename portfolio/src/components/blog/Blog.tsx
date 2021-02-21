@@ -13,7 +13,7 @@ import { BlogServiceProps, BlogPostData } from "./BlogService";
 import BlogPost from "./BlogPost";
 import { SharePanel } from "../nav/SharePanel";
 
-import "../../shared/Section.scss";
+import "../../shared/section.scss";
 import "./Blog.scss";
 
 
@@ -98,7 +98,7 @@ class Blog extends Component<
 
   private blogPosts(): JSX.Element {
     return (
-      <section id="blog" className="Section Blog">
+      <section id="blog" className="section blog">
         <SharePanel
           url={window.location.href}
           title="Blog"
@@ -108,11 +108,11 @@ class Blog extends Component<
         <Fade bottom>
           <Row>
             <Col>
-              <h2 className="Section-title">Blog</h2>
-              <div className="Centered Line" />
+              <h2 className="section-title">Blog</h2>
+              <div className="centered line" />
             </Col>
           </Row>
-          <CardColumns className="Section-content">
+          <CardColumns className="section-content">
             {this.state.blog.map(
               (data: BlogPostData): JSX.Element => (
                 <Fragment>{this.blogSummaryPanel(data)}</Fragment>

@@ -1,31 +1,30 @@
-.Blog-post {
-  text-align: left;
+.blog-post {
   padding: 30px 0;
+  text-align: left;
 
-  .Section-title {
+  .section-title {
+    margin-bottom: 5px;
     text-align: left;
     text-transform: none;
-    margin-bottom: 5px;
   }
 
-  .Blog-back
-  {
+  .blog-back {
     font-size: 20px;
-    padding: 0;
     font-style: italic;
+    padding: 0;
   }
 
-  .Tags {
-    text-transform: capitalize;
+  .tags {
     padding: 3px 15px;
+    text-transform: capitalize;
 
-    .Col-item:after {
+    .col-item::after {
       padding: 0 10px;
     }
   }
 
-  .Blog-excerpt {
-    color: #999999;
+  .blog-excerpt {
+    color: rgb(153, 153, 153);
     font-style: italic;
   }
 
@@ -33,7 +32,7 @@
     border-radius: 6px;
   }
 
-  .Featured,
+  .featured,
   .wp-block-image,
   .wp-block-embed {
     text-align: center;

@@ -41,7 +41,7 @@ export class App extends Component<CVProps> {
             <Sticky>
               {({ style }) => <NavPanel style={style}></NavPanel>}
             </Sticky>
-            <div className="App">
+            <div className="app">
               <Switch>
                 <Route exact path="/">
                   <Profile cv={this.props.cv} />

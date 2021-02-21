@@ -1,24 +1,24 @@
-.Share-panel {
-  position: fixed;
-  top: 40%;
-  left:0;
-  list-style: none;
-  padding-left: 0;
-  z-index: 10;
-  margin: 0;
+.share-panel {
   display: flex;
   flex-direction: column;
+  left: 0;
+  list-style: none;
+  margin: 0;
+  padding-left: 0;
+  position: fixed;
+  top: 40%;
   width: 40px;
+  z-index: 10;
 }
 
 @media screen and (max-width: 600px) {
-  .Share-panel {
-    position: fixed;
-    top: 97%;
+  .share-panel {
+    display: flex;
+    flex-direction: unset;
 
     padding: 0;
+    position: fixed;
+    top: 97%;
     z-index: 10;
-    flex-direction: unset;
-    display: flex;
   }
 }

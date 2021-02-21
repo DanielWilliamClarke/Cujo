@@ -6,7 +6,7 @@ import breaks from "remark-breaks";
 
 import { DynamicImage } from "../shared/DynamicImage";
 
-import "../../shared/Section.scss";
+import "../../shared/section.scss";
 import "./About.scss";
 
 type AboutProps = {
@@ -17,25 +17,25 @@ type AboutProps = {
 export class About extends Component<AboutProps> {
   render(): JSX.Element {
     return (
-      <section id="about" className="Section About">
+      <section id="about" className="section about">
         <Container>
           <Row>
             <Col>
-              <h2 className="Section-title">About</h2>
-              <div className="Centered Line" />
+              <h2 className="section-title">About</h2>
+              <div className="centered line" />
             </Col>
           </Row>
 
-          <Row className="Section-content">
+          <Row className="section-content">
             <Col>
               <DynamicImage
                 image="headshot.jpg"
                 alt="its, me!"
-                className="Headshot"
+                className="headshot"
               />
             </Col>
 
-            <Col className="Text-column">
+            <Col className="text-column">
               <h4>A little about me!</h4>
               <ReactMarkdown
                 source={this.props.basics.summary}
@@ -43,13 +43,13 @@ export class About extends Component<AboutProps> {
               />
             </Col>
 
-            <Col className="Text-column">
+            <Col className="text-column">
               <h4>My Interests</h4>
               <p>
                 Outside of my professional work, I enjoy spending my time doing
                 any of the following:
               </p>
-              <ul className="Interests">
+              <ul className="interests">
                 {this.props.interests.map((interest: string) => (
                   <li>
                     <ReactMarkdown source={interest} />
@@ -59,12 +59,12 @@ export class About extends Component<AboutProps> {
             </Col>
           </Row>
 
-          <Row className="Section-content">
-            <Col className="Mailto">
+          <Row className="section-content">
+            <Col className="mailto">
               <a href="mailto:dc@danielclarke.tech">dc@danielclarke.tech</a>
             </Col>
           </Row>
-          <div className="Centered Short-line" />
+          <div className="centered short-line" />
         </Container>
       </section>
     );

@@ -1,22 +1,22 @@
-.Section {
+.section {
+  color: rgb(238, 238, 238);
   margin: 0 auto;
   padding: 75px 0;
   position: relative;
-  color: #eeeeee;
 
-  .Section-title {
-    margin: 0 0 15px;
-    padding: 0;
+  .section-title {
+    color: rgb(204, 204, 204);
+    display: block;
     font-size: 2.25em;
     font-weight: 300;
-    color: #cccccc;
-    text-transform: uppercase;
-    display: block;
-    text-align: center;
     letter-spacing: 0.1em;
+    margin: 0 0 15px;
+    padding: 0;
+    text-align: center;
+    text-transform: uppercase;
   }
 
-  .Section-content {
+  .section-content {
     margin-top: 20px;
   }
 
@@ -24,9 +24,9 @@
   h4,
   h5,
   h6 {
-    color: #dddddd;
-    text-transform: uppercase;
+    color: rgb(221, 221, 221);
     letter-spacing: 0.1em;
+    text-transform: uppercase;
   }
 
   h3 {
@@ -50,45 +50,45 @@
   }
 }
 
-.Centered {
+.centered {
+  float: none;
   margin-left: auto;
   margin-right: auto;
-  float: none;
 }
 
-.Line {
+.line {
+  background: rgb(204, 204, 204);
   display: block;
+  height: 3px;
+  padding: 0 !important;
   width: 290px;
-  height: 3px;
-  padding: 0 !important;
-  background: #ccc;
 }
 
-.Short-line {
+.short-line {
+  background: #ccc;
   display: block;
-  width: 30px;
   height: 3px;
   padding: 0 !important;
-  background: #ccc;
+  width: 30px;
 }
 
-.Dot:after {
+.dot:after {
   content: "•";
 }
 
-.Dash:after {
+.dash:after {
   content: "-";
 }
 
-.Text-column {
+.text-column {
   text-align: left;
 }
 
-.Col-item {
-  display: flex;
-  padding: 0;
-  justify-content: center;
+.col-item {
   align-items: center;
+  display: flex;
+  justify-content: center;
+  padding: 0;
 
   p {
     width: 100%;
@@ -103,37 +103,37 @@
   }
 }
 
-.Images {
+.images {
   margin: 20px 0;
 
-  .Col-item::after {
+  .col-item::after {
     content: "";
   }
 
-  .Image-item {
+  .image-item {
     border-radius: 50%;
+    height: 150px;
     object-fit: cover;
     width: 150px;
-    height: 150px;
   }
 }
 
 @mixin section-coloring($bg, $color, $cardColor) {
   background-color: $bg;
 
-  .Short-line,
-  .Line {
+  .short-line,
+  .line {
     background-color: $color;
   }
 
-  .Col-item::after {
+  .col-item::after {
     color: $color;
   }
 
-  .Dot:after,
-  .Dash:after {
+  .dot::after,
+  .dash::after {
     color: $color;
-    margin: 0px 10px;
+    margin: 0 10px;
   }
 
   li::marker {
@@ -144,7 +144,7 @@
     background-color: $cardColor !important;
   }
 
-  .Dev-icon {
+  .dev-icon {
     transition: 0.5s;
 
     &:hover {
@@ -154,52 +154,58 @@
   }
 }
 
-@mixin alternating-section($side, $bg, $color, $cardColor: #222222) {
+@mixin alternating-section($side, $bg, $color, $card-color: rgb(34, 34, 34)) {
   div:nth-child(#{$side}) {
-    .Section {
-      @include section-coloring($bg, $color, $cardColor);
+    .section {
+      @include section-coloring($bg, $color, $card-color);
     }
   }
-  .Section:nth-child(#{$side}) {
-    @include section-coloring($bg, $color, $cardColor);
+
+  .section:nth-child(#{$side}) {
+    @include section-coloring($bg, $color, $card-color);
   }
 }
 
-.App {
-  @include alternating-section("odd", #222222, #f08b65, #111111);
-  @include alternating-section("even", #111111, #61c0bf);
+.app {
+  @include alternating-section(
+    'odd',
+    rgb(34, 34, 34),
+    rgb(240, 139, 101),
+    rgb(17, 17, 17)
+  );
+  @include alternating-section('even', rgb(17, 17, 17), rgb(97, 192, 191));
 }
 
 @media screen and (max-width: 700px) {
   .col {
-    width: 100%;
     flex-basis: revert;
+    width: 100%;
 
     ul {
       margin: 20px 0 !important;
     }
   }
 
-  .Section {
+  .section {
+    padding: 30px 0 0;
     text-align: left;
-    padding: 30px 0 0 0;
   }
 
-  .Text-column,
-  .Section-content {
+  .text-column,
+  .section-content {
     margin: 10px 0;
   }
 
-  .Col-item {
+  .col-item {
     display: block;
   }
 
-  .Images {
+  .images {
     .col {
       flex-basis: 0;
     }
 
-    .Col-item {
+    .col-item {
       display: flex !important;
     }
   }

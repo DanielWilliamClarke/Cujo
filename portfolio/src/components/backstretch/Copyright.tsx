@@ -7,12 +7,12 @@ import "./Copyright.scss"
 export class Copyright extends Component<{}> {
   render(): JSX.Element {
     return (
-      <section className="Section Copyright">
+      <section className="section copyright">
         <Container fluid>
           <Row>
             <Col>Copyright © 2021 Daniel Clarke</Col>
           </Row>
-          <div className="Centered Short-line" />
+          <div className="centered short-line" />
         </Container>
       </section>
     );

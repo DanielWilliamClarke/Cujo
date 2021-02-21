@@ -3,7 +3,7 @@ import { Education as EducationData } from "../../model/CV";
 import { Container, Row, Col } from "react-bootstrap";
 import moment from "moment";
 
-import "../../shared/Section.scss";
+import "../../shared/section.scss";
 import "./Education.scss";
 import { DynamicImage } from "../shared/DynamicImage";
 
@@ -16,68 +16,68 @@ export class Education extends Component<EducationProps> {
 
   render(): JSX.Element {
     return (
-      <section id="education" className="Section Education">
+      <section id="education" className="section education">
         <Container>
           <Row>
             <Col>
-              <h2 className="Section-title">Education</h2>
-              <div className="Centered Line" />
+              <h2 className="section-title">Education</h2>
+              <div className="centered line" />
             </Col>
           </Row>
 
           {this.props.education.map((e) => (
             <div>
-              <Row className="Section-content">
-                <Col className="Centered Qualification-type">
+              <Row className="section-content">
+                <Col className="centered Qualification-type">
                   <h4>{e.institution}</h4>
                   <h6>
                     {e.studyType}
-                    <span className="Dot" />
+                    <span className="dot" />
                     {e.area}
                   </h6>
                 </Col>
               </Row>
 
-              <Row className="Section-content">
-                <Col className="Centered">
+              <Row className="section-content">
+                <Col className="centered">
                   <h5>
                     <b>{e.grade}</b>
                   </h5>
                 </Col>
               </Row>
 
-              <Row className="Section-content Period">
-                <Col className="Centered">
+              <Row className="section-content period">
+                <Col className="centered">
                   <span>
                     <b>Period:</b>
                   </span>
-                  <span className="Date-range">
+                  <span className="date-range">
                     <span>{this.toDateSentence(e.startDate)}</span>
-                    <span className="Dash" />
+                    <span className="dash" />
                     <span>{this.toDateSentence(e.endDate)}</span>
                   </span>
                 </Col>
               </Row>
 
-              <Row className="Section-content Period">
-                <Col className="Centered">
+              <Row className="section-content">
+                <Col className="centered">
                   <p>{e.summary}</p>
                 </Col>
               </Row>
 
-              <Row className="Images">
+              <Row className="images">
                 {e.images.map((image) => (
-                  <Col className="Col-item">
+                  <Col className="col-item">
                     <DynamicImage
                       image={image}
                       alt="not found..."
-                      className="Centered Image-item"
+                      className="centered image-item"
                     />
                   </Col>
                 ))}
               </Row>
 
-              <div className="Centered Short-line" />
+              <div className="centered short-line" />
             </div>
           ))}
         </Container>
