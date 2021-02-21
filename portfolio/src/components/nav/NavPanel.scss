@@ -20,45 +20,37 @@
     content: "";
   }
 
-  ul {
-    list-style-type: none;
-    color: #fff;
-    margin: 0;
-    display: flex;
-
-    li {
-      font-weight: 500;
-    }
-  }
-
   .option {
     a {
-      padding: 21px;
-
       &:link,
       &:visited {
         text-decoration: none;
         color: #ffffff;
-      }
-
-      &:hover {
-        text-decoration: underline;
-        background-color: #ddd;
-        color: black;
       }
     }
   }
 
   .Nav-button {
     display: block;
-    padding: 17px;
+    padding: 17px 0;
     text-align: center;
+    color: #fff;
+    font-weight: 500;
+    transition: 0.3s;
 
     .Nav-active + .active {
       background-color: rgba(75, 108, 183, 1);
       height: 3px;
       position: relative;
       top: 18px;
+    }
+
+    &:hover {
+      background-color: #ddd;
+
+      a {
+        color: black;
+      }
     }
   }
 }
@@ -80,7 +72,6 @@
     .col {
       flex-basis: 0;
       font-size: 12px;
-      padding: 0;
     }
 
     .Col-item {
