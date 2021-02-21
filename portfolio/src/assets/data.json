@@ -97,9 +97,20 @@
       "startDate": "20/09/2010",
       "endDate": "20/05/2014",
       "grade": "First Class With Honours",
-      "courses": ["DB1101 - Basic SQL"],
       "summary": "BSc (Hons) Computer Science BCS accredited course, I achieved the second highest grade of my cohort  in my final year, graduating with a 1st",
-      "images": ["u1.jpg", "u2.jpg", "u3.jpg"]
+      "images": ["u1.jpg", "u4.png", "u3.jpg"],
+      "link": "https://www.ntu.ac.uk/"
+    },
+    {
+      "institution": "The King Edwards VI College",
+      "area": "Computing, Geography, and Art",
+      "studyType": "A-Level",
+      "startDate": "25/07/2007",
+      "endDate": "16/05/2009",
+      "grade": "",
+      "summary": "Studied a range of A-level subjects gaining access to university",
+      "images": ["k1.jpg"],
+      "link": "https://www.kedst.ac.uk/"
     }
   ],
   "skills": [

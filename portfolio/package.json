@@ -33,7 +33,7 @@
       "patterns": [
         "src"
       ],
-      "extensions": "js,jsx,tsx,css,scss,json"
+      "extensions": "js,jsx,tsx,css,scss,json,jpg,png,gif,svg"
     }
   },
   "dependencies": {
