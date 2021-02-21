@@ -16,12 +16,13 @@
 
 ## // Todo
 
-- [ ] Setup SSL correctly..
+- [x] Setup SSL correctly.. (ssl-companion is running, it will assign certificates in time)
 - [ ] Write tests
 - [ ] Get own logo and assets from designer
 - [ ] Fix predator/prey image asset
 - [ ] Finish contact page
-- [ ] Proof read profile
+- [ ] Add site footer
+- [x] Proof read profile
 - [x] Add asset citations (now using my own images or free stock images only)
 - [x] Produce production build for deployment
 - [x] Move sharing bar to bottom on mobile devices
