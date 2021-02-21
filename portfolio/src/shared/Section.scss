@@ -143,6 +143,15 @@
   .bg-dark {
     background-color: $cardColor !important;
   }
+
+  .Dev-icon {
+    transition: 0.5s;
+
+    &:hover {
+      color: $color;
+      transform: scale(1.2);
+    }
+  }
 }
 
 @mixin alternating-section($side, $bg, $color, $cardColor: #222222) {

@@ -38,10 +38,7 @@
         "Model Integration",
         "Public Speaking"
       ],
-      "images": [
-        "i1.jpg",
-        "i2.jpg"
-      ]
+      "images": ["i1.jpg", "i2.jpg"]
     },
     {
       "company": "Schlumberger",
@@ -56,10 +53,7 @@
         "Client Facing",
         "Geoscience"
       ],
-      "images": [
-        "o3.jpg",
-        "o1.jpg" 
-      ]
+      "images": ["o3.jpg", "o1.jpg"]
     },
     {
       "company": "Schlumberger",
@@ -74,9 +68,7 @@
         "Cloud",
         "Seismic Processing"
       ],
-      "images": [
-        "z1.jpg"
-      ]
+      "images": ["z1.jpg"]
     },
     {
       "company": "Schlumberger",
@@ -90,9 +82,7 @@
         "High Visibility",
         "Data Integration and Visualisation"
       ],
-      "images": [
-        "g1.jpg"
-      ]
+      "images": ["g1.jpg"]
     }
   ],
   "education": [
@@ -105,33 +95,163 @@
       "grade": "First Class With Honours",
       "courses": ["DB1101 - Basic SQL"],
       "summary": "BSc (Hons) Computer Science BCS accredited course, I achieved the second highest grade of my cohort  in my final year, graduating with a 1st",
-      "images": [
-        "u1.jpg",
-        "u2.jpg",
-        "u3.jpg"
-      ]
+      "images": ["u1.jpg", "u2.jpg", "u3.jpg"]
     }
   ],
-  "skills": {
-    "programming": ["Golang", "C++", "TypeScript", "Node JS", "Python", "PHP"],
-    "frameworks": ["React", "Angular", "KnockoutJS", "THREEJS"],
-    "tools": ["NPM", "Webpack", "Grunt", "Composer (PHP)", "MongoDB", "MySQL"],
-    "software": [
-      "Windows",
-      "Linux",
-      "Docker",
-      "Kubernetes",
-      "Google Cloud Platform"
-    ],
-    "devtools": [
-      "Git",
-      "Azure Devops",
-      "CircleCI",
-      "VS Code",
-      "Visual Studio",
-      "Jetbrains"
-    ]
-  },
+  "skills": [
+    {
+      "icon": "go-line",
+      "name": "Golang"
+    },
+    {
+      "icon": "cplusplus-plain",
+      "name": "C++"
+    },
+    {
+      "icon": "c-plain",
+      "name": "C"
+    },
+    {
+      "icon": "python-plain",
+      "name": "Python"
+    },
+    {
+      "icon": "java-plain",
+      "name": "Java"
+    },
+    {
+      "icon": "php-plain",
+      "name": "PHP"
+    },
+    {
+      "icon": "composer-plain",
+      "name": "Composer"
+    },
+    {
+      "icon": "nodejs-plain",
+      "name": "Node JS"
+    },
+    {
+      "icon": "typescript-plain",
+      "name": "TypeScript"
+    },
+    {
+      "icon": "javascript-plain",
+      "name": "JavaScript"
+    },
+    {
+      "icon": "babel-plain",
+      "name": "Babel"
+    },
+    {
+      "icon": "react-plain",
+      "name": "React"
+    },
+    {
+      "icon": "angularjs-plain",
+      "name": "Angular"
+    },
+    {
+      "icon": "jquery-plain",
+      "name": "jQuery"
+    },
+    {
+      "icon": "express-original-wordmark",
+      "name": "Express"
+    },
+    {
+      "icon": "npm-original-wordmark",
+      "name": "NPM"
+    },
+    {
+      "icon": "webpack-plain",
+      "name": "Webpack"
+    },
+    {
+      "icon": "grunt-plain",
+      "name": "Grunt"
+    },
+    {
+      "icon": "jasmine-plain",
+      "name": "Jasmine"
+    },
+    {
+      "icon": "mocha-plain",
+      "name": "Mocha"
+    },
+    {
+      "icon": "html5-plain",
+      "name": "HTML 5"
+    },
+    {
+      "icon": "css3-plain",
+      "name": "CSS3"
+    },
+    {
+      "icon": "sass-plain",
+      "name": "Sass"
+    },
+    {
+      "icon": "bootstrap-plain",
+      "name": "Bootstrap"
+    },
+    {
+      "icon": "docker-plain",
+      "name": "Docker"
+    },
+    {
+      "icon": "kubernetes-plain",
+      "name": "Kubernetes"
+    },
+    {
+      "icon": "linux-plain",
+      "name": "Linux"
+    },
+    {
+      "icon": "windows8-plain",
+      "name": "Windows"
+    },
+    {
+      "icon": "bash-plain",
+      "name": "Bash"
+    },
+    {
+      "icon": "googlecloud-plain",
+      "name": "GCP"
+    },
+    {
+      "icon": "mongodb-plain",
+      "name": "MongoDB"
+    },
+    {
+      "icon": "mysql-plain",
+      "name": "MySQL"
+    },
+    {
+      "icon": "git-plain",
+      "name": "Git"
+    },
+    {
+      "icon": "github-plain",
+      "name": "GitHub"
+    },
+    {
+      "icon": "bitbucket-plain",
+      "name": "Bitbucket"
+    },
+    {
+      "icon": "photoshop-plain",
+      "name": "Photoshop"
+    },
+    {
+      "icon": "visualstudio-plain",
+      "name": "Visual Studio"
+    },
+    {
+      "icon": "wordpress-plain",
+      "name": "Wordpress"
+    }
+  ],
   "languages": [
     {
       "language": "English",
@@ -158,19 +278,19 @@
       "image": "p1.gif",
       "summary": "My very own indie space shooter I built in my spare time using C++ and SFML, Based on my first year university programming class project submission."
     },
-    { 
+    {
       "name": "Predator/Prey Simulation",
       "link": "https://github.com/DanielWilliamClarke/Cujo",
       "image": "p4.jpg",
       "summary": "A predator / prey simulation with AI"
     },
-    { 
+    {
       "name": "This Very Portfolio",
       "link": "https://github.com/DanielWilliamClarke/Cujo",
       "image": "p2.gif",
       "summary": "I have made this Portfolio's code avaiable for all to see!"
     },
-    { 
+    {
       "name": "Various Projects",
       "link": "https://github.com/DanielWilliamClarke",
       "image": "p5.jpg",

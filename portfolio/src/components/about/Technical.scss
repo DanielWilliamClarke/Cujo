@@ -1,15 +1,21 @@
 .Technical {
-  .Languages {
-    font-weight: 500;
-  }
-
   .Skills {
-    list-style-type: none;
-    padding: 0 10px;
-    margin: 0;
+    font-weight: 500;
+    color: #bbbbbb;
+    padding: 20PX 0;
 
-    p {
-      margin-bottom: 0.5rem;
+    .Dev-icon {
+      width: 100%;
+      padding: 5px 0;
+
+      .Icon {
+        font-size: 75px;
+      }
+
+      .Icon-name {
+        font-size: 1rem;
+        margin: 0.2rem;
+      }
     }
   }
 }
