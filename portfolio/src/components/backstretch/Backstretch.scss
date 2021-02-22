@@ -1,37 +1,35 @@
+@import "../../shared/Palette.scss";
+
 .backstretch {
   align-items: center;
-  background: rgb(51, 51, 51);
-  background: linear-gradient(
-    -180deg,
-      rgba(75, 108, 183, .3),
-      rgba(24, 40, 72, .3)
-    ),
+  background: $col-bg-light;
+  background: linear-gradient(-180deg, $col-back-grad-high, $col-back-grad-low),
     url("../../assets/backstretch.jpg");
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  color: rgb(255, 255, 255);
+  color: $col-text-main;
   display: flex;
   height: calc(100vh - 50px);
   justify-content: center;
   text-align: center;
-  transition: .5;
+  transition: 0.5;
 
   .backstretch-main {
     font-size: 75px;
     font-weight: 700;
-    text-shadow: 0 0 50px #000;
+    text-shadow: 0 0 50px $col-bg-dark;
   }
 
   .backstretch-tag {
     font-size: 25px;
     font-weight: 400;
-    text-shadow: 0 0 50px #000;
+    text-shadow: 0 0 50px $col-bg-dark;
   }
 
   .line {
-    background-color: rgba(75, 108, 183, 1);
+    background-color: $col-accent-high;
   }
 }
 

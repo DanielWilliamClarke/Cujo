@@ -26,6 +26,7 @@ export class Projects extends Component<ProjectProps> {
               (p: Project): JSX.Element => this.projectCard(p)
             )}
           </CardColumns>
+          <div className="centered short-line" />
         </Container>
       </section>
     );

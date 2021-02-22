@@ -1,6 +1,8 @@
+@import "../../shared/Palette.scss";
+
 .copyright {
   .short-line {
-    background-color: rgba(75, 108, 183, 1) !important;
+    background-color: $col-accent-zing !important;
   }
 }
 
