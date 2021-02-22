@@ -4,7 +4,7 @@ import { Container, Row, Col, Card, CardColumns } from "react-bootstrap";
 import { ImageLocator } from "../shared/DynamicImage";
 
 import "../../shared/Section.scss";
-import "./Education.scss";
+import "./Projects.scss";
 
 type ProjectProps = {
   projects: Project[];
@@ -13,7 +13,7 @@ type ProjectProps = {
 export class Projects extends Component<ProjectProps> {
   render(): JSX.Element {
     return (
-      <section id="projects" className="section Projects">
+      <section id="projects" className="section projects">
         <Container>
           <Row>
             <Col>
@@ -43,6 +43,7 @@ export class Projects extends Component<ProjectProps> {
         )}
         <Card.Body>
           <Card.Title>{p.name}</Card.Title>
+          <div className="centered short-line" />
           <Card.Text>{p.summary}</Card.Text>
         </Card.Body>
         <Card.Footer>

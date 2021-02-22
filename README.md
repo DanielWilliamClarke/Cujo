@@ -65,9 +65,8 @@ docker-compose down -v
 
 ## Urls
 
-- danielclarke.tech - Portfolio
-- blog.danielclarke.tech/... - Wordpress - [Homepage redirects to Portfolio]
-- jenkins.danielclarke.tech - Jenkins
+- <http://danielclarke.tech> - Portfolio
+- <http://blog.danielclarke.tech>/... - Wordpress - [Homepage redirects to Portfolio]
 
 ## Setup and Resources
 
