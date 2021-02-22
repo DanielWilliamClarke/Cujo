@@ -3,7 +3,7 @@ import { Project } from "../../model/CV";
 import { Container, Row, Col, Card, CardColumns } from "react-bootstrap";
 import { ImageLocator } from "../shared/DynamicImage";
 
-import "../../shared/section.scss";
+import "../../shared/Section.scss";
 import "./Education.scss";
 
 type ProjectProps = {

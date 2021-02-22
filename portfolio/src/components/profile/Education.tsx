@@ -3,7 +3,7 @@ import { Education as EducationData } from "../../model/CV";
 import { Container, Row, Col } from "react-bootstrap";
 import moment from "moment";
 
-import "../../shared/section.scss";
+import "../../shared/Section.scss";
 import "./Education.scss";
 import { DynamicImage } from "../shared/DynamicImage";
 

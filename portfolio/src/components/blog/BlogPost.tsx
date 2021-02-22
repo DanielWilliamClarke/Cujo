@@ -7,7 +7,7 @@ import { BlogServiceProps, BlogPostData } from "./BlogService";
 import { Tag } from "./BlogTagModel";
 import { SharePanel } from "../nav/SharePanel";
 
-import "../../shared/section.scss";
+import "../../shared/Section.scss";
 import "./BlogPost.scss";
 import "highlight.js/scss/tomorrow-night-eighties.scss";
 
