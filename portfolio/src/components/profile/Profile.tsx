@@ -19,16 +19,13 @@ export class Profile extends Component<CVProps> {
         <SharePanel
           url={window.location.href}
           body="Software Engineer Portfolio and Blog"
-          hashtag="DWCPortfolio"
+          hashtag="DCTechPortfolio"
         />
         <Fade bottom>
           <About
             basics={this.props.cv.basics}
             interests={this.props.cv.interests}
           />
-        </Fade>
-        <Fade bottom>
-          <Technical skills={this.props.cv.skills} />
         </Fade>
         <Fade bottom>
           <Experience work={this.props.cv.work} />
@@ -38,6 +35,9 @@ export class Profile extends Component<CVProps> {
         </Fade>
         <Fade bottom>
           <Projects projects={this.props.cv.projects} />
+        </Fade>
+        <Fade bottom>
+          <Technical skills={this.props.cv.skills} />
         </Fade>
         <Fade bottom>
           <Contact profiles={this.props.cv.basics.profiles} />

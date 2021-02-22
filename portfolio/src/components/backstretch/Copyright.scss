@@ -1,5 +1,11 @@
 .copyright {
   .short-line {
-    background-color: rgba(75, 108, 183, 1);
+    background-color: rgba(75, 108, 183, 1) !important;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .section {
+    text-align: center;
   }
 }

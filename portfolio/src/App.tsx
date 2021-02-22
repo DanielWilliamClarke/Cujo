@@ -7,7 +7,7 @@ import { CVProps } from "./model/CV";
 import { Backstretch } from "./components/backstretch/Backstretch";
 import { NavPanel } from "./components/nav/NavPanel";
 
-import { Profile } from "./components/about/Profile";
+import { Profile } from "./components/profile/Profile";
 import Blog from "./components/blog/Blog";
 import { BlogService } from "./components/blog/BlogService";
 

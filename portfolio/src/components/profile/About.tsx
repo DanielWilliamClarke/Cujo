@@ -30,11 +30,13 @@ export class About extends Component<AboutProps> {
             <Col>
               <DynamicImage
                 image="headshot.jpg"
-                alt="its, me!"
+                alt="Daniel and Amelia"
                 className="headshot"
               />
             </Col>
+          </Row>
 
+          <Row className="section-content">
             <Col className="text-column">
               <h4>A little about me!</h4>
               <ReactMarkdown
@@ -61,7 +63,9 @@ export class About extends Component<AboutProps> {
 
           <Row className="section-content">
             <Col className="mailto">
-              <a href="mailto:dc@danielclarke.tech">{this.props.basics.email}</a>
+              <a href="mailto:dc@danielclarke.tech">
+                {this.props.basics.email}
+              </a>
             </Col>
           </Row>
           <div className="centered short-line" />

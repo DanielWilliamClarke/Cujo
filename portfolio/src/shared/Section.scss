@@ -17,7 +17,7 @@
   }
 
   .section-content {
-    margin-top: 20px;
+    margin: 20px 0;
   }
 
   h3,
@@ -56,8 +56,9 @@
   margin-right: auto;
 }
 
-.line, 
-.short-line {
+.line,
+.short-line,
+.long-line {
   background: rgb(204, 204, 204);
   display: block;
   height: 1px;
@@ -70,6 +71,10 @@
 
 .short-line {
   width: 30px;
+}
+
+.long-line {
+  width: 50vw;
 }
 
 .dot:after {
@@ -104,7 +109,7 @@
 }
 
 .images {
-  margin: 20px 0;
+  margin: 25px 0;
 
   .col-item::after {
     content: "";
@@ -168,12 +173,12 @@
 
 .app {
   @include alternating-section(
-    'odd',
+    "odd",
     rgb(34, 34, 34),
     rgb(240, 139, 101),
     rgb(17, 17, 17)
   );
-  @include alternating-section('even', rgb(17, 17, 17), rgb(97, 192, 191));
+  @include alternating-section("even", rgb(17, 17, 17), rgb(97, 192, 191));
 }
 
 @media screen and (max-width: 700px) {
@@ -187,7 +192,6 @@
   }
 
   .section {
-    padding: 30px 0 0;
     text-align: left;
   }
 

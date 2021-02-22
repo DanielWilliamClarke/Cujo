@@ -18,7 +18,7 @@ export class NavPanel extends Component<StyleProps> {
         </div>
         <Container>
           <Row className="nav-container">
-            {["about", "technical", "experience", "education", "projects", "contact"].map(
+            {["about", "experience", "education", "projects", "technical", "contact"].map(
               (hash: string): JSX.Element => this.createLink("", hash)
             )}
             {this.createLink("blog", "blog")}
