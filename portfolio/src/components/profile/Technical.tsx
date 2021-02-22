@@ -3,7 +3,7 @@ import { DevIcon } from "../../model/CV";
 import { DevIconName } from "../shared/DevIcon";
 import { Container, Row, Col } from "react-bootstrap";
 
-import "../../shared/section.scss";
+import "../../shared/Section.scss";
 import "./Technical.scss";
 
 type SkillsProps = {

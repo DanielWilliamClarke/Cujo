@@ -7,7 +7,7 @@ import util from "util";
 
 import { Work } from "../../model/CV";
 
-import "../../shared/section.scss";
+import "../../shared/Section.scss";
 import "./Experience.scss";
 import { DynamicImage } from "../shared/DynamicImage";
 

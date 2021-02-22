@@ -6,7 +6,7 @@ import breaks from "remark-breaks";
 
 import { DynamicImage } from "../shared/DynamicImage";
 
-import "../../shared/section.scss";
+import "../../shared/Section.scss";
 import "./About.scss";
 
 type AboutProps = {

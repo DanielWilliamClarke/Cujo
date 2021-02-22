@@ -3,10 +3,3 @@
   text-align: left;
   width: 75%;
 }
-
-@media (min-width: 576px) {
-  .card-columns {
-    column-count: 4 !important;
-    padding: 10px;
-  }
-}
