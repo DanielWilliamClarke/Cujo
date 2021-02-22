@@ -1,11 +1,13 @@
+@import "./Palette.scss";
+
 .section {
-  color: rgb(238, 238, 238);
+  color: $col-text-main;
   margin: 0 auto;
   padding: 75px 0;
   position: relative;
 
   .section-title {
-    color: rgb(204, 204, 204);
+    color: $col-text-title;
     display: block;
     font-size: 2.25em;
     font-weight: 300;
@@ -24,7 +26,7 @@
   h4,
   h5,
   h6 {
-    color: rgb(221, 221, 221);
+    color: $col-text-heading;
     letter-spacing: 0.1em;
     text-transform: uppercase;
   }
@@ -59,7 +61,7 @@
 .line,
 .short-line,
 .long-line {
-  background: rgb(204, 204, 204);
+  background: $col-text-title;
   display: block;
   height: 1px;
   padding: 0 !important;
@@ -164,7 +166,7 @@
   }
 }
 
-@mixin alternating-section($side, $bg, $color, $card-color: rgb(34, 34, 34)) {
+@mixin alternating-section($side, $bg, $color, $card-color: $col-bg-light) {
   div:nth-child(#{$side}) {
     .section {
       @include section-coloring($bg, $color, $card-color);
@@ -179,11 +181,11 @@
 .app {
   @include alternating-section(
     "odd",
-    rgb(34, 34, 34),
-    rgb(240, 139, 101),
-    rgb(17, 17, 17)
+    $col-bg-light,
+    $col-accent-zing,
+    $col-bg-dark
   );
-  @include alternating-section("even", rgb(17, 17, 17), rgb(97, 192, 191));
+  @include alternating-section("even", $col-bg-dark, $col-accent-high);
 }
 
 @media screen and (max-width: 700px) {

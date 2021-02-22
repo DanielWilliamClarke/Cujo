@@ -1,9 +1,12 @@
+@import "../../shared/Palette.scss";
+
 .nav-panel {
-  background-color: rgb(51, 51, 51);
+  background-color: $col-bg-light;
   height: 50px;
   overflow: hidden;
   text-transform: capitalize !important;
   z-index: 1;
+  border-top: 2px solid $col-main-brand;
 
   .nav-container {
     align-items: center;
@@ -18,37 +21,37 @@
   }
 
   .col-item::after {
-    content: '';
+    content: "";
   }
 
   .option {
     a {
       &:link,
       &:visited {
-        color: rgb(255, 255, 255);
+        color: $col-text-main;
         text-decoration: none;
       }
     }
 
     &:hover {
-      background-color: rgb(221, 221, 221);
+      background-color: $col-text-heading;
 
       a {
-        color: rgb(0, 0, 0);
+        color: $col-bg-dark;
       }
     }
   }
 
   .nav-button {
-    color: rgb(255, 255, 255);
+    color: $col-text-main;
     display: block;
     font-weight: 500;
     padding: 13px 1em;
     text-align: center;
-    transition: .5s;
+    transition: 0.5s;
 
     .nav-active {
-      color: rgba(75, 108, 183, 1) !important;
+      color: $col-main-brand !important;
     }
   }
 }
@@ -78,7 +81,7 @@
 @media screen and (max-width: 445px) {
   .nav-panel {
     .nav-button {
-      padding: 16px .2em;
+      padding: 16px 0.2em;
     }
   }
 }

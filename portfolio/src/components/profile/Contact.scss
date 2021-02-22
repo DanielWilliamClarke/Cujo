@@ -1,10 +1,12 @@
+@import "../../shared/Palette.scss";
+
 .contact {
-  background-color: rgba(75, 108, 183, 1) !important;
-  color: #222 !important;
+  background-color: $col-main-brand !important;
+  color: $col-bg-light !important;
 
   .section-title,
   h3 {
-    color: #222;
+    color: $col-bg-light;
   }
 
   h3 {
@@ -14,7 +16,7 @@
   .line,
   .long-line,
   .short-line {
-    background-color: #222 !important;
+    background-color: $col-bg-light !important;
   }
 
   .socials {
@@ -31,14 +33,14 @@
       width: 175px;
 
       &:hover {
-        background-color: rgba(17, 17, 17, 0.8);
+        background-color: #{$col-bg-light}cc;
       }
     }
 
     a {
       &:link,
       &:visited {
-        color: #222;
+        color: $col-bg-light;
         text-decoration: none;
       }
     }
@@ -58,7 +60,7 @@
     }
 
     &:hover {
-      color: rgba(75, 108, 183, 1) !important;
+      color: $col-main-brand !important;
     }
   }
 
@@ -66,9 +68,9 @@
     width: 500px;
 
     .contact-input {
-      background: #222;
-      color: #fff;
-      border: 1px solid #444;
+      background: $col-bg-light;
+      color: $col-text-main;
+      border: 1px solid $col-bg-dark;
     }
 
     .btn {

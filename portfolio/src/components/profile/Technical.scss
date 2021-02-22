@@ -1,6 +1,8 @@
+@import "../../shared/Palette.scss";
+
 .technical {
   .skills {
-    color: rgba(187, 187, 187, 1);
+    color: $col-text-title;
     font-weight: 500;
     padding: 20px 0;
   }
