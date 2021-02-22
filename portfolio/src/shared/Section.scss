@@ -115,6 +115,14 @@
   padding: 10px;
 }
 
+.card {
+  transition: .5s;
+
+  &:hover {
+    transform: scale(1.02);
+  }
+}
+
 .images {
   margin: 25px 0;
 
