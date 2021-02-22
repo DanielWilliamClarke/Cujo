@@ -1,0 +1,74 @@
+.contact {
+  background-color: rgb(97, 192, 191) !important;
+  color: #222 !important;
+
+  .section-title,
+  h3 {
+    color: #222;
+  }
+
+  h3 {
+    text-transform: none;
+  }
+
+  .line,
+  .long-line,
+  .short-line {
+    background-color: #222 !important;
+  }
+
+  .socials {
+    justify-content: center;
+
+    .social-platform {
+      align-items: center;
+      border-radius: 50%;
+      display: flex;
+      height: 175px;
+      justify-content: center;
+      margin: 0 10px;
+      transition: 0.5s;
+      width: 175px;
+
+      &:hover {
+        background-color: rgba(17, 17, 17, 0.8);
+      }
+    }
+
+    a {
+      &:link,
+      &:visited {
+        color: #222;
+        text-decoration: none;
+      }
+    }
+  }
+
+  .dev-icon {
+    width: 100%;
+
+    .icon {
+      font-size: 75px;
+    }
+
+    .icon-name {
+      font-size: 1rem;
+      font-weight: 400;
+      margin: 0.2rem;
+    }
+
+    &:hover {
+      color: rgb(97, 192, 191) !important;
+    }
+  }
+
+  .contact-form {
+    width: 500px;
+
+    .contact-input {
+      background: #222;
+      color: #fff;
+      border: 1px solid #444;
+    }
+  }
+}

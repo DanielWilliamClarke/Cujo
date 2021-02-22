@@ -103,7 +103,7 @@ class Blog extends Component<
           url={window.location.href}
           title="Blog"
           body="A blog about software engineering, magic, family life and other hobbies"
-          hashtag="DWCBlog"
+          hashtag="DCTechBlog"
         />
         <Fade bottom>
           <Row>

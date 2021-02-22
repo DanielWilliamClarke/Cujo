@@ -56,7 +56,7 @@ class BlogPost extends Component<
             url={window.location.href}
             title={`Blog - ${p.post.title.rendered}`}
             body={p.post.excerpt.rendered}
-            hashtag="DWCBlog"
+            hashtag="DCTechBlog"
           />
 
           {this.backButton()}

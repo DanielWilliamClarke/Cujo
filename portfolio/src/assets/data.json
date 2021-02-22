@@ -28,10 +28,17 @@
       },
       {
         "brand": {
+          "name": "Deviantart",
+          "icon": "photoshop-plain"
+        },
+        "url": "https://www.deviantart.com/clarkii"
+      },
+      {
+        "brand": {
           "name": "Blog",
           "icon": "wordpress-plain"
         },
-        "url": "https://danielclarke.tech/blog"
+        "url": "http://danielclarke.tech/blog"
       }
     ]
   },
@@ -222,6 +229,10 @@
       "name": "Bootstrap"
     },
     {
+      "icon": "protractor-plain",
+      "name": "Protractor"
+    },
+    {
       "icon": "docker-plain",
       "name": "Docker"
     },
@@ -236,6 +247,10 @@
     {
       "icon": "windows8-plain",
       "name": "Windows"
+    },
+    {
+      "icon": "ssh-original",
+      "name": "SSH"
     },
     {
       "icon": "bash-plain",

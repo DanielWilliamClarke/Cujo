@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { DevIcon } from "../../model/CV";
+import { DevIconName } from "../shared/DevIcon";
 import { Container, Row, Col } from "react-bootstrap";
-import ReactMarkdown from "react-markdown";
 
 import "../../shared/section.scss";
 import "./Technical.scss";
@@ -88,13 +88,10 @@ export class Technical extends Component<SkillsProps, SkillsState> {
       : true;
   }
 
-  private displayDevIcon({ icon, name }: DevIcon): JSX.Element {
+  private displayDevIcon(icon: DevIcon): JSX.Element {
     return (
       <Col>
-        <div className="dev-icon">
-          <span className={`icon devicon-${icon}`} />
-          <p className="icon-name">{name}</p>
-        </div>
+        <DevIconName icon={icon} />
       </Col>
     );
   }
