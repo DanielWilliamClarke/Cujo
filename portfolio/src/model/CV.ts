@@ -52,7 +52,7 @@ export interface DevIcon {
 
 export interface Skills {
   summary: string;
-  skills: DevIcon[]
+  list: DevIcon[]
 }
 
 export interface Language {
@@ -67,13 +67,18 @@ export interface Project {
   summary: string;
 }
 
+export interface Interests {
+  summary: string;
+  list: string[];
+}
+
 export interface CV {
   basics: Basics;
   work: Work[];
   education: Education[];
   skills: Skills;
   languages: Language[];
-  interests: string[];
+  interests: Interests;
   projects: Project[];
 }
 

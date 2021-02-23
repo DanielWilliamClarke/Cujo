@@ -46,7 +46,7 @@ export class Experience extends Component<WorkProps> {
                         >
                           <DynamicImage
                             image={work.logo}
-                            alt={work.company}
+                            alt={`${work.company} - Image not found!`}
                             className="centered image-item work-logo"
                           />
                         </a>
@@ -88,7 +88,7 @@ export class Experience extends Component<WorkProps> {
                       <Col className="col-item">
                         <DynamicImage
                           image={image}
-                          alt="not found..."
+                          alt={`${work.position} - Image not found!`}
                           className="centered image-item"
                         />
                       </Col>

@@ -68,7 +68,7 @@ export class Education extends Component<EducationProps> {
                     <a href={e.link} rel="noopener noreferrer" target="_blank">
                       <DynamicImage
                         image={image}
-                        alt="not found..."
+                        alt={`${e.institution} - Image not found!`}
                         className="centered image-item"
                       />
                     </a>

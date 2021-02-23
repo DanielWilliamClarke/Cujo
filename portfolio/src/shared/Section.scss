@@ -116,7 +116,7 @@
 }
 
 .card {
-  transition: .5s;
+  transition: 0.5s;
 
   &:hover {
     transform: scale(1.02);
@@ -227,5 +227,12 @@
     .col-item {
       display: flex !important;
     }
+  }
+}
+
+@media screen and (max-width: 770px) {
+  .card-columns {
+    column-count: 1 !important;
+    padding: 10px;
   }
 }

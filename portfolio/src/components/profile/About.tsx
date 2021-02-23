@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Basics } from "../../model/CV";
+import { Basics, Interests } from "../../model/CV";
 import { Container, Row, Col } from "react-bootstrap";
 import ReactMarkdown from "react-markdown";
 import breaks from "remark-breaks";
@@ -11,7 +11,7 @@ import "./About.scss";
 
 type AboutProps = {
   basics: Basics;
-  interests: string[];
+  interests: Interests;
 };
 
 export class About extends Component<AboutProps> {
@@ -29,8 +29,8 @@ export class About extends Component<AboutProps> {
           <Row className="section-content">
             <Col>
               <DynamicImage
-                image="headshot.jpg"
-                alt="Daniel and Amelia"
+                image={this.props.basics.picture}
+                alt="Daniel and Amelia - Image not found!"
                 className="headshot"
               />
             </Col>
@@ -47,12 +47,12 @@ export class About extends Component<AboutProps> {
 
             <Col className="text-column">
               <h4>My Interests</h4>
-              <p>
-                Outside of my professional work, I enjoy spending my time doing
-                any of the following:
-              </p>
+              <ReactMarkdown
+                source={this.props.interests.summary}
+                plugins={[breaks]}
+              />
               <ul className="interests">
-                {this.props.interests.map((interest: string) => (
+                {this.props.interests.list.map((interest: string) => (
                   <li>
                     <ReactMarkdown source={interest} />
                   </li>
