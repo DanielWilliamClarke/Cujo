@@ -3,7 +3,7 @@
 .backstretch {
   align-items: center;
   background: $col-bg-light;
-  background: linear-gradient(-180deg, $col-back-grad-high, $col-back-grad-low),
+  background: linear-gradient(0deg, $col-back-grad-high, $col-back-grad-low),
     url("../../assets/backstretch.jpg");
   background-attachment: fixed;
   background-position: center;
