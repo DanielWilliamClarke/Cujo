@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 
-import { Profile } from "../../model/CV";
+import { Profile } from "../../model/CVModel";
 import { DevIconName } from "../shared/DevIcon";
 
 import "./Contact.scss";

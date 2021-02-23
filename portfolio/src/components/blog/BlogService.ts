@@ -1,8 +1,8 @@
 import WPAPI from "wpapi";
 
-import { Post } from "./BlogPostModel";
-import { Media } from "./BlogMediaModel";
-import { Tag } from "./BlogTagModel";
+import { Post } from "../../model/BlogPostModel";
+import { Media } from "../../model/BlogMediaModel";
+import { Tag } from "../../model/BlogTagModel";
 
 export interface BlogPostData {
     post: Post;

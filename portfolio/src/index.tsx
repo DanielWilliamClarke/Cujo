@@ -6,7 +6,7 @@ import { App } from "./App";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import data from "./assets/data.json";
-import { CV } from "./model/CV";
+import { CV } from "./model/CVModel";
 
 ReactDOM.render(
   <React.StrictMode>

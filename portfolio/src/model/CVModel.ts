@@ -82,7 +82,6 @@ export interface CV {
   projects: Project[];
 }
 
-
 export type CVProps = {
   cv: CV;
 };

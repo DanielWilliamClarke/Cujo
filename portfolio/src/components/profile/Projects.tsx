@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import { Project } from "../../model/CV";
 import { Container, Row, Col, Card, CardColumns } from "react-bootstrap";
+
+import { Project } from "../../model/CVModel";
 import { ImageLocator } from "../shared/DynamicImage";
 
-import "../../shared/Section.scss";
+import "../shared/Portfolio.scss";
 import "./Projects.scss";
 
 type ProjectProps = {

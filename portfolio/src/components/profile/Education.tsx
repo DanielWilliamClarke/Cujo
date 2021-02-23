@@ -1,11 +1,12 @@
 import React, { Component } from "react";
-import { Education as EducationData } from "../../model/CV";
 import { Container, Row, Col } from "react-bootstrap";
 import moment from "moment";
 
-import "../../shared/Section.scss";
-import "./Education.scss";
+import { Education as EducationData } from "../../model/CVModel";
 import { DynamicImage } from "../shared/DynamicImage";
+
+import "../shared/Portfolio.scss";
+import "./Education.scss";
 
 type EducationProps = {
   education: EducationData[];

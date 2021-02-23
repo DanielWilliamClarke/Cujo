@@ -4,10 +4,10 @@ import { Button, Container, Row, Col } from "react-bootstrap";
 import moment from "moment";
 
 import { BlogServiceProps, BlogPostData } from "./BlogService";
-import { Tag } from "./BlogTagModel";
+import { Tag } from "../../model/BlogTagModel";
 import { SharePanel } from "../nav/SharePanel";
 
-import "../../shared/Section.scss";
+import "../shared/Portfolio.scss";
 import "./BlogPost.scss";
 import "highlight.js/scss/tomorrow-night-eighties.scss";
 

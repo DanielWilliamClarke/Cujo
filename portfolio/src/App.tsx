@@ -1,9 +1,9 @@
-import React, { Component } from "react";
+import { Component } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { StickyContainer, Sticky } from "react-sticky";
 import WPAPI from "wpapi";
 
-import { CVProps } from "./model/CV";
+import { CVProps } from "./model/CVModel";
 import { Backstretch } from "./components/backstretch/Backstretch";
 import { NavPanel } from "./components/nav/NavPanel";
 

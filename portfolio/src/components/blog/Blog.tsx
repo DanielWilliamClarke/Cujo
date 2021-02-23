@@ -13,7 +13,7 @@ import { BlogServiceProps, BlogPostData } from "./BlogService";
 import BlogPost from "./BlogPost";
 import { SharePanel } from "../nav/SharePanel";
 
-import "../../shared/Section.scss";
+import "../shared/Portfolio.scss";
 import "./Blog.scss";
 
 

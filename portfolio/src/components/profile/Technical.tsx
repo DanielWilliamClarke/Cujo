@@ -1,11 +1,12 @@
 import React, { Component } from "react";
-import { Skills, DevIcon } from "../../model/CV";
-import { DevIconName } from "../shared/DevIcon";
 import { Container, Row, Col } from "react-bootstrap";
 import ReactMarkdown from "react-markdown";
 import breaks from "remark-breaks";
 
-import "../../shared/Section.scss";
+import { Skills, DevIcon } from "../../model/CVModel";
+import { DevIconName } from "../shared/DevIcon";
+
+import "../shared/Portfolio.scss";
 import "./Technical.scss";
 
 type TechnicalProps = {
