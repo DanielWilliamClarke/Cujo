@@ -34,6 +34,14 @@ export class SharePanel extends Component<ShareProps> {
     return (
       <Container className="share-panel">
         <Slide left>
+          <LinkedinShareButton
+            url={this.props.url}
+            title={this.prepareTitle(this.props.title)}
+            summary={this.sanitize(this.props.body)}
+          >
+            <LinkedinIcon size={this.size} />
+          </LinkedinShareButton>
+
           <FacebookShareButton
             url={this.props.url}
             quote={this.prepareTitle(this.props.title)}
@@ -48,14 +56,6 @@ export class SharePanel extends Component<ShareProps> {
           >
             <RedditIcon size={this.size} />
           </RedditShareButton>
-
-          <LinkedinShareButton
-            url={this.props.url}
-            title={this.prepareTitle(this.props.title)}
-            summary={this.sanitize(this.props.body)}
-          >
-            <LinkedinIcon size={this.size} />
-          </LinkedinShareButton>
 
           <TwitterShareButton
             url={this.props.url}
