@@ -16,7 +16,6 @@ import { SharePanel } from "../nav/SharePanel";
 import "../shared/Portfolio.scss";
 import "./Blog.scss";
 
-
 const Fade = require("react-reveal/Fade");
 
 type BlogState = {
@@ -69,30 +68,40 @@ class Blog extends Component<
 
   private blogSummaryPanel(data: BlogPostData): JSX.Element {
     return (
-      <Card key={data.post.id} bg="dark">
-        <HashLink smooth to={`${this.props.match.url}/${data.post.id}#blogpost`}>
-          {data.media && <Card.Img variant="top" src={data.media.source_url} />}
-        </HashLink>
-        <Card.Body>
-          <HashLink smooth to={`${this.props.match.url}/${data.post.id}#blogpost`}>
-            <Card.Title>{data.post.title.rendered}</Card.Title>
+      <Fade bottom>
+        <Card key={data.post.id} bg="dark">
+          <HashLink
+            smooth
+            to={`${this.props.match.url}/${data.post.id}#blogpost`}
+          >
+            {data.media && (
+              <Card.Img variant="top" src={data.media.source_url} />
+            )}
           </HashLink>
-          <Card.Text>
-            Published {this.toDateSentence(data.post.date)}{" "}
-          </Card.Text>
-          <Card.Text
-            className="text-muted"
-            dangerouslySetInnerHTML={{
-              __html: data.post.excerpt.rendered,
-            }}
-          />
-        </Card.Body>
-        <Card.Footer>
-          <small className="text-muted">
-            Last updated {this.toDateSentence(data.post.modified)}
-          </small>
-        </Card.Footer>
-      </Card>
+          <Card.Body>
+            <HashLink
+              smooth
+              to={`${this.props.match.url}/${data.post.id}#blogpost`}
+            >
+              <Card.Title>{data.post.title.rendered}</Card.Title>
+            </HashLink>
+            <Card.Text>
+              Published {this.toDateSentence(data.post.date)}{" "}
+            </Card.Text>
+            <Card.Text
+              className="text-muted"
+              dangerouslySetInnerHTML={{
+                __html: data.post.excerpt.rendered,
+              }}
+            />
+          </Card.Body>
+          <Card.Footer>
+            <small className="text-muted">
+              Last updated {this.toDateSentence(data.post.modified)}
+            </small>
+          </Card.Footer>
+        </Card>
+      </Fade>
     );
   }
 
