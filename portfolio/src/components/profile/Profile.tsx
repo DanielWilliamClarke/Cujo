@@ -37,7 +37,7 @@ export class Profile extends Component<CVProps> {
           <Projects projects={this.props.cv.projects} />
         </Fade>
         <Fade bottom>
-          <Technical skills={this.props.cv.skills} />
+          <Technical techical={this.props.cv.skills} />
         </Fade>
         <Fade bottom>
           <Contact profiles={this.props.cv.basics.profiles} />

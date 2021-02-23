@@ -99,9 +99,10 @@
       "endDate": "Present",
       "summary": "Full stack software engineer leading a team of 4 software engineers for the GAIA Data discovery and marketplace platform.",
       "highlights": [
-        "Full Stack Development",
+        "Leadership",
         "High Visibility",
-        "Data Integration and Visualisation"
+        "Project Management",
+        "Integration and Visualisation"
       ],
       "logo": "slb.svg",
       "images": ["g1.jpg"]
@@ -115,7 +116,7 @@
       "startDate": "20/09/2010",
       "endDate": "20/05/2014",
       "grade": "First Class With Honours",
-      "summary": "BSc (Hons) Computer Science BCS accredited course, I achieved the second highest grade of my cohort  in my final year, graduating with a 1st",
+      "summary": "BSc (Hons) Computer Science BCS accredited course, I achieved the second highest grade of my cohort  in my final year, graduating with a First",
       "images": ["u1.jpg", "u4.png", "u3.jpg"],
       "link": "https://www.ntu.ac.uk/"
     },
@@ -126,173 +127,176 @@
       "startDate": "25/07/2007",
       "endDate": "16/05/2009",
       "grade": "",
-      "summary": "Studied a range of A-level subjects gaining access to university",
+      "summary": "Studied a range of A-Level subjects gaining access to study at university",
       "images": ["k1.jpg"],
       "link": "https://www.kedst.ac.uk/"
     }
   ],
-  "skills": [
-    {
-      "icon": "go-line",
-      "name": "Golang"
-    },
-    {
-      "icon": "cplusplus-plain",
-      "name": "C++"
-    },
-    {
-      "icon": "c-plain",
-      "name": "C"
-    },
-    {
-      "icon": "python-plain",
-      "name": "Python"
-    },
-    {
-      "icon": "java-plain",
-      "name": "Java"
-    },
-    {
-      "icon": "php-plain",
-      "name": "PHP"
-    },
-    {
-      "icon": "composer-plain",
-      "name": "Composer"
-    },
-    {
-      "icon": "nodejs-plain",
-      "name": "Node JS"
-    },
-    {
-      "icon": "typescript-plain",
-      "name": "TypeScript"
-    },
-    {
-      "icon": "javascript-plain",
-      "name": "JavaScript"
-    },
-    {
-      "icon": "babel-plain",
-      "name": "Babel"
-    },
-    {
-      "icon": "react-plain",
-      "name": "React"
-    },
-    {
-      "icon": "angularjs-plain",
-      "name": "Angular"
-    },
-    {
-      "icon": "jquery-plain",
-      "name": "jQuery"
-    },
-    {
-      "icon": "express-original-wordmark",
-      "name": "Express"
-    },
-    {
-      "icon": "npm-original-wordmark",
-      "name": "NPM"
-    },
-    {
-      "icon": "webpack-plain",
-      "name": "Webpack"
-    },
-    {
-      "icon": "grunt-plain",
-      "name": "Grunt"
-    },
-    {
-      "icon": "jasmine-plain",
-      "name": "Jasmine"
-    },
-    {
-      "icon": "mocha-plain",
-      "name": "Mocha"
-    },
-    {
-      "icon": "html5-plain",
-      "name": "HTML 5"
-    },
-    {
-      "icon": "css3-plain",
-      "name": "CSS3"
-    },
-    {
-      "icon": "sass-plain",
-      "name": "Sass"
-    },
-    {
-      "icon": "bootstrap-plain",
-      "name": "Bootstrap"
-    },
-    {
-      "icon": "protractor-plain",
-      "name": "Protractor"
-    },
-    {
-      "icon": "docker-plain",
-      "name": "Docker"
-    },
-    {
-      "icon": "kubernetes-plain",
-      "name": "Kubernetes"
-    },
-    {
-      "icon": "linux-plain",
-      "name": "Linux"
-    },
-    {
-      "icon": "windows8-plain",
-      "name": "Windows"
-    },
-    {
-      "icon": "ssh-original",
-      "name": "SSH"
-    },
-    {
-      "icon": "bash-plain",
-      "name": "Bash"
-    },
-    {
-      "icon": "googlecloud-plain",
-      "name": "GCP"
-    },
-    {
-      "icon": "mongodb-plain",
-      "name": "MongoDB"
-    },
-    {
-      "icon": "mysql-plain",
-      "name": "MySQL"
-    },
-    {
-      "icon": "git-plain",
-      "name": "Git"
-    },
-    {
-      "icon": "github-plain",
-      "name": "GitHub"
-    },
-    {
-      "icon": "bitbucket-plain",
-      "name": "Bitbucket"
-    },
-    {
-      "icon": "photoshop-plain",
-      "name": "Photoshop"
-    },
-    {
-      "icon": "visualstudio-plain",
-      "name": "Visual Studio"
-    },
-    {
-      "icon": "wordpress-plain",
-      "name": "Wordpress"
-    }
-  ],
+  "skills": {
+    "summary": "I have worked with and are proficient with a large varity of programming languages, frameworks and tools. For backend web applications I use Golang and Nodejs. For frontend; TypeScript and JavaScript, and for performant apps, services and games I use C++. I feel most at home with C++ and Golang, but I am trying to learn a few *esoteric* languages such as Rust and Assembly.\n\nBelow is a selection of the langauges, frameworks and tools I have had experience with during my career so far.",
+    "skills": [
+      {
+        "icon": "go-line",
+        "name": "Golang"
+      },
+      {
+        "icon": "cplusplus-plain",
+        "name": "C++"
+      },
+      {
+        "icon": "c-plain",
+        "name": "C"
+      },
+      {
+        "icon": "python-plain",
+        "name": "Python"
+      },
+      {
+        "icon": "java-plain",
+        "name": "Java"
+      },
+      {
+        "icon": "php-plain",
+        "name": "PHP"
+      },
+      {
+        "icon": "composer-plain",
+        "name": "Composer"
+      },
+      {
+        "icon": "nodejs-plain",
+        "name": "Node JS"
+      },
+      {
+        "icon": "typescript-plain",
+        "name": "TypeScript"
+      },
+      {
+        "icon": "javascript-plain",
+        "name": "JavaScript"
+      },
+      {
+        "icon": "babel-plain",
+        "name": "Babel"
+      },
+      {
+        "icon": "react-plain",
+        "name": "React"
+      },
+      {
+        "icon": "angularjs-plain",
+        "name": "Angular"
+      },
+      {
+        "icon": "jquery-plain",
+        "name": "jQuery"
+      },
+      {
+        "icon": "express-original-wordmark",
+        "name": "Express"
+      },
+      {
+        "icon": "npm-original-wordmark",
+        "name": "NPM"
+      },
+      {
+        "icon": "webpack-plain",
+        "name": "Webpack"
+      },
+      {
+        "icon": "grunt-plain",
+        "name": "Grunt"
+      },
+      {
+        "icon": "jasmine-plain",
+        "name": "Jasmine"
+      },
+      {
+        "icon": "mocha-plain",
+        "name": "Mocha"
+      },
+      {
+        "icon": "html5-plain",
+        "name": "HTML 5"
+      },
+      {
+        "icon": "css3-plain",
+        "name": "CSS3"
+      },
+      {
+        "icon": "sass-plain",
+        "name": "Sass"
+      },
+      {
+        "icon": "bootstrap-plain",
+        "name": "Bootstrap"
+      },
+      {
+        "icon": "protractor-plain",
+        "name": "Protractor"
+      },
+      {
+        "icon": "docker-plain",
+        "name": "Docker"
+      },
+      {
+        "icon": "kubernetes-plain",
+        "name": "Kubernetes"
+      },
+      {
+        "icon": "linux-plain",
+        "name": "Linux"
+      },
+      {
+        "icon": "windows8-plain",
+        "name": "Windows"
+      },
+      {
+        "icon": "ssh-original",
+        "name": "SSH"
+      },
+      {
+        "icon": "bash-plain",
+        "name": "Bash"
+      },
+      {
+        "icon": "googlecloud-plain",
+        "name": "GCP"
+      },
+      {
+        "icon": "mongodb-plain",
+        "name": "MongoDB"
+      },
+      {
+        "icon": "mysql-plain",
+        "name": "MySQL"
+      },
+      {
+        "icon": "git-plain",
+        "name": "Git"
+      },
+      {
+        "icon": "github-plain",
+        "name": "GitHub"
+      },
+      {
+        "icon": "bitbucket-plain",
+        "name": "Bitbucket"
+      },
+      {
+        "icon": "photoshop-plain",
+        "name": "Photoshop"
+      },
+      {
+        "icon": "visualstudio-plain",
+        "name": "Visual Studio"
+      },
+      {
+        "icon": "wordpress-plain",
+        "name": "Wordpress"
+      }
+    ]
+  },
   "languages": [
     {
       "language": "English",
@@ -329,7 +333,7 @@
       "name": "Predator/Prey Simulation",
       "link": "https://github.com/DanielWilliamClarke/Yautja",
       "image": "p4.jpg",
-      "summary": "A predator / prey simulation with AI. Currently begin resurrected from the ages"
+      "summary": "A predator / prey simulation with AI. I have currently began to resurrect the code base from ages long passed"
     },
     {
       "name": "Various Projects",
