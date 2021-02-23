@@ -16,12 +16,16 @@
 
 ## // Todo
 
-- [x] Setup SSL correctly.. (ssl-companion is running, it will assign certificates in time)
-- [ ] Write tests
 - [ ] Get own logo and assets from designer
-- [ ] Fix predator/prey image asset
-- [ ] Finish contact page
-- [ ] Add site footer
+- [ ] Restyle experience and education so they resemble a timeline
+- [ ] Maybe swap backstretch with a 3d webgl canvas visualistion?
+- [ ] Optimize images (sizes, file encodings - <https://developers.google.com/speed/pagespeed/insights/>)
+- [ ] Write tests (maybe)
+- [x] Formalise colour palette
+- [x] Setup SSL correctly.. (ssl-companion is running, it will assign certificates when the window opens again)
+- [x] Fix predator/prey image asset
+- [x] Finish contact page
+- [x] Add site footer
 - [x] Proof read profile
 - [x] Add asset citations (now using my own images or free stock images only)
 - [x] Produce production build for deployment
