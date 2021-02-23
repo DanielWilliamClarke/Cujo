@@ -18,6 +18,7 @@
 
 - [ ] Get own logo and assets from designer
 - [ ] Restyle experience and education so they resemble a timeline
+- [ ] Write the blog
 - [ ] Maybe swap backstretch with a 3d webgl canvas visualistion?
 - [ ] Optimize images (sizes, file encodings - <https://developers.google.com/speed/pagespeed/insights/>)
 - [ ] Write tests (maybe)
