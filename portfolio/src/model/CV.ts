@@ -50,6 +50,11 @@ export interface DevIcon {
   name: string
 }
 
+export interface Skills {
+  summary: string;
+  skills: DevIcon[]
+}
+
 export interface Language {
   language: string;
   fluency: string;
@@ -66,7 +71,7 @@ export interface CV {
   basics: Basics;
   work: Work[];
   education: Education[];
-  skills: DevIcon[];
+  skills: Skills;
   languages: Language[];
   interests: string[];
   projects: Project[];

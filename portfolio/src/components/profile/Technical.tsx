@@ -1,27 +1,29 @@
 import React, { Component } from "react";
-import { DevIcon } from "../../model/CV";
+import { Skills, DevIcon } from "../../model/CV";
 import { DevIconName } from "../shared/DevIcon";
 import { Container, Row, Col } from "react-bootstrap";
+import ReactMarkdown from "react-markdown";
+import breaks from "remark-breaks";
 
 import "../../shared/Section.scss";
 import "./Technical.scss";
 
-type SkillsProps = {
-  skills: DevIcon[];
+type TechnicalProps = {
+  techical: Skills;
 };
 
 type SkillsState = {
   search: string;
 };
 
-export class Technical extends Component<SkillsProps, SkillsState> {
+export class Technical extends Component<TechnicalProps, SkillsState> {
   componentWillMount(): void {
     this.setState({ search: "" });
   }
 
   render(): JSX.Element {
     return (
-      <section id="technical" className="section technical">
+      <section id="skills" className="section technical">
         <Container>
           <Row>
             <Col>
@@ -32,18 +34,10 @@ export class Technical extends Component<SkillsProps, SkillsState> {
 
           <Row className="section-content">
             <Col>
-              <p className="centered">
-                I have worked with and are proficient with a large varity of
-                programming languages, frameworks and tools. For backend web
-                applications I use Golang and Nodejs. For frontend; TypeScript
-                and JavaScript, and for performant apps, services and games I
-                use C++. I feel most at home with C++ and Golang, but I am
-                trying to learn a few <i>esoteric</i> languages such as Rust and
-                Assembly.
-              </p>
-              <p className="centered">
-                Below is a selection of the langauges, frameworks and tools I have had experience with during my career so far.
-              </p>
+              <ReactMarkdown
+                source={this.props.techical.summary}
+                plugins={[breaks]}
+              />
             </Col>
           </Row>
 
@@ -58,7 +52,7 @@ export class Technical extends Component<SkillsProps, SkillsState> {
             </Col>
           </Row>
           <Row className="skills">
-            {this.props.skills
+            {this.props.techical.skills
               .filter(this.filterSkills.bind(this))
               .map(this.displayDevIcon)}
           </Row>
@@ -82,9 +76,7 @@ export class Technical extends Component<SkillsProps, SkillsState> {
 
   private filterSkills({ name }: DevIcon): boolean {
     return this.state.search.length
-      ? name
-          .toLowerCase()
-          .includes(this.state.search.toLowerCase())
+      ? name.toLowerCase().includes(this.state.search.toLowerCase())
       : true;
   }
 
