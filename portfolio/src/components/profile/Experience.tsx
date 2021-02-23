@@ -5,11 +5,12 @@ import breaks from "remark-breaks";
 import moment from "moment";
 import util from "util";
 
-import { Work } from "../../model/CV";
-
-import "../../shared/Section.scss";
-import "./Experience.scss";
+import { Work } from "../../model/CVModel";
 import { DynamicImage } from "../shared/DynamicImage";
+
+import "../shared/Portfolio.scss";
+import "./Experience.scss";
+
 
 type WorkProps = {
   work: Work[];

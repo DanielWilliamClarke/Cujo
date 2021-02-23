@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import { Component } from "react";
 
 import { SharePanel } from "../nav/SharePanel";
 import { About } from "./About";
@@ -7,8 +7,7 @@ import { Technical } from "./Technical";
 import { Education } from "./Education";
 import { Projects } from "./Projects";
 import { Contact } from "./Contact";
-
-import { CVProps } from "../../model/CV";
+import { CVProps } from "../../model/CVModel";
 
 const Fade = require("react-reveal/Fade");
 

@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import { Basics, Interests } from "../../model/CV";
 import { Container, Row, Col } from "react-bootstrap";
 import ReactMarkdown from "react-markdown";
 import breaks from "remark-breaks";
 
+import { Basics, Interests } from "../../model/CVModel";
 import { DynamicImage } from "../shared/DynamicImage";
 
-import "../../shared/Section.scss";
+import "../shared/Portfolio.scss";
 import "./About.scss";
 
 type AboutProps = {

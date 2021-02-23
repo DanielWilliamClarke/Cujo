@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { CVProps } from "../../model/CV";
-
 import { Container, Row, Col } from "react-bootstrap";
+
+import { CVProps } from "../../model/CVModel";
 
 import "./Backstretch.scss";
 
