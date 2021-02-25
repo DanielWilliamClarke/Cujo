@@ -6,6 +6,8 @@
   - [// Todo](#-todo)
   - [Build](#build)
   - [Deploy](#deploy)
+  - [Redeploy](#redeploy)
+  - [Teardown](#teardown)
   - [Wordpress plugins](#wordpress-plugins)
   - [Urls](#urls)
   - [Setup and Resources](#setup-and-resources)
@@ -36,14 +38,16 @@
 ## Build
 
 ```bash
+# With script
+./scripts/build-portfolio.sh <DOCKER_HUB_USER_REGISTRY>/cujo-portfolio:latest
+
+# OR
+
 # Build: Dev
-docker build -f portfolio/Dockerfile -t cujo-portfolio ./portfolio
+docker build -f portfolio/Dockerfile -t <DOCKER_HUB_USER_REGISTRY>/cujo-portfolio:latest ./portfolio
 
 # Build: Prod
-docker build -f portfolio/Dockerfile -t cujo-portfolio --build-arg BUILD_MODE=":prod" ./portfolio
-
-# Tag image
-docker tag cujo-portfolio:latest <DOCKER_HUB_USER_REGISTRY>/cujo-portfolio:latest
+docker build -f portfolio/Dockerfile -t <DOCKER_HUB_USER_REGISTRY>/cujo-portfolio:latest --build-arg BUILD_MODE=":prod" ./portfolio
 
 # Push image
 docker push <DOCKER_HUB_USER_REGISTRY>/cujo-portfolio:latest
@@ -52,14 +56,44 @@ docker push <DOCKER_HUB_USER_REGISTRY>/cujo-portfolio:latest
 ## Deploy
 
 ```bash
+# Run with sudo where necerssary
+
+# With script
+./script/deploy.sh dev(or prod)
+
+# Or ...
+
 # Deploy: Dev
-docker-compose -f dev.compose.yaml up --build
+docker-compose -f dev.compose.yaml up
 
 # Deploy: Prod
-docker-compose -f prod.compose.yaml up
+docker-compose --env-file <SECRET ENV FILE> -f prod.compose.yaml up
+```
 
-# Trash
-docker-compose down -v
+## Redeploy
+
+```bash
+# Run with sudo where necerssary
+
+# With script
+./scripts/redploy.sh <DOCKER IMAGE NAME> <CONTAINER NAME>
+```
+
+## Teardown
+
+```bash
+# Run with sudo where necerssary
+
+# With script
+./scripts/teardown dev(or prod) (-v) # to delete volumes
+
+# Or ...
+
+# Teardown: Dev
+docker-compose -f dev.compose.yaml down (-v)
+
+# Teardown: Prod
+docker-compose --env-file <SECRET ENV FILE> -f prod.compose.yaml down (-v)
 ```
 
 ## Wordpress plugins
