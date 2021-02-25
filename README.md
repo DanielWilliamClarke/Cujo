@@ -56,7 +56,7 @@ docker push <DOCKER_HUB_USER_REGISTRY>/cujo-portfolio:latest
 ## Deploy
 
 ```bash
-# Run with sudo where necerssary
+# Run with sudo where necessary 
 
 # With script
 ./script/deploy.sh dev(or prod)
@@ -73,7 +73,7 @@ docker-compose --env-file <SECRET ENV FILE> -f prod.compose.yaml up
 ## Redeploy
 
 ```bash
-# Run with sudo where necerssary
+# Run with sudo where necessary 
 
 # With script
 ./scripts/redploy.sh <DOCKER IMAGE NAME> <CONTAINER NAME>
@@ -82,7 +82,7 @@ docker-compose --env-file <SECRET ENV FILE> -f prod.compose.yaml up
 ## Teardown
 
 ```bash
-# Run with sudo where necerssary
+# Run with sudo where necessary 
 
 # With script
 ./scripts/teardown dev(or prod) (-v) # to delete volumes
