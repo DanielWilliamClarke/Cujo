@@ -40,6 +40,8 @@ services:
       WORDPRESS_DB_USER: wordpress
       WORDPRESS_DB_PASSWORD: wordpress
       WORDPRESS_DB_NAME: wordpress
+    volumes:
+      - ./wordpress:/var/www/html
     networks:
       - wordpress
 

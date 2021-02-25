@@ -64,6 +64,8 @@ services:
     - VIRTUAL_PORT=80
     - LETSENCRYPT_HOST=blog.${DOMAIN}
     - LETSENCRYPT_EMAIL=dc@${DOMAIN}
+    volumes:
+      - ./wordpress:/var/www/html
     networks:
      - wordpress
      - proxy
