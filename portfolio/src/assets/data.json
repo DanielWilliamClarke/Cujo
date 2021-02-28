@@ -161,6 +161,10 @@
         "name": "PHP"
       },
       {
+         "icon": "matlab-plain",
+         "name": "MatLab"
+      },
+      {
         "icon": "composer-plain",
         "name": "Composer"
       },
@@ -237,6 +241,10 @@
         "name": "Protractor"
       },
       {
+        "icon": "electron-original",
+        "name": "Electron"
+      },
+      {
         "icon": "docker-plain",
         "name": "Docker"
       },
@@ -249,6 +257,10 @@
         "name": "Linux"
       },
       {
+        "icon": "ubuntu-plain",
+        "name": "Ubuntu"
+      },
+      {
         "icon": "windows8-plain",
         "name": "Windows"
       },
@@ -259,6 +271,10 @@
       {
         "icon": "bash-plain",
         "name": "Bash"
+      },
+      {
+        "icon": "google-plain",
+        "name": "Google"
       },
       {
         "icon": "googlecloud-plain",
