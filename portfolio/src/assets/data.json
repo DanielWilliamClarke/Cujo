@@ -161,13 +161,13 @@
         "name": "PHP"
       },
       {
-         "icon": "matlab-plain",
-         "name": "MatLab"
-      },
-      {
         "icon": "composer-plain",
         "name": "Composer"
       },
+      {
+        "icon": "matlab-plain",
+        "name": "MATLAB"
+     },
       {
         "icon": "nodejs-plain",
         "name": "Node JS"
