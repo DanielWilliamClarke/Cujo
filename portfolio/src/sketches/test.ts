@@ -2,8 +2,12 @@ import p5 from "p5";
 
 const sketch = (p: p5): void => {
     p.setup = (): void => {
-        p.createCanvas(500, 500);
+        p.createCanvas(window.innerWidth, window.innerHeight);
     };
+
+    p.windowResized = (): void => {
+        p.resizeCanvas(window.innerWidth, window.innerHeight);
+    }
 
     p.draw = (): void => {
         if (p.mouseIsPressed) {
