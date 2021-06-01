@@ -13,6 +13,7 @@ import { BlogService } from "./components/blog/BlogService";
 
 import "./App.scss";
 import { Copyright } from "./components/backstretch/Copyright";
+import { SketchBackstretch } from "./components/backstretch/SketchBackstretch";
 
 declare global {
   interface Window {
@@ -35,6 +36,7 @@ export class App extends Component<CVProps> {
   render(): JSX.Element {
     return (
       <div>
+        <SketchBackstretch></SketchBackstretch>
         <Backstretch cv={this.props.cv}></Backstretch>
         <StickyContainer>
           <Router>
