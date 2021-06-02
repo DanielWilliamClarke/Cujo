@@ -36,8 +36,7 @@ export class App extends Component<CVProps> {
   render(): JSX.Element {
     return (
       <div>
-        <SketchBackstretch></SketchBackstretch>
-        <Backstretch cv={this.props.cv}></Backstretch>
+        <SketchBackstretch cv={this.props.cv}></SketchBackstretch>
         <StickyContainer>
           <Router>
             <Sticky>

@@ -1,0 +1,67 @@
+@import "../shared/Palette.scss";
+
+.sketch-backstretch {
+  align-items: center;
+  background: $col-bg-light;
+  background: linear-gradient(0deg, $col-back-grad-high, $col-back-grad-low);
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: $col-text-main;
+  display: flex;
+  height: calc(100vh - 50px);
+  justify-content: center;
+  text-align: center;
+  transition: 0.5;
+
+  canvas {
+    position: absolute;
+    z-index: -1;
+  }
+
+  .backstretch-main {
+    font-size: 75px;
+    font-weight: 700;
+    text-shadow: 0 0 50px $col-bg-dark;
+  }
+
+  .backstretch-tag {
+    font-size: 25px;
+    font-weight: 400;
+    text-shadow: 0 0 50px $col-bg-dark;
+  }
+
+  .line {
+    background-color: $col-accent-high;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .sketch-backstretch {
+    background-position: 100%;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .sketch-backstretch {
+    background-position: 94%;
+    .backstretch-main {
+      font-size: 50px;
+    }
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .sketch-backstretch {
+    background-position: 22%;
+
+    .backstretch-main {
+      font-size: 30px;
+    }
+
+    .backstretch-tag {
+      font-size: 15px;
+    }
+  }
+}
