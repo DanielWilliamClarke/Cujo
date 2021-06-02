@@ -18,8 +18,12 @@ export class SketchBackstretch extends Component<CVProps> {
     }
 
     componentDidMount() {
-        new p5(hex, this.myRef.current)
-        new p5(waves, this.myRef.current)
+        const coin: boolean = (Math.floor(Math.random() * 2) === 0);
+        if(coin) {
+            new p5(hex, this.myRef.current);
+        } else {
+            new p5(waves, this.myRef.current);
+        }    
     }
 
     render() {
