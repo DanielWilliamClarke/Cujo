@@ -2,13 +2,21 @@ import p5 from "p5";
 
 const sketch = (p: p5): void => {
 
-    const boxWidth: number = 48;
+    const minW: number = 32;
+    const maxW: number = 64;
+    const minH: number = 60;
+    const maxH: number = 400;
     const padding: number = 50;
 
     let ma: number = 0;
+    let yAngle: number = -p.QUARTER_PI;
     let angle: number = 0;
     let colorAngle: number = 0;
     let maxD: number = 0;
+
+    let opacity: number = 0;
+    let opacityProgress: number = 0;
+    const easeInOutCubic = (x: number): number => x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
 
     p.setup = (): void => {
         p.frameRate(60);
@@ -18,43 +26,48 @@ const sketch = (p: p5): void => {
         p.noStroke();
 
         ma = 35.264; // p.atan(1 / p.sqrt(2));
-        maxD = p.dist(0, 0, 200, 200);
-        p.ortho(-800, 800, 600, -600, -1000, 10000); 
+        maxD = p.dist(0, 0, maxH, maxH);
+        p.ortho(-800, 800, 600, -600, -1000, 10000);
     }
 
     p.draw = (): void => {
 
         p.clear();
         p.rotateX(ma);
-        p.rotateY(-p.QUARTER_PI);
+        p.rotateY(yAngle += 0.001);
 
         const locX = p.mouseX - p.height / 2;
         const locY = p.mouseY - p.width / 2;
         p.ambientLight(0, 0, 75);
         p.pointLight(0, 0, 100, locX, locY, 255);
 
-        for(let z = padding; z < p.height - padding; z += boxWidth) {
-            for(let x = padding; x < p.width - padding; x += boxWidth) {
+        for(let z = padding; z < p.height - padding; z += maxW) {
+            for(let x = padding; x < p.width - padding; x += maxW) {
                 p.push();
 
                 const d = p.dist(x, z, p.width / 2, p.height / 2);
-                const offset = p.map(d, 0, maxD, -1.2 * p.PI, 1.2 * p.PI);
+                const offset = p.map(d, 0, maxD, -p.PI, p.PI);
                 const a = angle + offset;
-                const h = p.floor(p.map(p.sin(a), -1, 1, 50, 400));
+                const h = p.floor(p.map(p.sin(a), -1, 1, minH, maxH));
+                const w = p.floor(p.map(p.sin(a), -1, 1, minW, maxW));
 
                 const c = colorAngle + offset;
                 const hue = p.floor(p.map(p.sin(c), -1, 1, 0, 360));
                 const brightness = p.floor(p.map(p.sin(c), -1, 1, 75, 90));
 
-                p.fill(hue, 60, brightness);
+                p.fill(hue, 60, brightness, opacity);
                 p.translate(x - (p.width / 2), 0, z - (p.height / 2));
-                p.box(boxWidth, h, boxWidth);
+                p.box(w, h, w);
                 p.pop();
             }
         }
 
         angle -= 0.01;
         colorAngle -= 0.005;
+
+        //easeOutCubic
+        opacityProgress += 0.01;
+        opacity = easeInOutCubic(opacityProgress);
     };
 };
 
