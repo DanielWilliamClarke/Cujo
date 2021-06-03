@@ -14,7 +14,9 @@ COPY . /portfolio
 RUN yarn run build$BUILD_MODE
 
 #RELEASE -----------------------------------
-FROM nginx:1.9.15
+FROM nginx:1.21.0
+
+RUN chown nginx:nginx /usr/share/nginx/html/*
 
 WORKDIR /usr/share/nginx/html
 
