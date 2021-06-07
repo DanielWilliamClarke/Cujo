@@ -149,6 +149,10 @@
         "name": "C"
       },
       {
+        "icon": "rust-plain",
+        "name": "Rust"
+      },
+      {
         "icon": "python-plain",
         "name": "Python"
       },
@@ -197,12 +201,28 @@
         "name": "jQuery"
       },
       {
+        "icon": "materialui-plain",
+        "name": "Material UI"
+      },
+      {
         "icon": "express-original-wordmark",
         "name": "Express"
       },
       {
+        "icon": "nestjs-plain",
+        "name": "NestJS"
+      },
+      {
+        "icon": "nginx-original",
+        "name": "NGINX"
+      },
+      {
         "icon": "npm-original-wordmark",
         "name": "NPM"
+      },
+      {
+        "icon": "yarn-plain",
+        "name": "Yarn"
       },
       {
         "icon": "webpack-plain",
@@ -235,6 +255,10 @@
       {
         "icon": "bootstrap-plain",
         "name": "Bootstrap"
+      },
+      {
+        "icon": "d3js-plain",
+        "name": "D3JS"
       },
       {
         "icon": "protractor-plain",
@@ -289,6 +313,10 @@
         "name": "MySQL"
       },
       {
+        "icon": "confluence-original",
+        "name": "Confluence"
+      },
+      {
         "icon": "git-plain",
         "name": "Git"
       },
@@ -309,8 +337,24 @@
         "name": "Visual Studio"
       },
       {
+        "icon": "intellij-plain",
+        "name": "Intellij"
+      },
+      {
+        "icon": "phpstorm-plain",
+        "name": "PHPStorm"
+      },
+      {
+        "icon": "codepen-plain",
+        "name": "Codepen"
+      },
+      {
         "icon": "wordpress-plain",
         "name": "Wordpress"
+      },
+      {
+        "icon": "chrome-plain",
+        "name": "Chrome"
       }
     ]
   },
