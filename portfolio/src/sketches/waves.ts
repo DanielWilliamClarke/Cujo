@@ -79,6 +79,8 @@ const sketch = (p: p5): void => {
         p.colorMode(p.HSB, 100);
 
         p.createCanvas(window.innerWidth, window.innerHeight);
+        p.background(0);
+
         screenWidth  = p.width  = window.innerWidth;
         screenHeight = p.height = window.innerHeight;
         centerX = screenWidth / 2;

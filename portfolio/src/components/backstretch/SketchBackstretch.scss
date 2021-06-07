@@ -3,7 +3,7 @@
 .sketch-backstretch {
   align-items: center;
   background: $col-bg-light;
-  background: linear-gradient(0deg, $col-back-grad-high, $col-back-grad-low);
+  background: linear-gradient(0deg, $col-back-grad-sketch-high, $col-back-grad-sketch-low);
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
@@ -20,21 +20,26 @@
     z-index: -1;
   }
 
-  .backstretch-main {
-    font-size: 75px;
-    font-weight: 700;
-    text-shadow: 0 0 50px $col-bg-dark;
+  .backstretch-headline
+  {
+    .backstretch-main {
+      font-size: 75px;
+      font-weight: 700;
+      text-shadow: 0 0 50px $col-bg-dark;
+    }
+  
+    .backstretch-tag {
+      font-size: 25px;
+      font-weight: 400;
+      text-shadow: 0 0 50px $col-bg-dark;
+    }
+  
+    .line {
+      background-color: $col-accent-high;
+    }
   }
 
-  .backstretch-tag {
-    font-size: 25px;
-    font-weight: 400;
-    text-shadow: 0 0 50px $col-bg-dark;
-  }
 
-  .line {
-    background-color: $col-accent-high;
-  }
 }
 
 @media screen and (max-width: 1024px) {

@@ -33,12 +33,13 @@ export class SketchBackstretch extends Component<CVProps> {
 
     componentDidMount() {
         new p5([hex,  waves, boxes, phylotaxis].sample(), this.myRef.current);
+        // new p5([hex].sample(), this.myRef.current);
     }
 
     render() {
         return (
             <Container fluid ref={this.myRef} className="sketch-backstretch">
-                <div>
+                <div className="backstretch-headline">
                     <Row className="backstretch-main">
                         <Col>{this.props.cv.basics.name}</Col>
                     </Row>

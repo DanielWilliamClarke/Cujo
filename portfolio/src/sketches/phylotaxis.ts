@@ -16,11 +16,11 @@ if (!Array.prototype.sample) {
 const sketch = (p: p5): void => {
 
     let n = 0;
-    let c = 8;
+    let c = 12;
     let start = 0;
     let growth: boolean = true;
 
-    const magicAngle = 137.2;
+    const magicAngle = 137.6;
     const maxParticles = 3000;
     const increment = 5;
 
@@ -28,12 +28,13 @@ const sketch = (p: p5): void => {
     const magicAngleGenerators = [
         (input: number): number => {
             let ma = p.sin(input);
-            ma = p.map(ma, -1, 1, 137.3, 137.7);
+            ma = p.map(ma, -1, 1, 137.3, 137.6);
             return ma;
         },
-        (input: number): number => 137.3,
+        (input: number): number => 137.6,
         (input: number): number => 137.5,
-        (input: number): number => 137.7
+        (input: number): number => p.TWO_PI,
+        (input: number): number => (1 + p.sqrt(5)) / 2
     ];
 
     p.setup = (): void => {

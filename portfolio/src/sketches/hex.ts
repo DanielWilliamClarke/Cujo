@@ -12,12 +12,12 @@ let TICK = 0;
 const edges = 6;
 
 const options = {
-    len: 20,
-    count: 50,
+    len: 50,
+    count: 100,
     baseTime: 10,
     addedTime: 10,
-    dieChance: .02,
-    spawnChance: 1,
+    dieChance: .05,
+    spawnChance: 2,
     sparkChance: .1,
     sparkDist: 10,
     sparkSize: 2,
@@ -25,10 +25,10 @@ const options = {
     baseLight: 50,
     addedLight: 10, // [50-10,50+10]
     shadowToTimePropMult: 6,
-    baseLightInputMultiplier: .02,
+    baseLightInputMultiplier: .01,
     addedLightInputMultiplier: .02,
-    repaintAlpha: .04,
-    hueChange: .5
+    repaintAlpha: .03,
+    hueChange: 2
 };
 
 class HexLine {
@@ -135,6 +135,7 @@ const sketch = (p: p5): void => {
         p.frameRate(60);
         p.colorMode(p.HSB, 100);
         p.createCanvas(window.innerWidth, window.innerHeight);
+        p.background(0);
 
         const canvas = document.getElementById('defaultCanvas0') as any;
         ctx = canvas.getContext('2d');
