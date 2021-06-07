@@ -21,7 +21,7 @@
 - [ ] Get own logo and assets from designer
 - [ ] Restyle experience and education so they resemble a timeline
 - [ ] Write the blog
-- [x] Maybe swap backstretch with a 2d/3d webgl canvas visualistion?
+- [x] Maybe swap backstretch with a 2d/3d webgl canvas visualistion? 
 - [ ] Optimize images (sizes, file encodings - <https://developers.google.com/speed/pagespeed/insights/>)
 - [ ] Write tests (maybe)
 - [x] Formalise colour palette
@@ -34,6 +34,14 @@
 - [x] Produce production build for deployment
 - [x] Move sharing bar to bottom on mobile devices
 - [x] Add jenkins machine to deployment to CI/CD
+
+### Visualisations
+
+- [x] 3D Box wave
+- [x] Waves
+- [x] Hexagons
+- [ ] Phylotaxis
+- [ ] 4D tesseract projection? 
 
 ## Build
 
