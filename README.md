@@ -112,8 +112,8 @@ docker-compose --env-file <SECRET ENV FILE> -f prod.compose.yaml down (-v)
 
 ## Urls
 
-- <http://danielclarke.tech> - Portfolio
-- <http://blog.danielclarke.tech>/... - Wordpress - [Homepage redirects to Portfolio]
+- <https://portfolio.danielclarke.tech> - Portfolio
+- <https://blog.danielclarke.tech>/... - Wordpress - [Homepage redirects to Portfolio]
 
 ## Setup and Resources
 
