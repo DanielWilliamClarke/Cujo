@@ -1,5 +1,18 @@
 import p5 from "p5";
 
+declare global {
+    interface Array<T> {
+        sample(): T;
+    }
+}
+
+if (!Array.prototype.sample) {
+    // eslint-disable-next-line no-extend-native
+    Array.prototype.sample = function (): any {
+        return this[Math.floor(Math.random() * this.length)];
+    }
+}
+
 const sketch = (p: p5): void => {
 
     let n = 0;
@@ -11,12 +24,25 @@ const sketch = (p: p5): void => {
     const maxParticles = 3000;
     const increment = 5;
 
+    let selectedGenerator: any = null;
+    const magicAngleGenerators = [
+        (input: number): number => {
+            let ma = p.sin(input);
+            ma = p.map(ma, -1, 1, 137.3, 137.7);
+            return ma;
+        },
+        (input: number): number => 137.3,
+        (input: number): number => 137.5,
+        (input: number): number => 137.7
+    ];
+
     p.setup = (): void => {
         p.frameRate(144);
         p.colorMode(p.HSB);
         p.angleMode(p.DEGREES);
         p.blendMode(p.DIFFERENCE);
         p.createCanvas(window.innerWidth, window.innerHeight, p.WEBGL);
+        selectedGenerator = magicAngleGenerators.sample();
     }
 
     p.windowResized = (): void => {
@@ -29,8 +55,7 @@ const sketch = (p: p5): void => {
 
         for (var i = 0; i < n; i++) {
             // vary magic angle
-            let ma = p.sin(i);
-            ma = p.map(ma, -1, 1, 137.3, 137.6);
+            const ma = selectedGenerator(i);
 
             // Calculate angle and radis
             const a = i * ma;
@@ -67,6 +92,9 @@ const sketch = (p: p5): void => {
             growth = !growth
         }
         n += growth ? increment : -increment;
+        if(n <= 0) {
+            selectedGenerator = magicAngleGenerators.sample();
+        }
 
         start += 5;
     }

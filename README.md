@@ -4,6 +4,7 @@
 
 - [Cujo](#cujo)
   - [// Todo](#-todo)
+    - [Visualisations](#visualisations)
   - [Build](#build)
   - [Deploy](#deploy)
   - [Redeploy](#redeploy)
@@ -40,7 +41,7 @@
 - [x] 3D Box wave
 - [x] Waves
 - [x] Hexagons
-- [ ] Phylotaxis
+- [x] Phylotaxis
 - [ ] 4D tesseract projection? 
 
 ## Build
