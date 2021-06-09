@@ -85,7 +85,7 @@ const sketch = (p: p5): void => {
             // Draw
             p.fill(hu, 150, 255);
             p.noStroke();
-            p.ellipse(x, y, d, d, 5);
+            p.ellipse(x, y, d, d, 4);
         }
 
         // Toggle growth / skrinking
