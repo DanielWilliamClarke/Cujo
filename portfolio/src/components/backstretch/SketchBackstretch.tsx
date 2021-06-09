@@ -6,6 +6,7 @@ import hex from "../../sketches/hex";
 import waves from "../../sketches/waves";
 import boxes from "../../sketches/boxes";
 import phylotaxis from "../../sketches/phylotaxis";
+import hypercube from "../../sketches/hypercube";
 
 import { CVProps } from "../../model/CVModel";
 
@@ -32,8 +33,7 @@ export class SketchBackstretch extends Component<CVProps> {
     }
 
     componentDidMount() {
-        new p5([hex,  waves, boxes, phylotaxis].sample(), this.myRef.current);
-        // new p5([hex].sample(), this.myRef.current);
+        new p5([hex,  waves, boxes, phylotaxis, hypercube].sample(), this.myRef.current);
     }
 
     render() {
