@@ -85,7 +85,7 @@ docker-compose --env-file <SECRET ENV FILE> -f prod.compose.yaml up
 # Run with sudo where necessary 
 
 # With script
-./scripts/redploy.sh <DOCKER IMAGE NAME> <CONTAINER NAME>
+./scripts/redeploy.sh <DOCKER IMAGE NAME> <CONTAINER NAME> <dev or prod>
 ```
 
 ## Teardown

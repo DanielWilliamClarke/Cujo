@@ -87,6 +87,7 @@ const sketch = (p: p5): void => {
     p.setup = (): void => {
         p.createCanvas(p.windowWidth, p.windowHeight, p.WEBGL);
         p.colorMode(p.HSB);
+        p.ortho(-window.innerWidth, window.innerWidth, window.innerHeight, -window.innerHeight, -1000, 10000);
 
         // transparency ordering workaround
         const canvas = document.getElementById('defaultCanvas0') as any;
@@ -105,6 +106,7 @@ const sketch = (p: p5): void => {
 
     p.windowResized = (): void => {
         p.resizeCanvas(window.innerWidth, window.innerHeight);
+        p.ortho(-window.innerWidth, window.innerWidth, window.innerHeight, -window.innerHeight, -1000, 10000);
     };
 
     p.draw = (): void => {
@@ -131,7 +133,7 @@ const sketch = (p: p5): void => {
                 ];
                 const projected = matrixUtils.Matmul(projection, rotatedPoint) as Vector4D;
                 return projected
-                    .mult(p.width / 8)
+                    .mult(500)
                     .To3D(p);
             });
 
