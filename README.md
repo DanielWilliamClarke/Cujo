@@ -22,7 +22,7 @@
 - [ ] Get own logo and assets from designer
 - [ ] Restyle experience and education so they resemble a timeline
 - [ ] Write the blog
-- [x] Maybe swap backstretch with a 2d/3d webgl canvas visualistion? 
+- [x] Maybe swap backstretch with a 2d/3d webgl canvas visualistion?
 - [ ] Optimize images (sizes, file encodings - <https://developers.google.com/speed/pagespeed/insights/>)
 - [ ] Write tests (maybe)
 - [x] Formalise colour palette
@@ -42,7 +42,7 @@
 - [x] Waves
 - [x] Hexagons
 - [x] Phylotaxis
-- [ ] 4D tesseract projection? 
+- [ ] 4D tesseract projection?
 
 ## Build
 
@@ -65,7 +65,7 @@ docker push <DOCKER_HUB_USER_REGISTRY>/cujo-portfolio:latest
 ## Deploy
 
 ```bash
-# Run with sudo where necessary 
+# Run with sudo where necessary
 
 # With script
 ./script/deploy.sh dev(or prod)
@@ -82,7 +82,7 @@ docker-compose --env-file <SECRET ENV FILE> -f prod.compose.yaml up
 ## Redeploy
 
 ```bash
-# Run with sudo where necessary 
+# Run with sudo where necessary
 
 # With script
 ./scripts/redeploy.sh <DOCKER IMAGE NAME> <CONTAINER NAME> <dev or prod>
@@ -91,7 +91,7 @@ docker-compose --env-file <SECRET ENV FILE> -f prod.compose.yaml up
 ## Teardown
 
 ```bash
-# Run with sudo where necessary 
+# Run with sudo where necessary
 
 # With script
 ./scripts/teardown dev(or prod) (-v) # to delete volumes
@@ -113,7 +113,7 @@ docker-compose --env-file <SECRET ENV FILE> -f prod.compose.yaml down (-v)
 
 ## Urls
 
-- <https://portfolio.danielclarke.tech> - Portfolio
+- <https://danielclarke.tech> - Portfolio
 - <https://blog.danielclarke.tech>/... - Wordpress - [Homepage redirects to Portfolio]
 
 ## Setup and Resources
