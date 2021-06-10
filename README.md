@@ -15,7 +15,7 @@
 
 ---
 
-![](./portfolio/src/assets/p2.gif)
+![](./portfolio/src/assets/p2_2.gif)
 
 ## // Todo
 
