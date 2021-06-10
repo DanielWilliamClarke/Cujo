@@ -1,13 +1,12 @@
 version: "3.6"
 
 services:
-
   reverseproxy:
     image: jwilder/nginx-proxy
     container_name: nginx-proxy
     ports:
-      - '80:80'
-      - '443:443'
+      - "80:80"
+      - "443:443"
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
       - /etc/nginx/vhost.d
@@ -38,14 +37,14 @@ services:
     expose:
       - 8080
     environment:
-    - WORDPRESS_HOST=https://blog.${DOMAIN}
-    - VIRTUAL_HOST=portfolio.${DOMAIN}
-    - VIRTUAL_PORT=8080
-    - LETSENCRYPT_HOST=portfolio.${DOMAIN}
-    - LETSENCRYPT_EMAIL=dc@${DOMAIN}
+      - WORDPRESS_HOST=https://blog.${DOMAIN}
+      - VIRTUAL_HOST=${DOMAIN}
+      - VIRTUAL_PORT=8080
+      - LETSENCRYPT_HOST=${DOMAIN}
+      - LETSENCRYPT_EMAIL=dc@${DOMAIN}
     networks:
-     - wordpress
-     - proxy
+      - wordpress
+      - proxy
 
   wordpress:
     image: wordpress:latest
@@ -53,22 +52,22 @@ services:
     depends_on:
       - db
       - reverseproxy
-    expose: 
+    expose:
       - 80
     environment:
-    - WORDPRESS_DB_HOST=db:3306
-    - WORDPRESS_DB_NAME=${WORDPRESS_DB_NAME}
-    - WORDPRESS_DB_USER=${WORDPRESS_USER_NAME}
-    - WORDPRESS_DB_PASSWORD=${WORDPRESS_DB_PASSWORD}
-    - VIRTUAL_HOST=blog.${DOMAIN}
-    - VIRTUAL_PORT=80
-    - LETSENCRYPT_HOST=blog.${DOMAIN}
-    - LETSENCRYPT_EMAIL=dc@${DOMAIN}
+      - WORDPRESS_DB_HOST=db:3306
+      - WORDPRESS_DB_NAME=${WORDPRESS_DB_NAME}
+      - WORDPRESS_DB_USER=${WORDPRESS_USER_NAME}
+      - WORDPRESS_DB_PASSWORD=${WORDPRESS_DB_PASSWORD}
+      - VIRTUAL_HOST=blog.${DOMAIN}
+      - VIRTUAL_PORT=80
+      - LETSENCRYPT_HOST=blog.${DOMAIN}
+      - LETSENCRYPT_EMAIL=dc@${DOMAIN}
     volumes:
       - ./wordpress:/var/www/html
     networks:
-     - wordpress
-     - proxy
+      - wordpress
+      - proxy
 
   db:
     image: mysql:5.7

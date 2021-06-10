@@ -3,17 +3,16 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { StickyContainer, Sticky } from "react-sticky";
 import WPAPI from "wpapi";
 
+import { SketchBackstretch } from "./components/backstretch/SketchBackstretch";
 import { CVProps } from "./model/CVModel";
-import { Backstretch } from "./components/backstretch/Backstretch";
 import { NavPanel } from "./components/nav/NavPanel";
+import { Copyright } from "./components/backstretch/Copyright";
 
 import { Profile } from "./components/profile/Profile";
 import Blog from "./components/blog/Blog";
 import { BlogService } from "./components/blog/BlogService";
 
 import "./App.scss";
-import { Copyright } from "./components/backstretch/Copyright";
-import { SketchBackstretch } from "./components/backstretch/SketchBackstretch";
 
 declare global {
   interface Window {

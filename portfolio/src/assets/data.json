@@ -5,8 +5,8 @@
     "email": "dc@danielclarke.tech",
     "picture": "headshot.jpg",
     "phone": "07411259330",
-    "website": "https://danielclarke.tech",
-    "summary": "*I enjoy building software as I see both the art and science that it requires. I find it very enjoyable to see how a particular project or problem captivates me.*\n\nI am an engaged and quality focused full stack software engineer.\n\nI am always seeking to grasp bleeding edge technologies and practices in cloud, micro service architecture. software development, cyber security, CI/CD, SOLID and TDD.\n\nI am currently leading a team of 4 software engineers, though I never thought that management would be something I would venture into, I am enjoying the challenge, and looking forward to the opportunities this role may yield!",
+    "website": "https://portfolio.danielclarke.tech",
+    "summary": "*I enjoy building software as I see both the art and science that it requires. I find it very enjoyable to see how a particular project or problem captivates me.*\n\nI am an engaged and quality focused full stack software engineer.\n\nI am always seeking to grasp bleeding edge technologies and practices in cloud, micro service architecture. software development, cyber security, CI/CD, SOLID and TDD.\n\nI am currently leading a team of 5 software engineers, though I never thought that leadership would be something I would venture into, I am enjoying the challenge, and looking forward to the opportunities this role may yield!",
     "location": {
       "city": "Crawley",
       "region": "West Sussex",
@@ -15,7 +15,7 @@
     "profiles": [
       {
         "brand": {
-          "name": "Linkedin",
+          "name": "LinkedIn",
           "icon": "linkedin-plain"
         },
         "url": "https://www.linkedin.com/in/danielclarkesoftwareengineer/"
@@ -29,7 +29,7 @@
       },
       {
         "brand": {
-          "name": "Deviantart",
+          "name": "DeviantArt",
           "icon": "photoshop-plain"
         },
         "url": "https://www.deviantart.com/clarkii"
@@ -39,7 +39,7 @@
           "name": "Blog",
           "icon": "wordpress-plain"
         },
-        "url": "http://danielclarke.tech/blog"
+        "url": "http://portfolio.danielclarke.tech/blog"
       }
     ]
   },
@@ -134,7 +134,7 @@
     }
   ],
   "skills": {
-    "summary": "I have worked with and are proficient with a large varity of programming languages, frameworks and tools. For backend web applications I use Golang and Nodejs. For frontend; TypeScript and JavaScript, and for performant apps, services and games I use C++. I feel most at home with C++ and Golang, but I am trying to learn a few *esoteric* languages such as Rust and Assembly.\n\nBelow is a selection of the langauges, frameworks and tools I have had experience with during my career so far.",
+    "summary": "I have worked with and are proficient with a large variety of programming languages, frameworks and tools. For backend web applications I use Golang and Nodejs. For frontend; TypeScript and JavaScript, and for performant apps, services and games I use C++. I feel most at home with C++ and Golang, but I am trying to learn a few *esoteric* languages such as Rust and Assembly.\n\nBelow is a selection of the languages, frameworks and tools I have had experience with during my career so far.",
     "list": [
       {
         "icon": "go-line",
@@ -171,7 +171,7 @@
       {
         "icon": "matlab-plain",
         "name": "MATLAB"
-     },
+      },
       {
         "icon": "nodejs-plain",
         "name": "Node JS"
@@ -368,10 +368,11 @@
     "summary": "Outside of my professional work, I enjoy spending my time doing any of the following:",
     "list": [
       "My partner and I have recently had our first child, so being the **best dad I can be** is my foremost interest",
-      "I love to play **Magic the Gathering**",
+      "I love to play **Magic the Gathering** and **Elite Dangerous**",
+      "**Developing** my own indie games in my spare time",
+      "Learning how simple **mathematics** can lead to captivating 2D/3D visualisations",
       "**Cooking** new and interesting meals for my Family and I",
-      "Learning how to not suck at **Guitar**",
-      "**Developing** my own indie games in my spare time"
+      "Building my skills on **Guitar**"
     ]
   },
   "projects": [
@@ -385,7 +386,7 @@
       "name": "My Portfolio",
       "link": "https://github.com/DanielWilliamClarke/Cujo",
       "image": "p2.gif",
-      "summary": "I have made this Portfolio's code avaiable for all to see!"
+      "summary": "I have made this Portfolio's code available for all to see!"
     },
     {
       "name": "Semi Autonomous Finite State Machines",
@@ -409,7 +410,7 @@
       "name": "Past Digital Art Works 2006 - 2010",
       "link": "https://www.deviantart.com/clarkii",
       "image": "backstretch.jpg",
-      "summary": "In my youth I was a budding digital artist, All of my works are available to view on Deviantart!"
+      "summary": "In my youth I was a budding digital artist, All of my works are available to view on DeviantArt!"
     }
   ]
 }
