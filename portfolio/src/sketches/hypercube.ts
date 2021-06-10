@@ -20,7 +20,7 @@ const sketch = (p: p5): void => {
     const drawCube = (points: p5.Vector[], hue: number): void => {
         p.fill(hue, 100, 100, 0.05);
         p.stroke(hue, 100, 100);
-        p.strokeWeight(4);
+        p.strokeWeight(2);
 
         drawSquare(points[0], points[1], points[3], points[2]);
         drawSquare(points[0], points[1], points[5], points[4]);
