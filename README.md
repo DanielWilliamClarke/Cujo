@@ -42,7 +42,7 @@
 - [x] Waves
 - [x] Hexagons
 - [x] Phylotaxis
-- [ ] 4D tesseract projection?
+- [x] 4D tesseract projection?
 
 ## Build
 
