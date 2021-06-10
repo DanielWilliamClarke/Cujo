@@ -25,6 +25,7 @@
 - [x] Maybe swap backstretch with a 2d/3d webgl canvas visualistion?
 - [ ] Optimize images (sizes, file encodings - <https://developers.google.com/speed/pagespeed/insights/>)
 - [ ] Write tests (maybe)
+- [ ] Swap out static file with Rustlang backend service?
 - [x] Formalise colour palette
 - [x] Setup SSL correctly.. (ssl-companion is running, it will assign certificates when the window opens again)
 - [x] Fix predator/prey image asset
