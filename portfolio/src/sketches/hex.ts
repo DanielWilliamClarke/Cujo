@@ -12,23 +12,23 @@ let TICK = 0;
 const edges = 6;
 
 const options = {
-    len: 50,
-    count: 100,
+    len: 25,
+    count: 50,
     baseTime: 10,
     addedTime: 10,
     dieChance: .05,
     spawnChance: 2,
-    sparkChance: .1,
+    sparkChance: .05,
     sparkDist: 10,
     sparkSize: 2,
     color: new HSLA(),
-    baseLight: 50,
+    baseLight: 35,
     addedLight: 10, // [50-10,50+10]
     shadowToTimePropMult: 6,
     baseLightInputMultiplier: .01,
-    addedLightInputMultiplier: .02,
-    repaintAlpha: .03,
-    hueChange: 2
+    addedLightInputMultiplier: .01,
+    repaintAlpha: .05,
+    hueChange: 5
 };
 
 class HexLine {
@@ -46,7 +46,7 @@ class HexLine {
         public color: HSLA = new HSLA(),
         public cumulativeTime: number = 0,
         public time: number = 0,
-        public targetTime: number = 0) 
+        public targetTime: number = 0)
     {
         this.reset();
     }
@@ -76,13 +76,13 @@ class HexLine {
         this.addedX = Math.cos(this.rad);
         this.addedY = Math.sin(this.rad);
 
-        if (Math.random() < options.dieChance || 
-            this.x > this.dieX || 
-            this.x < -this.dieX || 
-            this.y > this.dieY || 
+        if (Math.random() < options.dieChance ||
+            this.x > this.dieX ||
+            this.x < -this.dieX ||
+            this.y > this.dieY ||
             this.y < -this.dieY) {
             this.reset();
-        }     
+        }
     }
 
     step(p: p5, ctx: any, centerX: number, centerY: number): void {
@@ -93,7 +93,7 @@ class HexLine {
         if (this.time >= this.targetTime) {
             this.beginPhase();
         }
-    
+
         const prop = this.time / this.targetTime;
         const wave = Math.sin(prop * Math.PI / 2)
         const x = this.addedX * wave;
@@ -114,14 +114,14 @@ class HexLine {
                 centerX + (this.x + x) * options.len + Math.random() * options.sparkDist * (Math.random() < .5 ? 1 : -1) - options.sparkSize / 2,
                 centerY + (this.y + y) * options.len + Math.random() * options.sparkDist * (Math.random() < .5 ? 1 : -1) - options.sparkSize / 2,
                 2, 2);
-        }     
+        }
     }
 }
 
 const sketch = (p: p5): void => {
 
     const lines: HexLine[] = [];
-  
+
     let screenWidth = 0;
     let screenHeight = 0;
     let centerX = 0;
