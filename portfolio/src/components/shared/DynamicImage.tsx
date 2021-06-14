@@ -16,17 +16,19 @@ export class DynamicImage extends Component<
 
   componentWillMount(): void {
     this.setState({ loaded: "" });
-
-    const uri = ImageLocator.buildImageUri(this.props.image);
-    if (uri) {
-      const handleLoad = (): void => {
-        this.handleLoad(uri);
-        image.removeEventListener('load', handleLoad);
-      };
-      const image = new Image();
-      image.addEventListener('load', handleLoad.bind(this));
-      image.src = uri;
-    }
+    
+    setTimeout(() => {
+      const uri = ImageLocator.buildImageUri(this.props.image);
+      if (uri) {
+        const handleLoad = (): void => {
+          this.handleLoad(uri);
+          image.removeEventListener('load', handleLoad);
+        };
+        const image = new Image();
+        image.addEventListener('load', handleLoad.bind(this));
+        image.src = uri;
+      }
+    }, 500);
   }
 
   render(): JSX.Element {
