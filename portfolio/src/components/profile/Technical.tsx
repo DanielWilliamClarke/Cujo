@@ -43,7 +43,7 @@ export class Technical extends Component<TechnicalProps, SkillsState> {
           </Row>
 
           <Row>
-            <Col className="section-content centered">
+            <Col className="section-content centered search">
               <input
                 type="text"
                 value={this.state.search}

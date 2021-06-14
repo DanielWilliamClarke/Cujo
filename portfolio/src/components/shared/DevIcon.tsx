@@ -1,6 +1,8 @@
 import { Component } from "react";
 import { DevIcon } from "../../model/CVModel";
 
+import "./DevIcon.scss";
+
 type DevIconProps = {
   icon: DevIcon;
 };

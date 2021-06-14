@@ -47,7 +47,7 @@ export class Education extends Component<EducationProps> {
                 </Col>
               </Row>}
 
-              <Row className="period">
+              <Row className="section-content period">
                 <Col className="centered">
                   <span className="date-range">
                     <span>{this.toDateSentence(e.startDate)}</span>
