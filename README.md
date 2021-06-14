@@ -48,19 +48,22 @@
 ## Build
 
 ```bash
+
+export DOCKER_HUB_USER_REGISTRY=xyz
+
 # With script
-./scripts/build-portfolio.sh <DOCKER_HUB_USER_REGISTRY>/cujo-portfolio:latest
+./scripts/build-portfolio.sh $DOCKER_HUB_USER_REGISTRY/cujo-portfolio:latest
 
 # OR
 
 # Build: Dev
-docker build -f portfolio/Dockerfile -t <DOCKER_HUB_USER_REGISTRY>/cujo-portfolio:latest ./portfolio
+docker build -f portfolio/Dockerfile -t $DOCKER_HUB_USER_REGISTRY/cujo-portfolio:latest ./portfolio
 
 # Build: Prod
-docker build -f portfolio/Dockerfile -t <DOCKER_HUB_USER_REGISTRY>/cujo-portfolio:latest --build-arg BUILD_MODE=":prod" ./portfolio
+docker build -f portfolio/Dockerfile -t $DOCKER_HUB_USER_REGISTRY/cujo-portfolio:latest --build-arg BUILD_MODE=":prod" ./portfolio
 
 # Push image
-docker push <DOCKER_HUB_USER_REGISTRY>/cujo-portfolio:latest
+docker push $DOCKER_HUB_USER_REGISTRY/cujo-portfolio:latest
 ```
 
 ## Deploy

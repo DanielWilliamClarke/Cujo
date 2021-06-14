@@ -5,17 +5,42 @@ type ImageProps = {
   alt: string;
 };
 
+
+type ImageState = {
+  loaded: string
+};
+
 export class DynamicImage extends Component<
-  ImageProps & HTMLAttributes<HTMLImageElement>
+  ImageProps & HTMLAttributes<HTMLImageElement>, ImageState
 > {
+
+  componentWillMount(): void {
+    this.setState({ loaded: "" });
+
+    const uri = ImageLocator.buildImageUri(this.props.image);
+    if (uri) {
+      const handleLoad = (): void => {
+        this.handleLoad(uri);
+        image.removeEventListener('load', handleLoad);
+      };
+      const image = new Image();
+      image.addEventListener('load', handleLoad.bind(this));
+      image.src = uri;
+    }
+  }
+
   render(): JSX.Element {
     return (
       <img
-        src={ImageLocator.buildImageUri(this.props.image)}
+        src={this.state.loaded}
         alt={this.props.alt}
         className={this.props.className}
       />
     );
+  }
+
+  private handleLoad(loaded: string): void {
+    this.setState({ loaded });
   }
 }
 
