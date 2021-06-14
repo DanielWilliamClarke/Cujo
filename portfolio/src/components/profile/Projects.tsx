@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Container, Row, Col, Card, CardColumns } from "react-bootstrap";
 
 import { Project } from "../../model/CVModel";
-import { ImageLocator } from "../shared/DynamicImage";
+import { DynamicImage } from "../shared/DynamicImage";
 
 import "../shared/Portfolio.scss";
 import "./Projects.scss";
@@ -36,13 +36,13 @@ export class Projects extends Component<ProjectProps> {
   private projectCard(p: Project): JSX.Element {
     return (
       <Card bg="dark">
-        {p.image.length && (
-          <Card.Img
-            variant="top"
-            src={ImageLocator.buildImageUri(p.image)}
-          />
-        )}
         <Card.Body>
+          {p.image.length && (<DynamicImage
+            image={p.image}
+            alt={`${p.name} project image`}
+            className="centered image-item"
+           />
+          )}
           <Card.Title>{p.name}</Card.Title>
           <div className="centered short-line" />
           <Card.Text>{p.summary}</Card.Text>
