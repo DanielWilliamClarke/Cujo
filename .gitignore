@@ -11,3 +11,5 @@ composer.*
 env-config.js
 
 wordpress
+
+service/target

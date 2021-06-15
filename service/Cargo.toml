@@ -1,0 +1,18 @@
+[package]
+name = "service"
+version = "0.1.0"
+authors = ["Daniel Clarke <Clarkit@gmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+actix = "0.12.0"
+actix-web = "4.0.0-beta.3"
+actix-rt = "2.2.0"
+listenfd = "0.3.3"
+dotenv = "0.11.0"
+log = "0.4.14"
+env_logger = "0.6"
+serde = "1.0.126"
+serde_json = "1.0.64"
