@@ -14,19 +14,17 @@ RUN rm ./target/release/deps/cujo*
 RUN cargo build --release
 
 #RELEASE -----------------------------------
-FROM alpine:latest
+FROM ubuntu:20.04
 
 WORKDIR /cujo
 
 COPY --from=build /cujo/target/release/cujo .
 COPY --from=build /cujo/.env .
 
-run ls /cujo
+RUN adduser user && \
+  chown -R user /cujo
+USER user
 
-# RUN adduser -D user && \
-#   chown -R user /cujo
-# USER user
+EXPOSE 5001
 
-EXPOSE 8000
-
-ENTRYPOINT ./cujo
+CMD ["./cujo"]
