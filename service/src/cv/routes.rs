@@ -1,7 +1,7 @@
 // src/cv/routes.rs
 
-use crate::cv::{Basics, Location};
 use actix_web::{get, web, HttpResponse, Responder};
+use crate::cv::{Basics, Location};
 
 #[get("/svcstatus")]
 async fn svc_status() -> impl Responder {

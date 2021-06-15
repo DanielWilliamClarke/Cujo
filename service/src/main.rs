@@ -8,8 +8,7 @@ use dotenv::dotenv;
 use std::env;
 
 mod cv;
-
-
+mod util;
 
 #[actix_rt::main]
 async fn main() -> std::io::Result<()> {
