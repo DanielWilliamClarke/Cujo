@@ -2,17 +2,14 @@
 #[macro_use]
 extern crate log;
 
-use actix_web::{get, App, HttpResponse, HttpServer, Responder};
+use actix_web::{App, HttpServer};
 use listenfd::ListenFd;
 use dotenv::dotenv;
 use std::env;
 
 mod cv;
 
-#[get("/")]
-async fn index() -> impl Responder {
-    HttpResponse::Ok().body("Hello Cujo!")
-}
+
 
 #[actix_rt::main]
 async fn main() -> std::io::Result<()> {

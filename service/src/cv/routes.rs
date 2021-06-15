@@ -3,6 +3,11 @@
 use crate::cv::{Basics, Location};
 use actix_web::{get, web, HttpResponse, Responder};
 
+#[get("/svcstatus")]
+async fn svc_status() -> impl Responder {
+    HttpResponse::Ok().body("Hello Cujo!")
+}
+
 #[get("/basics")]
 async fn get_basics() -> impl Responder {
     HttpResponse::Ok().json(
@@ -25,5 +30,6 @@ async fn get_basics() -> impl Responder {
 }
 
 pub fn init_routes(cfg: &mut web::ServiceConfig) {
+    cfg.service(svc_status);
     cfg.service(get_basics);
 }
