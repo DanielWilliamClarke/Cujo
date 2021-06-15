@@ -458,6 +458,21 @@ dependencies = [
 ]
 
 [[package]]
+name = "cujo"
+version = "0.1.0"
+dependencies = [
+ "actix",
+ "actix-rt",
+ "actix-web",
+ "dotenv",
+ "env_logger",
+ "listenfd",
+ "log",
+ "serde",
+ "serde_json",
+]
+
+[[package]]
 name = "derive-error-chain"
 version = "0.11.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1176,21 +1191,6 @@ dependencies = [
  "itoa",
  "ryu",
  "serde",
-]
-
-[[package]]
-name = "service"
-version = "0.1.0"
-dependencies = [
- "actix",
- "actix-rt",
- "actix-web",
- "dotenv",
- "env_logger",
- "listenfd",
- "log",
- "serde",
- "serde_json",
 ]
 
 [[package]]
