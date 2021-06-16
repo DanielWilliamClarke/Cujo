@@ -9,6 +9,7 @@ use std::env;
 
 mod cv;
 mod util;
+mod blog;
 
 #[actix_rt::main]
 async fn main() -> std::io::Result<()> {
