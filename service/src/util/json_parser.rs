@@ -16,9 +16,7 @@ pub fn parse<T>(filepath: &str) -> Result<T>
 where
     T: DeserializeOwned,
 {
-    Ok(
-        serde_json::from_str(
-            read(filepath)?.as_str())?)
+    Ok(serde_json::from_str(read(filepath)?.as_str())?)
 }
 
 #[cfg(test)]
@@ -29,8 +27,8 @@ mod tests {
 
     #[derive(Serialize, Deserialize)]
     #[serde(rename_all = "camelCase")]
-    pub struct TestJson {
-        pub attr: String,
+    struct TestJson {
+        attr: String,
     }
 
     #[test]
