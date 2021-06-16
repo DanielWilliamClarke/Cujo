@@ -33,7 +33,6 @@ impl BlogClient {
         let posts = self.get::<Vec<Post>>("posts", None);
         let media = self.get::<Vec<Media>>("media", None);
         let tags = self.get::<Vec<Tag>>("tags", None);
-
         let (posts, media, tags) = try_join!(posts, media, tags)?;
 
         let correlated = posts
@@ -56,10 +55,7 @@ impl BlogClient {
     fn correlate(&self, post: &Post, media: &[Media], tags: &[Tag]) -> BlogData {
         BlogData {
             post: post.clone(),
-            media: media
-                .iter()
-                .cloned()
-                .find(|m| m.post == post.id),
+            media: media.iter().cloned().find(|m| m.post == post.id),
             tags: tags
                 .iter()
                 .cloned()
@@ -82,12 +78,11 @@ impl BlogClient {
 
 #[cfg(test)]
 mod tests {
+    use super::{BlogClient, BlogData};
     use crate::blog::media::Media;
     use crate::blog::post::Post;
     use crate::blog::tag::Tag;
 
-    use super::{BlogClient, BlogData};
-    use actix_web::guard::Post;
     use mockito::mock;
     use serde::{Deserialize, Serialize};
 
@@ -137,11 +132,21 @@ mod tests {
         let id: i64 = 12345;
         let tag_id: i64 = 54321;
 
-        let post= Post{ id, tags: vec![tag_id], ..Default::default()};
-        let media: Vec<Media> = vec![ Media{ post: id, ..Default::default() }];
-        let tags: Vec<Tag> = vec![Tag{ id: tag_id, ..Default::default() }];
+        let post = Post {
+            id,
+            tags: vec![tag_id],
+            ..Default::default()
+        };
+        let media: Vec<Media> = vec![Media {
+            post: id,
+            ..Default::default()
+        }];
+        let tags: Vec<Tag> = vec![Tag {
+            id: tag_id,
+            ..Default::default()
+        }];
 
-        let blog_data = client.correlate(&post, &media, &tags);
+        let blog_data: BlogData = client.correlate(&post, &media, &tags);
 
         assert_eq!(post, blog_data.post);
         assert_eq!(media[0], blog_data.media.unwrap());
