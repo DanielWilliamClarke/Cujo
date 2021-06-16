@@ -1,5 +1,5 @@
 // src/util/mod.rs
 
-mod file_reader;
+mod json_parser;
 
-pub use file_reader::parse;
+pub use json_parser::parse;
