@@ -1,13 +1,14 @@
 version: "3.6"
 
 services:
+
   portfolio:
     build: 
       context: ./portfolio
     ports:
       - "5000:8080"
     environment:
-      WORDPRESS_HOST: http://localhost:8000
+      - WORDPRESS_HOST=http://localhost:8000
     volumes:
       - ./portfolio/build:/usr/share/nginx/html
       - ./portfolio/env.sh:/usr/share/nginx/html/env.sh
@@ -16,7 +17,14 @@ services:
       - wordpress
 
   service: 
-    
+    build:
+      context: ./service
+    expose:     
+     - 5001
+    env_file:
+      - ./service/.env
+    networks:
+      - wordpress
 
   db:
     image: mysql:5.7
