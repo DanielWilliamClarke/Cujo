@@ -46,6 +46,16 @@ services:
       - wordpress
       - proxy
 
+  service: 
+    image: dclarkious/cujo-rust:latest
+    container_name: service
+    expose:     
+     - 5001
+    env_file:
+      - ./service/.env
+    networks:
+      - wordpress
+
   wordpress:
     image: wordpress:latest
     restart: always
