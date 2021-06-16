@@ -1,35 +1,27 @@
 // src/cv/routes.rs
 
+use std::env;
+
 use actix_web::{get, web, HttpResponse, Responder};
-use crate::cv::{Basics, Location};
+use crate::cv::CV;
+use crate::util::parse;
 
 #[get("/svcstatus")]
 async fn svc_status() -> impl Responder {
     HttpResponse::Ok().body("Hello Cujo!")
 }
 
-#[get("/basics")]
-async fn get_basics() -> impl Responder {
-    HttpResponse::Ok().json(
-        Basics{
-            name: "Daniel William Clarke".to_string(),
-            label: "Software Engineer".to_string(),
-            email: "dc@danielclarke.tech".to_string(),
-            picture: "headshot.jpg".to_string(),
-            phone: "123456".to_string(),
-            website: "https://danielclarke.tech".to_string(),
-            summary: "Software engineer, trying to be the best, like no one ever was".to_string(),
-            location: Location{
-                city: "Crawley".to_string(),
-                region: "West Sussex".to_string(),
-                country_code: "GB".to_string(),
-            },
-            profiles: Vec::new()
-        }
-    )
+#[get("/cv")]
+async fn get_cv() -> impl Responder {
+    let filepath = env::var("DATA_DIR").expect("DATA_DIR not set");
+
+    match parse::<CV>(&filepath) {
+        Ok(cv) => HttpResponse::Ok().json(cv),
+        Err(err) => HttpResponse::InternalServerError().body(format!("Data not found: {}", err))
+    }
 }
 
 pub fn init_routes(cfg: &mut web::ServiceConfig) {
     cfg.service(svc_status);
-    cfg.service(get_basics);
+    cfg.service(get_cv);
 }

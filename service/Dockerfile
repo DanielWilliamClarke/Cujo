@@ -1,7 +1,9 @@
 #BUILD -----------------------------------
 FROM rust:1.52.1 as build
 
-RUN USER=root cargo new --bin cujo
+RUN rustup default nightly && \
+    USER=root cargo new --bin cujo
+
 WORKDIR ./cujo
 
 COPY ./Cargo.toml ./Cargo.toml
@@ -11,7 +13,7 @@ RUN rm src/*.rs
 COPY . /cujo
 
 RUN rm ./target/release/deps/cujo*
-RUN cargo build --release
+RUN cargo test && cargo build --release
 
 #RELEASE -----------------------------------
 FROM ubuntu:20.04
@@ -20,6 +22,7 @@ WORKDIR /cujo
 
 COPY --from=build /cujo/target/release/cujo .
 COPY --from=build /cujo/.env .
+COPY --from=build /cujo/data.json .
 
 RUN adduser user && \
   chown -R user /cujo
