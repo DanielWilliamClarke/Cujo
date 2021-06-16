@@ -4,6 +4,7 @@
 
 - [Cujo](#cujo)
   - [// Todo](#-todo)
+  - [// Done](#-done)
     - [Visualisations](#visualisations)
   - [Build](#build)
   - [Deploy](#deploy)
@@ -19,13 +20,20 @@
 
 ## // Todo
 
-- [ ] Get own logo and assets from designer
+- [ ] Get backend service working in prod
+- [ ] Document backend build and deployment
+- [ ] Put Blog data access and collation in backend service
+- [ ] Hide wordpress from outside world
+- [ ] Only expose wordpress admin via nginx proxy
 - [ ] Restyle experience and education so they resemble a timeline
-- [ ] Write the blog
-- [x] Maybe swap backstretch with a 2d/3d webgl canvas visualistion?
 - [ ] Optimize images (sizes, file encodings - <https://developers.google.com/speed/pagespeed/insights/>)
-- [ ] Write tests (maybe)
-- [ ] Swap out static file with Rustlang backend service?
+- [ ] Get own logo and assets from designer
+- [ ] Write the blog
+- [ ] Write tests
+
+## // Done
+- [x] Swap backstretch with a 2d/3d webgl canvas visualistion?
+- [x] Swap out static file with Rustlang backend service?
 - [x] Formalise colour palette
 - [x] Setup SSL correctly.. (ssl-companion is running, it will assign certificates when the window opens again)
 - [x] Fix predator/prey image asset
