@@ -8,9 +8,15 @@ use reqwest;
 use reqwest::Error;
 
 use serde::de::DeserializeOwned;
+use serde::{Deserialize, Serialize};
+
+use futures::try_join;
+
+#[derive(Serialize, Deserialize)]
 pub struct BlogData {
     pub post: Post,
-    pub media: Media,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub media: Option<Media>,
     pub tags: Vec<Tag>,
 }
 
@@ -19,15 +25,16 @@ pub struct BlogClient {
 }
 
 impl BlogClient {
-
     pub fn new(host: String) -> BlogClient {
-        BlogClient{ host }
-    }     
+        BlogClient { host }
+    }
 
-    pub async fn get_posts(& self) -> Result<Vec<BlogData>, Error> {
-        let posts = self.get::<Vec<Post>>("posts", None).await?;
-        let media = self.get::<Vec<Media>>("media", None).await?;
-        let tags = self.get::<Vec<Tag>>("tags", None).await?;
+    pub async fn get_posts(&self) -> Result<Vec<BlogData>, Error> {
+        let posts = self.get::<Vec<Post>>("posts", None);
+        let media = self.get::<Vec<Media>>("media", None);
+        let tags = self.get::<Vec<Tag>>("tags", None);
+
+        let (posts, media, tags) = try_join!(posts, media, tags)?;
 
         let correlated = posts
             .iter()
@@ -38,17 +45,21 @@ impl BlogClient {
     }
 
     pub async fn get_post(&self, id: &str) -> Result<BlogData, Error> {
-        let post = self.get::<Post>("posts", Some(id)).await?;
-        let media = self.get::<Vec<Media>>("media", None).await?;
-        let tags = self.get::<Vec<Tag>>("tags", None).await?;
+        let post = self.get::<Post>("posts", Some(id));
+        let media = self.get::<Vec<Media>>("media", None);
+        let tags = self.get::<Vec<Tag>>("tags", None);
 
+        let (post, media, tags) = try_join!(post, media, tags)?;
         Ok(self.correlate(&post, &media, &tags))
     }
 
     fn correlate(&self, post: &Post, media: &[Media], tags: &[Tag]) -> BlogData {
         BlogData {
             post: post.clone(),
-            media: media.iter().find(|m| m.post == post.id).unwrap().clone(),
+            media: media
+                .iter()
+                .cloned()
+                .find(|m| m.post == post.id),
             tags: tags
                 .iter()
                 .cloned()
@@ -61,16 +72,22 @@ impl BlogClient {
     where
         T: DeserializeOwned,
     {
-        let response = reqwest::get(format!("{}/{}/{}", self.host, endpoint, id.unwrap_or(""))).await?;
+        let response =
+            reqwest::get(format!("{}/{}/{}", self.host, endpoint, id.unwrap_or(""))).await?;
         println!("{:?}", response);
-        
+
         Ok(response.json().await?)
     }
 }
 
 #[cfg(test)]
 mod tests {
+    use crate::blog::media::Media;
+    use crate::blog::post::Post;
+    use crate::blog::tag::Tag;
+
     use super::{BlogClient, BlogData};
+    use actix_web::guard::Post;
     use mockito::mock;
     use serde::{Deserialize, Serialize};
 
@@ -87,7 +104,7 @@ mod tests {
 
         let test_data = TestJson {
             endpoint: "posts".to_string(),
-            id: "test_id".to_string()
+            id: "test_id".to_string(),
         };
         let json = serde_json::to_string(&test_data).unwrap();
 
@@ -96,15 +113,38 @@ mod tests {
             .with_header("content-type", "application/json")
             .with_body(json)
             .create();
-  
+
         let client = BlogClient::new(host.clone());
-        match client.get::<TestJson>(&test_data.endpoint, Some(&test_data.id)).await {
+        match client
+            .get::<TestJson>(&test_data.endpoint, Some(&test_data.id))
+            .await
+        {
             Ok(data) => {
                 assert_eq!(test_data.endpoint, data.endpoint);
-            },
-            Err(err) => panic!("Error: {}", err)
+                assert_eq!(test_data.id, data.id);
+            }
+            Err(err) => panic!("Error: {}", err),
         };
 
         m.assert();
+    }
+
+    #[test]
+    fn can_correlate() {
+        let host = "test".to_string();
+        let client = BlogClient::new(host);
+
+        let id: i64 = 12345;
+        let tag_id: i64 = 54321;
+
+        let post= Post{ id, tags: vec![tag_id], ..Default::default()};
+        let media: Vec<Media> = vec![ Media{ post: id, ..Default::default() }];
+        let tags: Vec<Tag> = vec![Tag{ id: tag_id, ..Default::default() }];
+
+        let blog_data = client.correlate(&post, &media, &tags);
+
+        assert_eq!(post, blog_data.post);
+        assert_eq!(media[0], blog_data.media.unwrap());
+        assert_eq!(tags, blog_data.tags);
     }
 }
