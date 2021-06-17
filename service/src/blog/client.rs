@@ -118,11 +118,11 @@ mod tests {
         M: Serialize,
         T: Serialize,
     {
-        let m_posts = setup_http_mocks(posts_url, posts);
-        let m_media = setup_http_mocks("/media", media);
-        let m_tags = setup_http_mocks("/tags", tags);
-
-        (m_posts, m_media, m_tags)
+        (
+            setup_http_mocks(posts_url, posts), 
+            setup_http_mocks("/media", media), 
+            setup_http_mocks("/tags", tags)
+        )
     }
 
     #[test]
