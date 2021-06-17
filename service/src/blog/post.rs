@@ -75,6 +75,7 @@ pub struct Links {
     pub replies: Vec<Reply>,
     #[serde(rename = "version-history")]
     pub version_history: Vec<VersionHistory>,
+    #[serde(default)]
     #[serde(rename = "predecessor-version")]
     pub predecessor_version: Vec<PredecessorVersion>,
     #[serde(rename = "wp:attachment")]
