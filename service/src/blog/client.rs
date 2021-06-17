@@ -95,18 +95,17 @@ mod tests {
         pub id: String,
     }
 
-    fn setup_post_mocks<P> (posts_url: &str, posts: &P) -> mockito::Mock
+    fn setup_http_mocks<T> (path: &str, data: &T) -> mockito::Mock
     where
-        P: Serialize 
+        T: Serialize 
     {
-        let posts_json = serde_json::to_string(posts).unwrap();
-        let m_posts = mock("GET", posts_url)
+        let json = serde_json::to_string(data).unwrap();
+
+        mock("GET", path)
             .with_status(200)
             .with_header("content-type", "application/json")
-            .with_body(posts_json)
-            .create();
-
-        m_posts
+            .with_body(json)
+            .create()
     }
 
     fn setup_rest_mocks<P, M, T> (posts_url: &str, posts: &P, media: &M, tags: &T) -> (mockito::Mock, mockito::Mock, mockito::Mock) 
@@ -115,21 +114,9 @@ mod tests {
         M: Serialize, 
         T: Serialize, 
     {
-        let m_posts = setup_post_mocks(posts_url, posts);
-
-        let media_json = serde_json::to_string(media).unwrap();
-        let m_media = mock("GET", "/media")
-            .with_status(200)
-            .with_header("content-type", "application/json")
-            .with_body(media_json)
-            .create();
-
-        let tags_json = serde_json::to_string(tags).unwrap();
-        let m_tags = mock("GET", "/tags")
-            .with_status(200)
-            .with_header("content-type", "application/json")
-            .with_body(tags_json)
-            .create();
+        let m_posts = setup_http_mocks(posts_url, posts);
+        let m_media = setup_http_mocks("/media", media);
+        let m_tags = setup_http_mocks("/tags", tags);
 
         (m_posts, m_media, m_tags)
     }
@@ -192,7 +179,7 @@ mod tests {
         };
 
         let url = format!("/{}/{}", test_data.endpoint, test_data.id);
-        let m = setup_post_mocks::<TestJson>(&url, &test_data);
+        let m = setup_http_mocks::<TestJson>(&url, &test_data);
 
         let host = mockito::server_url().to_string();
         let client = BlogClient::new(host.clone());
