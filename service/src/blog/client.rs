@@ -68,10 +68,12 @@ impl BlogClient {
     where
         T: DeserializeOwned,
     {
-        let response =
-            reqwest::get(format!("{}/{}/{}", self.host, endpoint, id.unwrap_or(""))).await?;
-        println!("{:?}", response);
+        let url = match id {
+            Some(id) => format!("{}/{}/{}", self.host, endpoint, id),
+            None => format!("{}/{}", self.host, endpoint),
+        };
 
+        let response = reqwest::get(url).await?;
         Ok(response.json().await?)
     }
 }
@@ -95,20 +97,19 @@ mod tests {
 
     #[actix_rt::test]
     async fn can_mock_get() {
-        let host = mockito::server_url().to_string();
-
+    
         let test_data = TestJson {
             endpoint: "posts".to_string(),
             id: "test_id".to_string(),
         };
         let json = serde_json::to_string(&test_data).unwrap();
-
         let m = mock("GET", "/posts/test_id")
             .with_status(200)
             .with_header("content-type", "application/json")
             .with_body(json)
             .create();
 
+        let host = mockito::server_url().to_string();
         let client = BlogClient::new(host.clone());
         match client
             .get::<TestJson>(&test_data.endpoint, Some(&test_data.id))
@@ -126,9 +127,7 @@ mod tests {
 
     #[test]
     fn can_correlate() {
-        let host = "test".to_string();
-        let client = BlogClient::new(host);
-
+        
         let id: i64 = 12345;
         let tag_id: i64 = 54321;
 
@@ -146,10 +145,141 @@ mod tests {
             ..Default::default()
         }];
 
+        let host = "test".to_string();
+        let client = BlogClient::new(host);
         let blog_data: BlogData = client.correlate(&post, &media, &tags);
 
         assert_eq!(post, blog_data.post);
         assert_eq!(media[0], blog_data.media.unwrap());
         assert_eq!(tags, blog_data.tags);
+    }
+
+    #[test]
+    fn can_correlate_with_no_media_or_tags() {
+       
+        let id: i64 = 12345;
+        let post = Post {
+            id,
+            ..Default::default()
+        };
+        let media: Vec<Media> = vec![];
+        let tags: Vec<Tag> = vec![];
+
+        let host = "test".to_string();
+        let client = BlogClient::new(host);
+        let blog_data: BlogData = client.correlate(&post, &media, &tags);
+
+        assert_eq!(post, blog_data.post);
+        assert_eq!(blog_data.media, None);
+        assert_eq!(0, blog_data.tags.len());
+    }
+
+    fn setup_rest_mocks<P, M, T> (posts_url: &str, posts: &P, media: &M, tags: &T) -> (mockito::Mock, mockito::Mock, mockito::Mock) 
+    where
+        P: Serialize, 
+        M: Serialize, 
+        T: Serialize, 
+    {
+        let posts_json = serde_json::to_string(posts).unwrap();
+        let m_posts = mock("GET", posts_url)
+            .with_status(200)
+            .with_header("content-type", "application/json")
+            .with_body(posts_json)
+            .create();
+
+        let media_json = serde_json::to_string(media).unwrap();
+        let m_media = mock("GET", "/media")
+            .with_status(200)
+            .with_header("content-type", "application/json")
+            .with_body(media_json)
+            .create();
+
+        let tags_json = serde_json::to_string(tags).unwrap();
+        let m_tags = mock("GET", "/tags")
+            .with_status(200)
+            .with_header("content-type", "application/json")
+            .with_body(tags_json)
+            .create();
+
+        (m_posts, m_media, m_tags)
+    }
+
+    #[actix_rt::test]
+    async fn can_get_posts() {
+        let id: i64 = 12345;
+        let tag_id: i64 = 54321;
+
+        let posts: Vec<Post> = vec![Post {
+            id,
+            tags: vec![tag_id],
+            ..Default::default()
+        }];
+        let media: Vec<Media> = vec![Media {
+            post: id,
+            ..Default::default()
+        }];
+        let tags: Vec<Tag> = vec![Tag {
+            id: tag_id,
+            ..Default::default()
+        }];
+
+        let (m_posts, m_media, m_tags) =
+            setup_rest_mocks::<Vec<Post>, Vec<Media>, Vec<Tag>>("/posts", &posts, &media, &tags);
+
+        let host = mockito::server_url().to_string();
+        let client = BlogClient::new(host);
+        match client.get_posts().await {
+            Ok(blog_data) => {
+                blog_data.iter().for_each(|b| {
+                    assert_eq!(posts[0], b.post);
+                    assert_eq!(media[0], b.media.clone().unwrap());
+                    assert_eq!(tags, b.tags);
+                });
+            }
+            Err(err) => panic!("Did not expect error: {}", err),
+        };
+
+        m_posts.assert();
+        m_media.assert();
+        m_tags.assert();
+    }
+
+    #[actix_rt::test]
+    async fn can_get_post_by_id() {
+        let id: i64 = 12345;
+        let tag_id: i64 = 54321;
+
+        let post = Post {
+            id,
+            tags: vec![tag_id],
+            ..Default::default()
+        };
+        let media: Vec<Media> = vec![Media {
+            post: id,
+            ..Default::default()
+        }];
+        let tags: Vec<Tag> = vec![Tag {
+            id: tag_id,
+            ..Default::default()
+        }];
+
+        let post_url = format!("/posts/{}", id);
+        let (m_posts, m_media, m_tags) =
+            setup_rest_mocks::<Post, Vec<Media>, Vec<Tag>>(&post_url, &post, &media, &tags);   
+
+        let host = mockito::server_url().to_string();
+        let client = BlogClient::new(host);
+        match client.get_post(&id.to_string()).await {
+            Ok(blog_data) => {
+                assert_eq!(post, blog_data.post);
+                assert_eq!(media[0], blog_data.media.clone().unwrap());
+                assert_eq!(tags, blog_data.tags);
+            }
+            Err(err) => panic!("Did not expect error: {}", err),
+        };
+
+        m_posts.assert();
+        m_media.assert();
+        m_tags.assert();
     }
 }
