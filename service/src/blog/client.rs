@@ -95,34 +95,43 @@ mod tests {
         pub id: String,
     }
 
-    #[actix_rt::test]
-    async fn can_mock_get() {
-    
-        let test_data = TestJson {
-            endpoint: "posts".to_string(),
-            id: "test_id".to_string(),
-        };
-        let json = serde_json::to_string(&test_data).unwrap();
-        let m = mock("GET", "/posts/test_id")
+    fn setup_post_mocks<P> (posts_url: &str, posts: &P) -> mockito::Mock
+    where
+        P: Serialize 
+    {
+        let posts_json = serde_json::to_string(posts).unwrap();
+        let m_posts = mock("GET", posts_url)
             .with_status(200)
             .with_header("content-type", "application/json")
-            .with_body(json)
+            .with_body(posts_json)
             .create();
 
-        let host = mockito::server_url().to_string();
-        let client = BlogClient::new(host.clone());
-        match client
-            .get::<TestJson>(&test_data.endpoint, Some(&test_data.id))
-            .await
-        {
-            Ok(data) => {
-                assert_eq!(test_data.endpoint, data.endpoint);
-                assert_eq!(test_data.id, data.id);
-            }
-            Err(err) => panic!("Error: {}", err),
-        };
+        m_posts
+    }
 
-        m.assert();
+    fn setup_rest_mocks<P, M, T> (posts_url: &str, posts: &P, media: &M, tags: &T) -> (mockito::Mock, mockito::Mock, mockito::Mock) 
+    where
+        P: Serialize, 
+        M: Serialize, 
+        T: Serialize, 
+    {
+        let m_posts = setup_post_mocks(posts_url, posts);
+
+        let media_json = serde_json::to_string(media).unwrap();
+        let m_media = mock("GET", "/media")
+            .with_status(200)
+            .with_header("content-type", "application/json")
+            .with_body(media_json)
+            .create();
+
+        let tags_json = serde_json::to_string(tags).unwrap();
+        let m_tags = mock("GET", "/tags")
+            .with_status(200)
+            .with_header("content-type", "application/json")
+            .with_body(tags_json)
+            .create();
+
+        (m_posts, m_media, m_tags)
     }
 
     #[test]
@@ -174,34 +183,31 @@ mod tests {
         assert_eq!(0, blog_data.tags.len());
     }
 
-    fn setup_rest_mocks<P, M, T> (posts_url: &str, posts: &P, media: &M, tags: &T) -> (mockito::Mock, mockito::Mock, mockito::Mock) 
-    where
-        P: Serialize, 
-        M: Serialize, 
-        T: Serialize, 
-    {
-        let posts_json = serde_json::to_string(posts).unwrap();
-        let m_posts = mock("GET", posts_url)
-            .with_status(200)
-            .with_header("content-type", "application/json")
-            .with_body(posts_json)
-            .create();
+    #[actix_rt::test]
+    async fn can_mock_get() {
+    
+        let test_data = TestJson {
+            endpoint: "posts".to_string(),
+            id: "test_id".to_string(),
+        };
 
-        let media_json = serde_json::to_string(media).unwrap();
-        let m_media = mock("GET", "/media")
-            .with_status(200)
-            .with_header("content-type", "application/json")
-            .with_body(media_json)
-            .create();
+        let url = format!("/{}/{}", test_data.endpoint, test_data.id);
+        let m = setup_post_mocks::<TestJson>(&url, &test_data);
 
-        let tags_json = serde_json::to_string(tags).unwrap();
-        let m_tags = mock("GET", "/tags")
-            .with_status(200)
-            .with_header("content-type", "application/json")
-            .with_body(tags_json)
-            .create();
+        let host = mockito::server_url().to_string();
+        let client = BlogClient::new(host.clone());
+        match client
+            .get::<TestJson>(&test_data.endpoint, Some(&test_data.id))
+            .await
+        {
+            Ok(data) => {
+                assert_eq!(test_data.endpoint, data.endpoint);
+                assert_eq!(test_data.id, data.id);
+            }
+            Err(err) => panic!("Error: {}", err),
+        };
 
-        (m_posts, m_media, m_tags)
+        m.assert();
     }
 
     #[actix_rt::test]
