@@ -30,10 +30,11 @@ impl BlogClient {
     }
 
     pub async fn get_posts(&self) -> Result<Vec<BlogData>, Error> {
-        let posts = self.get::<Vec<Post>>("posts");
-        let media = self.get::<Vec<Media>>("media");
-        let tags = self.get::<Vec<Tag>>("tags");
-        let (posts, media, tags) = try_join!(posts, media, tags)?;
+        let (posts, media, tags) = try_join!(
+            self.get::<Vec<Post>>("posts"),
+            self.get::<Vec<Media>>("media"),
+            self.get::<Vec<Tag>>("tags")
+        )?;
 
         let correlated = posts
             .iter()
@@ -45,11 +46,13 @@ impl BlogClient {
 
     pub async fn get_post(&self, id: &str) -> Result<BlogData, Error> {
         let posts_endpoint = format!("posts/{}", id);
-        let post = self.get::<Post>(&posts_endpoint);
-        let media = self.get::<Vec<Media>>("media");
-        let tags = self.get::<Vec<Tag>>("tags");
 
-        let (post, media, tags) = try_join!(post, media, tags)?;
+        let (post, media, tags) = try_join!(
+            self.get::<Post>(&posts_endpoint),
+            self.get::<Vec<Media>>("media"),
+            self.get::<Vec<Tag>>("tags")
+        )?;
+
         Ok(self.correlate(&post, &media, &tags))
     }
 
@@ -91,9 +94,9 @@ mod tests {
         pub id: String,
     }
 
-    fn setup_http_mocks<T> (path: &str, data: &T) -> mockito::Mock
+    fn setup_http_mocks<T>(path: &str, data: &T) -> mockito::Mock
     where
-        T: Serialize 
+        T: Serialize,
     {
         let json = serde_json::to_string(data).unwrap();
 
@@ -104,11 +107,16 @@ mod tests {
             .create()
     }
 
-    fn setup_rest_mocks<P, M, T> (posts_url: &str, posts: &P, media: &M, tags: &T) -> (mockito::Mock, mockito::Mock, mockito::Mock) 
+    fn setup_rest_mocks<P, M, T>(
+        posts_url: &str,
+        posts: &P,
+        media: &M,
+        tags: &T,
+    ) -> (mockito::Mock, mockito::Mock, mockito::Mock)
     where
-        P: Serialize, 
-        M: Serialize, 
-        T: Serialize, 
+        P: Serialize,
+        M: Serialize,
+        T: Serialize,
     {
         let m_posts = setup_http_mocks(posts_url, posts);
         let m_media = setup_http_mocks("/media", media);
@@ -119,7 +127,6 @@ mod tests {
 
     #[test]
     fn can_correlate() {
-        
         let id: i64 = 12345;
         let tag_id: i64 = 54321;
 
@@ -148,7 +155,6 @@ mod tests {
 
     #[test]
     fn can_correlate_with_no_media_or_tags() {
-       
         let id: i64 = 12345;
         let post = Post {
             id,
@@ -168,7 +174,6 @@ mod tests {
 
     #[actix_rt::test]
     async fn can_mock_get() {
-    
         let test_data = TestJson {
             endpoint: "posts".to_string(),
             id: "test_id".to_string(),
@@ -179,10 +184,7 @@ mod tests {
 
         let host = mockito::server_url().to_string();
         let client = BlogClient::new(host.clone());
-        match client
-            .get::<TestJson>(&test_data.endpoint)
-            .await
-        {
+        match client.get::<TestJson>(&test_data.endpoint).await {
             Ok(data) => {
                 assert_eq!(test_data.endpoint, data.endpoint);
                 assert_eq!(test_data.id, data.id);
@@ -254,7 +256,7 @@ mod tests {
 
         let post_url = format!("/posts/{}", id);
         let (m_posts, m_media, m_tags) =
-            setup_rest_mocks::<Post, Vec<Media>, Vec<Tag>>(&post_url, &post, &media, &tags);   
+            setup_rest_mocks::<Post, Vec<Media>, Vec<Tag>>(&post_url, &post, &media, &tags);
 
         let host = mockito::server_url().to_string();
         let client = BlogClient::new(host);
