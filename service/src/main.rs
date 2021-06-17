@@ -8,8 +8,9 @@ use dotenv::dotenv;
 use std::env;
 
 mod cv;
-mod util;
 mod blog;
+mod util;
+mod routes;
 
 #[actix_rt::main]
 async fn main() -> std::io::Result<()> {
@@ -21,7 +22,7 @@ async fn main() -> std::io::Result<()> {
         HttpServer::new(|| 
             App::new()
                 .wrap(Logger::default())
-                .configure(cv::init_routes));
+                .configure(routes::init));
 
     server = match listenfd.take_tcp_listener(0)? {
         Some(listener) => server.listen(listener)?,
