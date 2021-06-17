@@ -30,9 +30,9 @@ impl BlogClient {
     }
 
     pub async fn get_posts(&self) -> Result<Vec<BlogData>, Error> {
-        let posts = self.get::<Vec<Post>>("posts", None);
-        let media = self.get::<Vec<Media>>("media", None);
-        let tags = self.get::<Vec<Tag>>("tags", None);
+        let posts = self.get::<Vec<Post>>("posts");
+        let media = self.get::<Vec<Media>>("media");
+        let tags = self.get::<Vec<Tag>>("tags");
         let (posts, media, tags) = try_join!(posts, media, tags)?;
 
         let correlated = posts
@@ -44,12 +44,21 @@ impl BlogClient {
     }
 
     pub async fn get_post(&self, id: &str) -> Result<BlogData, Error> {
-        let post = self.get::<Post>("posts", Some(id));
-        let media = self.get::<Vec<Media>>("media", None);
-        let tags = self.get::<Vec<Tag>>("tags", None);
+        let posts_endpoint = format!("posts/{}", id);
+        let post = self.get::<Post>(&posts_endpoint);
+        let media = self.get::<Vec<Media>>("media");
+        let tags = self.get::<Vec<Tag>>("tags");
 
         let (post, media, tags) = try_join!(post, media, tags)?;
         Ok(self.correlate(&post, &media, &tags))
+    }
+
+    async fn get<T>(&self, endpoint: &str) -> Result<T, Error>
+    where
+        T: DeserializeOwned,
+    {
+        let response = reqwest::get(format!("{}/{}", self.host, endpoint)).await?;
+        Ok(response.json().await?)
     }
 
     fn correlate(&self, post: &Post, media: &[Media], tags: &[Tag]) -> BlogData {
@@ -62,19 +71,6 @@ impl BlogClient {
                 .filter(|t| post.tags.contains(&t.id))
                 .collect(),
         }
-    }
-
-    async fn get<T>(&self, endpoint: &str, id: Option<&str>) -> Result<T, Error>
-    where
-        T: DeserializeOwned,
-    {
-        let url = match id {
-            Some(id) => format!("{}/{}/{}", self.host, endpoint, id),
-            None => format!("{}/{}", self.host, endpoint),
-        };
-
-        let response = reqwest::get(url).await?;
-        Ok(response.json().await?)
     }
 }
 
@@ -178,13 +174,13 @@ mod tests {
             id: "test_id".to_string(),
         };
 
-        let url = format!("/{}/{}", test_data.endpoint, test_data.id);
+        let url = format!("/{}", test_data.endpoint);
         let m = setup_http_mocks::<TestJson>(&url, &test_data);
 
         let host = mockito::server_url().to_string();
         let client = BlogClient::new(host.clone());
         match client
-            .get::<TestJson>(&test_data.endpoint, Some(&test_data.id))
+            .get::<TestJson>(&test_data.endpoint)
             .await
         {
             Ok(data) => {
