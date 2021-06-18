@@ -37,7 +37,7 @@ pub struct Media {
     pub mime_type: String,
     #[serde(rename = "media_details")]
     pub media_details: MediaDetails,
-    pub post: i64,
+    pub post: Option<i64>,
     #[serde(rename = "source_url")]
     pub source_url: String,
     #[serde(rename = "_links")]
