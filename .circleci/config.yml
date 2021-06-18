@@ -17,6 +17,7 @@ jobs:
       - checkout
       - run: cargo --version
       - run: rustup default nightly
+      - run: cd service
       - run: cargo test
       - run: cargo build --release
 
