@@ -37,7 +37,6 @@ services:
     expose:
       - 8080
     environment:
-      - WORDPRESS_HOST=https://blog.${DOMAIN}
       - VIRTUAL_HOST=${DOMAIN}
       - VIRTUAL_PORT=8080
       - LETSENCRYPT_HOST=${DOMAIN}
@@ -51,8 +50,6 @@ services:
     container_name: service
     expose:     
      - 5001
-    env_file:
-      - ./service/.env
     networks:
       - wordpress
 
