@@ -3,13 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "npm run genenv && react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "build:prod": "GENERATE_SOURCEMAP=false npm run build",
     "watch": "npm-watch",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "genenv": "chmod +x ./env.sh && ./env.sh && cp env-config.js ./public/",
     "sasslint": "sass-lint -v",
     "sasslint:fix": "sass-lint-auto-fix"
   },
