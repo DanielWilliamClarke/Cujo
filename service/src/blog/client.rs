@@ -67,7 +67,10 @@ impl BlogClient {
     fn correlate(&self, post: &Post, media: &[Media], tags: &[Tag]) -> BlogData {
         BlogData {
             post: post.clone(),
-            media: media.iter().cloned().find(|m| m.post == post.id),
+            media: media.iter().cloned().find(|m| match m.post {
+                Some(id) => id == post.id,
+                None => false,
+            }),
             tags: tags
                 .iter()
                 .cloned()
@@ -119,9 +122,9 @@ mod tests {
         T: Serialize,
     {
         (
-            setup_http_mocks(posts_url, posts), 
-            setup_http_mocks("/media", media), 
-            setup_http_mocks("/tags", tags)
+            setup_http_mocks(posts_url, posts),
+            setup_http_mocks("/media", media),
+            setup_http_mocks("/tags", tags),
         )
     }
 
@@ -136,7 +139,7 @@ mod tests {
             ..Default::default()
         };
         let media: Vec<Media> = vec![Media {
-            post: id,
+            post: Some(id),
             ..Default::default()
         }];
         let tags: Vec<Tag> = vec![Tag {
@@ -206,7 +209,7 @@ mod tests {
             ..Default::default()
         }];
         let media: Vec<Media> = vec![Media {
-            post: id,
+            post: Some(id),
             ..Default::default()
         }];
         let tags: Vec<Tag> = vec![Tag {
@@ -246,7 +249,7 @@ mod tests {
             ..Default::default()
         };
         let media: Vec<Media> = vec![Media {
-            post: id,
+            post: Some(id),
             ..Default::default()
         }];
         let tags: Vec<Tag> = vec![Tag {
