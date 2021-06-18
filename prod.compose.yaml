@@ -1,6 +1,16 @@
 version: "3.6"
 
 services:
+
+  watchtower:
+    image: v2tec/watchtower
+    container_name: watchtower
+    volumes:
+        - /var/run/docker.sock:/var/run/docker.sock
+    restart: always
+    networks:
+      - cujo
+
   reverseproxy:
     image: jwilder/nginx-proxy
     container_name: nginx-proxy
@@ -13,7 +23,7 @@ services:
       - /usr/share/nginx/html
       - ./docker/certs:/etc/nginx/certs:ro
     networks:
-      - proxy
+      - cujo
 
   ssl-companion:
     image: jrcs/letsencrypt-nginx-proxy-companion
@@ -26,7 +36,7 @@ services:
     depends_on:
       - reverseproxy
     networks:
-      - proxy
+      - cujo
 
   portfolio:
     image: dclarkious/cujo-portfolio:latest
@@ -42,8 +52,7 @@ services:
       - LETSENCRYPT_HOST=${DOMAIN}
       - LETSENCRYPT_EMAIL=dc@${DOMAIN}
     networks:
-      - wordpress
-      - proxy
+      - cujo
 
   service: 
     image: dclarkious/cujo-rust:latest
@@ -54,7 +63,7 @@ services:
       - WORDPRESS_CLIENT_ID=${WORDPRESS_CLIENT_ID}
       - WORDPRESS_CLIENT_SECRET=${WORDPRESS_CLIENT_SECRET}
     networks:
-      - wordpress
+      - cujo
 
   wordpress:
     image: wordpress:latest
@@ -76,8 +85,7 @@ services:
     volumes:
       - ./wordpress:/var/www/html
     networks:
-      - wordpress
-      - proxy
+      - cujo
 
   db:
     image: mysql:5.7
@@ -90,11 +98,11 @@ services:
       MYSQL_USER: ${WORDPRESS_USER_NAME}
       MYSQL_PASSWORD: ${WORDPRESS_DB_PASSWORD}
     networks:
-      - wordpress
+      - cujo
 
 volumes:
   db_data: {}
 
 networks:
-  wordpress:
-  proxy:
+  cujo:
+  watchtower:
