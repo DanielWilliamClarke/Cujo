@@ -11,6 +11,7 @@ import hypercube from "../../sketches/hypercube";
 import { CVProps } from "../../model/CVModel";
 
 import "./SketchBackstretch.scss";
+import "../../assets/Roadrage-owgBd.otf";
 
 declare global {
   interface Array<T> {
