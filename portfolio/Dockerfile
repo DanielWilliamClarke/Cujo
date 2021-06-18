@@ -21,8 +21,6 @@ RUN chown nginx:nginx /usr/share/nginx/html/*
 WORKDIR /usr/share/nginx/html
 
 COPY --from=build /portfolio/build .
-COPY --from=build /portfolio/env.sh .
-COPY --from=build /portfolio/app.env .
 
 EXPOSE 8080
 
@@ -30,4 +28,4 @@ RUN rm /etc/nginx/conf.d/default.conf
 COPY nginx/nginx.conf /etc/nginx/conf.d
 
 # Start Nginx server
-CMD ["/bin/bash", "-c", "echo \"Starting Portfolio...\" && /usr/share/nginx/html/env.sh && nginx -g \"daemon off;\""]
+CMD ["/bin/bash", "-c", "echo \"Starting Portfolio...\" && nginx -g \"daemon off;\""]

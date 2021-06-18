@@ -1,7 +1,6 @@
 import { Component } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { StickyContainer, Sticky } from "react-sticky";
-import WPAPI from "wpapi";
 
 import { SketchBackstretch } from "./components/backstretch/SketchBackstretch";
 import { CVProps } from "./model/CVModel";
@@ -14,22 +13,12 @@ import { BlogService } from "./components/blog/BlogService";
 
 import "./App.scss";
 
-declare global {
-  interface Window {
-    _env_: any;
-  }
-}
-
 export class App extends Component<CVProps> {
   private bService: BlogService;
 
   constructor(props: CVProps) {
     super(props);
-    this.bService = new BlogService(
-      new WPAPI({
-        endpoint: `${window._env_.WORDPRESS_HOST}/wp-json`,
-      })
-    );
+    this.bService = new BlogService();
   }
 
   render(): JSX.Element {
