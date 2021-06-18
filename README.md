@@ -173,19 +173,21 @@ docker-compose --env-file <SECRET ENV FILE> -f prod.compose.yaml down (-v)
 
 ## // Todo
 
-- [ ] Get backend service working in prod
-- [x] Document backend build and deployment
-- [x] Put Blog data access and collation in backend service
-- [ ] Hide wordpress from outside world
-- [ ] Only expose wordpress admin via nginx proxy
+- [ ] Create Circle CI build pipeline
+- [ ] Add Rust code coverage
+- [ ] Write front end tests
 - [ ] Restyle experience and education so they resemble a timeline
-- [ ] Optimize images (sizes, file encodings - <https://developers.google.com/speed/pagespeed/insights/>)
 - [ ] Get own logo and assets from designer
-- [ ] Write the blog
-- [x] (1/2) Write tests [Service is tested]
+- [ ] Write blog
 
 ## // Done
 
+- [x] Optimize images (sizes, file encodings - <https://developers.google.com/speed/pagespeed/insights/>)
+- [x] Add authentication to wordpress rest api
+- [x] Write backend tests
+- [x] Get backend service working in prod
+- [x] Document backend build and deployment
+- [x] Put Blog data access and collation in backend service
 - [x] Swap backstretch with a 2d/3d webgl canvas visualistion?
 - [x] Swap out static file with Rustlang backend service?
 - [x] Formalise colour palette
