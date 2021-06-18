@@ -14,17 +14,16 @@ COPY . /cujo
 
 RUN rm ./target/release/deps/cujo*
 RUN cargo test --release 
-RUN cargo build --release
+RUN cargo install --path .
 
 #RELEASE -----------------------------------
-FROM ubuntu:20.04
+FROM debian:buster-slim
 
-RUN apt update -y && \
-  apt install -y libssl-dev
+RUN apt-get update -y && apt-get install -y libssl-dev
 
 WORKDIR /cujo
 
-COPY --from=build /cujo/target/release/cujo .
+COPY --from=build /usr/local/cargo/bin/cujo /usr/local/bin/cujo
 COPY --from=build /cujo/.env .
 COPY --from=build /cujo/data.json .
 
@@ -34,4 +33,4 @@ USER user
 
 EXPOSE 5001
 
-CMD ["./cujo"]
+CMD ["cujo"]
