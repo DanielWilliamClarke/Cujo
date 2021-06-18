@@ -16,7 +16,7 @@ jobs:
     steps:
       - checkout
       - run: cargo --version
-      - run: rustup default nightly && apt-get update -y && apt-get install -y libssl-dev  
+      - run: rustup default nightly && apk add openssl  
       - run: cd service && cargo test && cargo build --release
 
   # Below is the definition of your job to build and test your app, you can rename and customize it as you want.
