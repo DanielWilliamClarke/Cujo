@@ -1,26 +1,30 @@
-
-<center>
-
-![](https://see.fontimg.com/api/renderfont4/owgBd/eyJyIjoiZnMiLCJoIjoyMDAsInciOjEwMDAsImZzIjoyMDAsImZnYyI6IiNGRjEwODciLCJiZ2MiOiIjRkZGRkZGIiwidCI6MX0/Q3Vqbw/roadrage.png)
-
-</center> 
+<p align="center">
+  <img src="https://see.fontimg.com/api/renderfont4/owgBd/eyJyIjoiZnMiLCJoIjoyMDAsInciOjEwMDAsImZzIjoyMDAsImZnYyI6IiNGRjEwODciLCJiZ2MiOiIjRkZGRkZGIiwidCI6MX0/Q3Vqbw/roadrage.png"/>
+<p>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.12.0/devicon.min.css">
-<center style="font-size: 100px">
-  <i class="devicon-rust-plain"></i>
-  <i class="devicon-typescript-plain"></i>
-  <i class="devicon-react-original"></i>
-  <i class="devicon-docker-plain"></i>
-  <i class="devicon-wordpress-plain"></i>
-</center> 
 
-<center>
+<ul align="center">
+  <i style="font-size: 100px;" class="devicon-rust-plain"></i>
+  <i style="font-size: 100px;"class="devicon-typescript-plain"></i>
+  <i style="font-size: 100px;" class="devicon-react-original"></i>
+  <i style="font-size: 100px;" class="devicon-docker-plain"></i>
+  <i style="font-size: 100px;" class="devicon-wordpress-plain"></i>
+</ul>
 
-  ![](https://img.shields.io/website?down_color=red&down_message=Down&up_color=green&up_message=Up&url=https%3A%2F%2Fdanielclarke.tech) ![](https://img.shields.io/mozilla-observatory/grade/danielclarke.tech?publish) ![](https://img.shields.io/github/commit-activity/w/DanielWilliamClarke/Cujo) ![](https://img.shields.io/github/last-commit/DanielWilliamClarke/Cujo) ![](https://img.shields.io/github/languages/count/DanielWilliamClarke/Cujo) 
+<p align="center">
+  <img src="https://img.shields.io/website?down_color=red&down_message=Down&up_color=green&up_message=Up&url=https%3A%2F%2Fdanielclarke.tech"/>
+  <img src="https://img.shields.io/mozilla-observatory/grade/danielclarke.tech?publish"/>
+  <img src="https://img.shields.io/github/commit-activity/w/DanielWilliamClarke/Cujo"/>
+  <img src="https://img.shields.io/github/last-commit/DanielWilliamClarke/Cujo"/>
+  <img src="https://img.shields.io/github/languages/count/DanielWilliamClarke/Cujo"/>
+<p>
 
-A CV/Portfolio/Blog built in `TypeScript` using `React`. with a backend written in `Rust` using `Wordpress` for blogging and content.
+<p align="center">
+  A CV/Portfolio/Blog built in `TypeScript` using `React`. with a backend written in `Rust` using `Wordpress` for blogging and content.
+<p/>
 
-</center> 
+
 
 ---
 
