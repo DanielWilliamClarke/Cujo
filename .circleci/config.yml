@@ -15,11 +15,19 @@ jobs:
       - image: cimg/rust:1.53.0
     steps:
       - checkout
-      - run: cargo --version
-      - run: rustup default nightly
-      - run: apt-get update -y
-      - run: apt-get install -y libssl-dev  
-      - run: cd service && cargo test && cargo build --release
+      - run: 
+          command: |
+            cargo --version
+            rustup default nightly
+            sudo apt-get update -y
+            sudo apt-get install -y libssl-dev  
+          name: setup
+      - run:
+          command: |
+            cd service
+            cargo test
+            cargo build --release
+          name: test and build
 
   # Below is the definition of your job to build and test your app, you can rename and customize it as you want.
   build-and-test:  
