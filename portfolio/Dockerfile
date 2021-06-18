@@ -14,7 +14,7 @@ COPY . /portfolio
 RUN yarn run build$BUILD_MODE
 
 #RELEASE -----------------------------------
-FROM nginx:1.21.0
+FROM nginx:1.21.0-alpine
 
 RUN chown nginx:nginx /usr/share/nginx/html/*
 
