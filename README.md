@@ -2,16 +2,6 @@
   <img src="https://see.fontimg.com/api/renderfont4/owgBd/eyJyIjoiZnMiLCJoIjoyMDAsInciOjEwMDAsImZzIjoyMDAsImZnYyI6IiNGRjEwODciLCJiZ2MiOiIjRkZGRkZGIiwidCI6MX0/Q3Vqbw/roadrage.png"/>
 <p>
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.12.0/devicon.min.css">
-
-<ul align="center">
-  <i style="font-size: 100px;" class="devicon-rust-plain"></i>
-  <i style="font-size: 100px;"class="devicon-typescript-plain"></i>
-  <i style="font-size: 100px;" class="devicon-react-original"></i>
-  <i style="font-size: 100px;" class="devicon-docker-plain"></i>
-  <i style="font-size: 100px;" class="devicon-wordpress-plain"></i>
-</ul>
-
 <p align="center">
   <img src="https://img.shields.io/website?down_color=red&down_message=Down&up_color=green&up_message=Up&url=https%3A%2F%2Fdanielclarke.tech"/>
   <img src="https://img.shields.io/mozilla-observatory/grade/danielclarke.tech?publish"/>
