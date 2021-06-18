@@ -145,12 +145,20 @@
         "name": "C++"
       },
       {
-        "icon": "c-plain",
-        "name": "C"
-      },
-      {
         "icon": "rust-plain",
         "name": "Rust"
+      },
+      {
+        "icon": "typescript-plain",
+        "name": "TypeScript"
+      },
+      {
+        "icon": "javascript-plain",
+        "name": "JavaScript"
+      },
+      {
+        "icon": "c-plain",
+        "name": "C"
       },
       {
         "icon": "python-plain",
@@ -161,6 +169,10 @@
         "name": "Java"
       },
       {
+        "icon": "matlab-plain",
+        "name": "MATLAB"
+      },
+      {
         "icon": "php-plain",
         "name": "PHP"
       },
@@ -169,20 +181,8 @@
         "name": "Composer"
       },
       {
-        "icon": "matlab-plain",
-        "name": "MATLAB"
-      },
-      {
         "icon": "nodejs-plain",
         "name": "Node JS"
-      },
-      {
-        "icon": "typescript-plain",
-        "name": "TypeScript"
-      },
-      {
-        "icon": "javascript-plain",
-        "name": "JavaScript"
       },
       {
         "icon": "babel-plain",
