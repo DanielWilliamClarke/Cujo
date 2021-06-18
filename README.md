@@ -11,10 +11,12 @@
 <p>
 
 <p align="center">
-  A CV/Portfolio/Blog built in `TypeScript` using `React`. with a backend written in `Rust` using `Wordpress` for blogging and content.
+  A CV/Portfolio/Blog built in `TypeScript` using `React`. with a backend written in `Rust` using `Wordpress` for blogging and content.  
 <p/>
 
-
+<p align="center">
+ <img src="./portfolio/src/assets/p2_tess.gif"/>
+<p/>
 
 ---
 
@@ -35,8 +37,6 @@
 - [Wordpress plugins](#wordpress-plugins)
 
 ---
-
-![](./portfolio/src/assets/p2_2.gif)
 
 ## Dependencies
 
