@@ -8,6 +8,7 @@
   - [Build Service Locally](#build-service-locally)
   - [Build Portfolio Image](#build-portfolio-image)
   - [Build Service Image](#build-service-image)
+  - [Prod Environment](#prod-environment)
   - [Deploy](#deploy)
   - [Redeploy](#redeploy)
   - [Teardown](#teardown)
@@ -96,6 +97,20 @@ export DOCKER_HUB_USER_REGISTRY=xyz
 docker build -f service/Dockerfile -t $DOCKER_HUB_USER_REGISTRY/cujo-rust:latest ./service
 # Push image
 docker push $DOCKER_HUB_USER_REGISTRY/cujo-rust:latest
+```
+
+## Prod Environment
+
+For prod deployment an env file is required with  the following parameters specified
+
+```conf
+WORDPRESS_DB_PASSWORD=wp_password
+MYSQL_ROOT_PASSWORD=sql_password
+DOMAIN=localhost
+WORDPRESS_DB_NAME=db_name
+WORDPRESS_USER_NAME=wp_uiser
+WORDPRESS_CLIENT_ID=client_id
+WORDPRESS_CLIENT_SECRET=client_secret
 ```
 
 ## Deploy
