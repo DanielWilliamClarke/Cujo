@@ -17,9 +17,7 @@ jobs:
       - checkout
       - run: cargo --version
       - run: rustup default nightly
-      - run: pwd && cd service && pwd
-      - run: cargo test
-      - run: cargo build --release
+      - run: cd service && cargo test && cargo build --release
 
   # Below is the definition of your job to build and test your app, you can rename and customize it as you want.
   build-and-test:  
