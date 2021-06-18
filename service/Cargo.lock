@@ -503,6 +503,7 @@ dependencies = [
  "actix",
  "actix-rt",
  "actix-web",
+ "base64",
  "dotenv",
  "env_logger",
  "futures",
