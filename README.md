@@ -1,23 +1,44 @@
-# Cujo
 
-> A CV/Portfolio/Blog built in `TypeScript` using `React`. with a backend written in `Rust` using `Wordpress` for blog posts content.
+<center>
 
-- [Cujo](#cujo)
-  - [Dependencies](#dependencies)
-  - [Build Portfolio Locally](#build-portfolio-locally)
-  - [Build Service Locally](#build-service-locally)
-  - [Build Portfolio Image](#build-portfolio-image)
-  - [Build Service Image](#build-service-image)
-  - [Prod Environment](#prod-environment)
-  - [Deploy](#deploy)
-  - [Redeploy](#redeploy)
-  - [Teardown](#teardown)
-  - [// Todo](#-todo)
-  - [// Done](#-done)
-    - [Visualisations](#visualisations)
-  - [Urls](#urls)
-  - [Resources](#resources)
-  - [Wordpress plugins](#wordpress-plugins)
+![](https://see.fontimg.com/api/renderfont4/owgBd/eyJyIjoiZnMiLCJoIjoyMDAsInciOjEwMDAsImZzIjoyMDAsImZnYyI6IiNGRjEwODciLCJiZ2MiOiIjRkZGRkZGIiwidCI6MX0/Q3Vqbw/roadrage.png)
+
+</center> 
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.12.0/devicon.min.css">
+<center style="font-size: 100px">
+  <i class="devicon-rust-plain"></i>
+  <i class="devicon-typescript-plain"></i>
+  <i class="devicon-react-original"></i>
+  <i class="devicon-docker-plain"></i>
+  <i class="devicon-wordpress-plain"></i>
+</center> 
+
+<center>
+
+  ![](https://img.shields.io/website?down_color=red&down_message=Down&up_color=green&up_message=Up&url=https%3A%2F%2Fdanielclarke.tech) ![](https://img.shields.io/mozilla-observatory/grade/danielclarke.tech?publish) ![](https://img.shields.io/github/commit-activity/w/DanielWilliamClarke/Cujo) ![](https://img.shields.io/github/last-commit/DanielWilliamClarke/Cujo) ![](https://img.shields.io/github/languages/count/DanielWilliamClarke/Cujo) 
+
+A CV/Portfolio/Blog built in `TypeScript` using `React`. with a backend written in `Rust` using `Wordpress` for blogging and content.
+
+</center> 
+
+---
+
+- [Dependencies](#dependencies)
+- [Build Portfolio Locally](#build-portfolio-locally)
+- [Build Service Locally](#build-service-locally)
+- [Build Portfolio Image](#build-portfolio-image)
+- [Build Service Image](#build-service-image)
+- [Prod Environment](#prod-environment)
+- [Deploy](#deploy)
+- [Redeploy](#redeploy)
+- [Teardown](#teardown)
+- [// Todo](#-todo)
+- [// Done](#-done)
+  - [Visualisations](#visualisations)
+- [Urls](#urls)
+- [Resources](#resources)
+- [Wordpress plugins](#wordpress-plugins)
 
 ---
 
