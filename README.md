@@ -1,6 +1,6 @@
 # Cujo
 
-> A Dockerised CV/Portfolio/Blog built using React using Wordpress for blog posts and CDN.
+> A CV/Portfolio/Blog built in `TypeScript` using `React`. with a backend written in `Rust` using `Wordpress` for blog posts content.
 
 - [Cujo](#cujo)
   - [Dependencies](#dependencies)
