@@ -1,9 +1,10 @@
 #!/bin/bash
 
-IMAGE=$1
+REGISTRY=$1
+IMAGE=$2
 
 # Build: Prod
-docker build -f portfolio/Dockerfile -t $IMAGE --build-arg BUILD_MODE=":prod" ./portfolio
+docker build -f portfolio/Dockerfile -t $REGISTRY/$IMAGE --build-arg BUILD_MODE=":prod" ./portfolio
 
 # Push image
-docker push $IMAGE
+docker push $REGISTRY/$IMAGE

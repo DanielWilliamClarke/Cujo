@@ -3,75 +3,96 @@
 > A Dockerised CV/Portfolio/Blog built using React using Wordpress for blog posts and CDN.
 
 - [Cujo](#cujo)
-  - [// Todo](#-todo)
-  - [// Done](#-done)
-    - [Visualisations](#visualisations)
-  - [Build](#build)
+  - [Dependencies](#dependencies)
+  - [Build Portfolio Locally](#build-portfolio-locally)
+  - [Build Service Locally](#build-service-locally)
+  - [Build Portfolio Image](#build-portfolio-image)
+  - [Build Service Image](#build-service-image)
   - [Deploy](#deploy)
   - [Redeploy](#redeploy)
   - [Teardown](#teardown)
-  - [Wordpress plugins](#wordpress-plugins)
+  - [// Todo](#-todo)
+  - [// Done](#-done)
+    - [Visualisations](#visualisations)
   - [Urls](#urls)
-  - [Setup and Resources](#setup-and-resources)
+  - [Resources](#resources)
+  - [Wordpress plugins](#wordpress-plugins)
 
 ---
 
 ![](./portfolio/src/assets/p2_2.gif)
 
-## // Todo
+## Dependencies
 
-- [ ] Get backend service working in prod
-- [ ] Document backend build and deployment
-- [ ] Put Blog data access and collation in backend service
-- [ ] Hide wordpress from outside world
-- [ ] Only expose wordpress admin via nginx proxy
-- [ ] Restyle experience and education so they resemble a timeline
-- [ ] Optimize images (sizes, file encodings - <https://developers.google.com/speed/pagespeed/insights/>)
-- [ ] Get own logo and assets from designer
-- [ ] Write the blog
-- [ ] Write tests
+- Node
+- NPM
+- Rust [`Rustup`, `Rustc`, `Cargo`]
+- Docker
 
-## // Done
-- [x] Swap backstretch with a 2d/3d webgl canvas visualistion?
-- [x] Swap out static file with Rustlang backend service?
-- [x] Formalise colour palette
-- [x] Setup SSL correctly.. (ssl-companion is running, it will assign certificates when the window opens again)
-- [x] Fix predator/prey image asset
-- [x] Finish contact page
-- [x] Add site footer
-- [x] Proof read profile
-- [x] Add asset citations (now using my own images or free stock images only)
-- [x] Produce production build for deployment
-- [x] Move sharing bar to bottom on mobile devices
-- [x] Add jenkins machine to deployment to CI/CD
-
-### Visualisations
-
-- [x] 3D Box wave
-- [x] Waves
-- [x] Hexagons
-- [x] Phylotaxis
-- [x] 4D tesseract projection?
-
-## Build
+## Build Portfolio Locally
 
 ```bash
+# Portfolio
+cd portfolio
 
+# Install Dependencies
+npm install
+
+# Build portfolio
+npm run build
+
+# Run Locally
+npm run start
+```
+
+## Build Service Locally
+
+```bash
+# Service
+cd service
+
+# Build Service
+cargo build [--release]
+
+# Run Service locally 
+cargo run [--release]
+
+# Test Service 
+cargo test [--release]
+```
+
+## Build Portfolio Image
+
+```bash
 export DOCKER_HUB_USER_REGISTRY=xyz
 
 # With script
-./scripts/build-portfolio.sh $DOCKER_HUB_USER_REGISTRY/cujo-portfolio:latest
+./scripts/build-portfolio.sh $DOCKER_HUB_USER_REGISTRY cujo-portfolio
 
 # OR
 
-# Build: Dev
+# Build with Docker: Dev
 docker build -f portfolio/Dockerfile -t $DOCKER_HUB_USER_REGISTRY/cujo-portfolio:latest ./portfolio
-
-# Build: Prod
+# Build with Docker: Prod
 docker build -f portfolio/Dockerfile -t $DOCKER_HUB_USER_REGISTRY/cujo-portfolio:latest --build-arg BUILD_MODE=":prod" ./portfolio
-
 # Push image
 docker push $DOCKER_HUB_USER_REGISTRY/cujo-portfolio:latest
+```
+
+## Build Service Image
+
+```bash
+export DOCKER_HUB_USER_REGISTRY=xyz
+
+# With script
+./scripts/build-service.sh $DOCKER_HUB_USER_REGISTRY cujo-rust
+
+# OR
+
+# Build with Docker
+docker build -f service/Dockerfile -t $DOCKER_HUB_USER_REGISTRY/cujo-rust:latest ./service
+# Push image
+docker push $DOCKER_HUB_USER_REGISTRY/cujo-rust:latest
 ```
 
 ## Deploy
@@ -117,23 +138,59 @@ docker-compose -f dev.compose.yaml down (-v)
 docker-compose --env-file <SECRET ENV FILE> -f prod.compose.yaml down (-v)
 ```
 
-## Wordpress plugins
+## // Todo
 
-- Simple Website Redirect - <https://wordpress.org/plugins/simple-website-redirect/>
-- Disable Comments - <https://wordpress.org/plugins/disable-comments/>
-- Syntax-highlighting Code Block (with Server-side Rendering) - <https://en-gb.wordpress.org/plugins/syntax-highlighting-code-block/>
+- [ ] Get backend service working in prod
+- [x] Document backend build and deployment
+- [x] Put Blog data access and collation in backend service
+- [ ] Hide wordpress from outside world
+- [ ] Only expose wordpress admin via nginx proxy
+- [ ] Restyle experience and education so they resemble a timeline
+- [ ] Optimize images (sizes, file encodings - <https://developers.google.com/speed/pagespeed/insights/>)
+- [ ] Get own logo and assets from designer
+- [ ] Write the blog
+- [x] (1/2) Write tests [Service is tested]
+
+## // Done
+
+- [x] Swap backstretch with a 2d/3d webgl canvas visualistion?
+- [x] Swap out static file with Rustlang backend service?
+- [x] Formalise colour palette
+- [x] Setup SSL correctly.. (ssl-companion is running, it will assign certificates when the window opens again)
+- [x] Fix predator/prey image asset
+- [x] Finish contact page
+- [x] Add site footer
+- [x] Proof read profile
+- [x] Add asset citations (now using my own images or free stock images only)
+- [x] Produce production build for deployment
+- [x] Move sharing bar to bottom on mobile devices
+- [x] Add jenkins machine to deployment to CI/CD
+
+### Visualisations
+
+- [x] 3D Box wave
+- [x] Waves
+- [x] Hexagons
+- [x] Phylotaxis
+- [x] 4D tesseract projection?
 
 ## Urls
 
 - <https://danielclarke.tech> - Portfolio
 - <https://blog.danielclarke.tech>/... - Wordpress - [Homepage redirects to Portfolio]
 
-## Setup and Resources
+##  Resources
 
-- <https://blog.harveydelaney.com/hosting-websites-using-docker-nginx/>
-- <https://blog.harveydelaney.com/setting-up-jenkins-on-docker/>
-- <https://blog.harveydelaney.com/jenkins-build-test-deploy-node-app/>
-- <https://stackoverflow.com/questions/22345483/jenkins-publish-over-ssh-authentification-failed-with-private-key>
-- <https://nozaki.me/roller/kyle/entry/articles-jenkins-sshdeploy>
-- <https://stackoverflow.com/questions/48330402/secret-text-git-credentials-not-showing-up-in-jenkins-project-source-code-mana/49571986>
-- <https://linuxize.com/post/how-to-add-user-to-sudoers-in-ubuntu/>
+- Coding Train - `P5JS` <https://thecodingtrain.com/>
+- Lets Get Rusty - `Rust` <https://www.youtube.com/channel/UCSp-OaMpsO8K0KkOqyBl7_w>
+- Rust Rest API - `Rust` <https://cloudmaker.dev/how-to-create-a-rest-api-in-rust/>
+- Fix Reqwest in Linux - `Rust` <https://stackoverflow.com/questions/52238397/why-does-reqwest-require-an-openssl-installation#52238675>
+- Hosting websites using Nginx - `Nginx` <https://blog.harveydelaney.com/hosting-websites-using-docker-nginx/>
+- Add Sudoers - `Linux` <https://linuxize.com/post/how-to-add-user-to-sudoers-in-ubuntu/>
+
+## Wordpress plugins
+
+- Simple Website Redirect - <https://wordpress.org/plugins/simple-website-redirect/>
+- Disable Comments - <https://wordpress.org/plugins/disable-comments/>
+- Syntax-highlighting Code Block (with Server-side Rendering) - <https://en-gb.wordpress.org/plugins/syntax-highlighting-code-block/>
+- Reading time - <https://wordpress.org/plugins/reading-time-wp/>
