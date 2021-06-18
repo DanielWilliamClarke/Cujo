@@ -22,6 +22,9 @@ services:
       - 5001
     env_file:
       - ./service/.env
+    environment: 
+      - WORDPRESS_CLIENT_ID=dev
+      - WORDPRESS_CLIENT_SECRET=dev_secret
     networks:
       - cujo
 

@@ -3,9 +3,12 @@
 use crate::blog::media::Media;
 use crate::blog::post::Post;
 use crate::blog::tag::Tag;
+extern crate base64;
 
+use base64::encode;
 use reqwest;
 use reqwest::Error;
+use reqwest::header::AUTHORIZATION;
 
 use serde::de::DeserializeOwned;
 use serde::{Deserialize, Serialize};
@@ -22,11 +25,13 @@ pub struct BlogData {
 
 pub struct BlogClient {
     host: String,
+    client_id: String,
+    client_secret: String
 }
 
 impl BlogClient {
-    pub fn new(host: String) -> BlogClient {
-        BlogClient { host }
+    pub fn new(host: String, client_id: String, client_secret: String) -> BlogClient {
+        BlogClient { host,  client_id, client_secret }
     }
 
     pub async fn get_posts(&self) -> Result<Vec<BlogData>, Error> {
@@ -60,7 +65,15 @@ impl BlogClient {
     where
         T: DeserializeOwned,
     {
-        let response = reqwest::get(format!("{}/{}", self.host, endpoint)).await?;
+        let basic_auth = encode(format!("{}:{}", self.client_id, self.client_secret));
+
+        let client = reqwest::Client::new();
+        let response = client
+            .get(format!("{}/{}", self.host, endpoint))
+            .header(AUTHORIZATION, format!("Basic {}", basic_auth))
+            .send()
+            .await?;
+
         Ok(response.json().await?)
     }
 
@@ -148,7 +161,10 @@ mod tests {
         }];
 
         let host = "test".to_string();
-        let client = BlogClient::new(host);
+        let id = "id".to_string();
+        let secret = "secret".to_string();
+        let client = BlogClient::new(host, id, secret);
+
         let blog_data: BlogData = client.correlate(&post, &media, &tags);
 
         assert_eq!(post, blog_data.post);
@@ -167,7 +183,10 @@ mod tests {
         let tags: Vec<Tag> = vec![];
 
         let host = "test".to_string();
-        let client = BlogClient::new(host);
+        let id = "id".to_string();
+        let secret = "secret".to_string();
+        let client = BlogClient::new(host, id, secret);
+
         let blog_data: BlogData = client.correlate(&post, &media, &tags);
 
         assert_eq!(post, blog_data.post);
@@ -186,7 +205,10 @@ mod tests {
         let m = setup_http_mocks::<TestJson>(&url, &test_data);
 
         let host = mockito::server_url().to_string();
-        let client = BlogClient::new(host.clone());
+        let id = "id".to_string();
+        let secret = "secret".to_string();
+        let client = BlogClient::new(host, id, secret);
+
         match client.get::<TestJson>(&test_data.endpoint).await {
             Ok(data) => {
                 assert_eq!(test_data.endpoint, data.endpoint);
@@ -221,7 +243,10 @@ mod tests {
             setup_rest_mocks::<Vec<Post>, Vec<Media>, Vec<Tag>>("/posts", &posts, &media, &tags);
 
         let host = mockito::server_url().to_string();
-        let client = BlogClient::new(host);
+        let id = "id".to_string();
+        let secret = "secret".to_string();
+        let client = BlogClient::new(host, id, secret);
+
         match client.get_posts().await {
             Ok(blog_data) => {
                 blog_data.iter().for_each(|b| {
@@ -262,7 +287,10 @@ mod tests {
             setup_rest_mocks::<Post, Vec<Media>, Vec<Tag>>(&post_url, &post, &media, &tags);
 
         let host = mockito::server_url().to_string();
-        let client = BlogClient::new(host);
+        let client_id = "id".to_string();
+        let secret = "secret".to_string();
+        let client = BlogClient::new(host, client_id, secret);
+
         match client.get_post(&id.to_string()).await {
             Ok(blog_data) => {
                 assert_eq!(post, blog_data.post);

@@ -25,8 +25,10 @@ async fn get_cv() -> impl Responder {
 #[get("/blog")]
 async fn get_blog() -> impl Responder {
     let host = env::var("WORDPRESS_HOST").expect("WORDPRESS_HOST not set");
+    let client_id = env::var("WORDPRESS_CLIENT_ID").expect("WORDPRESS_CLIENT_ID not set");
+    let client_secret = env::var("WORDPRESS_CLIENT_SECRET").expect("WORDPRESS_CLIENT_SECRET not set");
 
-    let client = BlogClient::new(host);
+    let client = BlogClient::new(host, client_id, client_secret);
     match client.get_posts().await {
         Ok(data) => HttpResponse::Ok().json(data),
         Err(err) => HttpResponse::InternalServerError().body(format!("Blog data not found: {}", err))
@@ -36,9 +38,12 @@ async fn get_blog() -> impl Responder {
 #[get("/blog/{id}")]
 async fn get_blog_post(path: web::Path<String>) -> impl Responder {
     let host = env::var("WORDPRESS_HOST").expect("WORDPRESS_HOST not set");
+    let client_id = env::var("WORDPRESS_CLIENT_ID").expect("WORDPRESS_CLIENT_ID not set");
+    let client_secret = env::var("WORDPRESS_CLIENT_SECRET").expect("WORDPRESS_CLIENT_SECRET not set");
+
     let id = path.into_inner();
 
-    let client = BlogClient::new(host);
+    let client = BlogClient::new(host, client_id, client_secret);
     match client.get_post(&id).await {
         Ok(data) => HttpResponse::Ok().json(data),
         Err(err) => HttpResponse::InternalServerError().body(format!("Blog data not found: {}", err))

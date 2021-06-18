@@ -50,6 +50,9 @@ services:
     container_name: service
     expose:     
      - 5001
+    environment:
+      - WORDPRESS_CLIENT_ID=${WORDPRESS_CLIENT_ID}
+      - WORDPRESS_CLIENT_SECRET=${WORDPRESS_CLIENT_SECRET}
     networks:
       - wordpress
 
