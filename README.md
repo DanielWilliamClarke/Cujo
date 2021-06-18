@@ -51,6 +51,9 @@ npm run start
 # Service
 cd service
 
+# Once only
+rustup default nightly
+
 # Build Service
 cargo build [--release]
 
