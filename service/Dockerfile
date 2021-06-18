@@ -13,7 +13,8 @@ RUN rm src/*.rs
 COPY . /cujo
 
 RUN rm ./target/release/deps/cujo*
-RUN cargo test && cargo build --release
+RUN cargo test --release 
+RUN cargo build --release
 
 #RELEASE -----------------------------------
 FROM ubuntu:20.04
