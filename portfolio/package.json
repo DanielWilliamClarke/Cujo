@@ -52,8 +52,7 @@
     "react-share": "^4.3.1",
     "react-sticky": "^6.0.3",
     "remark-breaks": "^2.0.1",
-    "simplex-noise": "^2.4.0",
-    "wpapi": "^1.2.1"
+    "simplex-noise": "^2.4.0"
   },
   "devDependencies": {
     "@types/node": "^14.14.25",

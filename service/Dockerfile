@@ -18,6 +18,9 @@ RUN cargo test && cargo build --release
 #RELEASE -----------------------------------
 FROM ubuntu:20.04
 
+RUN apt update -y && \
+  apt install -y libssl-dev
+
 WORKDIR /cujo
 
 COPY --from=build /cujo/target/release/cujo .

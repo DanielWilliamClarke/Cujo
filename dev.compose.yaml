@@ -5,39 +5,25 @@ services:
   portfolio:
     build: 
       context: ./portfolio
+    depends_on:
+      - service
+      - wordpress
     ports:
       - "5000:8080"
-    environment:
-      - WORDPRESS_HOST=http://localhost:8000
     volumes:
       - ./portfolio/build:/usr/share/nginx/html
-      - ./portfolio/env.sh:/usr/share/nginx/html/env.sh
-      - ./portfolio/app.env:/usr/share/nginx/html/app.env
     networks:
-      - wordpress
+      - cujo
 
   service: 
     build:
       context: ./service
     expose:     
-     - 5001
+      - 5001
     env_file:
       - ./service/.env
     networks:
-      - wordpress
-
-  db:
-    image: mysql:5.7
-    volumes:
-      - db_data:/var/lib/mysql
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: somewordpress
-      MYSQL_DATABASE: wordpress
-      MYSQL_USER: wordpress
-      MYSQL_PASSWORD: wordpress
-    networks:
-      - wordpress
+      - cujo
 
   wordpress:
     depends_on:
@@ -54,10 +40,23 @@ services:
     volumes:
       - ./wordpress:/var/www/html
     networks:
-      - wordpress
+      - cujo
+
+  db:
+    image: mysql:5.7
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: somewordpress
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+    networks:
+      - cujo
 
 volumes:
   db_data: {}
 
 networks:
-  wordpress:
+  cujo:

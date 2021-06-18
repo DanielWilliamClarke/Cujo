@@ -37,7 +37,7 @@ async fn get_blog() -> impl Responder {
 async fn get_blog_post(path: web::Path<String>) -> impl Responder {
     let host = env::var("WORDPRESS_HOST").expect("WORDPRESS_HOST not set");
     let id = path.into_inner();
-    
+
     let client = BlogClient::new(host);
     match client.get_post(&id).await {
         Ok(data) => HttpResponse::Ok().json(data),
@@ -49,4 +49,5 @@ pub fn init(cfg: &mut web::ServiceConfig) {
     cfg.service(svc_status);
     cfg.service(get_cv);
     cfg.service(get_blog);
+    cfg.service(get_blog_post);
 }
