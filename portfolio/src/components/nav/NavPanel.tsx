@@ -5,11 +5,27 @@ import { NavHashLink } from "react-router-hash-link";
 import "./NavPanel.scss";
 
 export class NavPanel extends Component {
+  state = {
+    bg: undefined,
+  };
+
+  listenScrollEvent = () => {
+    if (window.scrollY < window.innerHeight) {
+      this.setState({ bg: undefined });
+    } else {
+      this.setState({ bg: "dark" });
+    }
+  };
+
+  componentDidMount() {
+    window.addEventListener("scroll", this.listenScrollEvent);
+  }
+
   render(): JSX.Element {
     return (
       <Navbar
+        bg={this.state.bg}
         sticky="top"
-        bg="dark"
         variant="dark"
         className="justify-content-center"
       >
