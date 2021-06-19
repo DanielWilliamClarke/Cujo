@@ -82,7 +82,7 @@ workflows:
               only: master
       - push-cujo-rust-image:
           requires:
-            - test-and-build-cujo-rust:
+            - test-and-build-cujo-rust
           filters:
             branches:
               only: master
