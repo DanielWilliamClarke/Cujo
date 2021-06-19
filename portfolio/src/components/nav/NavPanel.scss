@@ -1,5 +1,9 @@
 @import "../shared/Palette.scss";
 
+.navbar {
+  transition: 0.5s;
+}
+
 @media screen and (max-width: 1024px) {
   .navbar-nav {
     .nav-link {
