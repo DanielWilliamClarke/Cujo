@@ -1,15 +1,16 @@
+# Env
+.env
+!service/.env
+
+# Node
 node_modules/
 coverage/
 .data/
 package-lock.json
 *.exe
-.env
 vendor
 composer.*
 
-/public/env-config.js
-env-config.js
-
+# Cujo
 wordpress
-
 service/target

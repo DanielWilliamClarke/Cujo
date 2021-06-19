@@ -1,20 +1,11 @@
 #BUILD -----------------------------------
 FROM rust:1.52.1 as build
 
-RUN rustup default nightly && \
-    USER=root cargo new --bin cujo
-
 WORKDIR ./cujo
 
-COPY ./Cargo.toml ./Cargo.toml
-RUN cargo build --release
-RUN rm src/*.rs
-
-COPY . /cujo
-
-RUN rm ./target/release/deps/cujo*
-RUN cargo test --release 
-RUN cargo install --path .
+COPY . .
+RUN rustup default nightly && \
+  cargo install --path .
 
 #RELEASE -----------------------------------
 FROM debian:buster-slim
