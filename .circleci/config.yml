@@ -9,9 +9,10 @@ orbs:
   rust: circleci/rust@1.5.0
 
 jobs:
-  test-and-build-cujo-rust:
+  test-build-rust:
     docker:
       - image: cimg/rust:1.53.0
+    working_directory: ~/service
     steps:
       - checkout
       - setup_remote_docker
@@ -24,19 +25,17 @@ jobs:
             sudo apt-get install -y libssl-dev
             cargo install cargo2junit
       - run:
-          name: Test
+          name: Run Tests
           command: |
-            cd service
             cargo test -- -Z unstable-options --format json | cargo2junit > results.xml
       - store_test_results:
           path: ./service
       - run:
           name: Build Docker image
           command: |
-            cd service
             docker build -t $DOCKER_REGISTRY/$IMAGE_NAME_RUST:latest .
 
-  push-cujo-rust-image:
+  push-rust-image:
     docker:
       - image: circleci/buildpack-deps:stretch
     steps:
@@ -47,44 +46,58 @@ jobs:
             echo "$DOCKERHUB_PASS" | docker login -u "$DOCKER_USER" --password-stdin
             docker push $DOCKER_REGISTRY/$IMAGE_NAME_RUST:latest
 
-  # Below is the definition of your job to build and test your app, you can rename and customize it as you want.
-  build-and-test:
-    # These next lines define a Docker executor: https://circleci.com/docs/2.0/executor-types/
-    # You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
-    # A list of available CircleCI Docker Convenience Images are available here: https://circleci.com/developer/images/image/cimg/node
+  test-build-portfolio:
     docker:
       - image: cimg/node:15.1
-    # Then run your tests!
-    # CircleCI will report the results back to your VCS provider.
+    working_directory: ~/portfolio
     steps:
-      # Checkout the code as the first step.
       - checkout
-      # Next, the node orb's install-packages step will install the dependencies from a package.json.
-      # The orb install-packages step will also automatically cache them for faster future runs.
+      - setup_remote_docker
       - node/install-packages
-      # If you are using yarn instead npm, remove the line above and uncomment the two lines below.
-      # - node/install-packages:
-      #     pkg-manager: yarn
       - run:
           name: Run tests
           command: npm test
+      - store_test_results:
+          path: ./portfolio
+      - run:
+          name: Build Docker image
+          command: |
+            docker build -t $DOCKER_REGISTRY/$IMAGE_NAME_PORTFOLIO:latest .
+
+  push-portfolio-image:
+    docker:
+      - image: circleci/buildpack-deps:stretch
+    steps:
+      - setup_remote_docker
+      - run:
+          name: Publish Docker Image
+          command: |
+            echo "$DOCKERHUB_PASS" | docker login -u "$DOCKER_USER" --password-stdin
+            docker push $DOCKER_REGISTRY/$IMAGE_NAME_PORTFOLIO:latest
 
 workflows:
-  # Below is the definition of your workflow.
-  # Inside the workflow, you provide the jobs you want to run, e.g this workflow runs the build-and-test job above.
-  # CircleCI will run this workflow on every commit.
-  # For more details on extending your workflow, see the configuration docs: https://circleci.com/docs/2.0/configuration-reference/#workflows
   rust:
     jobs:
-      - test-and-build-cujo-rust:
+      - test-build-rust:
           filters:
             branches:
               only: master
-      - push-cujo-rust-image:
+      - push-rust-image:
           requires:
-            - test-and-build-cujo-rust
+            - test-build-rust
           filters:
             branches:
               only: master
-      # For running simple node tests, you could optionally use the node/test job from the orb to replicate and replace the job above in fewer lines.
-      # - node/test
+
+  portfolio:
+    jobs:
+      - test-build-portfolio:
+          filters:
+            branches:
+              only: master
+      - push-portfolio-image:
+          requires:
+            - test-build-portfolio
+          filters:
+            branches:
+              only: master
