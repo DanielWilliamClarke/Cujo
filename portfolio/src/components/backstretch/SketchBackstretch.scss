@@ -1,10 +1,5 @@
 @import "../shared/Palette.scss";
 
-@font-face {
-  font-family: 'RoadRage';
-  src: local('RoadRage'), url(../../assets/Roadrage-owgBd.otf) format('opentype');
-}
-
 .sketch-backstretch {
   align-items: center;
   background: $col-bg-light;
@@ -32,8 +27,8 @@
   .backstretch-headline {
     .backstretch-main {
       font-size: calc(30px + 3vw);
+      font-weight: 700;
       text-shadow: 0 0 50px $col-bg-dark;
-      font-family: RoadRage;
     }
 
     .backstretch-tag {

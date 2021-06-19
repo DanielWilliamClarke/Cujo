@@ -1,5 +1,5 @@
 #BUILD -----------------------------------
-FROM node:15.8.0 as build
+FROM node:16.3.0-alpine as build
 
 ARG BUILD_MODE
 
@@ -28,4 +28,4 @@ RUN rm /etc/nginx/conf.d/default.conf
 COPY nginx/nginx.conf /etc/nginx/conf.d
 
 # Start Nginx server
-CMD ["/bin/bash", "-c", "echo \"Starting Portfolio...\" && nginx -g \"daemon off;\""]
+CMD ["/bin/sh", "-c", "echo \"Starting Portfolio...\" && nginx -g \"daemon off;\""]

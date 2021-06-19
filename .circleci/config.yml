@@ -4,12 +4,12 @@ version: 2.1
 
 orbs:
   # https://circleci.com/developer/orbs/orb/circleci/node
-  node: circleci/node@4.1
+  node: circleci/node@4.5.1
   # https://circleci.com/developer/images/image/cimg/rust
   rust: circleci/rust@1.5.0
 
 jobs:
-  test-build-rust:
+  test-build-push-rust:
     docker:
       - image: cimg/rust:1.53.0
     steps:
@@ -35,21 +35,15 @@ jobs:
           command: |
             cd service
             docker build -t $DOCKER_REGISTRY/$IMAGE_NAME_RUST:latest .
-
-  push-rust-image:
-    docker:
-      - image: circleci/buildpack-deps:stretch
-    steps:
-      - setup_remote_docker
       - run:
           name: Publish Docker Image
           command: |
             echo "$DOCKERHUB_PASS" | docker login -u "$DOCKER_USER" --password-stdin
             docker push $DOCKER_REGISTRY/$IMAGE_NAME_RUST:latest
 
-  test-build-portfolio:
+  test-build-push-portfolio:
     docker:
-      - image: cimg/node:15.1
+      - image: cimg/node:16.3.0
     steps:
       - checkout
       - setup_remote_docker
@@ -57,22 +51,16 @@ jobs:
           name: Run tests
           command: |
             cd portfolio
-            npm install
-            npm test
-            npm build
+            yarn install
+            yarn run test
+            yarn run build
       - store_test_results:
           path: ./portfolio
       - run:
           name: Build Docker image
           command: |
             cd portfolio
-            docker build -t $DOCKER_REGISTRY/$IMAGE_NAME_PORTFOLIO:latest .
-
-  push-portfolio-image:
-    docker:
-      - image: circleci/buildpack-deps:stretch
-    steps:
-      - setup_remote_docker
+            docker build -t $DOCKER_REGISTRY/$IMAGE_NAME_PORTFOLIO:latest --build-arg BUILD_MODE=":prod" .
       - run:
           name: Publish Docker Image
           command: |
@@ -82,26 +70,14 @@ jobs:
 workflows:
   rust:
     jobs:
-      - test-build-rust:
-          filters:
-            branches:
-              only: master
-      - push-rust-image:
-          requires:
-            - test-build-rust
+      - test-build-push-rust:
           filters:
             branches:
               only: master
 
   portfolio:
     jobs:
-      - test-build-portfolio:
-          filters:
-            branches:
-              only: master
-      - push-portfolio-image:
-          requires:
-            - test-build-portfolio
+      - test-build-push-portfolio:
           filters:
             branches:
               only: master

@@ -11,7 +11,6 @@ import { DynamicImage } from "../shared/DynamicImage";
 import "../shared/Portfolio.scss";
 import "./Experience.scss";
 
-
 type WorkProps = {
   work: Work[];
 };
@@ -80,7 +79,10 @@ export class Experience extends Component<WorkProps> {
 
                   <Row className="section-content">
                     <Col>
-                      <ReactMarkdown source={work.summary} plugins={[breaks]} />
+                      <ReactMarkdown
+                        children={work.summary}
+                        remarkPlugins={[breaks]}
+                      />
                     </Col>
                   </Row>
 

@@ -36,8 +36,8 @@ export class Technical extends Component<TechnicalProps, SkillsState> {
           <Row className="section-content">
             <Col>
               <ReactMarkdown
-                source={this.props.techical.summary}
-                plugins={[breaks]}
+                children={this.props.techical.summary}
+                remarkPlugins={[breaks]}
               />
             </Col>
           </Row>
