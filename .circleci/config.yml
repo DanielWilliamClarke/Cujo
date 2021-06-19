@@ -52,7 +52,7 @@ jobs:
           command: |
             cd portfolio
             yarn install
-            yarn run test
+            yarn run test -- --watchAll=false --passWithNoTests
             yarn run build
       - store_test_results:
           path: ./portfolio
