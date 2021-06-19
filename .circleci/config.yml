@@ -12,7 +12,6 @@ jobs:
   test-build-rust:
     docker:
       - image: cimg/rust:1.53.0
-    working_directory: ~/service
     steps:
       - checkout
       - setup_remote_docker
@@ -27,12 +26,14 @@ jobs:
       - run:
           name: Run Tests
           command: |
+            cd service
             cargo test -- -Z unstable-options --format json | cargo2junit > results.xml
       - store_test_results:
           path: ./service
       - run:
           name: Build Docker image
           command: |
+            cd service
             docker build -t $DOCKER_REGISTRY/$IMAGE_NAME_RUST:latest .
 
   push-rust-image:
@@ -49,19 +50,22 @@ jobs:
   test-build-portfolio:
     docker:
       - image: cimg/node:15.1
-    working_directory: ~/portfolio
     steps:
       - checkout
       - setup_remote_docker
-      - node/install-packages
       - run:
           name: Run tests
-          command: npm test
+          command: |
+            cd portfolio
+            npm install
+            npm test
+            npm build
       - store_test_results:
           path: ./portfolio
       - run:
           name: Build Docker image
           command: |
+            cd portfolio
             docker build -t $DOCKER_REGISTRY/$IMAGE_NAME_PORTFOLIO:latest .
 
   push-portfolio-image:
