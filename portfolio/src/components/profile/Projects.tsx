@@ -37,15 +37,18 @@ export class Projects extends Component<ProjectProps> {
     return (
       <Card bg="dark">
         <Card.Body>
-          {p.image.length && (<DynamicImage
-            image={p.image}
-            alt={`${p.name} project image`}
-            className="centered image-item"
-           />
+          {p.image.length && (
+            <DynamicImage
+              image={p.image}
+              alt={`${p.name} project image`}
+              className="centered image-item"
+            />
           )}
-          <Card.Title>{p.name}</Card.Title>
-          <div className="centered short-line" />
-          <Card.Text>{p.summary}</Card.Text>
+          <div className="card-content">
+            <Card.Title>{p.name}</Card.Title>
+            <div className="centered short-line" />
+            <Card.Text>{p.summary}</Card.Text>
+          </div>
         </Card.Body>
         <Card.Footer>
           <a href={p.link} rel="noopener noreferrer" target="_blank">

@@ -40,21 +40,21 @@ export class About extends Component<AboutProps> {
             <Col className="text-column">
               <h4>A little about me!</h4>
               <ReactMarkdown
-                source={this.props.basics.summary}
-                plugins={[breaks]}
+                children={this.props.basics.summary}
+                remarkPlugins={[breaks]}
               />
             </Col>
 
             <Col className="text-column">
               <h4>My Interests</h4>
               <ReactMarkdown
-                source={this.props.interests.summary}
-                plugins={[breaks]}
+                children={this.props.interests.summary}
+                remarkPlugins={[breaks]}
               />
               <ul className="interests">
                 {this.props.interests.list.map((interest: string) => (
                   <li>
-                    <ReactMarkdown source={interest} />
+                    <ReactMarkdown children={interest} />
                   </li>
                 ))}
               </ul>
