@@ -25,8 +25,8 @@
 ---
 
 - [Dependencies](#dependencies)
-- [Build Portfolio Locally](#build-portfolio-locally)
 - [Build Service Locally](#build-service-locally)
+- [Build Portfolio Locally](#build-portfolio-locally)
 - [Build Portfolio Image](#build-portfolio-image)
 - [Build Service Image](#build-service-image)
 - [Prod Environment](#prod-environment)
@@ -49,22 +49,6 @@
 - Rust [`Rustup`, `Rustc`, `Cargo`]
 - Docker
 
-## Build Portfolio Locally
-
-```bash
-# Portfolio
-cd portfolio
-
-# Install Dependencies
-npm install
-
-# Build portfolio
-npm run build
-
-# Run Locally
-npm run start
-```
-
 ## Build Service Locally
 
 ```bash
@@ -84,6 +68,21 @@ cargo run [--release]
 cargo test [--release]
 ```
 
+## Build Portfolio Locally
+
+```bash
+# Portfolio
+cd portfolio
+
+# Install Dependencies
+npm install
+
+# Build portfolio
+npm run build
+
+# Run Locally
+npm run start # Requires service to be up!
+```
 ## Build Portfolio Image
 
 ```bash
@@ -123,13 +122,13 @@ docker push $DOCKER_HUB_USER_REGISTRY/cujo-rust:latest
 For prod deployment an env file is required with  the following parameters specified
 
 ```conf
-WORDPRESS_DB_PASSWORD=wp_password
-MYSQL_ROOT_PASSWORD=sql_password
+WORDPRESS_DB_PASSWORD=[REDACTED]
+MYSQL_ROOT_PASSWORD=[REDACTED]
 DOMAIN=localhost
 WORDPRESS_DB_NAME=db_name
-WORDPRESS_USER_NAME=wp_uiser
-WORDPRESS_CLIENT_ID=client_id
-WORDPRESS_CLIENT_SECRET=client_secret
+WORDPRESS_USER_NAME=wp_user
+WORDPRESS_CLIENT_ID=[REDACTED]
+WORDPRESS_CLIENT_SECRET=[DATA_EXPUNGED]
 ```
 
 ## Deploy
@@ -219,7 +218,7 @@ docker-compose --env-file <SECRET ENV FILE> -f prod.compose.yaml down (-v)
 - <https://danielclarke.tech> - Portfolio
 - <https://blog.danielclarke.tech>/... - Wordpress - [Homepage redirects to Portfolio]
 
-##  Resources
+## Resources
 
 - Coding Train - `P5JS` <https://thecodingtrain.com/>
 - Lets Get Rusty - `Rust` <https://www.youtube.com/channel/UCSp-OaMpsO8K0KkOqyBl7_w>
@@ -227,6 +226,7 @@ docker-compose --env-file <SECRET ENV FILE> -f prod.compose.yaml down (-v)
 - Fix Reqwest in Linux - `Rust` <https://stackoverflow.com/questions/52238397/why-does-reqwest-require-an-openssl-installation#52238675>
 - Hosting websites using Nginx - `Nginx` <https://blog.harveydelaney.com/hosting-websites-using-docker-nginx/>
 - Add Sudoers - `Linux` <https://linuxize.com/post/how-to-add-user-to-sudoers-in-ubuntu/>
+- Auto image redeploy with Watchtower - `Docker` <https://alexgallacher.com/setting-up-watchtower-to-update-docker-containers/>
 
 ## Wordpress plugins
 
@@ -234,3 +234,4 @@ docker-compose --env-file <SECRET ENV FILE> -f prod.compose.yaml down (-v)
 - Disable Comments - <https://wordpress.org/plugins/disable-comments/>
 - Syntax-highlighting Code Block (with Server-side Rendering) - <https://en-gb.wordpress.org/plugins/syntax-highlighting-code-block/>
 - Reading time - <https://wordpress.org/plugins/reading-time-wp/>
+- WordPress REST API Authentication <https://plugins.miniorange.com/wordpress-rest-api-basic-authentication-method>
