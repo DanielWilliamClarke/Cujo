@@ -25,26 +25,22 @@ export class App extends Component<CVProps> {
     return (
       <div>
         <SketchBackstretch cv={this.props.cv}></SketchBackstretch>
-        <StickyContainer>
-          <Router>
-            <Sticky>
-              {({ style }) => <NavPanel style={style}></NavPanel>}
-            </Sticky>
-            <div className="app">
-              <Switch>
-                <Route exact path="/">
-                  <Profile cv={this.props.cv} />
-                </Route>
-                <Route path="/blog">
-                  <Blog service={this.bService} />
-                </Route>
-              </Switch>
-              <footer id="footer">
-                <Copyright />
-              </footer>
-            </div>
-          </Router>
-        </StickyContainer>
+        <Router>
+          <NavPanel></NavPanel>
+          <div className="app">
+            <Switch>
+              <Route exact path="/">
+                <Profile cv={this.props.cv} />
+              </Route>
+              <Route path="/blog">
+                <Blog service={this.bService} />
+              </Route>
+            </Switch>
+            <footer id="footer">
+              <Copyright />
+            </footer>
+          </div>
+        </Router>
       </div>
     );
   }
