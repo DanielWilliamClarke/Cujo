@@ -46,7 +46,7 @@ jobs:
       - image: cimg/node:16.3.0
     steps:
       - checkout
-      - setup_remote_docker
+      - setup_remote_docker:
           version: 19.03.13 # https://support.circleci.com/hc/en-us/articles/360050934711-Docker-build-fails-with-EPERM-operation-not-permitted-copyfile-when-using-node-14-9-0-or-later-
       - run:
           name: Run tests
