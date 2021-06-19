@@ -1,96 +1,10 @@
 @import "../shared/Palette.scss";
 
-.nav-panel {
-  background-color: $col-bg-light;
-  height: 50px;
-  overflow: hidden;
-  text-transform: capitalize !important;
-  z-index: 1;
-  border-top: 2px solid $col-main-brand;
-
-  .nav-container {
-    align-items: center;
-    display: flex;
-    height: 100%;
-    justify-content: center;
-  }
-
-  .nav-logo {
-    display: none;
-    float: left;
-  }
-
-  .col-item::after {
-    content: "";
-  }
-
-  .option {
-    a {
-      &:link,
-      &:visited {
-        color: $col-text-main;
-        text-decoration: none;
-      }
-    }
-
-    &:hover {
-      background-color: $col-text-heading;
-
-      a {
-        color: $col-bg-dark;
-      }
-    }
-  }
-
-  .nav-button {
-    color: $col-text-main;
-    display: block;
-    font-weight: 500;
-    padding: 13px 1em;
-    text-align: center;
-    transition: 0.5s;
-
-    .nav-active {
-      color: $col-main-brand !important;
-    }
-  }
-}
-
 @media screen and (max-width: 1024px) {
-  .nav-panel {
-    .nav-logo {
-      display: none;
-    }
-
-    .nav-button {
-      padding: 16px 1em;
-    }
-
-    .col,
-    .col-md-auto {
+  .navbar-nav {
+    .nav-link {
       flex-basis: 0;
-      font-size: 12px;
-    }
-
-    .col-item {
-      display: flex;
-    }
-  }
-}
-
-@media screen and (max-width: 445px) {
-  .nav-panel {
-    .nav-button {
-      padding: 16px 0.2em;
-    }
-  }
-}
-
-@media screen and (max-width: 360px) {
-  .nav-panel {
-    .nav-button {
       font-size: 11px;
-      padding: 17px 2px;
     }
   }
 }
