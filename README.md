@@ -177,7 +177,6 @@ docker-compose --env-file <SECRET ENV FILE> -f prod.compose.yaml down (-v)
 
 ## // Todo
 
-- [ ] Create Circle CI build pipeline
 - [ ] Add Rust code coverage
 - [ ] Write front end tests
 - [ ] Restyle experience and education so they resemble a timeline
@@ -186,6 +185,8 @@ docker-compose --env-file <SECRET ENV FILE> -f prod.compose.yaml down (-v)
 
 ## // Done
 
+- [x] Add auto redeployment of new images pushed for prod
+- [x] Create Circle CI build pipeline
 - [x] Optimize images (sizes, file encodings - <https://developers.google.com/speed/pagespeed/insights/>)
 - [x] Add authentication to wordpress rest api
 - [x] Write backend tests
