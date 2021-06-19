@@ -123,6 +123,12 @@
   }
 }
 
+// https://stackoverflow.com/questions/39531511/cards-crops-bootstrap-4
+.card-columns .card {
+  display: inline-block;
+  width: 100%;
+}
+
 .images {
   margin: 25px 0;
 
