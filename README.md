@@ -3,15 +3,19 @@
 <p>
 
 <p align="center">
-  <img src="https://img.shields.io/website?down_color=red&down_message=Down&up_color=green&up_message=Up&url=https%3A%2F%2Fdanielclarke.tech"/>
+  <img src="https://img.shields.io/website?down_color=red&label=danielclarke.tech&url=https%3A%2F%2Fdanielclarke.tech"/>
+  <img src="https://img.shields.io/circleci/build/github/DanielWilliamClarke/Cujo"/>
   <img src="https://img.shields.io/mozilla-observatory/grade/danielclarke.tech?publish"/>
   <img src="https://img.shields.io/github/commit-activity/w/DanielWilliamClarke/Cujo"/>
   <img src="https://img.shields.io/github/last-commit/DanielWilliamClarke/Cujo"/>
+  <img src="https://img.shields.io/github/license/DanielWilliamClarke/Cujo"/>
   <img src="https://img.shields.io/github/languages/count/DanielWilliamClarke/Cujo"/>
+  <img src="https://img.shields.io/docker/image-size/dclarkious/cujo-rust?label=Rust%20Image%20Size"/>
+  <img src="https://img.shields.io/docker/image-size/dclarkious/cujo-portfolio?label=Portfolio%20Image%20Size"/>
 <p>
 
 <p align="center">
-  A CV/Portfolio/Blog built in <b>TypeScript</b> using <b>React</b>. with a backend written in <b>Rust</b> using <b>Wordpress</b> for blogging and content.  
+  A CV/Portfolio/Blog built in <b>TypeScript</b> using <b>React</b>. with a backend written in <b>Rust</b> using <b>Wordpress</b> for blogging and content.
 <p/>
 
 <p align="center">
@@ -73,10 +77,10 @@ rustup default nightly
 # Build Service
 cargo build [--release]
 
-# Run Service locally 
+# Run Service locally
 cargo run [--release]
 
-# Test Service 
+# Test Service
 cargo test [--release]
 ```
 
