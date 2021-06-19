@@ -15,7 +15,6 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-      - working_directory: ~/service
       - run:
           name: Setup Dependencies
           command: |
@@ -27,12 +26,15 @@ jobs:
       - run:
           name: Test
           command: |
+            cd service
             cargo test -- -Z unstable-options --format json | cargo2junit > results.xml
       - store_test_results:
           path: ./service
       - run:
           name: Build Docker image
-          command: docker build -t $DOCKER_REGISTRY/$IMAGE_NAME_RUST:latest .
+          command: |
+            cd service
+            docker build -t $DOCKER_REGISTRY/$IMAGE_NAME_RUST:latest .
 
   push-cujo-rust-image:
     docker:
