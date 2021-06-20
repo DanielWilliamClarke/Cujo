@@ -2,6 +2,12 @@
 
 .navbar {
   transition: 0.5s;
+
+  .nav-link {
+    &.active {
+      background-color: $col-accent-high;
+    }
+  }
 }
 
 @media screen and (max-width: 1024px) {
