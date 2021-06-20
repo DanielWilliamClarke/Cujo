@@ -52,7 +52,7 @@
 
 @media screen and (max-width: 850px) {
   .sketch-backstretch {
-    background-position: 94%;
+    margin-bottom: -48px;
     .backstretch-main {
       font-size: 50px;
     }
@@ -61,12 +61,9 @@
 
 @media screen and (max-width: 550px) {
   .sketch-backstretch {
-    background-position: 22%;
-
     .backstretch-main {
       font-size: 30px;
     }
-
     .backstretch-tag {
       font-size: 15px;
     }

@@ -5,8 +5,7 @@ import {
   Switch,
   withRouter,
 } from "react-router-dom";
-import { HashLink } from "react-router-hash-link";
-import { Card, CardColumns, Col, Row } from "react-bootstrap";
+import { Card, CardColumns, Col, Nav, Row } from "react-bootstrap";
 import moment from "moment";
 
 import { BlogServiceProps, BlogPostData } from "./BlogService";
@@ -70,21 +69,23 @@ class Blog extends Component<
     return (
       <Fade bottom>
         <Card key={data.post.id} bg="dark">
-          <HashLink
-            smooth
-            to={`${this.props.match.url}/${data.post.id}#blogpost`}
-          >
-            {data.media && (
-              <Card.Img variant="top" src={data.media.source_url} />
-            )}
-          </HashLink>
+          {data.media && (
+            <Nav navbarScroll>
+              <Nav.Link
+                href={`${this.props.match.url}/${data.post.id}#blogpost`}
+              >
+                <Card.Img variant="top" src={data.media.source_url} />
+              </Nav.Link>
+            </Nav>
+          )}
           <Card.Body>
-            <HashLink
-              smooth
-              to={`${this.props.match.url}/${data.post.id}#blogpost`}
-            >
-              <Card.Title>{data.post.title.rendered}</Card.Title>
-            </HashLink>
+            <Nav navbarScroll>
+              <Nav.Link
+                href={`${this.props.match.url}/${data.post.id}#blogpost`}
+              >
+                <Card.Title>{data.post.title.rendered}</Card.Title>
+              </Nav.Link>
+            </Nav>
             <Card.Text>
               Published {this.toDateSentence(data.post.date)}{" "}
             </Card.Text>
