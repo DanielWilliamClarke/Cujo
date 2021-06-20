@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Nav, Navbar } from "react-bootstrap";
-import { NavHashLink } from "react-router-hash-link";
 
 import "./NavPanel.scss";
 
