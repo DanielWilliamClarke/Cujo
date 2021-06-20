@@ -1,13 +1,13 @@
-import React, { Component } from "react";
+import { Component } from "react";
 import { Nav, Navbar } from "react-bootstrap";
 
 import "./NavPanel.scss";
 
-export class NavPanel extends Component {
-  state = {
-    bg: undefined,
-  };
+type NavState = {
+  bg: string | undefined;
+};
 
+export class NavPanel extends Component<{}, NavState> {
   listenScrollEvent = () => {
     if (window.scrollY < window.innerHeight) {
       this.setState({ bg: undefined });
@@ -16,7 +16,8 @@ export class NavPanel extends Component {
     }
   };
 
-  componentDidMount() {
+  componentWillMount() {
+    this.setState({ bg: undefined });
     window.addEventListener("scroll", this.listenScrollEvent);
   }
 
