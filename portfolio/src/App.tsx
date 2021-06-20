@@ -1,6 +1,5 @@
 import { Component } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { StickyContainer, Sticky } from "react-sticky";
 
 import { SketchBackstretch } from "./components/backstretch/SketchBackstretch";
 import { CVProps } from "./model/CVModel";
