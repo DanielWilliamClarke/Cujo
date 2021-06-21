@@ -1,27 +1,19 @@
 import axios, { AxiosResponse } from "axios";
 
 import { Post } from "../../model/BlogPostModel";
-import { Media } from "../../model/BlogMediaModel";
-import { Tag } from "../../model/BlogTagModel";
 
-export interface BlogPostData {
-    post: Post;
-    media: Media;
-    tags: Tag[];
-}
-  
 export type BlogServiceProps = {
   service: BlogService;
 };
 
 export class BlogService {
-  public async FetchAllBlogPosts(): Promise<BlogPostData[]> {
+  public async FetchAllBlogPosts(): Promise<Post[]> {
     const response: AxiosResponse = await axios.get('/api/blog');
-    return response.data as BlogPostData[];
+    return response.data as Post[];
   }
 
-  public async FetchBlogPost(postID: number): Promise<BlogPostData> {
+  public async FetchBlogPost(postID: number): Promise<Post> {
     const response: AxiosResponse = await axios.get(`/api/blog/${postID}`);
-    return response.data as BlogPostData;
+    return response.data as Post;
   }
 }

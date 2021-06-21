@@ -8,8 +8,10 @@ import {
 import { Card, CardColumns, Col, Nav, Row } from "react-bootstrap";
 import moment from "moment";
 
-import { BlogServiceProps, BlogPostData } from "./BlogService";
+import { BlogServiceProps } from "./BlogService";
 import BlogPost from "./BlogPost";
+import { Post } from "../../model/BlogPostModel";
+
 import { SharePanel } from "../nav/SharePanel";
 
 import "../shared/Portfolio.scss";
@@ -18,7 +20,7 @@ import "./Blog.scss";
 const Fade = require("react-reveal/Fade");
 
 type BlogState = {
-  blog: BlogPostData[];
+  blog: Post[];
 };
 
 type BlogRouteParams = { id: string };
@@ -53,7 +55,7 @@ class Blog extends Component<
     );
   }
 
-  private setBlogState(blog: BlogPostData[]) {
+  private setBlogState(blog: Post[]) {
     this.setState({ blog });
   }
 
@@ -65,40 +67,40 @@ class Blog extends Component<
     );
   }
 
-  private blogSummaryPanel(data: BlogPostData): JSX.Element {
+  private blogSummaryPanel(data: Post): JSX.Element {
     return (
       <Fade bottom>
-        <Card key={data.post.id} bg="dark">
-          {data.media && (
+        <Card key={data.id} bg="dark">
+          {data.mediaUrl && (
             <Nav navbarScroll>
               <Nav.Link
-                href={`${this.props.match.url}/${data.post.id}#blogpost`}
+                href={`${this.props.match.url}/${data.id}#blogpost`}
               >
-                <Card.Img variant="top" src={data.media.source_url} />
+                <Card.Img variant="top" src={data.mediaUrl} />
               </Nav.Link>
             </Nav>
           )}
           <Card.Body>
             <Nav navbarScroll>
               <Nav.Link
-                href={`${this.props.match.url}/${data.post.id}#blogpost`}
+                href={`${this.props.match.url}/${data.id}#blogpost`}
               >
-                <Card.Title>{data.post.title.rendered}</Card.Title>
+                <Card.Title>{data.title}</Card.Title>
               </Nav.Link>
             </Nav>
             <Card.Text>
-              Published {this.toDateSentence(data.post.date)}{" "}
+              Published {this.toDateSentence(data.date)}{" "}
             </Card.Text>
             <Card.Text
               className="text-muted"
               dangerouslySetInnerHTML={{
-                __html: data.post.excerpt.rendered,
+                __html: data.excerpt,
               }}
             />
           </Card.Body>
           <Card.Footer>
             <small className="text-muted">
-              Last updated {this.toDateSentence(data.post.modified)}
+              Last updated {this.toDateSentence(data.modified)}
             </small>
           </Card.Footer>
         </Card>
@@ -124,7 +126,7 @@ class Blog extends Component<
           </Row>
           <CardColumns className="section-content">
             {this.state.blog.map(
-              (data: BlogPostData): JSX.Element => (
+              (data: Post): JSX.Element => (
                 <Fragment>{this.blogSummaryPanel(data)}</Fragment>
               )
             )}

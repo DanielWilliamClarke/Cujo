@@ -1,40 +1,36 @@
 // src/blog/client.rs
 
-use crate::blog::media::Media;
-use crate::blog::post::Post;
-use crate::blog::tag::Tag;
+use crate::blog::wp_media::Media;
+use crate::blog::wp_post::Post;
+use crate::blog::wp_tag::Tag;
+use crate::blog::blog_post::BlogPost;
 extern crate base64;
 
 use base64::encode;
 use reqwest;
-use reqwest::Error;
 use reqwest::header::AUTHORIZATION;
+use reqwest::Error;
 
 use serde::de::DeserializeOwned;
-use serde::{Deserialize, Serialize};
 
 use futures::try_join;
 
-#[derive(Serialize, Deserialize)]
-pub struct BlogData {
-    pub post: Post,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub media: Option<Media>,
-    pub tags: Vec<Tag>,
+pub struct BlogClient<'a> {
+    host: &'a str,
+    client_id: &'a str,
+    client_secret: &'a str,
 }
 
-pub struct BlogClient {
-    host: String,
-    client_id: String,
-    client_secret: String
-}
-
-impl BlogClient {
-    pub fn new(host: String, client_id: String, client_secret: String) -> BlogClient {
-        BlogClient { host,  client_id, client_secret }
+impl<'a> BlogClient<'a> {
+    pub fn new(host: &'a str, client_id: &'a str, client_secret: &'a str) -> BlogClient<'a> {
+        BlogClient {
+            host,
+            client_id,
+            client_secret,
+        }
     }
 
-    pub async fn get_posts(&self) -> Result<Vec<BlogData>, Error> {
+    pub async fn get_posts(&self) -> Result<Vec<BlogPost>, Error> {
         let (posts, media, tags) = try_join!(
             self.get::<Vec<Post>>("posts"),
             self.get::<Vec<Media>>("media"),
@@ -49,11 +45,11 @@ impl BlogClient {
         Ok(correlated)
     }
 
-    pub async fn get_post(&self, id: &str) -> Result<BlogData, Error> {
-        let posts_endpoint = format!("posts/{}", id);
+    pub async fn get_post(&self, id: &str) -> Result<BlogPost, Error> {
+        let endpoint = format!("posts/{}", id);
 
         let (post, media, tags) = try_join!(
-            self.get::<Post>(&posts_endpoint),
+            self.get::<Post>(&endpoint),
             self.get::<Vec<Media>>("media"),
             self.get::<Vec<Tag>>("tags")
         )?;
@@ -77,28 +73,40 @@ impl BlogClient {
         Ok(response.json().await?)
     }
 
-    fn correlate(&self, post: &Post, media: &[Media], tags: &[Tag]) -> BlogData {
-        BlogData {
-            post: post.clone(),
-            media: media.iter().cloned().find(|m| match m.post {
-                Some(id) => id == post.id,
-                None => false,
-            }),
-            tags: tags
-                .iter()
-                .cloned()
-                .filter(|t| post.tags.contains(&t.id))
-                .collect(),
+    fn correlate(&self, post: &Post, media: &[Media], tags: &[Tag]) -> BlogPost {
+        let media_url = match media.iter().find(|m| match m.post {
+            Some(id) => id == post.id,
+            None => false,
+        }) {
+            Some(m) => Some(m.source_url.clone()),
+            None => None,
+        };
+
+        let tags = tags
+            .iter()
+            .filter(|t| post.tags.contains(&t.id))
+            .map(|t| t.name.clone())
+            .collect();
+
+        BlogPost {
+            id: post.id,
+            title: post.title.rendered.clone(),
+            content: post.content.rendered.clone(),
+            excerpt: post.excerpt.rendered.clone(),
+            date: post.date.clone(),
+            modified: post.modified.clone(),
+            media_url: media_url,
+            tags: tags,
         }
     }
 }
 
 #[cfg(test)]
 mod tests {
-    use super::{BlogClient, BlogData};
-    use crate::blog::media::Media;
-    use crate::blog::post::Post;
-    use crate::blog::tag::Tag;
+    use super::{BlogClient, BlogPost};
+    use crate::blog::wp_media::Media;
+    use crate::blog::wp_post::Post;
+    use crate::blog::wp_tag::Tag;
 
     use mockito::mock;
     use serde::{Deserialize, Serialize};
@@ -153,23 +161,30 @@ mod tests {
         };
         let media: Vec<Media> = vec![Media {
             post: Some(id),
-            ..Default::default()
-        }];
-        let tags: Vec<Tag> = vec![Tag {
-            id: tag_id,
+            source_url: String::from("https://somewhere.com/img.jpg"),
             ..Default::default()
         }];
 
-        let host = "test".to_string();
-        let id = "id".to_string();
-        let secret = "secret".to_string();
+        let test_tags = vec![String::from("test")];
+        let tags = test_tags
+            .iter()
+            .map(|name| Tag {
+                id: tag_id,
+                name: String::from(name),
+                ..Default::default()
+            })
+            .collect::<Vec<Tag>>();
+
+        let host = "test";
+        let id = "id";
+        let secret = "secret";
         let client = BlogClient::new(host, id, secret);
 
-        let blog_data: BlogData = client.correlate(&post, &media, &tags);
+        let bp: BlogPost = client.correlate(&post, &media, &tags);
 
-        assert_eq!(post, blog_data.post);
-        assert_eq!(media[0], blog_data.media.unwrap());
-        assert_eq!(tags, blog_data.tags);
+        assert_eq!(post.id, bp.id);
+        assert_eq!(media[0].source_url, bp.media_url.unwrap());
+        assert_eq!(test_tags, bp.tags);
     }
 
     #[test]
@@ -182,16 +197,16 @@ mod tests {
         let media: Vec<Media> = vec![];
         let tags: Vec<Tag> = vec![];
 
-        let host = "test".to_string();
-        let id = "id".to_string();
-        let secret = "secret".to_string();
+        let host = "test";
+        let id = "id";
+        let secret = "secret";
         let client = BlogClient::new(host, id, secret);
 
-        let blog_data: BlogData = client.correlate(&post, &media, &tags);
+        let bp: BlogPost = client.correlate(&post, &media, &tags);
 
-        assert_eq!(post, blog_data.post);
-        assert_eq!(blog_data.media, None);
-        assert_eq!(0, blog_data.tags.len());
+        assert_eq!(post.id, bp.id);
+        assert_eq!(None, bp.media_url);
+        assert_eq!(0, bp.tags.len());
     }
 
     #[actix_rt::test]
@@ -204,10 +219,10 @@ mod tests {
         let url = format!("/{}", test_data.endpoint);
         let m = setup_http_mocks::<TestJson>(&url, &test_data);
 
-        let host = mockito::server_url().to_string();
-        let id = "id".to_string();
-        let secret = "secret".to_string();
-        let client = BlogClient::new(host, id, secret);
+        let host = mockito::server_url();
+        let id = "id";
+        let secret = "secret";
+        let client = BlogClient::new(&host, id, secret);
 
         match client.get::<TestJson>(&test_data.endpoint).await {
             Ok(data) => {
@@ -234,25 +249,30 @@ mod tests {
             post: Some(id),
             ..Default::default()
         }];
-        let tags: Vec<Tag> = vec![Tag {
-            id: tag_id,
-            ..Default::default()
-        }];
+        let test_tags = vec![String::from("test")];
+        let tags = test_tags
+            .iter()
+            .map(|name| Tag {
+                id: tag_id,
+                name: String::from(name),
+                ..Default::default()
+            })
+            .collect::<Vec<Tag>>();
 
         let (m_posts, m_media, m_tags) =
             setup_rest_mocks::<Vec<Post>, Vec<Media>, Vec<Tag>>("/posts", &posts, &media, &tags);
 
-        let host = mockito::server_url().to_string();
-        let id = "id".to_string();
-        let secret = "secret".to_string();
-        let client = BlogClient::new(host, id, secret);
+        let host = mockito::server_url();
+        let id = "id";
+        let secret = "secret";
+        let client = BlogClient::new(&host, id, secret);
 
         match client.get_posts().await {
-            Ok(blog_data) => {
-                blog_data.iter().for_each(|b| {
-                    assert_eq!(posts[0], b.post);
-                    assert_eq!(media[0], b.media.clone().unwrap());
-                    assert_eq!(tags, b.tags);
+            Ok(bp) => {
+                bp.iter().for_each(|b| {
+                    assert_eq!(posts[0].id, b.id);
+                    assert_eq!(media[0].source_url, b.media_url.clone().unwrap());
+                    assert_eq!(test_tags, b.tags);
                 });
             }
             Err(err) => panic!("Did not expect error: {}", err),
@@ -277,25 +297,30 @@ mod tests {
             post: Some(id),
             ..Default::default()
         }];
-        let tags: Vec<Tag> = vec![Tag {
-            id: tag_id,
-            ..Default::default()
-        }];
+        let test_tags = vec![String::from("test")];
+        let tags = test_tags
+            .iter()
+            .map(|name| Tag {
+                id: tag_id,
+                name: String::from(name),
+                ..Default::default()
+            })
+            .collect::<Vec<Tag>>();
 
         let post_url = format!("/posts/{}", id);
         let (m_posts, m_media, m_tags) =
             setup_rest_mocks::<Post, Vec<Media>, Vec<Tag>>(&post_url, &post, &media, &tags);
 
-        let host = mockito::server_url().to_string();
-        let client_id = "id".to_string();
-        let secret = "secret".to_string();
-        let client = BlogClient::new(host, client_id, secret);
+        let host = mockito::server_url();
+        let client_id = "id";
+        let secret = "secret";
+        let client = BlogClient::new(&host, client_id, secret);
 
         match client.get_post(&id.to_string()).await {
-            Ok(blog_data) => {
-                assert_eq!(post, blog_data.post);
-                assert_eq!(media[0], blog_data.media.clone().unwrap());
-                assert_eq!(tags, blog_data.tags);
+            Ok(bp) => {
+                assert_eq!(post.id, bp.id);
+                assert_eq!(media[0].source_url, bp.media_url.clone().unwrap());
+                assert_eq!(test_tags, bp.tags);
             }
             Err(err) => panic!("Did not expect error: {}", err),
         };
