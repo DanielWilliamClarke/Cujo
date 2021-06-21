@@ -2,4 +2,4 @@
 
 mod model;
 
-pub use model::CV;
+pub use model::{ CV, CVConfig };

@@ -2,6 +2,14 @@
 
 use serde::{Deserialize, Serialize};
 
+use crate::util::FromEnv;
+
+#[derive(Deserialize, Debug, Clone)]
+pub struct CVConfig {
+    pub data_dir: String,
+}
+impl FromEnv for CVConfig {}
+
 #[derive(Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CV {

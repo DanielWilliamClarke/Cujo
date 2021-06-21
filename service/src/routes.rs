@@ -1,21 +1,10 @@
 // src/routes.rs
 
 use actix_web::{get, web, HttpResponse, Responder};
-use serde::Deserialize;
 
-use crate::blog::BlogClient;
-use crate::cv::CV;
+use crate::blog::{ BlogClient, BlogConfig };
+use crate::cv::{ CV, CVConfig };
 use crate::util::parse;
-use crate::util::FromEnv;
-
-#[derive(Deserialize, Debug, Clone)]
-pub struct Config {
-    data_dir: String,
-    wordpress_host: String,
-    wordpress_client_id: String,
-    wordpress_client_secret: String,
-}
-impl FromEnv for Config {}
 
 pub fn init(cfg: &mut web::ServiceConfig) {
     cfg.service(svc_status);
@@ -30,17 +19,16 @@ async fn svc_status() -> impl Responder {
 }
 
 #[get("/cv")]
-async fn get_cv(data: web::Data<Config>) -> impl Responder {
-    match parse::<CV>(&data.data_dir) {
+async fn get_cv(config: web::Data<CVConfig>) -> impl Responder {
+    match parse::<CV>(&config.data_dir) {
         Ok(cv) => HttpResponse::Ok().json(cv),
         Err(err) => HttpResponse::InternalServerError().body(format!("Data not found: {}", err)),
     }
 }
 
 #[get("/blog")]
-async fn get_blog(data: web::Data<Config>) -> impl Responder {
-    let client = BlogClient::new(&data.wordpress_host, &data.wordpress_client_id, &data.wordpress_client_secret);
-    match client.get_posts().await {
+async fn get_blog(config: web::Data<BlogConfig>) -> impl Responder {
+    match BlogClient::new(&config).get_posts().await {
         Ok(data) => HttpResponse::Ok().json(data),
         Err(err) => {
             HttpResponse::InternalServerError().body(format!("Blog data not found: {}", err))
@@ -49,10 +37,9 @@ async fn get_blog(data: web::Data<Config>) -> impl Responder {
 }
 
 #[get("/blog/{id}")]
-async fn get_blog_post(data: web::Data<Config>, path: web::Path<String>) -> impl Responder {
+async fn get_blog_post(config: web::Data<BlogConfig>, path: web::Path<String>) -> impl Responder {
     let id = path.into_inner();
-    let client = BlogClient::new(&data.wordpress_host, &data.wordpress_client_id, &data.wordpress_client_secret);
-    match client.get_post(&id).await {
+    match BlogClient::new(&config).get_post(&id).await {
         Ok(data) => HttpResponse::Ok().json(data),
         Err(err) => {
             HttpResponse::InternalServerError().body(format!("Blog data not found: {}", err))

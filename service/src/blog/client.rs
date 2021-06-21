@@ -1,9 +1,11 @@
 // src/blog/client.rs
 
+use crate::blog::blog_post::BlogPost;
 use crate::blog::wp_media::Media;
 use crate::blog::wp_post::Post;
 use crate::blog::wp_tag::Tag;
-use crate::blog::blog_post::BlogPost;
+use crate::util::FromEnv;
+
 extern crate base64;
 
 use base64::encode;
@@ -11,23 +13,25 @@ use reqwest;
 use reqwest::header::AUTHORIZATION;
 use reqwest::Error;
 
-use serde::de::DeserializeOwned;
-
 use futures::try_join;
+use serde::de::DeserializeOwned;
+use serde::Deserialize;
+
+#[derive(Deserialize, Debug, Clone)]
+pub struct BlogConfig {
+    host: String,
+    client_id: String,
+    client_secret: String,
+}
+impl FromEnv for BlogConfig {}
 
 pub struct BlogClient<'a> {
-    host: &'a str,
-    client_id: &'a str,
-    client_secret: &'a str,
+    config: &'a BlogConfig,
 }
 
 impl<'a> BlogClient<'a> {
-    pub fn new(host: &'a str, client_id: &'a str, client_secret: &'a str) -> BlogClient<'a> {
-        BlogClient {
-            host,
-            client_id,
-            client_secret,
-        }
+    pub fn new(config: &'a BlogConfig) -> BlogClient<'a> {
+        BlogClient { config }
     }
 
     pub async fn get_posts(&self) -> Result<Vec<BlogPost>, Error> {
@@ -61,11 +65,14 @@ impl<'a> BlogClient<'a> {
     where
         T: DeserializeOwned,
     {
-        let basic_auth = encode(format!("{}:{}", self.client_id, self.client_secret));
+        let basic_auth = encode(format!(
+            "{}:{}",
+            self.config.client_id, self.config.client_secret
+        ));
 
         let client = reqwest::Client::new();
         let response = client
-            .get(format!("{}/{}", self.host, endpoint))
+            .get(format!("{}/{}", self.config.host, endpoint))
             .header(AUTHORIZATION, format!("Basic {}", basic_auth))
             .send()
             .await?;
@@ -103,7 +110,7 @@ impl<'a> BlogClient<'a> {
 
 #[cfg(test)]
 mod tests {
-    use super::{BlogClient, BlogPost};
+    use super::{BlogClient, BlogConfig, BlogPost};
     use crate::blog::wp_media::Media;
     use crate::blog::wp_post::Post;
     use crate::blog::wp_tag::Tag;
@@ -175,10 +182,12 @@ mod tests {
             })
             .collect::<Vec<Tag>>();
 
-        let host = "test";
-        let id = "id";
-        let secret = "secret";
-        let client = BlogClient::new(host, id, secret);
+        let config = BlogConfig {
+            host: String::from("test"),
+            client_id: String::from("id"),
+            client_secret: String::from("secret"),
+        };
+        let client = BlogClient::new(&config);
 
         let bp: BlogPost = client.correlate(&post, &media, &tags);
 
@@ -197,10 +206,12 @@ mod tests {
         let media: Vec<Media> = vec![];
         let tags: Vec<Tag> = vec![];
 
-        let host = "test";
-        let id = "id";
-        let secret = "secret";
-        let client = BlogClient::new(host, id, secret);
+        let config = BlogConfig {
+            host: String::from("test"),
+            client_id: String::from("id"),
+            client_secret: String::from("secret"),
+        };
+        let client = BlogClient::new(&config);
 
         let bp: BlogPost = client.correlate(&post, &media, &tags);
 
@@ -219,10 +230,12 @@ mod tests {
         let url = format!("/{}", test_data.endpoint);
         let m = setup_http_mocks::<TestJson>(&url, &test_data);
 
-        let host = mockito::server_url();
-        let id = "id";
-        let secret = "secret";
-        let client = BlogClient::new(&host, id, secret);
+        let config = BlogConfig {
+            host: mockito::server_url(),
+            client_id: String::from("id"),
+            client_secret: String::from("secret"),
+        };
+        let client = BlogClient::new(&config);
 
         match client.get::<TestJson>(&test_data.endpoint).await {
             Ok(data) => {
@@ -262,10 +275,12 @@ mod tests {
         let (m_posts, m_media, m_tags) =
             setup_rest_mocks::<Vec<Post>, Vec<Media>, Vec<Tag>>("/posts", &posts, &media, &tags);
 
-        let host = mockito::server_url();
-        let id = "id";
-        let secret = "secret";
-        let client = BlogClient::new(&host, id, secret);
+        let config = BlogConfig {
+            host: mockito::server_url(),
+            client_id: String::from("id"),
+            client_secret: String::from("secret"),
+        };
+        let client = BlogClient::new(&config);
 
         match client.get_posts().await {
             Ok(bp) => {
@@ -311,10 +326,12 @@ mod tests {
         let (m_posts, m_media, m_tags) =
             setup_rest_mocks::<Post, Vec<Media>, Vec<Tag>>(&post_url, &post, &media, &tags);
 
-        let host = mockito::server_url();
-        let client_id = "id";
-        let secret = "secret";
-        let client = BlogClient::new(&host, client_id, secret);
+        let config = BlogConfig {
+            host: mockito::server_url(),
+            client_id: String::from("id"),
+            client_secret: String::from("secret"),
+        };
+        let client = BlogClient::new(&config);
 
         match client.get_post(&id.to_string()).await {
             Ok(bp) => {

@@ -6,7 +6,7 @@ mod wp_tag;
 mod blog_post;
 mod client;
 
-pub use client::BlogClient;
+pub use client::{ BlogClient, BlogConfig };
 
 
 

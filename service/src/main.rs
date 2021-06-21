@@ -1,10 +1,8 @@
 // src/main.rs
-#![feature(in_band_lifetimes)]
-
 #[macro_use]
 extern crate log;
 
-use actix_web::{middleware::Logger, App, HttpServer};
+use actix_web::{App, HttpServer, middleware::Logger};
 use dotenv::dotenv;
 use listenfd::ListenFd;
 use serde::Deserialize;
@@ -14,7 +12,9 @@ mod cv;
 mod routes;
 mod util;
 
-use routes::{init, Config};
+use routes::init;
+use cv::CVConfig;
+use blog::BlogConfig;
 use util::FromEnv;
 
 #[derive(Deserialize, Debug, Clone)]
@@ -29,19 +29,21 @@ async fn main() -> std::io::Result<()> {
     dotenv().ok();
     env_logger::init_from_env(env_logger::Env::new().default_filter_or("info"));
 
+    let server_config = ServerConfig::new("");
+    let cv_config = CVConfig::new("");
+    let blog_config = BlogConfig::new("WORDPRESS_");
+
     let mut server = HttpServer::new(move || {
         App::new()
-            .data(Config::parse().clone())
+            .data(cv_config.clone())
+            .data(blog_config.clone())
             .wrap(Logger::default())
             .configure(init)
     });
 
     server = match ListenFd::from_env().take_tcp_listener(0)? {
         Some(listener) => server.listen(listener)?,
-        None => {
-            let config = ServerConfig::parse();
-            server.bind(format!("{}:{}", config.host, config.port))?
-        }
+        None => server.bind(format!("{}:{}", server_config.host, server_config.port))?
     };
 
     info!("Cujo Server Started");
