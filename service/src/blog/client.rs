@@ -95,8 +95,8 @@ impl<'a> BlogClient<'a> {
             excerpt: post.excerpt.rendered.clone(),
             date: post.date.clone(),
             modified: post.modified.clone(),
-            media_url: media_url,
-            tags: tags,
+            media_url,
+            tags,
         }
     }
 }
