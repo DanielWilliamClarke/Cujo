@@ -1,18 +1,19 @@
 // src/utils/env_parser.rs
 
 use serde::de::DeserializeOwned;
+use std::fmt::Debug;
 
 pub trait FromEnv {
-    fn parse() -> Self
+    fn new(prefix: &str) -> Self
     where
-        Self: DeserializeOwned,
+        Self: DeserializeOwned + Debug,
     {
-        match envy::from_env::<Self>() {
+        match envy::prefixed(prefix).from_env::<Self>() {
             Ok(config) => {
-                println!("Cujo-rust API config set!");
+                print!("Cujo-rust config parsed!");
                 config
             }
-            Err(err) => panic!("Cujo-rust config not set! {:#?}", err),
+            Err(err) => panic!("Cujo-rust config not parsed! {:#?}", err),
         }
     }
 }
