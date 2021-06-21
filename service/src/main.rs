@@ -4,36 +4,44 @@
 #[macro_use]
 extern crate log;
 
-use actix_web::{App, HttpServer, middleware::Logger};
-use listenfd::ListenFd;
+use actix_web::{middleware::Logger, App, HttpServer};
 use dotenv::dotenv;
-use routes::{Config, init};
+use listenfd::ListenFd;
+use serde::Deserialize;
 
-mod cv;
 mod blog;
-mod util;
+mod cv;
 mod routes;
+mod util;
+
+use routes::{init, Config};
+use util::FromEnv;
+
+#[derive(Deserialize, Debug, Clone)]
+pub struct ServerConfig {
+    host: String,
+    port: String,
+}
+impl FromEnv for ServerConfig {}
 
 #[actix_rt::main]
 async fn main() -> std::io::Result<()> {
     dotenv().ok();
     env_logger::init_from_env(env_logger::Env::new().default_filter_or("info"));
 
-    let config = Config::new();
-    let uri = format!("{}:{}", config.host, config.port);
-    println!("Cujo-rust config set!");
+    let mut server = HttpServer::new(move || {
+        App::new()
+            .data(Config::parse().clone())
+            .wrap(Logger::default())
+            .configure(init)
+    });
 
-    let mut listenfd = ListenFd::from_env();
-    let mut server = 
-        HttpServer::new(move || 
-            App::new()
-                .data(config.clone())
-                .wrap(Logger::default())
-                .configure(init));
-
-    server = match listenfd.take_tcp_listener(0)? {
+    server = match ListenFd::from_env().take_tcp_listener(0)? {
         Some(listener) => server.listen(listener)?,
-        None => server.bind(uri)?
+        None => {
+            let config = ServerConfig::parse();
+            server.bind(format!("{}:{}", config.host, config.port))?
+        }
     };
 
     info!("Cujo Server Started");

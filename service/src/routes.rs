@@ -6,25 +6,16 @@ use serde::Deserialize;
 use crate::blog::BlogClient;
 use crate::cv::CV;
 use crate::util::parse;
+use crate::util::FromEnv;
 
 #[derive(Deserialize, Debug, Clone)]
 pub struct Config {
-    pub host: String,
-    pub port: String,
     data_dir: String,
     wordpress_host: String,
     wordpress_client_id: String,
     wordpress_client_secret: String,
 }
-
-impl Config {
-    pub fn new() -> Config {
-        match envy::from_env::<Config>() {
-            Ok(config) => config,
-            Err(err) => panic!("Cujo-rust config not set! {:#?}", err)
-        }
-    }
-}
+impl FromEnv for Config {}
 
 pub fn init(cfg: &mut web::ServiceConfig) {
     cfg.service(svc_status);
