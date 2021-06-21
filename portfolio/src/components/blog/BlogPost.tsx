@@ -3,8 +3,8 @@ import { RouteComponentProps, withRouter } from "react-router-dom";
 import { Button, Container, Row, Col } from "react-bootstrap";
 import moment from "moment";
 
-import { BlogServiceProps, BlogPostData } from "./BlogService";
-import { Tag } from "../../model/BlogTagModel";
+import { BlogServiceProps } from "./BlogService";
+import { Post } from "../../model/BlogPostModel";
 import { SharePanel } from "../nav/SharePanel";
 
 import "../shared/Portfolio.scss";
@@ -16,7 +16,7 @@ type BlogIDProps = {
 };
 
 type BlogPostState = {
-  post: BlogPostData | null;
+  post: Post | null;
 };
 
 class BlogPost extends Component<
@@ -44,18 +44,18 @@ class BlogPost extends Component<
     );
   }
 
-  private setPostState(post: BlogPostData | null) {
+  private setPostState(post: Post | null) {
     this.setState({ post });
   }
 
-  private displayPost(p: BlogPostData): JSX.Element {
+  private displayPost(p: Post): JSX.Element {
     return (
       <section id="blogpost" className="section blog-post">
         <Container>
           <SharePanel
             url={window.location.href}
-            title={`Blog - ${p.post.title.rendered}`}
-            body={p.post.excerpt.rendered}
+            title={`Blog - ${p.title}`}
+            body={p.excerpt}
             hashtag="DCTechBlog"
           />
 
@@ -63,9 +63,9 @@ class BlogPost extends Component<
 
           <Row>
             <Col>
-              <h2 className="section-title">{p.post.title.rendered}</h2>
+              <h2 className="section-title">{p.title}</h2>
               <h4 className="blog-modified">
-                Published {this.toDateSentence(p.post.date)}
+                Published {this.toDateSentence(p.date)}
               </h4>
               <div className="line"></div>
             </Col>
@@ -73,8 +73,8 @@ class BlogPost extends Component<
 
           <Row className="tags">
             {p.tags.map(
-              (t: Tag): JSX.Element => (
-                <span className="col-item">{t.name}</span>
+              (tag: string): JSX.Element => (
+                <span className="col-item">{tag}</span>
               )
             )}
           </Row>
@@ -83,16 +83,16 @@ class BlogPost extends Component<
             <Col>
               <div
                 dangerouslySetInnerHTML={{
-                  __html: p.post.excerpt.rendered,
+                  __html: p.excerpt,
                 }}
               ></div>
             </Col>
           </Row>
 
-          {p.media && (
+          {p.mediaUrl && (
             <Row className="section-content">
               <Col className="centered Featured">
-                <img src={p.media.source_url} alt="not found..." />
+                <img src={p.mediaUrl} alt="not found..." />
               </Col>
             </Row>
           )}
@@ -101,7 +101,7 @@ class BlogPost extends Component<
             <Col>
               <div
                 dangerouslySetInnerHTML={{
-                  __html: p.post.content.rendered,
+                  __html: p.content,
                 }}
               ></div>
             </Col>

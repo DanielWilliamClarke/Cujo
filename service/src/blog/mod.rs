@@ -1,11 +1,12 @@
 // src/blog/mod.rs
 
-mod post;
-mod media;
-mod tag;
+mod wp_post;
+mod wp_media;
+mod wp_tag;
+mod blog_post;
 mod client;
 
-pub use client::{BlogClient, BlogData};
+pub use client::BlogClient;
 
 
 
