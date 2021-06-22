@@ -1,4 +1,4 @@
-// src/blog/wp_post.rs
+// src/blog/model/wp_post.rs
 
 use serde::{Deserialize, Serialize};
 

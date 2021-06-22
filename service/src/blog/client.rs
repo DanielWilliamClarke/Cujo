@@ -1,9 +1,9 @@
 // src/blog/client.rs
 
-use crate::blog::blog_post::BlogPost;
-use crate::blog::wp_media::Media;
-use crate::blog::wp_post::Post;
-use crate::blog::wp_tag::Tag;
+use crate::blog::model::BlogPost;
+use crate::blog::model::Media;
+use crate::blog::model::Post;
+use crate::blog::model::Tag;
 use crate::util::FromEnv;
 
 extern crate base64;
@@ -110,10 +110,11 @@ impl<'a> BlogClient<'a> {
 
 #[cfg(test)]
 mod tests {
-    use super::{BlogClient, BlogConfig, BlogPost};
-    use crate::blog::wp_media::Media;
-    use crate::blog::wp_post::Post;
-    use crate::blog::wp_tag::Tag;
+    use crate::blog::model::BlogPost;
+    use crate::blog::model::Media;
+    use crate::blog::model::Post;
+    use crate::blog::model::Tag;
+    use super::{BlogClient, BlogConfig};
 
     use mockito::mock;
     use serde::{Deserialize, Serialize};
