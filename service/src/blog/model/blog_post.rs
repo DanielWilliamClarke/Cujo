@@ -1,4 +1,4 @@
-// src/blog/blog_post.rs
+// src/blog/model/blog_post.rs
 
 use serde::{Deserialize, Serialize};
 

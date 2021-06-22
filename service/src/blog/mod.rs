@@ -1,9 +1,6 @@
 // src/blog/mod.rs
 
-mod wp_post;
-mod wp_media;
-mod wp_tag;
-mod blog_post;
+mod model;
 mod client;
 
 pub use client::{ BlogClient, BlogConfig };
