@@ -1,9 +1,6 @@
 // src/blog/client.rs
 
-use crate::blog::model::BlogPost;
-use crate::blog::model::Media;
-use crate::blog::model::Post;
-use crate::blog::model::Tag;
+use crate::blog::model::{ BlogPost, Post, Media, Tag };
 use crate::util::FromEnv;
 
 extern crate base64;
@@ -110,10 +107,7 @@ impl<'a> BlogClient<'a> {
 
 #[cfg(test)]
 mod tests {
-    use crate::blog::model::BlogPost;
-    use crate::blog::model::Media;
-    use crate::blog::model::Post;
-    use crate::blog::model::Tag;
+    use crate::blog::model::{ BlogPost, Post, Media, Tag };
     use super::{BlogClient, BlogConfig};
 
     use mockito::mock;
