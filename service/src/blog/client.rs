@@ -78,13 +78,13 @@ impl<'a> BlogClient<'a> {
     }
 
     fn correlate(&self, post: &Post, media: &[Media], tags: &[Tag]) -> BlogPost {
-        let media_url = match media.iter().find(|m| match m.post {
-            Some(id) => id == post.id,
-            None => false,
-        }) {
-            Some(m) => Some(m.source_url.clone()),
-            None => None,
-        };
+        let media_url = media
+            .iter()
+            .find(|m| match m.post {
+                Some(id) => id == post.id,
+                None => false,
+            })
+            .map(|m| m.source_url.clone());
 
         let tags = tags
             .iter()
