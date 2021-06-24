@@ -4,7 +4,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/website?down_color=red&label=danielclarke.tech&url=https%3A%2F%2Fdanielclarke.tech"/>
-  <img src="https://img.shields.io/circleci/build/github/DanielWilliamClarke/Cujo?label=circle"/>
+  <img src="https://img.shields.io/circleci/build/github/DanielWilliamClarke/Cujo?label=circleci"/>
   <img src="https://img.shields.io/mozilla-observatory/grade/danielclarke.tech?publish"/>
   <img src="https://img.shields.io/github/commit-activity/w/DanielWilliamClarke/Cujo"/>
   <img src="https://img.shields.io/github/last-commit/DanielWilliamClarke/Cujo"/>
