@@ -1,4 +1,4 @@
-import { Component, Fragment } from "react";
+import { Component } from "react";
 import { Switch, Route, RouteComponentProps, withRouter } from "react-router-dom";
 import { SketchBackstretch } from "./components/backstretch/SketchBackstretch";
 import { CVProps } from "./model/CVModel";
@@ -9,8 +9,6 @@ import { BlogServiceProps } from "./components/blog/BlogService";
 import { BlogPost } from "./components/blog/BlogPost";
 
 import "./App.scss";
-import { Nav } from "react-bootstrap";
-
 type BlogRouteParams = { id: string };
 
 class App extends Component<CVProps & RouteComponentProps & BlogServiceProps> {
