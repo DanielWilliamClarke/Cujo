@@ -181,6 +181,10 @@
         "name": "Composer"
       },
       {
+        "icon": "markdown-original",
+        "name": "Markdown"
+      },
+      {
         "icon": "nodejs-plain",
         "name": "Node JS"
       },
@@ -195,6 +199,10 @@
       {
         "icon": "angularjs-plain",
         "name": "Angular"
+      },
+      {
+        "icon": "knockout-plain-wordmark",
+        "name": "Knockout"
       },
       {
         "icon": "jquery-plain",
@@ -233,12 +241,20 @@
         "name": "Grunt"
       },
       {
+        "icon": "karma-plain",
+        "name": "Karma"
+      },
+      {
         "icon": "jasmine-plain",
         "name": "Jasmine"
       },
       {
         "icon": "mocha-plain",
         "name": "Mocha"
+      },
+      {
+        "icon": "jest-plain",
+        "name": "Jest"
       },
       {
         "icon": "html5-plain",
@@ -261,12 +277,20 @@
         "name": "D3JS"
       },
       {
+        "icon": "threejs-original",
+        "name": "THREEJS"
+      },
+      {
         "icon": "protractor-plain",
         "name": "Protractor"
       },
       {
         "icon": "electron-original",
         "name": "Electron"
+      },
+      {
+        "icon": "spring-plain",
+        "name": "Spring"
       },
       {
         "icon": "docker-plain",
@@ -283,6 +307,10 @@
       {
         "icon": "ubuntu-plain",
         "name": "Ubuntu"
+      },
+      {
+        "icon": "unix-original",
+        "name": "Unix"
       },
       {
         "icon": "windows8-plain",
@@ -303,6 +331,10 @@
       {
         "icon": "googlecloud-plain",
         "name": "GCP"
+      },    
+      {
+        "icon": "firebase-plain",
+        "name": "Firebase"
       },
       {
         "icon": "mongodb-plain",
@@ -329,8 +361,20 @@
         "name": "Bitbucket"
       },
       {
+        "icon": "circleci-plain",
+        "name": "Circle CI"
+      },
+      {
         "icon": "photoshop-plain",
         "name": "Photoshop"
+      },
+      {
+        "icon": "processing-plain",
+        "name": "Processing"
+      },
+      {
+        "icon": "vscode-plain",
+        "name": "VS Code"
       },
       {
         "icon": "visualstudio-plain",

@@ -7,10 +7,11 @@ use crate::cv::{ CV, CVConfig };
 use crate::util::parse;
 
 pub fn init(cfg: &mut web::ServiceConfig) {
-    cfg.service(svc_status);
-    cfg.service(get_cv);
-    cfg.service(get_blog);
-    cfg.service(get_blog_post);
+    cfg
+        .service(svc_status)
+        .service(get_cv)
+        .service(get_blog)
+        .service(get_blog_post);
 }
 
 #[get("/svcstatus")]
@@ -37,8 +38,7 @@ async fn get_blog(config: web::Data<BlogConfig>) -> impl Responder {
 }
 
 #[get("/blog/{id}")]
-async fn get_blog_post(config: web::Data<BlogConfig>, path: web::Path<String>) -> impl Responder {
-    let id = path.into_inner();
+async fn get_blog_post(config: web::Data<BlogConfig>, id: web::Path<String>) -> impl Responder {
     match BlogClient::new(&config).get_post(&id).await {
         Ok(data) => HttpResponse::Ok().json(data),
         Err(err) => {
