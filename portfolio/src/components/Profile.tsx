@@ -1,17 +1,18 @@
 import { Component } from "react";
-
-import { SharePanel } from "../nav/SharePanel";
-import { About } from "./About";
-import { Experience } from "./Experience";
-import { Technical } from "./Technical";
-import { Education } from "./Education";
-import { Projects } from "./Projects";
-import { Contact } from "./Contact";
-import { CVProps } from "../../model/CVModel";
+import { CVProps } from "../model/CVModel";
+import { Blog } from "./blog/Blog";
+import { BlogServiceProps } from "./blog/BlogService";
+import { SharePanel } from "./nav/SharePanel";
+import { About } from "./profile/About";
+import { Contact } from "./profile/Contact";
+import { Education } from "./profile/Education";
+import { Experience } from "./profile/Experience";
+import { Projects } from "./profile/Projects";
+import { Technical } from "./profile/Technical";
 
 const Fade = require("react-reveal/Fade");
 
-export class Profile extends Component<CVProps> {
+export class Profile extends Component<CVProps & BlogServiceProps> {
   render(): JSX.Element {
     return (
       <div>
@@ -39,8 +40,11 @@ export class Profile extends Component<CVProps> {
           <Technical techical={this.props.cv.skills} />
         </Fade>
         <Fade bottom>
+          <Blog service={this.props.service} />
+        </Fade>
+        <Fade bottom>
           <Contact profiles={this.props.cv.basics.profiles} />
-        </Fade> 
+        </Fade>  
       </div>
     );
   }
