@@ -28,7 +28,7 @@ pub struct Basics {
     pub name: String,
     pub label: String,
     pub email: String,
-    pub picture: String,
+    pub images: Vec<String>,
     pub phone: String,
     pub website: String,
     pub summary: String,

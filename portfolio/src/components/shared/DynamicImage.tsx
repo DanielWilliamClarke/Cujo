@@ -5,7 +5,6 @@ type ImageProps = {
   alt: string;
 };
 
-
 type ImageState = {
   loaded: string
 };
