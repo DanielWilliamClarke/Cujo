@@ -44,6 +44,13 @@
   }
 }
 
+.scroll-indicator {
+  position: absolute;
+  bottom: calc(100vh - 85%);
+  display: flex;
+  justify-content: space-around;
+}
+
 @media screen and (max-width: 1024px) {
   .sketch-backstretch {
     background-position: 100%;

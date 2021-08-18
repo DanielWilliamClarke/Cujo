@@ -1,5 +1,5 @@
 import p5 from "p5";
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 
 import hex from "../../sketches/hex";
@@ -11,6 +11,7 @@ import hypercube from "../../sketches/hypercube";
 import { CVProps } from "../../model/CVModel";
 
 import "./SketchBackstretch.scss";
+import { ScrollIndicator } from "./ScrollIndicator";
 
 declare global {
   interface Array<T> {
@@ -42,17 +43,22 @@ export class SketchBackstretch extends Component<CVProps> {
 
   render() {
     return (
-      <Container fluid ref={this.myRef} className="sketch-backstretch">
-        <div className="backstretch-headline">
-          <Row className="backstretch-main">
-            <Col>{this.props.cv.basics.name}</Col>
-          </Row>
-          <div className="centered line"></div>
-          <Row className="backstretch-tag">
-            <Col>{this.props.cv.basics.label}</Col>
-          </Row>
-        </div>
-      </Container>
+      <Fragment>
+        <Container fluid ref={this.myRef} className="sketch-backstretch">
+          <div className="backstretch-headline">
+            <Row className="backstretch-main">
+              <Col>{this.props.cv.basics.name}</Col>
+            </Row>
+            <div className="centered line"></div>
+            <Row className="backstretch-tag">
+              <Col>{this.props.cv.basics.label}</Col>
+            </Row>
+          </div>
+        </Container>
+        <Container fluid className="scroll-indicator">
+          <ScrollIndicator />
+        </Container>
+      </Fragment>
     );
   }
 }
