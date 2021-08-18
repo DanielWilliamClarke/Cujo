@@ -1,6 +1,5 @@
-import React, { Component, Fragment, MouseEvent } from "react";
-import { RouteComponentProps, withRouter } from "react-router-dom";
-import { Button, Container, Row, Col } from "react-bootstrap";
+import { Component, Fragment } from "react";
+import { Container, Row, Col, Nav } from "react-bootstrap";
 import moment from "moment";
 
 import { BlogServiceProps } from "./BlogService";
@@ -19,21 +18,14 @@ type BlogPostState = {
   post: Post | null;
 };
 
-class BlogPost extends Component<
-  BlogServiceProps & BlogIDProps & RouteComponentProps,
-  BlogPostState
-> {
+export class BlogPost extends Component<BlogServiceProps & BlogIDProps, BlogPostState> {
+
   componentWillMount(): void {
     this.setPostState(null);
     this.props.service
       .FetchBlogPost(this.props.id)
       .then(this.setPostState.bind(this))
       .catch((err) => console.log(err));
-  }
-
-  handleClick(event: MouseEvent<HTMLButtonElement>) {
-    event.stopPropagation();
-    this.props.history.goBack();
   }
 
   render(): JSX.Element {
@@ -52,15 +44,19 @@ class BlogPost extends Component<
     return (
       <section id="blogpost" className="section blog-post">
         <Container>
+          <Nav navbarScroll>
+            <Nav.Link href={`/#blog`} >
+              {`< Back`}
+            </Nav.Link>
+          </Nav>
+
           <SharePanel
             url={window.location.href}
             title={`Blog - ${p.title}`}
             body={p.excerpt}
             hashtag="DCTechBlog"
           />
-
-          {this.backButton()}
-
+          
           <Row>
             <Col>
               <h2 className="section-title">{p.title}</h2>
@@ -108,21 +104,8 @@ class BlogPost extends Component<
           </Row>
 
           <div className="short-line"></div>
-          {this.backButton()}
         </Container>
       </section>
-    );
-  }
-
-  private backButton(): JSX.Element {
-    return (
-      <Button
-        className="blog-back"
-        variant="link"
-        onClick={this.handleClick.bind(this)}
-      >
-        {`< Back`}
-      </Button>
     );
   }
 
@@ -133,5 +116,3 @@ class BlogPost extends Component<
     return moment(date).format("Do MMMM YYYY HH:mm:ss");
   }
 }
-
-export default withRouter(BlogPost);

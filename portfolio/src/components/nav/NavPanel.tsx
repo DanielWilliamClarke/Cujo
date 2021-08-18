@@ -41,15 +41,13 @@ export class NavPanel extends Component<{}, NavState> {
             "education",
             "projects",
             "skills",
-            "contact",
-          ].map((hash: string): JSX.Element => this.createLink("/", hash))}
-          {this.createLink("/blog", "blog")}
+            "blog",
+            "contact"
+          ].map(
+            (hash: string): JSX.Element =>
+              (<Nav.Link href={`/#${hash}`}>{hash}</Nav.Link>))}
         </Nav>
       </Navbar>
     );
-  }
-
-  private createLink(link: string, hash: string): JSX.Element {
-    return <Nav.Link href={`${link}#${hash}`}>{hash}</Nav.Link>;
   }
 }

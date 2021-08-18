@@ -1,46 +1,41 @@
-import { Component } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-
+import { Component, Fragment } from "react";
+import { Switch, Route, RouteComponentProps, withRouter } from "react-router-dom";
 import { SketchBackstretch } from "./components/backstretch/SketchBackstretch";
 import { CVProps } from "./model/CVModel";
 import { NavPanel } from "./components/nav/NavPanel";
 import { Copyright } from "./components/backstretch/Copyright";
-
-import { Profile } from "./components/profile/Profile";
-import Blog from "./components/blog/Blog";
-import { BlogService } from "./components/blog/BlogService";
+import { Profile } from "./components/Profile";
+import { BlogServiceProps } from "./components/blog/BlogService";
+import { BlogPost } from "./components/blog/BlogPost";
 
 import "./App.scss";
+import { Nav } from "react-bootstrap";
 
-export class App extends Component<CVProps> {
-  private bService: BlogService;
+type BlogRouteParams = { id: string };
 
-  constructor(props: CVProps) {
-    super(props);
-    this.bService = new BlogService();
-  }
-
+class App extends Component<CVProps & RouteComponentProps & BlogServiceProps> {
   render(): JSX.Element {
     return (
       <div>
         <SketchBackstretch cv={this.props.cv}></SketchBackstretch>
-        <Router>
-          <NavPanel></NavPanel>
-          <div className="app">
-            <Switch>
-              <Route exact path="/">
-                <Profile cv={this.props.cv} />
-              </Route>
-              <Route path="/blog">
-                <Blog service={this.bService} />
-              </Route>
-            </Switch>
-            <footer id="footer">
-              <Copyright />
-            </footer>
-          </div>
-        </Router>
+        <NavPanel></NavPanel>
+        <div className="app">
+          <Switch>
+            <Route exact path="/">
+              <Profile cv={this.props.cv} service={this.props.service} />
+            </Route>
+            <Route
+              path={"/blog/:id"}
+              children={({ match }: RouteComponentProps<BlogRouteParams>): JSX.Element => 
+                <BlogPost service={this.props.service} id={parseInt(match.params.id)} />} />
+          </Switch>
+          <footer id="footer">
+            <Copyright />
+          </footer>
+        </div>
       </div>
     );
   }
 }
+
+export default withRouter(App);

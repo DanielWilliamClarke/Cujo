@@ -1,18 +1,9 @@
-import React, { Component, Fragment } from "react";
-import {
-  Route,
-  RouteComponentProps,
-  Switch,
-  withRouter,
-} from "react-router-dom";
+import { Component, Fragment } from "react";
 import { Card, CardColumns, Col, Nav, Row } from "react-bootstrap";
 import moment from "moment";
 
 import { BlogServiceProps } from "./BlogService";
-import BlogPost from "./BlogPost";
 import { Post } from "../../model/BlogPostModel";
-
-import { SharePanel } from "../nav/SharePanel";
 
 import "../shared/Portfolio.scss";
 import "./Blog.scss";
@@ -23,12 +14,7 @@ type BlogState = {
   blog: Post[];
 };
 
-type BlogRouteParams = { id: string };
-
-class Blog extends Component<
-  BlogServiceProps & RouteComponentProps,
-  BlogState
-> {
+export class Blog extends Component<BlogServiceProps, BlogState> {
   componentWillMount(): void {
     this.setBlogState([]);
     this.props.service
@@ -38,32 +24,32 @@ class Blog extends Component<
   }
 
   render(): JSX.Element {
-    return (
-      <Fragment>
-        <Switch location={this.props.location}>
-          <Route
-            exact
-            path={`${this.props.match.path}`}
-            children={this.blogPosts.bind(this)}
-          />
-          <Route
-            path={`${this.props.match.path}/:id`}
-            children={this.showPost.bind(this)}
-          />
-        </Switch>
-      </Fragment>
-    );
+    return this.blogPosts();
   }
 
   private setBlogState(blog: Post[]) {
     this.setState({ blog });
   }
 
-  private showPost({
-    match,
-  }: RouteComponentProps<BlogRouteParams>): JSX.Element {
+  private blogPosts(): JSX.Element {
     return (
-      <BlogPost service={this.props.service} id={parseInt(match.params.id)} />
+      <section id="blog" className="section blog">
+        <Fade bottom>
+          <Row>
+            <Col>
+              <h2 className="section-title">Blog</h2>
+              <div className="centered line" />
+            </Col>
+          </Row>
+          <CardColumns className="section-content">
+            {this.state.blog.map(
+              (data: Post): JSX.Element => (
+                <Fragment>{this.blogSummaryPanel(data)}</Fragment>
+              )
+            )}
+          </CardColumns>
+        </Fade>
+      </section>
     );
   }
 
@@ -74,8 +60,7 @@ class Blog extends Component<
           {data.mediaUrl && (
             <Nav navbarScroll>
               <Nav.Link
-                href={`${this.props.match.url}/${data.id}#blogpost`}
-              >
+                href={`/blog/${data.id}`} >
                 <Card.Img variant="top" src={data.mediaUrl} />
               </Nav.Link>
             </Nav>
@@ -83,7 +68,7 @@ class Blog extends Component<
           <Card.Body>
             <Nav navbarScroll>
               <Nav.Link
-                href={`${this.props.match.url}/${data.id}#blogpost`}
+                href={`/blog/${data.id}`}
               >
                 <Card.Title>{data.title}</Card.Title>
               </Nav.Link>
@@ -108,34 +93,6 @@ class Blog extends Component<
     );
   }
 
-  private blogPosts(): JSX.Element {
-    return (
-      <section id="blog" className="section blog">
-        <SharePanel
-          url={window.location.href}
-          title="Blog"
-          body="A blog about software engineering, magic, family life and other hobbies"
-          hashtag="DCTechBlog"
-        />
-        <Fade bottom>
-          <Row>
-            <Col>
-              <h2 className="section-title">Blog</h2>
-              <div className="centered line" />
-            </Col>
-          </Row>
-          <CardColumns className="section-content">
-            {this.state.blog.map(
-              (data: Post): JSX.Element => (
-                <Fragment>{this.blogSummaryPanel(data)}</Fragment>
-              )
-            )}
-          </CardColumns>
-        </Fade>
-      </section>
-    );
-  }
-
   private toDateSentence(date: string): string {
     if (date === "Present") {
       return date;
@@ -143,5 +100,3 @@ class Blog extends Component<
     return moment(date).format("Do MMMM YYYY HH:mm:ss");
   }
 }
-
-export default withRouter(Blog);
