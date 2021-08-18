@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Carousel } from "react-bootstrap";
 import ReactMarkdown from "react-markdown";
 import breaks from "remark-breaks";
 
@@ -27,13 +27,23 @@ export class About extends Component<AboutProps> {
           </Row>
 
           <Row className="section-content">
-            <Col>
-              <DynamicImage
-                image={this.props.basics.picture}
-                alt="Daniel and Amelia - Image not found!"
-                className="headshot"
-              />
-            </Col>
+            <Carousel 
+             indicators
+             wrap={true}
+             slide={true}
+             nextLabel={''} 
+             prevLabel={''}>
+              {this.props.basics.images.map(
+                (src: string) => (
+                  <Carousel.Item>
+                    <DynamicImage
+                      image={src}
+                      alt="Image not found!"
+                      className="headshot"
+                    />
+                  </Carousel.Item>
+                ))}
+            </Carousel>
           </Row>
 
           <Row className="section-content">

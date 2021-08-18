@@ -12,7 +12,7 @@ export interface Profile {
 export interface Basics {
   name: string;
   label: string;
-  picture: string;
+  images: string[];
   email: string;
   phone: string;
   website: string;
