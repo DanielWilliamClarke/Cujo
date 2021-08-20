@@ -11,6 +11,11 @@
     &.active {
       color: $col-main-brand !important;
     }
+
+    &.active,
+    &:hover {
+      font-weight: 700;
+    }
   }
 }
 
