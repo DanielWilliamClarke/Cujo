@@ -1,9 +1,11 @@
 import React, { Component } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Badge } from "react-bootstrap";
 import ReactMarkdown from "react-markdown";
 import breaks from "remark-breaks";
 import moment from "moment";
 import util from "util";
+import { VerticalTimeline, VerticalTimelineElement } from "react-vertical-timeline-component";
+import { MdWork } from "react-icons/md"
 
 import { Work } from "../../model/CVModel";
 import { DynamicImage } from "../shared/DynamicImage";
@@ -29,79 +31,75 @@ export class Experience extends Component<WorkProps> {
             </Col>
           </Row>
 
-          {this.props.work
-            .sort((a, b) => {
-              return this.toUnix(b.startDate) - this.toUnix(a.startDate);
-            })
-            .map(
-              (work: Work): JSX.Element => (
-                <div>
-                  <Row className="section-content">
-                    <Col className="centered">
-                      <h6>
-                        <a
-                          href={work.website}
-                          rel="noopener noreferrer"
-                          target="_blank"
-                        >
-                          <DynamicImage
-                            image={work.logo}
-                            alt={`${work.company} - Image not found!`}
-                            className="centered image-item work-logo"
-                          />
-                        </a>
-                      </h6>
-                      <h4>{work.position}</h4>
-                    </Col>
-                  </Row>
-
-                  <Row className="period">
-                    <Col className="centered">
-                      <span className="date-range">
-                        <span>{this.toDateSentence(work.startDate)}</span>
-                        <span className="dash" />
-                        <span>{this.toDateSentence(work.endDate)}</span>
-                        <span className="dot" />
-                        <span>
-                          <b>{this.toDuration(work.startDate, work.endDate)}</b>
-                        </span>
-                      </span>
-                    </Col>
-                  </Row>
-
-                  <Row className="section-content highlights">
+          <VerticalTimeline className="timeline">
+            {this.props.work
+              .sort((a, b) => {
+                return this.toUnix(b.startDate) - this.toUnix(a.startDate);
+              })
+              .map(
+                (work: Work, index: number): JSX.Element => (
+                  <VerticalTimelineElement
+                    className="vertical-timeline-element--work"
+                    key={index}
+                    date={this.toRange(work.startDate, work.endDate)}
+                    icon={<MdWork />}
+                  >
                     {work.highlights.map((highlight) => (
-                      <Col className="col-item">
-                        <p>{highlight}</p>
-                      </Col>
+                      <Badge bg="primary" className="highlight">{highlight}</Badge>
                     ))}
-                  </Row>
 
-                  <Row className="section-content">
-                    <Col>
-                      <ReactMarkdown
-                        children={work.summary}
-                        remarkPlugins={[breaks]}
-                      />
-                    </Col>
-                  </Row>
+                    <Row className="header">
+                      <Col className="headline">
+                        <h3>
+                          <span>
+                            {work.position}
+                          </span>
+                          <span>
+                            @
+                          </span>
+                          <span>
+                            <a
+                              href={work.website}
+                              rel="noopener noreferrer"
+                              target="_blank"
+                            >
+                              <DynamicImage
+                                image={work.logo}
+                                alt={`${work.company} - Image not found!`}
+                                className="centered image-item work-logo"
+                              />
+                            </a>
+                          </span>
+                        </h3>
+                      </Col>
+                    </Row>
 
-                  <Row className="images">
-                    {work.images.map((image) => (
-                      <Col className="col-item">
-                        <DynamicImage
-                          image={image}
-                          alt={`${work.position} - Image not found!`}
-                          className="centered image-item"
+                    <Row>
+                      <Col>
+                        <ReactMarkdown
+                          children={work.summary}
+                          remarkPlugins={[breaks]}
                         />
                       </Col>
-                    ))}
-                  </Row>
+                    </Row>
 
-                  <div className="centered short-line" />
-                </div>
-              )
-            )}
+                    <Row className="images">
+                      {work.images.map((image) => (
+                        <Col className="col-item">
+                          <DynamicImage
+                            image={image}
+                            alt={`${work.position} - Image not found!`}
+                            className="centered image-item"
+                          />
+                        </Col>
+                      ))}
+                    </Row>
+
+                    <div className="centered short-line" />
+                  </VerticalTimelineElement>
+                ))}
+          </VerticalTimeline>
+          <div className="centered short-line" />
         </Container>
       </section>
     );
@@ -109,6 +107,10 @@ export class Experience extends Component<WorkProps> {
 
   private toUnix(date: string): number {
     return moment(date, this.dateFormat).unix();
+  }
+
+  private toRange(start: string, end: string): string {
+    return `${this.toDateSentence(start)} - ${this.toDateSentence(end)} (${this.toDuration(start, end)})`;
   }
 
   private toDateSentence(date: string): string {
@@ -124,8 +126,7 @@ export class Experience extends Component<WorkProps> {
       endMoment = moment();
     }
     const difference = moment.duration(
-      endMoment.diff(moment(start, this.dateFormat))
-    );
+      endMoment.diff(moment(start, this.dateFormat)));
     const years = difference.years();
     const months = difference.months();
     const yearFormat = years

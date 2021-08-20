@@ -137,9 +137,9 @@
 
   .image-item {
     border-radius: 50%;
-    height: 150px;
+    height: 75px;
     object-fit: cover;
-    width: 150px;
+    width: 75px;
   }
 }
 
@@ -169,6 +169,12 @@
     &.carousel-item-right {
       transform: translateX(100%);
     }
+  }
+}
+
+.timeline {
+  .vertical-timeline-element-content {
+    color: $col-text-main;
   }
 }
 
@@ -210,6 +216,24 @@
   .image-item {
     box-shadow: 0 0 25px $card-color;
   }
+
+  .timeline {
+    text-align: left;
+    margin-top: 20px;
+
+    .vertical-timeline-element-icon {
+      background-color: $color;
+    }
+  
+    .vertical-timeline-element-content {
+      background-color: $card-color;
+      box-shadow: 0 0 25px $card-color;
+    }
+  
+    .vertical-timeline-element-content-arrow  {
+      border-right: 7px solid $card-color;
+    }
+  }  
 }
 
 @mixin alternating-section($side, $bg, $color, $card-color: $col-bg-light) {
@@ -231,7 +255,7 @@
     $col-accent-zing,
     $col-bg-dark
   );
-  @include alternating-section("even", $col-bg-dark, $col-accent-high);
+  @include alternating-section("even", $col-bg-dark, $col-sub-brand);
 }
 
 @media screen and (max-width: 700px) {

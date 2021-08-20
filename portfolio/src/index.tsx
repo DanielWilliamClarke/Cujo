@@ -7,6 +7,7 @@ import "./index.scss";
 import App from "./App";
 
 import "bootstrap/dist/css/bootstrap.min.css";
+import "react-vertical-timeline-component/style.min.css";
 
 import { CV } from "./model/CVModel";
 import { BlogService } from "./components/blog/BlogService";

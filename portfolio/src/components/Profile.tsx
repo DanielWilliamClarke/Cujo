@@ -21,25 +21,25 @@ export class Profile extends Component<CVProps & BlogServiceProps> {
           body="Software Engineer Portfolio and Blog"
           hashtag="DCTechPortfolio"
         />
-        <Fade bottom>
+        <Fade left>
           <About
             basics={this.props.cv.basics}
             interests={this.props.cv.interests}
           />
         </Fade>
-        <Fade bottom>
+        <Fade right>
           <Experience work={this.props.cv.work} />
         </Fade>
-        <Fade bottom>
+        <Fade left>
           <Education education={this.props.cv.education} />
         </Fade>
-        <Fade bottom>
+        <Fade right>
           <Projects projects={this.props.cv.projects} />
         </Fade>
-        <Fade bottom>
+        <Fade left>
           <Technical techical={this.props.cv.skills} />
         </Fade>
-        <Fade bottom>
+        <Fade right>
           <Blog service={this.props.service} />
         </Fade>
         <Fade bottom>
