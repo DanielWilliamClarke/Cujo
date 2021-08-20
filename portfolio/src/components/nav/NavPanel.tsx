@@ -83,11 +83,7 @@ class NavPanel extends Component<RouteComponentProps, NavState> {
   }
 
   private listenScrollEvent = () => {
-    if (window.scrollY < window.innerHeight) {
-      this.setState({ bg: undefined });
-    } else {
-      this.setState({ bg: "dark" });
-    }
+    this.setState({ bg: window.scrollY < window.innerHeight ? undefined : "dark" });
   };
 }
 

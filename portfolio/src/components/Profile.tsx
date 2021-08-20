@@ -1,6 +1,5 @@
 import { Component } from "react";
 import { CVProps } from "../model/CVModel";
-import { BlogServiceProps } from "./blog/BlogService";
 import { About } from "./profile/About";
 import { Education } from "./profile/Education";
 import { Experience } from "./profile/Experience";
@@ -9,7 +8,7 @@ import { Technical } from "./profile/Technical";
 
 const Fade = require("react-reveal/Fade");
 
-export class Profile extends Component<CVProps & BlogServiceProps> {
+export class Profile extends Component<CVProps> {
   render(): JSX.Element {
     return (
       <div>

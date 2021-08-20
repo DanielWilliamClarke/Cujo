@@ -52,6 +52,7 @@ export class Technical extends Component<TechnicalProps, SkillsState> {
               />
             </Col>
           </Row>
+          
           <Row className="skills">
             {this.props.techical.list
               .filter(this.filterSkills.bind(this))

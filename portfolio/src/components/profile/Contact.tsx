@@ -90,7 +90,7 @@ export class Contact extends Component<ContactProps, ContactState> {
     );
   }
 
-  handleSubmit(event: any) {
+  private handleSubmit(event: any) {
     event.preventDefault();
     const form = event.target;
     const data = new FormData(form);

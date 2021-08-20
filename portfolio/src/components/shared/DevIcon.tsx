@@ -6,7 +6,6 @@ import "./DevIcon.scss";
 type DevIconProps = {
   icon: DevIcon;
 };
-
 export class DevIconName extends Component<DevIconProps> {
   render(): JSX.Element {
     return (
