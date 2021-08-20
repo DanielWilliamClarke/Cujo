@@ -14,11 +14,6 @@ export class Profile extends Component<CVProps & BlogServiceProps> {
   render(): JSX.Element {
     return (
       <div>
-        <SharePanel
-          url={window.location.href}
-          body="Software Engineer Portfolio and Blog"
-          hashtag="DCTechPortfolio"
-        />
         <Fade left>
           <About
             basics={this.props.cv.basics}
