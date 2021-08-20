@@ -1,10 +1,9 @@
 import { Component, Fragment } from "react";
-import { Container, Row, Col, Nav, Badge } from "react-bootstrap";
+import { Container, Row, Col, Badge } from "react-bootstrap";
 import moment from "moment";
 
 import { BlogServiceProps } from "./BlogService";
 import { Post } from "../../model/BlogPostModel";
-import { SharePanel } from "../nav/SharePanel";
 
 import "../shared/Portfolio.scss";
 import "./BlogPost.scss";
