@@ -1,53 +1,26 @@
-import { Component } from "react";
+import { Component, Fragment } from "react";
 import { Nav, Navbar } from "react-bootstrap";
 import { RouteComponentProps, withRouter } from "react-router-dom";
+import Scrollspy from 'react-scrollspy';
 
 import "./NavPanel.scss";
 
-type Locator = {
-  root: string;
-  hash: string;
-};
-
 type NavState = {
   bg: string | undefined;
+  menu: string[];
 };
 
 class NavPanel extends Component<RouteComponentProps, NavState> {
-  listenScrollEvent = () => {
-    if (window.scrollY < window.innerHeight) {
-      this.setState({ bg: undefined });
-    } else {
-      this.setState({ bg: "dark" });
-    }
-  };
-
   componentWillMount() {
-    this.setState({ bg: undefined });
+    this.setState({
+      bg: undefined,
+      menu: ["home"].concat(this.buildMenuItems()).concat(["blog", "contact"]),
+    });
+
     window.addEventListener("scroll", this.listenScrollEvent);
   }
 
   render(): JSX.Element {
-
-    const profileNav: Locator[] = [
-      { root: "/", hash: "home" },
-      { root: "/", hash: "about" },
-      { root: "/", hash: "experience" },
-      { root: "/", hash: "education" },
-      { root: "/", hash: "skills" },
-      { root: "/", hash: "projects" }
-    ];
-
-    const blogNav: Locator[] = [
-      { root: "/", hash: "home" },
-      { root: this.props.location.pathname, hash: "post" }
-    ];
-
-    const permenantNav = [
-      { root: this.props.location.pathname, hash: "blog" },
-      { root: this.props.location.pathname, hash: "contact" }
-    ]
-
     return (
       <Navbar
         bg={this.state.bg}
@@ -57,20 +30,36 @@ class NavPanel extends Component<RouteComponentProps, NavState> {
       >
         <Nav
           justify
-          variant="pills"
           navbarScroll
           style={{ textTransform: "capitalize" }}
         >
-          {(this.props.location.pathname === "/" ? profileNav : blogNav)
-            .concat(permenantNav)
-            .map(
-              ({ root, hash }: Locator): JSX.Element => (
-                <Nav.Link href={`${root}#${hash}`}>{hash}</Nav.Link>
-              ))}
+          <Scrollspy items={this.state.menu} currentClassName="active" offset={-100} componentTag="nav">
+            {this.state.menu.map(
+              (hash: string): JSX.Element => {
+                const href = hash !== "home" ? 
+                  `${this.props.location.pathname}#${hash}` :
+                  `/#${hash}`;
+                return <Nav.Link href={href}>{hash}</Nav.Link>
+              })}
+          </Scrollspy>
         </Nav>
       </Navbar>
     );
   }
+
+  private buildMenuItems(): string[] {
+    return this.props.location.pathname === "/"
+      ? ["about", "experience", "education", "skills", "projects"]
+      : ["post"];
+  }
+
+  private listenScrollEvent = () => {
+    if (window.scrollY < window.innerHeight) {
+      this.setState({ bg: undefined });
+    } else {
+      this.setState({ bg: "dark" });
+    }
+  };
 }
 
 export default withRouter(NavPanel);

@@ -3,9 +3,13 @@
 .navbar {
   transition: 0.5s;
 
+  nav {
+    display: flex;
+  }
+
   .nav-link {
     &.active {
-      background-color: $col-main-brand;
+      color: $col-main-brand !important;
     }
   }
 }
