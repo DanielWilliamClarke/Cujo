@@ -33,19 +33,19 @@ class NavPanel extends Component<RouteComponentProps, NavState> {
       { root: "/", hash: "home" },
       { root: "/", hash: "about" },
       { root: "/", hash: "experience" },
-      { root: "/", hash: "skills" },
       { root: "/", hash: "education" },
-      { root: "/", hash: "projects" },
+      { root: "/", hash: "skills" },
+      { root: "/", hash: "projects" }
     ];
 
     const blogNav: Locator[] = [
       { root: "/", hash: "home" },
-      { root: this.props.location.pathname, hash: "post" },
+      { root: this.props.location.pathname, hash: "post" }
     ];
 
     const permenantNav = [
       { root: this.props.location.pathname, hash: "blog" },
-      { root: this.props.location.pathname, hash: "contact" },
+      { root: this.props.location.pathname, hash: "contact" }
     ]
 
     return (

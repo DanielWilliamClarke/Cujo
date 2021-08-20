@@ -34,7 +34,7 @@ export class Blog extends Component<BlogServiceProps, BlogState> {
   private blogPosts(): JSX.Element {
     return (
       <Fade bottom>
-        <section id="blog" className="section-light blog">
+        <section id="blog" className="section-dark blog">
           <Container>
               <Row>
                 <Col>
