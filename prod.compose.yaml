@@ -90,7 +90,7 @@ services:
       - cujo
 
   db:
-    image: mysql:5.7
+    image: mysql:latest
     volumes:
       - db_data:/var/lib/mysql
     restart: always
