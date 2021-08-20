@@ -24,10 +24,10 @@ export class Profile extends Component<CVProps & BlogServiceProps> {
           <Experience work={this.props.cv.work} />
         </Fade>
         <Fade left>
-          <Technical techical={this.props.cv.skills} />
+          <Education education={this.props.cv.education} />
         </Fade>
         <Fade right>
-          <Education education={this.props.cv.education} />
+          <Technical techical={this.props.cv.skills} />
         </Fade>
         <Fade left>
           <Projects projects={this.props.cv.projects} />
