@@ -1,5 +1,5 @@
 import p5 from "p5";
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 
 import hex from "../../sketches/hex";
