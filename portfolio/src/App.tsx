@@ -9,6 +9,7 @@ import { BlogServiceProps } from "./components/blog/BlogService";
 import { Blog } from "./components/blog/Blog";
 import { BlogPost } from "./components/blog/BlogPost";
 import { Contact } from "./components/profile/Contact";
+import { SharePanel } from "./components/nav/SharePanel";
 
 import "./App.scss";
 
@@ -20,6 +21,11 @@ class App extends Component<CVProps & RouteComponentProps & BlogServiceProps> {
       <div>
         <SketchBackstretch cv={this.props.cv}></SketchBackstretch>
         <NavPanel></NavPanel>
+        <SharePanel
+          url={window.location.href}
+          body="Software Engineer Portfolio and Blog"
+          hashtag="DCTechPortfolio"
+        />
         <div className="app">
           <Switch>
             <Route exact path="/">

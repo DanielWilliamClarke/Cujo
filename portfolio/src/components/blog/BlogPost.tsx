@@ -47,19 +47,6 @@ export class BlogPost extends Component<BlogServiceProps & BlogIDProps, BlogPost
       <Fade left>
         <section id="post" className="section-dark blog-post">
           <Container>
-            <Nav navbarScroll>
-              <Nav.Link href={`/#blog`} >
-                {`< Back`}
-              </Nav.Link>
-            </Nav>
-
-            <SharePanel
-              url={window.location.href}
-              title={`Blog - ${p.title}`}
-              body={p.excerpt}
-              hashtag="DCTechBlog"
-            />
-
             <Row>
               <Col>
                 <h2 className="section-title">{p.title}</h2>
