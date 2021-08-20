@@ -2,7 +2,7 @@
 #[macro_use]
 extern crate log;
 
-use actix_web::{App, HttpServer, middleware::Logger};
+use actix_web::{App, HttpServer, middleware::Logger, web::Data};
 use dotenv::dotenv;
 use listenfd::ListenFd;
 use serde::Deserialize;
@@ -35,8 +35,8 @@ async fn main() -> std::io::Result<()> {
 
     let mut server = HttpServer::new(move || {
         App::new()
-            .data(cv_config.clone())
-            .data(blog_config.clone())
+            .app_data(Data::new(cv_config.clone()))
+            .app_data(Data::new(blog_config.clone()))
             .wrap(Logger::default())
             .configure(init)
     });

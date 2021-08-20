@@ -45,7 +45,7 @@ export class Experience extends Component<WorkProps> {
                     icon={<MdWork />}
                   >
                     {work.highlights.map((highlight) => (
-                      <Badge bg="primary" className="highlight">{highlight}</Badge>
+                      <Badge bg="portfolio" className="highlight">{highlight}</Badge>
                     ))}
 
                     <Row className="header">

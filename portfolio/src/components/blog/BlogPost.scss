@@ -6,8 +6,12 @@
 
   .section-title {
     margin-bottom: 5px;
-    text-align: left;
     text-transform: none;
+  }
+
+  .section-title,
+  .blog-date {
+    text-align: center;
   }
 
   .blog-back {
@@ -17,19 +21,16 @@
   }
 
   .tags {
-    padding: 3px 15px;
-    text-transform: capitalize;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
 
-    .col-item::after {
-      padding: 0 10px;
+    .tag {
+      text-transform: uppercase;
+      margin-top: 10px;
     }
   }
-
-  .blog-excerpt {
-    color: $col-text-muted;
-    font-style: italic;
-  }
-
+ 
   img {
     border-radius: 6px;
   }

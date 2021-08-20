@@ -41,7 +41,7 @@ export class Education extends Component<EducationProps> {
                     <Row>
                       <Col>
                         <h4>
-                          <Badge bg="success" className="highlight">{e.grade}</Badge>
+                          <Badge bg="portfolio" className="highlight">{e.grade}</Badge>
                         </h4>
                       </Col>
                     </Row>

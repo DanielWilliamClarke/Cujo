@@ -4,7 +4,6 @@ import { Blog } from "./blog/Blog";
 import { BlogServiceProps } from "./blog/BlogService";
 import { SharePanel } from "./nav/SharePanel";
 import { About } from "./profile/About";
-import { Contact } from "./profile/Contact";
 import { Education } from "./profile/Education";
 import { Experience } from "./profile/Experience";
 import { Projects } from "./profile/Projects";
@@ -31,20 +30,14 @@ export class Profile extends Component<CVProps & BlogServiceProps> {
           <Experience work={this.props.cv.work} />
         </Fade>
         <Fade left>
-          <Education education={this.props.cv.education} />
-        </Fade>
-        <Fade right>
-          <Projects projects={this.props.cv.projects} />
-        </Fade>
-        <Fade left>
           <Technical techical={this.props.cv.skills} />
         </Fade>
         <Fade right>
-          <Blog service={this.props.service} />
+          <Education education={this.props.cv.education} />
         </Fade>
-        <Fade bottom>
-          <Contact profiles={this.props.cv.basics.profiles} />
-        </Fade>  
+        <Fade left>
+          <Projects projects={this.props.cv.projects} />
+        </Fade>
       </div>
     );
   }

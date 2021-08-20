@@ -1,13 +1,19 @@
 import { Component } from "react";
 import { Nav, Navbar } from "react-bootstrap";
+import { RouteComponentProps, withRouter } from "react-router-dom";
 
 import "./NavPanel.scss";
+
+type Locator = {
+  root: string;
+  hash: string;
+};
 
 type NavState = {
   bg: string | undefined;
 };
 
-export class NavPanel extends Component<{}, NavState> {
+class NavPanel extends Component<RouteComponentProps, NavState> {
   listenScrollEvent = () => {
     if (window.scrollY < window.innerHeight) {
       this.setState({ bg: undefined });
@@ -22,6 +28,26 @@ export class NavPanel extends Component<{}, NavState> {
   }
 
   render(): JSX.Element {
+
+    const profileNav: Locator[] = [
+      { root: "/", hash: "home" },
+      { root: "/", hash: "about" },
+      { root: "/", hash: "experience" },
+      { root: "/", hash: "skills" },
+      { root: "/", hash: "education" },
+      { root: "/", hash: "projects" },
+    ];
+
+    const blogNav: Locator[] = [
+      { root: "/", hash: "home" },
+      { root: this.props.location.pathname, hash: "post" },
+    ];
+
+    const permenantNav = [
+      { root: this.props.location.pathname, hash: "blog" },
+      { root: this.props.location.pathname, hash: "contact" },
+    ]
+
     return (
       <Navbar
         bg={this.state.bg}
@@ -35,19 +61,16 @@ export class NavPanel extends Component<{}, NavState> {
           navbarScroll
           style={{ textTransform: "capitalize" }}
         >
-          {[
-            "about",
-            "experience",
-            "education",
-            "projects",
-            "skills",
-            "blog",
-            "contact"
-          ].map(
-            (hash: string): JSX.Element =>
-              (<Nav.Link href={`/#${hash}`}>{hash}</Nav.Link>))}
+          {(this.props.location.pathname === "/" ? profileNav : blogNav)
+            .concat(permenantNav)
+            .map(
+              ({ root, hash }: Locator): JSX.Element => (
+                <Nav.Link href={`${root}#${hash}`}>{hash}</Nav.Link>
+              ))}
         </Nav>
       </Navbar>
     );
   }
 }
+
+export default withRouter(NavPanel);
