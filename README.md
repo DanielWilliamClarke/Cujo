@@ -178,12 +178,13 @@ docker-compose --env-file <SECRET ENV FILE> -f prod.compose.yaml down (-v)
 
 - [ ] Add Rust code coverage
 - [ ] Write front end tests
-- [ ] Restyle experience and education so they resemble a timeline
 - [ ] Get own logo and assets from designer
 - [ ] Write blog
 
 ## // Done
 
+- [x] Responsive and styled Nav
+- [x] Restyle experience and education so they resemble a timeline
 - [x] Add auto redeployment of new images pushed for prod
 - [x] Create Circle CI build pipeline
 - [x] Optimize images (sizes, file encodings - <https://developers.google.com/speed/pagespeed/insights/>)
@@ -227,6 +228,9 @@ docker-compose --env-file <SECRET ENV FILE> -f prod.compose.yaml down (-v)
 - Hosting websites using Nginx - `Nginx` <https://blog.harveydelaney.com/hosting-websites-using-docker-nginx/>
 - Add Sudoers - `Linux` <https://linuxize.com/post/how-to-add-user-to-sudoers-in-ubuntu/>
 - Auto image redeploy with Watchtower - `Docker` <https://alexgallacher.com/setting-up-watchtower-to-update-docker-containers/>
+- React scroll spy - `React` <https://makotot.github.io/react-scrollspy/>
+- React icons - `React` <https://react-icons.github.io/react-icons/icons?name=io5>
+- Devicons - `React` <https://devicon.dev/>
 
 ## Wordpress plugins
 
