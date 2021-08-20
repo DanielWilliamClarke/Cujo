@@ -1,6 +1,7 @@
 @import "../shared/Palette.scss";
 
 .navbar {
+  height: 70px;
   transition: 0.5s;
   padding: 0;
 
@@ -13,7 +14,7 @@
     line-height: 15px;
 
     svg {
-      font-size: calc(10px + 1vw);
+      font-size: calc(20px + 1vw);
     }
 
     &.active {
@@ -32,6 +33,16 @@
     .nav-link {
       flex-basis: 0;
       font-size: 11px;
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .navbar-nav {
+    .nav-link {
+      div {
+        display: none;
+      }
     }
   }
 }

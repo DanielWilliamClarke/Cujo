@@ -18,7 +18,7 @@
   justify-content: center;
   text-align: center;
   transition: 0.5;
-  margin-bottom: -56px;
+  margin-bottom: -70px;
 
   canvas {
     position: absolute;
@@ -59,7 +59,6 @@
 
 @media screen and (max-width: 850px) {
   .sketch-backstretch {
-    margin-bottom: -48px;
     .backstretch-main {
       font-size: 50px;
     }
