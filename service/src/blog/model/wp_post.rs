@@ -72,7 +72,7 @@ pub struct Links {
     pub collection: Vec<Collection>,
     pub about: Vec<About>,
     pub author: Vec<Author>,
-    pub replies: Vec<Reply>,
+    pub replies: Option<Vec<Reply>>,
     #[serde(rename = "version-history")]
     pub version_history: Vec<VersionHistory>,
     #[serde(default)]
