@@ -35,14 +35,6 @@ type ShareState = {
 export class SharePanel extends Component<ShareProps, ShareState> {
   private size: number = 40;
 
-  listenScrollEvent = () => {
-    this.setState({ show: window.scrollY > 0 });
-  };
-
-  listenResize = () => {
-    this.setState({ slim: window.innerWidth < 600 });
-  };
-
   componentWillMount() {
     this.listenScrollEvent();
     this.listenResize();
@@ -107,6 +99,14 @@ export class SharePanel extends Component<ShareProps, ShareState> {
       </Container>
     );
   }
+
+  private listenScrollEvent = () => {
+    this.setState({ show: window.scrollY > 0 });
+  };
+
+  private listenResize = () => {
+    this.setState({ slim: window.innerWidth < 600 });
+  };
 
   private sanitize(input: string): string {
     return input.replace(/(<([^>]+)>)/gi, "");

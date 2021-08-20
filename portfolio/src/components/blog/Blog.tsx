@@ -24,14 +24,6 @@ export class Blog extends Component<BlogServiceProps, BlogState> {
   }
 
   render(): JSX.Element {
-    return this.blogPosts();
-  }
-
-  private setBlogState(blog: Post[]) {
-    this.setState({ blog });
-  }
-
-  private blogPosts(): JSX.Element {
     return (
       <Fade bottom>
         <section id="blog" className="section-dark blog">
@@ -51,6 +43,10 @@ export class Blog extends Component<BlogServiceProps, BlogState> {
         </section>
       </Fade>
     );
+  }
+
+  private setBlogState(blog: Post[]) {
+    this.setState({ blog });
   }
 
   private blogSummaryPanel(data: Post): JSX.Element {

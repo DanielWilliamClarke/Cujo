@@ -29,7 +29,7 @@ class App extends Component<CVProps & RouteComponentProps & BlogServiceProps> {
         <div className="app">
           <Switch>
             <Route exact path="/">
-              <Profile cv={this.props.cv} service={this.props.service} />
+              <Profile cv={this.props.cv} />
             </Route>
             <Route
               path={"/blog/:id"}
