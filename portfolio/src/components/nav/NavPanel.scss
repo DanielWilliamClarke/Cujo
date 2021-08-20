@@ -2,12 +2,20 @@
 
 .navbar {
   transition: 0.5s;
+  padding: 0;
 
   nav {
     display: flex;
   }
 
   .nav-link {
+    text-align: center;
+    line-height: 15px;
+
+    svg {
+      font-size: calc(10px + 1vw);
+    }
+
     &.active {
       color: $col-main-brand !important;
     }
