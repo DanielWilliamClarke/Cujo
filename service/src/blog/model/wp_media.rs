@@ -1,8 +1,7 @@
 // src/blog/model/wp_media.rs
 
 use serde::{Deserialize, Serialize};
-
-#[derive(Serialize, Deserialize, Clone, Default, PartialEq, Debug)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Media {
     pub id: i64,
@@ -26,7 +25,6 @@ pub struct Media {
     pub ping_status: String,
     pub template: String,
     pub meta: Vec<::serde_json::Value>,
-    pub smush: Smush,
     pub description: Description,
     pub caption: Caption,
     #[serde(rename = "alt_text")]
@@ -44,107 +42,51 @@ pub struct Media {
     pub links: Links,
 }
 
-#[derive(Serialize, Deserialize, Clone, Default, PartialEq, Debug)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Guid {
     pub rendered: String,
 }
 
-#[derive(Serialize, Deserialize, Clone, Default, PartialEq, Debug)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Title {
     pub rendered: String,
 }
 
-#[derive(Serialize, Deserialize, Clone, Default, PartialEq, Debug)]
-#[serde(rename_all = "camelCase")]
-pub struct Smush {
-    pub stats: Stats,
-    pub sizes: Sizes,
-}
-
-#[derive(Serialize, Deserialize, Clone, Default, PartialEq, Debug)]
-#[serde(rename_all = "camelCase")]
-pub struct Stats {
-    pub percent: f64,
-    pub bytes: i64,
-    #[serde(rename = "size_before")]
-    pub size_before: i64,
-    #[serde(rename = "size_after")]
-    pub size_after: i64,
-    pub time: f64,
-    #[serde(rename = "api_version")]
-    pub api_version: String,
-    pub lossy: bool,
-    #[serde(rename = "keep_exif")]
-    pub keep_exif: i64,
-}
-
-#[derive(Serialize, Deserialize, Clone, Default, PartialEq, Debug)]
-#[serde(rename_all = "camelCase")]
-pub struct Sizes {
-    pub medium: Medium,
-    pub thumbnail: Thumbnail,
-}
-
-#[derive(Serialize, Deserialize, Clone, Default, PartialEq, Debug)]
-#[serde(rename_all = "camelCase")]
-pub struct Medium {
-    pub percent: f64,
-    pub bytes: i64,
-    #[serde(rename = "size_before")]
-    pub size_before: i64,
-    #[serde(rename = "size_after")]
-    pub size_after: i64,
-    pub time: f64,
-}
-
-#[derive(Serialize, Deserialize, Clone, Default, PartialEq, Debug)]
-#[serde(rename_all = "camelCase")]
-pub struct Thumbnail {
-    pub percent: f64,
-    pub bytes: i64,
-    #[serde(rename = "size_before")]
-    pub size_before: i64,
-    #[serde(rename = "size_after")]
-    pub size_after: i64,
-    pub time: f64,
-}
-
-#[derive(Serialize, Deserialize, Clone, Default, PartialEq, Debug)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Description {
     pub rendered: String,
 }
 
-#[derive(Serialize, Deserialize, Clone, Default, PartialEq, Debug)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Caption {
     pub rendered: String,
 }
 
-#[derive(Serialize, Deserialize, Clone, Default, PartialEq, Debug)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct MediaDetails {
     pub width: i64,
     pub height: i64,
     pub file: String,
-    pub sizes: Sizes2,
+    pub sizes: Sizes,
     #[serde(rename = "image_meta")]
     pub image_meta: ImageMeta,
 }
 
-#[derive(Serialize, Deserialize, Clone, Default, PartialEq, Debug)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
-pub struct Sizes2 {
-    pub medium: Medium2,
-    pub thumbnail: Thumbnail2,
+pub struct Sizes {
+    pub thumbnail: Thumbnail,
     pub full: Full,
 }
 
-#[derive(Serialize, Deserialize, Clone, Default, PartialEq, Debug)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
-pub struct Medium2 {
+pub struct Thumbnail {
     pub file: String,
     pub width: i64,
     pub height: i64,
@@ -154,19 +96,7 @@ pub struct Medium2 {
     pub source_url: String,
 }
 
-#[derive(Serialize, Deserialize, Clone, Default, PartialEq, Debug)]
-#[serde(rename_all = "camelCase")]
-pub struct Thumbnail2 {
-    pub file: String,
-    pub width: i64,
-    pub height: i64,
-    #[serde(rename = "mime_type")]
-    pub mime_type: String,
-    #[serde(rename = "source_url")]
-    pub source_url: String,
-}
-
-#[derive(Serialize, Deserialize, Clone, Default, PartialEq, Debug)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Full {
     pub file: String,
@@ -178,7 +108,7 @@ pub struct Full {
     pub source_url: String,
 }
 
-#[derive(Serialize, Deserialize, Clone, Default, PartialEq, Debug)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ImageMeta {
     pub aperture: String,
@@ -195,9 +125,10 @@ pub struct ImageMeta {
     pub shutter_speed: String,
     pub title: String,
     pub orientation: String,
+    pub keywords: Vec<::serde_json::Value>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Default, PartialEq, Debug)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Links {
     #[serde(rename = "self")]
@@ -205,29 +136,37 @@ pub struct Links {
     pub collection: Vec<Collection>,
     pub about: Vec<About>,
     pub author: Vec<Author>,
+    pub replies: Vec<Reply>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Default, PartialEq, Debug)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
-pub struct SelfField  {
+pub struct SelfField {
     pub href: String,
 }
 
-#[derive(Serialize, Deserialize, Clone, Default, PartialEq, Debug)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Collection {
     pub href: String,
 }
 
-#[derive(Serialize, Deserialize, Clone, Default, PartialEq, Debug)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct About {
     pub href: String,
 }
 
-#[derive(Serialize, Deserialize, Clone, Default, PartialEq, Debug)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Author {
+    pub embeddable: bool,
+    pub href: String,
+}
+
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct Reply {
     pub embeddable: bool,
     pub href: String,
 }

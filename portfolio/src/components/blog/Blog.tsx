@@ -1,5 +1,5 @@
-import { Component, Fragment } from "react";
-import { Card, CardColumns, Col, Nav, Row } from "react-bootstrap";
+import { Component } from "react";
+import { Card, CardColumns, Col, Container, Nav, Row } from "react-bootstrap";
 import moment from "moment";
 
 import { BlogServiceProps } from "./BlogService";
@@ -33,23 +33,23 @@ export class Blog extends Component<BlogServiceProps, BlogState> {
 
   private blogPosts(): JSX.Element {
     return (
-      <section id="blog" className="section blog">
-        <Fade bottom>
-          <Row>
-            <Col>
-              <h2 className="section-title">Blog</h2>
-              <div className="centered line" />
-            </Col>
-          </Row>
-          <CardColumns className="section-content">
-            {this.state.blog.map(
-              (data: Post): JSX.Element => (
-                <Fragment>{this.blogSummaryPanel(data)}</Fragment>
-              )
-            )}
-          </CardColumns>
-        </Fade>
-      </section>
+      <Fade bottom>
+        <section id="blog" className="section-light blog">
+          <Container>
+              <Row>
+                <Col>
+                  <h2 className="section-title">Blog</h2>
+                  <div className="centered line" />
+                </Col>
+              </Row>
+              <CardColumns className="section-content">
+                {this.state.blog.map(
+                  (data: Post): JSX.Element =>
+                    this.blogSummaryPanel(data))}
+              </CardColumns>
+            </Container>
+        </section>
+      </Fade>
     );
   }
 

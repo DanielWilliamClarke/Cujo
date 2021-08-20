@@ -43,7 +43,7 @@ export class SketchBackstretch extends Component<CVProps> {
 
   render() {
     return (
-      <Fragment>
+      <section id="home">
         <Container fluid ref={this.myRef} className="sketch-backstretch">
           <div className="backstretch-headline">
             <Row className="backstretch-main">
@@ -58,7 +58,7 @@ export class SketchBackstretch extends Component<CVProps> {
         <Container fluid className="scroll-indicator">
           <ScrollIndicator />
         </Container>
-      </Fragment>
+      </section>
     );
   }
 }

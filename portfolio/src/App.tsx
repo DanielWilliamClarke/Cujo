@@ -2,13 +2,16 @@ import { Component } from "react";
 import { Switch, Route, RouteComponentProps, withRouter } from "react-router-dom";
 import { SketchBackstretch } from "./components/backstretch/SketchBackstretch";
 import { CVProps } from "./model/CVModel";
-import { NavPanel } from "./components/nav/NavPanel";
+import NavPanel from "./components/nav/NavPanel";
 import { Copyright } from "./components/backstretch/Copyright";
 import { Profile } from "./components/Profile";
 import { BlogServiceProps } from "./components/blog/BlogService";
+import { Blog } from "./components/blog/Blog";
 import { BlogPost } from "./components/blog/BlogPost";
+import { Contact } from "./components/profile/Contact";
 
 import "./App.scss";
+
 type BlogRouteParams = { id: string };
 
 class App extends Component<CVProps & RouteComponentProps & BlogServiceProps> {
@@ -24,10 +27,13 @@ class App extends Component<CVProps & RouteComponentProps & BlogServiceProps> {
             </Route>
             <Route
               path={"/blog/:id"}
-              children={({ match }: RouteComponentProps<BlogRouteParams>): JSX.Element => 
-                <BlogPost service={this.props.service} id={parseInt(match.params.id)} />} />
+              children={({ match }: RouteComponentProps<BlogRouteParams>): JSX.Element =>
+                <BlogPost service={this.props.service} id={parseInt(match.params.id)} />}
+            />
           </Switch>
+          <Blog service={this.props.service} />
           <footer id="footer">
+            <Contact profiles={this.props.cv.basics.profiles} />
             <Copyright />
           </footer>
         </div>

@@ -1,6 +1,8 @@
 @import "./Palette.scss";
 
-.section {
+.section,
+.section-light,
+.section-dark {
   color: $col-text-main;
   margin: 0 auto;
   padding: 75px 0;
@@ -178,6 +180,12 @@
   }
 }
 
+.badge { 
+  font-weight: 500;
+  margin: 2px;
+  color: #ffffff;
+}
+
 @mixin section-coloring($bg, $color, $card-color) {
   background-color: $bg;
 
@@ -234,6 +242,10 @@
       border-right: 7px solid $card-color;
     }
   }  
+
+  .bg-portfolio {
+    background-color: $color;
+  }
 }
 
 @mixin alternating-section($side, $bg, $color, $card-color: $col-bg-light) {
@@ -249,13 +261,15 @@
 }
 
 .app {
-  @include alternating-section(
-    "odd",
-    $col-bg-light,
-    $col-accent-zing,
-    $col-bg-dark
-  );
+  @include alternating-section("odd", $col-bg-light, $col-accent-zing, $col-bg-dark);
   @include alternating-section("even", $col-bg-dark, $col-sub-brand);
+
+  .section-light {
+    @include section-coloring($col-bg-light, $col-accent-zing, $col-bg-dark);
+  }
+  .section-dark {
+    @include section-coloring($col-bg-dark, $col-sub-brand, $col-bg-light);
+  }
 }
 
 @media screen and (max-width: 700px) {
