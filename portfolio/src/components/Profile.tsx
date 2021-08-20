@@ -1,6 +1,5 @@
 import { Component } from "react";
 import { CVProps } from "../model/CVModel";
-import { Blog } from "./blog/Blog";
 import { BlogServiceProps } from "./blog/BlogService";
 import { SharePanel } from "./nav/SharePanel";
 import { About } from "./profile/About";
