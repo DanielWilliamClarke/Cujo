@@ -14,7 +14,7 @@
     line-height: 15px;
 
     svg {
-      font-size: calc(20px + 1vw);
+      font-size: calc(20px + 0.25vw);
     }
 
     &.active {
@@ -42,6 +42,10 @@
     .nav-link {
       div {
         display: none;
+      }
+
+      svg {
+        font-size: calc(25px + 0.25vw);
       }
     }
   }
