@@ -38,6 +38,8 @@
   "dependencies": {
     "axios": "^0.21.1",
     "bootstrap": "^5.1.0",
+    "inversify": "^5.1.1",
+    "inversify-react": "^1.0.0",
     "moment": "^2.29.1",
     "p5": "^1.3.1",
     "react": "^17.0.2",
@@ -48,9 +50,10 @@
     "react-markdown": "^6.0.2",
     "react-reveal": "^1.2.2",
     "react-router-dom": "^5.2.0",
-    "react-share": "^4.4.0",
     "react-scrollspy": "^3.4.3",
+    "react-share": "^4.4.0",
     "react-vertical-timeline-component": "^3.3.3",
+    "reflect-metadata": "^0.1.13",
     "remark-breaks": "^2.0.2",
     "simplex-noise": "^2.4.0"
   },

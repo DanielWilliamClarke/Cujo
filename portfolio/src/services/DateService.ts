@@ -1,13 +1,22 @@
+import { injectable } from "inversify";
 import moment from "moment";
 import util from "util";
 
-export class DateFormatter {
-  constructor(
-    private outFormat?: string,
-    private inFormat?: string)
-  {}
+export interface IDateService {
+  format(o: string, i?: string): IDateService;
+  toUnix(date: string): number;
+  toSentence(date: string): string;
+  toRange(start: string, end: string): string;
+  toRangeWithDuration(start: string, end: string): string;
+}
 
-  format(o: string, i?: string): DateFormatter {
+@injectable()
+export class DateService implements IDateService {
+
+  private outFormat: string | undefined;
+  private inFormat: string | undefined;
+
+  format(o: string, i?: string): IDateService {
     this.outFormat = o;
     this.inFormat = i;
     return this;
@@ -29,10 +38,10 @@ export class DateFormatter {
   }
 
   toRangeWithDuration(start: string, end: string): string {
-    return `${this.toSentence(start)} - ${this.toSentence(end)} (${this.toDuration(start, end)})`;
+    return `${this.toRange(start, end)} (${this.toDuration(start, end)})`;
   }
 
-  toDuration(start: string, end: string): string {
+  private toDuration(start: string, end: string): string {
     let endMoment = moment(end, this.inFormat);
     if (end === "Present") {
       endMoment = moment();

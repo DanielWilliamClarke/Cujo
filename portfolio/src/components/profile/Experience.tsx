@@ -1,5 +1,6 @@
 import { Component } from "react";
 import { Container, Row, Col, Badge } from "react-bootstrap";
+import { resolve } from "inversify-react";
 import ReactMarkdown from "react-markdown";
 import breaks from "remark-breaks";
 import {
@@ -8,7 +9,7 @@ import {
 } from "react-vertical-timeline-component";
 import { MdWork } from "react-icons/md";
 
-import { DateFormatter } from "../shared/DateUtils";
+import { IDateService } from "../../services/DateService";
 import { Work } from "../../model/CVModel";
 import { DynamicImage } from "../shared/DynamicImage";
 
@@ -20,7 +21,10 @@ type WorkProps = {
 };
 
 export class Experience extends Component<WorkProps> {
-  private formatter = new DateFormatter("MMMM YYYY", "DD/MM/YYYY");
+  @resolve("DateService") private readonly dateService!: IDateService;
+  componentWillMount() {
+    this.dateService.format("MMMM YYYY", "DD/MM/YYYY");
+  }
 
   render(): JSX.Element {
     return (
@@ -37,8 +41,8 @@ export class Experience extends Component<WorkProps> {
             {this.props.work
               .sort((a, b) => {
                 return (
-                  this.formatter.toUnix(b.startDate) -
-                  this.formatter.toUnix(a.startDate)
+                  this.dateService.toUnix(b.startDate) -
+                  this.dateService.toUnix(a.startDate)
                 );
               })
               .map(
@@ -46,7 +50,7 @@ export class Experience extends Component<WorkProps> {
                   <VerticalTimelineElement
                     className="vertical-timeline-element--work"
                     key={index}
-                    date={this.formatter.toRangeWithDuration(
+                    date={this.dateService.toRangeWithDuration(
                       work.startDate,
                       work.endDate
                     )}

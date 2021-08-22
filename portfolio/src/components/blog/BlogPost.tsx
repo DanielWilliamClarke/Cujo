@@ -1,8 +1,9 @@
-import { Component, Fragment } from "react";
+import { Component } from "react";
 import { Container, Row, Col, Badge } from "react-bootstrap";
+import { resolve } from "inversify-react";
 
-import { DateFormatter } from "../shared/DateUtils";
-import { BlogServiceProps } from "./BlogService";
+import { IDateService } from "../../services/DateService";
+import { IBlogService } from "../../services/BlogService";
 import { Post } from "../../model/BlogPostModel";
 
 import "../shared/Portfolio.scss";
@@ -15,12 +16,25 @@ type BlogIDProps = {
   id: number;
 };
 
-export class BlogPost extends Component<BlogServiceProps & BlogIDProps> {
-  private formatter = new DateFormatter("Do MMMM YYYY HH:mm:ss");
+type BlogPostState = {
+  post: Post | undefined;
+};
+
+export class BlogPost extends Component<BlogIDProps, BlogPostState> {
+  @resolve("DateService") private readonly dateService!: IDateService;
+  @resolve("BlogService") private readonly blogService!: IBlogService;
+
+  componentWillMount() {
+    this.dateService.format("Do MMMM YYYY HH:mm:ss");
+
+    this.setState({ post: undefined });
+    this.blogService
+      .FetchBlogPost(this.props.id)
+      .then((post: Post) => this.setState({ post }));
+  }
 
   render(): JSX.Element {
-    const post = this.props.service.post(this.props.id);
-    return <Fragment>{post && this.displayPost(post)}</Fragment>;
+    return <>{this.state.post && this.displayPost(this.state.post)}</>;
   }
 
   private displayPost(p: Post): JSX.Element {
@@ -33,7 +47,7 @@ export class BlogPost extends Component<BlogServiceProps & BlogIDProps> {
                 <h2 className="section-title">{p.title}</h2>
                 <div className="line centered"></div>
                 <h4 className="blog-date">
-                  {this.formatter.toSentence(p.date)}
+                  {this.dateService.toSentence(p.date)}
                 </h4>
               </Col>
             </Row>
