@@ -1,8 +1,9 @@
 import { Component } from "react";
 import { Card, CardColumns, Col, Container, Nav, Row } from "react-bootstrap";
+import { resolve } from "inversify-react";
 
-import { DateFormatter } from "../shared/DateUtils";
-import { BlogServiceProps } from "./BlogService";
+import { IDateService } from "../../services/DateService";
+import { IBlogService } from "../../services/BlogService";
 import { Post } from "../../model/BlogPostModel";
 
 import "../shared/Portfolio.scss";
@@ -10,8 +11,22 @@ import "./Blog.scss";
 
 const Fade = require("react-reveal/Fade");
 
-export class Blog extends Component<BlogServiceProps> {
-  private formatter = new DateFormatter("Do MMMM YYYY HH:mm:ss");
+type BlogState = {
+  posts: Post[];
+};
+
+export class Blog extends Component<{}, BlogState> {
+  @resolve("DateService") private readonly dateService!: IDateService;
+  @resolve("BlogService") private readonly blogService!: IBlogService;
+
+  componentWillMount() {
+    this.dateService.format("Do MMMM YYYY HH:mm:ss");
+
+    this.setState({ posts: [] });
+    this.blogService
+      .FetchAllBlogPosts()
+      .then((posts: Post[]) => this.setState({ posts }));
+  }
 
   render(): JSX.Element {
     return (
@@ -25,7 +40,8 @@ export class Blog extends Component<BlogServiceProps> {
               </Col>
             </Row>
             <CardColumns className="section-content">
-              {this.props.service.posts().map(this.blogSummaryPanel.bind(this))}
+              {this.state.posts &&
+                this.state.posts.map(this.blogSummaryPanel.bind(this))}
             </CardColumns>
           </Container>
         </section>
@@ -51,7 +67,7 @@ export class Blog extends Component<BlogServiceProps> {
               </Nav.Link>
             </Nav>
             <Card.Text>
-              Published {this.formatter.toSentence(data.date)}{" "}
+              Published {this.dateService.toSentence(data.date)}{" "}
             </Card.Text>
             <Card.Text
               className="text-muted"
@@ -62,7 +78,7 @@ export class Blog extends Component<BlogServiceProps> {
           </Card.Body>
           <Card.Footer>
             <small className="text-muted">
-              Last updated {this.formatter.toSentence(data.modified)}
+              Last updated {this.dateService.toSentence(data.modified)}
             </small>
           </Card.Footer>
         </Card>

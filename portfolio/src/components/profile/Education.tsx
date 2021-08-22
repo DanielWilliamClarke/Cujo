@@ -1,12 +1,13 @@
 import { Component } from "react";
 import { Container, Row, Col, Badge } from "react-bootstrap";
+import { resolve } from "inversify-react";
 import {
   VerticalTimeline,
   VerticalTimelineElement,
 } from "react-vertical-timeline-component";
 import { MdSchool } from "react-icons/md";
 
-import { DateFormatter } from "../shared/DateUtils";
+import { IDateService } from "../../services/DateService";
 import { Education as EducationData } from "../../model/CVModel";
 import { DynamicImage } from "../shared/DynamicImage";
 
@@ -18,7 +19,10 @@ type EducationProps = {
 };
 
 export class Education extends Component<EducationProps> {
-  private formatter = new DateFormatter("MMMM YYYY", "DD/MM/YYYY");
+  @resolve("DateService") private readonly dateService!: IDateService;
+  componentWillMount() {
+    this.dateService.format("MMMM YYYY", "DD/MM/YYYY");
+  }
 
   render(): JSX.Element {
     return (
@@ -36,7 +40,7 @@ export class Education extends Component<EducationProps> {
               <VerticalTimelineElement
                 className="vertical-timeline-element--work"
                 key={index}
-                date={this.formatter.toRange(e.startDate, e.endDate)}
+                date={this.dateService.toRange(e.startDate, e.endDate)}
                 icon={<MdSchool />}
               >
                 {!!e.grade.length && (
