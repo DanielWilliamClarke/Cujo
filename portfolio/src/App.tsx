@@ -1,5 +1,10 @@
 import { Component } from "react";
-import { Switch, Route, RouteComponentProps, withRouter } from "react-router-dom";
+import {
+  Switch,
+  Route,
+  RouteComponentProps,
+  withRouter,
+} from "react-router-dom";
 import { SketchBackstretch } from "./components/backstretch/SketchBackstretch";
 import { CVProps } from "./model/CVModel";
 import NavPanel from "./components/nav/NavPanel";
@@ -19,8 +24,8 @@ class App extends Component<CVProps & RouteComponentProps & BlogServiceProps> {
   render(): JSX.Element {
     return (
       <div>
-        <SketchBackstretch cv={this.props.cv}></SketchBackstretch>
-        <NavPanel></NavPanel>
+        <SketchBackstretch cv={this.props.cv} />
+        <NavPanel />
         <SharePanel
           url={window.location.href}
           body="Software Engineer Portfolio and Blog"
@@ -33,8 +38,14 @@ class App extends Component<CVProps & RouteComponentProps & BlogServiceProps> {
             </Route>
             <Route
               path={"/blog/:id"}
-              children={({ match }: RouteComponentProps<BlogRouteParams>): JSX.Element =>
-                <BlogPost service={this.props.service} id={parseInt(match.params.id)} />}
+              children={({
+                match,
+              }: RouteComponentProps<BlogRouteParams>): JSX.Element => (
+                <BlogPost
+                  service={this.props.service}
+                  id={parseInt(match.params.id)}
+                />
+              )}
             />
           </Switch>
           <Blog service={this.props.service} />

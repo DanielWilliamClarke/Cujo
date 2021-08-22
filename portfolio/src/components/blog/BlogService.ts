@@ -7,13 +7,18 @@ export type BlogServiceProps = {
 };
 
 export class BlogService {
-  public async FetchAllBlogPosts(): Promise<Post[]> {
-    const response: AxiosResponse = await axios.get('/api/blog');
-    return response.data as Post[];
+  constructor(private postsData: Post[] = []) {}
+
+  public async Fetch(): Promise<BlogService> {
+    this.postsData = (await axios.get('/api/blog')).data as Post[];
+    return this;
   }
 
-  public async FetchBlogPost(postID: number): Promise<Post> {
-    const response: AxiosResponse = await axios.get(`/api/blog/${postID}`);
-    return response.data as Post;
+  posts(): Post[] {
+    return this.postsData;
+  }
+
+  post(id: number): Post | undefined {
+    return this.postsData.find((p: Post) => p.id === id);
   }
 }

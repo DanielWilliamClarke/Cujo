@@ -15,30 +15,10 @@ type BlogIDProps = {
   id: number;
 };
 
-type BlogPostState = {
-  post: Post | null;
-};
-
-export class BlogPost extends Component<BlogServiceProps & BlogIDProps, BlogPostState> {
-
-  componentWillMount(): void {
-    this.setPostState(null);
-    this.props.service
-      .FetchBlogPost(this.props.id)
-      .then(this.setPostState.bind(this))
-      .catch((err) => console.log(err));
-  }
-
+export class BlogPost extends Component<BlogServiceProps & BlogIDProps> {
   render(): JSX.Element {
-    return (
-      <Fragment>
-          {this.state.post && this.displayPost(this.state.post)}
-      </Fragment>
-    );
-  }
-
-  private setPostState(post: Post | null) {
-    this.setState({ post });
+    const post = this.props.service.post(this.props.id);
+    return <Fragment>{post && this.displayPost(post)}</Fragment>;
   }
 
   private displayPost(p: Post): JSX.Element {
@@ -50,16 +30,18 @@ export class BlogPost extends Component<BlogServiceProps & BlogIDProps, BlogPost
               <Col>
                 <h2 className="section-title">{p.title}</h2>
                 <div className="line centered"></div>
-                <h4 className="blog-date">
-                  {this.toDateSentence(p.date)}
-                </h4>
+                <h4 className="blog-date">{this.toDateSentence(p.date)}</h4>
               </Col>
             </Row>
 
             <div className="tags">
-              {p.tags.map((tag: string): JSX.Element => (
-                <Badge bg="portfolio" className="tag">{tag}</Badge>
-              ))}
+              {p.tags.map(
+                (tag: string): JSX.Element => (
+                  <Badge bg="portfolio" className="tag">
+                    {tag}
+                  </Badge>
+                )
+              )}
             </div>
 
             {p.mediaUrl && (

@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router } from "react-router-dom";
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
 
 import "./index.scss";
 import App from "./App";
@@ -12,15 +12,16 @@ import "react-vertical-timeline-component/style.min.css";
 import { CV } from "./model/CVModel";
 import { BlogService } from "./components/blog/BlogService";
 
-axios.get("/api/cv").then((response: AxiosResponse) => {
+(async () => {
+  const cvData = (await axios.get("/api/cv")).data as CV;
+  const blogService = await new BlogService().Fetch();
+
   ReactDOM.render(
     <React.StrictMode>
       <Router>
-        <App
-          cv={response.data as CV} 
-          service={new BlogService()} />
+        <App cv={cvData} service={blogService} />
       </Router>
     </React.StrictMode>,
     document.getElementById("root")
   );
-});
+})();
