@@ -1,31 +1,40 @@
 import "reflect-metadata";
 
-import React from "react";
+import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Provider } from "inversify-react";
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 
 import { container } from "./ioc";
-
-import "./index.scss";
+import { CV, CVState } from "./model/CVModel";
 import App from "./App";
 
+import "./index.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-vertical-timeline-component/style.min.css";
 
-import { CV } from "./model/CVModel";
+class Cujo extends Component<{}, CVState> {
+  componentWillMount() {
+    this.setState({ cv: undefined });
+    axios
+      .get("/api/cv")
+      .then((response: AxiosResponse<CV>) =>
+        this.setState({ cv: response.data })
+      );
+  }
 
-(async () => {
-  const cvData = (await axios.get("/api/cv")).data as CV;
-  ReactDOM.render(
-    <React.StrictMode>
-      <Router>
-        <Provider container={container}>
-          <App cv={cvData} />
-        </Provider>
-      </Router>
-    </React.StrictMode>,
-    document.getElementById("root")
-  );
-})();
+  render(): JSX.Element {
+    return (
+      <React.StrictMode>
+        <Router>
+          <Provider container={container}>
+            {this.state.cv && <App cv={this.state.cv} />}
+          </Provider>
+        </Router>
+      </React.StrictMode>
+    );
+  }
+}
+
+ReactDOM.render(<Cujo />, document.getElementById("root"));
