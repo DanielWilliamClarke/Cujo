@@ -1,7 +1,7 @@
 import { Component, Fragment } from "react";
 import { Container, Row, Col, Badge } from "react-bootstrap";
-import moment from "moment";
 
+import { DateFormatter } from "../shared/DateUtils";
 import { BlogServiceProps } from "./BlogService";
 import { Post } from "../../model/BlogPostModel";
 
@@ -16,6 +16,8 @@ type BlogIDProps = {
 };
 
 export class BlogPost extends Component<BlogServiceProps & BlogIDProps> {
+  private formatter = new DateFormatter("Do MMMM YYYY HH:mm:ss");
+
   render(): JSX.Element {
     const post = this.props.service.post(this.props.id);
     return <Fragment>{post && this.displayPost(post)}</Fragment>;
@@ -30,7 +32,9 @@ export class BlogPost extends Component<BlogServiceProps & BlogIDProps> {
               <Col>
                 <h2 className="section-title">{p.title}</h2>
                 <div className="line centered"></div>
-                <h4 className="blog-date">{this.toDateSentence(p.date)}</h4>
+                <h4 className="blog-date">
+                  {this.formatter.toSentence(p.date)}
+                </h4>
               </Col>
             </Row>
 
@@ -67,12 +71,5 @@ export class BlogPost extends Component<BlogServiceProps & BlogIDProps> {
         </section>
       </Fade>
     );
-  }
-
-  private toDateSentence(date: string): string {
-    if (date === "Present") {
-      return date;
-    }
-    return moment(date).format("Do MMMM YYYY HH:mm:ss");
   }
 }

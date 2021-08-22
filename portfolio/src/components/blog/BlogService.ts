@@ -9,7 +9,7 @@ export type BlogServiceProps = {
 export class BlogService {
   constructor(private postsData: Post[] = []) {}
 
-  public async Fetch(): Promise<BlogService> {
+  public async fetch(): Promise<BlogService> {
     this.postsData = (await axios.get('/api/blog')).data as Post[];
     return this;
   }
