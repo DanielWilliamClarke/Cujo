@@ -14,7 +14,7 @@ import { BlogService } from "./components/blog/BlogService";
 
 (async () => {
   const cvData = (await axios.get("/api/cv")).data as CV;
-  const blogService = await new BlogService().Fetch();
+  const blogService = await new BlogService().fetch();
 
   ReactDOM.render(
     <React.StrictMode>

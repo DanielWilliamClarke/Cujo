@@ -1,7 +1,7 @@
 import { Component } from "react";
 import { Card, CardColumns, Col, Container, Nav, Row } from "react-bootstrap";
-import moment from "moment";
 
+import { DateFormatter } from "../shared/DateUtils";
 import { BlogServiceProps } from "./BlogService";
 import { Post } from "../../model/BlogPostModel";
 
@@ -11,6 +11,8 @@ import "./Blog.scss";
 const Fade = require("react-reveal/Fade");
 
 export class Blog extends Component<BlogServiceProps> {
+  private formatter = new DateFormatter("Do MMMM YYYY HH:mm:ss");
+
   render(): JSX.Element {
     return (
       <Fade bottom>
@@ -48,7 +50,9 @@ export class Blog extends Component<BlogServiceProps> {
                 <Card.Title>{data.title}</Card.Title>
               </Nav.Link>
             </Nav>
-            <Card.Text>Published {this.toDateSentence(data.date)} </Card.Text>
+            <Card.Text>
+              Published {this.formatter.toSentence(data.date)}{" "}
+            </Card.Text>
             <Card.Text
               className="text-muted"
               dangerouslySetInnerHTML={{
@@ -58,18 +62,11 @@ export class Blog extends Component<BlogServiceProps> {
           </Card.Body>
           <Card.Footer>
             <small className="text-muted">
-              Last updated {this.toDateSentence(data.modified)}
+              Last updated {this.formatter.toSentence(data.modified)}
             </small>
           </Card.Footer>
         </Card>
       </Fade>
     );
-  }
-
-  private toDateSentence(date: string): string {
-    if (date === "Present") {
-      return date;
-    }
-    return moment(date).format("Do MMMM YYYY HH:mm:ss");
   }
 }
