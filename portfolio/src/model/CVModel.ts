@@ -85,3 +85,7 @@ export interface CV {
 export type CVProps = {
   cv: CV;
 };
+
+export type CVState = {
+  cv: CV | undefined;
+};
