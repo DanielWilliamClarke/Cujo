@@ -39,7 +39,7 @@ export class Projects extends Component<ProjectProps> {
             {this.projectImage(p)}
             {this.projectContent(p)}
           </Row>
-          <div className="centered long-line" />
+          <div className="centered line" />
         </Fade>
       </Container>
     );
