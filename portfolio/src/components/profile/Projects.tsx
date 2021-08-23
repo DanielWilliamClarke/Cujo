@@ -1,11 +1,14 @@
-import React, { Component } from "react";
-import { Container, Row, Col, Card, CardColumns } from "react-bootstrap";
+import { Component } from "react";
+import { Container, Row, Col } from "react-bootstrap";
 
 import { Project } from "../../model/CVModel";
+import { DevIconName } from "../shared/DevIcon";
 import { DynamicImage } from "../shared/DynamicImage";
 
 import "../shared/Portfolio.scss";
 import "./Projects.scss";
+
+const Fade = require("react-reveal/Fade");
 
 type ProjectProps = {
   projects: Project[];
@@ -22,40 +25,53 @@ export class Projects extends Component<ProjectProps> {
               <div className="centered line" />
             </Col>
           </Row>
-          <CardColumns className="section-content">
-            {this.props.projects.map(
-              (p: Project): JSX.Element => this.projectCard(p)
-            )}
-          </CardColumns>
-          <div className="centered short-line" />
+          {this.props.projects.map(this.project.bind(this))}
         </Container>
       </section>
     );
   }
 
-  private projectCard(p: Project): JSX.Element {
+  private project(p: Project, index: number): JSX.Element {
     return (
-      <Card bg="dark">
-        <Card.Body>
-          {p.image.length && (
-            <DynamicImage
-              image={p.image}
-              alt={`${p.name} project image`}
-              className="centered image-item"
-            />
-          )}
-          <div className="card-content">
-            <Card.Title>{p.name}</Card.Title>
-            <div className="centered short-line" />
-            <Card.Text>{p.summary}</Card.Text>
-          </div>
-        </Card.Body>
-        <Card.Footer>
+      <Container className="project-panels">
+        <Fade right={index % 2 === 0} left={index % 2 !== 0}>
+          <Row className="project">
+            {this.projectImage(p)}
+            {this.projectContent(p)}
+          </Row>
+          <div className="centered long-line" />
+        </Fade>
+      </Container>
+    );
+  }
+
+  private projectImage(p: Project): JSX.Element {
+    return (
+      <Col className="project-image">
+        {p.image.length && (
+          <DynamicImage
+            image={p.image}
+            alt={`${p.name} project image`}
+            className="centered image-item"
+          />
+        )}
+      </Col>
+    );
+  }
+
+  private projectContent(p: Project): JSX.Element {
+    return (
+      <Col className="project-content">
+        <div className="content">
+          <h2>{p.name}</h2>
+          <div>{p.summary}</div>
+        </div>
+        <div className="links">
           <a href={p.link} rel="noopener noreferrer" target="_blank">
-            See more!
+            <DevIconName icon={p.icon} />
           </a>
-        </Card.Footer>
-      </Card>
+        </div>
+      </Col>
     );
   }
 }

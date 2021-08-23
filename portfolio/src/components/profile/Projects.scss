@@ -1,23 +1,71 @@
 .projects {
-  .card {
-    margin: 10px 0;
-  }
+  .project {
+    padding: 60px 0;
 
-  .card-body {
-    padding: 0;
+    .project-image,
+    .project-content {
+      display: flex;
+      align-content: center;
+      flex-wrap: wrap;
+      text-align: left;
+    }
 
-    img {
-      width: 100%;
-      padding-bottom: 20px;
-      border-radius: 3px;
+    .project-content {
+      .content {
+        padding-bottom: 10px;
+      }
+
+      .content,
+      .links {
+        width: 100%;
+        padding: 10px 0;
+
+        a {
+          text-decoration: none;
+        }
+      }
+
+      .dev-icon {
+        padding: 5px 0;
+        text-align: center;
+        width: 75px;
+    
+        .icon {
+          font-size: 75px;
+        }
+    
+        .icon-name {
+          font-size: 1rem;
+          margin: .2rem;
+        }
+      }
+    }
+
+    .project-image {
+      img {
+        width: 100%;
+        max-height: 350px;
+        object-fit: cover;
+        border-radius: 3px;
+        object-position: top;
+      }
     }
   }
 
-  .card-content {
-    padding: 0px 15px;
+  .project-panels:nth-child(even) .row {
+    flex-direction: row-reverse;
   }
+}
 
-  .card-footer {
-    padding: 15px;
+@media screen and (max-width: 700px) {
+  .projects {
+    .project-image {
+      padding-bottom: 30px;
+    }
+
+    .links {
+      display: flex;
+      justify-content: center;
+    }
   }
 }

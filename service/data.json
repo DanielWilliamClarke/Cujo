@@ -426,37 +426,61 @@
       "name": "Untitled Indie Space Shooter",
       "link": "https://github.com/DanielWilliamClarke/Annatar",
       "image": "p1_small.gif",
-      "summary": "Ongoing indie space shooter project I am building in my spare time using C++ and SFML, Based on my first year university programming class project submission."
+      "summary": "Ongoing indie space shooter project I am building in my spare time using C++ and SFML, Based on my first year university programming class project submission.",
+      "icon":  {
+        "icon": "github-plain",
+        "name": "GitHub"
+      }
     },
     {
       "name": "My Portfolio",
       "link": "https://github.com/DanielWilliamClarke/Cujo",
       "image": "p2_tess.gif",
-      "summary": "I have made this Portfolio's code available for all to see!"
+      "summary": "I have made this Portfolio's code available for all to see!",
+      "icon":  {
+        "icon": "github-plain",
+        "name": "GitHub"
+      }
     },
     {
       "name": "Semi Autonomous Finite State Machines",
       "link": "https://github.com/DanielWilliamClarke/SemiAutonomousFSMs",
       "image": "p3_small.gif",
-      "summary": "To complete my final year at Nottingham Trent University, I researched and developed an application capable of the generation and deployment of semi-autonomous supervisory controllers for process automation. Upon completion I was then able return to Schlumberger Gould Research to demonstrate and integrate my solution with their drilling simulation test platform and autonomously drove a physical miniature drilling rig live."
+      "summary": "To complete my final year at Nottingham Trent University, I researched and developed an application capable of the generation and deployment of semi-autonomous supervisory controllers for process automation. Upon completion I was then able return to Schlumberger Gould Research to demonstrate and integrate my solution with their drilling simulation test platform and autonomously drove a physical miniature drilling rig live.",
+      "icon":  {
+        "icon": "github-plain",
+        "name": "GitHub"
+      }
     },
     {
       "name": "Predator/Prey Simulation",
       "link": "https://github.com/DanielWilliamClarke/Yautja",
       "image": "p4_small.gif",
-      "summary": "A predator / prey simulation with AI. I have currently began to resurrect the code base from ages long passed"
+      "summary": "A predator / prey simulation with AI. I have currently began to resurrect the code base from ages long passed",
+      "icon":  {
+        "icon": "github-plain",
+        "name": "GitHub"
+      }
     },
     {
       "name": "Various Projects",
       "link": "https://github.com/DanielWilliamClarke",
       "image": "p5.jpg",
-      "summary": "Everything else on my Github"
+      "summary": "Everything else on my Github",
+      "icon":  {
+        "icon": "github-plain",
+        "name": "GitHub"
+      }
     },
     {
       "name": "Past Digital Art Works 2006 - 2010",
       "link": "https://www.deviantart.com/clarkii",
       "image": "backstretch.jpg",
-      "summary": "In my youth I was a budding digital artist, All of my works are available to view on DeviantArt!"
+      "summary": "In my youth I was a budding digital artist, All of my works are available to view on DeviantArt!",
+      "icon": {
+        "icon": "photoshop-plain",
+        "name": "DeviantArt"
+      }
     }
   ]
 }

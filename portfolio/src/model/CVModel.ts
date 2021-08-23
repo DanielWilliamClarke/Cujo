@@ -65,6 +65,7 @@ export interface Project {
   link: string;
   image: string;
   summary: string;
+  icon: DevIcon;
 }
 
 export interface Interests {
