@@ -121,4 +121,5 @@ pub struct Project {
     pub link: String,
     pub image: String,
     pub summary: String,
+    pub icon: Brand
 }
