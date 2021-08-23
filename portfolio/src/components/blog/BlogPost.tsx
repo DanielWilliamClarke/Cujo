@@ -1,8 +1,9 @@
-import { Component, Fragment } from "react";
+import { Component } from "react";
 import { Container, Row, Col, Badge } from "react-bootstrap";
-import moment from "moment";
+import { resolve } from "inversify-react";
 
-import { BlogServiceProps } from "./BlogService";
+import { IDateService } from "../../services/DateService";
+import { IBlogService } from "../../services/BlogService";
 import { Post } from "../../model/BlogPostModel";
 
 import "../shared/Portfolio.scss";
@@ -16,29 +17,24 @@ type BlogIDProps = {
 };
 
 type BlogPostState = {
-  post: Post | null;
+  post: Post | undefined;
 };
 
-export class BlogPost extends Component<BlogServiceProps & BlogIDProps, BlogPostState> {
+export class BlogPost extends Component<BlogIDProps, BlogPostState> {
+  @resolve("DateService") private readonly dateService!: IDateService;
+  @resolve("BlogService") private readonly blogService!: IBlogService;
 
-  componentWillMount(): void {
-    this.setPostState(null);
-    this.props.service
+  componentWillMount() {
+    this.dateService.format("Do MMMM YYYY HH:mm:ss");
+
+    this.setState({ post: undefined });
+    this.blogService
       .FetchBlogPost(this.props.id)
-      .then(this.setPostState.bind(this))
-      .catch((err) => console.log(err));
+      .then((post: Post) => this.setState({ post }));
   }
 
   render(): JSX.Element {
-    return (
-      <Fragment>
-          {this.state.post && this.displayPost(this.state.post)}
-      </Fragment>
-    );
-  }
-
-  private setPostState(post: Post | null) {
-    this.setState({ post });
+    return <>{this.state.post && this.displayPost(this.state.post)}</>;
   }
 
   private displayPost(p: Post): JSX.Element {
@@ -51,15 +47,19 @@ export class BlogPost extends Component<BlogServiceProps & BlogIDProps, BlogPost
                 <h2 className="section-title">{p.title}</h2>
                 <div className="line centered"></div>
                 <h4 className="blog-date">
-                  {this.toDateSentence(p.date)}
+                  {this.dateService.toSentence(p.date)}
                 </h4>
               </Col>
             </Row>
 
             <div className="tags">
-              {p.tags.map((tag: string): JSX.Element => (
-                <Badge bg="portfolio" className="tag">{tag}</Badge>
-              ))}
+              {p.tags.map(
+                (tag: string): JSX.Element => (
+                  <Badge bg="portfolio" className="tag">
+                    {tag}
+                  </Badge>
+                )
+              )}
             </div>
 
             {p.mediaUrl && (
@@ -85,12 +85,5 @@ export class BlogPost extends Component<BlogServiceProps & BlogIDProps, BlogPost
         </section>
       </Fade>
     );
-  }
-
-  private toDateSentence(date: string): string {
-    if (date === "Present") {
-      return date;
-    }
-    return moment(date).format("Do MMMM YYYY HH:mm:ss");
   }
 }

@@ -1,12 +1,15 @@
-import React, { Component } from "react";
+import { Component } from "react";
 import { Container, Row, Col, Badge } from "react-bootstrap";
+import { resolve } from "inversify-react";
 import ReactMarkdown from "react-markdown";
 import breaks from "remark-breaks";
-import moment from "moment";
-import util from "util";
-import { VerticalTimeline, VerticalTimelineElement } from "react-vertical-timeline-component";
-import { MdWork } from "react-icons/md"
+import {
+  VerticalTimeline,
+  VerticalTimelineElement,
+} from "react-vertical-timeline-component";
+import { MdWork } from "react-icons/md";
 
+import { IDateService } from "../../services/DateService";
 import { Work } from "../../model/CVModel";
 import { DynamicImage } from "../shared/DynamicImage";
 
@@ -18,7 +21,10 @@ type WorkProps = {
 };
 
 export class Experience extends Component<WorkProps> {
-  private dateFormat = "DD/MM/YYYY";
+  @resolve("DateService") private readonly dateService!: IDateService;
+  componentWillMount() {
+    this.dateService.format("MMMM YYYY", "DD/MM/YYYY");
+  }
 
   render(): JSX.Element {
     return (
@@ -34,29 +40,33 @@ export class Experience extends Component<WorkProps> {
           <VerticalTimeline className="timeline">
             {this.props.work
               .sort((a, b) => {
-                return this.toUnix(b.startDate) - this.toUnix(a.startDate);
+                return (
+                  this.dateService.toUnix(b.startDate) -
+                  this.dateService.toUnix(a.startDate)
+                );
               })
               .map(
                 (work: Work, index: number): JSX.Element => (
                   <VerticalTimelineElement
                     className="vertical-timeline-element--work"
                     key={index}
-                    date={this.toRange(work.startDate, work.endDate)}
+                    date={this.dateService.toRangeWithDuration(
+                      work.startDate,
+                      work.endDate
+                    )}
                     icon={<MdWork />}
                   >
                     {work.highlights.map((highlight) => (
-                      <Badge bg="portfolio" className="highlight">{highlight}</Badge>
+                      <Badge bg="portfolio" className="highlight">
+                        {highlight}
+                      </Badge>
                     ))}
 
                     <Row className="header">
                       <Col className="headline">
                         <h3>
-                          <span>
-                            {work.position}
-                          </span>
-                          <span>
-                            @
-                          </span>
+                          <span>{work.position}</span>
+                          <span>@</span>
                           <span>
                             <a
                               href={work.website}
@@ -97,44 +107,12 @@ export class Experience extends Component<WorkProps> {
 
                     <div className="centered short-line" />
                   </VerticalTimelineElement>
-                ))}
+                )
+              )}
           </VerticalTimeline>
           <div className="centered short-line" />
         </Container>
       </section>
     );
-  }
-
-  private toUnix(date: string): number {
-    return moment(date, this.dateFormat).unix();
-  }
-
-  private toRange(start: string, end: string): string {
-    return `${this.toDateSentence(start)} - ${this.toDateSentence(end)} (${this.toDuration(start, end)})`;
-  }
-
-  private toDateSentence(date: string): string {
-    if (date === "Present") {
-      return date;
-    }
-    return moment(date, this.dateFormat).format("MMMM YYYY");
-  }
-
-  private toDuration(start: string, end: string): string {
-    let endMoment = moment(end, this.dateFormat);
-    if (end === "Present") {
-      endMoment = moment();
-    }
-    const difference = moment.duration(
-      endMoment.diff(moment(start, this.dateFormat)));
-    const years = difference.years();
-    const months = difference.months();
-    const yearFormat = years
-      ? util.format("%d year%s", years, years === 1 ? "" : "s")
-      : "";
-    const monthFormat = months
-      ? util.format("%d month%s", months, months === 1 ? "" : "s")
-      : "";
-    return `${yearFormat} ${monthFormat}`;
   }
 }

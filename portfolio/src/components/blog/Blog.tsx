@@ -1,8 +1,9 @@
 import { Component } from "react";
 import { Card, CardColumns, Col, Container, Nav, Row } from "react-bootstrap";
-import moment from "moment";
+import { resolve } from "inversify-react";
 
-import { BlogServiceProps } from "./BlogService";
+import { IDateService } from "../../services/DateService";
+import { IBlogService } from "../../services/BlogService";
 import { Post } from "../../model/BlogPostModel";
 
 import "../shared/Portfolio.scss";
@@ -11,16 +12,20 @@ import "./Blog.scss";
 const Fade = require("react-reveal/Fade");
 
 type BlogState = {
-  blog: Post[];
+  posts: Post[];
 };
 
-export class Blog extends Component<BlogServiceProps, BlogState> {
-  componentWillMount(): void {
-    this.setBlogState([]);
-    this.props.service
+export class Blog extends Component<{}, BlogState> {
+  @resolve("DateService") private readonly dateService!: IDateService;
+  @resolve("BlogService") private readonly blogService!: IBlogService;
+
+  componentWillMount() {
+    this.dateService.format("Do MMMM YYYY HH:mm:ss");
+
+    this.setState({ posts: [] });
+    this.blogService
       .FetchAllBlogPosts()
-      .then(this.setBlogState.bind(this))
-      .catch((err) => console.log(err));
+      .then((posts: Post[]) => this.setState({ posts }));
   }
 
   render(): JSX.Element {
@@ -28,25 +33,20 @@ export class Blog extends Component<BlogServiceProps, BlogState> {
       <Fade bottom>
         <section id="blog" className="section-dark blog">
           <Container>
-              <Row>
-                <Col>
-                  <h2 className="section-title">Blog</h2>
-                  <div className="centered line" />
-                </Col>
-              </Row>
-              <CardColumns className="section-content">
-                {this.state.blog.map(
-                  (data: Post): JSX.Element =>
-                    this.blogSummaryPanel(data))}
-              </CardColumns>
-            </Container>
+            <Row>
+              <Col>
+                <h2 className="section-title">Blog</h2>
+                <div className="centered line" />
+              </Col>
+            </Row>
+            <CardColumns className="section-content">
+              {this.state.posts &&
+                this.state.posts.map(this.blogSummaryPanel.bind(this))}
+            </CardColumns>
+          </Container>
         </section>
       </Fade>
     );
-  }
-
-  private setBlogState(blog: Post[]) {
-    this.setState({ blog });
   }
 
   private blogSummaryPanel(data: Post): JSX.Element {
@@ -55,22 +55,19 @@ export class Blog extends Component<BlogServiceProps, BlogState> {
         <Card key={data.id} bg="dark">
           {data.mediaUrl && (
             <Nav navbarScroll>
-              <Nav.Link
-                href={`/blog/${data.id}`} >
+              <Nav.Link href={`/blog/${data.id}`}>
                 <Card.Img variant="top" src={data.mediaUrl} />
               </Nav.Link>
             </Nav>
           )}
           <Card.Body>
             <Nav navbarScroll>
-              <Nav.Link
-                href={`/blog/${data.id}`}
-              >
+              <Nav.Link href={`/blog/${data.id}`}>
                 <Card.Title>{data.title}</Card.Title>
               </Nav.Link>
             </Nav>
             <Card.Text>
-              Published {this.toDateSentence(data.date)}{" "}
+              Published {this.dateService.toSentence(data.date)}{" "}
             </Card.Text>
             <Card.Text
               className="text-muted"
@@ -81,18 +78,11 @@ export class Blog extends Component<BlogServiceProps, BlogState> {
           </Card.Body>
           <Card.Footer>
             <small className="text-muted">
-              Last updated {this.toDateSentence(data.modified)}
+              Last updated {this.dateService.toSentence(data.modified)}
             </small>
           </Card.Footer>
         </Card>
       </Fade>
     );
-  }
-
-  private toDateSentence(date: string): string {
-    if (date === "Present") {
-      return date;
-    }
-    return moment(date).format("Do MMMM YYYY HH:mm:ss");
   }
 }
