@@ -3,9 +3,8 @@ import { Nav, Navbar } from "react-bootstrap";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import Scrollspy from 'react-scrollspy';
 
-import { BsLightning } from "react-icons/bs";
-import { GiDiceTwentyFacesTwenty } from "react-icons/gi";
-import { IoHomeOutline, IoPlanetOutline, IoRocketOutline, IoSchoolOutline, IoCodeWorkingSharp, IoMegaphoneOutline, IoLibraryOutline } from "react-icons/io5";
+import { GiDiceTwentyFacesTwenty, GiBookmarklet, GiAnvilImpact } from "react-icons/gi";
+import { IoHomeOutline, IoPlanetOutline, IoRocketOutline, IoSchoolOutline, IoCodeWorkingSharp, IoMegaphoneOutline } from "react-icons/io5";
 
 import "./NavPanel.scss";
 
@@ -26,7 +25,7 @@ class NavPanel extends Component<RouteComponentProps, NavState> {
       menu: [
         { link: "home", icon: <IoHomeOutline /> }
       ].concat(this.buildMenuItems()).concat([
-        { link: "blog", icon: <IoLibraryOutline /> },
+        { link: "blog", icon: <GiBookmarklet /> },
         { link: "contact", icon: <IoMegaphoneOutline /> }
       ])
     });
@@ -77,7 +76,7 @@ class NavPanel extends Component<RouteComponentProps, NavState> {
         { link: "experience", icon: <IoRocketOutline /> },
         { link: "education", icon: <IoSchoolOutline /> },
         { link: "skills", icon: <IoCodeWorkingSharp /> },
-        { link: "projects", icon: <BsLightning /> }
+        { link: "projects", icon: <GiAnvilImpact /> }
       ] :
       [{ link: "post", icon: <IoPlanetOutline /> }];
   }
