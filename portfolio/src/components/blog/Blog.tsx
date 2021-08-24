@@ -2,6 +2,8 @@ import { Component } from "react";
 import { Card, CardColumns, Col, Container, Nav, Row } from "react-bootstrap";
 import { resolve } from "inversify-react";
 
+import { IoLibraryOutline } from "react-icons/io5";
+
 import { IDateService } from "../../services/DateService";
 import { IBlogService } from "../../services/BlogService";
 import { Post } from "../../model/BlogPostModel";
@@ -44,6 +46,8 @@ export class Blog extends Component<{}, BlogState> {
                 this.state.posts.map(this.blogSummaryPanel.bind(this))}
             </CardColumns>
           </Container>
+          <div className="centered short-line" />
+          <IoLibraryOutline className="section-icon"/>
         </section>
       </Fade>
     );

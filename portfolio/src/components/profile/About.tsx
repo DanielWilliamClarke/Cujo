@@ -3,6 +3,8 @@ import { Container, Row, Col, Carousel } from "react-bootstrap";
 import ReactMarkdown from "react-markdown";
 import breaks from "remark-breaks";
 
+import { GiDiceTwentyFacesTwenty } from "react-icons/gi";
+
 import { Basics, Interests } from "../../model/CVModel";
 import { DynamicImage } from "../shared/DynamicImage";
 
@@ -21,28 +23,28 @@ export class About extends Component<AboutProps> {
         <Container>
           <Row>
             <Col>
-              <h2 className="section-title">About</h2>
+              <h2 className="section-title">About Me!</h2>
               <div className="centered line" />
             </Col>
           </Row>
 
           <Row className="section-content">
-            <Carousel 
-             indicators
-             wrap={true}
-             slide={true}
-             nextLabel={''} 
-             prevLabel={''}>
-              {this.props.basics.images.map(
-                (src: string) => (
-                  <Carousel.Item>
-                    <DynamicImage
-                      image={src}
-                      alt="Image not found!"
-                      className="headshot"
-                    />
-                  </Carousel.Item>
-                ))}
+            <Carousel
+              indicators
+              wrap={true}
+              slide={true}
+              nextLabel={""}
+              prevLabel={""}
+            >
+              {this.props.basics.images.map((src: string) => (
+                <Carousel.Item>
+                  <DynamicImage
+                    image={src}
+                    alt="Image not found!"
+                    className="headshot"
+                  />
+                </Carousel.Item>
+              ))}
             </Carousel>
           </Row>
 
@@ -79,6 +81,7 @@ export class About extends Component<AboutProps> {
             </Col>
           </Row>
           <div className="centered short-line" />
+          <GiDiceTwentyFacesTwenty className="section-icon" />
         </Container>
       </section>
     );

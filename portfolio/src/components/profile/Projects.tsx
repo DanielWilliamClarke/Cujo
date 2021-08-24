@@ -1,5 +1,7 @@
 import { Component } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Badge } from "react-bootstrap";
+
+import { BsLightning } from "react-icons/bs";
 
 import { Project } from "../../model/CVModel";
 import { DevIconName } from "../shared/DevIcon";
@@ -21,11 +23,12 @@ export class Projects extends Component<ProjectProps> {
         <Container>
           <Row>
             <Col>
-              <h2 className="section-title">Projects</h2>
-              <div className="centered line" />
+              <h2 className="section-title">Personal Projects</h2>
             </Col>
           </Row>
           {this.props.projects.map(this.project.bind(this))}
+          <div className="centered short-line" />
+          <BsLightning className="section-icon" />
         </Container>
       </section>
     );
@@ -35,11 +38,11 @@ export class Projects extends Component<ProjectProps> {
     return (
       <Container className="project-panels">
         <Fade right={index % 2 === 0} left={index % 2 !== 0}>
+          <div className="centered line" />
           <Row className="project">
             {this.projectImage(p)}
             {this.projectContent(p)}
           </Row>
-          <div className="centered line" />
         </Fade>
       </Container>
     );
@@ -64,7 +67,12 @@ export class Projects extends Component<ProjectProps> {
       <Col className="project-content">
         <div className="content">
           <h2>{p.name}</h2>
-          <div>{p.summary}</div>
+          {p.tags.map((tag) => (
+            <Badge bg="portfolio" className="highlight">
+              {tag}
+            </Badge>
+          ))}
+          <div className="summary">{p.summary}</div>
         </div>
         <div className="links">
           <a href={p.link} rel="noopener noreferrer" target="_blank">

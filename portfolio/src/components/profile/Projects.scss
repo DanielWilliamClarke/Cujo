@@ -13,20 +13,24 @@
     .project-content {
       .content {
         padding-bottom: 10px;
+
+        .summary {
+          padding-top: 20px;
+        }
       }
 
       .content,
       .links {
         width: 100%;
-        padding: 10px 0;
+        padding-top: 10px;
 
         a {
           text-decoration: none;
+          color: inherit;
         }
       }
 
       .dev-icon {
-        padding: 5px 0;
         text-align: center;
         width: 75px;
     
@@ -52,8 +56,10 @@
     }
   }
 
-  .project-panels:nth-child(even) .row {
-    flex-direction: row-reverse;
+  .project-panels:nth-child(even) {
+    .row {
+      flex-direction: row-reverse;
+    }
   }
 }
 

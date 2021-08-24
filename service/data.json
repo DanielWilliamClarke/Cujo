@@ -427,6 +427,7 @@
       "link": "https://github.com/DanielWilliamClarke/Annatar",
       "image": "p1_small.gif",
       "summary": "Ongoing indie space shooter project I am building in my spare time using C++ and SFML, Based on my first year university programming class project submission.",
+      "tags": ["C++", "SFML", "Games Design", "Passion Project"],
       "icon":  {
         "icon": "github-plain",
         "name": "GitHub"
@@ -437,6 +438,7 @@
       "link": "https://github.com/DanielWilliamClarke/Cujo",
       "image": "p2_tess.gif",
       "summary": "I have made this Portfolio's code available for all to see!",
+      "tags": ["TypeScript", "React", "Rust", "Docker", "Full Stack", "Portfolio"],
       "icon":  {
         "icon": "github-plain",
         "name": "GitHub"
@@ -447,6 +449,7 @@
       "link": "https://github.com/DanielWilliamClarke/SemiAutonomousFSMs",
       "image": "p3_small.gif",
       "summary": "To complete my final year at Nottingham Trent University, I researched and developed an application capable of the generation and deployment of semi-autonomous supervisory controllers for process automation. Upon completion I was then able return to Schlumberger Gould Research to demonstrate and integrate my solution with their drilling simulation test platform and autonomously drove a physical miniature drilling rig live.",
+      "tags": ["C++", "SFML", "Automation", "Finite State Automata", "Algorithms", "OPC"],
       "icon":  {
         "icon": "github-plain",
         "name": "GitHub"
@@ -457,6 +460,7 @@
       "link": "https://github.com/DanielWilliamClarke/Yautja",
       "image": "p4_small.gif",
       "summary": "A predator / prey simulation with AI. I have currently began to resurrect the code base from ages long passed",
+      "tags": ["C++", "SFML",  "Simulation", "Natural Language Processing"],
       "icon":  {
         "icon": "github-plain",
         "name": "GitHub"
@@ -467,6 +471,7 @@
       "link": "https://github.com/DanielWilliamClarke",
       "image": "p5.jpg",
       "summary": "Everything else on my Github",
+      "tags": ["Proof of Concepts", "Coding Challenges", "Experiments"],
       "icon":  {
         "icon": "github-plain",
         "name": "GitHub"
@@ -477,6 +482,7 @@
       "link": "https://www.deviantart.com/clarkii",
       "image": "backstretch.jpg",
       "summary": "In my youth I was a budding digital artist, All of my works are available to view on DeviantArt!",
+      "tags": ["Digital Art", "Compositions", "Vistas"],
       "icon": {
         "icon": "photoshop-plain",
         "name": "DeviantArt"

@@ -5,7 +5,8 @@ import {
   VerticalTimeline,
   VerticalTimelineElement,
 } from "react-vertical-timeline-component";
-import { MdSchool } from "react-icons/md";
+
+import { IoSchoolOutline } from "react-icons/io5";
 
 import { IDateService } from "../../services/DateService";
 import { Education as EducationData } from "../../model/CVModel";
@@ -41,7 +42,7 @@ export class Education extends Component<EducationProps> {
                 className="vertical-timeline-element--work"
                 key={index}
                 date={this.dateService.toRange(e.startDate, e.endDate)}
-                icon={<MdSchool />}
+                icon={<IoSchoolOutline />}
               >
                 {!!e.grade.length && (
                   <Row>
@@ -95,6 +96,7 @@ export class Education extends Component<EducationProps> {
             ))}
           </VerticalTimeline>
           <div className="centered short-line" />
+          <IoSchoolOutline className="section-icon" />
         </Container>
       </section>
     );

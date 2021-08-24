@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 
+import { IoMegaphoneOutline } from "react-icons/io5";
+
 import { Profile } from "../../model/CVModel";
 import { DevIconName } from "../shared/DevIcon";
 
@@ -82,9 +84,9 @@ export class Contact extends Component<ContactProps, ContactState> {
                 </Form>
               </div>
             </Row>
-
-            <div className="centered short-line" />
           </Container>
+          <div className="centered short-line" />
+          <IoMegaphoneOutline className="section-icon" />
         </section>
       </Fade>
     );
