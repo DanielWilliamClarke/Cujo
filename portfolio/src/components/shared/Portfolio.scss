@@ -182,6 +182,7 @@
 .timeline {
   .vertical-timeline-element-content {
     color: $col-text-main;
+    box-shadow: none;
   }
 }
 
@@ -231,7 +232,8 @@
     color: $color;
   }
 
-  .image-item {
+  .image-item,
+  img {
     box-shadow: 0 0 25px $card-color;
   }
 
@@ -245,7 +247,6 @@
   
     .vertical-timeline-element-content {
       background-color: $card-color;
-      box-shadow: 0 0 25px $card-color;
     }
   
     .vertical-timeline-element-content-arrow  {
