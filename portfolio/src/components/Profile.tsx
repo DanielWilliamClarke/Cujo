@@ -12,24 +12,17 @@ export class Profile extends Component<CVProps> {
   render(): JSX.Element {
     return (
       <div>
-        <Fade left>
-          <About
-            basics={this.props.cv.basics}
-            interests={this.props.cv.interests}
-          />
-        </Fade>
-        <Fade right>
-          <Experience work={this.props.cv.work} />
-        </Fade>
-        <Fade left>
-          <Education education={this.props.cv.education} />
-        </Fade>
-        <Fade right>
-          <Technical techical={this.props.cv.skills} />
-        </Fade>
-        <Fade left>
+        {[
+          <About basics={this.props.cv.basics} interests={this.props.cv.interests} />,
+          <Experience work={this.props.cv.work} />,
+          <Education education={this.props.cv.education} />,
+          <Technical techical={this.props.cv.skills} />,
           <Projects projects={this.props.cv.projects} />
-        </Fade>
+        ].map((element: JSX.Element, index: number) => (
+          <Fade right={index % 2 === 0} left={index % 2 !== 0}>
+            {element}
+          </Fade>
+        ))}
       </div>
     );
   }
