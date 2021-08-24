@@ -3,6 +3,8 @@ import { Container, Row, Col } from "react-bootstrap";
 import ReactMarkdown from "react-markdown";
 import breaks from "remark-breaks";
 
+import { IoCodeWorkingSharp } from "react-icons/io5";
+
 import { Skills, DevIcon } from "../../model/CVModel";
 import { DevIconName } from "../shared/DevIcon";
 
@@ -28,7 +30,7 @@ export class Technical extends Component<TechnicalProps, SkillsState> {
         <Container>
           <Row>
             <Col>
-              <h2 className="section-title">Technical Skills</h2>
+              <h2 className="section-title">Skills and Competencies</h2>
               <div className="centered line" />
             </Col>
           </Row>
@@ -68,6 +70,7 @@ export class Technical extends Component<TechnicalProps, SkillsState> {
           </Row>
         </Container>
         <div className="centered short-line" />
+        <IoCodeWorkingSharp className="section-icon" />
       </section>
     );
   }

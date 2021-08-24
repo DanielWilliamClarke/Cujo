@@ -7,7 +7,8 @@ import {
   VerticalTimeline,
   VerticalTimelineElement,
 } from "react-vertical-timeline-component";
-import { MdWork } from "react-icons/md";
+
+import { IoRocketOutline } from "react-icons/io5";
 
 import { IDateService } from "../../services/DateService";
 import { Work } from "../../model/CVModel";
@@ -32,7 +33,7 @@ export class Experience extends Component<WorkProps> {
         <Container>
           <Row>
             <Col>
-              <h2 className="section-title">Experience</h2>
+              <h2 className="section-title">Professional Experience</h2>
               <div className="centered line" />
             </Col>
           </Row>
@@ -54,7 +55,7 @@ export class Experience extends Component<WorkProps> {
                       work.startDate,
                       work.endDate
                     )}
-                    icon={<MdWork />}
+                    icon={<IoRocketOutline />}
                   >
                     {work.highlights.map((highlight) => (
                       <Badge bg="portfolio" className="highlight">
@@ -111,6 +112,7 @@ export class Experience extends Component<WorkProps> {
               )}
           </VerticalTimeline>
           <div className="centered short-line" />
+          <IoRocketOutline className="section-icon" />
         </Container>
       </section>
     );

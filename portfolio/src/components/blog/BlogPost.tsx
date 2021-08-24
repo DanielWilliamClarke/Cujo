@@ -2,6 +2,8 @@ import { Component } from "react";
 import { Container, Row, Col, Badge } from "react-bootstrap";
 import { resolve } from "inversify-react";
 
+import { IoPlanetOutline } from "react-icons/io5";
+
 import { IDateService } from "../../services/DateService";
 import { IBlogService } from "../../services/BlogService";
 import { Post } from "../../model/BlogPostModel";
@@ -79,9 +81,9 @@ export class BlogPost extends Component<BlogIDProps, BlogPostState> {
                 ></div>
               </Col>
             </Row>
-
-            <div className="short-line centered"></div>
           </Container>
+          <div className="short-line centered"></div>
+          <IoPlanetOutline className="section-icon"/>
         </section>
       </Fade>
     );

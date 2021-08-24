@@ -51,6 +51,11 @@
   p {
     margin: 0.5rem 0;
   }
+
+  .section-icon {
+    font-size: calc(20px + 0.25vw);
+    margin-top: 20px;
+  }
 }
 
 .centered {
@@ -222,6 +227,10 @@
     }
   }
 
+  .section-icon {
+    color: $color;
+  }
+
   .image-item {
     box-shadow: 0 0 25px $card-color;
   }
@@ -283,8 +292,19 @@
     }
   }
 
+  .section-dark,
+  .section-light,
   .section {
     text-align: left;
+
+    .container {
+      padding-top: 20px;
+    }
+
+    .section-icon {
+      text-align: center !important;
+      width: 100%;
+    }
   }
 
   .text-column,

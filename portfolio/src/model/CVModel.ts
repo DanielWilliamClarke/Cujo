@@ -65,6 +65,7 @@ export interface Project {
   link: string;
   image: string;
   summary: string;
+  tags: string[];
   icon: DevIcon;
 }
 
