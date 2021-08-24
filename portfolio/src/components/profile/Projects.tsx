@@ -52,11 +52,15 @@ export class Projects extends Component<ProjectProps> {
     return (
       <Col className="project-image">
         {p.image.length && (
-          <DynamicImage
-            image={p.image}
-            alt={`${p.name} project image`}
-            className="centered image-item"
-          />
+          <a className="image-link" href={p.link} rel="noopener noreferrer" target="_blank">
+            <DynamicImage
+              image={p.image}
+              alt={`${p.name} project image`}
+              className="centered image-item"
+            />
+            <div className="overlay" />
+            <DevIconName icon={p.icon} />
+          </a>
         )}
       </Col>
     );
@@ -73,11 +77,6 @@ export class Projects extends Component<ProjectProps> {
             </Badge>
           ))}
           <div className="summary">{p.summary}</div>
-        </div>
-        <div className="links">
-          <a href={p.link} rel="noopener noreferrer" target="_blank">
-            <DevIconName icon={p.icon} />
-          </a>
         </div>
       </Col>
     );
