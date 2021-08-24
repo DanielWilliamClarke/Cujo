@@ -53,9 +53,9 @@ export class Blog extends Component<{}, BlogState> {
     );
   }
 
-  private blogSummaryPanel(data: Post): JSX.Element {
+  private blogSummaryPanel(data: Post, index: number): JSX.Element {
     return (
-      <Fade bottom>
+      <Fade left={index % 2 === 0} right={index % 2 !== 0}>
         <Card key={data.id} bg="dark">
           {data.mediaUrl && (
             <Nav navbarScroll>
