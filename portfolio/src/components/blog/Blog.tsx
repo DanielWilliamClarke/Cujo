@@ -2,7 +2,7 @@ import { Component } from "react";
 import { Card, CardColumns, Col, Container, Nav, Row } from "react-bootstrap";
 import { resolve } from "inversify-react";
 
-import { IoLibraryOutline } from "react-icons/io5";
+import { GiBookmarklet } from "react-icons/gi";
 
 import { IDateService } from "../../services/DateService";
 import { IBlogService } from "../../services/BlogService";
@@ -47,7 +47,7 @@ export class Blog extends Component<{}, BlogState> {
             </CardColumns>
           </Container>
           <div className="centered short-line" />
-          <IoLibraryOutline className="section-icon"/>
+          <GiBookmarklet className="section-icon"/>
         </section>
       </Fade>
     );

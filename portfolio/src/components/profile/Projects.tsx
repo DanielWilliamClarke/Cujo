@@ -1,7 +1,7 @@
 import { Component } from "react";
 import { Container, Row, Col, Badge } from "react-bootstrap";
 
-import { BsLightning } from "react-icons/bs";
+import { GiAnvilImpact } from "react-icons/gi";
 
 import { Project } from "../../model/CVModel";
 import { DevIconName } from "../shared/DevIcon";
@@ -28,7 +28,7 @@ export class Projects extends Component<ProjectProps> {
           </Row>
           {this.props.projects.map(this.project.bind(this))}
           <div className="centered short-line" />
-          <BsLightning className="section-icon" />
+          <GiAnvilImpact className="section-icon" />
         </Container>
       </section>
     );
