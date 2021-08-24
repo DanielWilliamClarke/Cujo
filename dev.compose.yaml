@@ -25,6 +25,9 @@ services:
     environment: 
       - WORDPRESS_CLIENT_ID=dev
       - WORDPRESS_CLIENT_SECRET=dev_secret
+    volumes:
+      - ./service/data.json:/cujo/data.json
+      - ./service/.env:/cujo/.env
     networks:
       - cujo
 
