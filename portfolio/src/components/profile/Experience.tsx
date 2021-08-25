@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Container, Row, Col, Badge } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import { resolve } from "inversify-react";
 import ReactMarkdown from "react-markdown";
 import breaks from "remark-breaks";
@@ -13,6 +13,7 @@ import { IoRocketOutline } from "react-icons/io5";
 import { IDateService } from "../../services/DateService";
 import { Work } from "../../model/CVModel";
 import { DynamicImage } from "../shared/DynamicImage";
+import { Lanyard } from "../shared/Lanyard";
 
 import "../shared/Portfolio.scss";
 import "./Experience.scss";
@@ -57,11 +58,7 @@ export class Experience extends Component<WorkProps> {
                     )}
                     icon={<IoRocketOutline />}
                   >
-                    {work.highlights.map((highlight) => (
-                      <Badge bg="portfolio" className="highlight">
-                        {highlight}
-                      </Badge>
-                    ))}
+                    <Lanyard tags={work.highlights} />
 
                     <Row className="header">
                       <Col className="headline">

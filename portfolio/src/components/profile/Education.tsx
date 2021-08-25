@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Container, Row, Col, Badge } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import { resolve } from "inversify-react";
 import {
   VerticalTimeline,
@@ -14,6 +14,7 @@ import { DynamicImage } from "../shared/DynamicImage";
 
 import "../shared/Portfolio.scss";
 import "./Education.scss";
+import { Lanyard } from "../shared/Lanyard";
 
 type EducationProps = {
   education: EducationData[];
@@ -44,17 +45,7 @@ export class Education extends Component<EducationProps> {
                 date={this.dateService.toRange(e.startDate, e.endDate)}
                 icon={<IoSchoolOutline />}
               >
-                {!!e.grade.length && (
-                  <Row>
-                    <Col>
-                      <h4>
-                        <Badge bg="portfolio" className="highlight">
-                          {e.grade}
-                        </Badge>
-                      </h4>
-                    </Col>
-                  </Row>
-                )}
+                {e.grade.length && <Lanyard tags={[e.grade]} />}
 
                 <Row className="header">
                   <Col className="Qualification-type">
