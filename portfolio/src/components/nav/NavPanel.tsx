@@ -3,8 +3,8 @@ import { Nav, Navbar } from "react-bootstrap";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import Scrollspy from 'react-scrollspy';
 
-import { GiDiceTwentyFacesTwenty, GiBookmarklet, GiAnvilImpact } from "react-icons/gi";
-import { IoHomeOutline, IoPlanetOutline, IoRocketOutline, IoSchoolOutline, IoCodeWorkingSharp, IoMegaphoneOutline } from "react-icons/io5";
+import { GiDiceTwentyFacesTwenty, GiBookmarklet, GiAnvilImpact, GiScrollQuill } from "react-icons/gi";
+import { IoHomeOutline, IoRocketOutline, IoSchoolOutline, IoCodeWorkingSharp, IoMegaphoneOutline } from "react-icons/io5";
 
 import "./NavPanel.scss";
 
@@ -78,7 +78,7 @@ class NavPanel extends Component<RouteComponentProps, NavState> {
         { link: "skills", icon: <IoCodeWorkingSharp /> },
         { link: "projects", icon: <GiAnvilImpact /> }
       ] :
-      [{ link: "post", icon: <IoPlanetOutline /> }];
+      [{ link: "post", icon: <GiScrollQuill /> }];
   }
 
   private listenScrollEvent = () => {
