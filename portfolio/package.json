@@ -4,10 +4,10 @@
   "private": true,
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
-    "build:prod": "GENERATE_SOURCEMAP=false npm run build",
+    "build": "CI=true react-scripts build",
+    "build:prod": "CI=true GENERATE_SOURCEMAP=false npm run build",
     "watch": "npm-watch",
-    "test": "react-scripts test",
+    "test": "CI=true react-scripts test",
     "eject": "react-scripts eject",
     "sasslint": "sass-lint -v",
     "sasslint:fix": "sass-lint-auto-fix"
