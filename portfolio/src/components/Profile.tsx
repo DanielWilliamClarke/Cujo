@@ -19,7 +19,7 @@ export class Profile extends Component<CVProps> {
           <Technical techical={this.props.cv.skills} />,
           <Projects projects={this.props.cv.projects} />
         ].map((element: JSX.Element, index: number) => (
-          <Fade triggerOnce direction={index % 2 === 0 ? "right" : "left" }>
+          <Fade triggerOnce delay={0.5} direction={index % 2 ? "left" : "right" }>
             {element}
           </Fade>
         ))}
