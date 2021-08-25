@@ -71,6 +71,9 @@ cargo test [--release]
 ## Build Portfolio Locally
 
 ```bash
+# Run in WSL or linux
+wsl
+
 # Portfolio
 cd portfolio
 

@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Card, CardColumns, Col, Container, Nav, Row } from "react-bootstrap";
+import { Card, Col, Container, Nav, Row } from "react-bootstrap";
 import { resolve } from "inversify-react";
 
 import { GiBookmarklet, GiScrollQuill } from "react-icons/gi";
