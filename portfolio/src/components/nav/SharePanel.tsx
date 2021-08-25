@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Container } from "react-bootstrap";
+import { Fade } from "react-awesome-reveal";
 
 import {
   FacebookShareButton,
@@ -17,8 +18,6 @@ import {
 } from "react-share";
 
 import "./SharePanel.scss";
-
-const Slide = require("react-reveal/Slide");
 
 interface ShareProps {
   url: string;
@@ -46,7 +45,7 @@ export class SharePanel extends Component<ShareProps, ShareState> {
     return (
       <Container className="share-panel">
         {this.state.show && (
-          <Slide left={!this.state.slim} bottom={this.state.slim}>
+          <Fade triggerOnce direction={this.state.slim ? "up" : "left"}>
             <LinkedinShareButton
               url={this.props.url}
               title={this.prepareTitle(this.props.title)}
@@ -94,7 +93,7 @@ export class SharePanel extends Component<ShareProps, ShareState> {
             >
               <EmailIcon size={this.size} />
             </EmailShareButton>
-          </Slide>
+          </Fade>
         )}
       </Container>
     );

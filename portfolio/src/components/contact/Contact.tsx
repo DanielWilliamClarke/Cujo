@@ -1,31 +1,33 @@
-import React, { Component } from "react";
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
-
+import { resolve } from "inversify-react";
+import { ChangeEvent, Component } from "react";
+import { Container, Row, Col, Form, Button, } from "react-bootstrap";
 import { IoMegaphoneOutline } from "react-icons/io5";
+import { Fade, Zoom } from "react-awesome-reveal";
 
 import { Profile } from "../../model/CVModel";
+import { IContactService } from "../../services/ContactService";
 import { DevIconName } from "../shared/DevIcon";
 
 import "./Contact.scss";
-
-const Fade = require("react-reveal/Fade");
 
 type ContactProps = {
   profiles: Profile[];
 };
 
 type ContactState = {
-  status: string;
+  status: boolean;
 };
 
 export class Contact extends Component<ContactProps, ContactState> {
+  @resolve("ContactService") private readonly contactService!: IContactService;
+
   componentWillMount() {
-    this.setState({ status: "" });
+    this.setState({ status: false });
   }
 
   render(): JSX.Element {
     return (
-      <Fade bottom>
+      <Fade triggerOnce direction="up">
         <section id="contact" className="section contact">
           <Container>
             <Row>
@@ -56,11 +58,7 @@ export class Contact extends Component<ContactProps, ContactState> {
                     <h3>Get in touch!</h3>
                   </Col>
                 </Row>
-                <Form
-                  onSubmit={this.handleSubmit.bind(this)}
-                  action="https://formspree.io/f/xjvpddee"
-                  method="POST"
-                >
+                <Form onSubmit={this.handleSubmit.bind(this)}>
                   <Form.Group controlId="formEmail">
                     <Form.Control
                       type="email"
@@ -84,7 +82,12 @@ export class Contact extends Component<ContactProps, ContactState> {
                 </Form>
               </div>
             </Row>
+
+            {this.state.status && (<Zoom>
+              <div className="contact-response">Thanks!</div>
+            </Zoom>)}
           </Container>
+
           <div className="centered short-line" />
           <IoMegaphoneOutline className="section-icon" />
         </section>
@@ -92,22 +95,13 @@ export class Contact extends Component<ContactProps, ContactState> {
     );
   }
 
-  private handleSubmit(event: any) {
+  private handleSubmit(event: ChangeEvent<HTMLFormElement>) {
     event.preventDefault();
-    const form = event.target;
-    const data = new FormData(form);
-    const xhr = new XMLHttpRequest();
-    xhr.open(form.method, form.action);
-    xhr.setRequestHeader("Accept", "application/json");
-    xhr.onreadystatechange = () => {
-      if (xhr.readyState !== XMLHttpRequest.DONE) return;
-      if (xhr.status === 200) {
-        form.reset();
-        this.setState({ status: "SUCCESS" });
-      } else {
-        this.setState({ status: "ERROR" });
-      }
-    };
-    xhr.send(data);
+    this.contactService.submit(
+      new FormData(event.target),
+      (success: boolean) => {
+        event.target.reset();
+        this.setState({ status: success });
+      });
   }
 }
