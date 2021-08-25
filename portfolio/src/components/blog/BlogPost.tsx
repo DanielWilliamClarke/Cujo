@@ -2,7 +2,7 @@ import { Component } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { resolve } from "inversify-react";
 
-import { IoPlanetOutline } from "react-icons/io5";
+import { GiScrollQuill } from "react-icons/gi";
 
 import { IDateService } from "../../services/DateService";
 import { IBlogService } from "../../services/BlogService";
@@ -55,14 +55,18 @@ export class BlogPost extends Component<BlogIDProps, BlogPostState> {
               </Col>
             </Row>
 
-            <Lanyard tags={p.tags} />
-
-            {p.mediaUrl && (
-              <Row className="section-content">
-                <Col className="centered Featured">
-                  <img src={p.mediaUrl} alt="not found..." />
-                </Col>
-              </Row>
+            <Lanyard className="tags" tags={p.tags} />
+  
+            {p.media_url && (
+              <>
+                <Row className="section-content">
+                  <Col className="centered featured">
+                    <img src={p.media_url} alt="not found..." />
+                  </Col>
+                  
+                </Row>
+                <div className="line centered" />
+              </>
             )}
 
             <Row className="section-content blog-content">
@@ -76,7 +80,7 @@ export class BlogPost extends Component<BlogIDProps, BlogPostState> {
             </Row>
           </Container>
           <div className="short-line centered"></div>
-          <IoPlanetOutline className="section-icon"/>
+          <GiScrollQuill className="section-icon"/>
         </section>
       </Fade>
     );

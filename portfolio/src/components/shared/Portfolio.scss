@@ -116,23 +116,12 @@
   }
 }
 
-.card-columns {
-  column-count: 2 !important;
-  padding: 10px;
-}
-
 .card {
   transition: 0.5s;
 
   &:hover {
     transform: scale(1.02);
   }
-}
-
-// https://stackoverflow.com/questions/39531511/cards-crops-bootstrap-4
-.card-columns .card {
-  display: inline-block;
-  width: 100%;
 }
 
 .images {

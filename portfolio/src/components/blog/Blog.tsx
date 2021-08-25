@@ -2,7 +2,7 @@ import { Component } from "react";
 import { Card, CardColumns, Col, Container, Nav, Row } from "react-bootstrap";
 import { resolve } from "inversify-react";
 
-import { GiBookmarklet } from "react-icons/gi";
+import { GiBookmarklet, GiScrollQuill } from "react-icons/gi";
 
 import { IDateService } from "../../services/DateService";
 import { IBlogService } from "../../services/BlogService";
@@ -42,13 +42,13 @@ export class Blog extends Component<{}, BlogState> {
                 <div className="centered line" />
               </Col>
             </Row>
-            <CardColumns className="section-content">
+            <Row xs={1} md={2} className="g-4 blog-cards">
               {this.state.posts &&
                 this.state.posts.map(this.blogSummaryPanel.bind(this))}
-            </CardColumns>
+            </Row>
           </Container>
           <div className="centered short-line" />
-          <GiBookmarklet className="section-icon"/>
+          <GiBookmarklet className="section-icon" />
         </section>
       </Fade>
     );
@@ -56,39 +56,44 @@ export class Blog extends Component<{}, BlogState> {
 
   private blogSummaryPanel(data: Post, index: number): JSX.Element {
     return (
-      <Fade left={index % 2 === 0} right={index % 2 !== 0}>
-        <Card key={data.id} bg="dark">
-          {data.mediaUrl && (
+      <Col>
+        <Fade left={index % 2 === 0} right={index % 2 !== 0}>
+          <Card key={data.id} bg="dark">
             <Nav navbarScroll>
               <Nav.Link href={`/blog/${data.id}`}>
-                <Card.Img variant="top" src={data.mediaUrl} />
+                {data.media_url ? (
+                  <Card.Img variant="top" src={data.media_url} />
+                ) : (
+                  <GiScrollQuill />
+                )}
               </Nav.Link>
             </Nav>
-          )}
-          <Card.Body>
-            <Nav navbarScroll>
-              <Nav.Link href={`/blog/${data.id}`}>
-                <Card.Title>{data.title}</Card.Title>
-              </Nav.Link>
-            </Nav>
-            <Card.Text>
-              Published {this.dateService.toSentence(data.date)}{" "}
-            </Card.Text>
-            <Lanyard tags={data.tags} />
-            <Card.Text
-              className="text-muted"
-              dangerouslySetInnerHTML={{
-                __html: data.excerpt,
-              }}
-            />
-          </Card.Body>
-          <Card.Footer>
-            <small className="text-muted">
-              Last updated {this.dateService.toSentence(data.modified)}
-            </small>
-          </Card.Footer>
-        </Card>
-      </Fade>
+
+            <Card.Body>
+              <Nav navbarScroll>
+                <Nav.Link href={`/blog/${data.id}`}>
+                  <Card.Title>{data.title}</Card.Title>
+                </Nav.Link>
+              </Nav>
+              <Card.Text>
+                Published {this.dateService.toSentence(data.date)}{" "}
+              </Card.Text>
+              <Lanyard tags={data.tags} />
+              <Card.Text
+                className="text-muted"
+                dangerouslySetInnerHTML={{
+                  __html: data.excerpt,
+                }}
+              />
+            </Card.Body>
+            <Card.Footer>
+              <small className="text-muted">
+                Last updated {this.dateService.toSentence(data.modified)}
+              </small>
+            </Card.Footer>
+          </Card>
+        </Fade>
+      </Col>
     );
   }
 }

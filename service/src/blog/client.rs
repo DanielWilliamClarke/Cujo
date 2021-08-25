@@ -80,10 +80,7 @@ impl<'a> BlogClient<'a> {
     fn correlate(&self, post: &Post, media: &[Media], tags: &[Tag]) -> BlogPost {
         let media_url = media
             .iter()
-            .find(|m| match m.post {
-                Some(id) => id == post.id,
-                None => false,
-            })
+            .find(|m| m.id == post.featured_media)
             .map(|m| m.source_url.clone());
 
         let tags = tags
@@ -158,11 +155,12 @@ mod tests {
 
         let post = Post {
             id,
+            featured_media: id,
             tags: vec![tag_id],
             ..Default::default()
         };
         let media: Vec<Media> = vec![Media {
-            post: Some(id),
+            id,
             source_url: String::from("https://somewhere.com/img.jpg"),
             ..Default::default()
         }];
@@ -250,11 +248,12 @@ mod tests {
 
         let posts: Vec<Post> = vec![Post {
             id,
+            featured_media: id,
             tags: vec![tag_id],
             ..Default::default()
         }];
         let media: Vec<Media> = vec![Media {
-            post: Some(id),
+            id,
             ..Default::default()
         }];
         let test_tags = vec![String::from("test")];
@@ -300,11 +299,12 @@ mod tests {
 
         let post = Post {
             id,
+            featured_media: id,
             tags: vec![tag_id],
             ..Default::default()
         };
         let media: Vec<Media> = vec![Media {
-            post: Some(id),
+            id,
             ..Default::default()
         }];
         let test_tags = vec![String::from("test")];

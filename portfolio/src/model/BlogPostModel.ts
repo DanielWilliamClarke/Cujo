@@ -5,6 +5,6 @@ export interface Post {
   excerpt: string;
   date: string;
   modified: string;
-  mediaUrl: string;
+  media_url: string;
   tags: string[];
 }

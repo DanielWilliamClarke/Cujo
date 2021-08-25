@@ -23,18 +23,23 @@
   }
 
   .tags {
-    font-size: 16px;
     display: flex;
     justify-content: center;
-
-    .tag {
-      text-transform: uppercase;
-      margin-top: 10px;
-    }
   }
  
+  iframe,
   img {
     border-radius: 6px;
+    width: 100%;
+    height: auto;
+  }
+
+  img {
+    max-width: 500px;
+  }
+
+  iframe {
+    max-width: 750px;
   }
 
   .featured,
