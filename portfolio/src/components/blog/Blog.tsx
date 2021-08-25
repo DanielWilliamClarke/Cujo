@@ -7,6 +7,7 @@ import { GiBookmarklet } from "react-icons/gi";
 import { IDateService } from "../../services/DateService";
 import { IBlogService } from "../../services/BlogService";
 import { Post } from "../../model/BlogPostModel";
+import { Lanyard } from "../shared/Lanyard";
 
 import "../shared/Portfolio.scss";
 import "./Blog.scss";
@@ -73,6 +74,7 @@ export class Blog extends Component<{}, BlogState> {
             <Card.Text>
               Published {this.dateService.toSentence(data.date)}{" "}
             </Card.Text>
+            <Lanyard tags={data.tags} />
             <Card.Text
               className="text-muted"
               dangerouslySetInnerHTML={{

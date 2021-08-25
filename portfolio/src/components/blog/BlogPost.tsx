@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Container, Row, Col, Badge } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import { resolve } from "inversify-react";
 
 import { IoPlanetOutline } from "react-icons/io5";
@@ -7,6 +7,7 @@ import { IoPlanetOutline } from "react-icons/io5";
 import { IDateService } from "../../services/DateService";
 import { IBlogService } from "../../services/BlogService";
 import { Post } from "../../model/BlogPostModel";
+import { Lanyard } from "../shared/Lanyard";
 
 import "../shared/Portfolio.scss";
 import "./BlogPost.scss";
@@ -54,15 +55,7 @@ export class BlogPost extends Component<BlogIDProps, BlogPostState> {
               </Col>
             </Row>
 
-            <div className="tags">
-              {p.tags.map(
-                (tag: string): JSX.Element => (
-                  <Badge bg="portfolio" className="tag">
-                    {tag}
-                  </Badge>
-                )
-              )}
-            </div>
+            <Lanyard tags={p.tags} />
 
             {p.mediaUrl && (
               <Row className="section-content">

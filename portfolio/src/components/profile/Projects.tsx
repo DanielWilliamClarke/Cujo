@@ -1,11 +1,12 @@
 import { Component } from "react";
-import { Container, Row, Col, Badge } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 
 import { GiAnvilImpact } from "react-icons/gi";
 
 import { Project } from "../../model/CVModel";
 import { DevIconName } from "../shared/DevIcon";
 import { DynamicImage } from "../shared/DynamicImage";
+import { Lanyard } from "../shared/Lanyard";
 
 import "../shared/Portfolio.scss";
 import "./Projects.scss";
@@ -71,11 +72,7 @@ export class Projects extends Component<ProjectProps> {
       <Col className="project-content">
         <div className="content">
           <h2>{p.name}</h2>
-          {p.tags.map((tag) => (
-            <Badge bg="portfolio" className="highlight">
-              {tag}
-            </Badge>
-          ))}
+          <Lanyard tags={p.tags} />
           <div className="summary">{p.summary}</div>
         </div>
       </Col>
