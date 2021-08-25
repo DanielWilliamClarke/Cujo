@@ -1,5 +1,6 @@
 import { Component } from "react";
 import { Container, Row, Col } from "react-bootstrap";
+import { Fade } from "react-awesome-reveal";
 
 import { GiAnvilImpact } from "react-icons/gi";
 
@@ -10,8 +11,6 @@ import { Lanyard } from "../shared/Lanyard";
 
 import "../shared/Portfolio.scss";
 import "./Projects.scss";
-
-const Fade = require("react-reveal/Fade");
 
 type ProjectProps = {
   projects: Project[];
@@ -38,7 +37,7 @@ export class Projects extends Component<ProjectProps> {
   private project(p: Project, index: number): JSX.Element {
     return (
       <Container className="project-panels">
-        <Fade right={index % 2 === 0} left={index % 2 !== 0}>
+        <Fade triggerOnce direction={index % 2 === 0 ? "right" : "left"}>
           <div className="centered line" />
           <Row className="project">
             {this.projectImage(p)}

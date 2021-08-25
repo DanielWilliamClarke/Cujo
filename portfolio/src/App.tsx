@@ -12,7 +12,7 @@ import { Copyright } from "./components/backstretch/Copyright";
 import { Profile } from "./components/Profile";
 import { Blog } from "./components/blog/Blog";
 import { BlogPost } from "./components/blog/BlogPost";
-import { Contact } from "./components/profile/Contact";
+import { Contact } from "./components/contact/Contact";
 import { SharePanel } from "./components/nav/SharePanel";
 
 import "./App.scss";

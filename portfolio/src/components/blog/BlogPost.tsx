@@ -1,6 +1,7 @@
 import { Component } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { resolve } from "inversify-react";
+import { Fade } from "react-awesome-reveal";
 
 import { GiScrollQuill } from "react-icons/gi";
 
@@ -12,8 +13,6 @@ import { Lanyard } from "../shared/Lanyard";
 import "../shared/Portfolio.scss";
 import "./BlogPost.scss";
 import "highlight.js/scss/tomorrow-night-eighties.scss";
-
-const Fade = require("react-reveal/Fade");
 
 type BlogIDProps = {
   id: number;
@@ -41,7 +40,7 @@ export class BlogPost extends Component<BlogIDProps, BlogPostState> {
 
   private displayPost(p: Post): JSX.Element {
     return (
-      <Fade left>
+      <Fade triggerOnce direction="left">
         <section id="post" className="section-light blog-post">
           <Container>
             <Row>

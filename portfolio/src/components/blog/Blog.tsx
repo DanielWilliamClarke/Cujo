@@ -1,6 +1,7 @@
 import { Component } from "react";
 import { Card, Col, Container, Nav, Row } from "react-bootstrap";
 import { resolve } from "inversify-react";
+import { Fade } from "react-awesome-reveal";
 
 import { GiBookmarklet, GiScrollQuill } from "react-icons/gi";
 
@@ -12,7 +13,6 @@ import { Lanyard } from "../shared/Lanyard";
 import "../shared/Portfolio.scss";
 import "./Blog.scss";
 
-const Fade = require("react-reveal/Fade");
 
 type BlogState = {
   posts: Post[];
@@ -32,7 +32,7 @@ export class Blog extends Component<{}, BlogState> {
 
   render(): JSX.Element {
     return (
-      <Fade bottom>
+      <Fade triggerOnce direction="up">
         <section id="blog" className="section-dark blog">
           <Container>
             <Row>
@@ -56,7 +56,7 @@ export class Blog extends Component<{}, BlogState> {
   private blogSummaryPanel(data: Post, index: number): JSX.Element {
     return (
       <Col>
-        <Fade left={index % 2 === 0} right={index % 2 !== 0}>
+        <Fade triggerOnce direction={index % 2 === 0 ? "left" : "right" }>
           <Card key={data.id} bg="dark">
             <Nav navbarScroll>
               <Nav.Link href={`/blog/${data.id}`}>
