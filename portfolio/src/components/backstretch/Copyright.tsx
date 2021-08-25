@@ -2,8 +2,7 @@ import React, { Component } from "react";
 
 import { Container, Row, Col } from "react-bootstrap";
 
-import "./Copyright.scss"
-
+import "./Copyright.scss";
 export class Copyright extends Component<{}> {
   render(): JSX.Element {
     return (
