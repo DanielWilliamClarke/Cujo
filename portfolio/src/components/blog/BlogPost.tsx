@@ -27,13 +27,12 @@ export class BlogPost extends Component<BlogIDProps, BlogPostState> {
   @resolve("DateService") private readonly dateService!: IDateService;
   @resolve("BlogService") private readonly blogService!: IBlogService;
 
-  componentWillMount() {
+  async componentWillMount() {
     this.dateService.format("Do MMMM YYYY HH:mm:ss");
 
     this.setState({ post: undefined });
-    this.blogService
-      .FetchBlogPost(this.props.id)
-      .then((post: Post) => this.setState({ post }));
+    const post: Post = await this.blogService.FetchBlogPost(this.props.id);
+    this.setState({ post });
   }
 
   render(): JSX.Element {

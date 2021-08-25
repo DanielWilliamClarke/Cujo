@@ -15,13 +15,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "react-vertical-timeline-component/style.min.css";
 
 class Cujo extends Component<{}, CVState> {
-  componentWillMount() {
+  async componentWillMount() {
     this.setState({ cv: undefined });
-    axios
-      .get("/api/cv")
-      .then((response: AxiosResponse<CV>) =>
-        this.setState({ cv: response.data })
-      );
+
+    const response: AxiosResponse<CV> = await axios.get("/api/cv");
+    this.setState({ cv: response.data })
   }
 
   render(): JSX.Element {

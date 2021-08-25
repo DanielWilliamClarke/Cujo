@@ -20,7 +20,7 @@ type SkillsState = {
 };
 
 export class Technical extends Component<TechnicalProps, SkillsState> {
-  componentWillMount(): void {
+  componentWillMount() {
     this.setState({ search: "" });
   }
 
