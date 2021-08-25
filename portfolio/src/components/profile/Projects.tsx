@@ -37,7 +37,7 @@ export class Projects extends Component<ProjectProps> {
   private project(p: Project, index: number): JSX.Element {
     return (
       <Container className="project-panels">
-        <Fade triggerOnce direction={index % 2 === 0 ? "right" : "left"}>
+        <Fade triggerOnce direction={index % 2 ? "left" : "right"}>
           <div className="centered line" />
           <Row className="project">
             {this.projectImage(p)}

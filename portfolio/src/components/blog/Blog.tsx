@@ -54,7 +54,7 @@ export class Blog extends Component<{}, BlogState> {
   private blogSummaryPanel(data: Post, index: number): JSX.Element {
     return (
       <Col>
-        <Fade triggerOnce direction={index % 2 === 0 ? "left" : "right" }>
+        <Fade triggerOnce direction={index % 2 ? "right" : "left" }>
           <Card key={data.id} bg="dark">
             <Nav navbarScroll>
               <Nav.Link href={`/blog/${data.id}`}>
