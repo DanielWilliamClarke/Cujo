@@ -19,7 +19,7 @@ type ContactState = {
 };
 
 export class Contact extends Component<ContactProps, ContactState> {
-  componentWillMount(): void {
+  componentWillMount() {
     this.setState({ status: "" });
   }
 

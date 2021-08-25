@@ -22,13 +22,12 @@ export class Blog extends Component<{}, BlogState> {
   @resolve("DateService") private readonly dateService!: IDateService;
   @resolve("BlogService") private readonly blogService!: IBlogService;
 
-  componentWillMount() {
+  async componentWillMount() {
     this.dateService.format("Do MMMM YYYY HH:mm:ss");
 
     this.setState({ posts: [] });
-    this.blogService
-      .FetchAllBlogPosts()
-      .then((posts: Post[]) => this.setState({ posts }));
+    const posts: Post[] = await this.blogService.FetchAllBlogPosts();
+    this.setState({ posts });
   }
 
   render(): JSX.Element {
@@ -86,6 +85,7 @@ export class Blog extends Component<{}, BlogState> {
                 }}
               />
             </Card.Body>
+
             <Card.Footer>
               <small className="text-muted">
                 Last updated {this.dateService.toSentence(data.modified)}
