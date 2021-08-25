@@ -6,7 +6,7 @@ import { Fade } from "react-awesome-reveal";
 import { GiScrollQuill } from "react-icons/gi";
 
 import { IDateService } from "../../services/DateService";
-import { IBlogService } from "../../services/BlogService";
+import { ICujoService } from "../../services/CujoService";
 import { Post } from "../../model/BlogPostModel";
 import { Lanyard } from "../shared/Lanyard";
 
@@ -24,14 +24,12 @@ type BlogPostState = {
 
 export class BlogPost extends Component<BlogIDProps, BlogPostState> {
   @resolve("DateService") private readonly dateService!: IDateService;
-  @resolve("BlogService") private readonly blogService!: IBlogService;
+  @resolve("CujoService") private readonly cujoService!: ICujoService;
 
   async componentWillMount() {
     this.dateService.format("Do MMMM YYYY HH:mm:ss");
-
     this.setState({ post: undefined });
-    const post: Post = await this.blogService.FetchBlogPost(this.props.id);
-    this.setState({ post });
+    this.setState({ post: await this.cujoService.FetchBlogPost(this.props.id) });
   }
 
   render(): JSX.Element {
