@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Card, Col, Container, Nav, Row } from "react-bootstrap";
+import { Card, Col, Nav, Row } from "react-bootstrap";
 import { resolve } from "inversify-react";
 import { Fade } from "react-awesome-reveal";
 
@@ -9,7 +9,7 @@ import { IDateService } from "../../services/DateService";
 import { ICujoService } from "../../services/CujoService";
 import { Post } from "../../model/BlogPostModel";
 import { Lanyard } from "../shared/Lanyard";
-import { Heading } from "../shared/Heading";
+import { Section } from "../shared/Section";
 
 import "../shared/Portfolio.scss";
 import "./Blog.scss";
@@ -31,18 +31,18 @@ export class Blog extends Component<{}, BlogState> {
   render(): JSX.Element {
     return (
       <Fade triggerOnce direction="up">
-        <section id="blog" className="section-dark blog">
-          <Container>
-            <Heading title="Blog" />
+        <Section
+          id="blog"
+          bg="section-dark"
+          title="Blog"
+          icon={GiBookmarklet}>
 
-            <Row xs={1} md={2} className="g-4 blog-cards">
-              {this.state.posts &&
-                this.state.posts.map(this.blogSummaryPanel.bind(this))}
-            </Row>
-          </Container>
-          <div className="centered short-line" />
-          <GiBookmarklet className="section-icon" />
-        </section>
+          <Row xs={1} md={2} className="g-4 blog-cards">
+            {this.state.posts &&
+              this.state.posts.map(this.blogSummaryPanel.bind(this))}
+          </Row>
+
+        </Section>
       </Fade>
     );
   }
@@ -50,7 +50,7 @@ export class Blog extends Component<{}, BlogState> {
   private blogSummaryPanel(data: Post, index: number): JSX.Element {
     return (
       <Col>
-        <Fade triggerOnce direction={index % 2 ? "right" : "left" }>
+        <Fade triggerOnce direction={index % 2 ? "right" : "left"}>
           <Card key={data.id} bg="dark">
             <Nav navbarScroll>
               <Nav.Link href={`/blog/${data.id}`}>

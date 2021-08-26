@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import { resolve } from "inversify-react";
 import { Fade } from "react-awesome-reveal";
 
@@ -9,7 +9,7 @@ import { IDateService } from "../../services/DateService";
 import { ICujoService } from "../../services/CujoService";
 import { Post } from "../../model/BlogPostModel";
 import { Lanyard } from "../shared/Lanyard";
-import { Heading } from "../shared/Heading";
+import { Section } from "../shared/Section";
 
 import "../shared/Portfolio.scss";
 import "./BlogPost.scss";
@@ -40,40 +40,41 @@ export class BlogPost extends Component<BlogIDProps, BlogPostState> {
   private displayPost(p: Post): JSX.Element {
     return (
       <Fade triggerOnce direction="left">
-        <section id="post" className="section-light blog-post">
-          <Container>
-            <Heading title={p.title} />
-            <h4 className="blog-date">
-                {this.dateService.toSentence(p.date)}
-            </h4>
+        <Section
+          id="post"
+          bg="section-light"
+          title={p.title}
+          icon={GiScrollQuill}>
 
-            <Lanyard className="tags" tags={p.tags} />
-  
-            {p.media_url && (
-              <>
-                <Row className="section-content">
-                  <Col className="centered featured">
-                    <img src={p.media_url} alt="not found..." />
-                  </Col>
-                  
-                </Row>
-                <div className="line centered" />
-              </>
-            )}
+          <h4 className="blog-date">
+            {this.dateService.toSentence(p.date)}
+          </h4>
 
-            <Row className="section-content blog-content">
-              <Col>
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: p.content,
-                  }}
-                ></div>
-              </Col>
-            </Row>
-          </Container>
-          <div className="short-line centered"></div>
-          <GiScrollQuill className="section-icon"/>
-        </section>
+          <Lanyard className="tags" tags={p.tags} />
+
+          {p.media_url && (
+            <>
+              <Row className="section-content">
+                <Col className="centered featured">
+                  <img src={p.media_url} alt="not found..." />
+                </Col>
+
+              </Row>
+              <div className="line centered" />
+            </>
+          )}
+
+          <Row className="section-content blog-content">
+            <Col>
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: p.content,
+                }}
+              ></div>
+            </Col>
+          </Row>
+
+        </Section>
       </Fade>
     );
   }

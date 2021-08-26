@@ -8,7 +8,7 @@ import { Project } from "../../model/CVModel";
 import { DevIconName } from "../shared/DevIcon";
 import { DynamicImage } from "../shared/DynamicImage";
 import { Lanyard } from "../shared/Lanyard";
-import { Heading } from "../shared/Heading";
+import { Section } from "../shared/Section";
 
 import "../shared/Portfolio.scss";
 import "./Projects.scss";
@@ -20,15 +20,15 @@ type ProjectProps = {
 export class Projects extends Component<ProjectProps> {
   render(): JSX.Element {
     return (
-      <section id="projects" className="section projects">
-        <Container>
-          <Heading title="Personal Projects" noSeparator />
-          
-          {this.props.projects.map(this.project.bind(this))}
-          <div className="centered short-line" />
-          <GiAnvilImpact className="section-icon" />
-        </Container>
-      </section>
+      <Section
+        id="projects"
+        title="Personal Projects"
+        noSeparator
+        icon={GiAnvilImpact}>
+
+        {this.props.projects.map(this.project.bind(this))}
+
+      </Section>
     );
   }
 

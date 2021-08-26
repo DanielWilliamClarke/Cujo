@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import { resolve } from "inversify-react";
 import ReactMarkdown from "react-markdown";
 import breaks from "remark-breaks";
@@ -14,7 +14,7 @@ import { IDateService } from "../../services/DateService";
 import { Work } from "../../model/CVModel";
 import { DynamicImage } from "../shared/DynamicImage";
 import { Lanyard } from "../shared/Lanyard";
-import { Heading } from "../shared/Heading";
+import { Section } from "../shared/Section";
 
 import "../shared/Portfolio.scss";
 import "./Experience.scss";
@@ -31,34 +31,33 @@ export class Experience extends Component<WorkProps> {
 
   render(): JSX.Element {
     return (
-      <section id="experience" className="section experience">
-        <Container>
-          <Heading title="Professional Experience" />
+      <Section
+        id="experience"
+        title="Professional Experience"
+        icon={IoRocketOutline}>
 
-          <VerticalTimeline className="timeline">
-            {this.props.work
-              .sort((a, b) =>
-                this.dateService.toUnix(b.startDate) -
-                this.dateService.toUnix(a.startDate))
-              .map((work: Work, index: number): JSX.Element => (
-                <VerticalTimelineElement
-                  className="vertical-timeline-element--work"
-                  key={index}
-                  date={this.dateService.toRangeWithDuration(
-                    work.startDate,
-                    work.endDate
-                  )}
-                  icon={<IoRocketOutline />}
-                >
-                  {this.renderRole(work)}
-                </VerticalTimelineElement>
-              )
-              )}
-          </VerticalTimeline>
-          <div className="centered short-line" />
-          <IoRocketOutline className="section-icon" />
-        </Container>
-      </section>
+        <VerticalTimeline className="timeline">
+          {this.props.work
+            .sort((a, b) =>
+              this.dateService.toUnix(b.startDate) -
+              this.dateService.toUnix(a.startDate))
+            .map((work: Work, index: number): JSX.Element => (
+              <VerticalTimelineElement
+                className="vertical-timeline-element--work"
+                key={index}
+                date={this.dateService.toRangeWithDuration(
+                  work.startDate,
+                  work.endDate
+                )}
+                icon={<IoRocketOutline />}
+              >
+                {this.renderRole(work)}
+              </VerticalTimelineElement>
+            )
+            )}
+        </VerticalTimeline>
+
+      </Section>
     );
   }
 
