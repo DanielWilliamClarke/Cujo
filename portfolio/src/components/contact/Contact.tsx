@@ -1,6 +1,6 @@
 import { resolve } from "inversify-react";
 import { ChangeEvent, Component } from "react";
-import { Container, Row, Col, Form, Button, } from "react-bootstrap";
+import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import { IoMegaphoneOutline } from "react-icons/io5";
 import { Fade, Zoom } from "react-awesome-reveal";
 
@@ -83,9 +83,11 @@ export class Contact extends Component<ContactProps, ContactState> {
               </div>
             </Row>
 
-            {this.state.status && (<Zoom>
-              <div className="contact-response">Thanks!</div>
-            </Zoom>)}
+            {this.state.status && (
+              <Zoom>
+                <div className="contact-response">Thanks!</div>
+              </Zoom>
+            )}
           </Container>
 
           <div className="centered short-line" />
@@ -95,13 +97,12 @@ export class Contact extends Component<ContactProps, ContactState> {
     );
   }
 
-  private handleSubmit(event: ChangeEvent<HTMLFormElement>) {
+  private async handleSubmit(event: ChangeEvent<HTMLFormElement>) {
     event.preventDefault();
-    this.contactService.submit(
-      new FormData(event.target),
-      (success: boolean) => {
-        event.target.reset();
-        this.setState({ status: success });
-      });
+    const success = await this.contactService.submit(
+      new FormData(event.target)
+    );
+    event.target.reset();
+    this.setState({ status: success });
   }
 }
