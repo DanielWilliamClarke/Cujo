@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import { resolve } from "inversify-react";
 import {
   VerticalTimeline,
@@ -12,7 +12,7 @@ import { IDateService } from "../../services/DateService";
 import { Education as EducationData } from "../../model/CVModel";
 import { DynamicImage } from "../shared/DynamicImage";
 import { Lanyard } from "../shared/Lanyard";
-import { Heading } from "../shared/Heading";
+import { Section } from "../shared/Section";
 
 import "../shared/Portfolio.scss";
 import "./Education.scss";
@@ -29,30 +29,29 @@ export class Education extends Component<EducationProps> {
 
   render(): JSX.Element {
     return (
-      <section id="education" className="section education">
-        <Container>
-          <Heading title="Education" />
+      <Section
+        id="education"
+        title="Education"
+        icon={IoSchoolOutline}>
 
-          <VerticalTimeline className="timeline">
-            {this.props.education
-              .sort((a, b) =>
-                this.dateService.toUnix(b.startDate) -
-                this.dateService.toUnix(a.startDate))
-              .map((e: EducationData, index: number) => (
-                <VerticalTimelineElement
-                  className="vertical-timeline-element--work"
-                  key={index}
-                  date={this.dateService.toRange(e.startDate, e.endDate)}
-                  icon={<IoSchoolOutline />}
-                >
-                  {this.renderInstitution(e)}
-                </VerticalTimelineElement>
-              ))}
-          </VerticalTimeline>
-          <div className="centered short-line" />
-          <IoSchoolOutline className="section-icon" />
-        </Container>
-      </section>
+        <VerticalTimeline className="timeline">
+          {this.props.education
+            .sort((a, b) =>
+              this.dateService.toUnix(b.startDate) -
+              this.dateService.toUnix(a.startDate))
+            .map((e: EducationData, index: number) => (
+              <VerticalTimelineElement
+                className="vertical-timeline-element--work"
+                key={index}
+                date={this.dateService.toRange(e.startDate, e.endDate)}
+                icon={<IoSchoolOutline />}
+              >
+                {this.renderInstitution(e)}
+              </VerticalTimelineElement>
+            ))}
+        </VerticalTimeline>
+
+      </Section>
     );
   }
 
