@@ -38,53 +38,60 @@ export class Education extends Component<EducationProps> {
           </Row>
 
           <VerticalTimeline className="timeline">
-            {this.props.education.map((e: EducationData, index: number) => (
-              <VerticalTimelineElement
-                className="vertical-timeline-element--work"
-                key={index}
-                date={this.dateService.toRange(e.startDate, e.endDate)}
-                icon={<IoSchoolOutline />}
-              >
-                {e.grade.length && <Lanyard tags={[e.grade]} />}
+            {this.props.education
+              .sort((a, b) => {
+                return (
+                  this.dateService.toUnix(b.startDate) -
+                  this.dateService.toUnix(a.startDate)
+                );
+              })
+              .map((e: EducationData, index: number) => (
+                <VerticalTimelineElement
+                  className="vertical-timeline-element--work"
+                  key={index}
+                  date={this.dateService.toRange(e.startDate, e.endDate)}
+                  icon={<IoSchoolOutline />}
+                >
+                  {e.grade.length && <Lanyard tags={[e.grade]} />}
 
-                <Row className="header">
-                  <Col className="Qualification-type">
-                    <h3>{e.institution}</h3>
-                    <h4>
-                      {e.studyType}
-                      <span className="dot" />
-                      {e.area}
-                    </h4>
-                  </Col>
-                </Row>
-
-                <Row>
-                  <Col>
-                    <p>{e.summary}</p>
-                  </Col>
-                </Row>
-
-                <Row className="images">
-                  {e.images.map((image) => (
-                    <Col className="col-item">
-                      <a
-                        href={e.link}
-                        rel="noopener noreferrer"
-                        target="_blank"
-                      >
-                        <DynamicImage
-                          image={image}
-                          alt={`${e.institution} - Image not found!`}
-                          className="centered image-item"
-                        />
-                      </a>
+                  <Row className="header">
+                    <Col className="Qualification-type">
+                      <h3>{e.institution}</h3>
+                      <h4>
+                        {e.studyType}
+                        <span className="dot" />
+                        {e.area}
+                      </h4>
                     </Col>
-                  ))}
-                </Row>
+                  </Row>
 
-                <div className="centered short-line" />
-              </VerticalTimelineElement>
-            ))}
+                  <Row>
+                    <Col>
+                      <p>{e.summary}</p>
+                    </Col>
+                  </Row>
+
+                  <Row className="images">
+                    {e.images.map((image) => (
+                      <Col className="col-item">
+                        <a
+                          href={e.link}
+                          rel="noopener noreferrer"
+                          target="_blank"
+                        >
+                          <DynamicImage
+                            image={image}
+                            alt={`${e.institution} - Image not found!`}
+                            className="centered image-item"
+                          />
+                        </a>
+                      </Col>
+                    ))}
+                  </Row>
+
+                  <div className="centered short-line" />
+                </VerticalTimelineElement>
+              ))}
           </VerticalTimeline>
           <div className="centered short-line" />
           <IoSchoolOutline className="section-icon" />
