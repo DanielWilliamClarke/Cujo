@@ -2,7 +2,7 @@ import axios, { AxiosResponse } from "axios";
 import { injectable } from "inversify";
 
 export interface IContactService {
-    submit (data: FormData, callback: (success: boolean) => void): Promise<void>;
+    submit (data: FormData): Promise<boolean>;
 }
 
 type ContactResponse = {
@@ -12,9 +12,9 @@ type ContactResponse = {
 
 @injectable()
 export class ContactService {
-    async submit (data: FormData, callback: (success: boolean) => void): Promise<void> {
+    async submit (data: FormData): Promise<boolean> {
         const response: AxiosResponse<ContactResponse> =
             await axios.post("https://formspree.io/f/xjvpddee", data);
-        callback(response.status === 200 && response.data.ok);
+        return response.status === 200 && response.data.ok;
     }
 }
