@@ -75,7 +75,7 @@ export class About extends Component<AboutProps> {
 
           <Row className="section-content">
             <Col className="mailto">
-              <a href="mailto:dc@danielclarke.tech">
+              <a href={`mailto:${this.props.basics.email}`}>
                 {this.props.basics.email}
               </a>
             </Col>
