@@ -8,9 +8,11 @@ import { IoCodeWorkingSharp } from "react-icons/io5";
 
 import { Skills, DevIcon } from "../../model/CVModel";
 import { DevIconName } from "../shared/DevIcon";
+import { Heading } from "../shared/Heading";
 
 import "../shared/Portfolio.scss";
 import "./Technical.scss";
+
 
 type TechnicalProps = {
   techical: Skills;
@@ -29,12 +31,7 @@ export class Technical extends Component<TechnicalProps, SkillsState> {
     return (
       <section id="skills" className="section technical">
         <Container>
-          <Row>
-            <Col>
-              <h2 className="section-title">Skills and Competencies</h2>
-              <div className="centered line" />
-            </Col>
-          </Row>
+          <Heading title="Skills and Competencies" />
 
           <Row className="section-content">
             <Col>

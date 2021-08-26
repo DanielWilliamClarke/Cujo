@@ -8,6 +8,7 @@ import { Project } from "../../model/CVModel";
 import { DevIconName } from "../shared/DevIcon";
 import { DynamicImage } from "../shared/DynamicImage";
 import { Lanyard } from "../shared/Lanyard";
+import { Heading } from "../shared/Heading";
 
 import "../shared/Portfolio.scss";
 import "./Projects.scss";
@@ -21,11 +22,8 @@ export class Projects extends Component<ProjectProps> {
     return (
       <section id="projects" className="section projects">
         <Container>
-          <Row>
-            <Col>
-              <h2 className="section-title">Personal Projects</h2>
-            </Col>
-          </Row>
+          <Heading title="Personal Projects" noSeparator />
+          
           {this.props.projects.map(this.project.bind(this))}
           <div className="centered short-line" />
           <GiAnvilImpact className="section-icon" />

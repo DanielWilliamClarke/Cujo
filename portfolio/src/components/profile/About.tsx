@@ -7,9 +7,11 @@ import { GiDiceTwentyFacesTwenty } from "react-icons/gi";
 
 import { Basics, Interests } from "../../model/CVModel";
 import { DynamicImage } from "../shared/DynamicImage";
+import { Heading } from "../shared/Heading";
 
 import "../shared/Portfolio.scss";
 import "./About.scss";
+
 
 type AboutProps = {
   basics: Basics;
@@ -21,12 +23,7 @@ export class About extends Component<AboutProps> {
     return (
       <section id="about" className="section about">
         <Container>
-          <Row>
-            <Col>
-              <h2 className="section-title">About Me!</h2>
-              <div className="centered line" />
-            </Col>
-          </Row>
+          <Heading title="About Me!" />
 
           <Row className="section-content">
             <Carousel
