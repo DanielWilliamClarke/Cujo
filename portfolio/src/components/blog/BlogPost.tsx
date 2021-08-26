@@ -29,9 +29,7 @@ export class BlogPost extends Component<BlogIDProps, BlogPostState> {
   async componentWillMount() {
     this.dateService.format("Do MMMM YYYY HH:mm:ss");
     this.setState({ post: undefined });
-    this.setState({
-      post: await this.cujoService.FetchBlogPost(this.props.id),
-    });
+    this.setState({ post: await this.cujoService.FetchBlogPost(this.props.id) });
   }
 
   render(): JSX.Element {
@@ -54,13 +52,14 @@ export class BlogPost extends Component<BlogIDProps, BlogPostState> {
             </Row>
 
             <Lanyard className="tags" tags={p.tags} />
-
+  
             {p.media_url && (
               <>
                 <Row className="section-content">
                   <Col className="centered featured">
                     <img src={p.media_url} alt="not found..." />
                   </Col>
+                  
                 </Row>
                 <div className="line centered" />
               </>
@@ -77,7 +76,7 @@ export class BlogPost extends Component<BlogIDProps, BlogPostState> {
             </Row>
           </Container>
           <div className="short-line centered"></div>
-          <GiScrollQuill className="section-icon" />
+          <GiScrollQuill className="section-icon"/>
         </section>
       </Fade>
     );
