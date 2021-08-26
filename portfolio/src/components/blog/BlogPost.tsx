@@ -9,6 +9,7 @@ import { IDateService } from "../../services/DateService";
 import { ICujoService } from "../../services/CujoService";
 import { Post } from "../../model/BlogPostModel";
 import { Lanyard } from "../shared/Lanyard";
+import { Heading } from "../shared/Heading";
 
 import "../shared/Portfolio.scss";
 import "./BlogPost.scss";
@@ -41,15 +42,10 @@ export class BlogPost extends Component<BlogIDProps, BlogPostState> {
       <Fade triggerOnce direction="left">
         <section id="post" className="section-light blog-post">
           <Container>
-            <Row>
-              <Col>
-                <h2 className="section-title">{p.title}</h2>
-                <div className="line centered"></div>
-                <h4 className="blog-date">
-                  {this.dateService.toSentence(p.date)}
-                </h4>
-              </Col>
-            </Row>
+            <Heading title={p.title} />
+            <h4 className="blog-date">
+                {this.dateService.toSentence(p.date)}
+            </h4>
 
             <Lanyard className="tags" tags={p.tags} />
   

@@ -7,6 +7,7 @@ import { Fade, Zoom } from "react-awesome-reveal";
 import { Profile } from "../../model/CVModel";
 import { IContactService } from "../../services/ContactService";
 import { DevIconName } from "../shared/DevIcon";
+import { Heading } from "../shared/Heading";
 
 import "./Contact.scss";
 
@@ -30,12 +31,7 @@ export class Contact extends Component<ContactProps, ContactState> {
       <Fade triggerOnce direction="up">
         <section id="contact" className="section contact">
           <Container>
-            <Row>
-              <Col>
-                <h2 className="section-title">Contact</h2>
-                <div className="centered line" />
-              </Col>
-            </Row>
+            <Heading title="Contact" />
 
             <Row className="section-content socials">
               {this.props.profiles.map(

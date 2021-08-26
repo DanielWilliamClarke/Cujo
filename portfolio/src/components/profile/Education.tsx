@@ -11,10 +11,11 @@ import { IoSchoolOutline } from "react-icons/io5";
 import { IDateService } from "../../services/DateService";
 import { Education as EducationData } from "../../model/CVModel";
 import { DynamicImage } from "../shared/DynamicImage";
+import { Lanyard } from "../shared/Lanyard";
+import { Heading } from "../shared/Heading";
 
 import "../shared/Portfolio.scss";
 import "./Education.scss";
-import { Lanyard } from "../shared/Lanyard";
 
 type EducationProps = {
   education: EducationData[];
@@ -30,21 +31,13 @@ export class Education extends Component<EducationProps> {
     return (
       <section id="education" className="section education">
         <Container>
-          <Row>
-            <Col>
-              <h2 className="section-title">Education</h2>
-              <div className="centered line" />
-            </Col>
-          </Row>
+          <Heading title="Education" />
 
           <VerticalTimeline className="timeline">
             {this.props.education
-              .sort((a, b) => {
-                return (
-                  this.dateService.toUnix(b.startDate) -
-                  this.dateService.toUnix(a.startDate)
-                );
-              })
+              .sort((a, b) =>
+                this.dateService.toUnix(b.startDate) -
+                this.dateService.toUnix(a.startDate))
               .map((e: EducationData, index: number) => (
                 <VerticalTimelineElement
                   className="vertical-timeline-element--work"
@@ -52,44 +45,7 @@ export class Education extends Component<EducationProps> {
                   date={this.dateService.toRange(e.startDate, e.endDate)}
                   icon={<IoSchoolOutline />}
                 >
-                  {e.grade.length && <Lanyard tags={[e.grade]} />}
-
-                  <Row className="header">
-                    <Col className="Qualification-type">
-                      <h3>{e.institution}</h3>
-                      <h4>
-                        {e.studyType}
-                        <span className="dot" />
-                        {e.area}
-                      </h4>
-                    </Col>
-                  </Row>
-
-                  <Row>
-                    <Col>
-                      <p>{e.summary}</p>
-                    </Col>
-                  </Row>
-
-                  <Row className="images">
-                    {e.images.map((image) => (
-                      <Col className="col-item">
-                        <a
-                          href={e.link}
-                          rel="noopener noreferrer"
-                          target="_blank"
-                        >
-                          <DynamicImage
-                            image={image}
-                            alt={`${e.institution} - Image not found!`}
-                            className="centered image-item"
-                          />
-                        </a>
-                      </Col>
-                    ))}
-                  </Row>
-
-                  <div className="centered short-line" />
+                  {this.renderInstitution(e)}
                 </VerticalTimelineElement>
               ))}
           </VerticalTimeline>
@@ -98,5 +54,50 @@ export class Education extends Component<EducationProps> {
         </Container>
       </section>
     );
+  }
+
+  private renderInstitution(e: EducationData): JSX.Element {
+    return (
+      <>
+        {e.grade.length && <Lanyard tags={[e.grade]} />}
+
+        <Row className="header">
+          <Col className="Qualification-type">
+            <h3>{e.institution}</h3>
+            <h4>
+              {e.studyType}
+              <span className="dot" />
+              {e.area}
+            </h4>
+          </Col>
+        </Row>
+
+        <Row>
+          <Col>
+            <p>{e.summary}</p>
+          </Col>
+        </Row>
+
+        <Row className="images">
+          {e.images.map((image) => (
+            <Col className="col-item">
+              <a
+                href={e.link}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <DynamicImage
+                  image={image}
+                  alt={`${e.institution} - Image not found!`}
+                  className="centered image-item"
+                />
+              </a>
+            </Col>
+          ))}
+        </Row>
+
+        <div className="centered short-line" />
+      </>
+    )
   }
 }

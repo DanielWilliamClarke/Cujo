@@ -9,10 +9,10 @@ import { IDateService } from "../../services/DateService";
 import { ICujoService } from "../../services/CujoService";
 import { Post } from "../../model/BlogPostModel";
 import { Lanyard } from "../shared/Lanyard";
+import { Heading } from "../shared/Heading";
 
 import "../shared/Portfolio.scss";
 import "./Blog.scss";
-
 
 type BlogState = {
   posts: Post[];
@@ -33,12 +33,8 @@ export class Blog extends Component<{}, BlogState> {
       <Fade triggerOnce direction="up">
         <section id="blog" className="section-dark blog">
           <Container>
-            <Row>
-              <Col>
-                <h2 className="section-title">Blog</h2>
-                <div className="centered line" />
-              </Col>
-            </Row>
+            <Heading title="Blog" />
+
             <Row xs={1} md={2} className="g-4 blog-cards">
               {this.state.posts &&
                 this.state.posts.map(this.blogSummaryPanel.bind(this))}
