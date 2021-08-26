@@ -85,5 +85,14 @@
 
   .contact-response {
     transition: 2s;
+    padding-bottom: 15px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .contact {
+    .contact-response {
+      text-align: center;
+    }
   }
 }
