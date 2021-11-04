@@ -50,12 +50,15 @@ export class DateService implements IDateService {
       endMoment.diff(moment(start, this.inFormat)));
     const years = difference.years();
     const months = difference.months();
+
     const yearFormat = years
       ? util.format("%d year%s", years, years === 1 ? "" : "s")
       : "";
     const monthFormat = months
       ? util.format("%d month%s", months, months === 1 ? "" : "s")
       : "";
-    return `${yearFormat} ${monthFormat}`;
+    const spacing = yearFormat !== "" ? " ": "";
+     
+    return `${yearFormat}${spacing}${monthFormat}`;
   }
 }
