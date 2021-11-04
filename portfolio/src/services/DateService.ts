@@ -8,6 +8,7 @@ export interface IDateService {
   toSentence(date: string): string;
   toRange(start: string, end: string): string;
   toRangeWithDuration(start: string, end: string): string;
+  IsFuture(data: string): boolean;
 }
 
 @injectable()
@@ -41,6 +42,10 @@ export class DateService implements IDateService {
     return `${this.toRange(start, end)} (${this.toDuration(start, end)})`;
   }
 
+  IsFuture(date: string): boolean {
+    return moment().diff(moment(date, this.inFormat)) < 0
+  }
+
   private toDuration(start: string, end: string): string {
     let endMoment = moment(end, this.inFormat);
     if (end === "Present") {
@@ -57,8 +62,10 @@ export class DateService implements IDateService {
     const monthFormat = months
       ? util.format("%d month%s", months, months === 1 ? "" : "s")
       : "";
-    const spacing = yearFormat !== "" ? " ": "";
+    const spacing = yearFormat !== "" ? " " : "";
      
     return `${yearFormat}${spacing}${monthFormat}`;
   }
+
+
 }
