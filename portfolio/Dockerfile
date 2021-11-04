@@ -6,7 +6,6 @@ ARG BUILD_MODE
 WORKDIR /portfolio
 
 COPY package.json /portfolio/package.json 
-COPY .env /portfolio/.env 
 
 RUN apk add git
 RUN npm install
