@@ -152,7 +152,7 @@
       "startDate": "20/09/2010",
       "endDate": "20/05/2014",
       "grade": "First Class With Honours",
-      "summary": "BSc (Hons) Computer Science BCS accredited course, I achieved the second highest grade of my cohort  in my final year, graduating with a First",
+      "summary": "BSc (Hons) Computer Science BCS accredited course, I achieved the second highest grade of my cohort in my final year, graduating with a First with Honours",
       "images": ["u1.jpg", "u4.png", "u3.jpg"],
       "link": "https://www.ntu.ac.uk/"
     },
@@ -172,16 +172,16 @@
     "summary": "I have worked with and are proficient with a large variety of programming languages, frameworks and tools. For backend web applications I use Golang and Nodejs. For frontend; TypeScript and JavaScript, and for performant apps, services and games I use C++. I feel most at home with C++ and Golang, but I am trying to learn a few *esoteric* languages such as Rust and Assembly.\n\nBelow is a selection of the languages, frameworks and tools I have had experience with during my career so far.",
     "list": [
       {
-        "icon": "go-line",
-        "name": "Golang"
+        "icon": "rust-plain",
+        "name": "Rust"
       },
       {
         "icon": "cplusplus-plain",
         "name": "C++"
       },
       {
-        "icon": "rust-plain",
-        "name": "Rust"
+        "icon": "go-line",
+        "name": "Golang"
       },
       {
         "icon": "typescript-plain",

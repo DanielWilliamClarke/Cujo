@@ -58,7 +58,7 @@ export class Education extends Component<EducationProps> {
   private renderInstitution(e: EducationData): JSX.Element {
     return (
       <>
-        {e.grade.length && <Lanyard tags={[e.grade]} />}
+        {e.grade !== "" && (<Lanyard tags={[e.grade]} />)}
 
         <Row className="header">
           <Col className="Qualification-type">
