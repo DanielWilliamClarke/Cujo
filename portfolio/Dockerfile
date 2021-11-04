@@ -1,17 +1,19 @@
 #BUILD -----------------------------------
-FROM node:16.3.0-alpine as build
+FROM node:14.16.0-alpine as build
 
 ARG BUILD_MODE
 
 WORKDIR /portfolio
 
-COPY package.json /portfolio/package.json
+COPY package.json /portfolio/package.json 
+COPY .env /portfolio/.env 
 
-RUN yarn install --network-timeout 100000
+RUN apk add git
+RUN npm install
 
 COPY . /portfolio
 
-RUN yarn run build$BUILD_MODE
+RUN npm run build$BUILD_MODE
 
 #RELEASE -----------------------------------
 FROM nginx:1.21.0-alpine
