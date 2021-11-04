@@ -57,7 +57,7 @@ export class Technical extends Component<TechnicalProps, SkillsState> {
         <Row className="skill-items">
           <Zoom triggerOnce cascade damping={0.01} className="col">
             {this.props.techical.list
-              .filter(this.filterSkills.bind(this))
+              .filter(({name}: DevIcon) => this.filterSkills(name))
               .map((icon: DevIcon) => (<DevIconName icon={icon} />))}
           </Zoom>
         </Row>
@@ -78,7 +78,7 @@ export class Technical extends Component<TechnicalProps, SkillsState> {
     this.setState({ search: event.target.value });
   }
 
-  private filterSkills({ name }: DevIcon): boolean {
+  private filterSkills(name: string): boolean {
     return this.state.search.length
       ? name.toLowerCase().includes(this.state.search.toLowerCase())
       : true;

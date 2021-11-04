@@ -52,9 +52,9 @@ jobs:
           name: Run tests
           command: |
             cd portfolio
-            yarn install
-            yarn run test -- --watchAll=false --passWithNoTests
-            yarn run build
+            npm install
+            npm run test -- --watchAll=false --passWithNoTests
+            npm run build
       - store_test_results:
           path: ./portfolio
       - run:
