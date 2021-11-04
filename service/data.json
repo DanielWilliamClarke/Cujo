@@ -423,6 +423,17 @@
   },
   "projects": [
     {
+      "name": "Contextual Logging in NestJS",
+      "link": "https://github.com/DanielWilliamClarke/Thoth",
+      "image": "t1.png",
+      "summary": "Proof of concept to realise: How to incorporate non intrusive implicit logging containing request context data into an existing REST service. Investigate how to capture and store request data via middleware and access it via auto-wired services. As well looking into setting up an Loki, Grafana, Tempo and Prometheus observability stack to aggregate and visualise logs. The main aim of the POC was to produce several NestJS Modules that could be lifted and shifted for use in other projects",
+      "tags": ["TypeScript", "NestJS", "aspect.js", "AsyncLocalStorage", "POC"],
+      "icon":  {
+        "icon": "github-plain",
+        "name": "GitHub"
+      }
+    },
+    {
       "name": "Untitled Indie Space Shooter",
       "link": "https://github.com/DanielWilliamClarke/Annatar",
       "image": "p1_small.gif",
