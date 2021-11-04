@@ -35,10 +35,10 @@ export class Experience extends Component<WorkProps> {
         id="experience"
         title="Professional Experience"
         icon={IoRocketOutline}>
-
         <VerticalTimeline className="timeline">
           {this.props.work
-            .sort((a, b) =>
+            .filter(({startDate}: Work) => !this.dateService.IsFuture(startDate))
+            .sort((a: Work, b: Work) =>
               this.dateService.toUnix(b.startDate) -
               this.dateService.toUnix(a.startDate))
             .map((work: Work, index: number): JSX.Element => (
@@ -56,7 +56,6 @@ export class Experience extends Component<WorkProps> {
             )
             )}
         </VerticalTimeline>
-
       </Section>
     );
   }

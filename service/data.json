@@ -97,7 +97,7 @@
       "position": "Full Stack Software Engineer: GAIA Core",
       "website": "https://www.software.slb.com/delfi/delfi-experience/gaia",
       "startDate": "20/11/2020",
-      "endDate": "Present",
+      "endDate": "28/07/2021",
       "summary": "Full stack software engineer leading a team of 4 software engineers for the GAIA Data discovery and marketplace platform.",
       "highlights": [
         "Leadership",
@@ -108,6 +108,40 @@
       ],
       "logo": "slb.svg",
       "images": ["g1.jpg"]
+    },
+    {
+      "company": "Schlumberger",
+      "position": "Full Stack Software Engineer: GAIA OSDU",
+      "website": "https://www.software.slb.com/delfi/delfi-experience/gaia",
+      "startDate": "28/07/2021",
+      "endDate": "28/12/2021",
+      "summary": "Full stack software engineer working within a multiple disciplinary team spread between Houston, Mexico, and Pune to build out the OSDU (Open Subsurface Data Universe) based GAIA marketplace",
+      "highlights": [
+        "OSDU",
+        "Full stack",
+        "Domain Driven Design",
+        "Java",
+        "Sprint Boot",
+        "Angular"
+      ],
+      "logo": "slb.svg",
+      "images": ["osdu1.png"]
+    },
+    {
+      "company": "Freetrade",
+      "position": "Software Engineer",
+      "website": "https://freetrade.io/",
+      "startDate": "03/01/2022",
+      "endDate": "Present",
+      "summary": "Starting a new role with Freetrade in the Discovery and Insights team",
+      "highlights": [
+        "Trading",
+        "Finance",
+        "Scale up",
+        "Firebase"
+      ],
+      "logo": "ft.svg",
+      "images": ["ft.png"]
     }
   ],
   "education": [
