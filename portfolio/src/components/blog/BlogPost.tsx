@@ -58,7 +58,6 @@ export class BlogPost extends Component<BlogIDProps, BlogPostState> {
                 <Col className="centered featured">
                   <img src={p.media_url} alt="not found..." />
                 </Col>
-
               </Row>
               <div className="line centered" />
             </>
