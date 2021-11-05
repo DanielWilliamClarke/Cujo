@@ -13,7 +13,7 @@ if (!Array.prototype.sample) {
     }
 }
 
-const sketch = (p: p5): void => {
+export function phylotaxis(p: p5): void {
 
     let n = 0;
     let c = 12;
@@ -100,5 +100,3 @@ const sketch = (p: p5): void => {
         start += 5;
     }
 };
-
-export default sketch;

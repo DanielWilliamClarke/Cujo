@@ -118,7 +118,7 @@ class HexLine {
     }
 }
 
-const sketch = (p: p5): void => {
+export function hex(p: p5): void {
 
     const lines: HexLine[] = [];
 
@@ -176,5 +176,3 @@ const sketch = (p: p5): void => {
         lines.forEach((line: HexLine) => line.step(p, ctx, centerX, centerY));
     };
 };
-
-export default sketch;

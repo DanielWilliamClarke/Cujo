@@ -1,7 +1,7 @@
 import p5 from "p5";
 import { Vector4D, MatrixUtils } from "./matrix_utils"
 
-const sketch = (p: p5): void => {
+export function hypercube(p: p5): void {
 
     const matrixUtils = new MatrixUtils(p);
     const distance = 2;
@@ -154,5 +154,3 @@ const sketch = (p: p5): void => {
         colorAngle += 0.05;
     };
 };
-
-export default sketch;

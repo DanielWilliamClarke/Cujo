@@ -58,7 +58,7 @@ class NoiseGenerator {
     }
 }
 
-const sketch = (p: p5): void => {
+export function waves (p: p5): void {
 
     const noiseGenerator = new NoiseGenerator(new SimplexNoise());
     const totalParticles = 1000;
@@ -135,5 +135,3 @@ const sketch = (p: p5): void => {
         hueBase += 0.1;
     };
 };
-
-export default sketch;
