@@ -2,11 +2,7 @@ import p5 from "p5";
 import React, { Component } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 
-import hex from "../../sketches/hex";
-import waves from "../../sketches/waves";
-import boxes from "../../sketches/boxes";
-import phylotaxis from "../../sketches/phylotaxis";
-import hypercube from "../../sketches/hypercube";
+import { hex, waves, boxes, phylotaxis, hypercube, grid } from "../../sketches";
 
 import { CVProps } from "../../model/CVModel";
 
@@ -36,7 +32,7 @@ export class SketchBackstretch extends Component<CVProps> {
 
   componentDidMount() {
     new p5(
-      [hex, waves, boxes, phylotaxis, hypercube].sample(),
+      [hex, waves, boxes, phylotaxis, hypercube, grid].sample(),
       this.myRef.current
     );
   }

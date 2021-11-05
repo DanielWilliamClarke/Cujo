@@ -1,6 +1,6 @@
 import p5 from "p5";
 
-const sketch = (p: p5): void => {
+export function boxes(p: p5): void {
 
     const minW: number = 32;
     const maxW: number = 64;
@@ -78,5 +78,3 @@ const sketch = (p: p5): void => {
         opacity = easeInOutCubic(opacityProgress);
     };
 };
-
-export default sketch;
