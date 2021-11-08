@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 
 import { hex, waves, boxes, phylotaxis, hypercube, grid } from "../../sketches";
+// import { phylotaxis } from "../../sketches";
 
 import { CVProps } from "../../model/CVModel";
 
@@ -33,6 +34,7 @@ export class SketchBackstretch extends Component<CVProps> {
   componentDidMount() {
     new p5(
       [hex, waves, boxes, phylotaxis, hypercube, grid].sample(),
+      // [phylotaxis].sample(), 
       this.myRef.current
     );
   }
