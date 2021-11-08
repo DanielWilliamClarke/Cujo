@@ -33,8 +33,8 @@ export function phylotaxis(p: p5): void {
         },
         (input: number): number => 137.6,
         (input: number): number => 137.5,
-        (input: number): number => p.TWO_PI,
-        (input: number): number => (1 + p.sqrt(5)) / 2
+        (input: number): number => 180,
+        (input: number): number => 99.5
     ];
 
     p.setup = (): void => {
