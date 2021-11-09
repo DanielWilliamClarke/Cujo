@@ -1,6 +1,8 @@
 import p5 from "p5";
 import { Vector4D, MatrixUtils } from "./matrix_utils"
 
+type RotationGenerator = (angle: number) => number[][];
+
 export function hypercube(p: p5): void {
 
     const matrixUtils = new MatrixUtils(p);
@@ -10,6 +12,59 @@ export function hypercube(p: p5): void {
     let angle: number = 0;
     let colorAngle: number = 0;
     let ctx: any = null;
+
+    const generators: RotationGenerator[] = [
+        (angle: number) => ([ // XY
+            [p.cos(angle), -p.sin(angle), 0, 0],
+            [p.sin(angle), p.cos(angle), 0, 0],
+            [0, 0, 1, 0],
+            [0, 0, 0, 1]
+        ]),
+
+        (angle: number) => ([ // XZ
+            [p.cos(angle), 0, -p.sin(angle),  0],
+            [0, 1, 0, 0],
+            [p.sin(angle), 0, p.cos(angle), 0],
+            [0, 0, 0, 1]
+        ]),
+
+        (angle: number) => ([ // XW
+            [p.cos(angle), 0, 0, -p.sin(angle)],
+            [0, 1, 0, 0],
+            [0, 0, 1, 0],
+            [p.sin(angle), 0, 0, p.cos(angle)]
+        ]),
+
+        (angle: number) => ([ // YZ
+            [1, 0, 0, 0],
+            [0, p.cos(angle), -p.sin(angle), 0],
+            [0, p.sin(angle), p.cos(angle), 0],
+            [0, 0, 0, 1]
+        ]),
+
+        (angle: number) => ([// YW
+            [1, 0, 0, 0],
+            [0, p.cos(angle), 0, -p.sin(angle)],
+            [0, 0, 1, 0],
+            [0,  p.sin(angle), 0, p.cos(angle)]
+        ]),
+
+        (angle: number) => ([ // ZW
+            [1, 0, 0, 0],
+            [0, 1, 0, 0],
+            [0, 0, p.cos(angle), -p.sin(angle)],
+            [0, 0, p.sin(angle), p.cos(angle)]
+        ])
+    ];
+
+    let currentRotations: RotationGenerator[] = [
+        generators.sample(),
+        generators.sample()
+    ];
+    setInterval((): void => {
+        currentRotations[0] = currentRotations[1];
+        currentRotations[1] = generators.sample();
+    }, 10000);
 
     const drawSquare = (...points: p5.Vector[]) => {
         p.beginShape();
@@ -36,52 +91,6 @@ export function hypercube(p: p5): void {
             result.push(points[i + offset])
         };
         return result;
-    }
-
-    const generateRotationMatrices = (angle: number): any[] => {
-        return [
-            [ // XY
-                [p.cos(angle), -p.sin(angle), 0, 0],
-                [p.sin(angle), p.cos(angle), 0, 0],
-                [0, 0, 1, 0],
-                [0, 0, 0, 1]
-            ],
-
-            // [ // XZ
-            //     [p.cos(angle), 0, -p.sin(angle),  0],
-            //     [0, 1, 0, 0],
-            //     [p.sin(angle), 0, p.cos(angle), 0],
-            //     [0, 0, 0, 1]
-            // ],
-
-            // [ // XW
-            //     [p.cos(angle), 0, 0, -p.sin(angle)],
-            //     [0, 1, 0, 0],
-            //     [0, 0, 1, 0],
-            //     [p.sin(angle), 0, 0, p.cos(angle)]
-            // ],
-
-            // [ // YZ
-            //     [1, 0, 0, 0],
-            //     [0, p.cos(angle), -p.sin(angle), 0],
-            //     [0, p.sin(angle), p.cos(angle), 0],
-            //     [0, 0, 0, 1]
-            // ],
-
-            // [// YW
-            //     [1, 0, 0, 0],
-            //     [0, p.cos(angle), 0, -p.sin(angle)],
-            //     [0, 0, 1, 0],
-            //     [0,  p.sin(angle), 0, p.cos(angle)]
-            // ],
-
-            [ // ZW
-                [1, 0, 0, 0],
-                [0, 1, 0, 0],
-                [0, 0, p.cos(angle), -p.sin(angle)],
-                [0, 0, p.sin(angle), p.cos(angle)]
-            ]
-        ];
     }
 
     p.setup = (): void => {
@@ -119,7 +128,8 @@ export function hypercube(p: p5): void {
             points.map((point: Vector4D): p5.Vector => {
                 // Rotate point
                 // https://math.stackexchange.com/questions/1402362/rotation-in-4d
-                const rotatedPoint = generateRotationMatrices(angle)
+                const rotatedPoint = currentRotations
+                    .map((generator: RotationGenerator) => generator(angle))
                     .reduce((point: Vector4D, rotation: number[][]): Vector4D =>
                         matrixUtils.Matmul(rotation, point) as Vector4D,
                         point)
