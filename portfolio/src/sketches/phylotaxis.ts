@@ -24,8 +24,8 @@ export function phylotaxis(p: p5): void {
     const maxParticles = 3000;
     const increment = 5;
 
-    let selectedGenerator: any = null;
-    const magicAngleGenerators = [
+    let selectedGenerator: (i: number) => number;
+    const magicAngleGenerators: ((i: number) => number)[] = [
         (input: number): number => {
             let ma = p.sin(input);
             ma = p.map(ma, -1, 1, 137.3, 137.6);
@@ -43,6 +43,7 @@ export function phylotaxis(p: p5): void {
         p.angleMode(p.DEGREES);
         p.blendMode(p.DIFFERENCE);
         p.createCanvas(window.innerWidth, window.innerHeight, p.WEBGL);
+        p.perspective();
         selectedGenerator = magicAngleGenerators.sample();
     }
 
@@ -53,6 +54,7 @@ export function phylotaxis(p: p5): void {
     p.draw = (): void => {
 
         p.background(0);
+        p.orbitControl();
 
         for (var i = 0; i < n; i++) {
             // vary magic angle
@@ -70,6 +72,7 @@ export function phylotaxis(p: p5): void {
             const lerpY1 = r * p.sin(a);
             const lerpY2 = r * p.sin((i + 2) * magicAngle);
 
+            const z = r * p.cos(a);
             const x = p.lerp(lerpX1, lerpX2, p.sin(p.millis() / 100))
             const y = p.lerp(lerpY1, lerpY2, p.cos(p.millis() / 100))
 
@@ -77,15 +80,22 @@ export function phylotaxis(p: p5): void {
             let hu = p.sin(start - i * 0.5);
             hu = p.map(hu, -1, 1, 0, 360);
 
-            // Here I want to try to keep particle max size consistent accross multiple device widths
-            const maxSize = p.map(p.width / 2, 375, 1440, 10, 15);
+            // Here I want to try to keep particle max size consistent across multiple device widths
+            const maxSize = p.map(p.width / 2, 375, 1440, 5, 10);
             // Calcualte particle size based on radius
             const d = p.map(r, 0, p.height / 2, 0.5, maxSize);
 
             // Draw
+            p.push();
             p.fill(hu, 150, 255);
             p.noStroke();
-            p.ellipse(x, y, d, d, 4);
+            p.translate(x, y, z);
+
+            p.rotateX(35.264);
+            p.rotateY(-p.QUARTER_PI);
+
+            p.box(d, d, d);
+            p.pop();
         }
 
         // Toggle growth / skrinking

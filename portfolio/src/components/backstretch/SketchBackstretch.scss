@@ -26,6 +26,8 @@
   }
 
   .backstretch-headline {
+    user-select: none;
+
     .backstretch-main {
       font-size: calc(30px + 3vw);
       font-weight: 700;
