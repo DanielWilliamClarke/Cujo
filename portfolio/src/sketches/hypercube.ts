@@ -13,7 +13,7 @@ export function hypercube(p: p5): void {
     let colorAngle: number = 0;
     let ctx: any = null;
 
-    const generators: RotationGenerator[] = [
+    const generators3d: RotationGenerator[] = [
         (angle: number) => ([ // XY
             [p.cos(angle), -p.sin(angle), 0, 0],
             [p.sin(angle), p.cos(angle), 0, 0],
@@ -28,18 +28,20 @@ export function hypercube(p: p5): void {
             [0, 0, 0, 1]
         ]),
 
-        (angle: number) => ([ // XW
-            [p.cos(angle), 0, 0, -p.sin(angle)],
-            [0, 1, 0, 0],
-            [0, 0, 1, 0],
-            [p.sin(angle), 0, 0, p.cos(angle)]
-        ]),
-
         (angle: number) => ([ // YZ
             [1, 0, 0, 0],
             [0, p.cos(angle), -p.sin(angle), 0],
             [0, p.sin(angle), p.cos(angle), 0],
             [0, 0, 0, 1]
+        ])
+    ];
+
+    const generators4d: RotationGenerator[] = [
+        (angle: number) => ([ // XW
+            [p.cos(angle), 0, 0, -p.sin(angle)],
+            [0, 1, 0, 0],
+            [0, 0, 1, 0],
+            [p.sin(angle), 0, 0, p.cos(angle)]
         ]),
 
         (angle: number) => ([// YW
@@ -57,14 +59,10 @@ export function hypercube(p: p5): void {
         ])
     ];
 
-    let currentRotations: RotationGenerator[] = [
-        generators.sample(),
-        generators.sample()
+    const currentRotations: RotationGenerator[] = [
+        generators3d.sample(),
+        generators4d.sample()
     ];
-    setInterval((): void => {
-        currentRotations[0] = currentRotations[1];
-        currentRotations[1] = generators.sample();
-    }, 10000);
 
     const drawSquare = (...points: p5.Vector[]) => {
         p.beginShape();
