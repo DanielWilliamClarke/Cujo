@@ -1,11 +1,9 @@
 import p5 from "p5";
 
 const SimplexNoise = require('simplex-noise');
-
 class HSLA {
     constructor(public h: number = 0, public s: number = 0, public b: number = 0, public a: number = 0)  {}
 }
-
 class Particle {
     public pastX: number = 0;
     public pastY: number = 0;
@@ -61,7 +59,7 @@ class NoiseGenerator {
 export function waves (p: p5): void {
 
     const noiseGenerator = new NoiseGenerator(new SimplexNoise());
-    const totalParticles = 1000;
+    const totalParticles = 5000;
     const particles: Particle[] = [];
     let screenWidth = 0;
     let screenHeight = 0;    
@@ -73,6 +71,8 @@ export function waves (p: p5): void {
     const base = 1000;
     const zInc = 0.001;
     let zOff = 0;
+
+    const clearIn = 30000;
 
     p.setup = (): void => {
         p.frameRate(60);
@@ -104,6 +104,12 @@ export function waves (p: p5): void {
 
     p.draw = (): void => {
 
+        const elapsedTime = p.millis();
+        const r =  Math.abs(elapsedTime % clearIn);
+        if(r <= 1000) {
+            p.background(0, p.map(r, 0, 1000, 0, 255));
+        }
+
         particles.forEach((particle: Particle): void => {
             particle.persistPosition();
 
@@ -117,7 +123,7 @@ export function waves (p: p5): void {
                 Math.sin(angle) * step);
 
             if (particle.color.a < 1) {
-                particle.color.a += 0.003;   
+                particle.color.a += 0.03;   
             }
 
             // draw pariticle

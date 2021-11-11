@@ -1,4 +1,5 @@
 import p5 from "p5";
+import { Ease } from "./easing";
 
 export function boxes(p: p5): void {
 
@@ -19,7 +20,6 @@ export function boxes(p: p5): void {
 
     let opacity: number = 0;
     let opacityProgress: number = 0;
-    const easeInOutCubic = (x: number): number => x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
 
     p.setup = (): void => {
         p.frameRate(60);
@@ -75,6 +75,6 @@ export function boxes(p: p5): void {
 
         //easeOutCubic
         opacityProgress += 0.01;
-        opacity = easeInOutCubic(opacityProgress);
+        opacity = Ease.easeInOutCubic(opacityProgress);
     };
 };
