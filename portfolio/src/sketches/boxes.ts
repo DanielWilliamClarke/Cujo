@@ -30,17 +30,17 @@ export function boxes(p: p5): void {
 
         ma = 35.264; // p.atan(1 / p.sqrt(2));
         maxD = p.dist(0, 0, maxH, maxH);
-        p.ortho(-window.innerWidth, window.innerWidth, window.innerHeight, -window.innerHeight, -1000, 10000);
+        p.perspective();
     }
 
     p.windowResized = (): void => {
         p.resizeCanvas(window.innerWidth, window.innerHeight);
-        p.ortho(-window.innerWidth, window.innerWidth, window.innerHeight, -window.innerHeight, -1000, 10000);
     };
 
     p.draw = (): void => {
 
         p.background(0);
+        p.orbitControl();
         p.rotateX(ma);
         p.rotateY(yAngle += 0.001);
 
