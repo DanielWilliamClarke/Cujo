@@ -182,6 +182,7 @@ docker-compose --env-file <SECRET ENV FILE> -f prod.compose.yaml down (-v)
 - [ ] Add Rust code coverage
 - [ ] Write front end tests
 - [ ] Get own logo and assets from designer
+- [ ] Replace WordPress with contentful to reduce need to host own content
 - [ ] Write blog
 
 ## // Done
