@@ -3,10 +3,10 @@
     "name": "Daniel William Clarke",
     "label": "Software Engineer",
     "email": "dc@danielclarke.tech",
-    "images": [ "train.jpg", "headshot.jpg", "snake.jpg", "family.jpg" ],
+    "images": ["train.jpg", "headshot.jpg", "snake.jpg", "family.jpg"],
     "phone": "07411259330",
     "website": "https://danielclarke.tech",
-    "summary": "*I enjoy building software as I see both the art and science that it requires. I find it very enjoyable to see how a particular project or problem captivates me.*\n\nI am an engaged and quality focused full stack software engineer.\n\nI am always seeking to grasp bleeding edge technologies and practices in cloud, micro service architecture. software development, cyber security, CI/CD, SOLID and TDD.\n\nI am currently leading a team of 5 software engineers, though I never thought that leadership would be something I would venture into, I am enjoying the challenge, and looking forward to the opportunities this role may yield!",
+    "summary": "*I enjoy building software as I see both the art and science that it requires. I find it very enjoyable to see how a particular project or problem captivates me.*\n\nI am an engaged and quality focused full stack software engineer.\n\nI am always seeking to grasp bleeding edge technologies and practices in cloud, micro service architecture. software development, cyber security, CI/CD, SOLID and TDD.\n\nI am currently starting a new role with Freetrade, though I never thought that finance would be a domain I would venture into, I am ready for the challenge, and looking forward to the opportunities this role may yield!",
     "location": {
       "city": "Crawley",
       "region": "West Sussex",
@@ -366,7 +366,7 @@
       {
         "icon": "googlecloud-plain",
         "name": "GCP"
-      },    
+      },
       {
         "icon": "firebase-plain",
         "name": "Firebase"
@@ -475,7 +475,7 @@
       "image": "p1_small.gif",
       "summary": "Ongoing indie space shooter project I am building in my spare time using C++ and SFML, Based on my first year university programming class project submission.",
       "tags": ["C++", "SFML", "Games Design", "Passion Project"],
-      "icon":  {
+      "icon": {
         "icon": "github-plain",
         "name": "GitHub"
       }
@@ -485,8 +485,15 @@
       "link": "https://github.com/DanielWilliamClarke/Cujo",
       "image": "p2_tess.gif",
       "summary": "I have made this Portfolio's code available for all to see!",
-      "tags": ["TypeScript", "React", "Rust", "Docker", "Full Stack", "Portfolio"],
-      "icon":  {
+      "tags": [
+        "TypeScript",
+        "React",
+        "Rust",
+        "Docker",
+        "Full Stack",
+        "Portfolio"
+      ],
+      "icon": {
         "icon": "github-plain",
         "name": "GitHub"
       }
@@ -496,8 +503,15 @@
       "link": "https://github.com/DanielWilliamClarke/SemiAutonomousFSMs",
       "image": "p3_small.gif",
       "summary": "To complete my final year at Nottingham Trent University, I researched and developed an application capable of the generation and deployment of semi-autonomous supervisory controllers for process automation. Upon completion I was then able return to Schlumberger Gould Research to demonstrate and integrate my solution with their drilling simulation test platform and autonomously drove a physical miniature drilling rig live.",
-      "tags": ["C++", "SFML", "Automation", "Finite State Automata", "Algorithms", "OPC"],
-      "icon":  {
+      "tags": [
+        "C++",
+        "SFML",
+        "Automation",
+        "Finite State Automata",
+        "Algorithms",
+        "OPC"
+      ],
+      "icon": {
         "icon": "github-plain",
         "name": "GitHub"
       }
@@ -507,8 +521,8 @@
       "link": "https://github.com/DanielWilliamClarke/Yautja",
       "image": "p4_small.gif",
       "summary": "A predator / prey simulation with AI. I have currently began to resurrect the code base from ages long passed",
-      "tags": ["C++", "SFML",  "Simulation", "Natural Language Processing"],
-      "icon":  {
+      "tags": ["C++", "SFML", "Simulation", "Natural Language Processing"],
+      "icon": {
         "icon": "github-plain",
         "name": "GitHub"
       }
@@ -519,7 +533,7 @@
       "image": "p5.jpg",
       "summary": "Everything else on my Github",
       "tags": ["Proof of Concepts", "Coding Challenges", "Experiments"],
-      "icon":  {
+      "icon": {
         "icon": "github-plain",
         "name": "GitHub"
       }

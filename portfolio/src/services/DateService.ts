@@ -39,7 +39,7 @@ export class DateService implements IDateService {
   }
 
   toRangeWithDuration(start: string, end: string): string {
-    return `${this.toRange(start, end)} (${this.toDuration(start, end)})`;
+    return `${this.toRange(start, end)} ${this.toDuration(start, end)}`;
   }
 
   IsFuture(date: string): boolean {
@@ -63,9 +63,7 @@ export class DateService implements IDateService {
       ? util.format("%d month%s", months, months === 1 ? "" : "s")
       : "";
     const spacing = yearFormat !== "" ? " " : "";
-     
-    return `${yearFormat}${spacing}${monthFormat}`;
+
+    return `(${yearFormat}${spacing}${monthFormat})`;
   }
-
-
 }

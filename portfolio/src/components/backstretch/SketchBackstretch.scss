@@ -44,6 +44,12 @@
       background-color: $col-sub-brand;
     }
   }
+
+  .backstretch-logo {
+    img {
+      height: 20px;
+    }
+  }
 }
 
 .scroll-indicator {
