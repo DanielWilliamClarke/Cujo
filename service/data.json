@@ -133,13 +133,8 @@
       "website": "https://freetrade.io/",
       "startDate": "03/01/2022",
       "endDate": "Present",
-      "summary": "Starting a new role with Freetrade in the Discovery and Insights team",
-      "highlights": [
-        "Trading",
-        "Finance",
-        "Scale up",
-        "Firebase"
-      ],
+      "summary": "Starting a new role with Freetrade in the Engagement team",
+      "highlights": ["Trading", "Finance", "Scale up", "Firebase"],
       "logo": "ft.svg",
       "images": ["ft.png"]
     }
@@ -454,7 +449,6 @@
       "Learning how simple **mathematics** can lead to captivating 2D/3D visualisations",
       "**Cooking** new and interesting meals for my Family and I",
       "Building my skills on **Guitar**"
-
     ]
   },
   "projects": [
@@ -464,7 +458,7 @@
       "image": "t1.png",
       "summary": "Proof of concept to realise: How to incorporate non intrusive implicit logging containing request context data into an existing REST service. Investigate how to capture and store request data via middleware and access it via auto-wired services. As well looking into setting up an Loki, Grafana, Tempo and Prometheus observability stack to aggregate and visualise logs. The main aim of the POC was to produce several NestJS Modules that could be lifted and shifted for use in other projects",
       "tags": ["TypeScript", "NestJS", "aspect.js", "AsyncLocalStorage", "POC"],
-      "icon":  {
+      "icon": {
         "icon": "github-plain",
         "name": "GitHub"
       }
