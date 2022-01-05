@@ -24,24 +24,21 @@ export class Blog extends Component<{}, BlogState> {
 
   async componentWillMount() {
     this.dateService.format("Do MMMM YYYY HH:mm:ss");
-    this.setState({ posts: [] })
+    this.setState({ posts: [] });
     this.setState({ posts: await this.cujoService.FetchAllBlogPosts() });
   }
 
   render(): JSX.Element {
     return (
       <Fade triggerOnce direction="up">
-        <Section
-          id="blog"
-          bg="section-dark"
-          title="Blog"
-          icon={GiBookmarklet}>
-
+        <Section id="blog" bg="section-dark" title="Blog" icon={GiBookmarklet}>
           <Row xs={1} md={2} className="g-4 blog-cards">
-            {this.state.posts &&
-              this.state.posts.map(this.blogSummaryPanel.bind(this))}
+            {this.state.posts.length ? (
+              this.state.posts.map(this.blogSummaryPanel.bind(this))
+            ) : (
+              <Col className="centered">Coming soon</Col>
+            )}
           </Row>
-
         </Section>
       </Fade>
     );
