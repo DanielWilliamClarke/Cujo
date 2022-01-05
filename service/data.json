@@ -45,6 +45,17 @@
   },
   "work": [
     {
+      "company": "FOLEY PATTERNS LIMITED",
+      "position": "Automotive Modelmaker",
+      "website": "http://www.foleypatterns.co.uk/",
+      "startDate": "01/05/2011",
+      "endDate": "01/01/2012",
+      "summary": "Developed models and tools for bespoke and prototype car bodies, primarily for Morgan Motors.",
+      "highlights": ["Prototyping", "Manufacturing", "Temporary"],
+      "logo": "fp1.png",
+      "images": ["fp2.jpg"]
+    },
+    {
       "company": "Schlumberger",
       "position": "Drilling Software Engineering Intern",
       "website": "https://www.cambridgetrust.org/partners/schlumberger-gould-research-centre",
@@ -464,7 +475,7 @@
       }
     },
     {
-      "name": "Untitled Indie Space Shooter",
+      "name": "Gradius D",
       "link": "https://github.com/DanielWilliamClarke/Annatar",
       "image": "p1_small.gif",
       "summary": "Ongoing indie space shooter project I am building in my spare time using C++ and SFML, Based on my first year university programming class project submission.",

@@ -34,26 +34,32 @@ export class Experience extends Component<WorkProps> {
       <Section
         id="experience"
         title="Professional Experience"
-        icon={IoRocketOutline}>
+        icon={IoRocketOutline}
+      >
         <VerticalTimeline className="timeline">
           {this.props.work
-            .filter(({startDate}: Work) => !this.dateService.IsFuture(startDate))
-            .sort((a: Work, b: Work) =>
-              this.dateService.toUnix(b.startDate) -
-              this.dateService.toUnix(a.startDate))
-            .map((work: Work, index: number): JSX.Element => (
-              <VerticalTimelineElement
-                className="vertical-timeline-element--work"
-                key={index}
-                date={this.dateService.toRangeWithDuration(
-                  work.startDate,
-                  work.endDate
-                )}
-                icon={<IoRocketOutline />}
-              >
-                {this.renderRole(work)}
-              </VerticalTimelineElement>
+            .filter(
+              ({ startDate }: Work) => !this.dateService.IsFuture(startDate)
             )
+            .sort(
+              (a: Work, b: Work) =>
+                this.dateService.toUnix(b.startDate) -
+                this.dateService.toUnix(a.startDate)
+            )
+            .map(
+              (work: Work, index: number): JSX.Element => (
+                <VerticalTimelineElement
+                  className="vertical-timeline-element--work"
+                  key={index}
+                  date={this.dateService.toRangeWithDuration(
+                    work.startDate,
+                    work.endDate
+                  )}
+                  icon={<IoRocketOutline />}
+                >
+                  {this.renderRole(work)}
+                </VerticalTimelineElement>
+              )
             )}
         </VerticalTimeline>
       </Section>
@@ -63,7 +69,7 @@ export class Experience extends Component<WorkProps> {
   private renderRole(work: Work): JSX.Element {
     return (
       <>
-        <Lanyard tags={work.highlights} />
+        <Lanyard tags={[work.company, ...work.highlights]} />
 
         <Row className="header">
           <Col className="headline">
@@ -72,13 +78,14 @@ export class Experience extends Component<WorkProps> {
               <span>@</span>
               <span>
                 <a
+                  title={work.company}
                   href={work.website}
                   rel="noopener noreferrer"
                   target="_blank"
                 >
                   <DynamicImage
                     image={work.logo}
-                    alt={`${work.company} - Image not found!`}
+                    alt={work.company}
                     className="centered image-item work-logo"
                   />
                 </a>
@@ -89,10 +96,7 @@ export class Experience extends Component<WorkProps> {
 
         <Row>
           <Col>
-            <ReactMarkdown
-              children={work.summary}
-              remarkPlugins={[breaks]}
-            />
+            <ReactMarkdown children={work.summary} remarkPlugins={[breaks]} />
           </Col>
         </Row>
 
@@ -110,6 +114,6 @@ export class Experience extends Component<WorkProps> {
 
         <div className="centered short-line" />
       </>
-    )
+    );
   }
 }
