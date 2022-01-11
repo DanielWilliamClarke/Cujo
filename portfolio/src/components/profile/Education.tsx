@@ -5,6 +5,8 @@ import {
   VerticalTimeline,
   VerticalTimelineElement,
 } from "react-vertical-timeline-component";
+import ReactMarkdown from "react-markdown";
+import breaks from "remark-breaks";
 
 import { IoSchoolOutline } from "react-icons/io5";
 
@@ -29,16 +31,14 @@ export class Education extends Component<EducationProps> {
 
   render(): JSX.Element {
     return (
-      <Section
-        id="education"
-        title="Education"
-        icon={IoSchoolOutline}>
-
+      <Section id="education" title="Education" icon={IoSchoolOutline}>
         <VerticalTimeline className="timeline">
           {this.props.education
-            .sort((a, b) =>
-              this.dateService.toUnix(b.startDate) -
-              this.dateService.toUnix(a.startDate))
+            .sort(
+              (a, b) =>
+                this.dateService.toUnix(b.startDate) -
+                this.dateService.toUnix(a.startDate)
+            )
             .map((e: EducationData, index: number) => (
               <VerticalTimelineElement
                 className="vertical-timeline-element--work"
@@ -50,7 +50,6 @@ export class Education extends Component<EducationProps> {
               </VerticalTimelineElement>
             ))}
         </VerticalTimeline>
-
       </Section>
     );
   }
@@ -58,7 +57,7 @@ export class Education extends Component<EducationProps> {
   private renderInstitution(e: EducationData): JSX.Element {
     return (
       <>
-        {e.grade !== "" && (<Lanyard tags={[e.grade]} />)}
+        {e.grade !== "" && <Lanyard tags={[e.grade]} />}
 
         <Row className="header">
           <Col className="Qualification-type">
@@ -73,18 +72,14 @@ export class Education extends Component<EducationProps> {
 
         <Row>
           <Col>
-            <p>{e.summary}</p>
+            <ReactMarkdown children={e.summary} remarkPlugins={[breaks]} />
           </Col>
         </Row>
 
         <Row className="images">
           {e.images.map((image) => (
             <Col className="col-item">
-              <a
-                href={e.link}
-                rel="noopener noreferrer"
-                target="_blank"
-              >
+              <a href={e.link} rel="noopener noreferrer" target="_blank">
                 <DynamicImage
                   image={image}
                   alt={`${e.institution} - Image not found!`}
@@ -97,6 +92,6 @@ export class Education extends Component<EducationProps> {
 
         <div className="centered short-line" />
       </>
-    )
+    );
   }
 }
