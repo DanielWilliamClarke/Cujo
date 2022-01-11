@@ -36,7 +36,7 @@ export class Blog extends Component<{}, BlogState> {
             {this.state.posts.length ? (
               this.state.posts.map(this.blogSummaryPanel.bind(this))
             ) : (
-              <Col className="centered">Coming soon</Col>
+              <Col className="blog-placeholder centered">Coming soon</Col>
             )}
           </Row>
         </Section>

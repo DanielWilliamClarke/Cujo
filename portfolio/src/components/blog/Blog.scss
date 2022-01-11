@@ -1,15 +1,14 @@
 @import "../shared/Palette.scss";
 
 .blog {
-
   .blog-cards {
     padding: 20px 0;
   }
-  
+
   .card {
     text-align: left;
     margin: 10px 0;
-    
+
     a {
       width: 100%;
 
@@ -34,5 +33,13 @@
 
   .nav-link {
     padding: 0;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .blog {
+    .blog-placeholder {
+      text-align: center;
+    }
   }
 }

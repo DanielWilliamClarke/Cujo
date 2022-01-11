@@ -1,6 +1,8 @@
 import { Component } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { Fade } from "react-awesome-reveal";
+import ReactMarkdown from "react-markdown";
+import breaks from "remark-breaks";
 
 import { GiAnvilImpact } from "react-icons/gi";
 
@@ -24,10 +26,9 @@ export class Projects extends Component<ProjectProps> {
         id="projects"
         title="Personal Projects"
         noSeparator
-        icon={GiAnvilImpact}>
-
+        icon={GiAnvilImpact}
+      >
         {this.props.projects.map(this.project.bind(this))}
-
       </Section>
     );
   }
@@ -50,7 +51,12 @@ export class Projects extends Component<ProjectProps> {
     return (
       <Col className="project-image">
         {p.image.length && (
-          <a className="image-link" href={p.link} rel="noopener noreferrer" target="_blank">
+          <a
+            className="image-link"
+            href={p.link}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
             <DynamicImage
               image={p.image}
               alt={`${p.name} project image`}
@@ -70,7 +76,11 @@ export class Projects extends Component<ProjectProps> {
         <div className="content">
           <h2>{p.name}</h2>
           <Lanyard tags={p.tags} />
-          <div className="summary">{p.summary}</div>
+          <ReactMarkdown
+            className="summary"
+            children={p.summary}
+            remarkPlugins={[breaks]}
+          />
         </div>
       </Col>
     );
