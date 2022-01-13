@@ -198,6 +198,14 @@
         "name": "JavaScript"
       },
       {
+        "icon": "kotlin-plain",
+        "name": "Kotlin"
+      },
+      {
+        "icon": "swift-plain",
+        "name": "Swift"
+      },
+      {
         "icon": "c-plain",
         "name": "C"
       },
@@ -330,6 +338,14 @@
         "name": "Electron"
       },
       {
+        "icon": "android-plain",
+        "name": "Android"
+      },
+      {
+        "icon": "apple-original",
+        "name": "Apple"
+      },
+      {
         "icon": "spring-plain",
         "name": "Spring"
       },
@@ -386,6 +402,10 @@
         "name": "MySQL"
       },
       {
+        "icon": "redis-plain",
+        "name": "Redis"
+      },
+      {
         "icon": "confluence-original",
         "name": "Confluence"
       },
@@ -400,6 +420,14 @@
       {
         "icon": "bitbucket-plain",
         "name": "Bitbucket"
+      },
+      {
+        "icon": "jira-plain",
+        "name": "Jira"
+      },
+      {
+        "icon": "figma-plain",
+        "name": "Figma"
       },
       {
         "icon": "circleci-plain",
@@ -440,6 +468,10 @@
       {
         "icon": "chrome-plain",
         "name": "Chrome"
+      },
+      {
+        "icon": "slack-plain",
+        "name": "Slack"
       }
     ]
   },
