@@ -141,7 +141,7 @@ export function hypercube(p: p5): void {
                 ];
                 const projected = matrixUtils.Matmul(projection, rotatedPoint) as Vector4D;
                 return projected
-                    .mult(500)
+                    .multiply(500)
                     .To3D(p);
             });
 
