@@ -12,7 +12,9 @@ import {
   hypercube,
   grid,
   conway,
+  conway3D,
 } from "../../sketches";
+// import { conway3D } from "../../sketches";
 
 import { CVProps } from "../../model/CVModel";
 
@@ -48,7 +50,17 @@ export class SketchBackstretch extends Component<CVProps> {
 
   componentDidMount() {
     new p5(
-      [conway, hex, waves, boxes, phylotaxis, hypercube, grid].sample(),
+      [
+        conway,
+        conway3D,
+        hex,
+        waves,
+        boxes,
+        phylotaxis,
+        hypercube,
+        grid,
+      ].sample(),
+      // conway3D,
       this.myRef.current
     );
   }
