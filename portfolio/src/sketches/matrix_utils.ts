@@ -9,7 +9,7 @@ export class Vector4D extends p5.Vector {
         super();
     }
 
-    mult(f: number): Vector4D {
+    multiply(f: number): Vector4D {
         this.x *= f;
         this.y *= f;
         this.z *= f;
