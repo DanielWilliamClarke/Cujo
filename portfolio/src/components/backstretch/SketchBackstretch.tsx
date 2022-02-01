@@ -4,8 +4,15 @@ import { Container, Row, Col } from "react-bootstrap";
 import { resolve } from "inversify-react";
 import { IDateService } from "../../services/DateService";
 
-import { hex, waves, boxes, phylotaxis, hypercube, grid } from "../../sketches";
-// import { phylotaxis } from "../../sketches";
+import {
+  hex,
+  waves,
+  boxes,
+  phylotaxis,
+  hypercube,
+  grid,
+  conway,
+} from "../../sketches";
 
 import { CVProps } from "../../model/CVModel";
 
@@ -41,8 +48,7 @@ export class SketchBackstretch extends Component<CVProps> {
 
   componentDidMount() {
     new p5(
-      [hex, waves, boxes, phylotaxis, hypercube, grid].sample(),
-      // [phylotaxis].sample(),
+      [conway, hex, waves, boxes, phylotaxis, hypercube, grid].sample(),
       this.myRef.current
     );
   }
