@@ -26,7 +26,7 @@ export function conway3D(p: p5): void {
   p.setup = p.windowResized = (): void => {
     p.frameRate(12);
     p.colorMode(p.HSL,360,100,100);
-    p.createCanvas(window.innerWidth, window.innerHeight, p.WEBGL);
+    p.createCanvas(window.innerWidth * 1.5, window.innerHeight * 2, p.WEBGL);
     p.smooth();
     p.perspective();
 
@@ -39,6 +39,9 @@ export function conway3D(p: p5): void {
   p.draw = (): void => {
     // Reset
     p.background(0);
+   // p.orbitControl();
+
+    p.rotateX(35.264);
 
     const locX = p.mouseX - p.height / 2;
     const locY = p.mouseY - p.width / 2;
