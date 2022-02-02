@@ -22,6 +22,9 @@ export function conway(p: p5): void {
   let columns = 0;
   let grid: Grid = [];
 
+  let B = [3]
+  let S = [2, 3]
+
   p.setup = p.windowResized = (): void => {
     p.frameRate(24);
     p.colorMode(p.HSL,360,100,100);
@@ -72,9 +75,9 @@ export function conway(p: p5): void {
 
       let state = grid[col][row];
       let neighbours = countNeighbours(grid, col, row);
-      if (!state && neighbours.sum === 3) {
+      if (!state && B.includes(neighbours.sum)) {
         next[col][row] = new Cell(averageColor(neighbours.colors));
-      } else if (state && (neighbours.sum < 2 || neighbours.sum > 3)) {
+      } else if (state && !S.includes(neighbours.sum)) {
         next[col][row] = undefined;
       } else {
         next[col][row] = state;
