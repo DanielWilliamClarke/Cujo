@@ -23,6 +23,9 @@ export function conway3D(p: p5): void {
   let depths = 0;
   let grid: Grid = [];
 
+  let B = [4]
+  let S = [4, 3];
+
   p.setup = p.windowResized = (): void => {
     p.frameRate(12);
     p.colorMode(p.HSL,360,100,100);
@@ -78,9 +81,9 @@ export function conway3D(p: p5): void {
 
       const state = grid[col][row][dep];
       let neighbours = countNeighbours(grid, col, row, dep);
-      if (!state && neighbours.sum === 4) {
+      if (!state && B.includes(neighbours.sum)) {
         next[col][row][dep] = new Cell(averageColor(neighbours.colors));
-      } else if (state && (neighbours.sum < 3 || neighbours.sum > 4)) {
+      } else if (state && !S.includes(neighbours.sum)) {
         next[col][row][dep] = undefined;
       } else {
         next[col][row][dep] = state;
@@ -91,7 +94,7 @@ export function conway3D(p: p5): void {
 
   const countNeighbours = (grid: Grid, x: number, y: number, z: number): Neighbours => {
     let neighbours: Neighbours = {
-      sum: 0,
+      sum: -1,
       colors: []
     };
 
@@ -110,8 +113,6 @@ export function conway3D(p: p5): void {
         }
       }
     }
-
-    neighbours.sum -= grid[x][y] ? 1 : 0;
 
     return neighbours;
   }
