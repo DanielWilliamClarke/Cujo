@@ -3,37 +3,13 @@ import React, { Component } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { resolve } from "inversify-react";
 import { IDateService } from "../../services/DateService";
-
-import {
-  hex,
-  waves,
-  boxes,
-  phylotaxis,
-  hypercube,
-  grid,
-  conway,
-  conway3D,
-} from "../../sketches";
-// import { conway3D } from "../../sketches";
-
+import { getSketch } from "../../sketches";
 import { CVProps } from "../../model/CVModel";
 
 import "./SketchBackstretch.scss";
+
 import { ScrollIndicator } from "./ScrollIndicator";
 import { DynamicImage } from "../shared/DynamicImage";
-
-declare global {
-  interface Array<T> {
-    sample(): T;
-  }
-}
-
-if (!Array.prototype.sample) {
-  // eslint-disable-next-line no-extend-native
-  Array.prototype.sample = function (): any {
-    return this[Math.floor(Math.random() * this.length)];
-  };
-}
 
 export class SketchBackstretch extends Component<CVProps> {
   private myRef: React.RefObject<any>;
@@ -49,20 +25,7 @@ export class SketchBackstretch extends Component<CVProps> {
   }
 
   componentDidMount() {
-    new p5(
-      [
-        conway,
-        conway3D,
-        hex,
-        waves,
-        boxes,
-        phylotaxis,
-        hypercube,
-        grid,
-      ].sample(),
-      // conway3D,
-      this.myRef.current
-    );
+    new p5(getSketch(), this.myRef.current);
   }
 
   render() {
