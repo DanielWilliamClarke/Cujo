@@ -7,16 +7,19 @@ const p5v: { sub(a: p5.Vector, b: p5.Vector): p5.Vector } = p5.Vector;
 export function boids(p: p5): void {
 
   const vehicles: Vehicle[] = [];
+  const noiseGenerator: NoiseGenerator = new NoiseGenerator(p);
 
-  const padding = 100;
   const dotSize: number = 10;
   const sampleFactor: number = 0.1;
 
   let wordIndex = 0;
   const words = [
-    "Daniel William Clarke",
-    "Software Engineer",
-    "Freetrade",
+    "Daniel",
+    "William",
+    "Clarke",
+    "Software ",
+    "Engineer",
+    "@ Freetrade",
     "Rust",
     "Golang",
     "C++",
@@ -48,20 +51,26 @@ export function boids(p: p5): void {
 
   p.windowResized = (): void => {
     p.resizeCanvas(window.innerWidth, window.innerHeight);
-    setupBoidsForWord("Daniel William Clarke");
   }
 
   p.draw = (): void => {
     p.background(0);
     p.rotateX(120);
-    vehicles.forEach((v: Vehicle) => v.behaviors().update().show())
+
+    vehicles.forEach((v: Vehicle) => v
+      .behaviors(noiseGenerator.getCoord())
+      .update()
+      .show())
   }
 
   const setupBoidsForWord = (newText: string) => {
+      const padding = p.width * 0.1;
+
       const fontSize = getFontSizeTextInBounds(newText, p.width - padding, p.height - padding);
       var bounds = myFont.textBounds(newText, 0, 0, fontSize) as {w: number, h: number};
+      const x = (p.width / 2) - (bounds.w / 2);
       const y = (p.height / 2) + (bounds.h / 2);
-      const points = myFont.textToPoints(newText, 0, y, fontSize, {sampleFactor});
+      const points = myFont.textToPoints(newText, x, y, fontSize, {sampleFactor});
       migrateToNewPoints(points);
   }
 
@@ -108,15 +117,17 @@ export function boids(p: p5): void {
         }
     }
 
-    //set target and color
-    vehicles.forEach((v, index, {length}) => {
-      v.setTarget(new p5.Vector(points[index].x, points[index].y));
-
-      const hue = p.map(index, 0, length, 0, 255);
-      v.setColor(new HSLA(hue, 60, 100));
-
-      v.setSize(dotSize);
-    });
+    // with randomised targets
+    vehicles
+      .map((value, index) => ({ value, sort: p.noise(index) }))
+      .sort((a, b) => a.sort - b.sort)
+      .map(({ value }) => value)
+      .forEach((v, index, {length}) => {
+        v.setTarget(new p5.Vector(points[index].x, points[index].y));
+        const hue = p.map(index, 0, length, 0, 255);
+        v.setColor(new HSLA(hue, 60, 100));
+        v.setSize(p.max(5, p.width * 0.001));
+      });
   }
 }
 
@@ -127,8 +138,8 @@ class HSLA {
 class Vehicle {
 
   private color!: HSLA;
-  private arriveDistance: number = 300;
-  private fleeRadius: number = 300;
+  private arriveDistance: number = 100;
+  private fleeRadius: number = 100;
   private maxSpeed: number = 20;
   private maxForce: number = 4;
 
@@ -158,24 +169,28 @@ class Vehicle {
     return this;
   }
 
-  show () {
+  show (point: p5.Vector = this.position, color: HSLA = this.color) {
     this.p.push();
 
     this.p.translate(
-      this.position.x - (this.p.width / 2),
-      this.position.y - (this.p.height / 2));
+      point.x - (this.p.width / 2),
+      point.y - (this.p.height / 2));
 
-    this.p.fill(this.color.h, this.color.s, this.color.b, this.color.a);
+    this.p.fill(color.h, color.s, color.b, color.a);
     this.p.noStroke();
-    this.p.box(this.radius, this.radius, this.radius);
+    this.p.ellipse(0, 0, this.radius, this.radius);
 
     this.p.pop();
   }
 
-  behaviors () {
+  behaviors (agitator: p5.Vector) {
     var arrive = this.arrive(this.target);
-    var mouse = this.p.createVector(this.p.mouseX, this.p.mouseY);
-    var flee = this.flee(mouse);
+    var flee = this.flee(agitator);
+
+    // const oldR = this.radius;
+    // this.radius = 50;
+    // this.show(agitator, new HSLA(255, 255, 255, 255))
+    // this.radius = oldR;
 
     arrive.mult(1);
     flee.mult(5);
@@ -227,5 +242,23 @@ class Vehicle {
     } else {
       return this.p.createVector(0, 0);
     }
+  }
+}
+
+class NoiseGenerator {
+
+  constructor(
+    private p: p5,
+    private xoff: number = 0,
+    private yoff: number = 0) {
+  }
+
+  getCoord (): p5.Vector {
+    this.xoff += 0.00001
+    this.yoff += 0.00001
+    return new p5.Vector(
+      this.p.noise(this.xoff) * this.p.width,
+      this.p.height / 2 + (this.p.sin(this.yoff) * (this.p.height / 4))
+    )
   }
 }
