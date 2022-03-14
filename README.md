@@ -38,7 +38,6 @@
   - [Visualisations](#visualisations)
 - [Urls](#urls)
 - [Resources](#resources)
-- [Wordpress plugins](#wordpress-plugins)
 
 ---
 
@@ -62,7 +61,7 @@ rustup default nightly
 cargo build [--release]
 
 # Run Service locally
-cargo run [--release]
+BLOG_HOST=url ACCESS_TOKEN=token SPACE_ID=id ENVIRONMENT=env cargo run [--release]
 
 # Test Service
 cargo test [--release]
@@ -125,13 +124,11 @@ docker push $DOCKER_HUB_USER_REGISTRY/cujo-rust:latest
 For prod deployment an env file is required with  the following parameters specified
 
 ```conf
-WORDPRESS_DB_PASSWORD=[REDACTED]
-MYSQL_ROOT_PASSWORD=[REDACTED]
 DOMAIN=localhost
-WORDPRESS_DB_NAME=db_name
-WORDPRESS_USER_NAME=wp_user
-WORDPRESS_CLIENT_ID=[REDACTED]
-WORDPRESS_CLIENT_SECRET=[DATA_EXPUNGED]
+BLOG_HOST=https://cdn.contentful.com
+ACCESS_TOKEN=[REDACTED]
+SPACE_ID=[REDACTED]
+ENVIRONMENT=master
 ```
 
 ## Deploy
@@ -182,11 +179,11 @@ docker-compose --env-file <SECRET ENV FILE> -f prod.compose.yaml down (-v)
 - [ ] Add Rust code coverage
 - [ ] Write front end tests
 - [ ] Get own logo and assets from designer
-- [ ] Replace WordPress with contentful to reduce need to host own content
 - [ ] Write blog
 
 ## // Done
 
+- [x] Replace WordPress with contentful to reduce need to host own content
 - [x] Responsive and styled Nav
 - [x] Restyle experience and education so they resemble a timeline
 - [x] Add auto redeployment of new images pushed for prod
@@ -208,7 +205,6 @@ docker-compose --env-file <SECRET ENV FILE> -f prod.compose.yaml down (-v)
 - [x] Add asset citations (now using my own images or free stock images only)
 - [x] Produce production build for deployment
 - [x] Move sharing bar to bottom on mobile devices
-- [x] Add jenkins machine to deployment to CI/CD
 
 ### Visualisations
 
@@ -217,11 +213,11 @@ docker-compose --env-file <SECRET ENV FILE> -f prod.compose.yaml down (-v)
 - [x] Hexagons
 - [x] Phylotaxis
 - [x] 4D tesseract projection?
+- [x] Conways game of life
 
 ## Urls
 
 - <https://danielclarke.tech> - Portfolio
-- <https://blog.danielclarke.tech>/... - Wordpress - [Homepage redirects to Portfolio]
 
 ## Resources
 
@@ -235,11 +231,4 @@ docker-compose --env-file <SECRET ENV FILE> -f prod.compose.yaml down (-v)
 - React scroll spy - `React` <https://makotot.github.io/react-scrollspy/>
 - React icons - `React` <https://react-icons.github.io/react-icons/icons?name=io5>
 - Devicons - `React` <https://devicon.dev/>
-
-## Wordpress plugins
-
-- Simple Website Redirect - <https://wordpress.org/plugins/simple-website-redirect/>
-- Disable Comments - <https://wordpress.org/plugins/disable-comments/>
-- Syntax-highlighting Code Block (with Server-side Rendering) - <https://en-gb.wordpress.org/plugins/syntax-highlighting-code-block/>
-- Reading time - <https://wordpress.org/plugins/reading-time-wp/>
-- WordPress REST API Authentication <https://plugins.miniorange.com/wordpress-rest-api-basic-authentication-method>
+- Contentful - `CDN` <https://www.contentful.com/>
