@@ -20,9 +20,11 @@ services:
       - 5001
     env_file:
       - ./service/.env
+      - ./service/.sensitive-env
     volumes:
       - ./service/data.json:/cujo/data.json
       - ./service/.env:/cujo/.env
+      - ./service/.sensitive-env:/cujo/.sensitive-env
     networks:
       - cujo
 

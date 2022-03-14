@@ -61,8 +61,10 @@ services:
     expose:
       - 5001
     environment:
-      - WORDPRESS_CLIENT_ID=${WORDPRESS_CLIENT_ID}
-      - WORDPRESS_CLIENT_SECRET=${WORDPRESS_CLIENT_SECRET}
+      - BLOG_HOST=${BLOG_HOST}
+      - ACCESS_TOKEN=${ACCESS_TOKEN}
+      - SPACE_ID=${SPACE_ID}
+      - ENVIRONMENT=${ENVIRONMENT}
     networks:
       - cujo
 
