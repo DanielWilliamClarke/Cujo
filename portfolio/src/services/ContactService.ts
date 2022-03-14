@@ -11,7 +11,7 @@ type ContactResponse = {
 }
 
 @injectable()
-export class ContactService {
+export class ContactService implements IContactService {
     async submit (data: FormData): Promise<boolean> {
         const response: AxiosResponse<ContactResponse> =
             await axios.post("https://formspree.io/f/xjvpddee", data);

@@ -2,16 +2,12 @@
 
 use actix_web::{get, web, HttpResponse, Responder};
 
-use crate::blog::{ BlogClient, BlogConfig };
-use crate::cv::{ CV, CVConfig };
+use crate::blog::{BlogClient, BlogConfig};
+use crate::cv::{CVConfig, CV};
 use crate::util::parse;
 
 pub fn init(cfg: &mut web::ServiceConfig) {
-    cfg
-        .service(svc_status)
-        .service(get_cv)
-        .service(get_blog)
-        .service(get_blog_post);
+    cfg.service(svc_status).service(get_cv).service(get_blog);
 }
 
 #[get("/svcstatus")]
@@ -29,17 +25,7 @@ async fn get_cv(config: web::Data<CVConfig>) -> impl Responder {
 
 #[get("/blog")]
 async fn get_blog(config: web::Data<BlogConfig>) -> impl Responder {
-    match BlogClient::new(&config).get_posts().await {
-        Ok(data) => HttpResponse::Ok().json(data),
-        Err(err) => {
-            HttpResponse::InternalServerError().body(format!("Blog data not found: {}", err))
-        }
-    }
-}
-
-#[get("/blog/{id}")]
-async fn get_blog_post(config: web::Data<BlogConfig>, id: web::Path<String>) -> impl Responder {
-    match BlogClient::new(&config).get_post(&id).await {
+    match BlogClient::new(&config).get_entries().await {
         Ok(data) => HttpResponse::Ok().json(data),
         Err(err) => {
             HttpResponse::InternalServerError().body(format!("Blog data not found: {}", err))

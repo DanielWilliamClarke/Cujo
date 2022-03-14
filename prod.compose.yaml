@@ -1,7 +1,6 @@
 version: "3.6"
 
 services:
-
   watchtower:
     image: containrrr/watchtower
     container_name: watchtower
@@ -56,54 +55,16 @@ services:
     networks:
       - cujo
 
-  service: 
+  service:
     image: dclarkious/cujo-rust:latest
     container_name: service
-    expose:     
-     - 5001
+    expose:
+      - 5001
     environment:
       - WORDPRESS_CLIENT_ID=${WORDPRESS_CLIENT_ID}
       - WORDPRESS_CLIENT_SECRET=${WORDPRESS_CLIENT_SECRET}
     networks:
       - cujo
-
-  wordpress:
-    image: wordpress:latest
-    restart: always
-    depends_on:
-      - db
-      - reverseproxy
-    expose:
-      - 80
-    environment:
-      - WORDPRESS_DB_HOST=db:3306
-      - WORDPRESS_DB_NAME=${WORDPRESS_DB_NAME}
-      - WORDPRESS_DB_USER=${WORDPRESS_USER_NAME}
-      - WORDPRESS_DB_PASSWORD=${WORDPRESS_DB_PASSWORD}
-      - VIRTUAL_HOST=blog.${DOMAIN}
-      - VIRTUAL_PORT=80
-      - LETSENCRYPT_HOST=blog.${DOMAIN}
-      - LETSENCRYPT_EMAIL=dc@${DOMAIN}
-    volumes:
-      - ./wordpress:/var/www/html
-    networks:
-      - cujo
-
-  db:
-    image: mysql:latest
-    volumes:
-      - db_data:/var/lib/mysql
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${WORDPRESS_DB_NAME}
-      MYSQL_USER: ${WORDPRESS_USER_NAME}
-      MYSQL_PASSWORD: ${WORDPRESS_DB_PASSWORD}
-    networks:
-      - cujo
-
-volumes:
-  db_data: {}
 
 networks:
   cujo:

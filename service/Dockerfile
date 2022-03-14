@@ -1,5 +1,5 @@
 #BUILD -----------------------------------
-FROM rust:1.52.1 as build
+FROM rust:1.59 as build
 
 WORKDIR ./cujo
 
@@ -10,7 +10,7 @@ RUN rustup default nightly && \
 #RELEASE -----------------------------------
 FROM debian:buster-slim
 
-RUN apt-get update -y && apt-get install -y libssl-dev
+RUN apt-get update -y && apt-get install -y ca-certificates libssl-dev
 
 WORKDIR /cujo
 
