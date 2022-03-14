@@ -45,6 +45,7 @@ services:
     restart: always
     depends_on:
       - reverseproxy
+      - service
     expose:
       - 8080
     environment:
