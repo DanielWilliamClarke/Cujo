@@ -6,26 +6,26 @@ import { Fade } from "react-awesome-reveal";
 import { GiBookmarklet, GiScrollQuill } from "react-icons/gi";
 
 import { IDateService } from "../../services/DateService";
-import { ICujoService } from "../../services/CujoService";
-import { Post } from "../../model/BlogPostModel";
+import {
+  ContentfulEntries,
+  getMediaURL,
+  Item,
+} from "../../model/ContentfulEntries";
 import { Lanyard } from "../shared/Lanyard";
 import { Section } from "../shared/Section";
 
 import "../shared/Portfolio.scss";
 import "./Blog.scss";
 
-type BlogState = {
-  posts: Post[];
+export type BlogProps = {
+  blog: ContentfulEntries;
 };
 
-export class Blog extends Component<{}, BlogState> {
+export class Blog extends Component<BlogProps> {
   @resolve("DateService") private readonly dateService!: IDateService;
-  @resolve("CujoService") private readonly cujoService!: ICujoService;
 
   async componentWillMount() {
     this.dateService.format("Do MMMM YYYY HH:mm:ss");
-    this.setState({ posts: [] });
-    this.setState({ posts: await this.cujoService.FetchAllBlogPosts() });
   }
 
   render(): JSX.Element {
@@ -33,8 +33,8 @@ export class Blog extends Component<{}, BlogState> {
       <Fade triggerOnce direction="up">
         <Section id="blog" bg="section-dark" title="Blog" icon={GiBookmarklet}>
           <Row xs={1} md={2} className="g-4 blog-cards">
-            {this.state.posts.length ? (
-              this.state.posts.map(this.blogSummaryPanel.bind(this))
+            {this.props.blog.items.length ? (
+              this.props.blog.items.map(this.blogSummaryPanel.bind(this))
             ) : (
               <Col className="blog-placeholder centered">Coming soon</Col>
             )}
@@ -44,15 +44,20 @@ export class Blog extends Component<{}, BlogState> {
     );
   }
 
-  private blogSummaryPanel(data: Post, index: number): JSX.Element {
+  private blogSummaryPanel(data: Item, index: number): JSX.Element {
+    const mediaUrl = getMediaURL(
+      this.props.blog.includes,
+      data.fields.media.sys.id
+    );
+
     return (
       <Col>
         <Fade triggerOnce direction={index % 2 ? "right" : "left"}>
-          <Card key={data.id} bg="dark">
+          <Card key={data.fields.id} bg="dark">
             <Nav navbarScroll>
-              <Nav.Link href={`/blog/${data.id}`}>
-                {data.media_url ? (
-                  <Card.Img variant="top" src={data.media_url} />
+              <Nav.Link href={`/blog/${data.fields.id}`}>
+                {mediaUrl ? (
+                  <Card.Img variant="top" src={mediaUrl} />
                 ) : (
                   <GiScrollQuill />
                 )}
@@ -61,25 +66,27 @@ export class Blog extends Component<{}, BlogState> {
 
             <Card.Body>
               <Nav navbarScroll>
-                <Nav.Link href={`/blog/${data.id}`}>
-                  <Card.Title>{data.title}</Card.Title>
+                <Nav.Link href={`/blog/${data.fields.id}`}>
+                  <Card.Title>{data.fields.title}</Card.Title>
                 </Nav.Link>
               </Nav>
               <Card.Text>
-                Published {this.dateService.toSentence(data.date)}{" "}
+                Published{" "}
+                {this.dateService.toSentence(data.sys.createdAt.toString())}{" "}
               </Card.Text>
-              <Lanyard tags={data.tags} />
+              <Lanyard tags={data.fields.tags} />
               <Card.Text
                 className="text-muted"
                 dangerouslySetInnerHTML={{
-                  __html: data.excerpt,
+                  __html: data.fields.excerpt,
                 }}
               />
             </Card.Body>
 
             <Card.Footer>
               <small className="text-muted">
-                Last updated {this.dateService.toSentence(data.modified)}
+                Last updated{" "}
+                {this.dateService.toSentence(data.sys.updatedAt.toString())}
               </small>
             </Card.Footer>
           </Card>

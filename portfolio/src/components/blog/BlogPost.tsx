@@ -1,62 +1,86 @@
-import { Component } from "react";
-import { Row, Col } from "react-bootstrap";
-import { resolve } from "inversify-react";
-import { Fade } from "react-awesome-reveal";
-
-import { GiScrollQuill } from "react-icons/gi";
-
-import { IDateService } from "../../services/DateService";
-import { ICujoService } from "../../services/CujoService";
-import { Post } from "../../model/BlogPostModel";
-import { Lanyard } from "../shared/Lanyard";
-import { Section } from "../shared/Section";
-
-import "../shared/Portfolio.scss";
-import "./BlogPost.scss";
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import { BLOCKS, Block, Inline } from "@contentful/rich-text-types";
 import "highlight.js/scss/tomorrow-night-eighties.scss";
+import { resolve } from "inversify-react";
+import { Component } from "react";
+import { Fade } from "react-awesome-reveal";
+import { Col, Row } from "react-bootstrap";
+import { GiScrollQuill } from "react-icons/gi";
+import {
+  ContentfulEntries,
+  getMediaURL,
+  Item,
+} from "../../model/ContentfulEntries";
+import { IDateService } from "../../services/DateService";
+import { Lanyard } from "../shared/Lanyard";
+import "../shared/Portfolio.scss";
+import { Section } from "../shared/Section";
+import "./BlogPost.scss";
 
-type BlogIDProps = {
-  id: number;
+type BlogProps = {
+  id: string;
+  blog: ContentfulEntries;
 };
 
-type BlogPostState = {
-  post: Post | undefined;
-};
-
-export class BlogPost extends Component<BlogIDProps, BlogPostState> {
+export class BlogPost extends Component<BlogProps> {
   @resolve("DateService") private readonly dateService!: IDateService;
-  @resolve("CujoService") private readonly cujoService!: ICujoService;
 
   async componentWillMount() {
     this.dateService.format("Do MMMM YYYY HH:mm:ss");
-    this.setState({ post: undefined });
-    this.setState({ post: await this.cujoService.FetchBlogPost(this.props.id) });
   }
 
   render(): JSX.Element {
-    return <>{this.state.post && this.displayPost(this.state.post)}</>;
+    const post = this.props.blog.items.find(
+      (item: Item) => item.fields.id === this.props.id
+    );
+
+    return <>{post && this.displayPost(post)}</>;
   }
 
-  private displayPost(p: Post): JSX.Element {
+  private displayPost(item: Item): JSX.Element {
+    const mediaUrl = getMediaURL(
+      this.props.blog.includes,
+      item.fields.media.sys.id
+    );
+
+    const options = {
+      renderNode: {
+        [BLOCKS.EMBEDDED_ASSET]: (node: Block | Inline): JSX.Element => {
+          const mediaUrl = getMediaURL(
+            this.props.blog.includes,
+            node.data.target.sys.id
+          );
+
+          return (
+            <Row className="section-content">
+              <Col className="centered featured">
+                <img src={mediaUrl} alt="not found..." />
+              </Col>
+            </Row>
+          );
+        },
+      },
+    };
+
     return (
       <Fade triggerOnce direction="left">
         <Section
           id="post"
           bg="section-light"
-          title={p.title}
-          icon={GiScrollQuill}>
-
+          title={item.fields.title}
+          icon={GiScrollQuill}
+        >
           <h4 className="blog-date">
-            {this.dateService.toSentence(p.date)}
+            {this.dateService.toSentence(item.sys.updatedAt.toString())}
           </h4>
 
-          <Lanyard className="tags" tags={p.tags} />
+          <Lanyard className="tags" tags={item.fields.tags} />
 
-          {p.media_url && (
+          {mediaUrl && (
             <>
               <Row className="section-content">
                 <Col className="centered featured">
-                  <img src={p.media_url} alt="not found..." />
+                  <img src={mediaUrl} alt="not found..." />
                 </Col>
               </Row>
               <div className="line centered" />
@@ -64,15 +88,8 @@ export class BlogPost extends Component<BlogIDProps, BlogPostState> {
           )}
 
           <Row className="section-content blog-content">
-            <Col>
-              <div
-                dangerouslySetInnerHTML={{
-                  __html: p.content,
-                }}
-              ></div>
-            </Col>
+            <Col>{documentToReactComponents(item.fields.content, options)}</Col>
           </Row>
-
         </Section>
       </Fade>
     );

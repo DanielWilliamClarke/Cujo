@@ -5,7 +5,7 @@ import { phylotaxis } from "./phylotaxis";
 import { hypercube } from "./hypercube";
 import { grid } from "./grid";
 import { conway } from "./conway"
-import { conway3D } from "./conway_3d"
+// import { conway3D } from "./conway_3d"
 import { boids } from "./boids";
 import p5 from "p5";
 
@@ -25,7 +25,7 @@ if (!Array.prototype.sample) {
 export function getSketch (): (p: p5) => void {
   return [
     conway,
-    conway3D,
+    // conway3D,
     hex,
     waves,
     boxes,

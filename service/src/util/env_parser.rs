@@ -4,11 +4,11 @@ use serde::de::DeserializeOwned;
 use std::fmt::Debug;
 
 pub trait FromEnv {
-    fn new(prefix: &str) -> Self
+    fn from_env() -> Self
     where
         Self: DeserializeOwned + Debug,
     {
-        match envy::prefixed(prefix).from_env::<Self>() {
+        match envy::prefixed("").from_env::<Self>() {
             Ok(config) => {
                 print!("Cujo-rust config parsed!");
                 config
