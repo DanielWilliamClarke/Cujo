@@ -13,6 +13,8 @@ import {
 } from "../../model/ContentfulEntries";
 import { Lanyard } from "../shared/Lanyard";
 import { Section } from "../shared/Section";
+import readingTime from "reading-time";
+import { documentToPlainTextString } from "@contentful/rich-text-plain-text-renderer";
 
 import "../shared/Portfolio.scss";
 import "./Blog.scss";
@@ -50,6 +52,8 @@ export class Blog extends Component<BlogProps> {
       data.fields.media.sys.id
     );
 
+    const stats = readingTime(documentToPlainTextString(data.fields.content));
+
     return (
       <Col>
         <Fade triggerOnce direction={index % 2 ? "right" : "left"}>
@@ -81,6 +85,7 @@ export class Blog extends Component<BlogProps> {
                   __html: data.fields.excerpt,
                 }}
               />
+              <small className="text-muted">{stats.text}</small>
             </Card.Body>
 
             <Card.Footer>

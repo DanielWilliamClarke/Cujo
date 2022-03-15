@@ -11,11 +11,14 @@ import {
   getMediaURL,
   Item,
 } from "../../model/ContentfulEntries";
+import readingTime from "reading-time";
+import { documentToPlainTextString } from "@contentful/rich-text-plain-text-renderer";
 import { IDateService } from "../../services/DateService";
 import { Lanyard } from "../shared/Lanyard";
-import "../shared/Portfolio.scss";
 import { Section } from "../shared/Section";
+
 import "./BlogPost.scss";
+import "../shared/Portfolio.scss";
 
 type BlogProps = {
   id: string;
@@ -42,6 +45,8 @@ export class BlogPost extends Component<BlogProps> {
       this.props.blog.includes,
       item.fields.media.sys.id
     );
+
+    const stats = readingTime(documentToPlainTextString(item.fields.content));
 
     const options = {
       renderNode: {
@@ -86,6 +91,8 @@ export class BlogPost extends Component<BlogProps> {
               <div className="line centered" />
             </>
           )}
+
+          <small className="text-muted">{stats.text}</small>
 
           <Row className="section-content blog-content">
             <Col>{documentToReactComponents(item.fields.content, options)}</Col>

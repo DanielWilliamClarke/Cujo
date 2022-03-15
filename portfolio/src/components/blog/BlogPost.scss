@@ -1,7 +1,6 @@
 @import "../shared/Palette.scss";
 
 .post {
-
   .container {
     text-align: left;
   }
@@ -26,16 +25,12 @@
     display: flex;
     justify-content: center;
   }
- 
+
   iframe,
   img {
     border-radius: 6px;
-    width: 100%;
+    max-width: 100%;
     height: auto;
-  }
-
-  img {
-    max-width: 500px;
   }
 
   iframe {
