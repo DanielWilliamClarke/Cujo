@@ -37,6 +37,7 @@
     }
   },
   "dependencies": {
+    "@contentful/rich-text-plain-text-renderer": "^15.11.1",
     "@contentful/rich-text-react-renderer": "^15.11.1",
     "axios": "^0.21.1",
     "bootstrap": "^5.1.0",
@@ -56,6 +57,7 @@
     "react-scrollspy": "^3.4.3",
     "react-share": "^4.4.0",
     "react-vertical-timeline-component": "^3.3.3",
+    "reading-time": "^1.5.0",
     "reflect-metadata": "^0.1.13",
     "remark-breaks": "^2.0.2",
     "simplex-noise": "^2.4.0",
