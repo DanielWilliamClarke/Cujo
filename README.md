@@ -232,3 +232,4 @@ docker-compose --env-file <SECRET ENV FILE> -f prod.compose.yaml down (-v)
 - React icons - `React` <https://react-icons.github.io/react-icons/icons?name=io5>
 - Devicons - `React` <https://devicon.dev/>
 - Contentful - `CDN` <https://www.contentful.com/>
+- Rich Text Renderer - `React` <https://www.npmjs.com/package/@contentful/rich-text-react-renderer>
