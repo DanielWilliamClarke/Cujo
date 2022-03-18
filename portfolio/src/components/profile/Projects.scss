@@ -21,7 +21,7 @@
 
       .content {
         width: 100%;
-        padding-top: 10px;        
+        padding-top: 10px;
       }
     }
 
@@ -33,19 +33,19 @@
     .dev-icon {
       text-align: center;
       width: 75px;
-  
+
+      .icon-override,
       .icon {
         font-size: 75px;
       }
-  
+
       .icon-name {
         font-size: 1rem;
-        margin: .2rem;
+        margin: 0.2rem;
       }
     }
 
     .project-image {
-         
       .image-link {
         display: inline-block;
         position: relative;
@@ -57,13 +57,13 @@
           object-fit: cover;
           border-radius: 6px;
         }
-  
+
         .overlay {
-          background-color:#000000;
+          background-color: #000000;
           border-radius: 6px;
           transition: 0.5s;
         }
-  
+
         .overlay,
         .dev-icon {
           opacity: 0;
@@ -77,7 +77,7 @@
           align-items: center;
           flex-direction: column;
         }
-  
+
         &:hover {
           .overlay {
             opacity: 0.7;

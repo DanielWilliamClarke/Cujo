@@ -1,8 +1,10 @@
 import { resolve } from "inversify-react";
 import { ChangeEvent, Component } from "react";
 import { Row, Col, Form, Button } from "react-bootstrap";
-import { MdCampaign } from "react-icons/md";
+
 import { Fade, Zoom } from "react-awesome-reveal";
+
+import { MdCampaign } from "react-icons/md";
 
 import { Profile } from "../../model/CVModel";
 import { IContactService } from "../../services/ContactService";
