@@ -1,7 +1,7 @@
 import { resolve } from "inversify-react";
 import { ChangeEvent, Component } from "react";
 import { Row, Col, Form, Button } from "react-bootstrap";
-import { IoMegaphoneOutline } from "react-icons/io5";
+import { MdCampaign } from "react-icons/md";
 import { Fade, Zoom } from "react-awesome-reveal";
 
 import { Profile } from "../../model/CVModel";
@@ -29,11 +29,7 @@ export class Contact extends Component<ContactProps, ContactState> {
   render(): JSX.Element {
     return (
       <Fade triggerOnce direction="up">
-        <Section
-          id="contact"
-          title="Contact"
-          icon={IoMegaphoneOutline}>
-
+        <Section id="contact" title="Contact" icon={MdCampaign}>
           <Row className="section-content socials">
             {this.props.profiles.map(
               (p: Profile): JSX.Element => (
@@ -85,7 +81,6 @@ export class Contact extends Component<ContactProps, ContactState> {
               <div className="contact-response">Thanks!</div>
             </Zoom>
           )}
-
         </Section>
       </Fade>
     );

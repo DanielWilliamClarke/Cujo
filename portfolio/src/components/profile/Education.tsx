@@ -8,7 +8,8 @@ import {
 import ReactMarkdown from "react-markdown";
 import breaks from "remark-breaks";
 
-import { IoSchoolOutline } from "react-icons/io5";
+import { MdSchool } from "react-icons/md";
+import { HiLightBulb } from "react-icons/hi";
 
 import { IDateService } from "../../services/DateService";
 import { Education as EducationData } from "../../model/CVModel";
@@ -31,7 +32,7 @@ export class Education extends Component<EducationProps> {
 
   render(): JSX.Element {
     return (
-      <Section id="education" title="Education" icon={IoSchoolOutline}>
+      <Section id="education" title="Education" icon={MdSchool}>
         <VerticalTimeline className="timeline">
           {this.props.education
             .sort(
@@ -44,7 +45,7 @@ export class Education extends Component<EducationProps> {
                 className="vertical-timeline-element--work"
                 key={index}
                 date={this.dateService.toRange(e.startDate, e.endDate)}
-                icon={<IoSchoolOutline />}
+                icon={<HiLightBulb />}
               >
                 {this.renderInstitution(e)}
               </VerticalTimelineElement>

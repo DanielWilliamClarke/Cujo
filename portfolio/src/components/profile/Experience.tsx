@@ -8,7 +8,8 @@ import {
   VerticalTimelineElement,
 } from "react-vertical-timeline-component";
 
-import { IoRocketOutline } from "react-icons/io5";
+import { MdLoyalty } from "react-icons/md";
+import { HiLightningBolt } from "react-icons/hi";
 
 import { IDateService } from "../../services/DateService";
 import { Work } from "../../model/CVModel";
@@ -31,11 +32,7 @@ export class Experience extends Component<WorkProps> {
 
   render(): JSX.Element {
     return (
-      <Section
-        id="experience"
-        title="Professional Experience"
-        icon={IoRocketOutline}
-      >
+      <Section id="experience" title="Professional Experience" icon={MdLoyalty}>
         <VerticalTimeline className="timeline">
           {this.props.work
             .filter(
@@ -55,7 +52,7 @@ export class Experience extends Component<WorkProps> {
                     work.startDate,
                     work.endDate
                   )}
-                  icon={<IoRocketOutline />}
+                  icon={<HiLightningBolt />}
                 >
                   {this.renderRole(work)}
                 </VerticalTimelineElement>

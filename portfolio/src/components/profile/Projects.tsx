@@ -4,7 +4,7 @@ import { Fade } from "react-awesome-reveal";
 import ReactMarkdown from "react-markdown";
 import breaks from "remark-breaks";
 
-import { GiAnvilImpact } from "react-icons/gi";
+import { MdHardware } from "react-icons/md";
 
 import { Project } from "../../model/CVModel";
 import { DevIconName } from "../shared/DevIcon";
@@ -26,7 +26,7 @@ export class Projects extends Component<ProjectProps> {
         id="projects"
         title="Personal Projects"
         noSeparator
-        icon={GiAnvilImpact}
+        icon={MdHardware}
       >
         {this.props.projects.map(this.project.bind(this))}
       </Section>

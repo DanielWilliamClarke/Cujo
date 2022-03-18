@@ -3,7 +3,7 @@ import { Card, Col, Nav, Row } from "react-bootstrap";
 import { resolve } from "inversify-react";
 import { Fade } from "react-awesome-reveal";
 
-import { GiBookmarklet, GiScrollQuill } from "react-icons/gi";
+import { MdBook, MdHistoryEdu } from "react-icons/md";
 
 import { IDateService } from "../../services/DateService";
 import {
@@ -33,7 +33,7 @@ export class Blog extends Component<BlogProps> {
   render(): JSX.Element {
     return (
       <Fade triggerOnce direction="up">
-        <Section id="blog" bg="section-dark" title="Blog" icon={GiBookmarklet}>
+        <Section id="blog" bg="section-dark" title="Blog" icon={MdBook}>
           <Row xs={1} md={2} className="g-4 blog-cards">
             {this.props.blog.items.length ? (
               this.props.blog.items.map(this.blogSummaryPanel.bind(this))
@@ -63,7 +63,7 @@ export class Blog extends Component<BlogProps> {
                 {mediaUrl ? (
                   <Card.Img variant="top" src={mediaUrl} />
                 ) : (
-                  <GiScrollQuill />
+                  <MdHistoryEdu />
                 )}
               </Nav.Link>
             </Nav>
