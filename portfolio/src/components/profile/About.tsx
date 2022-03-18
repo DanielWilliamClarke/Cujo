@@ -4,7 +4,7 @@ import ReactMarkdown from "react-markdown";
 import breaks from "remark-breaks";
 import { Fade, Zoom } from "react-awesome-reveal";
 
-import { GiDiceTwentyFacesTwenty } from "react-icons/gi";
+import { MdFingerprint } from "react-icons/md";
 
 import { Basics, Interests } from "../../model/CVModel";
 import { DynamicImage } from "../shared/DynamicImage";
@@ -12,7 +12,6 @@ import { Section } from "../shared/Section";
 
 import "../shared/Portfolio.scss";
 import "./About.scss";
-
 
 type AboutProps = {
   basics: Basics;
@@ -22,11 +21,7 @@ type AboutProps = {
 export class About extends Component<AboutProps> {
   render(): JSX.Element {
     return (
-      <Section
-        id="about"
-        title="About Me!"
-        icon={GiDiceTwentyFacesTwenty}>
-
+      <Section id="about" title="About Me!" icon={MdFingerprint}>
         <Row className="section-content">
           <Zoom triggerOnce damping={0.01}>
             <Carousel
@@ -87,7 +82,6 @@ export class About extends Component<AboutProps> {
             </Col>
           </Zoom>
         </Row>
-
       </Section>
     );
   }

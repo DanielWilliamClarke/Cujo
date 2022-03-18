@@ -5,7 +5,7 @@ import { resolve } from "inversify-react";
 import { Component } from "react";
 import { Fade } from "react-awesome-reveal";
 import { Col, Row } from "react-bootstrap";
-import { GiScrollQuill } from "react-icons/gi";
+import { MdHistoryEdu } from "react-icons/md";
 import {
   ContentfulEntries,
   getMediaURL,
@@ -73,7 +73,7 @@ export class BlogPost extends Component<BlogProps> {
           id="post"
           bg="section-light"
           title={item.fields.title}
-          icon={GiScrollQuill}
+          icon={MdHistoryEdu}
         >
           <h4 className="blog-date">
             {this.dateService.toSentence(item.sys.updatedAt.toString())}

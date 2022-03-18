@@ -4,7 +4,7 @@ import ReactMarkdown from "react-markdown";
 import breaks from "remark-breaks";
 import { Zoom } from "react-awesome-reveal";
 
-import { IoCodeWorkingSharp } from "react-icons/io5";
+import { MdBolt } from "react-icons/md";
 
 import { Skills, DevIcon } from "../../model/CVModel";
 import { DevIconName } from "../shared/DevIcon";
@@ -12,7 +12,6 @@ import { Section } from "../shared/Section";
 
 import "../shared/Portfolio.scss";
 import "./Technical.scss";
-
 
 type TechnicalProps = {
   techical: Skills;
@@ -29,11 +28,7 @@ export class Technical extends Component<TechnicalProps, SkillsState> {
 
   render(): JSX.Element {
     return (
-      <Section
-        id="skills"
-        title="Skills and Competencies"
-        icon={IoCodeWorkingSharp}>
-
+      <Section id="skills" title="Skills and Competencies" icon={MdBolt}>
         <Row className="section-content">
           <Col>
             <ReactMarkdown
@@ -57,8 +52,10 @@ export class Technical extends Component<TechnicalProps, SkillsState> {
         <Row className="skill-items">
           <Zoom triggerOnce cascade damping={0.01} className="col">
             {this.props.techical.list
-              .filter(({name}: DevIcon) => this.filterSkills(name))
-              .map((icon: DevIcon) => (<DevIconName icon={icon} />))}
+              .filter(({ name }: DevIcon) => this.filterSkills(name))
+              .map((icon: DevIcon) => (
+                <DevIconName icon={icon} />
+              ))}
           </Zoom>
         </Row>
 
@@ -69,7 +66,6 @@ export class Technical extends Component<TechnicalProps, SkillsState> {
             </p>
           </Col>
         </Row>
-        
       </Section>
     );
   }

@@ -9,6 +9,7 @@ export interface IDateService {
   toRange(start: string, end: string): string;
   toRangeWithDuration(start: string, end: string): string;
   IsFuture(data: string): boolean;
+  CurrentYear(): number;
 }
 
 @injectable()
@@ -44,6 +45,10 @@ export class DateService implements IDateService {
 
   IsFuture(date: string): boolean {
     return moment().diff(moment(date, this.inFormat)) < 0
+  }
+
+  CurrentYear(): number {
+    return moment().year();
   }
 
   private toDuration(start: string, end: string): string {
