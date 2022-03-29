@@ -1,8 +1,10 @@
 @import "../shared/Palette.scss";
 
 .copyright {
+  background-color: $col-bg-light !important;
+
   .short-line {
-    background-color: $col-accent-zing !important;
+    background-color: $col-main-brand !important;
   }
 }
 

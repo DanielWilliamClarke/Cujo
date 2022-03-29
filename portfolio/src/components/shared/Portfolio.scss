@@ -162,7 +162,7 @@
     &.carousel-item-left {
       transform: translateX(-100%);
     }
-    
+
     &.carousel-item-right {
       transform: translateX(100%);
     }
@@ -176,7 +176,7 @@
   }
 }
 
-.badge { 
+.badge {
   font-weight: 500;
   margin: 2px;
   color: #ffffff;
@@ -224,7 +224,7 @@
 
   .image-item,
   img {
-    box-shadow: 0 0 25px $card-color;
+    box-shadow: 0 0 25px $col-shadow;
   }
 
   .timeline {
@@ -234,15 +234,15 @@
     .vertical-timeline-element-icon {
       background-color: $color;
     }
-  
+
     .vertical-timeline-element-content {
       background-color: $card-color;
     }
-  
-    .vertical-timeline-element-content-arrow  {
+
+    .vertical-timeline-element-content-arrow {
       border-right: 7px solid $card-color;
     }
-  }  
+  }
 
   .bg-portfolio {
     background-color: $color;
@@ -262,7 +262,12 @@
 }
 
 .app {
-  @include alternating-section("odd", $col-bg-light, $col-accent-zing, $col-bg-dark);
+  @include alternating-section(
+    "odd",
+    $col-bg-light,
+    $col-accent-zing,
+    $col-bg-dark
+  );
   @include alternating-section("even", $col-bg-dark, $col-sub-brand);
 
   .section-light {

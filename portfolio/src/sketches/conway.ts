@@ -1,7 +1,8 @@
 import p5 from "p5";
 
 class HSLA {
-  constructor(public h: number = 255, public s: number = 255, public b: number = 255, public a: number = 255)  {}
+  constructor(public h: number = 255, public s: number = 255, public b: number = 255, public a: number = 255) {
+  }
 }
 class Cell {
   constructor(public color: HSLA = new HSLA(), public phantom?: boolean) {}
@@ -26,8 +27,8 @@ export function conway(p: p5): void {
   let S = [2, 3]
 
   p.setup = p.windowResized = (): void => {
-    p.frameRate(24);
-    p.colorMode(p.HSL,360,100,100);
+    p.frameRate(12);
+    p.colorMode(p.HSL, 360, 100, 100);
     p.createCanvas(window.innerWidth, window.innerHeight, p.WEBGL);
     p.smooth();
     p.perspective();
@@ -132,10 +133,9 @@ export function conway(p: p5): void {
 
   const randomColor = (): HSLA =>
     new HSLA(
-      p.random(150, 360),
-      90,
-      60,
-      0.97);
+      p.random(30, 55),
+      p.random(80, 100),
+      60);
 
   const averageColor = (colors: HSLA[]): HSLA => {
     if (colors.length === 1) {
