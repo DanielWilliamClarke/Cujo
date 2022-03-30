@@ -1,30 +1,41 @@
+import { resolve } from "inversify-react";
 import { Component } from "react";
 import { Container } from "react-bootstrap";
-import { IconType } from "react-icons";
+import { IconWithDefaultState, IIconService } from "../../services/IconService";
 
 import { Heading } from "./Heading";
 
 type SectionProps = {
-    id: string;
-    title: string
-    icon: IconType
-    noSeparator?: boolean;
-    bg?: string;
+  id: string;
+  title: string;
+  noSeparator?: boolean;
+  bg?: string;
 };
 
-export class Section extends Component<SectionProps> {
-    render(): JSX.Element {
-        return (
-            <section
-                id={this.props.id}
-                className={`${this.props.bg ?? "section"} ${this.props.id}`}>
-                <Container>
-                    <Heading title={this.props.title} noSeparator={this.props.noSeparator} />
-                    {this.props.children}
-                    <div className="centered short-line" />
-                    <this.props.icon className="section-icon" />
-                </Container>
-            </section>
-        )
-    }
+export class Section extends Component<SectionProps, IconWithDefaultState> {
+  @resolve("IconService") private readonly iconService!: IIconService;
+
+  constructor(props: SectionProps, context: {}) {
+    super(props, context);
+    this.state = { icon: this.iconService.getWithDefault(this.props.id) };
+  }
+
+  render(): JSX.Element {
+    return (
+      <section
+        id={this.props.id}
+        className={`${this.props.bg ?? "section"} ${this.props.id}`}
+      >
+        <Container>
+          <Heading
+            title={this.props.title}
+            noSeparator={this.props.noSeparator}
+          />
+          {this.props.children}
+          <div className="centered short-line" />
+          <this.state.icon className="section-icon" />
+        </Container>
+      </section>
+    );
+  }
 }

@@ -1,43 +1,27 @@
+import { resolve } from "inversify-react";
 import { Component } from "react";
 import { Nav, Navbar } from "react-bootstrap";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import Scrollspy from "react-scrollspy";
-
-import {
-  MdHome,
-  MdBook,
-  MdHistoryEdu,
-  MdCampaign,
-  MdFingerprint,
-  MdLoyalty,
-  MdSchool,
-  MdBolt,
-  MdHardware,
-} from "react-icons/md";
+import { IIconService } from "../../services/IconService";
 
 import "./NavPanel.scss";
 
-type MenuItem = {
-  link: string;
-  icon: JSX.Element;
-};
-
 type NavState = {
   bg: string | undefined;
-  menu: MenuItem[];
+  menu: string[];
 };
 
 class NavPanel extends Component<RouteComponentProps, NavState> {
-  componentWillMount() {
-    this.setState({
+  @resolve("IconService") private readonly iconService!: IIconService;
+
+  constructor(props: RouteComponentProps) {
+    super(props);
+
+    this.state = {
       bg: undefined,
-      menu: [{ link: "home", icon: <MdHome /> }]
-        .concat(this.buildMenuItems())
-        .concat([
-          { link: "blog", icon: <MdBook /> },
-          { link: "contact", icon: <MdCampaign /> },
-        ]),
-    });
+      menu: ["home"].concat(this.buildMenuItems()).concat(["blog", "contact"]),
+    };
 
     window.addEventListener("scroll", this.listenScrollEvent);
   }
@@ -52,19 +36,20 @@ class NavPanel extends Component<RouteComponentProps, NavState> {
       >
         <Nav justify navbarScroll style={{ textTransform: "capitalize" }}>
           <Scrollspy
-            items={this.state.menu.map(({ link }) => link)}
+            items={this.state.menu}
             currentClassName="active"
             offset={-100}
             componentTag="nav"
           >
-            {this.state.menu.map(({ link, icon }: MenuItem): JSX.Element => {
+            {this.state.menu.map((link: string): JSX.Element => {
               const href =
                 link !== "home"
                   ? `${this.props.location.pathname}#${link}`
                   : `/#${link}`;
+              const NavIcon = this.iconService.getWithDefault(link);
               return (
                 <Nav.Link href={href}>
-                  {icon}
+                  <NavIcon />
                   <div>{link}</div>
                 </Nav.Link>
               );
@@ -75,16 +60,10 @@ class NavPanel extends Component<RouteComponentProps, NavState> {
     );
   }
 
-  private buildMenuItems(): MenuItem[] {
+  private buildMenuItems(): string[] {
     return this.props.location.pathname === "/"
-      ? [
-          { link: "about", icon: <MdFingerprint /> },
-          { link: "experience", icon: <MdLoyalty /> },
-          { link: "education", icon: <MdSchool /> },
-          { link: "skills", icon: <MdBolt /> },
-          { link: "projects", icon: <MdHardware /> },
-        ]
-      : [{ link: "post", icon: <MdHistoryEdu /> }];
+      ? ["about", "experience", "education", "skills", "projects"]
+      : ["post"];
   }
 
   private listenScrollEvent = () => {

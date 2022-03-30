@@ -2,9 +2,6 @@ import { Component } from "react";
 import { Card, Col, Nav, Row } from "react-bootstrap";
 import { resolve } from "inversify-react";
 import { Fade } from "react-awesome-reveal";
-
-import { MdBook, MdHistoryEdu } from "react-icons/md";
-
 import { IDateService } from "../../services/DateService";
 import {
   ContentfulEntries,
@@ -18,22 +15,26 @@ import { documentToPlainTextString } from "@contentful/rich-text-plain-text-rend
 
 import "../shared/Portfolio.scss";
 import "./Blog.scss";
+import { IconWithDefaultState, IIconService } from "../../services/IconService";
 
 export type BlogProps = {
   blog: ContentfulEntries;
 };
 
-export class Blog extends Component<BlogProps> {
+export class Blog extends Component<BlogProps, IconWithDefaultState> {
   @resolve("DateService") private readonly dateService!: IDateService;
+  @resolve("IconService") private readonly iconService!: IIconService;
 
-  async componentWillMount() {
+  constructor(props: BlogProps, context: {}) {
+    super(props, context);
     this.dateService.format("Do MMMM YYYY HH:mm:ss");
+    this.state = { icon: this.iconService.getWithDefault("post") };
   }
 
   render(): JSX.Element {
     return (
       <Fade triggerOnce direction="up">
-        <Section id="blog" bg="section-dark" title="Blog" icon={MdBook}>
+        <Section id="blog" bg="section-dark" title="Blog">
           <Row xs={1} md={2} className="g-4 blog-cards">
             {this.props.blog.items.length ? (
               this.props.blog.items.map(this.blogSummaryPanel.bind(this))
@@ -63,7 +64,7 @@ export class Blog extends Component<BlogProps> {
                 {mediaUrl ? (
                   <Card.Img variant="top" src={mediaUrl} />
                 ) : (
-                  <MdHistoryEdu />
+                  <this.state.icon />
                 )}
               </Nav.Link>
             </Nav>
