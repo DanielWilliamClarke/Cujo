@@ -176,14 +176,17 @@ docker-compose --env-file <SECRET ENV FILE> -f prod.compose.yaml down (-v)
 
 ## // Todo
 
+- [ ] Move CV fully to Contentful and have backend collect CV data
+- [ ] Add competency levels to skills and visualise
 - [ ] Add Rust code coverage
 - [ ] Write front end tests
-- [ ] Get own logo and assets from designer
+- [ ] Get own logo and assets from a designer
 - [ ] Write blog
 
 ## // Done
 
-- [x] Replace WordPress with contentful to reduce need to host own content
+- [x] Update color scheme to be less dark
+- [x] Replace WordPress with Contentful to reduce need to host own content and infrastructure
 - [x] Responsive and styled Nav
 - [x] Restyle experience and education so they resemble a timeline
 - [x] Add auto redeployment of new images pushed for prod
