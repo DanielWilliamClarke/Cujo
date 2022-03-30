@@ -29,7 +29,7 @@ type BlogRouteParams = { id: string };
 class App extends Component<RouteComponentProps, AppState> {
   @resolve("CujoService") private readonly cujoService!: ICujoService;
 
-  async componentWillMount() {
+  async componentDidMount() {
     this.setState({
       cv: await this.cujoService.FetchCV(),
       blog: await this.cujoService.FetchBlogPosts(),

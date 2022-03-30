@@ -1,18 +1,15 @@
-import { Component } from "react";
-import { Row, Col } from "react-bootstrap";
 import { resolve } from "inversify-react";
+import { Component } from "react";
+import { Col, Row } from "react-bootstrap";
 import ReactMarkdown from "react-markdown";
-import breaks from "remark-breaks";
 import {
   VerticalTimeline,
   VerticalTimelineElement,
 } from "react-vertical-timeline-component";
-
-import { MdLoyalty } from "react-icons/md";
-import { HiLightningBolt } from "react-icons/hi";
-
-import { IDateService } from "../../services/DateService";
+import breaks from "remark-breaks";
 import { Work } from "../../model/CVModel";
+import { IDateService } from "../../services/DateService";
+import { IconWithDefaultState, IIconService } from "../../services/IconService";
 import { DynamicImage } from "../shared/DynamicImage";
 import { Lanyard } from "../shared/Lanyard";
 import { Section } from "../shared/Section";
@@ -24,15 +21,19 @@ type WorkProps = {
   work: Work[];
 };
 
-export class Experience extends Component<WorkProps> {
+export class Experience extends Component<WorkProps, IconWithDefaultState> {
   @resolve("DateService") private readonly dateService!: IDateService;
-  componentWillMount() {
+  @resolve("IconService") private readonly iconService!: IIconService;
+
+  constructor(props: WorkProps, context: {}) {
+    super(props, context);
     this.dateService.format("MMMM YYYY", "DD/MM/YYYY");
+    this.state = { icon: this.iconService.getWithDefault("work") };
   }
 
   render(): JSX.Element {
     return (
-      <Section id="experience" title="Professional Experience" icon={MdLoyalty}>
+      <Section id="experience" title="Professional Experience">
         <VerticalTimeline className="timeline">
           {this.props.work
             .filter(
@@ -52,7 +53,7 @@ export class Experience extends Component<WorkProps> {
                     work.startDate,
                     work.endDate
                   )}
-                  icon={<HiLightningBolt />}
+                  icon={<this.state.icon />}
                 >
                   {this.renderRole(work)}
                 </VerticalTimelineElement>

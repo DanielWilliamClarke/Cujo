@@ -1,18 +1,15 @@
-import { Component } from "react";
-import { Row, Col } from "react-bootstrap";
 import { resolve } from "inversify-react";
+import { Component } from "react";
+import { Col, Row } from "react-bootstrap";
+import ReactMarkdown from "react-markdown";
 import {
   VerticalTimeline,
   VerticalTimelineElement,
 } from "react-vertical-timeline-component";
-import ReactMarkdown from "react-markdown";
 import breaks from "remark-breaks";
-
-import { MdSchool } from "react-icons/md";
-import { HiLightBulb } from "react-icons/hi";
-
-import { IDateService } from "../../services/DateService";
 import { Education as EducationData } from "../../model/CVModel";
+import { IDateService } from "../../services/DateService";
+import { IconWithDefaultState, IIconService } from "../../services/IconService";
 import { DynamicImage } from "../shared/DynamicImage";
 import { Lanyard } from "../shared/Lanyard";
 import { Section } from "../shared/Section";
@@ -24,15 +21,19 @@ type EducationProps = {
   education: EducationData[];
 };
 
-export class Education extends Component<EducationProps> {
+export class Education extends Component<EducationProps, IconWithDefaultState> {
   @resolve("DateService") private readonly dateService!: IDateService;
-  componentWillMount() {
+  @resolve("IconService") private readonly iconService!: IIconService;
+
+  constructor(props: EducationProps, context: {}) {
+    super(props, context);
     this.dateService.format("MMMM YYYY", "DD/MM/YYYY");
+    this.state = { icon: this.iconService.getWithDefault("school") };
   }
 
   render(): JSX.Element {
     return (
-      <Section id="education" title="Education" icon={MdSchool}>
+      <Section id="education" title="Education">
         <VerticalTimeline className="timeline">
           {this.props.education
             .sort(
@@ -45,7 +46,7 @@ export class Education extends Component<EducationProps> {
                 className="vertical-timeline-element--work"
                 key={index}
                 date={this.dateService.toRange(e.startDate, e.endDate)}
-                icon={<HiLightBulb />}
+                icon={<this.state.icon />}
               >
                 {this.renderInstitution(e)}
               </VerticalTimelineElement>

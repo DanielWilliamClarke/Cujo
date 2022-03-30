@@ -4,8 +4,6 @@ import ReactMarkdown from "react-markdown";
 import breaks from "remark-breaks";
 import { Fade, Zoom } from "react-awesome-reveal";
 
-import { MdFingerprint } from "react-icons/md";
-
 import { Basics, Interests } from "../../model/CVModel";
 import { DynamicImage } from "../shared/DynamicImage";
 import { Section } from "../shared/Section";
@@ -21,7 +19,7 @@ type AboutProps = {
 export class About extends Component<AboutProps> {
   render(): JSX.Element {
     return (
-      <Section id="about" title="About Me!" icon={MdFingerprint}>
+      <Section id="about" title="About Me!">
         <Row className="section-content">
           <Zoom triggerOnce damping={0.01}>
             <Carousel

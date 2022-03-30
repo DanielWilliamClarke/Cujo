@@ -5,7 +5,6 @@ import { resolve } from "inversify-react";
 import { Component } from "react";
 import { Fade } from "react-awesome-reveal";
 import { Col, Row } from "react-bootstrap";
-import { MdHistoryEdu } from "react-icons/md";
 import {
   ContentfulEntries,
   getMediaURL,
@@ -28,8 +27,9 @@ type BlogProps = {
 export class BlogPost extends Component<BlogProps> {
   @resolve("DateService") private readonly dateService!: IDateService;
 
-  async componentWillMount() {
-    this.dateService.format("Do MMMM YYYY HH:mm:ss");
+  constructor(props: BlogProps, context: {}) {
+    super(props, context);
+    this.dateService.format("MMMM YYYY", "DD/MM/YYYY");
   }
 
   render(): JSX.Element {
@@ -69,12 +69,7 @@ export class BlogPost extends Component<BlogProps> {
 
     return (
       <Fade triggerOnce direction="left">
-        <Section
-          id="post"
-          bg="section-light"
-          title={item.fields.title}
-          icon={MdHistoryEdu}
-        >
+        <Section id="post" bg="section-light" title={item.fields.title}>
           <h4 className="blog-date">
             {this.dateService.toSentence(item.sys.updatedAt.toString())}
           </h4>

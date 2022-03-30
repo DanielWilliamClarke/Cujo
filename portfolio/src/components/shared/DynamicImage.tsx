@@ -6,15 +6,19 @@ type ImageProps = {
 };
 
 type ImageState = {
-  loaded: string
+  loaded: string;
 };
 
 export class DynamicImage extends Component<
-  ImageProps & HTMLAttributes<HTMLImageElement>, ImageState
+  ImageProps & HTMLAttributes<HTMLImageElement>,
+  ImageState
 > {
+  constructor(props: ImageProps & HTMLAttributes<HTMLImageElement>) {
+    super(props);
+    this.state = { loaded: "" };
+  }
 
-  async componentWillMount() {
-    this.setState({ loaded: "" });
+  async componentDidMount() {
     await this.load();
   }
 
@@ -32,17 +36,17 @@ export class DynamicImage extends Component<
     this.setState({ loaded });
   }
 
-  private load (): Promise<boolean> {
+  private load(): Promise<boolean> {
     return new Promise((resolve) => {
       const uri = ImageLocator.buildImageUri(this.props.image);
       if (uri) {
         const handleLoad = (): void => {
           this.handleLoad(uri);
-          image.removeEventListener('load', handleLoad);
+          image.removeEventListener("load", handleLoad);
           resolve(true);
         };
         const image = new Image();
-        image.addEventListener('load', handleLoad.bind(this));
+        image.addEventListener("load", handleLoad.bind(this));
         image.src = uri;
       }
     });

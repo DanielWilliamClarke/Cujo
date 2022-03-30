@@ -4,8 +4,6 @@ import ReactMarkdown from "react-markdown";
 import breaks from "remark-breaks";
 import { Zoom } from "react-awesome-reveal";
 
-import { MdBolt } from "react-icons/md";
-
 import { Skills, DevIcon } from "../../model/CVModel";
 import { DevIconName } from "../shared/DevIcon";
 import { Section } from "../shared/Section";
@@ -22,13 +20,14 @@ type SkillsState = {
 };
 
 export class Technical extends Component<TechnicalProps, SkillsState> {
-  componentWillMount() {
-    this.setState({ search: "" });
+  constructor(props: TechnicalProps) {
+    super(props);
+    this.state = { search: "" };
   }
 
   render(): JSX.Element {
     return (
-      <Section id="skills" title="Skills and Competencies" icon={MdBolt}>
+      <Section id="skills" title="Skills and Competencies">
         <Row className="section-content">
           <Col>
             <ReactMarkdown

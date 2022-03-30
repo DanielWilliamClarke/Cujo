@@ -12,16 +12,13 @@ import { ScrollIndicator } from "./ScrollIndicator";
 import { DynamicImage } from "../shared/DynamicImage";
 
 export class SketchBackstretch extends Component<CVProps> {
-  private myRef: React.RefObject<any>;
   @resolve("DateService") private readonly dateService!: IDateService;
+  private myRef: React.RefObject<any>;
 
-  constructor(props: any) {
-    super(props);
-    this.myRef = React.createRef();
-  }
-
-  componentWillMount() {
+  constructor(props: CVProps, context: {}) {
+    super(props, context);
     this.dateService.format("MMMM YYYY", "DD/MM/YYYY");
+    this.myRef = React.createRef();
   }
 
   componentDidMount() {

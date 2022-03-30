@@ -1,27 +1,26 @@
 import { Component } from "react";
 import { DevIcon } from "../../model/CVModel";
-import { IconType } from "react-icons";
-import { FaDeviantart } from "react-icons/fa";
+import { IconState, IIconService } from "../../services/IconService";
+
 import "./DevIcon.scss";
+import { resolve } from "inversify-react";
 
 type DevIconProps = {
   icon: DevIcon;
-  iconOverride?: IconType;
 };
 
-type DevIconState = {
-  iconOverride: IconType | undefined;
-};
+export class DevIconName extends Component<DevIconProps, IconState> {
+  @resolve("IconService") private readonly iconService!: IIconService;
 
-export class DevIconName extends Component<DevIconProps, DevIconState> {
-  componentDidMount() {
-    this.setState({ iconOverride: this.brandToIcon(this.props.icon) });
+  constructor(props: DevIconProps, context: {}) {
+    super(props, context);
+    this.state = { icon: this.iconService.get(this.props.icon.name) };
   }
 
   render(): JSX.Element {
     let iconComponent: JSX.Element;
-    if (this.state?.iconOverride) {
-      iconComponent = <this.state.iconOverride className="icon-override" />;
+    if (this.state?.icon) {
+      iconComponent = <this.state.icon className="icon-override" />;
     } else {
       iconComponent = (
         <span className={`icon devicon-${this.props.icon.icon}`} />
@@ -34,14 +33,5 @@ export class DevIconName extends Component<DevIconProps, DevIconState> {
         <p className="icon-name">{this.props.icon.name}</p>
       </div>
     );
-  }
-
-  private brandToIcon(brand: DevIcon): IconType | undefined {
-    switch (brand.name) {
-      case "DeviantArt":
-        return FaDeviantart;
-      default:
-        return;
-    }
   }
 }

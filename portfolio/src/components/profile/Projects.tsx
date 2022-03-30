@@ -4,8 +4,6 @@ import { Fade } from "react-awesome-reveal";
 import ReactMarkdown from "react-markdown";
 import breaks from "remark-breaks";
 
-import { MdHardware } from "react-icons/md";
-
 import { Project } from "../../model/CVModel";
 import { DevIconName } from "../shared/DevIcon";
 import { DynamicImage } from "../shared/DynamicImage";
@@ -22,12 +20,7 @@ type ProjectProps = {
 export class Projects extends Component<ProjectProps> {
   render(): JSX.Element {
     return (
-      <Section
-        id="projects"
-        title="Personal Projects"
-        noSeparator
-        icon={MdHardware}
-      >
+      <Section id="projects" title="Personal Projects" noSeparator>
         {this.props.projects.map(this.project.bind(this))}
       </Section>
     );

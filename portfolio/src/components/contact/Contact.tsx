@@ -4,8 +4,6 @@ import { Row, Col, Form, Button } from "react-bootstrap";
 
 import { Fade, Zoom } from "react-awesome-reveal";
 
-import { MdCampaign } from "react-icons/md";
-
 import { Profile } from "../../model/CVModel";
 import { IContactService } from "../../services/ContactService";
 import { DevIconName } from "../shared/DevIcon";
@@ -24,14 +22,15 @@ type ContactState = {
 export class Contact extends Component<ContactProps, ContactState> {
   @resolve("ContactService") private readonly contactService!: IContactService;
 
-  componentWillMount() {
-    this.setState({ status: false });
+  constructor(props: ContactProps) {
+    super(props);
+    this.state = { status: false };
   }
 
   render(): JSX.Element {
     return (
       <Fade triggerOnce direction="up">
-        <Section id="contact" title="Contact" icon={MdCampaign}>
+        <Section id="contact" title="Contact">
           <Row className="section-content socials">
             {this.props.profiles.map(
               (p: Profile): JSX.Element => (

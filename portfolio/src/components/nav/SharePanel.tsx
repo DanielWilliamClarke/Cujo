@@ -34,9 +34,10 @@ type ShareState = {
 export class SharePanel extends Component<ShareProps, ShareState> {
   private size: number = 40;
 
-  componentWillMount() {
-    this.listenScrollEvent();
-    this.listenResize();
+  constructor(props: ShareProps) {
+    super(props);
+
+    this.state = { show: false, slim: true };
     window.addEventListener("scroll", this.listenScrollEvent);
     window.addEventListener("resize", this.listenResize);
   }
