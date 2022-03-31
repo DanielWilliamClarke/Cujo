@@ -37,7 +37,7 @@ export class SketchBackstretch extends Component<CVProps> {
         <Container fluid ref={this.myRef} className="sketch-backstretch">
           <div className="backstretch-headline">
             <DynamicImage
-              image={"logo.svg"}
+              image={"logo.png"}
               alt={currentRole.company}
               className="centered image-item my-logo"
             />
