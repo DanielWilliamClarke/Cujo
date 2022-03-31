@@ -91,7 +91,7 @@ mod tests {
         };
 
         let path = format!(
-            "/spaces/{}/environments/{}/entries?access_token={}",
+            "/spaces/{}/environments/{}/entries?access_token={}&content_type=blogPost",
             blog_config.space_id, blog_config.environment, blog_config.access_token
         );
 
