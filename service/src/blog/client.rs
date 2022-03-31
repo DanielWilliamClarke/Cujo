@@ -39,7 +39,7 @@ impl<'a> BlogClient<'a> {
     {
         Ok(reqwest::Client::new()
             .get(format!(
-                "{}/spaces/{}/environments/{}/entries?access_token={}",
+                "{}/spaces/{}/environments/{}/entries?access_token={}&content_type=blogPost",
                 self.config.blog_host,
                 self.config.space_id,
                 self.config.environment,
