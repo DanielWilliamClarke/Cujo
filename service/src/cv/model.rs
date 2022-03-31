@@ -122,5 +122,5 @@ pub struct Project {
     pub image: String,
     pub summary: String,
     pub tags: Vec<String>,
-    pub icon: Brand
+    pub icon: Brand,
 }

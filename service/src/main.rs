@@ -1,28 +1,20 @@
 // src/main.rs
+
 #[macro_use]
 extern crate log;
 
 use actix_web::{middleware::Logger, web::Data, App, HttpServer};
 use dotenv::dotenv;
 use listenfd::ListenFd;
-use serde::Deserialize;
 
 mod blog;
 mod cv;
-mod routes;
+mod server;
 mod util;
 
-use blog::BlogConfig;
 use cv::CVConfig;
-use routes::init;
+use server::{init, ContentfulConfig, ServerConfig};
 use util::FromEnv;
-
-#[derive(Deserialize, Debug, Clone)]
-pub struct ServerConfig {
-    host: String,
-    port: String,
-}
-impl FromEnv for ServerConfig {}
 
 #[actix_rt::main]
 async fn main() -> std::io::Result<()> {
@@ -31,12 +23,12 @@ async fn main() -> std::io::Result<()> {
 
     let server_config = ServerConfig::from_env();
     let cv_config = CVConfig::from_env();
-    let config = BlogConfig::from_env();
+    let contentful_config = ContentfulConfig::from_env();
 
     let mut server = HttpServer::new(move || {
         App::new()
             .app_data(Data::new(cv_config.clone()))
-            .app_data(Data::new(config.clone()))
+            .app_data(Data::new(contentful_config.clone()))
             .wrap(Logger::default())
             .configure(init)
     });
