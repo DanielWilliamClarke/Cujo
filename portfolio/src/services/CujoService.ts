@@ -1,12 +1,12 @@
 import axios from "axios";
 import { injectable } from "inversify";
 
-import { ContentfulEntries } from "../model/ContentfulEntries";
+import { Post } from "../model/BlogPost";
 import { CV } from "../model/CVModel";
 
 export interface ICujoService {
   FetchCV(): Promise<CV>
-  FetchBlogPosts(): Promise<ContentfulEntries>
+  FetchBlogPosts(): Promise<Post[]>
 }
 
 @injectable()
@@ -15,7 +15,7 @@ export class CujoService implements ICujoService {
     return (await axios.get('/api/cv')).data as CV;
   }
 
-  async FetchBlogPosts(): Promise<ContentfulEntries> {
-    return (await axios.get('/api/blog')).data as ContentfulEntries;
+  async FetchBlogPosts(): Promise<Post[]> {
+    return (await axios.get('/api/blog')).data as Post[];
   }
 }

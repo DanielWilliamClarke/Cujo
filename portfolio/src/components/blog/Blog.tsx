@@ -3,11 +3,7 @@ import { Card, Col, Nav, Row } from "react-bootstrap";
 import { resolve } from "inversify-react";
 import { Fade } from "react-awesome-reveal";
 import { IDateService } from "../../services/DateService";
-import {
-  ContentfulEntries,
-  getMediaURL,
-  Item,
-} from "../../model/ContentfulEntries";
+import { Post } from "../../model/BlogPost";
 import { Lanyard } from "../shared/Lanyard";
 import { Section } from "../shared/Section";
 import readingTime from "reading-time";
@@ -18,7 +14,7 @@ import "./Blog.scss";
 import { IconWithDefaultState, IIconService } from "../../services/IconService";
 
 export type BlogProps = {
-  blog: ContentfulEntries;
+  blog: Post[];
 };
 
 export class Blog extends Component<BlogProps, IconWithDefaultState> {
@@ -36,8 +32,8 @@ export class Blog extends Component<BlogProps, IconWithDefaultState> {
       <Fade triggerOnce direction="up">
         <Section id="blog" bg="section-dark" title="Blog">
           <Row xs={1} md={2} className="g-4 blog-cards">
-            {this.props.blog.items.length ? (
-              this.props.blog.items.map(this.blogSummaryPanel.bind(this))
+            {this.props.blog.length ? (
+              this.props.blog.map(this.blogSummaryPanel.bind(this))
             ) : (
               <Col className="blog-placeholder centered">Coming soon</Col>
             )}
@@ -47,22 +43,17 @@ export class Blog extends Component<BlogProps, IconWithDefaultState> {
     );
   }
 
-  private blogSummaryPanel(data: Item, index: number): JSX.Element {
-    const mediaUrl = getMediaURL(
-      this.props.blog.includes,
-      data.fields.media.sys.id
-    );
-
-    const stats = readingTime(documentToPlainTextString(data.fields.content));
+  private blogSummaryPanel(post: Post, index: number): JSX.Element {
+    const stats = readingTime(documentToPlainTextString(post.content.document));
 
     return (
       <Col>
         <Fade triggerOnce direction={index % 2 ? "right" : "left"}>
-          <Card key={data.fields.id} bg="dark">
+          <Card key={post.id} bg="dark">
             <Nav navbarScroll>
-              <Nav.Link href={`/blog/${data.fields.id}`}>
-                {mediaUrl ? (
-                  <Card.Img variant="top" src={mediaUrl} />
+              <Nav.Link href={`/blog/${post.id}`}>
+                {post.media ? (
+                  <Card.Img variant="top" src={post.media.file.url} />
                 ) : (
                   <this.state.icon />
                 )}
@@ -71,19 +62,19 @@ export class Blog extends Component<BlogProps, IconWithDefaultState> {
 
             <Card.Body>
               <Nav navbarScroll>
-                <Nav.Link href={`/blog/${data.fields.id}`}>
-                  <Card.Title>{data.fields.title}</Card.Title>
+                <Nav.Link href={`/blog/${post.id}`}>
+                  <Card.Title>{post.title}</Card.Title>
                 </Nav.Link>
               </Nav>
               <Card.Text>
                 Published{" "}
-                {this.dateService.toSentence(data.sys.createdAt.toString())}{" "}
+                {this.dateService.toSentence(post.sys.createdAt.toString())}{" "}
               </Card.Text>
-              <Lanyard tags={data.fields.tags} />
+              <Lanyard tags={post.tags} />
               <Card.Text
                 className="text-muted"
                 dangerouslySetInnerHTML={{
-                  __html: data.fields.excerpt,
+                  __html: post.excerpt,
                 }}
               />
               <small className="text-muted">{stats.text}</small>
@@ -92,7 +83,7 @@ export class Blog extends Component<BlogProps, IconWithDefaultState> {
             <Card.Footer>
               <small className="text-muted">
                 Last updated{" "}
-                {this.dateService.toSentence(data.sys.updatedAt.toString())}
+                {this.dateService.toSentence(post.sys.updatedAt.toString())}
               </small>
             </Card.Footer>
           </Card>

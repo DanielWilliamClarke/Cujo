@@ -1,27 +1,24 @@
+import { documentToPlainTextString } from "@contentful/rich-text-plain-text-renderer";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import { BLOCKS, Block, Inline } from "@contentful/rich-text-types";
-import "highlight.js/scss/tomorrow-night-eighties.scss";
+import { Block, BLOCKS, Inline } from "@contentful/rich-text-types";
+
 import { resolve } from "inversify-react";
 import { Component } from "react";
 import { Fade } from "react-awesome-reveal";
 import { Col, Row } from "react-bootstrap";
-import {
-  ContentfulEntries,
-  getMediaURL,
-  Item,
-} from "../../model/ContentfulEntries";
 import readingTime from "reading-time";
-import { documentToPlainTextString } from "@contentful/rich-text-plain-text-renderer";
+import { getAsset, Post } from "../../model/BlogPost";
 import { IDateService } from "../../services/DateService";
 import { Lanyard } from "../shared/Lanyard";
 import { Section } from "../shared/Section";
 
-import "./BlogPost.scss";
 import "../shared/Portfolio.scss";
+import "./BlogPost.scss";
+import "highlight.js/scss/tomorrow-night-eighties.scss";
 
 type BlogProps = {
   id: string;
-  blog: ContentfulEntries;
+  blog: Post[];
 };
 
 export class BlogPost extends Component<BlogProps> {
@@ -33,33 +30,28 @@ export class BlogPost extends Component<BlogProps> {
   }
 
   render(): JSX.Element {
-    const post = this.props.blog.items.find(
-      (item: Item) => item.fields.id === this.props.id
+    const post = this.props.blog.find(
+      (post: Post) => post.id === this.props.id
     );
 
     return <>{post && this.displayPost(post)}</>;
   }
 
-  private displayPost(item: Item): JSX.Element {
-    const mediaUrl = getMediaURL(
-      this.props.blog.includes,
-      item.fields.media.sys.id
-    );
-
-    const stats = readingTime(documentToPlainTextString(item.fields.content));
+  private displayPost(post: Post): JSX.Element {
+    const stats = readingTime(documentToPlainTextString(post.content.document));
 
     const options = {
       renderNode: {
         [BLOCKS.EMBEDDED_ASSET]: (node: Block | Inline): JSX.Element => {
-          const mediaUrl = getMediaURL(
-            this.props.blog.includes,
+          const media = getAsset(
+            post.content.includes,
             node.data.target.sys.id
           );
 
           return (
             <Row className="section-content">
               <Col className="centered featured">
-                <img src={mediaUrl} alt="not found..." />
+                <img src={media?.file.url} alt={media?.description} />
               </Col>
             </Row>
           );
@@ -69,18 +61,18 @@ export class BlogPost extends Component<BlogProps> {
 
     return (
       <Fade triggerOnce direction="left">
-        <Section id="post" bg="section-light" title={item.fields.title}>
+        <Section id="post" bg="section-light" title={post.title}>
           <h4 className="blog-date">
-            {this.dateService.toSentence(item.sys.updatedAt.toString())}
+            {this.dateService.toSentence(post.sys.updatedAt.toString())}
           </h4>
 
-          <Lanyard className="tags" tags={item.fields.tags} />
+          <Lanyard className="tags" tags={post.tags} />
 
-          {mediaUrl && (
+          {post.media && (
             <>
               <Row className="section-content">
                 <Col className="centered featured">
-                  <img src={mediaUrl} alt="not found..." />
+                  <img src={post.media.file.url} alt={post.media.description} />
                 </Col>
               </Row>
               <div className="line centered" />
@@ -90,7 +82,9 @@ export class BlogPost extends Component<BlogProps> {
           <small className="text-muted">{stats.text}</small>
 
           <Row className="section-content blog-content">
-            <Col>{documentToReactComponents(item.fields.content, options)}</Col>
+            <Col>
+              {documentToReactComponents(post.content.document, options)}
+            </Col>
           </Row>
         </Section>
       </Fade>

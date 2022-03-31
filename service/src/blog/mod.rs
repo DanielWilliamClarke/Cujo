@@ -1,5 +1,5 @@
 // src/blog/mod.rs
 
-mod client;
+mod blog_reader;
 
-pub use client::{BlogClient, BlogConfig};
+pub use blog_reader::BlogReader;
