@@ -2,15 +2,16 @@
 
 use std::collections::HashMap;
 
-use crate::{
-    http_client,
-    json_util::merge,
-    models::{Entry, RichTextWithIncludes},
-    query_builder::QueryBuilder,
-};
+use crate::{http_client, json_util::merge, query_builder::QueryBuilder};
 
 use serde::{Deserialize, Serialize};
 use serde_json::{json, Value};
+
+#[derive(Serialize, Deserialize, Debug, Clone)]
+pub struct ContentfulResult<T> {
+    pub entries: Vec<T>,
+    pub includes: Option<Value>,
+}
 
 pub struct ContentfulClient {
     delivery_api_access_token: String,
@@ -20,16 +21,6 @@ pub struct ContentfulClient {
 }
 
 impl ContentfulClient {
-    pub fn new(delivery_api_access_token: &str, space_id: &str) -> ContentfulClient {
-        let environment_id = "master".into();
-        ContentfulClient {
-            base_url: "https://cdn.contentful.com/spaces".into(),
-            delivery_api_access_token: delivery_api_access_token.into(),
-            space_id: space_id.into(),
-            environment_id,
-        }
-    }
-
     pub fn with_environment(
         delivery_api_access_token: &str,
         space_id: &str,
@@ -43,127 +34,66 @@ impl ContentfulClient {
         }
     }
 
-    fn get_entry_url(&self, entry_id: &str) -> String {
-        let url = format!(
-            "{base_url}/{space_id}/environments/{environment_id}/entries/{entry_id}",
-            base_url = &self.base_url,
-            space_id = &self.space_id,
-            environment_id = &self.environment_id,
-            entry_id = &entry_id
-        );
-        url
-    }
-
     fn get_query_string_url(&self, query_string: &str) -> String {
-        let url = format!(
+        format!(
             "{base_url}/{space_id}/environments/{environment}/entries{query_string}",
             base_url = &self.base_url,
             space_id = &self.space_id,
             environment = &self.environment_id,
             query_string = &query_string
-        );
-        url
-    }
-
-    pub async fn get_entry<T>(
-        &self,
-        entry_id: &str,
-    ) -> Result<Option<T>, Box<dyn std::error::Error>>
-    where
-        for<'a> T: Serialize + Deserialize<'a>,
-    {
-        if let Some(entry) = self.get_contentful_entry(entry_id).await? {
-            let mut entry_json_value = entry.fields.clone();
-            entry_json_value["sys"] = json!(entry.sys);
-            let entry_string = entry_json_value.to_string();
-            let entry = serde_json::from_str::<T>(&entry_string.as_str())?;
-            Ok(Some(entry))
-        } else {
-            Ok(None)
-        }
-    }
-
-    pub async fn get_contentful_entry(
-        &self,
-        entry_id: &str,
-    ) -> Result<Option<Entry<Value>>, Box<dyn std::error::Error>> {
-        let url = self.get_entry_url(entry_id);
-        let json_value =
-            http_client::get::<Entry<Value>>(&url, &self.delivery_api_access_token).await?;
-        Ok(json_value)
-    }
-
-    pub async fn get_entry_json_value(
-        &self,
-        entry_id: &str,
-    ) -> Result<Option<Value>, Box<dyn std::error::Error>> {
-        let url = self.get_entry_url(entry_id);
-        let json_value = http_client::get::<Value>(&url, &self.delivery_api_access_token).await?;
-        Ok(json_value)
+        )
     }
 
     pub async fn get_entries<T>(
         &self,
         query_builder: Option<QueryBuilder>,
-    ) -> Result<Vec<T>, Box<dyn std::error::Error>>
+    ) -> Result<Option<ContentfulResult<T>>, Box<dyn std::error::Error>>
     where
         for<'a> T: Serialize + Deserialize<'a>,
     {
-        let query_string = if let Some(query_builder) = query_builder {
-            query_builder.build()
-        } else {
-            "".to_string()
+        let query_string = match query_builder {
+            Some(builder) => builder.build(),
+            None => "".to_string(),
         };
 
         self.get_entries_by_query_string::<T>(query_string.as_str())
             .await
     }
 
-    pub async fn get_entries_by_query_string<T>(
+    async fn get_entries_by_query_string<T>(
         &self,
         query_string: &str,
-    ) -> Result<Vec<T>, Box<dyn std::error::Error>>
+    ) -> Result<Option<ContentfulResult<T>>, Box<dyn std::error::Error>>
     where
         for<'a> T: Serialize + Deserialize<'a>,
     {
         log::debug!("query_string: {:?}", &query_string);
         let url = self.get_query_string_url(query_string);
-        if let Some(json) = http_client::get::<Value>(&url, &self.delivery_api_access_token).await?
-        {
-            if let Some(mut items) = json.clone().get_mut("items") {
-                if items.is_array() {
-                    if let Some(includes) = json.get("includes") {
-                        self.resolve_array(&mut items, &includes)?;
+
+        match http_client::get::<Value>(&url, &self.delivery_api_access_token).await? {
+            Some(json) => match json.clone().get_mut("items") {
+                Some(items) => {
+                    if items.is_array() {
+                        let includes = match json.clone().get("includes") {
+                            Some(includes) => {
+                                self.resolve_array(items, includes)?;
+                                Some(includes.clone().to_owned())
+                            }
+                            None => None,
+                        };
+
+                        let ar_string = items.to_string();
+                        let entries = serde_json::from_str::<Vec<T>>(&ar_string.as_str())?;
+
+                        Ok(Some(ContentfulResult { entries, includes }))
+                    } else {
+                        Ok(None)
                     }
-
-                    let ar_string = items.to_string();
-                    let entries = serde_json::from_str::<Vec<T>>(&ar_string.as_str())?;
-                    Ok(entries)
-                } else {
-                    unimplemented!();
                 }
-            } else {
-                unimplemented!();
-            }
-        } else {
-            unimplemented!();
+                None => Ok(None),
+            },
+            None => Ok(None),
         }
-    }
-
-    pub async fn get_entries_by_type<T>(
-        &self,
-        content_type: &str,
-        query_builder: Option<QueryBuilder>,
-    ) -> Result<Vec<T>, Box<dyn std::error::Error>>
-    where
-        for<'a> T: Serialize + Deserialize<'a>,
-    {
-        let query_builder = query_builder
-            .unwrap_or(QueryBuilder::new())
-            .content_type_is(content_type);
-
-        self.get_entries(Some(query_builder)).await
-        //self.get_entries_by_query_string::<T>(Some(new_query_string)).await
     }
 
     fn resolve_array(
@@ -171,8 +101,7 @@ impl ContentfulClient {
         value: &mut Value,
         includes: &Value,
     ) -> Result<(), Box<dyn std::error::Error>> {
-        let items = value.as_array_mut().unwrap();
-        for item in items {
+        for item in value.as_array_mut().unwrap() {
             if item.is_object() {
                 self.resolve_object(item, &includes)?;
             } else if item.is_string() || item.is_number() {
@@ -190,72 +119,14 @@ impl ContentfulClient {
         value: &mut Value,
         includes: &Value,
     ) -> Result<(), Box<dyn std::error::Error>> {
-        let sys_type = value["sys"]["type"].clone();
-        if sys_type == "Entry" {
-            self.resolve_entry(value, &includes)?;
-        } else if sys_type == "Link" {
-            self.resolve_link(value, &includes)?;
-        } else {
-            let node_type = value["nodeType"].clone();
-            if node_type == "document" {
-                *value = json!(RichTextWithIncludes {
-                    document: value.clone(),
-                    includes: includes.clone()
-                });
-            } else {
-                unimplemented!("{} - {} not implemented", &sys_type, &node_type);
-            }
-        }
-        Ok(())
-    }
-
-    fn resolve_entry(
-        &self,
-        value: &mut Value,
-        includes: &Value,
-    ) -> Result<(), Box<dyn std::error::Error>> {
-        let mut sys_map = HashMap::new();
-        if let Some(sys) = value.get_mut("sys") {
-            sys_map.insert("sys".to_string(), sys.clone());
-        }
-
-        let fields_val: Value;
-        if let Some(fields) = value.get_mut("fields") {
-            if fields.is_object() {
-                let entry_object = fields.as_object_mut().unwrap();
-                for (_field_name, field_value) in entry_object {
-                    if field_value.is_object() {
-                        self.resolve_object(field_value, &includes)?;
-                    } else if field_value.is_array() {
-                        self.resolve_array(field_value, &includes)?;
-                    } else {
-                        // Regular string, number, etc, values. No need to do anything.
-                    }
-                }
-
-                fields_val = fields.clone()
-            } else {
-                unimplemented!();
-            }
-        } else {
-            unimplemented!();
-        }
-
-        *value = merge(&fields_val, &sys_map);
-
-        Ok(())
-    }
-
-    fn resolve_asset(&self, value: &mut Value) -> Result<(), Box<dyn std::error::Error>> {
-        if let Some(fields) = value.get_mut("fields") {
-            if fields.is_object() {
-                *value = fields.clone();
-            } else {
-                unimplemented!();
-            }
-        } else {
-            unimplemented!();
-        }
+        match value["sys"]["type"].clone() {
+            Value::String(sys_type) => match sys_type.as_str() {
+                "Entry" => self.resolve_entry(value, includes)?,
+                "Link" => self.resolve_link(value, includes)?,
+                _ => (),
+            },
+            _ => (),
+        };
 
         Ok(())
     }
@@ -265,39 +136,104 @@ impl ContentfulClient {
         value: &mut Value,
         includes: &Value,
     ) -> Result<(), Box<dyn std::error::Error>> {
-        let link_type = value["sys"]["linkType"].clone();
         let link_id = value["sys"]["id"].clone();
-        if link_type == "Entry" {
-            let included_entries = includes["Entry"].as_array().unwrap();
-            let mut filtered_entries = included_entries
-                .iter()
-                .filter(|entry| entry["sys"]["id"].to_string() == link_id.to_string())
-                .take(1);
-            let linked_entry = filtered_entries.next();
-            if let Some(entry) = linked_entry {
-                let mut entry = entry.clone();
-                self.resolve_entry(&mut entry, &includes)?;
-                *value = entry;
-                //value["fields"] = entry["fields"].clone();
-                //*value = entry["fields"].clone();
+
+        let resolved = match value["sys"]["linkType"].clone() {
+            Value::String(link_type) => match link_type.as_str() {
+                "Entry" => self.find_item(&link_type, &link_id, &includes, |entry, includes| {
+                    Ok(self.resolve_entry(entry, includes)?)
+                }),
+                "Asset" => self.find_item(&link_type, &link_id, &includes, |asset, _| {
+                    Ok(self.resolve_asset(asset)?)
+                }),
+                _ => Ok(json!({})),
+            },
+            _ => Ok(json!({})),
+        };
+
+        *value = match resolved {
+            Ok(entry) => entry,
+            Err(_) => json!({}),
+        };
+
+        Ok(())
+    }
+
+    fn resolve_entry(
+        &self,
+        value: &mut Value,
+        includes: &Value,
+    ) -> Result<(), Box<dyn std::error::Error>> {
+        let sys = match value.get_mut("sys") {
+            Some(sys) => {
+                let mut map = HashMap::new();
+                map.insert("sys".to_string(), sys.clone());
+                map
             }
-        } else if link_type == "Asset" {
-            let included_assets = includes["Asset"].as_array().unwrap();
-            let mut filtered_assets = included_assets
-                .iter()
-                .filter(|entry| entry["sys"]["id"].to_string() == link_id.to_string())
-                .take(1);
-            let linked_asset = filtered_assets.next();
-            if let Some(asset) = linked_asset {
-                let mut asset = asset.clone();
-                self.resolve_asset(&mut asset)?;
-                *value = asset;
+            None => HashMap::new(),
+        };
+
+        let fields = match value.get_mut("fields") {
+            Some(fields) => {
+                if fields.is_object() {
+                    for (_, field_value) in fields.as_object_mut().unwrap() {
+                        if field_value.is_object() {
+                            self.resolve_object(field_value, &includes)?;
+                        } else if field_value.is_array() {
+                            self.resolve_array(field_value, &includes)?;
+                        } else {
+                            // Regular string, number, etc, values. No need to do anything.
+                        }
+                    }
+                };
+
+                fields.clone()
             }
-        } else {
-            unimplemented!();
+            None => json!({}),
+        };
+
+        *value = merge(&fields, &sys);
+
+        Ok(())
+    }
+
+    fn resolve_asset(&self, value: &mut Value) -> Result<(), Box<dyn std::error::Error>> {
+        match value.get_mut("fields") {
+            Some(fields) => {
+                if fields.is_object() {
+                    *value = fields.clone();
+                };
+            }
+            None => (),
         }
 
-        //*value = value["fields"].clone();
         Ok(())
+    }
+
+    fn find_item<F>(
+        &self,
+        key: &str,
+        link_id: &Value,
+        includes: &Value,
+        resolver: F,
+    ) -> Result<Value, Box<dyn std::error::Error>>
+    where
+        F: Fn(&mut Value, &Value) -> Result<(), Box<dyn std::error::Error>>,
+    {
+        let mut filtered_items = includes[key]
+            .as_array()
+            .unwrap()
+            .iter()
+            .filter(|entry| entry["sys"]["id"].to_string() == link_id.to_string())
+            .take(1);
+
+        match filtered_items.next() {
+            Some(entry) => {
+                let mut entry = entry.clone();
+                resolver(&mut entry, includes)?;
+                Ok(entry)
+            }
+            None => Ok(json!({})),
+        }
     }
 }

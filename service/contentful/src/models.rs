@@ -2,7 +2,6 @@
 
 use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
-use serde_json::Value;
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Space {
@@ -100,10 +99,4 @@ pub struct FileDetails {
 pub struct ImageDetails {
     pub height: i32,
     pub width: i32,
-}
-
-#[derive(Clone, Debug, Serialize, Deserialize)]
-pub struct RichTextWithIncludes {
-    pub document: Value,
-    pub includes: Value,
 }

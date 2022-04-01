@@ -2,7 +2,7 @@
 
 use contentful::{
     models::{Asset, SystemProperties},
-    ContentfulClient, QueryBuilder,
+    ContentfulClient, ContentfulResult, QueryBuilder,
 };
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
@@ -27,7 +27,9 @@ impl<'a> BlogReader<'a> {
         BlogReader { client }
     }
 
-    pub async fn get_entries(&self) -> Result<Vec<BlogPost>, Box<dyn std::error::Error>> {
+    pub async fn get_entries(
+        &self,
+    ) -> Result<Option<ContentfulResult<BlogPost>>, Box<dyn std::error::Error>> {
         let builder = QueryBuilder::new().content_type_is("blogPost");
 
         let posts = self.client.get_entries::<BlogPost>(Some(builder)).await?;

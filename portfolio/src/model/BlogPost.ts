@@ -1,18 +1,18 @@
 import { Document } from '@contentful/rich-text-types';
 
+export interface BlogPostEntries {
+  entries: Post[],
+  includes: Includes
+}
+
 export interface Post {
   id:      string;
   title:   string;
-  content: Content;
+  content: Document;
   excerpt: string;
   media?:  Media;
   tags:    string[];
   sys:    BlogPostSys;
-}
-
-export interface Content {
-  document: Document;
-  includes: Includes;
 }
 
 export interface Includes {
