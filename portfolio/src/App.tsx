@@ -15,13 +15,13 @@ import { Contact } from "./components/contact/Contact";
 import NavPanel from "./components/nav/NavPanel";
 import { SharePanel } from "./components/nav/SharePanel";
 import { Profile } from "./components/Profile";
-import { Post } from "./model/BlogPost";
+import { BlogPostEntries } from "./model/BlogPost";
 import { CV } from "./model/CVModel";
 import { ICujoService } from "./services/CujoService";
 
 export type AppState = {
   cv: CV | undefined;
-  blog: Post[] | undefined;
+  blog: BlogPostEntries | undefined;
 };
 
 type BlogRouteParams = { id: string };

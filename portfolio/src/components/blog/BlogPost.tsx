@@ -7,7 +7,7 @@ import { Component } from "react";
 import { Fade } from "react-awesome-reveal";
 import { Col, Row } from "react-bootstrap";
 import readingTime from "reading-time";
-import { getAsset, Post } from "../../model/BlogPost";
+import { BlogPostEntries, getAsset, Post } from "../../model/BlogPost";
 import { IDateService } from "../../services/DateService";
 import { Lanyard } from "../shared/Lanyard";
 import { Section } from "../shared/Section";
@@ -18,7 +18,7 @@ import "highlight.js/scss/tomorrow-night-eighties.scss";
 
 type BlogProps = {
   id: string;
-  blog: Post[];
+  blog: BlogPostEntries;
 };
 
 export class BlogPost extends Component<BlogProps> {
@@ -30,7 +30,7 @@ export class BlogPost extends Component<BlogProps> {
   }
 
   render(): JSX.Element {
-    const post = this.props.blog.find(
+    const post = this.props.blog.entries.find(
       (post: Post) => post.id === this.props.id
     );
 
@@ -38,13 +38,13 @@ export class BlogPost extends Component<BlogProps> {
   }
 
   private displayPost(post: Post): JSX.Element {
-    const stats = readingTime(documentToPlainTextString(post.content.document));
+    const stats = readingTime(documentToPlainTextString(post.content));
 
     const options = {
       renderNode: {
         [BLOCKS.EMBEDDED_ASSET]: (node: Block | Inline): JSX.Element => {
           const media = getAsset(
-            post.content.includes,
+            this.props.blog.includes,
             node.data.target.sys.id
           );
 
@@ -82,9 +82,7 @@ export class BlogPost extends Component<BlogProps> {
           <small className="text-muted">{stats.text}</small>
 
           <Row className="section-content blog-content">
-            <Col>
-              {documentToReactComponents(post.content.document, options)}
-            </Col>
+            <Col>{documentToReactComponents(post.content, options)}</Col>
           </Row>
         </Section>
       </Fade>

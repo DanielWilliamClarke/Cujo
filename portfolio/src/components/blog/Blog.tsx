@@ -3,7 +3,7 @@ import { Card, Col, Nav, Row } from "react-bootstrap";
 import { resolve } from "inversify-react";
 import { Fade } from "react-awesome-reveal";
 import { IDateService } from "../../services/DateService";
-import { Post } from "../../model/BlogPost";
+import { BlogPostEntries, Post } from "../../model/BlogPost";
 import { Lanyard } from "../shared/Lanyard";
 import { Section } from "../shared/Section";
 import readingTime from "reading-time";
@@ -14,7 +14,7 @@ import "./Blog.scss";
 import { IconWithDefaultState, IIconService } from "../../services/IconService";
 
 export type BlogProps = {
-  blog: Post[];
+  blog: BlogPostEntries;
 };
 
 export class Blog extends Component<BlogProps, IconWithDefaultState> {
@@ -32,8 +32,8 @@ export class Blog extends Component<BlogProps, IconWithDefaultState> {
       <Fade triggerOnce direction="up">
         <Section id="blog" bg="section-dark" title="Blog">
           <Row xs={1} md={2} className="g-4 blog-cards">
-            {this.props.blog.length ? (
-              this.props.blog.map(this.blogSummaryPanel.bind(this))
+            {this.props.blog.entries.length ? (
+              this.props.blog.entries.map(this.blogSummaryPanel.bind(this))
             ) : (
               <Col className="blog-placeholder centered">Coming soon</Col>
             )}
@@ -44,7 +44,7 @@ export class Blog extends Component<BlogProps, IconWithDefaultState> {
   }
 
   private blogSummaryPanel(post: Post, index: number): JSX.Element {
-    const stats = readingTime(documentToPlainTextString(post.content.document));
+    const stats = readingTime(documentToPlainTextString(post.content));
 
     return (
       <Col>
