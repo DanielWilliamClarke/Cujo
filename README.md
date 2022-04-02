@@ -61,7 +61,7 @@ rustup default nightly
 cargo build [--release]
 
 # Run Service locally
-BLOG_HOST=url ACCESS_TOKEN=token SPACE_ID=id ENVIRONMENT=env cargo run [--release]
+ACCESS_TOKEN=token SPACE_ID=id ENVIRONMENT=env cargo run [--release]
 
 # Test Service
 cargo test [--release]
