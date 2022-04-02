@@ -23,7 +23,7 @@ pub struct BlogReader<'a> {
 }
 
 impl<'a> BlogReader<'a> {
-    pub fn new(client: &'a ContentfulClient) -> BlogReader<'a> {
+    pub fn new(client: &'a ContentfulClient) -> Self {
         BlogReader { client }
     }
 
