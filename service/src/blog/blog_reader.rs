@@ -2,7 +2,7 @@
 
 use contentful::{
     models::{Asset, SystemProperties},
-    ContentfulClient, ContentfulResult, QueryBuilder,
+    ContentfulClient, Entries, QueryBuilder,
 };
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
@@ -29,7 +29,7 @@ impl<'a> BlogReader<'a> {
 
     pub async fn get_entries(
         &self,
-    ) -> Result<Option<ContentfulResult<BlogPost>>, Box<dyn std::error::Error>> {
+    ) -> Result<Option<Entries<BlogPost>>, Box<dyn std::error::Error>> {
         let builder = QueryBuilder::new().content_type_is("blogPost");
 
         let posts = self.client.get_entries::<BlogPost>(Some(builder)).await?;
