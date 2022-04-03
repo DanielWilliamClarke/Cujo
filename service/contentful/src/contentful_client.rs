@@ -5,7 +5,7 @@ use std::collections::HashMap;
 use crate::{http_client, json_util::merge, query_builder::QueryBuilder};
 
 use serde::{Deserialize, Serialize};
-use serde_json::{json, Value};
+use serde_json::Value;
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct Entries<T> {
@@ -46,16 +46,6 @@ impl ContentfulClient {
             .await
     }
 
-    fn get_query_string_url(&self, query_string: &str) -> String {
-        format!(
-            "{base_url}/{space_id}/environments/{environment}/entries{query_string}",
-            base_url = &self.base_url,
-            space_id = &self.space_id,
-            environment = &self.environment_id,
-            query_string = &query_string
-        )
-    }
-
     async fn get_entries_by_query_string<T>(
         &self,
         query_string: &str,
@@ -68,7 +58,7 @@ impl ContentfulClient {
 
         let response = http_client::get::<Value>(&url, &self.delivery_api_access_token)
             .await?
-            .unwrap_or(json!({}));
+            .unwrap_or(Value::Null);
 
         let includes = match response.clone().get("includes") {
             Some(includes) => Some(includes.clone().to_owned()),
@@ -86,6 +76,16 @@ impl ContentfulClient {
             }
             _ => Ok(None),
         }
+    }
+
+    fn get_query_string_url(&self, query_string: &str) -> String {
+        format!(
+            "{base_url}/{space_id}/environments/{environment}/entries{query_string}",
+            base_url = &self.base_url,
+            space_id = &self.space_id,
+            environment = &self.environment_id,
+            query_string = &query_string
+        )
     }
 
     fn resolve_array(&self, value: &mut Value, includes: &Value) {
@@ -135,7 +135,7 @@ impl ContentfulClient {
 
                 fields.clone()
             }
-            _ => json!({}),
+            _ => Value::Null,
         };
 
         *value = merge(&fields, &sys);
@@ -155,16 +155,14 @@ impl ContentfulClient {
                     self.resolve_asset(asset)
                 })
             }
-            _ => json!({}),
+            _ => Value::Null,
         };
     }
 
     fn resolve_asset(&self, value: &mut Value) {
-        match value.get_mut("fields") {
-            Some(fields) if fields.is_object() => {
-                *value = fields.clone();
-            }
-            _ => (),
+        *value = match value.get_mut("fields") {
+            Some(fields) if fields.is_object() => fields.clone(),
+            _ => Value::Null,
         };
     }
 
@@ -172,20 +170,21 @@ impl ContentfulClient {
     where
         F: Fn(&mut Value, &Value),
     {
-        let mut item = includes[key]
+        let item = includes[key]
             .as_array()
             .unwrap()
             .iter()
             .filter(|entry| entry["sys"]["id"].to_string() == link_id.to_string())
-            .take(1);
+            .take(1)
+            .next();
 
-        match item.next() {
+        match item {
             Some(entry) => {
                 let mut entry = entry.clone();
                 resolver(&mut entry, includes);
                 entry
             }
-            None => json!({}),
+            None => Value::Null,
         }
     }
 }
