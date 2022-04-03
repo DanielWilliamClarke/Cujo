@@ -6,5 +6,5 @@ mod json_util;
 pub mod models;
 mod query_builder;
 
-pub use contentful_client::{ContentfulClient, ContentfulResult};
+pub use contentful_client::{ContentfulClient, Entries};
 pub use query_builder::QueryBuilder;

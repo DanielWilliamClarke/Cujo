@@ -2,7 +2,7 @@
 
 use contentful::{
     models::{Asset, SystemProperties},
-    ContentfulClient, ContentfulResult, QueryBuilder,
+    ContentfulClient, Entries, QueryBuilder,
 };
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
@@ -42,9 +42,7 @@ impl<'a> CVReader<'a> {
         CVReader { client }
     }
 
-    pub async fn get_about(
-        &self,
-    ) -> Result<Option<ContentfulResult<About>>, Box<dyn std::error::Error>> {
+    pub async fn get_about(&self) -> Result<Option<Entries<About>>, Box<dyn std::error::Error>> {
         let builder = QueryBuilder::new().content_type_is("interests").include(2);
 
         let about = self.client.get_entries::<About>(Some(builder)).await?;
