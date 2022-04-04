@@ -7,6 +7,7 @@ import {
   VerticalTimelineElement,
 } from "react-vertical-timeline-component";
 import breaks from "remark-breaks";
+import { Entries, Media } from "../../model/Includes";
 import { Work } from "../../model/CVModel";
 import { IDateService } from "../../services/DateService";
 import { IconWithDefaultState, IIconService } from "../../services/IconService";
@@ -18,7 +19,7 @@ import "../shared/Portfolio.scss";
 import "./Experience.scss";
 
 type WorkProps = {
-  work: Work[];
+  work: Entries<Work>;
 };
 
 export class Experience extends Component<WorkProps, IconWithDefaultState> {
@@ -27,7 +28,7 @@ export class Experience extends Component<WorkProps, IconWithDefaultState> {
 
   constructor(props: WorkProps, context: {}) {
     super(props, context);
-    this.dateService.format("MMMM YYYY", "DD/MM/YYYY");
+    this.dateService.format("MMMM YYYY", "YYYY-MM-DD");
     this.state = { icon: this.iconService.getWithDefault("work") };
   }
 
@@ -35,14 +36,15 @@ export class Experience extends Component<WorkProps, IconWithDefaultState> {
     return (
       <Section id="experience" title="Professional Experience">
         <VerticalTimeline className="timeline">
-          {this.props.work
+          {this.props.work.entries
             .filter(
-              ({ startDate }: Work) => !this.dateService.IsFuture(startDate)
+              ({ startDate }: Work) =>
+                !this.dateService.IsFuture(startDate.toString())
             )
             .sort(
               (a: Work, b: Work) =>
-                this.dateService.toUnix(b.startDate) -
-                this.dateService.toUnix(a.startDate)
+                this.dateService.toUnix(b.startDate.toString()) -
+                this.dateService.toUnix(a.startDate.toString())
             )
             .map(
               (work: Work, index: number): JSX.Element => (
@@ -50,8 +52,8 @@ export class Experience extends Component<WorkProps, IconWithDefaultState> {
                   className="vertical-timeline-element--work"
                   key={index}
                   date={this.dateService.toRangeWithDuration(
-                    work.startDate,
-                    work.endDate
+                    work.startDate.toString(),
+                    work.endDate?.toString() ?? "Present"
                   )}
                   icon={<this.state.icon />}
                 >
@@ -82,7 +84,7 @@ export class Experience extends Component<WorkProps, IconWithDefaultState> {
                   target="_blank"
                 >
                   <DynamicImage
-                    image={work.logo}
+                    image={work.logo.file.url}
                     alt={work.company}
                     className="centered image-item work-logo"
                   />
@@ -99,10 +101,10 @@ export class Experience extends Component<WorkProps, IconWithDefaultState> {
         </Row>
 
         <Row className="images">
-          {work.images.map((image) => (
+          {work.images.map((image: Media) => (
             <Col className="col-item">
               <DynamicImage
-                image={image}
+                image={image.file.url}
                 alt={`${work.position} - Image not found!`}
                 className="centered image-item"
               />

@@ -7,7 +7,8 @@ import { Component } from "react";
 import { Fade } from "react-awesome-reveal";
 import { Col, Row } from "react-bootstrap";
 import readingTime from "reading-time";
-import { BlogPostEntries, getAsset, Post } from "../../model/BlogPost";
+import { Post } from "../../model/BlogPost";
+import { getAsset, Entries } from "../../model/Includes";
 import { IDateService } from "../../services/DateService";
 import { Lanyard } from "../shared/Lanyard";
 import { Section } from "../shared/Section";
@@ -18,7 +19,7 @@ import "highlight.js/scss/tomorrow-night-eighties.scss";
 
 type BlogProps = {
   id: string;
-  blog: BlogPostEntries;
+  blog: Entries<Post>;
 };
 
 export class BlogPost extends Component<BlogProps> {
@@ -26,7 +27,7 @@ export class BlogPost extends Component<BlogProps> {
 
   constructor(props: BlogProps, context: {}) {
     super(props, context);
-    this.dateService.format("MMMM YYYY", "DD/MM/YYYY");
+    this.dateService.format("Do MMMM YYYY HH:mm:ss");
   }
 
   render(): JSX.Element {

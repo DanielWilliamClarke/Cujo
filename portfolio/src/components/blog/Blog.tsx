@@ -3,7 +3,8 @@ import { Card, Col, Nav, Row } from "react-bootstrap";
 import { resolve } from "inversify-react";
 import { Fade } from "react-awesome-reveal";
 import { IDateService } from "../../services/DateService";
-import { BlogPostEntries, Post } from "../../model/BlogPost";
+import { Post } from "../../model/BlogPost";
+import { Entries } from "../../model/Includes";
 import { Lanyard } from "../shared/Lanyard";
 import { Section } from "../shared/Section";
 import readingTime from "reading-time";
@@ -14,7 +15,7 @@ import "./Blog.scss";
 import { IconWithDefaultState, IIconService } from "../../services/IconService";
 
 export type BlogProps = {
-  blog: BlogPostEntries;
+  blog: Entries<Post>;
 };
 
 export class Blog extends Component<BlogProps, IconWithDefaultState> {

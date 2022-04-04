@@ -1,126 +1,84 @@
 // src/cv/model.rs
 
+use contentful::{models::Asset, Entries};
 use serde::{Deserialize, Serialize};
+use serde_json::Value;
 
-use crate::util::FromEnv;
-
-#[derive(Deserialize, Debug, Clone)]
-pub struct CVConfig {
-    pub data_dir: String,
-}
-impl FromEnv for CVConfig {}
-
-#[derive(Serialize, Deserialize)]
-#[serde(rename_all = "camelCase")]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct CV {
-    pub basics: Basics,
-    pub work: Vec<Work>,
-    pub education: Vec<Education>,
-    pub skills: Skills,
-    pub languages: Vec<Language>,
-    pub interests: Interests,
-    pub projects: Vec<Project>,
+    pub about: Option<Entries<About>>,
+    pub work: Option<Entries<Work>>,
+    pub education: Option<Entries<Education>>,
+    pub skills: Option<Entries<Skills>>,
+    pub projects: Option<Entries<Project>>,
 }
 
-#[derive(Serialize, Deserialize)]
-#[serde(rename_all = "camelCase")]
-pub struct Basics {
+#[derive(Serialize, Deserialize, Debug, Clone)]
+pub struct About {
     pub name: String,
     pub label: String,
     pub email: String,
-    pub images: Vec<String>,
     pub phone: String,
     pub website: String,
-    pub summary: String,
-    pub location: Location,
+    pub about: Value,
+    pub interests: Value,
+    pub images: Vec<Asset>,
     pub profiles: Vec<Profile>,
 }
 
-#[derive(Serialize, Deserialize)]
-#[serde(rename_all = "camelCase")]
-pub struct Location {
-    pub city: String,
-    pub region: String,
-    pub country_code: String,
-}
-
-#[derive(Serialize, Deserialize)]
-#[serde(rename_all = "camelCase")]
-pub struct Profile {
-    pub brand: Brand,
-    pub url: String,
-}
-
-#[derive(Serialize, Deserialize)]
-#[serde(rename_all = "camelCase")]
-pub struct Brand {
-    pub name: String,
-    pub icon: String,
-}
-
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 #[serde(rename_all = "camelCase")]
 pub struct Work {
-    pub company: String,
     pub position: String,
+    pub company: String,
     pub website: String,
     pub start_date: String,
-    pub end_date: String,
-    pub summary: String,
+    pub end_date: Option<String>,
     pub highlights: Vec<String>,
-    pub logo: String,
-    pub images: Vec<String>,
+    pub summary: String,
+    pub logo: Asset,
+    pub images: Vec<Asset>,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 #[serde(rename_all = "camelCase")]
 pub struct Education {
     pub institution: String,
+    pub link: String,
     pub area: String,
     pub study_type: String,
     pub start_date: String,
-    pub end_date: String,
-    pub grade: String,
-    pub summary: String,
-    pub images: Vec<String>,
-    pub link: String,
+    pub end_date: Option<String>,
+    pub grade: Option<String>,
+    pub summary: Value,
+    pub images: Vec<Asset>,
 }
 
-#[derive(Serialize, Deserialize)]
-#[serde(rename_all = "camelCase")]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct Skills {
-    pub summary: String,
-    pub list: Vec<List>,
+    pub summary: Value,
+    pub list: Vec<DevIcon>,
 }
 
-#[derive(Serialize, Deserialize)]
-#[serde(rename_all = "camelCase")]
-pub struct List {
-    pub icon: String,
-    pub name: String,
-}
-
-#[derive(Serialize, Deserialize)]
-#[serde(rename_all = "camelCase")]
-pub struct Language {
-    pub language: String,
-    pub fluency: String,
-}
-
-#[derive(Serialize, Deserialize)]
-#[serde(rename_all = "camelCase")]
-pub struct Interests {
-    pub summary: String,
-    pub list: Vec<String>,
-}
-
-#[derive(Serialize, Deserialize)]
-#[serde(rename_all = "camelCase")]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct Project {
+    pub rank: i32,
     pub name: String,
     pub link: String,
-    pub image: String,
-    pub summary: String,
+    pub image: Asset,
+    pub summary: Value,
     pub tags: Vec<String>,
-    pub icon: Brand,
+    pub icon: DevIcon,
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone)]
+pub struct Profile {
+    pub url: String,
+    pub brand: DevIcon,
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone)]
+pub struct DevIcon {
+    pub name: String,
+    pub icon: String,
 }

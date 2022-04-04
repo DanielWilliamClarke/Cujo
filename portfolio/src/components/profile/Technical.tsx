@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { Row, Col } from "react-bootstrap";
-import ReactMarkdown from "react-markdown";
-import breaks from "remark-breaks";
 import { Zoom } from "react-awesome-reveal";
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 
+import { Entries } from "../../model/Includes";
 import { Skills, DevIcon } from "../../model/CVModel";
 import { DevIconName } from "../shared/DevIcon";
 import { Section } from "../shared/Section";
@@ -12,7 +12,7 @@ import "../shared/Portfolio.scss";
 import "./Technical.scss";
 
 type TechnicalProps = {
-  techical: Skills;
+  skills: Entries<Skills>;
 };
 
 type SkillsState = {
@@ -30,10 +30,7 @@ export class Technical extends Component<TechnicalProps, SkillsState> {
       <Section id="skills" title="Skills and Competencies">
         <Row className="section-content">
           <Col>
-            <ReactMarkdown
-              children={this.props.techical.summary}
-              remarkPlugins={[breaks]}
-            />
+            {documentToReactComponents(this.props.skills.entries[0].summary)}
           </Col>
         </Row>
 
@@ -50,7 +47,7 @@ export class Technical extends Component<TechnicalProps, SkillsState> {
 
         <Row className="skill-items">
           <Zoom triggerOnce cascade damping={0.01} className="col">
-            {this.props.techical.list
+            {this.props.skills.entries[0].list
               .filter(({ name }: DevIcon) => this.filterSkills(name))
               .map((icon: DevIcon) => (
                 <DevIconName icon={icon} />

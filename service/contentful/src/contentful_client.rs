@@ -4,7 +4,7 @@ use std::collections::HashMap;
 
 use crate::{http_client, json_util::merge, query_builder::QueryBuilder};
 
-use serde::{Deserialize, Serialize};
+use serde::{de::DeserializeOwned, Deserialize, Serialize};
 use serde_json::Value;
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
@@ -35,7 +35,7 @@ impl ContentfulClient {
         query_builder: Option<QueryBuilder>,
     ) -> Result<Option<Entries<T>>, Box<dyn std::error::Error>>
     where
-        for<'a> T: Serialize + Deserialize<'a>,
+        T: Serialize + DeserializeOwned,
     {
         let query_string = match query_builder {
             Some(builder) => builder.build(),
@@ -51,7 +51,7 @@ impl ContentfulClient {
         query_string: &str,
     ) -> Result<Option<Entries<T>>, Box<dyn std::error::Error>>
     where
-        for<'a> T: Serialize + Deserialize<'a>,
+        for<'a> T: Serialize + DeserializeOwned,
     {
         log::debug!("query_string: {:?}", &query_string);
         let url = self.get_query_string_url(query_string);
