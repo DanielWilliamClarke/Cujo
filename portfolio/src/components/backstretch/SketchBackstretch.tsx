@@ -17,7 +17,7 @@ export class SketchBackstretch extends Component<CVProps> {
 
   constructor(props: CVProps, context: {}) {
     super(props, context);
-    this.dateService.format("MMMM YYYY", "DD/MM/YYYY");
+    this.dateService.format("MMMM YYYY", "YYYY-MM-DD");
     this.myRef = React.createRef();
   }
 
@@ -26,10 +26,10 @@ export class SketchBackstretch extends Component<CVProps> {
   }
 
   render() {
-    const currentRole = this.props.cv.work.sort(
+    const currentRole = this.props.cv.work.entries.sort(
       (a, b) =>
-        this.dateService.toUnix(b.startDate) -
-        this.dateService.toUnix(a.startDate)
+        this.dateService.toUnix(b.startDate.toString()) -
+        this.dateService.toUnix(a.startDate.toString())
     )[0];
 
     return (
@@ -42,16 +42,16 @@ export class SketchBackstretch extends Component<CVProps> {
               className="centered image-item my-logo"
             />
             <Row className="backstretch-main">
-              <Col>{this.props.cv.basics.name}</Col>
+              <Col>{this.props.cv.about.entries[0].name}</Col>
             </Row>
             <div className="centered line"></div>
             <Row className="backstretch-tag">
-              <Col>{this.props.cv.basics.label}</Col>
+              <Col>{this.props.cv.about.entries[0].label}</Col>
             </Row>
             <Row className="backstretch-logo">
               <Col>
                 <DynamicImage
-                  image={currentRole.logo}
+                  image={currentRole.logo.file.url}
                   alt={currentRole.company}
                   className="centered image-item work-logo"
                 />

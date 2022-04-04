@@ -1,9 +1,5 @@
 import { Document } from '@contentful/rich-text-types';
-
-export interface BlogPostEntries {
-  entries: Post[],
-  includes: Includes
-}
+import { Media } from './Includes';
 
 export interface Post {
   id:      string;
@@ -12,69 +8,10 @@ export interface Post {
   excerpt: string;
   media?:  Media;
   tags:    string[];
-  sys:    BlogPostSys;
+  sys:    Sys;
 }
 
-export interface Includes {
-  Asset: Asset[];
-}
-
-export interface Asset {
-  fields:   Media;
-  metadata: Metadata;
-  sys:      AssetSys;
-}
-
-export interface Media {
-  description: string;
-  file:        File;
-  title:       string;
-}
-
-export interface File {
-  contentType: string;
-  details:     Details;
-  fileName:    string;
-  url:         string;
-  uploadUrl?:  null;
-}
-
-export interface Details {
-  image: Image;
-  size:  number;
-}
-
-export interface Image {
-  height: number;
-  width:  number;
-}
-
-export interface Metadata {
-  tags: any[];
-}
-
-export interface AssetSys {
-  createdAt:   Date;
-  environment: Environment;
-  id:          string;
-  locale:      string;
-  revision:    number;
-  space:       Environment;
-  type:        string;
-  updatedAt:   Date;
-}
-
-export interface Environment {
-  sys: EnvironmentSys;
-}
-
-export interface EnvironmentSys {
-  id:       string;
-  linkType: string;
-  type:     string;
-}
-
-export interface BlogPostSys {
+export interface Sys {
   id:        string;
   version:   null;
   revision:  number;
@@ -82,7 +19,3 @@ export interface BlogPostSys {
   updatedAt: Date;
 }
 
-export const getAsset =
-  (includes: Includes, id: string): Media | undefined =>
-    includes.Asset.find((asset: Asset) => asset.sys.id === id)
-    ?.fields

@@ -1,89 +1,75 @@
-export interface Location {
-  city: string;
-  countryCode: string;
-  region: string;
-}
-
-export interface Profile {
-  url: string;
-  brand: DevIcon;
-}
-
-export interface Basics {
-  name: string;
-  label: string;
-  images: string[];
-  email: string;
-  phone: string;
-  website: string;
-  summary: string;
-  location: Location;
-  profiles: Profile[];
-}
-
-export interface Work {
-  company: string;
-  position: string;
-  website: string;
-  startDate: string;
-  endDate: string;
-  summary: string;
-  highlights: string[];
-  logo: string;
-  images: string[];
-}
-
-export interface Education {
-  institution: string;
-  area: string;
-  studyType: string;
-  startDate: string;
-  endDate: string;
-  grade: string;
-  summary: string;
-  images: string[];
-  link: string;
-}
-
-export interface DevIcon {
-  icon: string;
-  name: string
-}
-
-export interface Skills {
-  summary: string;
-  list: DevIcon[]
-}
-
-export interface Language {
-  language: string;
-  fluency: string;
-}
-
-export interface Project {
-  name: string;
-  link: string;
-  image: string;
-  summary: string;
-  tags: string[];
-  icon: DevIcon;
-}
-
-export interface Interests {
-  summary: string;
-  list: string[];
-}
-
-export interface CV {
-  basics: Basics;
-  work: Work[];
-  education: Education[];
-  skills: Skills;
-  languages: Language[];
-  interests: Interests;
-  projects: Project[];
-}
+import { Entries, Media } from "./Includes";
+import { Document } from '@contentful/rich-text-types';
 
 export type CVProps = {
   cv: CV;
 };
+export interface CV {
+  about: Entries<About>;
+  work: Entries<Work>;
+  education: Entries<Education>;
+  skills: Entries<Skills>;
+  projects: Entries<Project>;
+}
+
+export interface About {
+  name:      string;
+  label:     string;
+  email:     string;
+  phone:     string;
+  website:   string;
+  about:     Document;
+  interests: Document;
+  images:    Media[];
+  profiles:  Profile[];
+}
+
+export interface Work {
+  position:   string;
+  company:    string;
+  website:    string;
+  startDate:  Date;
+  endDate:    Date;
+  highlights: string[];
+  summary:    string;
+  logo:       Media;
+  images:     Media[];
+}
+
+export interface Education {
+  institution: string;
+  link:        string;
+  area:        string;
+  studyType:   string;
+  startDate:   Date;
+  endDate:     Date;
+  grade:       string;
+  summary:     Document;
+  images:      Media[];
+}
+
+export interface Skills {
+  summary: Document;
+  list:    DevIcon[];
+}
+
+export interface Project {
+  rank:    number;
+  name:    string;
+  link:    string;
+  image:   Media;
+  summary: Document;
+  tags:    string[];
+  icon:    DevIcon;
+}
+
+export interface Profile {
+  url:   string;
+  brand: DevIcon;
+}
+
+export interface DevIcon {
+  name: string;
+  icon: string;
+}
+

@@ -1,9 +1,8 @@
 import { Component } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { Fade } from "react-awesome-reveal";
-import ReactMarkdown from "react-markdown";
-import breaks from "remark-breaks";
 
+import { Entries } from "../../model/Includes";
 import { Project } from "../../model/CVModel";
 import { DevIconName } from "../shared/DevIcon";
 import { DynamicImage } from "../shared/DynamicImage";
@@ -12,16 +11,19 @@ import { Section } from "../shared/Section";
 
 import "../shared/Portfolio.scss";
 import "./Projects.scss";
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 
 type ProjectProps = {
-  projects: Project[];
+  projects: Entries<Project>;
 };
 
 export class Projects extends Component<ProjectProps> {
   render(): JSX.Element {
     return (
       <Section id="projects" title="Personal Projects" noSeparator>
-        {this.props.projects.map(this.project.bind(this))}
+        {this.props.projects.entries
+          .sort((pA, pB) => pA.rank - pB.rank)
+          .map(this.project.bind(this))}
       </Section>
     );
   }
@@ -43,7 +45,7 @@ export class Projects extends Component<ProjectProps> {
   private projectImage(p: Project): JSX.Element {
     return (
       <Col className="project-image">
-        {p.image.length && (
+        {p.image && (
           <a
             className="image-link"
             href={p.link}
@@ -51,7 +53,7 @@ export class Projects extends Component<ProjectProps> {
             target="_blank"
           >
             <DynamicImage
-              image={p.image}
+              image={p.image.file.url}
               alt={`${p.name} project image`}
               className="centered image-item"
             />
@@ -69,11 +71,7 @@ export class Projects extends Component<ProjectProps> {
         <div className="content">
           <h2>{p.name}</h2>
           <Lanyard tags={p.tags} />
-          <ReactMarkdown
-            className="summary"
-            children={p.summary}
-            remarkPlugins={[breaks]}
-          />
+          {documentToReactComponents(p.summary)}
         </div>
       </Col>
     );

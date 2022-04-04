@@ -59,14 +59,17 @@ export class ImageLocator {
   }
 
   private static isUrl(image: string): boolean {
-    let url;
+    if (image.startsWith("//images.")) {
+      return true;
+    }
 
+    let url;
     try {
       url = new URL(image);
     } catch (_) {
       return false;
     }
 
-    return url.protocol === "http:" || url.protocol === "https:";
+    return ["http:", "https:"].includes(url.protocol);
   }
 }

@@ -1,13 +1,13 @@
 import { resolve } from "inversify-react";
 import { Component } from "react";
 import { Col, Row } from "react-bootstrap";
-import ReactMarkdown from "react-markdown";
 import {
   VerticalTimeline,
   VerticalTimelineElement,
 } from "react-vertical-timeline-component";
-import breaks from "remark-breaks";
-import { Education as EducationData } from "../../model/CVModel";
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import { Entries, Media } from "../../model/Includes";
+import { Education as EducationModel } from "../../model/CVModel";
 import { IDateService } from "../../services/DateService";
 import { IconWithDefaultState, IIconService } from "../../services/IconService";
 import { DynamicImage } from "../shared/DynamicImage";
@@ -18,7 +18,7 @@ import "../shared/Portfolio.scss";
 import "./Education.scss";
 
 type EducationProps = {
-  education: EducationData[];
+  education: Entries<EducationModel>;
 };
 
 export class Education extends Component<EducationProps, IconWithDefaultState> {
@@ -27,7 +27,7 @@ export class Education extends Component<EducationProps, IconWithDefaultState> {
 
   constructor(props: EducationProps, context: {}) {
     super(props, context);
-    this.dateService.format("MMMM YYYY", "DD/MM/YYYY");
+    this.dateService.format("MMMM YYYY", "YYYY-MM-DD");
     this.state = { icon: this.iconService.getWithDefault("school") };
   }
 
@@ -35,17 +35,20 @@ export class Education extends Component<EducationProps, IconWithDefaultState> {
     return (
       <Section id="education" title="Education">
         <VerticalTimeline className="timeline">
-          {this.props.education
+          {this.props.education.entries
             .sort(
               (a, b) =>
-                this.dateService.toUnix(b.startDate) -
-                this.dateService.toUnix(a.startDate)
+                this.dateService.toUnix(b.startDate.toString()) -
+                this.dateService.toUnix(a.startDate.toString())
             )
-            .map((e: EducationData, index: number) => (
+            .map((e: EducationModel, index: number) => (
               <VerticalTimelineElement
                 className="vertical-timeline-element--work"
                 key={index}
-                date={this.dateService.toRange(e.startDate, e.endDate)}
+                date={this.dateService.toRange(
+                  e.startDate.toString(),
+                  e.endDate.toString()
+                )}
                 icon={<this.state.icon />}
               >
                 {this.renderInstitution(e)}
@@ -56,7 +59,7 @@ export class Education extends Component<EducationProps, IconWithDefaultState> {
     );
   }
 
-  private renderInstitution(e: EducationData): JSX.Element {
+  private renderInstitution(e: EducationModel): JSX.Element {
     return (
       <>
         {e.grade !== "" && <Lanyard tags={[e.grade]} />}
@@ -73,17 +76,15 @@ export class Education extends Component<EducationProps, IconWithDefaultState> {
         </Row>
 
         <Row>
-          <Col>
-            <ReactMarkdown children={e.summary} remarkPlugins={[breaks]} />
-          </Col>
+          <Col>{documentToReactComponents(e.summary)}</Col>
         </Row>
 
         <Row className="images">
-          {e.images.map((image) => (
+          {e.images.map((image: Media) => (
             <Col className="col-item">
               <a href={e.link} rel="noopener noreferrer" target="_blank">
                 <DynamicImage
-                  image={image}
+                  image={image.file.url}
                   alt={`${e.institution} - Image not found!`}
                   className="centered image-item"
                 />

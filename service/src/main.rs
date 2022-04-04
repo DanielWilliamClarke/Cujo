@@ -12,7 +12,6 @@ mod cv;
 mod server;
 mod util;
 
-use cv::CVConfig;
 use server::{init, ContentfulConfig, ServerConfig};
 use util::FromEnv;
 
@@ -22,12 +21,10 @@ async fn main() -> std::io::Result<()> {
     env_logger::init_from_env(env_logger::Env::new().default_filter_or("info"));
 
     let server_config = ServerConfig::from_env();
-    let cv_config = CVConfig::from_env();
     let contentful_config = ContentfulConfig::from_env();
 
     let mut server = HttpServer::new(move || {
         App::new()
-            .app_data(Data::new(cv_config.clone()))
             .app_data(Data::new(contentful_config.clone()))
             .wrap(Logger::default())
             .configure(init)

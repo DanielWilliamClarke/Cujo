@@ -15,13 +15,14 @@ import { Contact } from "./components/contact/Contact";
 import NavPanel from "./components/nav/NavPanel";
 import { SharePanel } from "./components/nav/SharePanel";
 import { Profile } from "./components/Profile";
-import { BlogPostEntries } from "./model/BlogPost";
+import { Entries } from "./model/Includes";
 import { CV } from "./model/CVModel";
 import { ICujoService } from "./services/CujoService";
+import { Post } from "./model/BlogPost";
 
 export type AppState = {
   cv: CV | undefined;
-  blog: BlogPostEntries | undefined;
+  blog: Entries<Post> | undefined;
 };
 
 type BlogRouteParams = { id: string };
@@ -70,7 +71,7 @@ class App extends Component<RouteComponentProps, AppState> {
           </Switch>
           {this.state.blog && <Blog blog={this.state.blog} />}
           <footer id="footer">
-            <Contact profiles={this.state.cv.basics.profiles} />
+            <Contact profiles={this.state.cv.about.entries[0].profiles} />
             <Copyright />
           </footer>
         </div>

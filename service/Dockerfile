@@ -16,7 +16,6 @@ WORKDIR /cujo
 
 COPY --from=build /usr/local/cargo/bin/cujo /usr/local/bin/cujo
 COPY --from=build /cujo/.env .
-COPY --from=build /cujo/data.json .
 
 RUN adduser user && \
   chown -R user /cujo
