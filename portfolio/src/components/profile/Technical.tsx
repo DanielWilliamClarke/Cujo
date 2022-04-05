@@ -41,7 +41,7 @@ export class Technical extends Component<TechnicalProps, SkillsState> {
               type="text"
               value={this.state.search}
               onChange={this.handleSearchInput.bind(this)}
-              placeholder="Search for a skill!"
+              placeholder="Search"
             />
           </Col>
         </Row>
