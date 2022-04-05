@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Row, Col, Carousel } from "react-bootstrap";
 import { Fade, Zoom } from "react-awesome-reveal";
 
-import { Entries, Media } from "../../model/Includes";
+import { Entry, Media } from "../../model/Includes";
 import { About as AboutModel } from "../../model/CVModel";
 import { DynamicImage } from "../shared/DynamicImage";
 import { Section } from "../shared/Section";
@@ -12,7 +12,7 @@ import "./About.scss";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 
 type AboutProps = {
-  about: Entries<AboutModel>;
+  about: Entry<AboutModel>;
 };
 
 export class About extends Component<AboutProps> {
@@ -28,7 +28,7 @@ export class About extends Component<AboutProps> {
               nextLabel={""}
               prevLabel={""}
             >
-              {this.props.about.entries[0].images.map((media: Media) => (
+              {this.props.about.entry.images.map((media: Media) => (
                 <Carousel.Item>
                   <DynamicImage
                     image={media.file.url}
@@ -45,14 +45,14 @@ export class About extends Component<AboutProps> {
           <Col className="text-column">
             <Fade triggerOnce direction="left">
               <h4>A little about me!</h4>
-              {documentToReactComponents(this.props.about.entries[0].about)}
+              {documentToReactComponents(this.props.about.entry.about)}
             </Fade>
           </Col>
 
           <Col className="text-column">
             <Fade triggerOnce direction="right">
               <h4>My Interests</h4>
-              {documentToReactComponents(this.props.about.entries[0].interests)}
+              {documentToReactComponents(this.props.about.entry.interests)}
             </Fade>
           </Col>
         </Row>
@@ -60,8 +60,8 @@ export class About extends Component<AboutProps> {
         <Row className="section-content">
           <Zoom triggerOnce damping={0.01}>
             <Col className="mailto">
-              <a href={`mailto:${this.props.about.entries[0].email}`}>
-                {this.props.about.entries[0].email}
+              <a href={`mailto:${this.props.about.entry.email}`}>
+                {this.props.about.entry.email}
               </a>
             </Col>
           </Zoom>

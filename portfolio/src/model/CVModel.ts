@@ -1,14 +1,15 @@
-import { Entries, Media } from "./Includes";
+import { Entries, Entry, Media } from "./Includes";
 import { Document } from '@contentful/rich-text-types';
 
 export type CVProps = {
   cv: CV;
 };
+
 export interface CV {
-  about: Entries<About>;
+  about: Entry<About>;
   work: Entries<Work>;
   education: Entries<Education>;
-  skills: Entries<Skills>;
+  skills: Entry<Skills>;
   projects: Entries<Project>;
 }
 

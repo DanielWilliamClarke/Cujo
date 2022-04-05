@@ -3,9 +3,14 @@ export interface Entries<T> {
   includes: Includes
 }
 
+export interface Entry<T> {
+  entry: T,
+  includes: Includes
+}
+
 export interface Includes {
   Asset?: Asset[];
-  Entry?: Entry[];
+  Entry?: RefEntry[];
 }
 
 export interface Asset {
@@ -14,7 +19,7 @@ export interface Asset {
   sys:      Sys;
 }
 
-export interface Entry {
+export interface RefEntry {
   fields:   any;
   metadata: Metadata;
   sys:      Sys;

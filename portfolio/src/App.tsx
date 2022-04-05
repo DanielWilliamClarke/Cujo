@@ -31,10 +31,12 @@ class App extends Component<RouteComponentProps, AppState> {
   @resolve("CujoService") private readonly cujoService!: ICujoService;
 
   async componentDidMount() {
-    this.cujoService.FetchCV().then((cv: CV) => this.setState({ cv }));
-    this.cujoService
-      .FetchBlogPosts()
-      .then((blog: Entries<Post>) => this.setState({ blog }));
+    const [cv, blog] = await Promise.all([
+      this.cujoService.FetchCV(),
+      this.cujoService.FetchBlogPosts(),
+    ]);
+
+    this.setState({ cv, blog });
   }
 
   render(): JSX.Element {
@@ -71,7 +73,7 @@ class App extends Component<RouteComponentProps, AppState> {
           </Switch>
           {this.state.blog && <Blog blog={this.state.blog} />}
           <footer id="footer">
-            <Contact profiles={this.state.cv.about.entries[0].profiles} />
+            <Contact profiles={this.state.cv.about.entry.profiles} />
             <Copyright />
           </footer>
         </div>

@@ -13,6 +13,12 @@ pub struct Entries<T> {
     pub includes: Option<Value>,
 }
 
+#[derive(Serialize, Deserialize, Debug, Clone)]
+pub struct Entry<T> {
+    pub entry: T,
+    pub includes: Option<Value>,
+}
+
 pub struct ContentfulClient {
     delivery_api_access_token: String,
     space_id: String,

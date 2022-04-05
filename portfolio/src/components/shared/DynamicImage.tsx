@@ -60,7 +60,7 @@ export class ImageLocator {
 
   private static isUrl(image: string): boolean {
     if (image.startsWith("//images.")) {
-      return true;
+      image = `https:${image}`;
     }
 
     let url;

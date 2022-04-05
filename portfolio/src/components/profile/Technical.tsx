@@ -3,7 +3,7 @@ import { Row, Col } from "react-bootstrap";
 import { Zoom } from "react-awesome-reveal";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 
-import { Entries } from "../../model/Includes";
+import { Entry } from "../../model/Includes";
 import { Skills, DevIcon } from "../../model/CVModel";
 import { DevIconName } from "../shared/DevIcon";
 import { Section } from "../shared/Section";
@@ -12,7 +12,7 @@ import "../shared/Portfolio.scss";
 import "./Technical.scss";
 
 type TechnicalProps = {
-  skills: Entries<Skills>;
+  skills: Entry<Skills>;
 };
 
 type SkillsState = {
@@ -30,7 +30,7 @@ export class Technical extends Component<TechnicalProps, SkillsState> {
       <Section id="skills" title="Skills and Competencies">
         <Row className="section-content">
           <Col>
-            {documentToReactComponents(this.props.skills.entries[0].summary)}
+            {documentToReactComponents(this.props.skills.entry.summary)}
           </Col>
         </Row>
 
@@ -47,7 +47,7 @@ export class Technical extends Component<TechnicalProps, SkillsState> {
 
         <Row className="skill-items">
           <Zoom triggerOnce cascade damping={0.01} className="col">
-            {this.props.skills.entries[0].list
+            {this.props.skills.entry.list
               .filter(({ name }: DevIcon) => this.filterSkills(name))
               .map((icon: DevIcon) => (
                 <DevIconName icon={icon} />

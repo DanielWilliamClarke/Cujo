@@ -1,15 +1,15 @@
 // src/cv/model.rs
 
-use contentful::{models::Asset, Entries};
+use contentful::{models::Asset, Entries, Entry};
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct CV {
-    pub about: Option<Entries<About>>,
+    pub about: Option<Entry<About>>,
     pub work: Option<Entries<Work>>,
     pub education: Option<Entries<Education>>,
-    pub skills: Option<Entries<Skills>>,
+    pub skills: Option<Entry<Skills>>,
     pub projects: Option<Entries<Project>>,
 }
 
