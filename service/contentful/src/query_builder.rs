@@ -8,10 +8,8 @@ pub struct QueryBuilder {
 
 impl QueryBuilder {
     pub fn new() -> QueryBuilder {
-        let query_string_values = HashMap::new();
-
         QueryBuilder {
-            query_string_values,
+            query_string_values: HashMap::new(),
         }
     }
 
