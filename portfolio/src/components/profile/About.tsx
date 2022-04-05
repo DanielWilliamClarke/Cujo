@@ -44,14 +44,12 @@ export class About extends Component<AboutProps> {
         <Row className="section-content">
           <Col className="text-column">
             <Fade triggerOnce direction="left">
-              <h4>A little about me!</h4>
               {documentToReactComponents(this.props.about.entry.about)}
             </Fade>
           </Col>
 
           <Col className="text-column">
             <Fade triggerOnce direction="right">
-              <h4>My Interests</h4>
               {documentToReactComponents(this.props.about.entry.interests)}
             </Fade>
           </Col>
