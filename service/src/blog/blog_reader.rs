@@ -1,25 +1,10 @@
 // src/blog/blog_reader.rs
 
 use async_trait::async_trait;
-use contentful::{
-    models::{Asset, SystemProperties},
-    ContentfulClient, Entries, QueryBuilder,
-};
-use serde::{Deserialize, Serialize};
-use serde_json::Value;
+use contentful::{ContentfulClient, Entries, QueryBuilder};
 
+use super::BlogPost;
 use crate::util::Reader;
-
-#[derive(Serialize, Deserialize, Debug, Clone)]
-pub struct BlogPost {
-    id: String,
-    title: String,
-    content: Value,
-    excerpt: Option<String>,
-    media: Option<Asset>,
-    tags: Vec<String>,
-    sys: SystemProperties,
-}
 
 pub struct BlogReader {
     client: Box<ContentfulClient>,
