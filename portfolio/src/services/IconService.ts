@@ -2,6 +2,7 @@ import { injectable } from "inversify";
 import { IconType } from "react-icons";
 import { FaDeviantart } from "react-icons/fa";
 import { HiLightBulb, HiLightningBolt } from "react-icons/hi";
+import { SiNotion, SiAndroidstudio, SiContentful, SiXcode } from "react-icons/si";
 import { MdBolt, MdBook, MdCampaign, MdFingerprint, MdHardware, MdHistoryEdu, MdHome, MdLoyalty, MdReportProblem, MdSchool } from "react-icons/md";
 
 export interface IIconService {
@@ -37,7 +38,11 @@ export class IconService implements IIconService {
     work: HiLightningBolt,
     school: HiLightBulb,
 
-    DeviantArt: FaDeviantart
+    DeviantArt: FaDeviantart,
+    Notion: SiNotion,
+    "Android Studio": SiAndroidstudio,
+    Contentful: SiContentful,
+    XCode: SiXcode
   }
 
   get(id: string): IconType | undefined {
