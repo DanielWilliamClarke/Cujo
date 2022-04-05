@@ -17,20 +17,24 @@ impl<'a> CVReader<'a> {
 
     pub async fn get_cv(&self) -> Result<CV, Box<dyn std::error::Error>> {
         let (about, work, education, skills, projects) = try_join!(
-            self.get_cv_entries::<About>("interests"),
+            self.get_cv_entry::<About>("interests", 0),
             self.get_cv_entries::<Work>("work"),
             self.get_cv_entries::<Education>("education"),
-            self.get_cv_entries::<Skills>("skills"),
+            self.get_cv_entry::<Skills>("skills", 0),
             self.get_cv_entries::<Project>("project"),
         )?;
 
         Ok(CV {
-            about: self.extract_entry(about, 0),
+            about,
             work,
             education,
-            skills: self.extract_entry(skills, 0),
+            skills,
             projects,
         })
+    }
+
+    fn build_query(&self, entries_type: &str) -> Option<QueryBuilder> {
+        Some(QueryBuilder::new().content_type_is(entries_type).include(2))
     }
 
     async fn get_cv_entries<T>(
@@ -40,22 +44,22 @@ impl<'a> CVReader<'a> {
     where
         T: Serialize + DeserializeOwned,
     {
-        let builder = QueryBuilder::new().content_type_is(entries_type).include(2);
-
-        self.client.get_entries::<T>(Some(builder)).await
+        self.client
+            .get_entries::<T>(self.build_query(entries_type))
+            .await
     }
 
-    fn extract_entry<T>(&self, entries: Option<Entries<T>>, index: usize) -> Option<Entry<T>>
+    async fn get_cv_entry<T>(
+        &self,
+        entries_type: &str,
+        index: usize,
+    ) -> Result<Option<Entry<T>>, Box<dyn std::error::Error>>
     where
         T: Serialize + DeserializeOwned + Clone,
     {
-        match entries {
-            Some(Entries { entries, includes }) => Some(Entry {
-                entry: entries[index].clone(),
-                includes,
-            }),
-            None => None,
-        }
+        self.client
+            .get_entry::<T>(self.build_query(entries_type), index)
+            .await
     }
 }
 

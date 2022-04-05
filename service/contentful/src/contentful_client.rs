@@ -36,6 +36,23 @@ impl ContentfulClient {
         }
     }
 
+    pub async fn get_entry<T>(
+        &self,
+        query_builder: Option<QueryBuilder>,
+        index: usize,
+    ) -> Result<Option<Entry<T>>, Box<dyn std::error::Error>>
+    where
+        T: Serialize + DeserializeOwned + Clone,
+    {
+        match self.get_entries::<T>(query_builder).await {
+            Ok(Some(Entries { entries, includes })) => Ok(Some(Entry {
+                entry: entries[index].clone(),
+                includes,
+            })),
+            _ => Ok(None),
+        }
+    }
+
     pub async fn get_entries<T>(
         &self,
         query_builder: Option<QueryBuilder>,
