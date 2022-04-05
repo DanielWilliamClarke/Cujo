@@ -6,7 +6,6 @@ use futures::try_join;
 use serde::{de::DeserializeOwned, Serialize};
 
 use super::{About, Education, Project, Skills, Work, CV};
-
 use crate::util::Reader;
 
 pub struct CVReader {
