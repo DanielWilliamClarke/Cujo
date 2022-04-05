@@ -197,9 +197,7 @@ impl ContentfulClient {
             .as_array()
             .unwrap()
             .iter()
-            .filter(|entry| entry["sys"]["id"].to_string() == link_id.to_string())
-            .take(1)
-            .next();
+            .find(|entry| entry["sys"]["id"].to_string() == link_id.to_string());
 
         match item {
             Some(entry) => {

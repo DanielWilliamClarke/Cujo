@@ -47,6 +47,7 @@
 
     .project-image {
       .image-link {
+        transition: 0.5s;
         display: inline-block;
         position: relative;
         width: 100%;
@@ -79,6 +80,8 @@
         }
 
         &:hover {
+          transform: scale(1.05);
+
           .overlay {
             opacity: 0.7;
           }

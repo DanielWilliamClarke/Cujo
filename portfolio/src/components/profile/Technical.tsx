@@ -37,6 +37,7 @@ export class Technical extends Component<TechnicalProps, SkillsState> {
         <Row>
           <Col className="section-content centered search">
             <input
+              className="skills-input"
               type="text"
               value={this.state.search}
               onChange={this.handleSearchInput.bind(this)}

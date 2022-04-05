@@ -74,8 +74,7 @@ export class Experience extends Component<WorkProps, IconWithDefaultState> {
         <Row className="header">
           <Col className="headline">
             <h3>
-              <span>{work.position}</span>
-              <span>@</span>
+              <span className="at">{work.position}</span>
               <span>
                 <a
                   title={work.company}

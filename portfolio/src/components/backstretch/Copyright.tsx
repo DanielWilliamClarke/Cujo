@@ -12,11 +12,12 @@ export class Copyright extends Component<{}> {
 
   render(): JSX.Element {
     return (
-      <section className="section copyright">
+      <section className="section copyright-footer">
         <Container fluid>
           <Row>
             <Col>
-              Copyright © {this.dateService.CurrentYear()} Daniel Clarke
+              <span className="copyright">Copyright</span>
+              <span>{this.dateService.CurrentYear()} Daniel Clarke</span>
             </Col>
           </Row>
           <div className="centered short-line" />

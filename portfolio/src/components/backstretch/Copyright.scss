@@ -1,7 +1,15 @@
 @import "../shared/Palette.scss";
 
-.copyright {
+.copyright-footer {
   background-color: $col-bg-light !important;
+
+  .row {
+    margin-bottom: 10px;
+  }
+
+  .copyright:after {
+    color: $col-main-brand !important;
+  }
 
   .short-line {
     background-color: $col-main-brand !important;

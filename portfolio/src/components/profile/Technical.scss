@@ -21,6 +21,22 @@
       margin: 0.2rem;
     }
   }
+
+  .skills-input {
+    transition: 0.5s;
+    border-radius: 6px;
+    background: $col-bg-light;
+    color: $col-text-main;
+    border: 1px solid $col-bg-dark;
+    width: 50%;
+    font-size: 2em;
+    margin: 10px 0;
+    text-align: center;
+
+    &:focus-within {
+      width: 100%;
+    }
+  }
 }
 
 @media screen and (max-width: 700px) {
