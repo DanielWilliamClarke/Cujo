@@ -19,20 +19,24 @@ pub struct Entry<T> {
     pub includes: Option<Value>,
 }
 
-pub struct ContentfulClient {
-    delivery_api_access_token: String,
+#[derive(Deserialize, Debug, Clone)]
+pub struct ContentfulConfig {
+    access_token: String,
     space_id: String,
+    environment: String,
+}
+
+#[derive(Clone)]
+pub struct ContentfulClient {
+    config: ContentfulConfig,
     base_url: String,
-    environment_id: String,
 }
 
 impl ContentfulClient {
-    pub fn new(delivery_api_access_token: &str, space_id: &str, environment_id: &str) -> Self {
+    pub fn new(config: ContentfulConfig) -> Self {
         ContentfulClient {
+            config,
             base_url: "https://cdn.contentful.com/spaces".into(),
-            delivery_api_access_token: delivery_api_access_token.into(),
-            space_id: space_id.into(),
-            environment_id: environment_id.into(),
         }
     }
 
@@ -79,7 +83,7 @@ impl ContentfulClient {
         log::debug!("query_string: {:?}", &query_string);
         let url = self.get_query_string_url(query_string);
 
-        let response = http_client::get::<Value>(&url, &self.delivery_api_access_token)
+        let response = http_client::get::<Value>(&url, &self.config.access_token)
             .await?
             .unwrap_or(Value::Null);
 
@@ -105,8 +109,8 @@ impl ContentfulClient {
         format!(
             "{base_url}/{space_id}/environments/{environment}/entries{query_string}",
             base_url = &self.base_url,
-            space_id = &self.space_id,
-            environment = &self.environment_id,
+            space_id = &self.config.space_id,
+            environment = &self.config.environment,
             query_string = &query_string
         )
     }

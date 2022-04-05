@@ -1,6 +1,7 @@
 // src/server/config.rs
 
 use crate::util::FromEnv;
+use contentful::ContentfulConfig;
 use serde::Deserialize;
 
 #[derive(Deserialize, Debug, Clone)]
@@ -10,10 +11,4 @@ pub struct ServerConfig {
 }
 impl FromEnv for ServerConfig {}
 
-#[derive(Deserialize, Debug, Clone)]
-pub struct ContentfulConfig {
-    pub access_token: String,
-    pub space_id: String,
-    pub environment: String,
-}
 impl FromEnv for ContentfulConfig {}

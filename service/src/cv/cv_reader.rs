@@ -1,36 +1,23 @@
 // src/blog/blog_reader.rs
 
+use async_trait::async_trait;
 use contentful::{ContentfulClient, Entries, Entry, QueryBuilder};
 use futures::try_join;
 use serde::{de::DeserializeOwned, Serialize};
 
 use super::{About, Education, Project, Skills, Work, CV};
 
-pub struct CVReader<'a> {
-    client: &'a ContentfulClient,
+use crate::util::Reader;
+
+pub struct CVReader {
+    client: Box<ContentfulClient>,
 }
 
-impl<'a> CVReader<'a> {
-    pub fn new(client: &'a ContentfulClient) -> Self {
-        CVReader { client }
-    }
-
-    pub async fn get_cv(&self) -> Result<CV, Box<dyn std::error::Error>> {
-        let (about, work, education, skills, projects) = try_join!(
-            self.get_cv_entry::<About>("interests", 0),
-            self.get_cv_entries::<Work>("work"),
-            self.get_cv_entries::<Education>("education"),
-            self.get_cv_entry::<Skills>("skills", 0),
-            self.get_cv_entries::<Project>("project"),
-        )?;
-
-        Ok(CV {
-            about,
-            work,
-            education,
-            skills,
-            projects,
-        })
+impl CVReader {
+    pub fn new(client: &ContentfulClient) -> Self {
+        CVReader {
+            client: Box::new(client.to_owned()),
+        }
     }
 
     fn build_query(&self, entries_type: &str) -> Option<QueryBuilder> {
@@ -60,6 +47,29 @@ impl<'a> CVReader<'a> {
         self.client
             .get_entry::<T>(self.build_query(entries_type), index)
             .await
+    }
+}
+
+#[async_trait(?Send)]
+impl Reader for CVReader {
+    type Data = CV;
+
+    async fn get(&self) -> Result<Self::Data, Self::Error> {
+        let (about, work, education, skills, projects) = try_join!(
+            self.get_cv_entry::<About>("interests", 0),
+            self.get_cv_entries::<Work>("work"),
+            self.get_cv_entries::<Education>("education"),
+            self.get_cv_entry::<Skills>("skills", 0),
+            self.get_cv_entries::<Project>("project"),
+        )?;
+
+        Ok(CV {
+            about,
+            work,
+            education,
+            skills,
+            projects,
+        })
     }
 }
 

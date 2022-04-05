@@ -1,9 +1,13 @@
 // src/main.rs
 
+#![feature(associated_type_defaults)]
+#![feature(type_alias_impl_trait)]
+
 #[macro_use]
 extern crate log;
 
 use actix_web::{middleware::Logger, web::Data, App, HttpServer};
+use contentful::{ContentfulClient, ContentfulConfig};
 use dotenv::dotenv;
 use listenfd::ListenFd;
 
@@ -12,7 +16,7 @@ mod cv;
 mod server;
 mod util;
 
-use server::{init, ContentfulConfig, ServerConfig};
+use server::{init, ServerConfig};
 use util::FromEnv;
 
 #[actix_rt::main]
@@ -21,11 +25,11 @@ async fn main() -> std::io::Result<()> {
     env_logger::init_from_env(env_logger::Env::new().default_filter_or("info"));
 
     let server_config = ServerConfig::from_env();
-    let contentful_config = ContentfulConfig::from_env();
+    let client = ContentfulClient::new(ContentfulConfig::from_env());
 
     let mut server = HttpServer::new(move || {
         App::new()
-            .app_data(Data::new(contentful_config.clone()))
+            .app_data(Data::new(client.clone()))
             .wrap(Logger::default())
             .configure(init)
     });

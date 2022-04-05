@@ -1,9 +1,10 @@
 // src/server/routes.rs
 use actix_web::{get, web, HttpResponse, Responder};
+use serde::Serialize;
 
 use crate::blog::BlogReader;
 use crate::cv::CVReader;
-use crate::ContentfulConfig;
+use crate::util::Reader;
 use contentful::ContentfulClient;
 
 pub fn init(cfg: &mut web::ServiceConfig) {
@@ -16,18 +17,19 @@ async fn svc_status() -> impl Responder {
 }
 
 #[get("/cv")]
-async fn get_cv(config: web::Data<ContentfulConfig>) -> impl Responder {
-    let client = ContentfulClient::new(&config.access_token, &config.space_id, &config.environment);
-    match CVReader::new(&client).get_cv().await {
-        Ok(data) => HttpResponse::Ok().json(data),
-        Err(err) => HttpResponse::InternalServerError().body(format!("CV Data not found: {}", err)),
-    }
+async fn get_cv(client: web::Data<ContentfulClient>) -> impl Responder {
+    get(CVReader::new(&client)).await
 }
 
 #[get("/blog")]
-async fn get_blog(config: web::Data<ContentfulConfig>) -> impl Responder {
-    let client = ContentfulClient::new(&config.access_token, &config.space_id, &config.environment);
-    match BlogReader::new(&client).get_entries().await {
+async fn get_blog(client: web::Data<ContentfulClient>) -> impl Responder {
+    get(BlogReader::new(&client)).await
+}
+
+async fn get(
+    reader: impl Reader<Data = impl Serialize, Error = impl std::fmt::Display>,
+) -> impl Responder {
+    match reader.get().await {
         Ok(data) => HttpResponse::Ok().json(data),
         Err(err) => {
             HttpResponse::InternalServerError().body(format!("Blog data not found: {}", err))

@@ -3,5 +3,5 @@
 mod config;
 mod routes;
 
-pub use config::{ContentfulConfig, ServerConfig};
+pub use config::ServerConfig;
 pub use routes::init;
