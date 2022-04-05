@@ -38,6 +38,12 @@
 
       &:hover {
         background-color: #{$col-bg-light}cc;
+
+        .dev-icon {
+          color: $col-main-brand !important;
+          transition-delay: 0.1s;
+          transform: scale(1.2);
+        }
       }
     }
 
@@ -62,10 +68,6 @@
       font-size: 1rem;
       font-weight: 400;
       margin: 0.2rem;
-    }
-
-    &:hover {
-      color: $col-main-brand !important;
     }
   }
 

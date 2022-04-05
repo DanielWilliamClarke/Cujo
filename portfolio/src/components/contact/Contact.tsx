@@ -34,11 +34,14 @@ export class Contact extends Component<ContactProps, ContactState> {
           <Row className="section-content socials">
             {this.props.profiles.map(
               (p: Profile): JSX.Element => (
-                <Col md="auto" className="social-platform">
-                  <a href={p.url} rel="noopener noreferrer" target="_blank">
-                    <DevIconName icon={p.brand} />
-                  </a>
-                </Col>
+                <a
+                  className="social-platform"
+                  href={p.url}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  <DevIconName icon={p.brand} />
+                </a>
               )
             )}
           </Row>

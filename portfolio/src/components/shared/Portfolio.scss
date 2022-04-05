@@ -90,6 +90,14 @@
   content: "•";
 }
 
+.at:after {
+  content: "@";
+}
+
+.copyright:after {
+  content: "©";
+}
+
 .dash:after {
   content: "-";
 }
@@ -173,6 +181,11 @@
   .vertical-timeline-element-content {
     color: $col-text-main;
     box-shadow: none;
+    transition: 0.5s;
+
+    &:hover {
+      transform: scale(1.02);
+    }
   }
 }
 
@@ -196,7 +209,9 @@
   }
 
   .dot::after,
-  .dash::after {
+  .dash::after,
+  .at::after,
+  .copyright:after {
     color: $color;
     margin: 0 10px;
   }
