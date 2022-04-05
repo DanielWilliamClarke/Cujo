@@ -42,11 +42,11 @@ export class SketchBackstretch extends Component<CVProps> {
               className="centered image-item my-logo"
             />
             <Row className="backstretch-main">
-              <Col>{this.props.cv.about.entries[0].name}</Col>
+              <Col>{this.props.cv.about.entry.name}</Col>
             </Row>
             <div className="centered line"></div>
             <Row className="backstretch-tag">
-              <Col>{this.props.cv.about.entries[0].label}</Col>
+              <Col>{this.props.cv.about.entry.label}</Col>
             </Row>
             <Row className="backstretch-logo">
               <Col>

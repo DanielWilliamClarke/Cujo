@@ -1,6 +1,6 @@
 // src/blog/blog_reader.rs
 
-use contentful::{ContentfulClient, Entries, QueryBuilder};
+use contentful::{ContentfulClient, Entries, Entry, QueryBuilder};
 use futures::try_join;
 use serde::{de::DeserializeOwned, Serialize};
 
@@ -25,10 +25,10 @@ impl<'a> CVReader<'a> {
         )?;
 
         Ok(CV {
-            about,
+            about: self.extract_entry(about, 0),
             work,
             education,
-            skills,
+            skills: self.extract_entry(skills, 0),
             projects,
         })
     }
@@ -43,6 +43,19 @@ impl<'a> CVReader<'a> {
         let builder = QueryBuilder::new().content_type_is(entries_type).include(2);
 
         self.client.get_entries::<T>(Some(builder)).await
+    }
+
+    fn extract_entry<T>(&self, entries: Option<Entries<T>>, index: usize) -> Option<Entry<T>>
+    where
+        T: Serialize + DeserializeOwned + Clone,
+    {
+        match entries {
+            Some(Entries { entries, includes }) => Some(Entry {
+                entry: entries[index].clone(),
+                includes,
+            }),
+            None => None,
+        }
     }
 }
 
