@@ -1,6 +1,6 @@
 import { Component } from "react";
 import { DevIcon } from "../../model/CVModel";
-import { IconState, IIconService } from "../../services/IconService";
+import { IIconService } from "../../services/IconService";
 
 import "./DevIcon.scss";
 import { resolve } from "inversify-react";
@@ -9,18 +9,15 @@ type DevIconProps = {
   icon: DevIcon;
 };
 
-export class DevIconName extends Component<DevIconProps, IconState> {
+export class DevIconName extends Component<DevIconProps> {
   @resolve("IconService") private readonly iconService!: IIconService;
-
-  constructor(props: DevIconProps, context: {}) {
-    super(props, context);
-    this.state = { icon: this.iconService.get(this.props.icon.name) };
-  }
 
   render(): JSX.Element {
     let iconComponent: JSX.Element;
-    if (this.state?.icon) {
-      iconComponent = <this.state.icon className="icon-override" />;
+
+    const Icon = this.iconService.get(this.props.icon.name);
+    if (Icon) {
+      iconComponent = <Icon className="icon-override" />;
     } else {
       iconComponent = (
         <span className={`icon devicon-${this.props.icon.icon}`} />
