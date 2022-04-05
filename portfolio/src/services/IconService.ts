@@ -14,10 +14,6 @@ type IconMap = {
   [key: string]: IconType
 }
 
-export type IconState = {
-  icon: IconType | undefined;
-};
-
 export type IconWithDefaultState = {
   icon: IconType;
 };
