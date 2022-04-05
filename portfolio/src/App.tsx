@@ -31,10 +31,10 @@ class App extends Component<RouteComponentProps, AppState> {
   @resolve("CujoService") private readonly cujoService!: ICujoService;
 
   async componentDidMount() {
-    this.setState({
-      cv: await this.cujoService.FetchCV(),
-      blog: await this.cujoService.FetchBlogPosts(),
-    });
+    this.cujoService.FetchCV().then((cv: CV) => this.setState({ cv }));
+    this.cujoService
+      .FetchBlogPosts()
+      .then((blog: Entries<Post>) => this.setState({ blog }));
   }
 
   render(): JSX.Element {
