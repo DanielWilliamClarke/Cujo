@@ -1,7 +1,6 @@
 // src/main.rs
 
 #![feature(associated_type_defaults)]
-#![feature(type_alias_impl_trait)]
 
 #[macro_use]
 extern crate log;
