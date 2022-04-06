@@ -34,7 +34,13 @@ export class Blog extends Component<BlogProps, IconWithDefaultState> {
         <Section id="blog" bg="section-dark" title="Blog">
           <Row xs={1} md={2} className="g-4 blog-cards">
             {this.props.blog.entries.length ? (
-              this.props.blog.entries.map(this.blogSummaryPanel.bind(this))
+              this.props.blog.entries
+                .sort(
+                  (a: Post, b: Post) =>
+                    this.dateService.toUnix(b.sys.createdAt.toString()) -
+                    this.dateService.toUnix(a.sys.createdAt.toString())
+                )
+                .map(this.blogSummaryPanel.bind(this))
             ) : (
               <Col className="blog-placeholder centered">Coming soon</Col>
             )}
