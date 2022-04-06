@@ -1,12 +1,15 @@
 import { documentToPlainTextString } from "@contentful/rich-text-plain-text-renderer";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import { Block, BLOCKS, Inline } from "@contentful/rich-text-types";
+import { Block, BLOCKS, MARKS, Inline } from "@contentful/rich-text-types";
 
 import { resolve } from "inversify-react";
-import { Component } from "react";
+import { Component, ReactNode } from "react";
 import { Fade } from "react-awesome-reveal";
 import { Col, Row } from "react-bootstrap";
 import readingTime from "reading-time";
+import SyntaxHighlighter from "react-syntax-highlighter";
+import { obsidian } from "react-syntax-highlighter/dist/esm/styles/hljs";
+
 import { Post } from "../../model/BlogPost";
 import { getAsset, Entries } from "../../model/Includes";
 import { IDateService } from "../../services/DateService";
@@ -42,7 +45,25 @@ export class BlogPost extends Component<BlogProps> {
     const stats = readingTime(documentToPlainTextString(post.content));
 
     const options = {
+      renderMark: {
+        [MARKS.CODE]: (text: ReactNode): JSX.Element => (
+          <SyntaxHighlighter language="rust" style={obsidian} showLineNumbers>
+            {text}
+          </SyntaxHighlighter>
+        ),
+      },
       renderNode: {
+        [BLOCKS.PARAGRAPH]: (node: any, children: ReactNode) => {
+          if (
+            node.content.length === 1 &&
+            node.content[0].marks.find(
+              (x: { type: string }) => x.type === "code"
+            )
+          ) {
+            return <div>{children}</div>;
+          }
+          return <p>{children}</p>;
+        },
         [BLOCKS.EMBEDDED_ASSET]: (node: Block | Inline): JSX.Element => {
           const media = getAsset(
             this.props.blog.includes,
