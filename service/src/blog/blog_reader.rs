@@ -25,9 +25,7 @@ impl Reader for BlogReader {
     async fn get(&self) -> Result<Self::Data, Self::Error> {
         let builder = QueryBuilder::new().content_type_is("blogPost");
 
-        let posts = self.client.get_entries::<BlogPost>(Some(builder)).await?;
-
-        Ok(posts)
+        Ok(self.client.get_entries::<BlogPost>(Some(builder)).await?)
     }
 }
 

@@ -139,15 +139,6 @@ impl ContentfulClient {
     }
 
     fn resolve_entry(&self, value: &mut Value, includes: &Value) {
-        let sys = match value.get_mut("sys") {
-            Some(sys) => {
-                let mut map = HashMap::new();
-                map.insert("sys".to_string(), sys.clone());
-                map
-            }
-            None => HashMap::new(),
-        };
-
         let fields = match value.get_mut("fields") {
             Some(fields) if fields.is_object() => {
                 fields
@@ -163,6 +154,15 @@ impl ContentfulClient {
                 fields.clone()
             }
             _ => Value::Null,
+        };
+
+        let sys = match value.get_mut("sys") {
+            Some(sys) => {
+                let mut map = HashMap::new();
+                map.insert("sys".to_string(), sys.clone());
+                map
+            }
+            None => HashMap::new(),
         };
 
         *value = merge(&fields, &sys);
