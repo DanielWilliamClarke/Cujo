@@ -1,6 +1,12 @@
 import { documentToPlainTextString } from "@contentful/rich-text-plain-text-renderer";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import { Block, BLOCKS, MARKS, Inline } from "@contentful/rich-text-types";
+import {
+  Block,
+  BLOCKS,
+  MARKS,
+  INLINES,
+  Inline,
+} from "@contentful/rich-text-types";
 
 import { resolve } from "inversify-react";
 import { Component, ReactNode } from "react";
@@ -47,17 +53,33 @@ export class BlogPost extends Component<BlogProps> {
     const options = {
       renderMark: {
         [MARKS.CODE]: (text: ReactNode): JSX.Element => (
-          <SyntaxHighlighter language="rust" style={obsidian} showLineNumbers>
+          <SyntaxHighlighter
+            className="code-snippet"
+            language="rust"
+            style={obsidian}
+            showLineNumbers
+          >
             {text}
           </SyntaxHighlighter>
         ),
       },
       renderNode: {
+        [BLOCKS.HR]: (node: Block | Inline): JSX.Element => (
+          <div className="long-line centered" />
+        ),
+        [INLINES.HYPERLINK]: (
+          { data }: Block | Inline,
+          children: ReactNode
+        ): JSX.Element => (
+          <a href={data.uri} target="_blank" rel="noopener noreferrer">
+            {children}
+          </a>
+        ),
         [BLOCKS.PARAGRAPH]: (node: any, children: ReactNode) => {
           if (
             node.content.length === 1 &&
             node.content[0].marks.find(
-              (x: { type: string }) => x.type === "code"
+              ({ type }: { type: string }) => type === "code"
             )
           ) {
             return <div>{children}</div>;
@@ -101,7 +123,7 @@ export class BlogPost extends Component<BlogProps> {
             </>
           )}
 
-          <small className="text-muted">{stats.text}</small>
+          <p className="text-muted">{stats.text}</p>
 
           <Row className="section-content blog-content">
             <Col>{documentToReactComponents(post.content, options)}</Col>
