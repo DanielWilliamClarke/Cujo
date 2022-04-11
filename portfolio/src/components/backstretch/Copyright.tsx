@@ -17,7 +17,9 @@ export class Copyright extends Component<{}> {
           <Row>
             <Col>
               <span className="copyright">Copyright</span>
-              <span>{this.dateService.CurrentYear()} Daniel Clarke</span>
+              <span>
+                {this.dateService.CurrentYear()} Daniel William Clarke
+              </span>
             </Col>
           </Row>
           <div className="centered short-line" />
