@@ -1,13 +1,14 @@
 #BUILD -----------------------------------
-FROM node:14.16.0-alpine as build
+FROM node:14.15.5-alpine as build
 
 ARG BUILD_MODE
 
 WORKDIR /portfolio
 
-COPY package.json /portfolio/package.json 
+COPY package.json /portfolio/package.json
 
 RUN apk add git
+RUN npm set unsafe-perm true
 RUN npm install
 
 COPY . /portfolio
