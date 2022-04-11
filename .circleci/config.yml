@@ -13,4 +13,4 @@ workflows:
           mapping: |
             service/.* build-service true
             portfolio/.* build-portfolio true
-          config-path: .circleci/workflows.yml
+          config-path: .circleci/workflows.yaml
