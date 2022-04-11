@@ -38,6 +38,6 @@ async fn main() -> std::io::Result<()> {
         None => server.bind(format!("{}:{}", server_config.host, server_config.port))?,
     };
 
-    info!("Cujo Server Started");
+    info!("Cujo Server Started 👾");
     server.run().await
 }
