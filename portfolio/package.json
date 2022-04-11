@@ -11,7 +11,8 @@
     "test": "CI=true react-scripts test",
     "eject": "react-scripts eject",
     "sasslint": "sass-lint -v",
-    "sasslint:fix": "sass-lint-auto-fix"
+    "sasslint:fix": "sass-lint-auto-fix",
+    "clean": "rm -rf node_modules && rm -rf package-lock.json"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -82,6 +83,8 @@
     "typescript": "^4.3.4"
   },
   "resolutions": {
-    "coa": "2.0.2"
+    "coa": "2.0.2",
+    "@types/react": "17.0.2",
+    "@types/react-dom": "17.0.2"
   }
 }

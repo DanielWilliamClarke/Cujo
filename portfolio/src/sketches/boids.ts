@@ -123,7 +123,7 @@ export function boids(p: p5): void {
       .sort((a, b) => a.sort - b.sort)
       .map(({ value }) => value)
       .forEach((v, index, {length}) => {
-        v.setTarget(new p5.Vector(points[index].x, points[index].y));
+        v.setTarget(p.createVector(points[index].x, points[index].y));
         const hue = p.map(index, 0, length, 0, 255);
         v.setColor(new HSLA(hue, 60, 100));
         v.setSize(p.max(5, p.width * 0.001));
@@ -256,7 +256,7 @@ class NoiseGenerator {
   getCoord (): p5.Vector {
     this.xoff += 0.00001
     this.yoff += 0.00001
-    return new p5.Vector(
+    return this.p.createVector(
       this.p.noise(this.xoff) * this.p.width,
       this.p.height / 2 + (this.p.sin(this.yoff) * (this.p.height / 4))
     )

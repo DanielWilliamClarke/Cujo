@@ -137,7 +137,7 @@ ENVIRONMENT=master
 # Run with sudo where necessary
 
 # With script
-./script/deploy.sh dev(or prod)
+./scripts/deploy.sh dev(or prod)
 
 # Or ...
 
