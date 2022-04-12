@@ -1,12 +1,10 @@
 import { resolve } from "inversify-react";
 import { Component } from "react";
 import { Col, Row } from "react-bootstrap";
-import ReactMarkdown from "react-markdown";
 import {
   VerticalTimeline,
   VerticalTimelineElement,
 } from "react-vertical-timeline-component";
-import breaks from "remark-breaks";
 import { Entries, Media } from "../../model/Includes";
 import { Work } from "../../model/CVModel";
 import { IDateService } from "../../services/DateService";
@@ -95,7 +93,7 @@ export class Experience extends Component<WorkProps, IconWithDefaultState> {
 
         <Row>
           <Col>
-            <ReactMarkdown children={work.summary} remarkPlugins={[breaks]} />
+            <p>{work.summary}</p>
           </Col>
         </Row>
 

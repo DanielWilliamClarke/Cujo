@@ -8,8 +8,10 @@ import { Profile } from "../../model/CVModel";
 import { IContactService } from "../../services/ContactService";
 import { DevIconName } from "../shared/DevIcon";
 import { Section } from "../shared/Section";
+import { withDividerState } from "../shared/TriangleDivider";
 
 import "./Contact.scss";
+import styles from "../shared/style.module.scss";
 
 type ContactProps = {
   profiles: Profile[];
@@ -19,18 +21,27 @@ type ContactState = {
   status: boolean;
 };
 
-export class Contact extends Component<ContactProps, ContactState> {
+export class Contact extends Component<
+  ContactProps,
+  ContactState & withDividerState
+> {
   @resolve("ContactService") private readonly contactService!: IContactService;
 
   constructor(props: ContactProps) {
     super(props);
-    this.state = { status: false };
+    this.state = {
+      status: false,
+      divider: {
+        background: styles.colorBrand,
+        foreground: styles.colorLightBg,
+      },
+    };
   }
 
   render(): JSX.Element {
     return (
       <Fade triggerOnce direction="up">
-        <Section id="contact" title="Contact">
+        <Section id="contact" title="Contact" withDivider={this.state.divider}>
           <Row className="section-content socials">
             {this.props.profiles.map(
               (p: Profile): JSX.Element => (

@@ -1,0 +1,7 @@
+@import "./Palette.scss";
+
+:export {
+  colorBrand: $col-main-brand;
+  colorDarkBg: $col-bg-light;
+  colorLightBg: $col-bg-dark;
+}
