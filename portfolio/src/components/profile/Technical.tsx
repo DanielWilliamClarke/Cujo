@@ -32,7 +32,7 @@ export class Technical extends Component<TechnicalProps, SkillsState> {
 
   render(): JSX.Element {
     return (
-      <Section id="skills" title="Skills and Competencies">
+      <Section id="skills" title="Skills">
         <Row className="section-content">
           <Col>
             {documentToReactComponents(this.props.skills.entry.summary)}

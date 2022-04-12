@@ -1,9 +1,10 @@
 import { injectable } from "inversify";
 import { IconType } from "react-icons";
-import { FaDeviantart } from "react-icons/fa";
+import { GiCardDraw } from "react-icons/gi";
+import { FaDeviantart, FaWizardsOfTheCoast } from "react-icons/fa";
 import { HiLightBulb, HiLightningBolt } from "react-icons/hi";
-import { SiNotion, SiAndroidstudio, SiContentful, SiXcode } from "react-icons/si";
-import { MdBolt, MdBook, MdCampaign, MdFingerprint, MdHardware, MdHistoryEdu, MdHome, MdLoyalty, MdReportProblem, MdSchool } from "react-icons/md";
+import { SiNotion, SiAndroidstudio, SiContentful, SiXcode, SiReactivex, SiAzuredevops, SiCmake, SiP5Dotjs, SiPowershell, SiVultr } from "react-icons/si";
+import { MdBolt, MdBook, MdCampaign, MdFingerprint, MdHardware, MdHistoryEdu, MdHome, MdLoyalty, MdReportProblem, MdSchool, MdCatchingPokemon } from "react-icons/md";
 
 export interface IIconService {
   get (id: string): IconType | undefined;
@@ -38,7 +39,16 @@ export class IconService implements IIconService {
     Notion: SiNotion,
     "Android Studio": SiAndroidstudio,
     Contentful: SiContentful,
-    XCode: SiXcode
+    XCode: SiXcode,
+    Rx: SiReactivex,
+    "Azure DevOps": SiAzuredevops,
+    CMake: SiCmake,
+    Pokémon: MdCatchingPokemon,
+    "p5.js": SiP5Dotjs,
+    Powershell: SiPowershell,
+    Magic: FaWizardsOfTheCoast,
+    Vultr: SiVultr,
+    Archidekt: GiCardDraw
   }
 
   get(id: string): IconType | undefined {

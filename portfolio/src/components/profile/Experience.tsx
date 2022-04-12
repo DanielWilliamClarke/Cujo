@@ -32,7 +32,7 @@ export class Experience extends Component<WorkProps, IconWithDefaultState> {
 
   render(): JSX.Element {
     return (
-      <Section id="experience" title="Professional Experience">
+      <Section id="experience" title="Experience">
         <VerticalTimeline className="timeline">
           {this.props.work.entries
             .filter(

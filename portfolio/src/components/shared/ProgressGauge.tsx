@@ -52,7 +52,7 @@ export class ProgressGauge extends Component<
                     styles={buildStyles({
                       strokeLinecap: "round",
                       rotation: 1 / 2 + 1 / 8,
-                      trailColor: "#eeeeee99",
+                      trailColor: "#eeeeee55",
                       pathColor: color,
                       pathTransitionDuration: 2.0,
                     })}
