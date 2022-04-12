@@ -7,6 +7,7 @@ import { resolve } from "inversify-react";
 
 type DevIconProps = {
   icon: DevIcon;
+  color?: string;
 };
 
 export class DevIconName extends Component<DevIconProps> {
@@ -25,7 +26,7 @@ export class DevIconName extends Component<DevIconProps> {
     }
 
     return (
-      <div className="dev-icon">
+      <div className="dev-icon" style={{ color: this.props.color }}>
         {iconComponent}
         <p className="icon-name">{this.props.icon.name}</p>
       </div>

@@ -7,6 +7,7 @@ import { Entry } from "../../model/Includes";
 import { Skills, Skill } from "../../model/CVModel";
 import { DevIconName } from "../shared/DevIcon";
 import { Section } from "../shared/Section";
+import { ProgressGauge } from "../shared/ProgressGauge";
 
 import "../shared/Portfolio.scss";
 import "./Technical.scss";
@@ -17,12 +18,16 @@ type TechnicalProps = {
 
 type SkillsState = {
   search: string;
+  gaugeColors: string[];
 };
 
 export class Technical extends Component<TechnicalProps, SkillsState> {
   constructor(props: TechnicalProps) {
     super(props);
-    this.state = { search: "" };
+    this.state = {
+      search: "",
+      gaugeColors: ["#FB6962", "#FB6962", "#FCFC99", "#0CC078", "#0CC078"],
+    };
   }
 
   render(): JSX.Element {
@@ -47,12 +52,14 @@ export class Technical extends Component<TechnicalProps, SkillsState> {
         </Row>
 
         <Row className="skill-items">
-          <Zoom triggerOnce cascade damping={0.01} className="col">
+          <Zoom triggerOnce cascade damping={0.01} className="col centered">
             {this.props.skills.entry.list
               .filter(({ name }: Skill) => this.filterSkills(name))
               .sort((a: Skill, b: Skill) => b.level - a.level)
-              .map(({ icon }: Skill) => (
-                <DevIconName icon={icon} />
+              .map(({ level, icon }: Skill) => (
+                <ProgressGauge value={level} colors={this.state.gaugeColors}>
+                  {(color: string) => <DevIconName icon={icon} color={color} />}
+                </ProgressGauge>
               ))}
           </Zoom>
         </Row>

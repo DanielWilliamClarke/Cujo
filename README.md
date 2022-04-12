@@ -237,3 +237,4 @@ docker-compose --env-file <SECRET ENV FILE> -f prod.compose.yaml down (-v)
 - Contentful - `CDN` <https://www.contentful.com/>
 - Rich Text Renderer - `React` <https://www.npmjs.com/package/@contentful/rich-text-react-renderer>
 - Import SCSS variables in Typescript - `SCSS` <https://medium.com/@christian.tonye_16869/scss-variables-in-react-typescript-components-de19d7f96245>
+- Circular Progress Bar - `React` <https://github.com/kevinsqi/react-circular-progressbar>
