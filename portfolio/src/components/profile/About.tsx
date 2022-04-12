@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import React, { Component, ReactNode } from "react";
 import { Row, Col, Carousel } from "react-bootstrap";
 import { Fade, Zoom } from "react-awesome-reveal";
-
+import { Block, INLINES, Inline } from "@contentful/rich-text-types";
 import { Entry, Media } from "../../model/Includes";
 import { About as AboutModel } from "../../model/CVModel";
 import { DynamicImage } from "../shared/DynamicImage";
@@ -17,8 +17,21 @@ type AboutProps = {
 
 export class About extends Component<AboutProps> {
   render(): JSX.Element {
+    const options = {
+      renderNode: {
+        [INLINES.HYPERLINK]: (
+          { data }: Block | Inline,
+          children: ReactNode
+        ): JSX.Element => (
+          <a href={data.uri} target="_blank" rel="noopener noreferrer">
+            {children}
+          </a>
+        ),
+      },
+    };
+
     return (
-      <Section id="about" title="About Me!">
+      <Section id="about" title="About">
         <Row className="section-content">
           <Zoom triggerOnce damping={0.01}>
             <Carousel
@@ -44,13 +57,16 @@ export class About extends Component<AboutProps> {
         <Row className="section-content">
           <Col className="text-column">
             <Fade triggerOnce direction="left">
-              {documentToReactComponents(this.props.about.entry.about)}
+              {documentToReactComponents(this.props.about.entry.about, options)}
             </Fade>
           </Col>
 
           <Col className="text-column">
             <Fade triggerOnce direction="right">
-              {documentToReactComponents(this.props.about.entry.interests)}
+              {documentToReactComponents(
+                this.props.about.entry.interests,
+                options
+              )}
             </Fade>
           </Col>
         </Row>

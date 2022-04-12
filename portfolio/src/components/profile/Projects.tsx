@@ -20,7 +20,7 @@ type ProjectProps = {
 export class Projects extends Component<ProjectProps> {
   render(): JSX.Element {
     return (
-      <Section id="projects" title="Personal Projects" noSeparator>
+      <Section id="projects" title="Projects" noSeparator>
         {this.props.projects.entries
           .sort((pA, pB) => pA.rank - pB.rank)
           .map(this.project.bind(this))}
