@@ -51,10 +51,21 @@
   .code-snippet {
     border-radius: 6px;
     box-shadow: 0 0 25px $col-shadow;
+
+    width: 75%;
+    margin: 50px auto;
   }
 
   .text-muted {
     margin-top: 10px;
     text-align: center;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .post {
+    .code-snippet {
+      width: 100%;
+    }
   }
 }
