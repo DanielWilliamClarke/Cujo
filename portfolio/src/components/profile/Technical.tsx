@@ -4,7 +4,7 @@ import { Zoom } from "react-awesome-reveal";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 
 import { Entry } from "../../model/Includes";
-import { Skills, DevIcon } from "../../model/CVModel";
+import { Skills, Skill } from "../../model/CVModel";
 import { DevIconName } from "../shared/DevIcon";
 import { Section } from "../shared/Section";
 
@@ -49,8 +49,9 @@ export class Technical extends Component<TechnicalProps, SkillsState> {
         <Row className="skill-items">
           <Zoom triggerOnce cascade damping={0.01} className="col">
             {this.props.skills.entry.list
-              .filter(({ name }: DevIcon) => this.filterSkills(name))
-              .map((icon: DevIcon) => (
+              .filter(({ name }: Skill) => this.filterSkills(name))
+              .sort((a: Skill, b: Skill) => b.level - a.level)
+              .map(({ icon }: Skill) => (
                 <DevIconName icon={icon} />
               ))}
           </Zoom>
