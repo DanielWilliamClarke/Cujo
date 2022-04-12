@@ -51,7 +51,13 @@ export interface Education {
 
 export interface Skills {
   summary: Document;
-  list:    DevIcon[];
+  list:    Skill[];
+}
+
+export interface Skill {
+  name:  string;
+  level: number
+  icon:  DevIcon;
 }
 
 export interface Project {

@@ -57,7 +57,14 @@ pub struct Education {
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct Skills {
     pub summary: Value,
-    pub list: Vec<DevIcon>,
+    pub list: Vec<Skill>,
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone)]
+pub struct Skill {
+    pub name: String,
+    pub level: i32,
+    pub icon: DevIcon,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
