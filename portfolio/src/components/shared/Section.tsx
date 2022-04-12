@@ -4,12 +4,14 @@ import { Container } from "react-bootstrap";
 import { IconWithDefaultState, IIconService } from "../../services/IconService";
 
 import { Heading } from "./Heading";
+import { DividerProps, TriangleDivider } from "./TriangleDivider";
 
 type SectionProps = {
   id: string;
   title: string;
   noSeparator?: boolean;
   bg?: string;
+  withDivider?: DividerProps;
 };
 
 export class Section extends Component<SectionProps, IconWithDefaultState> {
@@ -22,20 +24,25 @@ export class Section extends Component<SectionProps, IconWithDefaultState> {
 
   render(): JSX.Element {
     return (
-      <section
-        id={this.props.id}
-        className={`${this.props.bg ?? "section"} ${this.props.id}`}
-      >
-        <Container>
-          <Heading
-            title={this.props.title}
-            noSeparator={this.props.noSeparator}
-          />
-          {this.props.children}
-          <div className="centered short-line" />
-          <this.state.icon className="section-icon" />
-        </Container>
-      </section>
+      <>
+        {this.props.withDivider && (
+          <TriangleDivider {...this.props.withDivider} />
+        )}
+        <section
+          id={this.props.id}
+          className={`${this.props.bg ?? "section"} ${this.props.id}`}
+        >
+          <Container>
+            <Heading
+              title={this.props.title}
+              noSeparator={this.props.noSeparator}
+            />
+            {this.props.children}
+            <div className="centered short-line" />
+            <this.state.icon className="section-icon" />
+          </Container>
+        </section>
+      </>
     );
   }
 }

@@ -9,10 +9,10 @@ import { Lanyard } from "../shared/Lanyard";
 import { Section } from "../shared/Section";
 import readingTime from "reading-time";
 import { documentToPlainTextString } from "@contentful/rich-text-plain-text-renderer";
+import { IconWithDefaultState, IIconService } from "../../services/IconService";
 
 import "../shared/Portfolio.scss";
 import "./Blog.scss";
-import { IconWithDefaultState, IIconService } from "../../services/IconService";
 
 export type BlogProps = {
   blog: Entries<Post>;
@@ -25,7 +25,9 @@ export class Blog extends Component<BlogProps, IconWithDefaultState> {
   constructor(props: BlogProps, context: {}) {
     super(props, context);
     this.dateService.format("Do MMMM YYYY HH:mm:ss");
-    this.state = { icon: this.iconService.getWithDefault("post") };
+    this.state = {
+      icon: this.iconService.getWithDefault("post"),
+    };
   }
 
   render(): JSX.Element {
