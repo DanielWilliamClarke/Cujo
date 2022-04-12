@@ -5,10 +5,15 @@
     color: $col-text-title;
     font-weight: 500;
     padding: 20px 0;
+
+    .col {
+      min-width: 200px;
+      max-width: 220px;
+      text-shadow: 0 0 25px $col-shadow;
+    }
   }
 
   .dev-icon {
-    padding: 5px 0;
     width: 100%;
 
     .icon-override,
