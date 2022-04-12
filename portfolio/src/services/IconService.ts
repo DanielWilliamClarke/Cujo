@@ -3,17 +3,41 @@ import { IconType } from "react-icons";
 import { GiCardDraw } from "react-icons/gi";
 import { FaDeviantart, FaWizardsOfTheCoast } from "react-icons/fa";
 import { HiLightBulb, HiLightningBolt } from "react-icons/hi";
-import { SiNotion, SiAndroidstudio, SiContentful, SiXcode, SiReactivex, SiAzuredevops, SiCmake, SiP5Dotjs, SiPowershell, SiVultr } from "react-icons/si";
-import { MdBolt, MdBook, MdCampaign, MdFingerprint, MdHardware, MdHistoryEdu, MdHome, MdLoyalty, MdReportProblem, MdSchool, MdCatchingPokemon } from "react-icons/md";
+import {
+  SiNotion,
+  SiAndroidstudio,
+  SiContentful,
+  SiXcode,
+  SiReactivex,
+  SiAzuredevops,
+  SiCmake,
+  SiP5Dotjs,
+  SiPowershell,
+  SiVultr,
+  SiSfml,
+} from "react-icons/si";
+import {
+  MdBolt,
+  MdBook,
+  MdCampaign,
+  MdFingerprint,
+  MdHardware,
+  MdHistoryEdu,
+  MdHome,
+  MdLoyalty,
+  MdReportProblem,
+  MdSchool,
+  MdCatchingPokemon,
+} from "react-icons/md";
 
 export interface IIconService {
-  get (id: string): IconType | undefined;
-  getWithDefault(id: string): IconType
+  get(id: string): IconType | undefined;
+  getWithDefault(id: string): IconType;
 }
 
 type IconMap = {
-  [key: string]: IconType
-}
+  [key: string]: IconType;
+};
 
 export type IconWithDefaultState = {
   icon: IconType;
@@ -21,7 +45,6 @@ export type IconWithDefaultState = {
 
 @injectable()
 export class IconService implements IIconService {
-
   iconMap: IconMap = {
     home: MdHome,
     about: MdFingerprint,
@@ -48,14 +71,15 @@ export class IconService implements IIconService {
     Powershell: SiPowershell,
     Magic: FaWizardsOfTheCoast,
     Vultr: SiVultr,
-    Archidekt: GiCardDraw
-  }
+    Archidekt: GiCardDraw,
+    SFML: SiSfml,
+  };
 
   get(id: string): IconType | undefined {
-   return this.iconMap[id]
+    return this.iconMap[id];
   }
 
   getWithDefault(id: string): IconType {
-    return this.iconMap[id] ?? MdReportProblem
+    return this.iconMap[id] ?? MdReportProblem;
   }
 }
