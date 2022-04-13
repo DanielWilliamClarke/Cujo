@@ -54,10 +54,11 @@ export class IconService implements IIconService {
     projects: MdHardware,
     blog: MdBook,
     post: MdHistoryEdu,
-    contact: MdCampaign,
+    profiles: MdCampaign,
     work: HiLightningBolt,
     school: HiLightBulb,
 
+    // DevIcon overrides
     DeviantArt: FaDeviantart,
     Notion: SiNotion,
     "Android Studio": SiAndroidstudio,

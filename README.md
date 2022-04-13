@@ -176,14 +176,13 @@ docker-compose --env-file <SECRET ENV FILE> -f prod.compose.yaml down (-v)
 
 ## // Todo
 
-- [ ] Add competency levels to skills and visualise
 - [ ] Add Rust code coverage
 - [ ] Write front end tests
-- [ ] Get own logo and assets from a designer
-- [ ] Write blog
 
 ## // Done
 
+- [x] Write blog
+- [x] Add competency levels to skills and visualise
 - [x] Move CV fully to Contentful and have backend collect CV data
 - [x] Update color scheme to be less dark
 - [x] Replace WordPress with Contentful to reduce need to host own content and infrastructure
@@ -197,8 +196,8 @@ docker-compose --env-file <SECRET ENV FILE> -f prod.compose.yaml down (-v)
 - [x] Get backend service working in prod
 - [x] Document backend build and deployment
 - [x] Put Blog data access and collation in backend service
-- [x] Swap backstretch with a 2d/3d webgl canvas visualistion?
-- [x] Swap out static file with Rustlang backend service?
+- [x] Swap backstretch with a 2d/3d WEBGL canvas visualisation?
+- [x] Swap out static file with Rust backend service?
 - [x] Formalise colour palette
 - [x] Setup SSL correctly.. (ssl-companion is running, it will assign certificates when the window opens again)
 - [x] Fix predator/prey image asset
@@ -216,7 +215,7 @@ docker-compose --env-file <SECRET ENV FILE> -f prod.compose.yaml down (-v)
 - [x] Hexagons
 - [x] Phylotaxis
 - [x] 4D tesseract projection?
-- [x] Conways game of life
+- [x] Conway's game of life
 
 ## Urls
 
@@ -233,7 +232,7 @@ docker-compose --env-file <SECRET ENV FILE> -f prod.compose.yaml down (-v)
 - Auto image redeploy with Watchtower - `Docker` <https://alexgallacher.com/setting-up-watchtower-to-update-docker-containers/>
 - React scroll spy - `React` <https://makotot.github.io/react-scrollspy/>
 - React icons - `React` <https://react-icons.github.io/react-icons/icons?name=io5>
-- Devicons - `React` <https://devicon.dev/>
+- DevIcons - `React` <https://devicon.dev/>
 - Contentful - `CDN` <https://www.contentful.com/>
 - Rich Text Renderer - `React` <https://www.npmjs.com/package/@contentful/rich-text-react-renderer>
 - Import SCSS variables in Typescript - `SCSS` <https://medium.com/@christian.tonye_16869/scss-variables-in-react-typescript-components-de19d7f96245>
