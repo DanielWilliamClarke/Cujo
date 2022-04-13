@@ -22,7 +22,6 @@ export class ScrollIndicator extends Component<{}, IndicatorState> {
         <div className="chevron"></div>
         <div className="chevron"></div>
         <div className="chevron"></div>
-        <span className="text">Scroll down</span>
       </div>
     );
   }

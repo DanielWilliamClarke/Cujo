@@ -41,7 +41,11 @@ export class Contact extends Component<
   render(): JSX.Element {
     return (
       <Fade triggerOnce direction="up">
-        <Section id="contact" title="Contact" withDivider={this.state.divider}>
+        <Section
+          id="profiles"
+          title="Profiles"
+          withDivider={this.state.divider}
+        >
           <Row className="section-content socials">
             {this.props.profiles.map(
               (p: Profile): JSX.Element => (
@@ -63,7 +67,7 @@ export class Contact extends Component<
             <div className="contact-form centered">
               <Row className="form-title">
                 <Col>
-                  <h3>Get in touch!</h3>
+                  <h3>Send me a message!</h3>
                 </Col>
               </Row>
               <Form onSubmit={this.handleSubmit.bind(this)}>

@@ -20,7 +20,7 @@ class NavPanel extends Component<RouteComponentProps, NavState> {
 
     this.state = {
       bg: undefined,
-      menu: ["home"].concat(this.buildMenuItems()).concat(["blog", "contact"]),
+      menu: ["home"].concat(this.buildMenuItems()).concat(["blog", "profiles"]),
     };
 
     window.addEventListener("scroll", this.listenScrollEvent);
