@@ -1,4 +1,4 @@
-import { Component } from "react";
+import React from "react";
 
 type ProgressProps = {
   valueStart: number;
@@ -11,7 +11,10 @@ type ProgressState = {
   timeout?: number;
 };
 
-export class ProgressProvider extends Component<ProgressProps, ProgressState> {
+export class ProgressProvider extends React.Component<
+  ProgressProps,
+  ProgressState
+> {
   constructor(props: ProgressProps) {
     super(props);
     this.state = {

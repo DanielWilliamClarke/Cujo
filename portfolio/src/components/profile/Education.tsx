@@ -1,5 +1,5 @@
 import { resolve } from "inversify-react";
-import { Component } from "react";
+import React from "react";
 import { Col, Row } from "react-bootstrap";
 import {
   VerticalTimeline,
@@ -21,7 +21,10 @@ type EducationProps = {
   education: Entries<EducationModel>;
 };
 
-export class Education extends Component<EducationProps, IconWithDefaultState> {
+export class Education extends React.Component<
+  EducationProps,
+  IconWithDefaultState
+> {
   @resolve("DateService") private readonly dateService!: IDateService;
   @resolve("IconService") private readonly iconService!: IIconService;
 

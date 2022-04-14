@@ -1,4 +1,4 @@
-import { Component } from "react";
+import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { Fade } from "react-awesome-reveal";
 
@@ -17,7 +17,7 @@ type ProjectProps = {
   projects: Entries<Project>;
 };
 
-export class Projects extends Component<ProjectProps> {
+export class Projects extends React.Component<ProjectProps> {
   render(): JSX.Element {
     return (
       <Section id="projects" title="Projects" noSeparator>

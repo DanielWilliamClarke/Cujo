@@ -1,4 +1,4 @@
-import { Component } from "react";
+import React from "react";
 import { DevIcon } from "../../model/CVModel";
 import { IIconService } from "../../services/IconService";
 
@@ -10,7 +10,7 @@ type DevIconProps = {
   color?: string;
 };
 
-export class DevIconName extends Component<DevIconProps> {
+export class DevIconName extends React.Component<DevIconProps> {
   @resolve("IconService") private readonly iconService!: IIconService;
 
   render(): JSX.Element {

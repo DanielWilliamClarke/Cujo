@@ -4,11 +4,12 @@
   "private": true,
   "scripts": {
     "preinstall": "npm install --package-lock-only --ignore-scripts && npx npm-force-resolutions",
-    "start": "react-scripts start",
-    "build": "CI=true react-scripts build",
+    "start": "craco start",
+    "build": "craco build",
+    "build:ci": "CI=true craco build",
     "build:prod": "CI=true GENERATE_SOURCEMAP=false npm run build",
     "watch": "npm-watch",
-    "test": "CI=true react-scripts test",
+    "test": "CI=true craco test",
     "eject": "react-scripts eject",
     "sasslint": "sass-lint -v",
     "sasslint:fix": "sass-lint-auto-fix",
@@ -66,6 +67,7 @@
     "util": "^0.12.4"
   },
   "devDependencies": {
+    "@craco/craco": "^6.4.3",
     "@types/dat.gui": "^0.7.7",
     "@types/node": "^15.12.4",
     "@types/p5": "^1.3.0",
@@ -75,11 +77,12 @@
     "@types/react-scrollspy": "^3.3.4",
     "@types/react-syntax-highlighter": "^13.5.2",
     "@types/react-vertical-timeline-component": "^3.0.1",
+    "craco-esbuild": "^0.5.0",
     "npm-watch": "^0.10.0",
     "react-scripts": "^4.0.3",
     "sass": "^1.35.1",
     "sass-lint-auto-fix": "^0.21.2",
-    "typescript": "^4.3.4"
+    "typescript": "^4.4.4"
   },
   "resolutions": {
     "coa": "2.0.2",

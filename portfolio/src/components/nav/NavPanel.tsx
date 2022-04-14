@@ -1,5 +1,5 @@
 import { resolve } from "inversify-react";
-import { Component } from "react";
+import React from "react";
 import { Nav, Navbar } from "react-bootstrap";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import Scrollspy from "react-scrollspy";
@@ -12,7 +12,7 @@ type NavState = {
   menu: string[];
 };
 
-class NavPanel extends Component<RouteComponentProps, NavState> {
+class NavPanel extends React.Component<RouteComponentProps, NavState> {
   @resolve("IconService") private readonly iconService!: IIconService;
 
   constructor(props: RouteComponentProps) {

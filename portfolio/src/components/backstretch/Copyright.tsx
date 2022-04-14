@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { resolve } from "inversify-react";
 
 import { Container, Row, Col } from "react-bootstrap";
@@ -7,7 +7,7 @@ import { IDateService } from "../../services/DateService";
 
 import "./Copyright.scss";
 
-export class Copyright extends Component<{}> {
+export class Copyright extends React.Component<{}> {
   @resolve("DateService") private readonly dateService!: IDateService;
 
   render(): JSX.Element {
