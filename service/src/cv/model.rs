@@ -55,9 +55,15 @@ pub struct Education {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
+#[serde(rename_all = "camelCase")]
 pub struct Skills {
     pub summary: Value,
-    pub list: Vec<Skill>,
+    pub current_summary: Value,
+    pub current: Vec<Skill>,
+    pub favorite_summary: Value,
+    pub favorite: Vec<Skill>,
+    pub used_summary: Value,
+    pub used: Vec<Skill>,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
