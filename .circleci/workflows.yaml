@@ -60,7 +60,7 @@ jobs:
             cd portfolio
             npm install
             npm run test -- --watchAll=false --passWithNoTests
-            npm run build
+            npm run build:ci
       - store_test_results:
           path: ./portfolio
       - run:

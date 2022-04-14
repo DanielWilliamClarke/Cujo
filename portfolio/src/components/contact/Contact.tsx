@@ -1,5 +1,5 @@
 import { resolve } from "inversify-react";
-import { ChangeEvent, Component } from "react";
+import React, { ChangeEvent } from "react";
 import { Row, Col, Form, Button } from "react-bootstrap";
 
 import { Fade, Zoom } from "react-awesome-reveal";
@@ -21,7 +21,7 @@ type ContactState = {
   status: boolean;
 };
 
-export class Contact extends Component<
+export class Contact extends React.Component<
   ContactProps,
   ContactState & withDividerState
 > {

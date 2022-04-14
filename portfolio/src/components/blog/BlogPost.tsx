@@ -9,7 +9,7 @@ import {
 } from "@contentful/rich-text-types";
 
 import { resolve } from "inversify-react";
-import { Component, ReactNode } from "react";
+import React, { ReactNode } from "react";
 import { Fade } from "react-awesome-reveal";
 import { Col, Row } from "react-bootstrap";
 import readingTime from "reading-time";
@@ -31,7 +31,7 @@ type BlogProps = {
   blog: Entries<Post>;
 };
 
-export class BlogPost extends Component<BlogProps> {
+export class BlogPost extends React.Component<BlogProps> {
   @resolve("DateService") private readonly dateService!: IDateService;
 
   constructor(props: BlogProps, context: {}) {

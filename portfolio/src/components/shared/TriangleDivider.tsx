@@ -1,4 +1,4 @@
-import { Component, CSSProperties } from "react";
+import React, { CSSProperties } from "react";
 
 import "./TriangleDivider.scss";
 
@@ -11,7 +11,7 @@ export type withDividerState = {
   divider: DividerProps;
 };
 
-export class TriangleDivider extends Component<DividerProps> {
+export class TriangleDivider extends React.Component<DividerProps> {
   render(): JSX.Element {
     const myStyle: CSSProperties = {
       borderLeftColor: this.props.background,

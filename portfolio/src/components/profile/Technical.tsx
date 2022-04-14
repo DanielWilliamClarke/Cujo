@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { Row, Col } from "react-bootstrap";
 import { Zoom } from "react-awesome-reveal";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
@@ -22,7 +22,7 @@ type SkillsState = {
   gaugeColors: string[];
 };
 
-export class Technical extends Component<TechnicalProps, SkillsState> {
+export class Technical extends React.Component<TechnicalProps, SkillsState> {
   constructor(props: TechnicalProps) {
     super(props);
     this.state = {

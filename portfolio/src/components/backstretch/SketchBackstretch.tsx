@@ -1,5 +1,5 @@
 import p5 from "p5";
-import React, { Component } from "react";
+import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { resolve } from "inversify-react";
 import { IDateService } from "../../services/DateService";
@@ -11,7 +11,7 @@ import "./SketchBackstretch.scss";
 import { ScrollIndicator } from "./ScrollIndicator";
 import { DynamicImage } from "../shared/DynamicImage";
 
-export class SketchBackstretch extends Component<CVProps> {
+export class SketchBackstretch extends React.Component<CVProps> {
   @resolve("DateService") private readonly dateService!: IDateService;
   private myRef: React.RefObject<any>;
 

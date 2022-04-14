@@ -1,4 +1,4 @@
-import { Component } from "react";
+import React from "react";
 import { Card, Col, Nav, Row } from "react-bootstrap";
 import { resolve } from "inversify-react";
 import { Fade } from "react-awesome-reveal";
@@ -18,7 +18,7 @@ export type BlogProps = {
   blog: Entries<Post>;
 };
 
-export class Blog extends Component<BlogProps, IconWithDefaultState> {
+export class Blog extends React.Component<BlogProps, IconWithDefaultState> {
   @resolve("DateService") private readonly dateService!: IDateService;
   @resolve("IconService") private readonly iconService!: IIconService;
 

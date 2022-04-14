@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { Container } from "react-bootstrap";
 import { Fade } from "react-awesome-reveal";
 
@@ -31,7 +31,7 @@ type ShareState = {
   slim: boolean;
 };
 
-export class SharePanel extends Component<ShareProps, ShareState> {
+export class SharePanel extends React.Component<ShareProps, ShareState> {
   private size: number = 40;
 
   constructor(props: ShareProps) {

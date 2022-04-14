@@ -1,4 +1,4 @@
-import { Component, HTMLAttributes } from "react";
+import React, { HTMLAttributes } from "react";
 
 type ImageProps = {
   image: string;
@@ -9,7 +9,7 @@ type ImageState = {
   loaded: string;
 };
 
-export class DynamicImage extends Component<
+export class DynamicImage extends React.Component<
   ImageProps & HTMLAttributes<HTMLImageElement>,
   ImageState
 > {

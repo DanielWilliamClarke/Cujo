@@ -1,5 +1,5 @@
 import { resolve } from "inversify-react";
-import { Component } from "react";
+import React from "react";
 import {
   Route,
   RouteComponentProps,
@@ -27,7 +27,7 @@ export type AppState = {
 
 type BlogRouteParams = { id: string };
 
-class App extends Component<RouteComponentProps, AppState> {
+class App extends React.Component<RouteComponentProps, AppState> {
   @resolve("CujoService") private readonly cujoService!: ICujoService;
 
   async componentDidMount() {

@@ -1,5 +1,5 @@
 import { resolve } from "inversify-react";
-import { Component } from "react";
+import React from "react";
 import { Container } from "react-bootstrap";
 import { IconWithDefaultState, IIconService } from "../../services/IconService";
 
@@ -14,7 +14,10 @@ type SectionProps = {
   withDivider?: DividerProps;
 };
 
-export class Section extends Component<SectionProps, IconWithDefaultState> {
+export class Section extends React.Component<
+  SectionProps,
+  IconWithDefaultState
+> {
   @resolve("IconService") private readonly iconService!: IIconService;
 
   constructor(props: SectionProps, context: {}) {

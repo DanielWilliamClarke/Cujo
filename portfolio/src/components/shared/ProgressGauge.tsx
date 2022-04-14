@@ -1,4 +1,4 @@
-import { Component } from "react";
+import React from "react";
 import {
   buildStyles,
   CircularProgressbarWithChildren,
@@ -18,7 +18,7 @@ type ProgressGaugeState = {
   isVisible: boolean;
 };
 
-export class ProgressGauge extends Component<
+export class ProgressGauge extends React.Component<
   ProgressGaugeProps,
   ProgressGaugeState
 > {

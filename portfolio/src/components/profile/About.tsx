@@ -1,4 +1,4 @@
-import React, { Component, ReactNode } from "react";
+import React, { ReactNode } from "react";
 import { Row, Col, Carousel } from "react-bootstrap";
 import { Fade, Zoom } from "react-awesome-reveal";
 import { Block, INLINES, Inline } from "@contentful/rich-text-types";
@@ -15,7 +15,7 @@ type AboutProps = {
   about: Entry<AboutModel>;
 };
 
-export class About extends Component<AboutProps> {
+export class About extends React.Component<AboutProps> {
   render(): JSX.Element {
     const options = {
       renderNode: {

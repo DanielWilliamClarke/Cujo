@@ -1,4 +1,4 @@
-import { Component } from "react";
+import React from "react";
 import { Fade } from "react-awesome-reveal";
 
 import { CVProps } from "../model/CVModel";
@@ -8,7 +8,7 @@ import { Experience } from "./profile/Experience";
 import { Projects } from "./profile/Projects";
 import { Technical } from "./profile/Technical";
 
-export class Profile extends Component<CVProps> {
+export class Profile extends React.Component<CVProps> {
   render(): JSX.Element {
     return (
       <div>

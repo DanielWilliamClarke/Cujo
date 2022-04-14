@@ -1,4 +1,4 @@
-import { Component } from "react";
+import React from "react";
 
 import "./ScrollIndicator.scss";
 
@@ -6,7 +6,7 @@ type IndicatorState = {
   visible: boolean;
 };
 
-export class ScrollIndicator extends Component<{}, IndicatorState> {
+export class ScrollIndicator extends React.Component<{}, IndicatorState> {
   constructor(props: {}) {
     super(props);
 
