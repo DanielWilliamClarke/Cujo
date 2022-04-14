@@ -13,9 +13,19 @@
     transition: 0.5s;
     text-align: center;
     line-height: 15px;
+    display: flex;
+
+    svg,
+    .nav-label {
+      margin: auto 0px;
+    }
 
     svg {
       font-size: calc(20px + 0.25vw);
+    }
+
+    .nav-label {
+      margin-left: 10px;
     }
 
     &.active {
@@ -38,7 +48,7 @@
   }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 700px) {
   .navbar-nav {
     .nav-link {
       div {

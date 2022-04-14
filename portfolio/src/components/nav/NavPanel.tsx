@@ -50,7 +50,7 @@ class NavPanel extends Component<RouteComponentProps, NavState> {
               return (
                 <Nav.Link href={href}>
                   <NavIcon />
-                  <div>{link}</div>
+                  <div className="nav-label">{link}</div>
                 </Nav.Link>
               );
             })}
