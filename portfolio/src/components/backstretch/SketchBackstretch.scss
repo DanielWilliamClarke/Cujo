@@ -36,7 +36,7 @@
 
     .backstretch-tag {
       font-size: calc(15px + 1vw);
-      font-weight: 400;
+      font-weight: 100;
       text-shadow: 0 0 50px $col-bg-dark;
     }
 
@@ -60,7 +60,7 @@
 
 .scroll-indicator {
   position: absolute;
-  bottom: 200px;
+  bottom: 28%;
   display: flex;
   justify-content: space-around;
 }
