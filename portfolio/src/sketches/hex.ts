@@ -141,16 +141,16 @@ class HexLine {
 }
 
 export class Hex implements Sketch {
-  lines: HexLine[] = [];
+  private lines: HexLine[] = [];
 
-  screenWidth = 0;
-  screenHeight = 0;
-  centerX = 0;
-  centerY = 0;
-  dieX = 0;
-  dieY = 0;
+  private screenWidth = 0;
+  private screenHeight = 0;
+  private centerX = 0;
+  private centerY = 0;
+  private dieX = 0;
+  private dieY = 0;
 
-  ctx: any;
+  private ctx: any;
 
   constructor(private readonly p: p5) {}
 

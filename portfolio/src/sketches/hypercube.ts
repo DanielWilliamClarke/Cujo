@@ -5,15 +5,15 @@ import { Vector4D, MatrixUtils } from "./matrix_utils";
 type RotationGenerator = (angle: number) => number[][];
 
 export class Hypercube implements Sketch {
-  matrixUtils = new MatrixUtils(this.p);
-  distance = 2;
+  private matrixUtils = new MatrixUtils(this.p);
+  private distance = 2;
 
-  points: Vector4D[] = [];
-  angle: number = 0;
-  colorAngle: number = 0;
-  ctx: any = null;
+  private points: Vector4D[] = [];
+  private angle: number = 0;
+  private colorAngle: number = 0;
+  private ctx: any = null;
 
-  generators3d: RotationGenerator[] = [
+  private generators3d: RotationGenerator[] = [
     (angle: number) => [
       // XY
       [this.p.cos(angle), -this.p.sin(angle), 0, 0],
@@ -39,7 +39,7 @@ export class Hypercube implements Sketch {
     ],
   ];
 
-  generators4d: RotationGenerator[] = [
+  private generators4d: RotationGenerator[] = [
     (angle: number) => [
       // XW
       [this.p.cos(angle), 0, 0, -this.p.sin(angle)],
@@ -65,43 +65,10 @@ export class Hypercube implements Sketch {
     ],
   ];
 
-  currentRotations: RotationGenerator[] = [
+  private currentRotations: RotationGenerator[] = [
     this.generators3d.sample(),
     this.generators4d.sample(),
   ];
-
-  drawSquare = (...points: p5.Vector[]) => {
-    this.p.beginShape();
-    for (let point of points) this.p.vertex(point.x, point.y, point.z);
-    this.p.endShape(this.p.CLOSE);
-  };
-
-  drawCube = (points: p5.Vector[], hue: number): void => {
-    this.p.fill(hue, 100, 100, 0.05);
-    this.p.stroke(hue, 100, 100);
-    this.p.strokeWeight(2);
-
-    this.drawSquare(points[0], points[1], points[3], points[2]);
-    this.drawSquare(points[0], points[1], points[5], points[4]);
-    this.drawSquare(points[4], points[5], points[7], points[6]);
-    this.drawSquare(points[2], points[3], points[7], points[6]);
-    this.drawSquare(points[1], points[3], points[7], points[5]);
-    this.drawSquare(points[0], points[2], points[6], points[4]);
-  };
-
-  getEvenPoints = (
-    points: p5.Vector[],
-    start: number,
-    end: number,
-    offset: number = 0,
-    step: number = 2
-  ) => {
-    let result = [];
-    for (let i = start; i < end; i += step) {
-      result.push(points[i + offset]);
-    }
-    return result;
-  };
 
   constructor(private readonly p: p5) {}
 
@@ -205,4 +172,37 @@ export class Hypercube implements Sketch {
     this.angle += 0.01;
     this.colorAngle += 0.05;
   }
+
+  private drawSquare = (...points: p5.Vector[]) => {
+    this.p.beginShape();
+    for (let point of points) this.p.vertex(point.x, point.y, point.z);
+    this.p.endShape(this.p.CLOSE);
+  };
+
+  private drawCube = (points: p5.Vector[], hue: number): void => {
+    this.p.fill(hue, 100, 100, 0.05);
+    this.p.stroke(hue, 100, 100);
+    this.p.strokeWeight(2);
+
+    this.drawSquare(points[0], points[1], points[3], points[2]);
+    this.drawSquare(points[0], points[1], points[5], points[4]);
+    this.drawSquare(points[4], points[5], points[7], points[6]);
+    this.drawSquare(points[2], points[3], points[7], points[6]);
+    this.drawSquare(points[1], points[3], points[7], points[5]);
+    this.drawSquare(points[0], points[2], points[6], points[4]);
+  };
+
+  private getEvenPoints = (
+    points: p5.Vector[],
+    start: number,
+    end: number,
+    offset: number = 0,
+    step: number = 2
+  ) => {
+    let result = [];
+    for (let i = start; i < end; i += step) {
+      result.push(points[i + offset]);
+    }
+    return result;
+  };
 }

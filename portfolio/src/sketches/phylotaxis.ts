@@ -15,21 +15,17 @@ if (!Array.prototype.sample) {
 }
 
 export class Phylotaxis implements Sketch {
-  n = 0;
-  c = 12;
-  start = 0;
-  growth: boolean = true;
+  private n = 0;
+  private c = 12;
+  private start = 0;
+  private growth: boolean = true;
 
-  magicAngle = 137.6;
-  maxParticles = 3000;
-  increment = 5;
+  private magicAngle = 137.6;
+  private maxParticles = 3000;
+  private increment = 5;
 
-  constructor(private readonly p: p5) {}
-
-  preload(): void {}
-
-  selectedGenerator!: (i: number) => number;
-  magicAngleGenerators: ((i: number) => number)[] = [
+  private selectedGenerator!: (i: number) => number;
+  private magicAngleGenerators: ((i: number) => number)[] = [
     (input: number): number => {
       let ma = this.p.sin(input);
       ma = this.p.map(ma, -1, 1, 137.3, 137.6);
@@ -40,6 +36,10 @@ export class Phylotaxis implements Sketch {
     (input: number): number => 180,
     (input: number): number => 99.5,
   ];
+
+  constructor(private readonly p: p5) {}
+
+  preload(): void {}
 
   setup() {
     this.p.frameRate(144);

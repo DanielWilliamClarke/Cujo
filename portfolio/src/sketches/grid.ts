@@ -47,22 +47,22 @@ class GridUtil {
 }
 
 export class Grid implements Sketch {
-  screenWidth = 0;
-  screenHeight = 0;
+  private screenWidth = 0;
+  private screenHeight = 0;
 
-  timeScale = 0.005;
-  t = 0;
+  private timeScale = 0.005;
+  private t = 0;
 
-  scale = 150;
-  num = 10;
-  lineWidth = 15;
+  private scale = 150;
+  private num = 20;
+  private lineWidth = 15;
 
-  shapes: Vector4D[] = [];
-  hexPoints: p5.Vector[] = [];
-  maxDist = 0;
-  size = 0;
+  private shapes: Vector4D[] = [];
+  private hexPoints: p5.Vector[] = [];
+  private maxDist = 0;
+  private size = 0;
 
-  ctx: any;
+  private ctx: any;
 
   constructor(private readonly p: p5) {}
 
