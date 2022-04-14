@@ -20,16 +20,16 @@ type Neighbours = {
 };
 
 export class Conway implements Sketch {
-  chance = 0.0001;
+  private chance = 0.0001;
 
-  resolution = 20;
-  boxSize = this.resolution - 1;
-  rows = 0;
-  columns = 0;
-  grid: Grid = [];
+  private resolution = 10;
+  private boxSize = this.resolution - 1;
+  private rows = 0;
+  private columns = 0;
+  private grid: Grid = [];
 
-  B = [3];
-  S = [2, 3];
+  private B = [3];
+  private S = [2, 3];
 
   constructor(private readonly p: p5) {}
 
@@ -97,7 +97,7 @@ export class Conway implements Sketch {
     this.grid = next;
   }
 
-  countNeighbours = (grid: Grid, x: number, y: number): Neighbours => {
+  private countNeighbours = (grid: Grid, x: number, y: number): Neighbours => {
     let neighbours: Neighbours = {
       sum: 0,
       colors: [],
@@ -121,7 +121,9 @@ export class Conway implements Sketch {
     return neighbours;
   };
 
-  iterateGrid = (delegate: (col: number, row: number) => void): void => {
+  private iterateGrid = (
+    delegate: (col: number, row: number) => void
+  ): void => {
     for (let col = 0; col < this.columns; col++) {
       for (let row = 0; row < this.rows; row++) {
         delegate(col, row);
@@ -129,7 +131,7 @@ export class Conway implements Sketch {
     }
   };
 
-  makeGrid = (columns: number, rows: number, empty?: boolean): Grid =>
+  private makeGrid = (columns: number, rows: number, empty?: boolean): Grid =>
     new Array(columns).fill(undefined).map(() =>
       new Array(rows).fill(undefined).map(() => {
         if (!empty && Math.random() > 0.3) {
@@ -139,10 +141,10 @@ export class Conway implements Sketch {
       })
     );
 
-  randomColor = (): HSLA =>
+  private randomColor = (): HSLA =>
     new HSLA(this.p.random(30, 55), this.p.random(80, 100), 60);
 
-  averageColor = (colors: HSLA[]): HSLA => {
+  private averageColor = (colors: HSLA[]): HSLA => {
     if (colors.length === 1) {
       return colors[0];
     }

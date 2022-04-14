@@ -1,14 +1,14 @@
-import { Hex } from "./hex";
-import { Waves } from "./waves";
-import { Boxes } from "./boxes";
-import { Phylotaxis } from "./phylotaxis";
-import { Hypercube } from "./hypercube";
-import { Grid } from "./grid";
-import { Conway } from "./conway";
+import p5 from "p5";
 // import { conway3D } from "./conway_3d"
 import { Boids } from "./boids";
-import p5 from "p5";
+import { Boxes } from "./boxes";
+import { Conway } from "./conway";
+import { Grid } from "./grid";
+import { Hex } from "./hex";
+import { Hypercube } from "./hypercube";
 import { pauseableSketch } from "./pauseable_sketch";
+import { Phylotaxis } from "./phylotaxis";
+import { Waves } from "./waves";
 
 declare global {
   interface Array<T> {
@@ -22,6 +22,7 @@ if (!Array.prototype.sample) {
     return this[Math.floor(Math.random() * this.length)];
   };
 }
+
 export interface Sketch {
   preload(): void;
   setup(): void;
@@ -30,6 +31,7 @@ export interface Sketch {
 }
 
 export function getSketch(): (p: p5) => void {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const sketchBuilder: (p: p5) => Sketch = [
     (p: p5) => new Conway(p),
     (p: p5) => new Hex(p),

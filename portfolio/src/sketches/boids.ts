@@ -6,12 +6,12 @@ const fontName = require("../assets/QuartzoBold-W9lv.otf").default;
 const p5v: { sub(a: p5.Vector, b: p5.Vector): p5.Vector } = p5.Vector;
 
 export class Boids implements Sketch {
-  vehicles: Vehicle[] = [];
-  dotSize: number = 10;
-  sampleFactor: number = 0.1;
+  private vehicles: Vehicle[] = [];
+  private dotSize: number = 10;
+  private sampleFactor: number = 0.1;
 
-  wordIndex = 0;
-  words = [
+  private wordIndex = 0;
+  private words = [
     "Daniel",
     "William",
     "Clarke",
@@ -30,7 +30,7 @@ export class Boids implements Sketch {
     private readonly noiseGenerator: NoiseGenerator = new NoiseGenerator(p)
   ) {}
 
-  myFont!: p5.Font;
+  private myFont!: p5.Font;
   preload() {
     this.myFont = this.p.loadFont(fontName);
   }
@@ -65,7 +65,7 @@ export class Boids implements Sketch {
     );
   }
 
-  setupBoidsForWord = (newText: string) => {
+  private setupBoidsForWord = (newText: string) => {
     const padding = this.p.width * 0.1;
 
     const fontSize = this.getFontSizeTextInBounds(
@@ -85,7 +85,7 @@ export class Boids implements Sketch {
     this.migrateToNewPoints(points);
   };
 
-  getFontSizeTextInBounds = (
+  private getFontSizeTextInBounds = (
     text: string,
     boundsWidth: number,
     boundsHeight: number
@@ -102,7 +102,7 @@ export class Boids implements Sketch {
     return fontSize;
   };
 
-  migrateToNewPoints = (points: p5.Vector[]) => {
+  private migrateToNewPoints = (points: p5.Vector[]) => {
     if (!this.vehicles.length) {
       //FIRST TIME CREATION
       this.vehicles.push(

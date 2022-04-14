@@ -1,3 +1,4 @@
+import dat from "dat.gui";
 import p5 from "p5";
 import { Sketch } from ".";
 
@@ -73,23 +74,37 @@ class NoiseGenerator {
 }
 
 export class Waves implements Sketch {
-  noiseGenerator = new NoiseGenerator(new SimplexNoise());
-  totalParticles = 5000;
-  particles: Particle[] = [];
-  screenWidth = 0;
-  screenHeight = 0;
-  centerX = 0;
-  centerY = 0;
-  hueBase = 0;
+  private totalParticles = 5000;
+  private particles: Particle[] = [];
+  private screenWidth = 0;
+  private screenHeight = 0;
+  private centerX = 0;
+  private centerY = 0;
+  private hueBase = 0;
 
-  step = 10;
-  base = 1000;
-  zInc = 0.001;
-  zOff = 0;
+  private fluffOff = 0;
+  private fluffInc = 0.05;
 
-  clearIn = 30000;
+  private zOff = 0;
+  private zInc = 0.001;
 
-  constructor(private readonly p: p5) {}
+  private clearIn = 20000;
+
+  private parameters = {
+    base: 200,
+    step: 9,
+    bearing: 14,
+  };
+
+  constructor(
+    private readonly p: p5,
+    private readonly noiseGenerator: NoiseGenerator = new NoiseGenerator(
+      new SimplexNoise()
+    ),
+    private readonly gui: dat.GUI = new dat.GUI()
+  ) {
+    // this.setupDatGui();
+  }
 
   preload(): void {}
 
@@ -134,21 +149,28 @@ export class Waves implements Sketch {
       this.p.background(0, this.p.map(r, 0, 1000, 0, 255));
     }
 
+    const fluff = this.p.constrain(
+      this.p.map(this.p.sin(this.fluffOff), -1, 1, 0, 3),
+      0.5,
+      2.5
+    );
+    this.fluffOff += this.fluffInc;
+
     this.particles.forEach((particle: Particle): void => {
       particle.persistPosition();
 
       const angle =
         Math.PI *
-        6 *
+        this.parameters.bearing *
         this.noiseGenerator.getNoise(
-          (particle.x / this.base) * 1.75,
-          (particle.y / this.base) * 1.75,
+          (particle.x / this.parameters.base) * fluff,
+          (particle.y / this.parameters.base) * fluff,
           this.zOff
         );
 
       particle.integratePosition(
-        Math.cos(angle) * this.step,
-        Math.sin(angle) * this.step
+        Math.cos(angle) * this.parameters.step,
+        Math.sin(angle) * this.parameters.step
       );
 
       if (particle.color.a < 1) {
@@ -188,5 +210,34 @@ export class Waves implements Sketch {
 
     this.zOff += this.zInc;
     this.hueBase += 0.1;
+  }
+
+  private setupDatGui() {
+    this.gui.remember(this.parameters);
+    this.gui
+      .add(this.parameters, "base")
+      .min(100)
+      .max(1000)
+      .step(100)
+      .onFinishChange(() => this.p.background(0));
+    this.gui
+      .add(this.parameters, "step")
+      .min(5)
+      .max(20)
+      .step(1)
+      .onFinishChange(() => this.p.background(0));
+    this.gui
+      .add(this.parameters, "fluff")
+      .min(0)
+      .max(3)
+      .step(0.05)
+      .onFinishChange(() => this.p.background(0));
+    this.gui
+      .add(this.parameters, "bearing")
+      .min(0)
+      .max(100)
+      .step(1)
+      .onFinishChange(() => this.p.background(0));
+    this.gui.close();
   }
 }

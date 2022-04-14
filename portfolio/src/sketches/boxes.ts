@@ -3,23 +3,23 @@ import { Sketch } from ".";
 import { Ease } from "./easing";
 
 export class Boxes implements Sketch {
-  minW: number = 32;
-  maxW: number = 64;
-  minH: number = 60;
-  maxH: number = 240;
-  padding: number = 50;
+  private minW: number = 32;
+  private maxW: number = 64;
+  private minH: number = 60;
+  private maxH: number = 240;
+  private padding: number = 50;
 
-  size: number = 1000;
-  halfSize: number = 1000 / 2;
+  private size: number = 1000;
+  private halfSize: number = 1000 / 2;
 
-  ma: number = 0;
-  yAngle: number = -this.p.QUARTER_PI;
-  angle: number = 0;
-  colorAngle: number = 0;
-  maxD: number = 0;
+  private ma: number = 0;
+  private yAngle: number = -this.p.QUARTER_PI;
+  private angle: number = 0;
+  private colorAngle: number = 0;
+  private maxD: number = 0;
 
-  opacity: number = 0;
-  opacityProgress: number = 0;
+  private opacity: number = 0;
+  private opacityProgress: number = 0;
 
   constructor(private readonly p: p5) {}
 
