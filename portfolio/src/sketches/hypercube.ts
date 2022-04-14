@@ -1,164 +1,208 @@
 import p5 from "p5";
-import { Vector4D, MatrixUtils } from "./matrix_utils"
+import { Sketch } from ".";
+import { Vector4D, MatrixUtils } from "./matrix_utils";
 
 type RotationGenerator = (angle: number) => number[][];
 
-export function hypercube(p: p5): void {
+export class Hypercube implements Sketch {
+  matrixUtils = new MatrixUtils(this.p);
+  distance = 2;
 
-    const matrixUtils = new MatrixUtils(p);
-    const distance = 2;
+  points: Vector4D[] = [];
+  angle: number = 0;
+  colorAngle: number = 0;
+  ctx: any = null;
 
-    let points: Vector4D[] = [];
-    let angle: number = 0;
-    let colorAngle: number = 0;
-    let ctx: any = null;
+  generators3d: RotationGenerator[] = [
+    (angle: number) => [
+      // XY
+      [this.p.cos(angle), -this.p.sin(angle), 0, 0],
+      [this.p.sin(angle), this.p.cos(angle), 0, 0],
+      [0, 0, 1, 0],
+      [0, 0, 0, 1],
+    ],
 
-    const generators3d: RotationGenerator[] = [
-        (angle: number) => ([ // XY
-            [p.cos(angle), -p.sin(angle), 0, 0],
-            [p.sin(angle), p.cos(angle), 0, 0],
-            [0, 0, 1, 0],
-            [0, 0, 0, 1]
-        ]),
+    (angle: number) => [
+      // XZ
+      [this.p.cos(angle), 0, -this.p.sin(angle), 0],
+      [0, 1, 0, 0],
+      [this.p.sin(angle), 0, this.p.cos(angle), 0],
+      [0, 0, 0, 1],
+    ],
 
-        (angle: number) => ([ // XZ
-            [p.cos(angle), 0, -p.sin(angle),  0],
-            [0, 1, 0, 0],
-            [p.sin(angle), 0, p.cos(angle), 0],
-            [0, 0, 0, 1]
-        ]),
+    (angle: number) => [
+      // YZ
+      [1, 0, 0, 0],
+      [0, this.p.cos(angle), -this.p.sin(angle), 0],
+      [0, this.p.sin(angle), this.p.cos(angle), 0],
+      [0, 0, 0, 1],
+    ],
+  ];
 
-        (angle: number) => ([ // YZ
-            [1, 0, 0, 0],
-            [0, p.cos(angle), -p.sin(angle), 0],
-            [0, p.sin(angle), p.cos(angle), 0],
-            [0, 0, 0, 1]
-        ])
-    ];
+  generators4d: RotationGenerator[] = [
+    (angle: number) => [
+      // XW
+      [this.p.cos(angle), 0, 0, -this.p.sin(angle)],
+      [0, 1, 0, 0],
+      [0, 0, 1, 0],
+      [this.p.sin(angle), 0, 0, this.p.cos(angle)],
+    ],
 
-    const generators4d: RotationGenerator[] = [
-        (angle: number) => ([ // XW
-            [p.cos(angle), 0, 0, -p.sin(angle)],
-            [0, 1, 0, 0],
-            [0, 0, 1, 0],
-            [p.sin(angle), 0, 0, p.cos(angle)]
-        ]),
+    (angle: number) => [
+      // YW
+      [1, 0, 0, 0],
+      [0, this.p.cos(angle), 0, -this.p.sin(angle)],
+      [0, 0, 1, 0],
+      [0, this.p.sin(angle), 0, this.p.cos(angle)],
+    ],
 
-        (angle: number) => ([// YW
-            [1, 0, 0, 0],
-            [0, p.cos(angle), 0, -p.sin(angle)],
-            [0, 0, 1, 0],
-            [0,  p.sin(angle), 0, p.cos(angle)]
-        ]),
+    (angle: number) => [
+      // ZW
+      [1, 0, 0, 0],
+      [0, 1, 0, 0],
+      [0, 0, this.p.cos(angle), -this.p.sin(angle)],
+      [0, 0, this.p.sin(angle), this.p.cos(angle)],
+    ],
+  ];
 
-        (angle: number) => ([ // ZW
-            [1, 0, 0, 0],
-            [0, 1, 0, 0],
-            [0, 0, p.cos(angle), -p.sin(angle)],
-            [0, 0, p.sin(angle), p.cos(angle)]
-        ])
-    ];
+  currentRotations: RotationGenerator[] = [
+    this.generators3d.sample(),
+    this.generators4d.sample(),
+  ];
 
-    const currentRotations: RotationGenerator[] = [
-        generators3d.sample(),
-        generators4d.sample()
-    ];
+  drawSquare = (...points: p5.Vector[]) => {
+    this.p.beginShape();
+    for (let point of points) this.p.vertex(point.x, point.y, point.z);
+    this.p.endShape(this.p.CLOSE);
+  };
 
-    const drawSquare = (...points: p5.Vector[]) => {
-        p.beginShape();
-        for (let point of points) p.vertex(point.x, point.y, point.z);
-        p.endShape(p.CLOSE);
+  drawCube = (points: p5.Vector[], hue: number): void => {
+    this.p.fill(hue, 100, 100, 0.05);
+    this.p.stroke(hue, 100, 100);
+    this.p.strokeWeight(2);
+
+    this.drawSquare(points[0], points[1], points[3], points[2]);
+    this.drawSquare(points[0], points[1], points[5], points[4]);
+    this.drawSquare(points[4], points[5], points[7], points[6]);
+    this.drawSquare(points[2], points[3], points[7], points[6]);
+    this.drawSquare(points[1], points[3], points[7], points[5]);
+    this.drawSquare(points[0], points[2], points[6], points[4]);
+  };
+
+  getEvenPoints = (
+    points: p5.Vector[],
+    start: number,
+    end: number,
+    offset: number = 0,
+    step: number = 2
+  ) => {
+    let result = [];
+    for (let i = start; i < end; i += step) {
+      result.push(points[i + offset]);
     }
+    return result;
+  };
 
-    const drawCube = (points: p5.Vector[], hue: number): void => {
-        p.fill(hue, 100, 100, 0.05);
-        p.stroke(hue, 100, 100);
-        p.strokeWeight(2);
+  constructor(private readonly p: p5) {}
 
-        drawSquare(points[0], points[1], points[3], points[2]);
-        drawSquare(points[0], points[1], points[5], points[4]);
-        drawSquare(points[4], points[5], points[7], points[6]);
-        drawSquare(points[2], points[3], points[7], points[6]);
-        drawSquare(points[1], points[3], points[7], points[5]);
-        drawSquare(points[0], points[2], points[6], points[4]);
+  preload(): void {}
+
+  setup() {
+    this.p.createCanvas(this.p.windowWidth, this.p.windowHeight, this.p.WEBGL);
+    this.p.colorMode(this.p.HSB);
+    this.p.ortho(
+      -window.innerWidth,
+      window.innerWidth,
+      window.innerHeight,
+      -window.innerHeight,
+      -1000,
+      10000
+    );
+
+    // transparency ordering workaround
+    const canvas = document.getElementById("defaultCanvas0") as any;
+    this.ctx = canvas.getContext("webgl");
+    this.ctx.disable(this.ctx.DEPTH_TEST);
+
+    // Generate 4D points
+    for (let i = 0; i < 16; i++) {
+      let x = i & 1 ? -1 : 1;
+      let y = i & 2 ? -1 : 1;
+      let z = i & 4 ? -1 : 1;
+      let w = i & 8 ? -1 : 1;
+      this.points.push(new Vector4D(x, y, z, w));
     }
+  }
 
-    const getEvenPoints = (points: p5.Vector[], start: number, end: number, offset: number = 0, step: number = 2) => {
-        let result = [];
-        for (let i = start; i < end; i += step) {
-            result.push(points[i + offset])
-        };
-        return result;
-    }
+  windowResized() {
+    this.p.resizeCanvas(window.innerWidth, window.innerHeight);
+    this.p.ortho(
+      -window.innerWidth,
+      window.innerWidth,
+      window.innerHeight,
+      -window.innerHeight,
+      -1000,
+      10000
+    );
+  }
 
-    p.setup = (): void => {
-        p.createCanvas(p.windowWidth, p.windowHeight, p.WEBGL);
-        p.colorMode(p.HSB);
-        p.ortho(-window.innerWidth, window.innerWidth, window.innerHeight, -window.innerHeight, -1000, 10000);
+  draw() {
+    this.p.background(0);
+    this.p.rotateX(35.264);
+    this.p.rotateY(-this.p.QUARTER_PI);
 
-        // transparency ordering workaround
-        const canvas = document.getElementById('defaultCanvas0') as any;
-        ctx = canvas.getContext('webgl');
-        ctx.disable(ctx.DEPTH_TEST);
+    // Rotate and Project 4D Points
+    const projected3d: p5.Vector[] = this.points.map(
+      (point: Vector4D): p5.Vector => {
+        // Rotate point
+        // https://math.stackexchange.com/questions/1402362/rotation-in-4d
+        const rotatedPoint = this.currentRotations
+          .map((generator: RotationGenerator) => generator(this.angle))
+          .reduce(
+            (point: Vector4D, rotation: number[][]): Vector4D =>
+              this.matrixUtils.Matmul(rotation, point) as Vector4D,
+            point
+          );
 
-        // Generate 4D points
-        for (let i = 0; i < 16; i++) {
-            let x = i & 1 ? -1 : 1;
-            let y = i & 2 ? -1 : 1;
-            let z = i & 4 ? -1 : 1;
-            let w = i & 8 ? -1 : 1;
-            points.push(new Vector4D(x, y, z, w));
-        }
-    };
+        // Project point
+        const w = 1 / (this.distance - rotatedPoint.w);
+        const projection = [
+          [w, 0, 0, 0],
+          [0, w, 0, 0],
+          [0, 0, w, 0],
+        ];
+        const projected = this.matrixUtils.Matmul(
+          projection,
+          rotatedPoint
+        ) as Vector4D;
+        return projected.multiply(500).To3D(this.p);
+      }
+    );
 
-    p.windowResized = (): void => {
-        p.resizeCanvas(window.innerWidth, window.innerHeight);
-        p.ortho(-window.innerWidth, window.innerWidth, window.innerHeight, -window.innerHeight, -1000, 10000);
-    };
+    // Draw each cube
+    [
+      projected3d.slice(0, 8),
+      projected3d.slice(8),
+      [...projected3d.slice(0, 4), ...projected3d.slice(8, 12)],
+      [...projected3d.slice(4, 8), ...projected3d.slice(12)],
+      [...this.getEvenPoints(projected3d, 0, 16)],
+      [...this.getEvenPoints(projected3d, 0, 16, 1)],
+      [
+        ...this.getEvenPoints(projected3d, 0, 16, 0, 4),
+        ...this.getEvenPoints(projected3d, 0, 16, 1, 4),
+      ],
+      [
+        ...this.getEvenPoints(projected3d, 0, 16, 2, 4),
+        ...this.getEvenPoints(projected3d, 0, 16, 3, 4),
+      ],
+    ].forEach((cube: p5.Vector[], index: number): void =>
+      this.drawCube(
+        cube,
+        this.p.map(this.p.sin(this.colorAngle + index), -1, 1, 0, 360)
+      )
+    );
 
-    p.draw = (): void => {
-        p.background(0);
-        p.rotateX(35.264);
-        p.rotateY(-p.QUARTER_PI);
-
-        // Rotate and Project 4D Points
-        const projected3d: p5.Vector[] =
-            points.map((point: Vector4D): p5.Vector => {
-                // Rotate point
-                // https://math.stackexchange.com/questions/1402362/rotation-in-4d
-                const rotatedPoint = currentRotations
-                    .map((generator: RotationGenerator) => generator(angle))
-                    .reduce((point: Vector4D, rotation: number[][]): Vector4D =>
-                        matrixUtils.Matmul(rotation, point) as Vector4D,
-                        point)
-
-                // Project point
-                const w = 1 / (distance - rotatedPoint.w);
-                const projection = [
-                    [w, 0, 0, 0],
-                    [0, w, 0, 0],
-                    [0, 0, w, 0]
-                ];
-                const projected = matrixUtils.Matmul(projection, rotatedPoint) as Vector4D;
-                return projected
-                    .multiply(500)
-                    .To3D(p);
-            });
-
-        // Draw each cube
-        [
-            projected3d.slice(0, 8),
-            projected3d.slice(8),
-            [...projected3d.slice(0, 4), ...projected3d.slice(8, 12)],
-            [...projected3d.slice(4, 8), ...projected3d.slice(12)],
-            [...getEvenPoints(projected3d, 0, 16)],
-            [...getEvenPoints(projected3d, 0, 16, 1)],
-            [...getEvenPoints(projected3d, 0, 16, 0, 4), ...getEvenPoints(projected3d, 0, 16, 1, 4)],
-            [...getEvenPoints(projected3d, 0, 16, 2, 4), ...getEvenPoints(projected3d, 0, 16, 3, 4)]
-        ].forEach((cube: p5.Vector[], index: number): void =>
-            drawCube(cube, p.map(p.sin(colorAngle + index), -1, 1, 0, 360)))
-
-        angle += 0.01;
-        colorAngle += 0.05;
-    };
-};
+    this.angle += 0.01;
+    this.colorAngle += 0.05;
+  }
+}

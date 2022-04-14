@@ -1,80 +1,89 @@
 import p5 from "p5";
+import { Sketch } from ".";
 import { Ease } from "./easing";
 
-export function boxes(p: p5): void {
+export class Boxes implements Sketch {
+  minW: number = 32;
+  maxW: number = 64;
+  minH: number = 60;
+  maxH: number = 240;
+  padding: number = 50;
 
-    const minW: number = 32;
-    const maxW: number = 64;
-    const minH: number = 60;
-    const maxH: number = 240;
-    const padding: number = 50;
+  size: number = 1000;
+  halfSize: number = 1000 / 2;
 
-    const size: number = 1000;
-    const halfSize: number = 1000 / 2;
+  ma: number = 0;
+  yAngle: number = -this.p.QUARTER_PI;
+  angle: number = 0;
+  colorAngle: number = 0;
+  maxD: number = 0;
 
-    let ma: number = 0;
-    let yAngle: number = -p.QUARTER_PI;
-    let angle: number = 0;
-    let colorAngle: number = 0;
-    let maxD: number = 0;
+  opacity: number = 0;
+  opacityProgress: number = 0;
 
-    let opacity: number = 0;
-    let opacityProgress: number = 0;
+  constructor(private readonly p: p5) {}
 
-    p.setup = (): void => {
-        p.frameRate(60);
-        p.createCanvas(window.innerWidth, window.innerHeight, p.WEBGL);
-        p.colorMode(p.HSB);
-        p.smooth();
-        p.noStroke();
+  preload(): void {}
 
-        ma = 35.264; // p.atan(1 / p.sqrt(2));
-        maxD = p.dist(0, 0, maxH, maxH);
-        p.perspective();
+  setup() {
+    this.p.frameRate(60);
+    this.p.createCanvas(window.innerWidth, window.innerHeight, this.p.WEBGL);
+    this.p.colorMode(this.p.HSB);
+    this.p.smooth();
+    this.p.noStroke();
+
+    this.ma = 35.264; // this.p.atan(1 / this.p.sqrt(2));
+    this.maxD = this.p.dist(0, 0, this.maxH, this.maxH);
+    this.p.perspective();
+  }
+
+  windowResized() {
+    this.p.resizeCanvas(window.innerWidth, window.innerHeight);
+  }
+
+  draw() {
+    this.p.background(0);
+    this.p.orbitControl();
+    this.p.rotateX(this.ma);
+    this.p.rotateY((this.yAngle += 0.001));
+
+    const locX = this.p.mouseX - this.p.height / 2;
+    const locY = this.p.mouseY - this.p.width / 2;
+    this.p.ambientLight(0, 0, 75);
+    this.p.pointLight(0, 0, 100, locX, locY, 255);
+
+    for (let z = this.padding; z < this.size - this.padding; z += this.maxW) {
+      for (let x = this.padding; x < this.size - this.padding; x += this.maxW) {
+        this.p.push();
+
+        const d = this.p.dist(x, z, this.halfSize, this.halfSize);
+        const offset = this.p.map(d, 0, this.maxD, -this.p.PI, this.p.PI);
+        const a = this.angle + offset;
+        const h = this.p.floor(
+          this.p.map(this.p.sin(a), -1, 1, this.minH, this.maxH)
+        );
+        const w = this.p.floor(
+          this.p.map(this.p.sin(a), -1, 1, this.minW, this.maxW)
+        );
+
+        const c = this.colorAngle + offset;
+        const hue = this.p.floor(this.p.map(this.p.sin(c), -1, 1, 0, 360));
+        const brightness = this.p.floor(
+          this.p.map(this.p.sin(c), -1, 1, 75, 90)
+        );
+
+        this.p.fill(hue, 60, brightness, this.opacity);
+        this.p.translate(x - this.halfSize, 0, z - this.halfSize);
+        this.p.box(w, h, w);
+        this.p.pop();
+      }
     }
 
-    p.windowResized = (): void => {
-        p.resizeCanvas(window.innerWidth, window.innerHeight);
-    };
+    this.angle -= 0.01;
+    this.colorAngle -= 0.005;
 
-    p.draw = (): void => {
-
-        p.background(0);
-        p.orbitControl();
-        p.rotateX(ma);
-        p.rotateY(yAngle += 0.001);
-
-        const locX = p.mouseX - p.height / 2;
-        const locY = p.mouseY - p.width / 2;
-        p.ambientLight(0, 0, 75);
-        p.pointLight(0, 0, 100, locX, locY, 255);
-
-        for(let z = padding; z < size - padding; z += maxW) {
-            for(let x = padding; x < size - padding; x += maxW) {
-                p.push();
-
-                const d = p.dist(x, z, halfSize, halfSize);
-                const offset = p.map(d, 0, maxD, -p.PI, p.PI);
-                const a = angle + offset;
-                const h = p.floor(p.map(p.sin(a), -1, 1, minH, maxH));
-                const w = p.floor(p.map(p.sin(a), -1, 1, minW, maxW));
-
-                const c = colorAngle + offset;
-                const hue = p.floor(p.map(p.sin(c), -1, 1, 0, 360));
-                const brightness = p.floor(p.map(p.sin(c), -1, 1, 75, 90));
-
-                p.fill(hue, 60, brightness, opacity);
-                p.translate(x - halfSize, 0, z - halfSize);
-                p.box(w, h, w);
-                p.pop();
-            }
-        }
-
-        angle -= 0.01;
-        colorAngle -= 0.005;
-
-        //easeOutCubic
-        opacityProgress += 0.01;
-        opacity = Ease.easeInOutCubic(opacityProgress);
-    };
-};
+    //easeOutCubic
+    this.opacityProgress += 0.01;
+    this.opacity = Ease.easeInOutCubic(this.opacityProgress);
+  }
+}
