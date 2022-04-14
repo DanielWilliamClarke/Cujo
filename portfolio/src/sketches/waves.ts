@@ -11,6 +11,7 @@ class HSLA {
     public a: number = 0
   ) {}
 }
+
 class Particle {
   public pastX: number = 0;
   public pastY: number = 0;
@@ -31,7 +32,7 @@ class Particle {
     this.x = this.pastX = screenWidth * Math.random();
     this.y = this.pastY = screenHeight * Math.random();
     this.color.h =
-      Math.atan2(this.y - centerY, this.x - centerX) * (180 / Math.PI);
+      Math.atan2(this.y - centerY, this.x - centerX) * (180 / Math.PI) + 50;
     this.color.s = 100;
     this.color.b = 100;
     this.color.a = 0.95;
