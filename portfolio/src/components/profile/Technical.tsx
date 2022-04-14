@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Row, Col } from "react-bootstrap";
 import { Zoom } from "react-awesome-reveal";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import { Document } from "@contentful/rich-text-types";
 
 import { Entry } from "../../model/Includes";
 import { Skills, Skill } from "../../model/CVModel";
@@ -51,18 +52,18 @@ export class Technical extends Component<TechnicalProps, SkillsState> {
           </Col>
         </Row>
 
-        <Row className="skill-items">
-          <Zoom triggerOnce cascade damping={0.01} className="col centered">
-            {this.props.skills.entry.list
-              .filter(({ name }: Skill) => this.filterSkills(name))
-              .sort((a: Skill, b: Skill) => b.level - a.level)
-              .map(({ level, icon }: Skill) => (
-                <ProgressGauge value={level} colors={this.state.gaugeColors}>
-                  {(color: string) => <DevIconName icon={icon} color={color} />}
-                </ProgressGauge>
-              ))}
-          </Zoom>
-        </Row>
+        {this.displaySkills(
+          this.props.skills.entry.currentSummary,
+          this.props.skills.entry.current
+        )}
+        {this.displaySkills(
+          this.props.skills.entry.favoriteSummary,
+          this.props.skills.entry.favorite
+        )}
+        {this.displaySkills(
+          this.props.skills.entry.usedSummary,
+          this.props.skills.entry.used
+        )}
 
         <Row className="section-content">
           <Col>
@@ -83,5 +84,28 @@ export class Technical extends Component<TechnicalProps, SkillsState> {
     return this.state.search.length
       ? name.toLowerCase().includes(this.state.search.toLowerCase())
       : true;
+  }
+
+  private displaySkills(summary: Document, skills: Skill[]) {
+    return (
+      <>
+        <Row className="section-content">
+          <Col>{documentToReactComponents(summary)}</Col>
+        </Row>
+        <Row className="skill-items">
+          <Zoom triggerOnce cascade damping={0.01} className="col centered">
+            {skills
+              .filter(({ name }: Skill) => this.filterSkills(name))
+              .sort((a: Skill, b: Skill) => b.level - a.level)
+              .map(({ level, icon }: Skill) => (
+                <ProgressGauge value={level} colors={this.state.gaugeColors}>
+                  {(color: string) => <DevIconName icon={icon} color={color} />}
+                </ProgressGauge>
+              ))}
+          </Zoom>
+        </Row>
+        <div className="line centered" />
+      </>
+    );
   }
 }
