@@ -4,10 +4,14 @@ import { Ease } from "./easing";
 import { Sketch } from ".";
 
 class GridUtil {
-  static getSquareGrid(num: number, scale: number): Vector4D[] {
+  static getSquareGrid(
+    totalX: number,
+    totalY: number,
+    scale: number
+  ): Vector4D[] {
     const vectors: [number, number][] = [];
-    for (let x = -num; x <= num; x++) {
-      for (let y = -num; y <= num; y++) {
+    for (let x = -totalX; x <= totalX; x++) {
+      for (let y = -totalY; y <= totalY; y++) {
         vectors.push([x, y]);
       }
     }
@@ -54,8 +58,9 @@ export class Grid implements Sketch {
   private t = 0;
 
   private scale = 150;
-  private num = 20;
-  private lineWidth = 15;
+  private totalX = 0;
+  private totalY = 0;
+  private lineWidth = 10;
 
   private shapes: Vector4D[] = [];
   private hexPoints: p5.Vector[] = [];
@@ -76,10 +81,13 @@ export class Grid implements Sketch {
     this.screenWidth = this.p.width = window.innerWidth;
     this.screenHeight = this.p.height = window.innerHeight;
 
+    this.totalX = Math.ceil(this.screenWidth / 2 / this.scale);
+    this.totalY = Math.ceil(this.screenHeight / 2 / this.scale);
+
     const canvas = document.getElementById("defaultCanvas0") as any;
     this.ctx = canvas.getContext("2d");
 
-    this.shapes = GridUtil.getSquareGrid(this.num, this.scale);
+    this.shapes = GridUtil.getSquareGrid(this.totalX, this.totalY, this.scale);
     this.hexPoints = GridUtil.getPolygonPoints(360, 4);
 
     this.maxDist = this.shapes.reduce(

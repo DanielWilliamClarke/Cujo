@@ -75,7 +75,7 @@ class NoiseGenerator {
 }
 
 export class Waves implements Sketch {
-  private totalParticles = 5000;
+  private totalParticles = 1500;
   private particles: Particle[] = [];
   private screenWidth = 0;
   private screenHeight = 0;
@@ -104,7 +104,7 @@ export class Waves implements Sketch {
     ),
     private readonly gui: dat.GUI = new dat.GUI()
   ) {
-    // this.setupDatGui();
+    //this.setupDatGui();
   }
 
   preload(): void {}
@@ -227,12 +227,12 @@ export class Waves implements Sketch {
       .max(20)
       .step(1)
       .onFinishChange(() => this.p.background(0));
-    this.gui
-      .add(this.parameters, "fluff")
-      .min(0)
-      .max(3)
-      .step(0.05)
-      .onFinishChange(() => this.p.background(0));
+    // this.gui
+    //   .add(this.parameters, "fluff")
+    //   .min(0)
+    //   .max(3)
+    //   .step(0.05)
+    //   .onFinishChange(() => this.p.background(0));
     this.gui
       .add(this.parameters, "bearing")
       .min(0)

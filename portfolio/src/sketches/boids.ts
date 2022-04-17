@@ -12,17 +12,19 @@ export class Boids implements Sketch {
 
   private wordIndex = 0;
   private words = [
-    "Daniel",
-    "William",
-    "Clarke",
-    "Software ",
-    "Engineer",
-    "@ Freetrade",
-    "Rust",
-    "Golang",
-    "C++",
-    "Kotlin",
-    "Swift",
+    { word: "Daniel", angle: 120 },
+    { word: "William", angle: -120 },
+    { word: "Clarke", angle: 120 },
+    { word: "Full Stack", angle: -120 },
+    { word: "Software", angle: 120 },
+    { word: "Engineer", angle: -120 },
+    { word: "Freetrade", angle: 120 },
+    { word: "Rust", angle: -120 },
+    { word: "Golang", angle: 120 },
+    { word: "C++", angle: -120 },
+    { word: "Kotlin", angle: 120 },
+    { word: "Swift", angle: -120 },
+    { word: "TypeScript", angle: 120 },
   ];
 
   constructor(
@@ -42,13 +44,13 @@ export class Boids implements Sketch {
     this.p.smooth();
     this.p.noStroke();
 
-    this.setupBoidsForWord(this.words[this.wordIndex]);
+    this.setupBoidsForWord(this.words[this.wordIndex].word);
     setInterval(() => {
       this.wordIndex++;
       if (this.wordIndex >= this.words.length) {
         this.wordIndex = 0;
       }
-      this.setupBoidsForWord(this.words[this.wordIndex]);
+      this.setupBoidsForWord(this.words[this.wordIndex].word);
     }, 3000);
   }
 
@@ -59,6 +61,9 @@ export class Boids implements Sketch {
   draw() {
     this.p.background(0);
     this.p.rotateX(120);
+
+    this.p.rotateY(this.words[this.wordIndex].angle);
+    this.p.scale(0.7);
 
     this.vehicles.forEach((v: Vehicle) =>
       v.behaviors(this.noiseGenerator.getCoord()).update().show()
