@@ -1,9 +1,9 @@
 import React from "react";
+import { resolve } from "inversify-react";
 import { DevIcon } from "../../model/CVModel";
 import { IIconService } from "../../services/IconService";
 
 import "./DevIcon.scss";
-import { resolve } from "inversify-react";
 
 type DevIconProps = {
   icon: DevIcon;
