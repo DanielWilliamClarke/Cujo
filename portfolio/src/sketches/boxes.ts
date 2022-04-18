@@ -5,8 +5,8 @@ import { Ease } from "./easing";
 export class Boxes implements Sketch {
   private minW: number = 32;
   private maxW: number = 64;
-  private minH: number = 60;
-  private maxH: number = 240;
+  private minH: number = 30;
+  private maxH: number = 360;
   private padding: number = 50;
 
   private size: number = 1000;
@@ -32,7 +32,7 @@ export class Boxes implements Sketch {
     this.p.smooth();
     this.p.noStroke();
 
-    this.ma = 35.264; // this.p.atan(1 / this.p.sqrt(2));
+    this.ma = -this.p.atan(1 / this.p.sqrt(2));
     this.maxD = this.p.dist(0, 0, this.maxH, this.maxH);
     this.p.perspective();
   }
