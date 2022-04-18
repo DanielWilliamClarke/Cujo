@@ -1,12 +1,14 @@
 import { resolve } from "inversify-react";
 import React from "react";
+import { Fade } from "react-awesome-reveal";
+import { Container } from "react-bootstrap";
 import {
   Route,
   RouteComponentProps,
   Switch,
   withRouter,
 } from "react-router-dom";
-import "./App.scss";
+
 import { Copyright } from "./components/backstretch/Copyright";
 import { SketchBackstretch } from "./components/backstretch/SketchBackstretch";
 import { Blog } from "./components/blog/Blog";
@@ -15,10 +17,13 @@ import { Contact } from "./components/contact/Contact";
 import NavPanel from "./components/nav/NavPanel";
 import { SharePanel } from "./components/nav/SharePanel";
 import { Profile } from "./components/Profile";
-import { Entries } from "./model/Includes";
-import { CV } from "./model/CVModel";
-import { ICujoService } from "./services/CujoService";
 import { Post } from "./model/BlogPost";
+import { CV } from "./model/CVModel";
+import { Entries } from "./model/Includes";
+import { ICujoService } from "./services/CujoService";
+import { BlockReverseLoading } from "./components/shared/BlockReverseLoading";
+
+import "./App.scss";
 
 export type AppState = {
   cv: CV | undefined;
@@ -35,18 +40,32 @@ class App extends React.Component<RouteComponentProps, AppState> {
       this.cujoService.FetchCV(),
       this.cujoService.FetchBlogPosts(),
     ]);
-
     this.setState({ cv, blog });
   }
 
   render(): JSX.Element {
     if (!this.state?.cv) {
-      return <></>;
+      return (
+        <Container fluid>
+          <BlockReverseLoading
+            style={{
+              height: "100vh",
+              width: "auto",
+            }}
+            box={{
+              speed: 3,
+              size: 50,
+            }}
+          />
+        </Container>
+      );
     }
 
     return (
       <>
-        <SketchBackstretch cv={this.state.cv} />
+        <Fade triggerOnce damping={0.01}>
+          <SketchBackstretch cv={this.state.cv} />
+        </Fade>
         <NavPanel />
         <SharePanel
           url={window.location.href}
