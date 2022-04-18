@@ -44,27 +44,29 @@ class App extends React.Component<RouteComponentProps, AppState> {
   }
 
   render(): JSX.Element {
-    if (!this.state?.cv) {
-      return (
-        <Container fluid>
-          <BlockReverseLoading
-            style={{
-              height: "100vh",
-              width: "auto",
-            }}
-            box={{
-              speed: 3,
-              size: 50,
-            }}
-          />
-        </Container>
-      );
-    }
+    return !this.state?.cv ? this.displayLoading() : this.displayApp();
+  }
 
+  private displayLoading(): JSX.Element {
+    return (
+      <BlockReverseLoading
+        style={{
+          height: "100vh",
+          width: "auto",
+        }}
+        box={{
+          speed: 3,
+          size: 50,
+        }}
+      />
+    );
+  }
+
+  private displayApp(): JSX.Element {
     return (
       <>
         <Fade triggerOnce damping={0.01}>
-          <SketchBackstretch cv={this.state.cv} />
+          <SketchBackstretch cv={this.state.cv!} />
         </Fade>
         <NavPanel />
         <SharePanel
@@ -75,24 +77,21 @@ class App extends React.Component<RouteComponentProps, AppState> {
         <div className="app">
           <Switch>
             <Route exact path="/">
-              <Profile cv={this.state.cv} />
+              <Profile cv={this.state.cv!} />
             </Route>
-            <Route
-              path={"/blog/:id"}
-              children={({
-                match,
-              }: RouteComponentProps<BlogRouteParams>): JSX.Element =>
+            <Route path={"/blog/:id"}>
+              {({ match }: RouteComponentProps<BlogRouteParams>): JSX.Element =>
                 this.state.blog ? (
                   <BlogPost id={match.params.id} blog={this.state.blog} />
                 ) : (
                   <></>
                 )
               }
-            />
+            </Route>
           </Switch>
           {this.state.blog && <Blog blog={this.state.blog} />}
           <footer id="footer">
-            <Contact profiles={this.state.cv.about.entry.profiles} />
+            <Contact profiles={this.state.cv!.about.entry.profiles} />
             <Copyright />
           </footer>
         </div>
