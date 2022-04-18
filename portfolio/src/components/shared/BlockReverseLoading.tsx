@@ -15,7 +15,7 @@ type LoadingProps = {
 export class BlockReverseLoading extends React.Component<LoadingProps> {
   render() {
     return (
-      <div className="container" style={this.props.style}>
+      <div className="loading-container" style={this.props.style}>
         <div
           className="box"
           style={{
