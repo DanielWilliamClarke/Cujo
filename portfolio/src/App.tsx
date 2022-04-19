@@ -1,7 +1,6 @@
 import { resolve } from "inversify-react";
 import React from "react";
 import { Fade } from "react-awesome-reveal";
-import { Container } from "react-bootstrap";
 import {
   Route,
   RouteComponentProps,
