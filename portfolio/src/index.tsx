@@ -4,6 +4,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Provider } from "inversify-react";
+import LogRocket from 'logrocket';
 
 import { container } from "./ioc";
 import App from "./App";
@@ -26,4 +27,5 @@ class Cujo extends React.Component {
   }
 }
 
+LogRocket.init('fjqkqf/cujo');
 ReactDOM.render(<Cujo />, document.getElementById("root"));
