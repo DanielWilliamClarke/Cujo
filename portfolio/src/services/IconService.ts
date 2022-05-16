@@ -72,7 +72,7 @@ export class IconService implements IIconService {
     Powershell: SiPowershell,
     Magic: FaWizardsOfTheCoast,
     Vultr: SiVultr,
-    Archidekt: GiCardDraw,
+    MoxField: GiCardDraw,
     SFML: SiSfml,
   };
 
