@@ -13,7 +13,8 @@
     "eject": "react-scripts eject",
     "sasslint": "sass-lint -v",
     "sasslint:fix": "sass-lint-auto-fix",
-    "clean": "rm -rf node_modules && rm -rf package-lock.json"
+    "clean": "rm -rf node_modules && rm -rf package-lock.json",
+    "analyze": "source-map-explorer 'build/static/js/*.js'"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -82,7 +83,8 @@
     "react-scripts": "^4.0.3",
     "sass": "^1.35.1",
     "sass-lint-auto-fix": "^0.21.2",
-    "typescript": "^4.4.4"
+    "typescript": "^4.4.4",
+    "source-map-explorer": "^2.5.2"
   },
   "resolutions": {
     "coa": "2.0.2",
