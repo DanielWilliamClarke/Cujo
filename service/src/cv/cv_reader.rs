@@ -1,5 +1,7 @@
 // src/blog/blog_reader.rs
 
+use std::time::Instant;
+
 use async_trait::async_trait;
 use contentful::{ContentfulClient, Entries, Entry, QueryBuilder};
 use futures::try_join;
@@ -54,6 +56,7 @@ impl Reader for CVReader {
     type Data = CV;
 
     async fn get(&self) -> Result<Self::Data, Self::Error> {
+        let now = Instant::now();
         let (about, work, education, skills, projects) = try_join!(
             self.get_cv_entry::<About>("interests", 0),
             self.get_cv_entries::<Work>("work"),
@@ -61,7 +64,9 @@ impl Reader for CVReader {
             self.get_cv_entry::<Skills>("skills", 0),
             self.get_cv_entries::<Project>("project"),
         )?;
+        let elapsed = now.elapsed();
 
+        println!("CV READER - Elapsed: {:.2?}", elapsed);
         Ok(CV {
             about,
             work,
