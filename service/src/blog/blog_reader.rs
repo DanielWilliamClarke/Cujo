@@ -1,5 +1,7 @@
 // src/blog/blog_reader.rs
 
+use std::time::Instant;
+
 use async_trait::async_trait;
 use contentful::{ContentfulClient, Entries, QueryBuilder};
 
@@ -25,7 +27,12 @@ impl Reader for BlogReader {
     async fn get(&self) -> Result<Self::Data, Self::Error> {
         let builder = QueryBuilder::new().content_type_is("blogPost");
 
-        Ok(self.client.get_entries::<BlogPost>(Some(builder)).await?)
+        let now = Instant::now();
+        let results = self.client.get_entries::<BlogPost>(Some(builder)).await?;
+        let elapsed = now.elapsed();
+
+        println!("BLOG READER - Elapsed: {:.2?}", elapsed);
+        Ok(results)
     }
 }
 
