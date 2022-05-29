@@ -30,6 +30,7 @@
 - [Build Portfolio Image](#build-portfolio-image)
 - [Build Service Image](#build-service-image)
 - [Prod Environment](#prod-environment)
+- [Add Contentful API IPs to /etc/hosts](#add-contentful-api-ips-to-etchosts)
 - [Deploy](#deploy)
 - [Redeploy](#redeploy)
 - [Teardown](#teardown)
@@ -130,6 +131,21 @@ ACCESS_TOKEN=[REDACTED]
 SPACE_ID=[REDACTED]
 ENVIRONMENT=master
 ```
+
+## Add Contentful API IPs to /etc/hosts
+
+To save on any potential DNS issues while using the Contentful Content Delivery API
+
+Update the `/etc/hosts` files with all IP addresses for the `cdn.contentful.com` host
+
+```Config
+151.101.130.49 cdn.contentful.com
+151.101.66.49 cdn.contentful.com
+151.101.194.49 cdn.contentful.com
+151.101.2.49 cdn.contentful.com
+```
+
+IPs subject to change...
 
 ## Deploy
 
