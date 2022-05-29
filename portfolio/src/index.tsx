@@ -1,19 +1,21 @@
+import "reflect-metadata";
+
 import { Provider } from "inversify-react";
+import LogRocket from "logrocket";
+import setupLogRocketReact from "logrocket-react";
 import React, { Suspense } from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router } from "react-router-dom";
 
-import "reflect-metadata";
-
+import { BlockReverseLoading } from "./components/shared/BlockReverseLoading";
 import { container } from "./ioc";
 import { Post } from "./model/BlogPost";
 import { CV } from "./model/CVModel";
 import { Entries } from "./model/Includes";
-import { BlockReverseLoading } from "./components/shared/BlockReverseLoading";
 import { CujoService, ICujoService } from "./services/CujoService";
 
-import "bootstrap/dist/css/bootstrap.min.css";
 import "react-vertical-timeline-component/style.min.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.scss";
 
 const App = React.lazy(() => import(/* webpackChunkName: "App" */ "./App"));
@@ -76,6 +78,9 @@ class Cujo extends React.Component<CujoProps, CujoState> {
     );
   }
 }
+
+LogRocket.init("fjqkqf/cujo");
+setupLogRocketReact(LogRocket);
 
 ReactDOM.render(
   <Cujo service={new CujoService()} />,
