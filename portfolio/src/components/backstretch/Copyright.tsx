@@ -1,8 +1,6 @@
 import React from "react";
 import { resolve } from "inversify-react";
-
 import { Container, Row, Col } from "react-bootstrap";
-
 import { IDateService } from "../../services/DateService";
 
 import "./Copyright.scss";
