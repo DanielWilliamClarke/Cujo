@@ -14,7 +14,6 @@ export interface IDateService {
 
 @injectable()
 export class DateService implements IDateService {
-
   private outFormat: string | undefined;
   private inFormat: string | undefined;
 
@@ -44,7 +43,7 @@ export class DateService implements IDateService {
   }
 
   IsFuture(date: string): boolean {
-    return moment().diff(moment(date, this.inFormat)) < 0
+    return moment().diff(moment(date, this.inFormat)) < 0;
   }
 
   CurrentYear(): number {
@@ -57,9 +56,10 @@ export class DateService implements IDateService {
       endMoment = moment();
     }
     const difference = moment.duration(
-      endMoment.diff(moment(start, this.inFormat)));
+      endMoment.diff(moment(start, this.inFormat))
+    );
     const years = difference.years();
-    const months = difference.months();
+    const months = difference.months() + 1; // we want to ceiling of months not floor
 
     const yearFormat = years
       ? util.format("%d year%s", years, years === 1 ? "" : "s")
