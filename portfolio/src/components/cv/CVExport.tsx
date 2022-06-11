@@ -51,10 +51,10 @@ export class CVExport extends React.Component<CVProps> {
               url = window.URL.createObjectURL(blob);
               a.href = url;
               a.download = filename;
-              a.click();
+              //a.click();
               
               setTimeout(() => {
-                window.open(url!, '_blank')
+                window.open(url!, '_self')
               }, 100);
             }
           }}
