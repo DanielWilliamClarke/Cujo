@@ -254,3 +254,8 @@ docker-compose --env-file <SECRET ENV FILE> -f prod.compose.yaml down (-v)
 - Rich Text Renderer - `React` <https://www.npmjs.com/package/@contentful/rich-text-react-renderer>
 - Import SCSS variables in Typescript - `SCSS` <https://medium.com/@christian.tonye_16869/scss-variables-in-react-typescript-components-de19d7f96245>
 - Circular Progress Bar - `React` <https://github.com/kevinsqi/react-circular-progressbar>
+
+- Generating PDF with React - <https://react-pdf.org/>
+  - Rendering a PDF in Canvas <https://mozilla.github.io/pdf.js/examples/>
+  - How to actually render to a Canvas <https://stackoverflow.com/questions/59867174/why-getcontext-function-cannot-be-called-on-react-jsx-canvas-object>
+  - Fixing build with PDFJS - <https://github.com/mozilla/pdf.js/issues/13200>

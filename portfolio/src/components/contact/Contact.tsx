@@ -33,7 +33,7 @@ export class Contact extends React.Component<
       status: false,
       divider: {
         background: styles.colorBrand,
-        foreground: styles.colorLightBg,
+        foreground: styles.colorDarkBg,
       },
     };
   }
