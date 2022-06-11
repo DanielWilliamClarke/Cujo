@@ -259,3 +259,5 @@ docker-compose --env-file <SECRET ENV FILE> -f prod.compose.yaml down (-v)
   - Rendering a PDF in Canvas <https://mozilla.github.io/pdf.js/examples/>
   - How to actually render to a Canvas <https://stackoverflow.com/questions/59867174/why-getcontext-function-cannot-be-called-on-react-jsx-canvas-object>
   - Fixing build with PDFJS - <https://github.com/mozilla/pdf.js/issues/13200>
+
+- Material Icons png - <https://github.com/material-icons/material-icons-png>
