@@ -54,14 +54,20 @@ export class CV extends React.Component<CVProps> {
                   document={this.generate()}
                   fileName={`daniel_william_clarke_cv_${this.dateService.CurrentTimestamp()}.pdf`}
                 >
-                  {({ url }) => (
-                    <canvas
-                      className="pdf-canvas"
-                      ref={(canvas: HTMLCanvasElement) =>
-                        this.renderPDF(url!, canvas)
-                      }
-                    ></canvas>
-                  )}
+                  {({ url }) => {
+                    if (!url) {
+                      return <></>
+                    }
+
+                    return (
+                      <canvas
+                        className="pdf-canvas"
+                        ref={(canvas: HTMLCanvasElement) =>
+                          this.renderPDF(url!, canvas)
+                        }
+                      ></canvas>
+                    )
+                  }}
                 </PDFDownloadLink>
               </Fade>
             </Col>
@@ -72,7 +78,7 @@ export class CV extends React.Component<CVProps> {
   }
 
   private async renderPDF(url: string, canvas: HTMLCanvasElement) {
-    if (!url) {
+    if (!url || !canvas) {
       return;
     }
 
@@ -93,8 +99,13 @@ export class CV extends React.Component<CVProps> {
     canvas.style.height = "auto";
     canvas.style.width = "90%";
 
+    var transform = outputScale !== 1
+      ? [outputScale, 0, 0, outputScale, 0, 0]
+      : undefined;
+
     page.render({
       canvasContext: ctx as Object,
+      transform: transform,
       viewport: viewport,
     });
   }
