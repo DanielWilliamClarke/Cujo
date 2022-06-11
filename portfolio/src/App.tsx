@@ -16,14 +16,15 @@ import NavPanel from "./components/nav/NavPanel";
 import { SharePanel } from "./components/nav/SharePanel";
 import { Profile } from "./components/Profile";
 import { Post } from "./model/BlogPost";
-import { CV } from "./model/CVModel";
+import { CV as CVModel } from "./model/CVModel";
 import { Entries } from "./model/Includes";
 import { BlockReverseLoading } from "./components/shared/BlockReverseLoading";
 
 import "./App.scss";
+import { CV } from "./components/cv/CV";
 
 type AppProps = {
-  cv: CV | undefined;
+  cv: CVModel | undefined;
   blog: Entries<Post> | undefined;
 };
 
@@ -77,6 +78,7 @@ class App extends React.Component<AppProps & RouteComponentProps> {
             </Route>
           </Switch>
           {this.props.blog && <Blog blog={this.props.blog} />}
+          <CV cv={this.props.cv!} />
           <footer id="footer">
             <Contact profiles={this.props.cv!.about.entry.profiles} />
             <Copyright />

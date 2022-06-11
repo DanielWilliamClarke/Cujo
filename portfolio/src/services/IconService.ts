@@ -28,6 +28,7 @@ import {
   MdReportProblem,
   MdSchool,
   MdCatchingPokemon,
+  MdCloudDownload,
 } from "react-icons/md";
 
 export interface IIconService {
@@ -53,6 +54,7 @@ export class IconService implements IIconService {
     skills: MdBolt,
     projects: MdHardware,
     blog: MdBook,
+    cv: MdCloudDownload,
     post: MdHistoryEdu,
     profiles: MdCampaign,
     work: HiLightningBolt,

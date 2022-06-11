@@ -20,7 +20,9 @@ class NavPanel extends React.Component<RouteComponentProps, NavState> {
 
     this.state = {
       bg: undefined,
-      menu: ["home"].concat(this.buildMenuItems()).concat(["blog", "profiles"]),
+      menu: ["home"]
+        .concat(this.buildMenuItems())
+        .concat(["blog", "cv", "profiles"]),
     };
 
     window.addEventListener("scroll", this.listenScrollEvent);
