@@ -1,18 +1,18 @@
 import React, { ReactNode } from "react";
-import { View, StyleSheet, Text } from "@react-pdf/renderer";
+import { View, StyleSheet, Text, Image } from "@react-pdf/renderer";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 
 import { BLOCKS } from "@contentful/rich-text-types";
 
 import { CV } from "../../../model/CVModel";
 
-// import styles from "../shared/style.module.scss";
+import styles from "../../shared/style.module.scss";
 
 const pdfStyles = StyleSheet.create({
   intro: {
     display: "flex",
     flexDirection: "row",
-    height: "20%",
+    height: "25%",
     backgroundColor: "#222222",
     fontSize: "10",
     color: "#ffffff",
@@ -20,19 +20,39 @@ const pdfStyles = StyleSheet.create({
   profile: {
     flexDirection: "column",
     backgroundColor: "#222222",
-    width: "50%",
-    margin: "10px",
+    width: "70%",
+    margin: "15px",
   },
-  profileHeading: {
+  heading: {
     marginBottom: "5px",
     fontSize: "15",
   },
-  profileParagraph: {
-    marginBottom: "10px",
+  paragraph: {
+    marginBottom: "20px",
   },
   contact: {
     backgroundColor: "#212121",
-    width: "50%",
+    width: "30%",
+    margin: "15px",
+  },
+  contactIcon: {
+    width: "30px",
+    height: "30px",
+    borderRadius: "100%",
+    backgroundColor: "#1CAED3",
+    marginRight: "10px",
+    display: "flex",
+    justifyContent: "center",
+    alignContent: "center",
+    flexDirection: "row",
+  },
+  contactItem: {
+    marginBottom: "10px",
+    display: "flex",
+    flexDirection: "row",
+  },
+  contactValue: {
+    color: styles.colorMuted,
   },
   hr: {
     height: "3px",
@@ -50,9 +70,7 @@ const options = {
     },
     [BLOCKS.HEADING_3]: () => {
       return (
-        <View
-          style={[pdfStyles.profileHeading, { fontFamily: "Helvetica-Bold" }]}
-        >
+        <View style={[pdfStyles.heading, { fontFamily: "Helvetica-Bold" }]}>
           <Text>PROFILE</Text>
           <View style={pdfStyles.hr} />
         </View>
@@ -63,7 +81,7 @@ const options = {
     },
   },
   renderText: (text: string): ReactNode => {
-    return <Text style={pdfStyles.profileParagraph}>{text.trim()}</Text>;
+    return <Text style={pdfStyles.paragraph}>{text.trim()}</Text>;
   },
 };
 
@@ -74,7 +92,47 @@ export class Intro {
         <View style={pdfStyles.profile}>
           {documentToReactComponents(cv.about.entry.about, options)}
         </View>
-        <View style={pdfStyles.contact}></View>
+        <View style={pdfStyles.contact}>
+          <View style={[pdfStyles.heading, { fontFamily: "Helvetica-Bold" }]}>
+            <Text>CONTACT</Text>
+            <View style={pdfStyles.hr} />
+          </View>
+          {this.createContactItem(
+            "Phone",
+            cv.about.entry.phone,
+            "phone_in_talk"
+          )}
+          {this.createContactItem("Email", cv.about.entry.email, "email")}
+          {this.createContactItem("Website", cv.about.entry.website, "link")}
+          {this.createContactItem(
+            "Address",
+            "Crawley, UK".toUpperCase(),
+            "house"
+          )}
+        </View>
+      </View>
+    );
+  }
+
+  private static createContactItem(
+    title: string,
+    value: string,
+    iconName: string
+  ): JSX.Element {
+    return (
+      <View style={pdfStyles.contactItem}>
+        <View style={pdfStyles.contactIcon}>
+          <Image
+            src={`https://material-icons.github.io/material-icons-png/png/white/${iconName}/round-4x.png`}
+            style={{ width: "20px", height: "20px", marginTop: "5px" }}
+          />
+        </View>
+        <View>
+          <Text style={{ fontFamily: "Helvetica-Bold", marginBottom: "8px" }}>
+            {title.toUpperCase()}
+          </Text>
+          <Text style={pdfStyles.contactValue}>{value}</Text>
+        </View>
       </View>
     );
   }
