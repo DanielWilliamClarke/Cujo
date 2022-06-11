@@ -18,10 +18,10 @@ import { Profile } from "./components/Profile";
 import { Post } from "./model/BlogPost";
 import { CV as CVModel } from "./model/CVModel";
 import { Entries } from "./model/Includes";
-import { BlockReverseLoading } from "./components/shared/BlockReverseLoading";
+import { CV } from "./components/cv/CV";
+import { CVExport } from "./components/cv/CVExport";
 
 import "./App.scss";
-import { CV } from "./components/cv/CV";
 
 type AppProps = {
   cv: CVModel | undefined;
@@ -32,22 +32,16 @@ type BlogRouteParams = { id: string };
 
 class App extends React.Component<AppProps & RouteComponentProps> {
   render(): JSX.Element {
-    return !this.props?.cv ? this.displayLoading() : this.displayApp();
-  }
-
-  private displayLoading(): JSX.Element {
     return (
-      <BlockReverseLoading
-        style={{
-          height: "100vh",
-          width: "auto",
-        }}
-        box={{
-          speed: 3,
-          size: 50,
-        }}
-      />
-    );
+      <Switch>
+          <Route exact path="/">
+            {this.displayApp()}
+          </Route>
+          <Route exact path="/cv">
+            {<CVExport cv={this.props.cv!} />}
+          </Route>
+        </Switch>
+    )
   }
 
   private displayApp(): JSX.Element {
