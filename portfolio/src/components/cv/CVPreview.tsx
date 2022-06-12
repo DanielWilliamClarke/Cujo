@@ -1,12 +1,7 @@
 import React from "react";
 import { Fade } from "react-awesome-reveal";
 import { Row, Col } from "react-bootstrap";
-import {
-  Document,
-  Page,
-  PDFDownloadLink,
-  StyleSheet,
-} from "@react-pdf/renderer";
+import { PDFDownloadLink } from "@react-pdf/renderer";
 import { resolve } from "inversify-react";
 
 import * as pdfjs from "pdfjs-dist/legacy/build/pdf.js";
@@ -15,22 +10,15 @@ import { CVProps } from "../../model/CVModel";
 import { IDateService } from "../../services/DateService";
 import { Section } from "../shared/Section";
 
-import "./CV.scss";
+import { CV } from "./sections/CV";
 
-import { Heading } from "./sections/Heading";
-import { Intro } from "./sections/Intro";
+import "./CVPreview.scss";
 
 // This is quite dumb but works
 pdfjs.GlobalWorkerOptions.workerSrc =
   "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf.worker.min.js";
 
-const pdfStyles = StyleSheet.create({
-  body: {
-    fontFamily: "Helvetica",
-  },
-});
-
-export class CV extends React.Component<CVProps> {
+export class CVPreview extends React.Component<CVProps> {
   @resolve("DateService") private readonly dateService!: IDateService;
 
   constructor(props: CVProps, context: {}) {
@@ -51,12 +39,12 @@ export class CV extends React.Component<CVProps> {
             <Col className="centered featured">
               <Fade triggerOnce direction="up" delay={0.2}>
                 <PDFDownloadLink
-                  document={this.generate()}
+                  document={CV.render(this.props.cv, this.dateService)}
                   fileName={`daniel_william_clarke_cv_${this.dateService.CurrentTimestamp()}.pdf`}
                 >
                   {({ url }) => {
                     if (!url) {
-                      return <></>
+                      return <></>;
                     }
 
                     return (
@@ -66,7 +54,7 @@ export class CV extends React.Component<CVProps> {
                           this.renderPDF(url!, canvas)
                         }
                       ></canvas>
-                    )
+                    );
                   }}
                 </PDFDownloadLink>
               </Fade>
@@ -99,25 +87,13 @@ export class CV extends React.Component<CVProps> {
     canvas.style.height = "auto";
     canvas.style.width = "90%";
 
-    var transform = outputScale !== 1
-      ? [outputScale, 0, 0, outputScale, 0, 0]
-      : undefined;
+    var transform =
+      outputScale !== 1 ? [outputScale, 0, 0, outputScale, 0, 0] : undefined;
 
     page.render({
       canvasContext: ctx as Object,
       transform: transform,
       viewport: viewport,
     });
-  }
-
-  private generate(): JSX.Element {
-    return (
-      <Document>
-        <Page style={pdfStyles.body} size="A4">
-          {Heading.render(this.props.cv, this.dateService)}
-          {Intro.render(this.props.cv)}
-        </Page>
-      </Document>
-    );
   }
 }
