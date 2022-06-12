@@ -11,6 +11,7 @@ import { Skills } from "./Skills";
 import { Education } from "./Education";
 import { Experience } from "./Experience";
 import { Outro } from "./Outro";
+import { Interests } from "./Interests";
 
 const pdfStyles = StyleSheet.create({
   body: {
@@ -53,6 +54,8 @@ export class CV {
             </View>
             <View style={pdfStyles.right}>
               {Experience.render(cv.work.entries.slice(0, 3))}
+              <View style={{ height: 30 }} />
+              {Interests.render(cv)}
             </View>
           </View>
           {Outro.render(cv)}
