@@ -34,14 +34,14 @@ class App extends React.Component<AppProps & RouteComponentProps> {
   render(): JSX.Element {
     return (
       <Switch>
-          <Route exact path="/">
-            {this.displayApp()}
-          </Route>
-          <Route exact path="/cv">
-            {<CVExport cv={this.props.cv!} />}
-          </Route>
-        </Switch>
-    )
+        <Route exact path="/cv">
+          {<CVExport cv={this.props.cv!} />}
+        </Route>
+        <Route exact path="/*">
+          {this.displayApp()}
+        </Route>
+      </Switch>
+    );
   }
 
   private displayApp(): JSX.Element {
