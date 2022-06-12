@@ -124,7 +124,7 @@ export class Intro {
         <View style={pdfStyles.contactIcon}>
           <Image
             src={`https://material-icons.github.io/material-icons-png/png/white/${iconName}/round-4x.png`}
-            style={{ width: "20px", height: "20px", marginTop: "5px" }}
+            style={{ width: "15px", height: "15px", marginTop: "8px" }}
           />
         </View>
         <View>

@@ -69,7 +69,7 @@ export class Heading {
           <Text style={[pdfStyles.role, { fontFamily: "Helvetica-Bold" }]}>
             {`${currentRole.position}`.toUpperCase()}
           </Text>
-          <Text style={pdfStyles.role}>{`@`.toUpperCase()}</Text>
+          <Text style={pdfStyles.role}>{` | `}</Text>
           <Text style={[pdfStyles.role, { fontFamily: "Helvetica-Bold" }]}>
             {`${currentRole.company}`.toUpperCase()}
           </Text>

@@ -18,7 +18,7 @@ import { Profile } from "./components/Profile";
 import { Post } from "./model/BlogPost";
 import { CV as CVModel } from "./model/CVModel";
 import { Entries } from "./model/Includes";
-import { CV } from "./components/cv/CV";
+import { CVPreview } from "./components/cv/CVPreview";
 import { CVExport } from "./components/cv/CVExport";
 
 import "./App.scss";
@@ -72,7 +72,7 @@ class App extends React.Component<AppProps & RouteComponentProps> {
             </Route>
           </Switch>
           {this.props.blog && <Blog blog={this.props.blog} />}
-          <CV cv={this.props.cv!} />
+          <CVPreview cv={this.props.cv!} />
           <footer id="footer">
             <Contact profiles={this.props.cv!.about.entry.profiles} />
             <Copyright />
