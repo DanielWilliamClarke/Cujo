@@ -40,7 +40,7 @@ const pdfStyles = StyleSheet.create({
   },
   pill: {
     backgroundColor: "#1CAED3",
-    borderRadius: 6,
+    borderRadius: "100%",
     paddingHorizontal: 5,
     paddingVertical: 2,
     marginRight: 3,
