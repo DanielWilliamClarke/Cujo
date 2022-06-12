@@ -22,7 +22,7 @@ const pdfStyles = StyleSheet.create({
     margin: "5px 0",
   },
   skillItem: {
-    marginBottom: "10px",
+    marginBottom: "5px",
     display: "flex",
     flexDirection: "row",
   },
@@ -73,7 +73,7 @@ export class Skills {
               fontSize: 10,
             }}
           >
-            {skill.name}
+            {skill.name.toUpperCase()}
           </Text>
           {this.createBar(skill.level)}
         </View>
