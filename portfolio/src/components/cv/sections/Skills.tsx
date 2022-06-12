@@ -1,8 +1,6 @@
 import React from "react";
 import { StyleSheet, View, Text, Image } from "@react-pdf/renderer";
 
-import { IDateService } from "../../../services/DateService";
-
 import styles from "../../shared/style.module.scss";
 import { CV as CVModel, Skill } from "../../../model/CVModel";
 
@@ -40,7 +38,7 @@ const pdfStyles = StyleSheet.create({
 });
 
 export class Skills {
-  static render(cv: CVModel, dateService: IDateService): JSX.Element {
+  static render(cv: CVModel): JSX.Element {
     return (
       <View>
         <View style={[pdfStyles.heading, { fontFamily: "Helvetica-Bold" }]}>

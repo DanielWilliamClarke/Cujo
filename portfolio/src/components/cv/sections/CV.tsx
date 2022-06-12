@@ -7,8 +7,10 @@ import { CV as CVModel } from "../../../model/CVModel";
 
 import { Heading } from "./Heading";
 import { Intro } from "./Intro";
-import { Content } from "./Content";
 import { Skills } from "./Skills";
+import { Education } from "./Education";
+import { Experience } from "./Experience";
+import { Outro } from "./Outro";
 
 const pdfStyles = StyleSheet.create({
   body: {
@@ -39,13 +41,21 @@ export class CV {
   static render(cv: CVModel, dateService: IDateService): JSX.Element {
     return (
       <Document>
-        <Page style={pdfStyles.body} size="A4">
+        <Page style={pdfStyles.body} size="A4" wrap>
           {Heading.render(cv, dateService)}
           {Intro.render(cv)}
           <View style={pdfStyles.contentRow}>
-            <View style={pdfStyles.left}>{Skills.render(cv, dateService)}</View>
-            <View style={pdfStyles.right}>{Content.render()}</View>
+            <View style={pdfStyles.left}>
+              {Skills.render(cv)}
+              {Education.render(cv)}
+              <View style={{ height: 30 }} />
+              {Experience.render(cv.work.entries.slice(3))}
+            </View>
+            <View style={pdfStyles.right}>
+              {Experience.render(cv.work.entries.slice(0, 3))}
+            </View>
           </View>
+          {Outro.render(cv)}
         </Page>
       </Document>
     );
