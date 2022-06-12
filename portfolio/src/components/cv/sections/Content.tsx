@@ -8,7 +8,7 @@ const pdfStyles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     fontSize: "10",
-    width: "50%",
+    width: "100%",
   },
 });
 
