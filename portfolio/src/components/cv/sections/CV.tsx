@@ -54,7 +54,7 @@ export class CV {
             </View>
             <View style={pdfStyles.right}>
               {Experience.render(cv.work.entries.slice(0, 3))}
-              <View style={{ height: 30 }} />
+              <View style={{ height: 20 }} />
               {Interests.render(cv)}
             </View>
           </View>
