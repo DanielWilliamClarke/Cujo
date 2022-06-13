@@ -96,6 +96,7 @@ export class Skills {
             width: 200,
             height: 5,
             backgroundColor: styles.colorLightBg,
+            borderRadius: "100%",
           }}
         >
           <View
@@ -103,6 +104,7 @@ export class Skills {
               width: level * 2,
               height: 5,
               backgroundColor: "#1CAED3",
+              borderRadius: "100%",
             }}
           ></View>
         </View>
