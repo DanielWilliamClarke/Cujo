@@ -8,7 +8,7 @@ const pdfStyles = StyleSheet.create({
   intro: {
     display: "flex",
     flexDirection: "row",
-    height: "20%",
+    height: "19%",
     backgroundColor: "#222222",
     fontSize: "10",
     color: "#ffffff",
