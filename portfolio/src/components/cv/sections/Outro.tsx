@@ -63,7 +63,7 @@ export class Outro {
     return (
       <View style={pdfStyles.intro}>
         <View style={pdfStyles.profile}>
-          <Text>References avalable on request.</Text>
+          <Text>References available on request.</Text>
         </View>
         <View style={pdfStyles.contact}>
           {this.createContactItem(
