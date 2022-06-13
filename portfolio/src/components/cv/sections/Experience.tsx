@@ -93,7 +93,7 @@ export class Experience {
               <View style={pdfStyles.experience}>
                 <View style={pdfStyles.experienceItem}>
                   <Image
-                    src={work.images.reverse()[0].file.url}
+                    src={work.images[0].file.url}
                     style={pdfStyles.experienceIcon}
                   />
                   <View>
