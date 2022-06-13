@@ -14,7 +14,7 @@ const pdfStyles = StyleSheet.create({
   },
   paragraph: {
     marginBottom: "10px",
-    fontSize: 11,
+    fontSize: 10,
   },
   bullet: {
     fontSize: 10,
