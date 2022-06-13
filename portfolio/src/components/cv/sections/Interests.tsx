@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, Text, Font } from "@react-pdf/renderer";
+import { View, StyleSheet, Text } from "@react-pdf/renderer";
 
 import { documentToPlainTextString } from "@contentful/rich-text-plain-text-renderer";
 
@@ -7,20 +7,13 @@ import { Block } from "@contentful/rich-text-types";
 
 import { CV } from "../../../model/CVModel";
 
-import styles from "../../shared/style.module.scss";
-
-Font.registerEmojiSource({
-  format: "png",
-  url: "https://twemoji.maxcdn.com/2/72x72/",
-});
-
 const pdfStyles = StyleSheet.create({
   heading: {
     marginBottom: "5px",
     fontSize: "15",
   },
   paragraph: {
-    marginBottom: "20px",
+    marginBottom: "10px",
     fontSize: 11,
   },
   bullet: {

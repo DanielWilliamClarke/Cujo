@@ -66,10 +66,6 @@ export class Outro {
           <Text>References avalable on request.</Text>
         </View>
         <View style={pdfStyles.contact}>
-          {/* <View style={[pdfStyles.heading, { fontFamily: "Helvetica-Bold" }]}>
-            <Text>CONTACT</Text>
-            <View style={pdfStyles.hr} />
-          </View> */}
           {this.createContactItem(
             "Phone",
             cv.about.entry.phone,

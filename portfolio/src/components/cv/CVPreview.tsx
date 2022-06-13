@@ -18,7 +18,7 @@ import "./CVPreview.scss";
 pdfjs.GlobalWorkerOptions.workerSrc =
   "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf.worker.min.js";
 
-export class CVPreview extends React.Component<CVProps> {
+export default class CVPreview extends React.Component<CVProps> {
   @resolve("DateService") private readonly dateService!: IDateService;
 
   constructor(props: CVProps, context: {}) {

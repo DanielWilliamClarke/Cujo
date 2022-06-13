@@ -13,7 +13,7 @@ import { CV } from "./sections/CV";
 pdfjs.GlobalWorkerOptions.workerSrc =
   "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf.worker.min.js";
 
-export class CVExport extends React.Component<CVProps> {
+export default class CVExport extends React.Component<CVProps> {
   @resolve("DateService") private readonly dateService!: IDateService;
 
   constructor(props: CVProps, context: {}) {
@@ -37,7 +37,7 @@ export class CVExport extends React.Component<CVProps> {
             url = window.URL.createObjectURL(blob);
             a.href = url;
             a.download = filename;
-            //a.click();
+            a.click();
 
             setTimeout(() => {
               window.open(url!, "_self");
