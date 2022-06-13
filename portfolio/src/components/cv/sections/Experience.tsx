@@ -11,9 +11,6 @@ const pdfStyles = StyleSheet.create({
     marginVertical: "5px",
     fontSize: "15",
   },
-  paragraph: {
-    marginBottom: "20px",
-  },
   hr: {
     height: "3px",
     width: "50%",
@@ -22,7 +19,7 @@ const pdfStyles = StyleSheet.create({
   },
   experience: {
     fontSize: 10,
-    marginBottom: 25,
+    marginBottom: 15,
   },
   company: {
     fontSize: 10,
