@@ -1,5 +1,5 @@
 import React from "react";
-import { Document, StyleSheet, Page, View } from "@react-pdf/renderer";
+import { Document, StyleSheet, Page, View, Font } from "@react-pdf/renderer";
 import { IDateService } from "../../../services/DateService";
 
 import styles from "../../shared/style.module.scss";
@@ -13,6 +13,11 @@ import { Experience } from "./Experience";
 import { Outro } from "./Outro";
 import { Interests } from "./Interests";
 
+Font.registerEmojiSource({
+  format: "png",
+  url: "https://twemoji.maxcdn.com/2/72x72/",
+});
+
 const pdfStyles = StyleSheet.create({
   body: {
     fontFamily: "Helvetica",
@@ -24,17 +29,12 @@ const pdfStyles = StyleSheet.create({
   },
   left: {
     padding: 15,
-    width: "50%", //<- working alternative
-    // flexGrow: 0,
-    // flexShrink: 1,
-    // flexBasis: 200,
+    width: "50%",
   },
   right: {
     padding: 15,
-    width: "50%", //<- working alternative
+    width: "50%",
     backgroundColor: styles.colorOffWhite,
-    // flexShrink: 1,
-    // flexGrow: 0,
   },
 });
 

@@ -1,8 +1,6 @@
 import React from "react";
 import { View, StyleSheet, Text } from "@react-pdf/renderer";
 
-import { CV } from "../../../model/CVModel";
-
 const pdfStyles = StyleSheet.create({
   intro: {
     display: "flex",

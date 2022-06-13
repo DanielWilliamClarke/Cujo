@@ -18,10 +18,15 @@ import { Profile } from "./components/Profile";
 import { Post } from "./model/BlogPost";
 import { CV as CVModel } from "./model/CVModel";
 import { Entries } from "./model/Includes";
-import { CVPreview } from "./components/cv/CVPreview";
-import { CVExport } from "./components/cv/CVExport";
 
 import "./App.scss";
+
+const CVPreview = React.lazy(
+  () => import(/* webpackChunkName: "CVPreview" */ "./components/cv/CVPreview")
+);
+const CVExport = React.lazy(
+  () => import(/* webpackChunkName: "CVExport" */ "./components/cv/CVExport")
+);
 
 type AppProps = {
   cv: CVModel | undefined;
