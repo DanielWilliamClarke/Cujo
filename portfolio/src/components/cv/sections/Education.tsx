@@ -4,22 +4,11 @@ import { View, StyleSheet, Text } from "@react-pdf/renderer";
 import { DateService, IDateService } from "../../../services/DateService";
 import { CV, Education as EducationModel } from "../../../model/CVModel";
 
+import { Header } from "./Header";
+
 import styles from "../../shared/style.module.scss";
 
 const pdfStyles = StyleSheet.create({
-  heading: {
-    marginVertical: "5px",
-    fontSize: "15",
-  },
-  paragraph: {
-    marginBottom: "20px",
-  },
-  hr: {
-    height: "3px",
-    width: "50%",
-    backgroundColor: "#1CAED3",
-    margin: "5px 0",
-  },
   education: {
     fontSize: 10,
     marginBottom: 10,
@@ -42,10 +31,7 @@ export class Education {
   static render(cv: CV): JSX.Element {
     return (
       <View>
-        <View style={[pdfStyles.heading, { fontFamily: "Helvetica-Bold" }]}>
-          <Text>EDUCATION</Text>
-          <View style={pdfStyles.hr} />
-        </View>
+        {Header.render("education")}
         <View>
           {cv.education.entries
             .sort(
