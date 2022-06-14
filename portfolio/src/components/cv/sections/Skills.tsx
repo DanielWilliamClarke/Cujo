@@ -3,21 +3,12 @@ import { StyleSheet, View, Text, Image } from "@react-pdf/renderer";
 
 import styles from "../../shared/style.module.scss";
 import { CV as CVModel, Skill } from "../../../model/CVModel";
+import { Header } from "./Header";
 
 const pdfStyles = StyleSheet.create({
-  heading: {
-    marginBottom: "5px",
-    fontSize: "15",
-  },
   paragraph: {
     fontSize: 10,
     marginBottom: "10px",
-  },
-  hr: {
-    height: "3px",
-    width: "50%",
-    backgroundColor: "#1CAED3",
-    margin: "5px 0",
   },
   skillItem: {
     marginBottom: "5px",
@@ -41,10 +32,7 @@ export class Skills {
   static render(cv: CVModel): JSX.Element {
     return (
       <View>
-        <View style={[pdfStyles.heading, { fontFamily: "Helvetica-Bold" }]}>
-          <Text>SKILLS</Text>
-          <View style={pdfStyles.hr} />
-        </View>
+        {Header.render("skills")}
         <View>
           <Text style={pdfStyles.paragraph}>
             Below are a collection of my most used skills, please view my

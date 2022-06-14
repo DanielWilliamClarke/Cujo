@@ -5,18 +5,9 @@ import { DateService, IDateService } from "../../../services/DateService";
 import { Work } from "../../../model/CVModel";
 
 import styles from "../../shared/style.module.scss";
+import { Header } from "./Header";
 
 const pdfStyles = StyleSheet.create({
-  heading: {
-    marginVertical: "5px",
-    fontSize: "15",
-  },
-  hr: {
-    height: "3px",
-    width: "50%",
-    backgroundColor: "#1CAED3",
-    margin: "5px 0",
-  },
   experience: {
     fontSize: 10,
     marginBottom: 15,
@@ -71,10 +62,7 @@ export class Experience {
   static render(work: Work[]): JSX.Element {
     return (
       <View>
-        <View style={[pdfStyles.heading, { fontFamily: "Helvetica-Bold" }]}>
-          <Text>EXPERIENCE</Text>
-          <View style={pdfStyles.hr} />
-        </View>
+        {Header.render("experience")}
         <View>
           {work
             .filter(
