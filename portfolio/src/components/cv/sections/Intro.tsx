@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import { View, StyleSheet, Text, Image } from "@react-pdf/renderer";
+import { View, StyleSheet, Text } from "@react-pdf/renderer";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { BLOCKS } from "@contentful/rich-text-types";
 
