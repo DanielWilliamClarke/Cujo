@@ -4,7 +4,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import { resolve } from "inversify-react";
 import { IDateService } from "../../services/DateService";
 import { getSketch } from "../../sketches";
-import { CVProps } from "../../model/CVModel";
+import { CVProps, Work } from "../../model/CVModel";
 
 import "./SketchBackstretch.scss";
 
@@ -26,11 +26,16 @@ export class SketchBackstretch extends React.Component<CVProps> {
   }
 
   render() {
-    const currentRole = this.props.cv.work.entries.sort(
-      (a, b) =>
-        this.dateService.toUnix(b.startDate.toString()) -
-        this.dateService.toUnix(a.startDate.toString())
-    )[0];
+    const currentRole = this.props.cv.work.entries
+      .filter(
+        ({ startDate }: Work) =>
+          !this.dateService.IsFuture(startDate.toString())
+      )
+      .sort(
+        (a, b) =>
+          this.dateService.toUnix(b.startDate.toString()) -
+          this.dateService.toUnix(a.startDate.toString())
+      )[0];
 
     return (
       <section id="home">
