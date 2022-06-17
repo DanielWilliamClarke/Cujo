@@ -64,49 +64,39 @@ export class Experience {
       <View>
         {Header.render("experience")}
         <View>
-          {work
-            .filter(
-              ({ startDate }: Work) =>
-                !this.dateService.IsFuture(startDate.toString())
-            )
-            .sort(
-              (a: Work, b: Work) =>
-                this.dateService.toUnix(b.startDate.toString()) -
-                this.dateService.toUnix(a.startDate.toString())
-            )
-            .map((work: Work) => (
-              <View style={pdfStyles.experience}>
-                <View style={pdfStyles.experienceItem}>
-                  <Image
-                    src={work.images[0].file.url}
-                    style={pdfStyles.experienceIcon}
-                  />
-                  <View>
-                    <Text style={pdfStyles.dates}>
-                      {this.dateService.toRangeWithDuration(
-                        work.startDate.toString(),
-                        work.endDate?.toString() ?? "Present"
-                      )}
-                    </Text>
-                    <Text
-                      style={[
-                        pdfStyles.company,
-                        { fontFamily: "Helvetica-Bold" },
-                      ]}
-                    >
-                      {work.company}
-                    </Text>
-                    <Text
-                      style={[pdfStyles.role, { fontFamily: "Helvetica-Bold" }]}
-                    >
-                      {work.position}
-                    </Text>
-                  </View>
+          {work.map((work: Work) => (
+            <View style={pdfStyles.experience}>
+              <View style={pdfStyles.experienceItem}>
+                <Image
+                  src={work.images[0].file.url}
+                  style={pdfStyles.experienceIcon}
+                />
+                <View>
+                  <Text style={pdfStyles.dates}>
+                    {this.dateService.toRangeWithDuration(
+                      work.startDate.toString(),
+                      work.endDate?.toString() ?? "Present"
+                    )}
+                  </Text>
+                  <Text
+                    style={[
+                      pdfStyles.company,
+                      { fontFamily: "Helvetica-Bold" },
+                    ]}
+                  >
+                    {work.company}
+                  </Text>
+                  <Text
+                    style={[pdfStyles.role, { fontFamily: "Helvetica-Bold" }]}
+                  >
+                    {work.position}
+                  </Text>
                 </View>
-                {this.createLanyard(work.highlights)}
-                <Text>{work.summary}</Text>
               </View>
-            ))}
+              {this.createLanyard(work.highlights)}
+              <Text>{work.summary}</Text>
+            </View>
+          ))}
         </View>
       </View>
     );

@@ -3,7 +3,7 @@ import { Document, StyleSheet, Page, View, Font } from "@react-pdf/renderer";
 import { IDateService } from "../../../services/DateService";
 
 import styles from "../../shared/style.module.scss";
-import { CV as CVModel } from "../../../model/CVModel";
+import { CV as CVModel, Work } from "../../../model/CVModel";
 
 import { Heading } from "./Heading";
 import { Intro } from "./Intro";
@@ -40,6 +40,16 @@ const pdfStyles = StyleSheet.create({
 
 export class CV {
   static render(cv: CVModel, dateService: IDateService): JSX.Element {
+    const experience = cv.work.entries
+      .filter(
+        ({ startDate }: Work) => !dateService.IsFuture(startDate.toString())
+      )
+      .sort(
+        (a: Work, b: Work) =>
+          dateService.toUnix(b.startDate.toString()) -
+          dateService.toUnix(a.startDate.toString())
+      );
+
     return (
       <Document>
         <Page style={pdfStyles.body} size="A4" wrap>
@@ -50,10 +60,10 @@ export class CV {
               {Skills.render(cv)}
               {Education.render(cv)}
               <View style={{ height: 30 }} />
-              {Experience.render(cv.work.entries.slice(4))}
+              {Experience.render(experience.slice(3))}
             </View>
             <View style={pdfStyles.right}>
-              {Experience.render(cv.work.entries.slice(0, 4))}
+              {Experience.render(experience.slice(0, 3))}
               <View style={{ height: 20 }} />
               {Interests.render(cv)}
             </View>
