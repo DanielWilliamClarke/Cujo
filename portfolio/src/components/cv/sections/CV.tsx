@@ -50,10 +50,10 @@ export class CV {
               {Skills.render(cv)}
               {Education.render(cv)}
               <View style={{ height: 30 }} />
-              {Experience.render(cv.work.entries.slice(3))}
+              {Experience.render(cv.work.entries.slice(4))}
             </View>
             <View style={pdfStyles.right}>
-              {Experience.render(cv.work.entries.slice(0, 3))}
+              {Experience.render(cv.work.entries.slice(0, 4))}
               <View style={{ height: 20 }} />
               {Interests.render(cv)}
             </View>

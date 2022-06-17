@@ -3,7 +3,7 @@ import { View, StyleSheet, Text } from "@react-pdf/renderer";
 import { IDateService } from "../../../services/DateService";
 
 import styles from "../../shared/style.module.scss";
-import { CV } from "../../../model/CVModel";
+import { CV, Work } from "../../../model/CVModel";
 
 const pdfStyles = StyleSheet.create({
   body: {
@@ -48,11 +48,15 @@ export class Heading {
       .split(" ")
       .map((name: string, index: number) => ({ name, color: colors[index] }));
 
-    const currentRole = cv.work.entries.sort(
-      (a, b) =>
-        dateService.toUnix(b.startDate.toString()) -
-        dateService.toUnix(a.startDate.toString())
-    )[0];
+    const currentRole = cv.work.entries
+      .filter(
+        ({ startDate }: Work) => !dateService.IsFuture(startDate.toString())
+      )
+      .sort(
+        (a, b) =>
+          dateService.toUnix(b.startDate.toString()) -
+          dateService.toUnix(a.startDate.toString())
+      )[0];
 
     return (
       <View style={pdfStyles.header}>
