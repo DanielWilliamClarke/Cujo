@@ -239,6 +239,9 @@ docker-compose --env-file <SECRET ENV FILE> -f prod.compose.yaml down (-v)
 ## Urls
 
 - <https://danielclarke.tech> - Portfolio
+- <https://danielclarke.tech/api/cv> - CV API 
+- <https://danielclarke.tech/api/blog> - Blog API 
+- <https://danielclarke.tech/cv> - Generate, Show and Download Resume
 
 ## Resources
 
