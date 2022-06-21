@@ -15,7 +15,7 @@
 <p>
 
 <p align="center">
-  A CV/Portfolio/Blog built in <b>TypeScript</b> using <b>React</b>. with a backend written in <b>Rust</b> using <b>Contentful</b> for portfolio and blog content.
+  A CV/Portfolio/Blog built in <b>TypeScript</b> using <b>React</b>, <b>React PDF</b> and <b>P5JS</b>. with a backend written in <b>Rust</b> using <b>Contentful</b> for portfolio and blog content.
 <p/>
 
 <p align="center">
