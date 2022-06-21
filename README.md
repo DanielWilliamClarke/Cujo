@@ -198,6 +198,8 @@ docker-compose --env-file <SECRET ENV FILE> -f prod.compose.yaml down (-v)
 
 ## // Done
 
+- [x] Generate CV PDF from contentful content
+- [x] Add new section to showcase and allow users to download an up to date copy of my CV PDF  
 - [x] Write blog
 - [x] Add competency levels to skills and visualise
 - [x] Move CV fully to Contentful and have backend collect CV data
