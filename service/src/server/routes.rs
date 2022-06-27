@@ -32,11 +32,9 @@ impl Routes {
         let headers = req.headers();
         let parameters = AuthParameters {
             redirect: Routes::extract_header(headers, "redirect"),
-            id: Routes::extract_header(headers, "client_id"),
-            secret: Routes::extract_header(headers, "client_secret"),
+            id: Routes::extract_header(headers, "client-id"),
+            secret: Routes::extract_header(headers, "client-secret"),
         };
-
-        println!("AUTH Request - {:?}", req);
 
         println!("Attempting authentication for - {}", parameters.redirect);
         match auth.authenticate(parameters.clone()).await {
