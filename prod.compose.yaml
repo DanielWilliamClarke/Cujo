@@ -66,6 +66,9 @@ services:
       - ACCESS_TOKEN=${ACCESS_TOKEN}
       - SPACE_ID=${SPACE_ID}
       - ENVIRONMENT=${ENVIRONMENT}
+      - AUTH_URL=${AUTH_URL}
+      - AUTHORITY=${AUTHORITY}
+      - AUDIENCE=${AUDIENCE}
     networks:
       - cujo
 
