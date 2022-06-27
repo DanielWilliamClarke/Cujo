@@ -25,6 +25,7 @@ mod util;
 
 use auth::{validator, Auth0Client, AuthConfig, RedirectClient, RedirectConfig};
 use server::{Routes, ServerConfig};
+
 use util::FromEnv;
 
 #[actix_rt::main]
@@ -48,7 +49,7 @@ async fn main() -> std::io::Result<()> {
             .route("/status", web::get().to(Routes::svc_status))
             .route("/cv", web::get().to(Routes::get_cv))
             .route("/blog", web::get().to(Routes::get_blog))
-            .route("/auth", web::post().to(Routes::auth))
+            .route("/auth/{endpoint}", web::post().to(Routes::auth))
             .route(
                 "/regenerate_cv",
                 web::post()

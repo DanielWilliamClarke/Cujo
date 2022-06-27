@@ -26,12 +26,15 @@ impl Routes {
 
     pub async fn auth(
         req: HttpRequest,
+        path: web::Path<String>,
         auth: web::Data<Auth0Client>,
         redirect_client: web::Data<RedirectClient>,
     ) -> impl Responder {
+        let endpoint = path.into_inner();
         let headers = req.headers();
+
         let parameters = AuthParameters {
-            redirect: Routes::extract_header(headers, "redirect"),
+            redirect: endpoint,
             id: Routes::extract_header(headers, "client-id"),
             secret: Routes::extract_header(headers, "client-secret"),
         };
@@ -88,12 +91,13 @@ impl Routes {
         client: web::Data<ContentfulClient>,
         cache: web::Data<Mutex<Cache>>,
     ) -> impl Responder {
-        println!("calling cv regenerate");
+        println!("CV Cache regeneration start!!");
         match CVReader::new(&client).get().await {
             Ok(cv) => {
                 let mut locked_cache = cache.lock().unwrap();
                 locked_cache.cv = cv;
-                HttpResponse::Ok().body("CV Cache regenerated!!")
+                println!("CV Cache regeneration start!!");
+                HttpResponse::Ok().body("CV Cache regeneration complete!!")
             }
             Err(err) => HttpResponse::InternalServerError()
                 .body(format!("CV Cache could not be regenerated: {}", err)),
@@ -104,12 +108,13 @@ impl Routes {
         client: web::Data<ContentfulClient>,
         cache: web::Data<Mutex<Cache>>,
     ) -> impl Responder {
-        println!("calling blog regenerate");
+        println!("Blog Cache regeneration start!!");
         match BlogReader::new(&client).get().await {
             Ok(blog) => {
                 let mut locked_cache = cache.lock().unwrap();
                 locked_cache.blog = blog;
-                HttpResponse::Ok().body("Blog Cache regenerated!!")
+                println!("Blog Cache regeneration complete!!");
+                HttpResponse::Ok().body("Blog Cache regeneration complete!!")
             }
             Err(err) => HttpResponse::InternalServerError()
                 .body(format!("Blog Cache could not be regenerated: {}", err)),
