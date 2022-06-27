@@ -4,4 +4,4 @@ mod config;
 mod routes;
 
 pub use config::ServerConfig;
-pub use routes::init;
+pub use routes::{Cache, Routes};
