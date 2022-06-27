@@ -2,21 +2,32 @@
 
 use reqwest::Error;
 use reqwest::{self, Response};
+use serde::Deserialize;
+
+use crate::util::FromEnv;
 
 use super::AuthToken;
 
+#[derive(Deserialize, Debug, Clone)]
+pub struct RedirectConfig {
+    pub self_redirect: String,
+}
+impl FromEnv for RedirectConfig {}
+
 #[derive(Clone)]
-pub struct RedirectClient;
+pub struct RedirectClient {
+    config: RedirectConfig,
+}
 
 impl RedirectClient {
-    pub fn new() -> Self {
-        RedirectClient {}
+    pub fn new(config: RedirectConfig) -> Self {
+        RedirectClient { config }
     }
 
-    pub async fn redirect(&self, url: String, token: AuthToken) -> Result<Response, Error> {
+    pub async fn redirect(&self, endpoint: String, token: AuthToken) -> Result<Response, Error> {
         let client = reqwest::Client::new();
         client
-            .post(url)
+            .post(format!("{}/{}", self.config.self_redirect, endpoint))
             .header(
                 "Authorization",
                 format!("{} {}", token.token_type, token.access_token),

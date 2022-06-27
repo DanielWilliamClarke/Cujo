@@ -23,8 +23,7 @@ mod cv;
 mod server;
 mod util;
 
-use crate::auth::{validator, Auth0Client, AuthConfig, RedirectClient};
-
+use auth::{validator, Auth0Client, AuthConfig, RedirectClient, RedirectConfig};
 use server::{Routes, ServerConfig};
 use util::FromEnv;
 
@@ -35,7 +34,7 @@ async fn main() -> std::io::Result<()> {
 
     let server_config = ServerConfig::from_env();
     let auth_client = Auth0Client::new(AuthConfig::from_env());
-    let redirect_client = RedirectClient::new();
+    let redirect_client = RedirectClient::new(RedirectConfig::from_env());
     let client = ContentfulClient::new(ContentfulConfig::from_env());
     let cache = Data::new(Mutex::new(Routes::generate_cache(client.clone()).await));
 
