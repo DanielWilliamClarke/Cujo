@@ -36,6 +36,8 @@ impl Routes {
             secret: Routes::extract_header(headers, "client_secret"),
         };
 
+        println!("AUTH Request - {:?}", req);
+
         println!("Attempting authentication for - {}", parameters.redirect);
         match auth.authenticate(parameters.clone()).await {
             Ok(token) => {
