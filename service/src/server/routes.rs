@@ -37,35 +37,37 @@ impl Routes {
         };
 
         println!("Attempting authentication for - {}", parameters.redirect);
-        match auth.authenticate(parameters.clone()).await {
-            Ok(token) => {
-                println!(
-                    "Client authenticated, redirecting to - {}",
-                    parameters.redirect
-                );
-                match redirect_client.redirect(parameters.redirect, token).await {
-                    Ok(res) if res.status() == 200 => {
-                        println!("Redirect response valid: {:?}", res);
-                        HttpResponse::Ok().body(format!(
-                            "Authenitcated redirect response valid - {}",
-                            res.status()
-                        ))
-                    }
-                    Ok(res) if res.status() != 200 => {
-                        println!("Redirect response failed: {:?}", res);
-                        HttpResponse::InternalServerError().body(format!(
-                            "Authenitcated redirect response failed - {}",
-                            res.status()
-                        ))
-                    }
-                    Err(err) => {
-                        println!("Redirect request failure - {}", err);
-                        HttpResponse::BadRequest().body("Authenitcated redirect request failure")
-                    }
-                    _ => HttpResponse::BadRequest().body("Unknown failure"),
-                }
+        let token = match auth.authenticate(parameters.clone()).await {
+            Ok(token) => token,
+            Err(err) => {
+                return HttpResponse::Unauthorized().body(format!("Client unauthorized!: {}", err))
             }
-            Err(err) => HttpResponse::Unauthorized().body(format!("Client unauthorized!: {}", err)),
+        };
+
+        println!(
+            "Client authenticated, redirecting to - {}",
+            parameters.redirect
+        );
+        match redirect_client.redirect(parameters.redirect, token).await {
+            Ok(res) if res.status() == 200 => {
+                println!("Redirect response valid: {:?}", res);
+                HttpResponse::Ok().body(format!(
+                    "Authenitcated redirect response valid - {}",
+                    res.status()
+                ))
+            }
+            Ok(res) if res.status() != 200 => {
+                println!("Redirect response failed: {:?}", res);
+                HttpResponse::InternalServerError().body(format!(
+                    "Authenitcated redirect response failed - {}",
+                    res.status()
+                ))
+            }
+            Err(err) => {
+                println!("Redirect request failure - {}", err);
+                HttpResponse::BadRequest().body("Authenitcated redirect request failure")
+            }
+            _ => HttpResponse::BadRequest().body("Unknown failure"),
         }
     }
 
