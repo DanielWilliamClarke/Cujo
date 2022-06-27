@@ -48,7 +48,7 @@ impl Auth0Client {
         map.insert("audience", self.config.audience.clone());
         map.insert("grant_type", "client_credentials".to_owned());
 
-        println!("{:?}", map);
+        println!("AUTH PARAMETERS - {:?}", map);
 
         let client = reqwest::Client::new();
         let response = client
@@ -58,7 +58,7 @@ impl Auth0Client {
             .send()
             .await?;
 
-        println!("{:?}", response);
+        println!("AUTH RESPONSE - {:?}", response);
 
         Ok(response.json().await?)
     }
