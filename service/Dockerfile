@@ -17,10 +17,6 @@ WORKDIR /cujo
 COPY --from=build /usr/local/cargo/bin/cujo /usr/local/bin/cujo
 COPY --from=build /cujo/.env .
 
-RUN adduser user && \
-  chown -R user /cujo
-USER user
-
 EXPOSE 5001
 
 CMD ["cujo"]
