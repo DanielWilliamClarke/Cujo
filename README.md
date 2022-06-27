@@ -127,10 +127,16 @@ For prod deployment an env file is required with  the following parameters speci
 
 ```conf
 DOMAIN=localhost
+
 BLOG_HOST=https://cdn.contentful.com
 ACCESS_TOKEN=[REDACTED]
 SPACE_ID=[REDACTED]
 ENVIRONMENT=master
+
+AUTH_URL=[DATA EXPUNGED]
+AUTHORITY=[DATA EXPUNGED]
+AUDIENCE=[REDACTED]
+SELF_REDIRECT=[REDACTED]
 ```
 
 ## Add Contentful API IPs to /etc/hosts
@@ -198,6 +204,12 @@ docker-compose --env-file <SECRET ENV FILE> -f prod.compose.yaml down (-v)
 
 ## // Done
 
+- [x] Implement a more async system design
+  - [x] Cujo service now maintains a cache of contentful content
+  - [x] Requests from the website now read the cache only
+  - [x] Contentful webhooks now call the cujo service on content publish / unpublish
+  - [x] We authenticate the webhook POST request agaisnt Auth0
+  - [x] Redirect and validate the token so only authenticated clients can trigger a can regenerate the cache
 - [x] Generate CV PDF from contentful content
 - [x] Add new section to showcase and allow users to download an up to date copy of my CV PDF  
 - [x] Write blog
