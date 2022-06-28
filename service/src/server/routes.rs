@@ -1,5 +1,6 @@
 // src/server/routes.rs
 use actix_web::{http::header::HeaderMap, web, HttpRequest, HttpResponse, Responder};
+use serde::Serialize;
 use std::sync::Mutex;
 
 use crate::auth::{Auth0Client, AuthParameters, RedirectClient};
@@ -89,16 +90,12 @@ impl Routes {
         cache: web::Data<Mutex<Cache>>,
     ) -> impl Responder {
         println!("CV Cache regeneration start!!");
-        match CVReader::new(&client).get().await {
-            Ok(cv) => {
-                let mut locked_cache = cache.lock().unwrap();
-                locked_cache.cv = serde_json::to_string(&cv).unwrap();
-                println!("CV Cache regeneration start!!");
-                HttpResponse::Ok().body("CV Cache regeneration complete!!")
-            }
-            Err(err) => HttpResponse::InternalServerError()
-                .body(format!("CV Cache could not be regenerated: {}", err)),
-        }
+
+        Routes::regenerate(CVReader::new(&client), move |cv| {
+            let mut locked_cache = cache.lock().unwrap();
+            locked_cache.cv = cv
+        })
+        .await
     }
 
     pub async fn regenerate_blog_cache(
@@ -106,16 +103,12 @@ impl Routes {
         cache: web::Data<Mutex<Cache>>,
     ) -> impl Responder {
         println!("Blog Cache regeneration start!!");
-        match BlogReader::new(&client).get().await {
-            Ok(blog) => {
-                let mut locked_cache = cache.lock().unwrap();
-                locked_cache.blog = serde_json::to_string(&blog).unwrap();
-                println!("Blog Cache regeneration complete!!");
-                HttpResponse::Ok().body("Blog Cache regeneration complete!!")
-            }
-            Err(err) => HttpResponse::InternalServerError()
-                .body(format!("Blog Cache could not be regenerated: {}", err)),
-        }
+
+        Routes::regenerate(BlogReader::new(&client), move |blog| {
+            let mut locked_cache = cache.lock().unwrap();
+            locked_cache.blog = blog
+        })
+        .await
     }
 
     pub async fn get_cv(cache: web::Data<Mutex<Cache>>) -> impl Responder {
@@ -130,6 +123,25 @@ impl Routes {
         match headers.get(header) {
             Some(header) => header.to_str().unwrap().to_owned(),
             None => "".to_owned(),
+        }
+    }
+
+    async fn regenerate<F>(
+        reader: impl Reader<Data = impl Serialize, Error = impl std::fmt::Display>,
+        cache_handler: F,
+    ) -> impl Responder
+    where
+        F: Fn(String),
+    {
+        match reader.get().await {
+            Ok(data) => {
+                cache_handler(serde_json::to_string(&data).unwrap());
+                let body = "Cache regeneration complete!!";
+                println!("{}", body);
+                HttpResponse::Ok().body(body)
+            }
+            Err(err) => HttpResponse::InternalServerError()
+                .body(format!("Cache could not be regenerated: {}", err)),
         }
     }
 }
