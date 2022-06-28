@@ -204,7 +204,7 @@ docker-compose --env-file <SECRET ENV FILE> -f prod.compose.yaml down (-v)
 
 ## // Done
 
-- [x] Implement a more async system design
+- [x] Implement async system design
   - [x] Cujo service now maintains a cache of contentful content
   - [x] Requests from the website now read the cache only
   - [x] Contentful webhooks now call the cujo service on content publish / unpublish
@@ -271,10 +271,10 @@ docker-compose --env-file <SECRET ENV FILE> -f prod.compose.yaml down (-v)
 - Rich Text Renderer - `React` <https://www.npmjs.com/package/@contentful/rich-text-react-renderer>
 - Import SCSS variables in Typescript - `SCSS` <https://medium.com/@christian.tonye_16869/scss-variables-in-react-typescript-components-de19d7f96245>
 - Circular Progress Bar - `React` <https://github.com/kevinsqi/react-circular-progressbar>
-
-- Generating PDF with React - <https://react-pdf.org/>
-  - Rendering a PDF in Canvas <https://mozilla.github.io/pdf.js/examples/>
-  - How to actually render to a Canvas <https://stackoverflow.com/questions/59867174/why-getcontext-function-cannot-be-called-on-react-jsx-canvas-object>
-  - Fixing build with PDFJS - <https://github.com/mozilla/pdf.js/issues/13200>
-
-- Material Icons png - <https://github.com/material-icons/material-icons-png>
+- Generating PDF with React - `React PDF` <https://react-pdf.org/>
+  - Rendering a PDF in Canvas - `React PDF`  <https://mozilla.github.io/pdf.js/examples/>
+  - How to actually render to a Canvas - `PDFJS` <https://stackoverflow.com/questions/59867174/why-getcontext-function-cannot-be-called-on-react-jsx-canvas-object>
+  - Fixing build with PDFJS - `PDFJS` <https://github.com/mozilla/pdf.js/issues/13200>
+  - Material Icons png - <https://github.com/material-icons/material-icons-png>
+- Auth0 Client Credentials Flow - `Rust` <https://auth0.com/docs/get-started/authentication-and-authorization-flow/call-your-api-using-the-client-credentials-flow>
+- Securing Actix Service with Auth0 - `Rust` <https://auth0.com/blog/build-an-api-in-rust-with-jwt-authentication-using-actix-web/#Securing-the-API>
