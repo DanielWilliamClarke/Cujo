@@ -8,13 +8,10 @@ use crate::cv::CVReader;
 use crate::util::Reader;
 use contentful::ContentfulClient;
 
-use crate::{blog::BlogPost, cv::CV};
-use contentful::Entries;
-
 #[derive(Debug, Clone)]
 pub struct Cache {
-    pub cv: CV,
-    pub blog: Option<Entries<BlogPost>>,
+    pub cv: String,
+    pub blog: String,
 }
 
 pub struct Routes;
@@ -77,11 +74,11 @@ impl Routes {
     pub async fn generate_cache(client: ContentfulClient) -> Cache {
         Cache {
             cv: match CVReader::new(&client).get().await {
-                Ok(cv) => cv,
+                Ok(cv) => serde_json::to_string(&cv).unwrap(),
                 Err(err) => panic!("Could not generate cv cache - {}", err),
             },
             blog: match BlogReader::new(&client).get().await {
-                Ok(blog) => blog,
+                Ok(blog) => serde_json::to_string(&blog).unwrap(),
                 Err(err) => panic!("Could not generate blog cache - {}", err),
             },
         }
@@ -95,7 +92,7 @@ impl Routes {
         match CVReader::new(&client).get().await {
             Ok(cv) => {
                 let mut locked_cache = cache.lock().unwrap();
-                locked_cache.cv = cv;
+                locked_cache.cv = serde_json::to_string(&cv).unwrap();
                 println!("CV Cache regeneration start!!");
                 HttpResponse::Ok().body("CV Cache regeneration complete!!")
             }
@@ -112,7 +109,7 @@ impl Routes {
         match BlogReader::new(&client).get().await {
             Ok(blog) => {
                 let mut locked_cache = cache.lock().unwrap();
-                locked_cache.blog = blog;
+                locked_cache.blog = serde_json::to_string(&blog).unwrap();
                 println!("Blog Cache regeneration complete!!");
                 HttpResponse::Ok().body("Blog Cache regeneration complete!!")
             }
@@ -122,11 +119,11 @@ impl Routes {
     }
 
     pub async fn get_cv(cache: web::Data<Mutex<Cache>>) -> impl Responder {
-        HttpResponse::Ok().json(cache.lock().unwrap().cv.clone())
+        HttpResponse::Ok().body(cache.lock().unwrap().cv.clone())
     }
 
     pub async fn get_blog(cache: web::Data<Mutex<Cache>>) -> impl Responder {
-        HttpResponse::Ok().json(cache.lock().unwrap().blog.clone())
+        HttpResponse::Ok().body(cache.lock().unwrap().blog.clone())
     }
 
     fn extract_header(headers: &HeaderMap, header: &str) -> String {
