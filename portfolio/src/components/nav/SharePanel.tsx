@@ -21,7 +21,7 @@ import "./SharePanel.scss";
 
 interface ShareProps {
   url: string;
-  title?: string;
+  title: string;
   body: string;
   hashtag: string;
 }

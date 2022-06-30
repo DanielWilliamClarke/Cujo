@@ -7,6 +7,7 @@ import {
   INLINES,
   Inline,
 } from "@contentful/rich-text-types";
+import { Helmet } from "react-helmet";
 
 import { resolve } from "inversify-react";
 import React, { ReactNode } from "react";
@@ -55,6 +56,13 @@ export class BlogPost extends React.Component<BlogProps> {
               body={post.excerpt}
               hashtag="DCTechBlog"
             />
+            <Helmet>
+              <title>{post.title}</title>
+              <meta property="og:title" content={post.title} />
+              <meta property="og:image" content={post.media?.file.url} />
+              <meta property="og:description" content={post.excerpt} />
+              <meta property="og:url" content={window.location.href} />
+            </Helmet>
             {this.displayPost(post)}
           </>
         )}
