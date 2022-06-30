@@ -201,6 +201,7 @@ docker-compose --env-file <SECRET ENV FILE> -f prod.compose.yaml down (-v)
 
 - [ ] Add Rust code coverage
 - [ ] Write front end tests
+- [ ] Get SEO and social media previews to work
 
 ## // Done
 
@@ -279,3 +280,4 @@ docker-compose --env-file <SECRET ENV FILE> -f prod.compose.yaml down (-v)
   - Material Icons png - <https://github.com/material-icons/material-icons-png>
 - Auth0 Client Credentials Flow - `Rust` <https://auth0.com/docs/get-started/authentication-and-authorization-flow/call-your-api-using-the-client-credentials-flow>
 - Securing Actix Service with Auth0 - `Rust` <https://auth0.com/blog/build-an-api-in-rust-with-jwt-authentication-using-actix-web/#Securing-the-API>
+- Generate Prerendered pages with Prerender - <https://github.com/prerender/prerender-nginx>
