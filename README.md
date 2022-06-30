@@ -264,6 +264,7 @@ docker-compose --env-file <SECRET ENV FILE> -f prod.compose.yaml down (-v)
 - Hosting websites using Nginx - `Nginx` <https://blog.harveydelaney.com/hosting-websites-using-docker-nginx/>
 - Add Sudoers - `Linux` <https://linuxize.com/post/how-to-add-user-to-sudoers-in-ubuntu/>
 - Auto image redeploy with Watchtower - `Docker` <https://alexgallacher.com/setting-up-watchtower-to-update-docker-containers/>
+- CircleCI Path filtering - `CircleCI` <https://circleci.com/docs/2.0/using-dynamic-configuration#execute-specific-workflows-or-steps-based-on-which-files-are-modified>
 - React scroll spy - `React` <https://makotot.github.io/react-scrollspy/>
 - React icons - `React` <https://react-icons.github.io/react-icons/icons?name=io5>
 - DevIcons - `React` <https://devicon.dev/>
