@@ -2,6 +2,7 @@ import React from "react";
 import { Fade } from "react-awesome-reveal";
 
 import { CVProps } from "../model/CVModel";
+import { SharePanel } from "./nav/SharePanel";
 import { About } from "./profile/About";
 import { Education } from "./profile/Education";
 import { Experience } from "./profile/Experience";
@@ -12,6 +13,12 @@ export class Profile extends React.Component<CVProps> {
   render(): JSX.Element {
     return (
       <div>
+        <SharePanel
+          url={window.location.href}
+          title="Daniel William Clarke Portfolio"
+          body={this.props.cv.about.entry.label}
+          hashtag="DCTechPortfolio"
+        />
         {[
           <About about={this.props.cv.about} />,
           <Experience work={this.props.cv.work} />,

@@ -21,6 +21,7 @@ import { getAsset, Entries } from "../../model/Includes";
 import { IDateService } from "../../services/DateService";
 import { Lanyard } from "../shared/Lanyard";
 import { Section } from "../shared/Section";
+import { SharePanel } from "../nav/SharePanel";
 
 import "../shared/Portfolio.scss";
 import "./BlogPost.scss";
@@ -44,7 +45,21 @@ export class BlogPost extends React.Component<BlogProps> {
       (post: Post) => post.id === this.props.id
     );
 
-    return <>{post && this.displayPost(post)}</>;
+    return (
+      <>
+        {post && (
+          <>
+            <SharePanel
+              url={window.location.href}
+              title={post.title}
+              body={post.excerpt}
+              hashtag="DCTechBlog"
+            />
+            {this.displayPost(post)}
+          </>
+        )}
+      </>
+    );
   }
 
   private displayPost(post: Post): JSX.Element {

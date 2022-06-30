@@ -13,7 +13,6 @@ import { Blog } from "./components/blog/Blog";
 import { BlogPost } from "./components/blog/BlogPost";
 import { Contact } from "./components/contact/Contact";
 import NavPanel from "./components/nav/NavPanel";
-import { SharePanel } from "./components/nav/SharePanel";
 import { Profile } from "./components/Profile";
 import { Post } from "./model/BlogPost";
 import { CV as CVModel } from "./model/CVModel";
@@ -56,11 +55,6 @@ class App extends React.Component<AppProps & RouteComponentProps> {
           <SketchBackstretch cv={this.props.cv!} />
         </Fade>
         <NavPanel />
-        <SharePanel
-          url={window.location.href}
-          body="Software Engineer Portfolio and Blog"
-          hashtag="DCTechPortfolio"
-        />
         <div className="app">
           <Switch>
             <Route exact path="/">
