@@ -38,6 +38,7 @@
 - [// Done](#-done)
   - [Visualisations](#visualisations)
 - [Urls](#urls)
+- [Third Parties](#third-parties)
 - [Resources](#resources)
 
 ---
@@ -260,6 +261,12 @@ docker-compose --env-file <SECRET ENV FILE> -f prod.compose.yaml down (-v)
 - <https://danielclarke.tech/api/cv> - CV API 
 - <https://danielclarke.tech/api/blog> - Blog API 
 - <https://danielclarke.tech/cv> - Generate, Show and Download Resume
+
+## Third Parties
+
+- <https://www.contentful.com/> - Contentful
+- <https://auth0.com/> - Auth0
+- <https://dashboard.prerender.io/> - Prerender.io
 
 ## Resources
 
