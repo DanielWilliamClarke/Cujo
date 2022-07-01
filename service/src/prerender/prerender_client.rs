@@ -3,7 +3,7 @@
 use std::collections::HashMap;
 
 use reqwest;
-use reqwest::{header, Error};
+use reqwest::header;
 use serde::Deserialize;
 
 use crate::util::FromEnv;
@@ -26,20 +26,20 @@ impl PrerenderClient {
         PrerenderClient { config }
     }
 
-    pub async fn recache_portfolio(&self) -> Result<(), Error> {
+    pub async fn recache_portfolio(&self) {
         self.recache(self.config.prerender_cache_base_url.clone())
             .await
     }
 
-    pub async fn recache_blog_post(&self, blog_id: String) -> Result<(), Error> {
+    pub async fn recache_blog_post(&self, blog_id: String) {
         self.recache(format!(
             "{}/blog/{}",
             self.config.prerender_cache_base_url, blog_id
         ))
-        .await
+        .await;
     }
 
-    async fn recache(&self, url: String) -> Result<(), Error> {
+    async fn recache(&self, url: String) {
         println!("Recaching: {}", url);
 
         let mut map = HashMap::new();
@@ -47,13 +47,16 @@ impl PrerenderClient {
         map.insert("url", url);
 
         let client = reqwest::Client::new();
-        client
+        let response = client
             .post(self.config.prerender_api_url.clone())
             .header(header::CONTENT_TYPE, "application/json")
             .json(&map)
-            .send()
-            .await?;
+            .send();
 
-        Ok(())
+        // Ideally just send and forget the recache request
+        // if an error is returned its not critical to return it
+        match response.await {
+            _ => (),
+        }
     }
 }
