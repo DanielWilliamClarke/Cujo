@@ -1,11 +1,14 @@
 // src/server/routes.rs
 use actix_web::{http::header::HeaderMap, web, HttpRequest, HttpResponse, Responder};
-use serde::Serialize;
+use futures::Future;
+use futures::StreamExt;
+use serde::{Deserialize, Serialize};
 use std::sync::Mutex;
 
 use crate::auth::{Auth0Client, AuthParameters, RedirectClient};
 use crate::blog::BlogReader;
 use crate::cv::CVReader;
+use crate::prerender::PrerenderClient;
 use crate::util::Reader;
 use contentful::ContentfulClient;
 
@@ -13,6 +16,13 @@ use contentful::ContentfulClient;
 pub struct Cache {
     pub cv: String,
     pub blog: String,
+}
+
+#[derive(Deserialize, Debug, Clone)]
+#[serde(rename_all = "camelCase")]
+pub struct BlogWebhookBody {
+    pub entity_id: String,
+    pub blog_id: String,
 }
 
 pub struct Routes;
@@ -24,6 +34,7 @@ impl Routes {
 
     pub async fn auth(
         req: HttpRequest,
+        mut body: web::Payload,
         path: web::Path<String>,
         auth: web::Data<Auth0Client>,
         redirect_client: web::Data<RedirectClient>,
@@ -49,7 +60,24 @@ impl Routes {
             "Client authenticated, redirecting to - {}",
             parameters.redirect
         );
-        match redirect_client.redirect(parameters.redirect, token).await {
+
+        let mut bytes = web::BytesMut::new();
+        while let Some(item) = body.next().await {
+            let item = match &item {
+                Ok(item) => item,
+                Err(err) => {
+                    return HttpResponse::BadRequest()
+                        .body(format!("No payload present for redirect {}", err))
+                }
+            };
+
+            bytes.extend_from_slice(&item);
+        }
+
+        match redirect_client
+            .redirect(parameters.redirect, bytes.freeze(), token)
+            .await
+        {
             Ok(res) if res.status() == 200 => {
                 println!("Redirect response valid: {:?}", res);
                 HttpResponse::Ok().body(format!(
@@ -86,27 +114,41 @@ impl Routes {
     }
 
     pub async fn regenerate_cv_cache(
-        client: web::Data<ContentfulClient>,
+        contentful_client: web::Data<ContentfulClient>,
+        prerender_client: web::Data<PrerenderClient>,
         cache: web::Data<Mutex<Cache>>,
     ) -> impl Responder {
         println!("CV Cache regeneration start!!");
 
-        Routes::regenerate(CVReader::new(&client), move |cv| {
+        Routes::regenerate(CVReader::new(&contentful_client), async move |cv| {
             let mut locked_cache = cache.lock().unwrap();
-            locked_cache.cv = cv
+            locked_cache.cv = cv;
+
+            match prerender_client.recache_portfolio().await {
+                _ => (),
+            }
         })
         .await
     }
 
     pub async fn regenerate_blog_cache(
-        client: web::Data<ContentfulClient>,
+        body: web::Json<BlogWebhookBody>,
+        contentful_client: web::Data<ContentfulClient>,
+        prerender_client: web::Data<PrerenderClient>,
         cache: web::Data<Mutex<Cache>>,
     ) -> impl Responder {
         println!("Blog Cache regeneration start!!");
 
-        Routes::regenerate(BlogReader::new(&client), move |blog| {
+        Routes::regenerate(BlogReader::new(&contentful_client), async move |blog| {
             let mut locked_cache = cache.lock().unwrap();
-            locked_cache.blog = blog
+            locked_cache.blog = blog;
+
+            match prerender_client
+                .recache_blog_post(body.blog_id.clone())
+                .await
+            {
+                _ => (),
+            }
         })
         .await
     }
@@ -126,16 +168,17 @@ impl Routes {
         }
     }
 
-    async fn regenerate<F>(
+    async fn regenerate<F, Fut>(
         reader: impl Reader<Data = impl Serialize, Error = impl std::fmt::Display>,
         cache_handler: F,
     ) -> impl Responder
     where
-        F: Fn(String),
+        F: FnOnce(String) -> Fut,
+        Fut: Future<Output = ()>,
     {
         match reader.get().await {
             Ok(data) => {
-                cache_handler(serde_json::to_string(&data).unwrap());
+                cache_handler(serde_json::to_string(&data).unwrap()).await;
                 let body = "Cache regeneration complete!!";
                 println!("{}", body);
                 HttpResponse::Ok().body(body)

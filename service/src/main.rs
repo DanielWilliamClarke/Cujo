@@ -1,6 +1,7 @@
 // src/main.rs
 
 #![feature(associated_type_defaults)]
+#![feature(async_closure)]
 
 #[macro_use]
 extern crate log;
@@ -20,12 +21,13 @@ use listenfd::ListenFd;
 mod auth;
 mod blog;
 mod cv;
+mod prerender;
 mod server;
 mod util;
 
 use auth::{validator, Auth0Client, AuthConfig, RedirectClient, RedirectConfig};
+use prerender::{PrerenderClient, PrerenderConfig};
 use server::{Routes, ServerConfig};
-
 use util::FromEnv;
 
 #[actix_rt::main]
@@ -36,14 +38,18 @@ async fn main() -> std::io::Result<()> {
     let server_config = ServerConfig::from_env();
     let auth_client = Auth0Client::new(AuthConfig::from_env());
     let redirect_client = RedirectClient::new(RedirectConfig::from_env());
-    let client = ContentfulClient::new(ContentfulConfig::from_env());
-    let cache = Data::new(Mutex::new(Routes::generate_cache(client.clone()).await));
+    let prerender_client = PrerenderClient::new(PrerenderConfig::from_env());
+    let contentful_client = ContentfulClient::new(ContentfulConfig::from_env());
+    let cache = Data::new(Mutex::new(
+        Routes::generate_cache(contentful_client.clone()).await,
+    ));
 
     let mut server = HttpServer::new(move || {
         App::new()
             .app_data(Data::new(auth_client.clone()))
             .app_data(Data::new(redirect_client.clone()))
-            .app_data(Data::new(client.clone()))
+            .app_data(Data::new(prerender_client.clone()))
+            .app_data(Data::new(contentful_client.clone()))
             .app_data(cache.clone())
             .wrap(Logger::default())
             .route("/status", web::get().to(Routes::svc_status))
