@@ -205,10 +205,11 @@ docker-compose --env-file <SECRET ENV FILE> -f prod.compose.yaml down (-v)
 
 - [ ] Add Rust code coverage
 - [ ] Write front end tests
-- [ ] Get SEO and social media previews to work
+- [ ] Trigger recache on contentful update
 
 ## // Done
 
+- [x] Get SEO and social media previews to work
 - [x] Implement async system design
   - [x] Cujo service now maintains a cache of contentful content
   - [x] Requests from the website now read the cache only
