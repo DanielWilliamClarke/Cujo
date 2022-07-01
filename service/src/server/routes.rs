@@ -124,9 +124,7 @@ impl Routes {
             let mut locked_cache = cache.lock().unwrap();
             locked_cache.cv = cv;
 
-            match prerender_client.recache_portfolio().await {
-                _ => (),
-            }
+            prerender_client.recache_portfolio().await;
         })
         .await
     }
@@ -143,12 +141,9 @@ impl Routes {
             let mut locked_cache = cache.lock().unwrap();
             locked_cache.blog = blog;
 
-            match prerender_client
+            prerender_client
                 .recache_blog_post(body.blog_id.clone())
-                .await
-            {
-                _ => (),
-            }
+                .await;
         })
         .await
     }
