@@ -20,6 +20,12 @@ import "./index.scss";
 
 const App = React.lazy(() => import(/* webpackChunkName: "App" */ "./App"));
 
+declare global {
+  interface Window {
+    prerenderReady: boolean;
+  }
+}
+
 type CujoProps = {
   service: ICujoService;
 };
@@ -43,6 +49,14 @@ class Cujo extends React.Component<CujoProps, CujoState> {
     this.props.service.FetchBlogPosts().then((blog: Entries<Post>) => {
       this.setState({ blog });
     });
+  }
+
+  componentDidUpdate() {
+    setTimeout(() => {
+      if (this.state.cv && this.state.blog) {
+        window.prerenderReady = true;
+      }
+    }, 5000);
   }
 
   render(): JSX.Element {
@@ -78,6 +92,8 @@ class Cujo extends React.Component<CujoProps, CujoState> {
     );
   }
 }
+
+window.prerenderReady = false;
 
 LogRocket.init("fjqkqf/cujo");
 setupLogRocketReact(LogRocket);
