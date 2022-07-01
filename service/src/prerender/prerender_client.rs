@@ -48,7 +48,7 @@ impl PrerenderClient {
 
         let client = reqwest::Client::new();
         client
-            .get(self.config.prerender_api_url.clone())
+            .post(self.config.prerender_api_url.clone())
             .header(header::CONTENT_TYPE, "application/json")
             .json(&map)
             .send()
