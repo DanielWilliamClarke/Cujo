@@ -1,5 +1,6 @@
 // src/auth/auth0_client.rs
 
+use actix_web::web;
 use reqwest::Error;
 use reqwest::{self, Response};
 use serde::Deserialize;
@@ -24,7 +25,12 @@ impl RedirectClient {
         RedirectClient { config }
     }
 
-    pub async fn redirect(&self, endpoint: String, token: AuthToken) -> Result<Response, Error> {
+    pub async fn redirect(
+        &self,
+        endpoint: String,
+        payload: web::Bytes,
+        token: AuthToken,
+    ) -> Result<Response, Error> {
         let client = reqwest::Client::new();
         client
             .post(format!("{}/{}", self.config.self_redirect, endpoint))
@@ -33,6 +39,7 @@ impl RedirectClient {
                 format!("{} {}", token.token_type, token.access_token),
             )
             .header("content-type", "application/json")
+            .body(payload)
             .send()
             .await
     }
