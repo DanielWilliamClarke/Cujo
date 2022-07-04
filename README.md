@@ -294,3 +294,4 @@ docker-compose --env-file <SECRET ENV FILE> -f prod.compose.yaml down (-v)
 - Securing Actix Service with Auth0 - `Rust` <https://auth0.com/blog/build-an-api-in-rust-with-jwt-authentication-using-actix-web/#Securing-the-API>
 - Generate Prerendered pages with Prerender - <https://github.com/prerender/prerender-nginx>
 - Triggering a reache with Prerender - <https://docs.prerender.io/v1/docs/en/6-api>
+- Ubuntu does not cache DNS records - <https://www.cloudns.net/blog/dns-cache-explained/>
