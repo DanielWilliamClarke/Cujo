@@ -7,7 +7,7 @@ const pdfStyles = StyleSheet.create({
   outro: {
     display: "flex",
     flexDirection: "row",
-    height: "19%",
+    height: "18.5%",
     backgroundColor: "#222222",
     fontSize: "10",
     color: "#ffffff",

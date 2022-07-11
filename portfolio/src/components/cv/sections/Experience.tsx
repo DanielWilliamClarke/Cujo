@@ -1,5 +1,7 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import { View, StyleSheet, Text, Image } from "@react-pdf/renderer";
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import { BLOCKS } from "@contentful/rich-text-types";
 
 import { DateService, IDateService } from "../../../services/DateService";
 import { Work } from "../../../model/CVModel";
@@ -10,7 +12,7 @@ import { Header } from "./Header";
 const pdfStyles = StyleSheet.create({
   experience: {
     fontSize: 10,
-    marginBottom: 15,
+    marginBottom: 12,
   },
   company: {
     fontSize: 10,
@@ -49,8 +51,20 @@ const pdfStyles = StyleSheet.create({
     justifyContent: "center",
     alignContent: "center",
     flexDirection: "row",
-  },
+  }
 });
+
+const options = {
+  renderNode: {
+    [BLOCKS.DOCUMENT]: (_: any, children: ReactNode) => <View>{children}</View>,
+    [BLOCKS.PARAGRAPH]: (_: any, children: ReactNode) => (
+      <View>{children}</View>
+    ),
+  },
+  renderText: (text: string): ReactNode => (
+    <Text>{text.trim()}</Text>
+  ),
+};
 
 export class Experience {
   private static dateService: IDateService = (() => {
@@ -59,10 +73,10 @@ export class Experience {
     return service;
   })();
 
-  static render(work: Work[]): JSX.Element {
+  static render(work: Work[], withContinue: boolean = false): JSX.Element {
     return (
       <View>
-        {Header.render("experience")}
+        {Header.render(`experience ${withContinue ? "(cont)" : ""}`)}
         <View>
           {work.map((work: Work) => (
             <View style={pdfStyles.experience}>
@@ -94,7 +108,7 @@ export class Experience {
                 </View>
               </View>
               {this.createLanyard(work.highlights)}
-              <Text>{work.summary}</Text>
+              {documentToReactComponents(work.summary, options)}
             </View>
           ))}
         </View>

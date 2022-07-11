@@ -18,6 +18,10 @@ Font.registerEmojiSource({
   url: "https://twemoji.maxcdn.com/2/72x72/",
 });
 
+Font.registerHyphenationCallback(word => (
+  [word]
+));
+
 const pdfStyles = StyleSheet.create({
   body: {
     fontFamily: "Helvetica",
@@ -28,11 +32,13 @@ const pdfStyles = StyleSheet.create({
     flexGrow: 1,
   },
   left: {
-    padding: 15,
+    paddingHorizontal: 15,
+    paddingVertical: 8,
     width: "50%",
   },
   right: {
-    padding: 15,
+    paddingHorizontal: 15,
+    paddingVertical: 8,
     width: "50%",
     backgroundColor: styles.colorOffWhite,
   },
@@ -52,19 +58,26 @@ export class CV {
 
     return (
       <Document>
-        <Page style={pdfStyles.body} size="A4" wrap>
+        <Page style={pdfStyles.body} size="A4" wrap={false}>
           {Heading.render(cv, dateService)}
           {Intro.render(cv)}
           <View style={pdfStyles.contentRow}>
             <View style={pdfStyles.left}>
               {Skills.render(cv)}
               {Education.render(cv)}
-              <View style={{ height: 30 }} />
-              {Experience.render(experience.slice(3))}
             </View>
             <View style={pdfStyles.right}>
-              {Experience.render(experience.slice(0, 3))}
-              <View style={{ height: 20 }} />
+              {Experience.render(experience.slice(0, 2))}
+            </View>
+          </View>
+        </Page>
+        <Page style={pdfStyles.body} size="A4" wrap={false}>
+          <View style={pdfStyles.contentRow}>
+            <View style={pdfStyles.left}>
+              {Experience.render(experience.slice(2, 6), true)}
+            </View>
+            <View style={pdfStyles.right}>
+              {Experience.render(experience.slice(6), true)}
               {Interests.render(cv)}
             </View>
           </View>

@@ -35,7 +35,7 @@ pub struct Work {
     pub start_date: String,
     pub end_date: Option<String>,
     pub highlights: Vec<String>,
-    pub summary: String,
+    pub summary: Value,
     pub logo: Asset,
     pub images: Vec<Asset>,
 }
