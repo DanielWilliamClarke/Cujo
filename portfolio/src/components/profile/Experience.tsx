@@ -5,6 +5,7 @@ import {
   VerticalTimeline,
   VerticalTimelineElement,
 } from "react-vertical-timeline-component";
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { Entries, Media } from "../../model/Includes";
 import { Work } from "../../model/CVModel";
 import { IDateService } from "../../services/DateService";
@@ -96,7 +97,7 @@ export class Experience extends React.Component<
 
         <Row>
           <Col>
-            <p>{work.summary}</p>
+            {documentToReactComponents(work.summary)}
           </Col>
         </Row>
 

@@ -32,7 +32,7 @@ export interface Work {
   startDate: Date;
   endDate: Date;
   highlights: string[];
-  summary: string;
+  summary: Document;
   logo: Media;
   images: Media[];
 }
