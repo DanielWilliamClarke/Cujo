@@ -204,6 +204,7 @@ docker-compose --env-file <SECRET ENV FILE> -f prod.compose.yaml down (-v)
 
 ## // Todo
 
+- [ ] Replace REST API with GraphQL API
 - [ ] Add Rust code coverage
 - [ ] Write front end tests
 
