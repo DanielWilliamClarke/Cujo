@@ -305,3 +305,6 @@ docker-compose --env-file <SECRET ENV FILE> -f prod.compose.yaml down (-v)
 - Async GraphQL Crate - `Rust` <https://github.com/async-graphql/async-graphql>
   - Async GraphQL tutorial - `Rust` <https://romankudryashov.com/blog/2020/12/graphql-rust/>
   - Async GraphQL book - `Rust` <https://async-graphql.github.io/async-graphql/en/introduction.html>
+- GraphQL Client load GQL files <https://github.com/apollographql/graphql-tag/issues/42>
+  - Craco Plugin <https://www.npmjs.com/package/craco-graphql-loader>
+  - GraphQL Request <https://github.com/prisma-labs/graphql-request>
