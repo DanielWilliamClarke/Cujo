@@ -7,7 +7,7 @@ services:
     depends_on:
       - service
     ports:
-      - "5000:8080"
+      - "3000:8080"
     volumes:
       - ./portfolio/build:/usr/share/nginx/html
     networks:
@@ -17,7 +17,7 @@ services:
     build:
       context: ./service
     expose:
-      - 5001
+      - 5000
     env_file:
       - ./service/.env
       - ./service/.sensitive-env

@@ -1,29 +1,10 @@
 // src/models.rs
 
-use chrono::{DateTime, Utc};
+use async_graphql::SimpleObject;
+use chrono::{Utc, DateTime};
 use serde::{Deserialize, Serialize};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
-pub struct Space {
-    pub name: String,
-    pub locales: Vec<Locale>,
-    #[serde(rename = "sys")]
-    pub system_properties: SystemProperties,
-}
-
-#[derive(Clone, Debug, Serialize, Deserialize)]
-#[serde(rename_all = "camelCase")]
-pub struct Locale {
-    pub name: String,
-    pub code: String,
-    pub fallback_code: Option<String>,
-    pub default: bool,
-    pub optional: bool,
-    pub content_management_api: bool,
-    pub content_delivery_api: bool,
-}
-
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(SimpleObject, Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct SystemProperties {
     pub id: String,
@@ -56,30 +37,34 @@ impl SystemProperties {
     }
 }
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(SimpleObject, Clone, Debug, Serialize, Deserialize)]
+pub struct Space {
+    pub name: String,
+    pub locales: Vec<Locale>,
+    #[serde(rename = "sys")]
+    pub system_properties: SystemProperties,
+}
+
+#[derive(SimpleObject, Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
-pub struct Entry<T> {
-    pub sys: SystemProperties,
-    pub fields: T,
+pub struct Locale {
+    pub name: String,
+    pub code: String,
+    pub fallback_code: Option<String>,
+    pub default: bool,
+    pub optional: bool,
+    pub content_management_api: bool,
+    pub content_delivery_api: bool,
 }
 
-impl<T> Entry<T>
-where
-    T: Serialize,
-{
-    pub fn new(entry: T, sys: SystemProperties) -> Entry<T> {
-        Entry { sys, fields: entry }
-    }
-}
-
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(SimpleObject, Clone, Debug, Serialize, Deserialize)]
 pub struct Asset {
     pub description: Option<String>,
     pub title: Option<String>,
     pub file: File,
 }
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(SimpleObject, Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct File {
     pub file_name: String,
@@ -89,13 +74,13 @@ pub struct File {
     pub details: FileDetails,
 }
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(SimpleObject, Clone, Debug, Serialize, Deserialize)]
 pub struct FileDetails {
     pub size: i64,
     pub image: Option<ImageDetails>,
 }
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(SimpleObject, Clone, Debug, Serialize, Deserialize)]
 pub struct ImageDetails {
     pub height: i32,
     pub width: i32,

@@ -3,10 +3,10 @@
 use std::time::Instant;
 
 use async_trait::async_trait;
-use contentful::{ContentfulClient, Entries, QueryBuilder};
+use contentful::{ContentfulClient, QueryBuilder};
 
-use super::BlogPost;
-use crate::util::Reader;
+use super::BlogEntries;
+use crate::{util::Reader, blog::model::BlogPost};
 
 pub struct BlogReader {
     client: Box<ContentfulClient>,
@@ -22,7 +22,7 @@ impl BlogReader {
 
 #[async_trait(?Send)]
 impl Reader for BlogReader {
-    type Data = Option<Entries<BlogPost>>;
+    type Data = BlogEntries;
 
     async fn get(&self) -> Result<Self::Data, Self::Error> {
         let builder = QueryBuilder::new().content_type_is("blogPost");
@@ -32,7 +32,7 @@ impl Reader for BlogReader {
         let elapsed = now.elapsed();
 
         println!("BLOG READER - Elapsed: {:.2?}", elapsed);
-        Ok(results)
+        Ok(BlogEntries::new(results.unwrap()))
     }
 }
 

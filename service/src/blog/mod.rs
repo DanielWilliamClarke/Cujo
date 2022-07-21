@@ -4,4 +4,4 @@ mod blog_reader;
 mod model;
 
 pub use blog_reader::BlogReader;
-pub use model::BlogPost;
+pub use model::BlogEntries;

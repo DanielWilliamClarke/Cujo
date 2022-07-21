@@ -4,4 +4,4 @@ mod cv_reader;
 mod model;
 
 pub use cv_reader::CVReader;
-pub use model::{About, Education, Project, Skills, Work, CV};
+pub use model::{About, AboutEntry, Education, EducationEntries, Project, ProjectEntries, Skills, SkillsEntry, Work, WorkEntries, CV};
