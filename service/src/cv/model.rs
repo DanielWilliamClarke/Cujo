@@ -2,9 +2,9 @@
 
 use async_graphql::SimpleObject;
 use contentful::models::Asset;
+use contentful::{Entries, Entry};
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
-use contentful::{Entries, Entry};
 
 #[derive(SimpleObject, Serialize, Deserialize, Debug, Clone)]
 pub struct CV {
@@ -18,60 +18,75 @@ pub struct CV {
 #[derive(SimpleObject, Serialize, Deserialize, Debug, Clone)]
 pub struct AboutEntry {
     pub entry: About,
-    pub includes: Option<Value>
+    pub includes: Option<Value>,
 }
 
 impl AboutEntry {
-    pub fn new (item: Entry<About>) -> Self {
-        AboutEntry { entry: item.entry, includes: item.includes }
+    pub fn new(item: Entry<About>) -> Self {
+        AboutEntry {
+            entry: item.entry,
+            includes: item.includes,
+        }
     }
 }
 
 #[derive(SimpleObject, Serialize, Deserialize, Debug, Clone)]
 pub struct WorkEntries {
     pub entries: Vec<Work>,
-    pub includes: Option<Value>
+    pub includes: Option<Value>,
 }
 
 impl WorkEntries {
-    pub fn new (item: Entries<Work>) -> Self {
-        WorkEntries { entries: item.entries, includes: item.includes }
+    pub fn new(item: Entries<Work>) -> Self {
+        WorkEntries {
+            entries: item.entries,
+            includes: item.includes,
+        }
     }
 }
 
 #[derive(SimpleObject, Serialize, Deserialize, Debug, Clone)]
 pub struct EducationEntries {
     pub entries: Vec<Education>,
-    pub includes: Option<Value>
+    pub includes: Option<Value>,
 }
 
 impl EducationEntries {
-    pub fn new (item: Entries<Education>) -> Self {
-        EducationEntries { entries: item.entries, includes: item.includes }
+    pub fn new(item: Entries<Education>) -> Self {
+        EducationEntries {
+            entries: item.entries,
+            includes: item.includes,
+        }
     }
 }
 
 #[derive(SimpleObject, Serialize, Deserialize, Debug, Clone)]
 pub struct SkillsEntry {
     pub entry: Skills,
-    pub includes: Option<Value>
+    pub includes: Option<Value>,
 }
 
 impl SkillsEntry {
-    pub fn new (item: Entry<Skills>) -> Self {
-        SkillsEntry { entry: item.entry, includes: item.includes }
+    pub fn new(item: Entry<Skills>) -> Self {
+        SkillsEntry {
+            entry: item.entry,
+            includes: item.includes,
+        }
     }
 }
 
 #[derive(SimpleObject, Serialize, Deserialize, Debug, Clone)]
 pub struct ProjectEntries {
     pub entries: Vec<Project>,
-    pub includes: Option<Value>
+    pub includes: Option<Value>,
 }
 
 impl ProjectEntries {
-    pub fn new (item: Entries<Project>) -> Self {
-        ProjectEntries { entries: item.entries, includes: item.includes }
+    pub fn new(item: Entries<Project>) -> Self {
+        ProjectEntries {
+            entries: item.entries,
+            includes: item.includes,
+        }
     }
 }
 

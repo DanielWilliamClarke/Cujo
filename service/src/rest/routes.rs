@@ -5,12 +5,14 @@ use futures::StreamExt;
 use serde::Deserialize;
 use std::sync::Mutex;
 
-use crate::auth::validator;
-use crate::auth::{Auth0Client, AuthParameters, RedirectClient};
-use crate::blog::BlogReader;
-use crate::cache::Cache;
-use crate::cv::CVReader;
-use crate::prerender::PrerenderClient;
+use crate::{
+    auth::validator,
+    auth::{Auth0Client, AuthParameters, RedirectClient},
+    blog::BlogReader,
+    cache::Cache,
+    cv::CVReader,
+    prerender::PrerenderClient,
+};
 use contentful::ContentfulClient;
 
 #[derive(Deserialize, Debug, Clone)]
@@ -147,31 +149,18 @@ impl Routes {
 }
 
 pub fn configure_rest_service(cfg: &mut web::ServiceConfig) {
-    cfg
-    .service(
-        web::resource("/status")
-            .route(web::get().to(Routes::svc_status))
-    )
-    .service(
-        web::resource("/cv")
-            .route(web::get().to(Routes::get_cv))
-    )
-    .service(
-        web::resource("/blog")
-            .route(web::get().to(Routes::get_blog))
-    )
-    .service(
-        web::resource("/auth/{endpoint}")
-            .route(web::post().to(Routes::auth))
-    )
-    .service(
-        web::resource("/regenerate_cv")
-            .route(web::post().to(Routes::regenerate_cv_cache))
-            .wrap(HttpAuthentication::bearer(validator))
-    )
-    .service(
-        web::resource("/regenerate_blog")
-            .route(web::post().to(Routes::regenerate_blog_cache))
-            .wrap(HttpAuthentication::bearer(validator))
-    );
+    cfg.service(web::resource("/status").route(web::get().to(Routes::svc_status)))
+        .service(web::resource("/cv").route(web::get().to(Routes::get_cv)))
+        .service(web::resource("/blog").route(web::get().to(Routes::get_blog)))
+        .service(web::resource("/auth/{endpoint}").route(web::post().to(Routes::auth)))
+        .service(
+            web::resource("/regenerate_cv")
+                .route(web::post().to(Routes::regenerate_cv_cache))
+                .wrap(HttpAuthentication::bearer(validator)),
+        )
+        .service(
+            web::resource("/regenerate_blog")
+                .route(web::post().to(Routes::regenerate_blog_cache))
+                .wrap(HttpAuthentication::bearer(validator)),
+        );
 }
