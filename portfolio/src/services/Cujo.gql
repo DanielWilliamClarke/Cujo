@@ -1,0 +1,147 @@
+query CujoQuery {
+  cv {
+    about {
+      entry {
+        name
+        label
+        phone
+        website
+        about
+        interests
+        images {
+          description
+          file {
+            url
+          }
+        }
+        profiles {
+          url
+          brand {
+            name
+            icon
+          }
+        }
+      }
+      includes
+    }
+    work {
+      entries {
+        position
+        company
+        website
+        startDate
+        endDate
+        highlights
+        summary
+        logo {
+          description
+          file {
+            url
+          }
+        }
+        images {
+          description
+          title
+          file {
+            url
+          }
+        }
+      }
+      includes
+    }
+    education {
+      entries {
+        institution
+        link
+        area
+        studyType
+        startDate
+        endDate
+        grade
+        summary
+        images {
+          description
+          file {
+            url
+          }
+        }
+      }
+      includes
+    }
+    skills {
+      entry {
+        summary
+        currentSummary
+        current {
+          name
+          level
+          icon {
+            name
+            icon
+          }
+        }
+        favoriteSummary
+        favorite {
+          name
+          level
+          icon {
+            name
+            icon
+          }
+        }
+        usedSummary
+        used {
+          name
+          level
+          icon {
+            name
+            icon
+          }
+        }
+      }
+      includes
+    }
+    projects {
+      entries {
+        rank
+        name
+        link
+        image {
+          description
+          file {
+            url
+          }
+        }
+        summary
+        tags
+        icon {
+          name
+          icon
+        }
+      }
+      includes
+    }
+  }
+  blog {
+    entries {
+      id
+      title
+      content
+      excerpt
+      media {
+        description
+        file {
+          url
+        }
+      }
+      tags
+      sys {
+        id
+        revision
+        createdAt
+        updatedAt
+      }
+    }
+    includes
+  }
+}
