@@ -10,10 +10,10 @@ use std::sync::Mutex;
 
 use actix_web::{
     middleware::Logger,
-    web::{self, Data},
+    web::Data,
     App, HttpServer,
 };
-use actix_web_httpauth::middleware::HttpAuthentication;
+
 use contentful::{ContentfulClient, ContentfulConfig};
 use dotenv::dotenv;
 use listenfd::ListenFd;
@@ -23,12 +23,17 @@ mod blog;
 mod cv;
 mod prerender;
 mod server;
+mod graphql;
+mod cache;
 mod util;
 
-use auth::{validator, Auth0Client, AuthConfig, RedirectClient, RedirectConfig};
+use auth::{Auth0Client, AuthConfig, RedirectClient, RedirectConfig};
 use prerender::{PrerenderClient, PrerenderConfig};
-use server::{Routes, ServerConfig};
+use server::{ServerConfig};
 use util::FromEnv;
+use cache::Cache;
+use server::configure_rest_service;
+use graphql::{configure_graphql_service, create_schema_with_cache};
 
 #[actix_rt::main]
 async fn main() -> std::io::Result<()> {
@@ -41,7 +46,7 @@ async fn main() -> std::io::Result<()> {
     let prerender_client = PrerenderClient::new(PrerenderConfig::from_env());
     let contentful_client = ContentfulClient::new(ContentfulConfig::from_env());
     let cache = Data::new(Mutex::new(
-        Routes::generate_cache(contentful_client.clone()).await,
+        Cache::generate_cache(contentful_client.clone()).await,
     ));
 
     let mut server = HttpServer::new(move || {
@@ -51,23 +56,10 @@ async fn main() -> std::io::Result<()> {
             .app_data(Data::new(prerender_client.clone()))
             .app_data(Data::new(contentful_client.clone()))
             .app_data(cache.clone())
+            .app_data(Data::new(create_schema_with_cache(cache.clone())))
             .wrap(Logger::default())
-            .route("/status", web::get().to(Routes::svc_status))
-            .route("/cv", web::get().to(Routes::get_cv))
-            .route("/blog", web::get().to(Routes::get_blog))
-            .route("/auth/{endpoint}", web::post().to(Routes::auth))
-            .route(
-                "/regenerate_cv",
-                web::post()
-                    .to(Routes::regenerate_cv_cache)
-                    .wrap(HttpAuthentication::bearer(validator)),
-            )
-            .route(
-                "/regenerate_blog",
-                web::post()
-                    .to(Routes::regenerate_blog_cache)
-                    .wrap(HttpAuthentication::bearer(validator)),
-            )
+            .configure(configure_rest_service)
+            .configure(configure_graphql_service)
     });
 
     server = match ListenFd::from_env().take_tcp_listener(0)? {

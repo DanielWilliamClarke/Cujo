@@ -1,22 +1,17 @@
 // src/server/routes.rs
 use actix_web::{http::header::HeaderMap, web, HttpRequest, HttpResponse, Responder};
-use futures::Future;
+use actix_web_httpauth::middleware::HttpAuthentication;
 use futures::StreamExt;
-use serde::{Deserialize, Serialize};
+use serde::Deserialize;
 use std::sync::Mutex;
 
+use crate::auth::validator;
 use crate::auth::{Auth0Client, AuthParameters, RedirectClient};
 use crate::blog::BlogReader;
+use crate::cache::Cache;
 use crate::cv::CVReader;
 use crate::prerender::PrerenderClient;
-use crate::util::Reader;
 use contentful::ContentfulClient;
-
-#[derive(Debug, Clone)]
-pub struct Cache {
-    pub cv: String,
-    pub blog: String,
-}
 
 #[derive(Deserialize, Debug, Clone)]
 #[serde(rename_all = "camelCase")]
@@ -25,7 +20,7 @@ pub struct BlogWebhookBody {
     pub blog_id: String,
 }
 
-pub struct Routes;
+struct Routes;
 
 impl Routes {
     pub async fn svc_status() -> impl Responder {
@@ -81,35 +76,22 @@ impl Routes {
             Ok(res) if res.status() == 200 => {
                 println!("Redirect response valid: {:?}", res);
                 HttpResponse::Ok().body(format!(
-                    "Authenitcated redirect response valid - {}",
+                    "Authenticated redirect response valid - {}",
                     res.status()
                 ))
             }
             Ok(res) if res.status() != 200 => {
                 println!("Redirect response failed: {:?}", res);
                 HttpResponse::InternalServerError().body(format!(
-                    "Authenitcated redirect response failed - {}",
+                    "Authenticated redirect response failed - {}",
                     res.status()
                 ))
             }
             Err(err) => {
                 println!("Redirect request failure - {}", err);
-                HttpResponse::BadRequest().body("Authenitcated redirect request failure")
+                HttpResponse::BadRequest().body("Authenticated redirect request failure")
             }
             _ => HttpResponse::BadRequest().body("Unknown failure"),
-        }
-    }
-
-    pub async fn generate_cache(client: ContentfulClient) -> Cache {
-        Cache {
-            cv: match CVReader::new(&client).get().await {
-                Ok(cv) => serde_json::to_string(&cv).unwrap(),
-                Err(err) => panic!("Could not generate cv cache - {}", err),
-            },
-            blog: match BlogReader::new(&client).get().await {
-                Ok(blog) => serde_json::to_string(&blog).unwrap(),
-                Err(err) => panic!("Could not generate blog cache - {}", err),
-            },
         }
     }
 
@@ -120,7 +102,7 @@ impl Routes {
     ) -> impl Responder {
         println!("CV Cache regeneration start!!");
 
-        Routes::regenerate(CVReader::new(&contentful_client), async move |cv| {
+        Cache::regenerate(CVReader::new(&contentful_client), async move |cv| {
             let mut locked_cache = cache.lock().unwrap();
             locked_cache.cv = cv;
 
@@ -137,7 +119,7 @@ impl Routes {
     ) -> impl Responder {
         println!("Blog Cache regeneration start!!");
 
-        Routes::regenerate(BlogReader::new(&contentful_client), async move |blog| {
+        Cache::regenerate(BlogReader::new(&contentful_client), async move |blog| {
             let mut locked_cache = cache.lock().unwrap();
             locked_cache.blog = blog;
 
@@ -149,11 +131,11 @@ impl Routes {
     }
 
     pub async fn get_cv(cache: web::Data<Mutex<Cache>>) -> impl Responder {
-        HttpResponse::Ok().body(cache.lock().unwrap().cv.clone())
+        HttpResponse::Ok().json(cache.lock().unwrap().cv.clone())
     }
 
     pub async fn get_blog(cache: web::Data<Mutex<Cache>>) -> impl Responder {
-        HttpResponse::Ok().body(cache.lock().unwrap().blog.clone())
+        HttpResponse::Ok().json(cache.lock().unwrap().blog.clone())
     }
 
     fn extract_header(headers: &HeaderMap, header: &str) -> String {
@@ -162,24 +144,34 @@ impl Routes {
             None => "".to_owned(),
         }
     }
+}
 
-    async fn regenerate<F, Fut>(
-        reader: impl Reader<Data = impl Serialize, Error = impl std::fmt::Display>,
-        cache_handler: F,
-    ) -> impl Responder
-    where
-        F: FnOnce(String) -> Fut,
-        Fut: Future<Output = ()>,
-    {
-        match reader.get().await {
-            Ok(data) => {
-                cache_handler(serde_json::to_string(&data).unwrap()).await;
-                let body = "Cache regeneration complete!!";
-                println!("{}", body);
-                HttpResponse::Ok().body(body)
-            }
-            Err(err) => HttpResponse::InternalServerError()
-                .body(format!("Cache could not be regenerated: {}", err)),
-        }
-    }
+pub fn configure_rest_service(cfg: &mut web::ServiceConfig) {
+    cfg
+    .service(
+        web::resource("/status")
+            .route(web::get().to(Routes::svc_status))
+    )
+    .service(
+        web::resource("/cv")
+            .route(web::get().to(Routes::get_cv))
+    )
+    .service(
+        web::resource("/blog")
+            .route(web::get().to(Routes::get_blog))
+    )
+    .service(
+        web::resource("/auth/{endpoint}")
+            .route(web::post().to(Routes::auth))
+    )
+    .service(
+        web::resource("/regenerate_cv")
+            .route(web::post().to(Routes::regenerate_cv_cache))
+            .wrap(HttpAuthentication::bearer(validator))
+    )
+    .service(
+        web::resource("/regenerate_blog")
+            .route(web::post().to(Routes::regenerate_blog_cache))
+            .wrap(HttpAuthentication::bearer(validator))
+    );
 }

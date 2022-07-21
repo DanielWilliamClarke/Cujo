@@ -8,7 +8,7 @@ use futures::try_join;
 use serde::{de::DeserializeOwned, Serialize};
 
 use super::{About, Education, Project, Skills, Work, CV};
-use crate::util::Reader;
+use crate::{util::Reader, cv::{model::AboutEntry, WorkEntries, EducationEntries, SkillsEntry, ProjectEntries}};
 
 pub struct CVReader {
     client: Box<ContentfulClient>,
@@ -68,11 +68,11 @@ impl Reader for CVReader {
 
         println!("CV READER - Elapsed: {:.2?}", elapsed);
         Ok(CV {
-            about,
-            work,
-            education,
-            skills,
-            projects,
+           about: AboutEntry::new(about.unwrap()),
+           work: WorkEntries::new(work.unwrap()),
+           education: EducationEntries::new(education.unwrap()),
+           skills: SkillsEntry::new(skills.unwrap()),
+           projects: ProjectEntries::new(projects.unwrap()),
         })
     }
 }
