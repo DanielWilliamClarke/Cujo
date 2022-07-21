@@ -6,7 +6,7 @@ use async_trait::async_trait;
 use contentful::{ContentfulClient, QueryBuilder};
 
 use super::BlogEntries;
-use crate::{util::Reader, blog::model::BlogPost};
+use crate::{blog::model::BlogPost, util::Reader};
 
 pub struct BlogReader {
     client: Box<ContentfulClient>,

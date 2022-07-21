@@ -204,12 +204,13 @@ docker-compose --env-file <SECRET ENV FILE> -f prod.compose.yaml down (-v)
 
 ## // Todo
 
-- [ ] Replace REST API with GraphQL API
+- [ ] Use GraphQL client to frontend
 - [ ] Add Rust code coverage
 - [ ] Write front end tests
 
 ## // Done
 
+- [x] Add a GraphQL API to backend
 - [x] Trigger recache on contentful update
 - [x] Get SEO and social media previews to work
 - [x] Implement async system design
@@ -259,9 +260,14 @@ docker-compose --env-file <SECRET ENV FILE> -f prod.compose.yaml down (-v)
 ## Urls
 
 - <https://danielclarke.tech> - Portfolio
-- <https://danielclarke.tech/api/cv> - CV API 
-- <https://danielclarke.tech/api/blog> - Blog API 
+- <https://danielclarke.tech/api/cv> - CV API
+- <https://danielclarke.tech/api/blog> - Blog API
 - <https://danielclarke.tech/cv> - Generate, Show and Download Resume
+- <https://danielclarke.tech/api/auth/{endpoint}> - Auth
+- <https://danielclarke.tech/api/regenerate_cv> - CV cache regeneration API
+- <https://danielclarke.tech/api/regenerate_blog> - Blog cache regeneration API
+- <https://danielclarke.tech/api/graphql> - GraphQL API
+- <https://danielclarke.tech/api/graphiql> - GraphQL Playground
 
 ## Third Parties
 
@@ -296,3 +302,6 @@ docker-compose --env-file <SECRET ENV FILE> -f prod.compose.yaml down (-v)
 - Generate Prerendered pages with Prerender - <https://github.com/prerender/prerender-nginx>
 - Triggering a reache with Prerender - <https://docs.prerender.io/v1/docs/en/6-api>
 - Ubuntu does not cache DNS records - <https://www.cloudns.net/blog/dns-cache-explained/>
+- Async GraphQL Crate - `Rust` <https://github.com/async-graphql/async-graphql>
+  - Async GraphQL tutorial - `Rust` <https://romankudryashov.com/blog/2020/12/graphql-rust/>
+  - Async GraphQL book - `Rust` <https://async-graphql.github.io/async-graphql/en/introduction.html>

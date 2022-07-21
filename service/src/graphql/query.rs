@@ -1,50 +1,33 @@
+// src/graphql/query.rs
 use std::sync::Mutex;
 
 use actix_web::web::Data;
-use async_graphql::{Object, Context};
+use async_graphql::{Context, Object};
 
-use crate::{cv::{CV, AboutEntry, WorkEntries, EducationEntries, SkillsEntry, ProjectEntries}, blog::BlogEntries, cache::Cache};
+use crate::{
+    blog::BlogEntries,
+    cache::Cache,
+    cv::CV,
+};
 
 pub struct Query;
 
 #[Object]
 impl Query {
-    async fn about(&self, ctx: &Context<'_>) -> AboutEntry {
-       unwrap_cv(ctx).await.about
-    }
-
-    async fn work(&self, ctx: &Context<'_>) -> WorkEntries {
-        unwrap_cv(ctx).await.work
-    }
-
-    async fn education(&self, ctx: &Context<'_>) -> EducationEntries {
-        unwrap_cv(ctx).await.education
-    }
-
-    async fn skills(&self, ctx: &Context<'_>) -> SkillsEntry {
-        unwrap_cv(ctx).await.skills
-    }
-
-    async fn projects(&self, ctx: &Context<'_>) -> ProjectEntries {
-        unwrap_cv(ctx).await.projects
+    async fn cv(&self, ctx: &Context<'_>) -> CV {
+        unwrap_cache(ctx).await.cv
     }
 
     async fn blog(&self, ctx: &Context<'_>) -> BlogEntries {
-        ctx.data::<Data<Mutex<Cache>>>()
+        unwrap_cache(ctx).await.blog
+    }
+}
+
+async fn unwrap_cache(ctx: &Context<'_>) -> Cache {
+    ctx.data::<Data<Mutex<Cache>>>()
         .ok()
         .unwrap()
         .lock()
         .unwrap()
-        .blog.clone() 
-    }
-}
-
-async fn unwrap_cv(ctx: &Context<'_>) -> CV {
-    ctx.data::<Data<Mutex<Cache>>>()
-   .ok()
-   .unwrap()
-   .lock()
-   .unwrap()
-   .cv.
-   clone()
+        .clone()
 }

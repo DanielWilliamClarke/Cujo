@@ -1,9 +1,13 @@
-use actix_web::{Responder, HttpResponse};
+use actix_web::{HttpResponse, Responder};
 use contentful::ContentfulClient;
 use futures::Future;
 use serde::Serialize;
 
-use crate::{cv::{CV, CVReader}, blog::{BlogEntries, BlogReader}, util::Reader};
+use crate::{
+    blog::{BlogEntries, BlogReader},
+    cv::{CVReader, CV},
+    util::Reader,
+};
 
 #[derive(Debug, Clone)]
 pub struct Cache {
@@ -46,4 +50,3 @@ impl Cache {
         }
     }
 }
-
