@@ -11,7 +11,7 @@ type DevIconProps = {
 };
 
 export class DevIconName extends React.Component<DevIconProps> {
-  @resolve("IconService") private readonly iconService!: IIconService;
+  @resolve(IIconService.$) private readonly iconService!: IIconService;
 
   render(): JSX.Element {
     let iconComponent: JSX.Element;

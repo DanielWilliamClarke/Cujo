@@ -13,7 +13,7 @@ type NavState = {
 };
 
 class NavPanel extends React.Component<RouteComponentProps, NavState> {
-  @resolve("IconService") private readonly iconService!: IIconService;
+  @resolve(IIconService.$) private readonly iconService!: IIconService;
 
   constructor(props: RouteComponentProps) {
     super(props);
