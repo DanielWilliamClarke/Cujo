@@ -8,7 +8,7 @@ import { IconService, IIconService } from "./services/IconService";
 export const container = new Container();
 
 // Setup DateService
-container.bind<IDateService>("DateService").to(DateService);
+container.bind<IDateService>(IDateService.$).to(DateService);
 
 // Setup BlogService
 container.bind<ICujoService>("CujoService").to(CujoService).inSingletonScope();

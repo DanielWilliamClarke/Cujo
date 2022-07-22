@@ -34,7 +34,7 @@ type BlogProps = {
 };
 
 export class BlogPost extends React.Component<BlogProps> {
-  @resolve("DateService") private readonly dateService!: IDateService;
+  @resolve(IDateService.$) private readonly dateService!: IDateService;
 
   constructor(props: BlogProps, context: {}) {
     super(props, context);

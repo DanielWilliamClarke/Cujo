@@ -12,7 +12,7 @@ import { ScrollIndicator } from "./ScrollIndicator";
 import { DynamicImage } from "../shared/DynamicImage";
 
 export class SketchBackstretch extends React.Component<CVProps> {
-  @resolve("DateService") private readonly dateService!: IDateService;
+  @resolve(IDateService.$) private readonly dateService!: IDateService;
   private myRef: React.RefObject<any>;
 
   constructor(props: CVProps, context: {}) {
