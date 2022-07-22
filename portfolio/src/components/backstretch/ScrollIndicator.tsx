@@ -1,32 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 
 import "./ScrollIndicator.scss";
 
-type IndicatorState = {
-  visible: boolean;
-};
+export const ScrollIndicator: React.FC = (): JSX.Element => {
+  const [visible, setVisible] = useState(true);
+  window.addEventListener("scroll", () => setVisible(window.scrollY === 0));
 
-export class ScrollIndicator extends React.Component<{}, IndicatorState> {
-  constructor(props: {}) {
-    super(props);
-
-    window.addEventListener("scroll", this.listenScrollEvent);
-    this.state = { visible: true };
-  }
-
-  render(): JSX.Element {
-    return (
-      <div
-        className={`indicator-container ${this.state.visible ? "visible" : ""}`}
-      >
-        <div className="chevron"></div>
-        <div className="chevron"></div>
-        <div className="chevron"></div>
-      </div>
-    );
-  }
-
-  private listenScrollEvent = () => {
-    this.setState({ visible: window.scrollY === 0 });
-  };
+  return (
+    <div className={`indicator-container ${visible ? "visible" : ""}`}>
+      <div className="chevron"></div>
+      <div className="chevron"></div>
+      <div className="chevron"></div>
+    </div>
+  );
 }
