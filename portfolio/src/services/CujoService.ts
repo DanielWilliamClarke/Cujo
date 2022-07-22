@@ -27,7 +27,6 @@ export class CujoService implements ICujoService {
   }
 
   async FetchGraphQL(): Promise<GraphQLResponse> {
-    const graphQLClient = new GraphQLClient('/api/graphql');
-    return await graphQLClient.request<GraphQLResponse>(CujoQuery);
+    return await new GraphQLClient('/api/graphql').request<GraphQLResponse>(CujoQuery);
   }
 }
