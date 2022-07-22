@@ -43,18 +43,8 @@ class Cujo extends React.Component<CujoProps, CujoState> {
       blog: undefined,
     };
 
-    this.props.service.FetchCV().then((cv: CV) => {
-      this.setState({ cv });
-    });
-    this.props.service.FetchBlogPosts().then((blog: Entries<Post>) => {
-      this.setState({ blog });
-    });
-
     this.props.service.FetchGraphQL()
-      .then(({cv, blog}) => {
-        console.log(cv)
-        console.log(blog)
-      });
+      .then(({cv, blog}) => this.setState({cv, blog}));
   }
 
   componentDidUpdate() {
