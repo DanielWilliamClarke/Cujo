@@ -74,7 +74,7 @@ class App extends React.Component<AppProps & RouteComponentProps> {
           <CVPreview cv={this.props.cv!} />
           <footer id="footer">
             <Contact profiles={this.props.cv!.about.entry.profiles} />
-            <Copyright />
+            <Copyright name={this.props.cv!.about.entry.name}/>
           </footer>
         </div>
       </>

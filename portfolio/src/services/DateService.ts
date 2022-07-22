@@ -1,4 +1,4 @@
-import { injectable } from "inversify";
+import { injectable, interfaces } from "inversify";
 import moment from "moment";
 import util from "util";
 
@@ -11,6 +11,10 @@ export interface IDateService {
   IsFuture(data: string): boolean;
   CurrentYear(): number;
   CurrentTimestamp(): string;
+}
+
+export namespace IDateService {
+  export const $: interfaces.ServiceIdentifier<IDateService> = Symbol('IDateService');
 }
 
 @injectable()
