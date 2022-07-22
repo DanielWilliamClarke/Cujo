@@ -261,14 +261,13 @@ docker-compose --env-file <SECRET ENV FILE> -f prod.compose.yaml down (-v)
 ## Urls
 
 - <https://danielclarke.tech> - Portfolio
-- <https://danielclarke.tech/api/cv> - CV API
-- <https://danielclarke.tech/api/blog> - Blog API
+- <https://danielclarke.tech/blog> - Blog
 - <https://danielclarke.tech/cv> - Generate, Show and Download Resume
-- <https://danielclarke.tech/api/auth/{endpoint}> - Auth
-- <https://danielclarke.tech/api/regenerate_cv> - CV cache regeneration API
-- <https://danielclarke.tech/api/regenerate_blog> - Blog cache regeneration API
 - <https://danielclarke.tech/api/graphql> - GraphQL API
 - <https://danielclarke.tech/api/graphiql> - GraphQL Playground
+- <https://danielclarke.tech/api/auth/{endpoint}> - Auth API
+- <https://danielclarke.tech/api/regenerate_cv> - CV cache regeneration API
+- <https://danielclarke.tech/api/regenerate_blog> - Blog cache regeneration API
 
 ## Third Parties
 
