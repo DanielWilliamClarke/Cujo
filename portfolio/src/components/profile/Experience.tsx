@@ -26,7 +26,7 @@ export class Experience extends React.Component<
   IconWithDefaultState
 > {
   @resolve(IDateService.$) private readonly dateService!: IDateService;
-  @resolve("IconService") private readonly iconService!: IIconService;
+  @resolve(IIconService.$) private readonly iconService!: IIconService;
 
   constructor(props: WorkProps, context: {}) {
     super(props, context);

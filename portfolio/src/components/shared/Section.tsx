@@ -18,7 +18,7 @@ export class Section extends React.Component<
   SectionProps,
   IconWithDefaultState
 > {
-  @resolve("IconService") private readonly iconService!: IIconService;
+  @resolve(IIconService.$) private readonly iconService!: IIconService;
 
   constructor(props: SectionProps, context: {}) {
     super(props, context);

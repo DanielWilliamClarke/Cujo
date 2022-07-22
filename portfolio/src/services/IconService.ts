@@ -1,4 +1,4 @@
-import { injectable } from "inversify";
+import { injectable, interfaces } from "inversify";
 import { IconType } from "react-icons";
 import { GiCardDraw } from "react-icons/gi";
 import { FaDeviantart, FaWizardsOfTheCoast } from "react-icons/fa";
@@ -34,6 +34,10 @@ import {
 export interface IIconService {
   get(id: string): IconType | undefined;
   getWithDefault(id: string): IconType;
+}
+
+export namespace IIconService {
+  export const $: interfaces.ServiceIdentifier<IIconService> = Symbol('IIconService');
 }
 
 type IconMap = {

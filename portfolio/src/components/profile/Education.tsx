@@ -26,7 +26,7 @@ export class Education extends React.Component<
   IconWithDefaultState
 > {
   @resolve(IDateService.$) private readonly dateService!: IDateService;
-  @resolve("IconService") private readonly iconService!: IIconService;
+  @resolve(IIconService.$) private readonly iconService!: IIconService;
 
   constructor(props: EducationProps, context: {}) {
     super(props, context);

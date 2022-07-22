@@ -17,4 +17,4 @@ container.bind<ICujoService>("CujoService").to(CujoService).inSingletonScope();
 container.bind<IContactService>("ContactService").to(ContactService).inSingletonScope();
 
 // Setup IconService
-container.bind<IIconService>("IconService").to(IconService).inSingletonScope();
+container.bind<IIconService>(IIconService.$).to(IconService).inSingletonScope();
