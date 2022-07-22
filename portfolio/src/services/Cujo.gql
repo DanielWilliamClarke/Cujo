@@ -5,6 +5,7 @@ query CujoQuery {
         name
         label
         phone
+        email
         website
         about
         interests
