@@ -1,148 +1,156 @@
 query CujoQuery {
   cv {
     about {
-      entry {
-        name
-        label
-        phone
-        email
-        website
-        about
-        interests
-        images {
-          description
-          file {
-            url
-          }
-        }
-        profiles {
-          url
-          brand {
-            name
-            icon
-          }
-        }
-      }
-      includes
+      ...About
     }
     work {
-      entries {
-        position
-        company
-        website
-        startDate
-        endDate
-        highlights
-        summary
-        logo {
-          description
-          file {
-            url
-          }
-        }
-        images {
-          description
-          title
-          file {
-            url
-          }
-        }
-      }
-      includes
+      ...Work
     }
     education {
-      entries {
-        institution
-        link
-        area
-        studyType
-        startDate
-        endDate
-        grade
-        summary
-        images {
-          description
-          file {
-            url
-          }
-        }
-      }
-      includes
+      ...Education
     }
     skills {
-      entry {
-        summary
-        currentSummary
-        current {
-          name
-          level
-          icon {
-            name
-            icon
-          }
-        }
-        favoriteSummary
-        favorite {
-          name
-          level
-          icon {
-            name
-            icon
-          }
-        }
-        usedSummary
-        used {
-          name
-          level
-          icon {
-            name
-            icon
-          }
-        }
-      }
-      includes
+      ...Skills
     }
     projects {
-      entries {
-        rank
-        name
-        link
-        image {
-          description
-          file {
-            url
-          }
-        }
-        summary
-        tags
-        icon {
-          name
-          icon
-        }
-      }
-      includes
+      ...Project
     }
   }
   blog {
-    entries {
-      id
-      title
-      content
-      excerpt
-      media {
-        description
-        file {
-          url
-        }
-      }
-      tags
-      sys {
-        id
-        revision
-        createdAt
-        updatedAt
+    ...Blog
+  }
+}
+
+fragment About on AboutEntry {
+  entry {
+    name
+    label
+    phone
+    email
+    website
+    about
+    interests
+    images {
+      ...ImageUrl
+    }
+    profiles {
+      url
+      brand {
+        ...DevIcon
       }
     }
-    includes
   }
+  includes
+}
+
+fragment Work on WorkEntries {
+  entries {
+    position
+    company
+    website
+    startDate
+    endDate
+    highlights
+    summary
+    logo {
+      ...ImageUrl
+    }
+    images {
+      ...ImageUrl
+    }
+  }
+  includes
+}
+
+fragment Education on EducationEntries {
+  entries {
+    institution
+    link
+    area
+    studyType
+    startDate
+    endDate
+    grade
+    summary
+    images {
+      ...ImageUrl
+    }
+  }
+  includes
+}
+
+fragment Skills on SkillsEntry {
+  entry {
+    summary
+    currentSummary
+    current {
+      ...Skill
+    }
+    favoriteSummary
+    favorite {
+      ...Skill
+    }
+    usedSummary
+    used {
+      ...Skill
+    }
+  }
+  includes
+}
+
+fragment Skill on Skill {
+  name
+  level
+  icon {
+    ...DevIcon
+  }
+}
+
+fragment Project on ProjectEntries {
+  entries {
+    rank
+    name
+    link
+    image {
+      ...ImageUrl
+    }
+    summary
+    tags
+    icon {
+      ...DevIcon
+    }
+  }
+  includes
+}
+
+fragment Blog on BlogEntries {
+  entries {
+    id
+    title
+    content
+    excerpt
+    media {
+      ...ImageUrl
+    }
+    tags
+    sys {
+      id
+      revision
+      createdAt
+      updatedAt
+    }
+  }
+  includes
+}
+
+fragment ImageUrl on Asset {
+  description
+  file {
+    url
+  }
+}
+
+fragment DevIcon on DevIcon {
+  name
+  icon
 }
