@@ -54,15 +54,15 @@ jobs:
       - checkout
       - setup_remote_docker:
           version: 19.03.13 # https://support.circleci.com/hc/en-us/articles/360050934711-Docker-build-fails-with-EPERM-operation-not-permitted-copyfile-when-using-node-14-9-0-or-later-
-      - run:
-          name: Run tests
-          command: |
-            cd portfolio
-            npm install
-            npm run test -- --watchAll=false --passWithNoTests
-            npm run build:ci
-      - store_test_results:
-          path: ./portfolio
+      # - run:
+      #     name: Run tests
+      #     command: |
+      #       cd portfolio
+      #       npm install
+      #       npm run test -- --watchAll=false --passWithNoTests
+      #       npm run build:ci
+      # - store_test_results:
+      #     path: ./portfolio
       - run:
           name: Build Docker image
           command: |
