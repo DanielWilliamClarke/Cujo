@@ -289,7 +289,7 @@ docker-compose --env-file <SECRET ENV FILE> -f prod.compose.yaml down (-v)
 - React scroll spy - `React` <https://makotot.github.io/react-scrollspy/>
 - React icons - `React` <https://react-icons.github.io/react-icons/icons?name=io5>
 - DevIcons - `React` <https://devicon.dev/>
-- Contentful - `CDN` <https://www.contentful.com/>
+- Contentful - `CMS` <https://www.contentful.com/>
 - Rich Text Renderer - `React` <https://www.npmjs.com/package/@contentful/rich-text-react-renderer>
 - Import SCSS variables in Typescript - `SCSS` <https://medium.com/@christian.tonye_16869/scss-variables-in-react-typescript-components-de19d7f96245>
 - Circular Progress Bar - `React` <https://github.com/kevinsqi/react-circular-progressbar>
@@ -306,6 +306,6 @@ docker-compose --env-file <SECRET ENV FILE> -f prod.compose.yaml down (-v)
 - Async GraphQL Crate - `Rust` <https://github.com/async-graphql/async-graphql>
   - Async GraphQL tutorial - `Rust` <https://romankudryashov.com/blog/2020/12/graphql-rust/>
   - Async GraphQL book - `Rust` <https://async-graphql.github.io/async-graphql/en/introduction.html>
-- GraphQL Client load GQL files <https://github.com/apollographql/graphql-tag/issues/42>
-  - Craco Plugin <https://www.npmjs.com/package/craco-graphql-loader>
-  - GraphQL Request <https://github.com/prisma-labs/graphql-request>
+- GraphQL Client load GQL files - `GraphQL` <https://github.com/apollographql/graphql-tag/issues/42>
+  - Craco Plugin - `GraphQL`  <https://www.npmjs.com/package/craco-graphql-loader>
+- GraphQL Request - `GraphQL`  <https://github.com/prisma-labs/graphql-request>
