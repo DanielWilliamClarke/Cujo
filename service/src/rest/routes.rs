@@ -132,14 +132,6 @@ impl Routes {
         .await
     }
 
-    pub async fn get_cv(cache: web::Data<Mutex<Cache>>) -> impl Responder {
-        HttpResponse::Ok().json(cache.lock().unwrap().cv.clone())
-    }
-
-    pub async fn get_blog(cache: web::Data<Mutex<Cache>>) -> impl Responder {
-        HttpResponse::Ok().json(cache.lock().unwrap().blog.clone())
-    }
-
     fn extract_header(headers: &HeaderMap, header: &str) -> String {
         match headers.get(header) {
             Some(header) => header.to_str().unwrap().to_owned(),
@@ -150,8 +142,6 @@ impl Routes {
 
 pub fn configure_rest_service(cfg: &mut web::ServiceConfig) {
     cfg.service(web::resource("/status").route(web::get().to(Routes::svc_status)))
-        .service(web::resource("/cv").route(web::get().to(Routes::get_cv)))
-        .service(web::resource("/blog").route(web::get().to(Routes::get_blog)))
         .service(web::resource("/auth/{endpoint}").route(web::post().to(Routes::auth)))
         .service(
             web::resource("/regenerate_cv")
