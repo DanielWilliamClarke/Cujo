@@ -1,7 +1,7 @@
 import p5 from "p5";
-import React from "react";
+import React, { useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import { resolve } from "inversify-react";
+import { useInjection } from "inversify-react";
 import { IDateService } from "../../services/DateService";
 import { getSketch } from "../../sketches";
 import { CVProps, Work } from "../../model/CVModel";
@@ -11,58 +11,52 @@ import "./SketchBackstretch.scss";
 import { ScrollIndicator } from "./ScrollIndicator";
 import { DynamicImage } from "../shared/DynamicImage";
 
-export class SketchBackstretch extends React.Component<CVProps> {
-  @resolve(IDateService.$) private readonly dateService!: IDateService;
-  private myRef: React.RefObject<any>;
+export const SketchBackstretch: React.FC<CVProps> = ({ cv }: CVProps): JSX.Element => {
+  const dateService = useInjection(IDateService.$);
+  dateService.format("MMMM YYYY", "YYYY-MM-DD")
 
-  constructor(props: CVProps, context: {}) {
-    super(props, context);
-    this.dateService.format("MMMM YYYY", "YYYY-MM-DD");
-    this.myRef = React.createRef();
-  }
+  // Similar to componentDidMount and componentDidUpdate:
+  const p5Ref = React.createRef<any>();
+  useEffect(() => {
+    new p5(getSketch(), p5Ref.current);
+  }, []);
 
-  componentDidMount() {
-    new p5(getSketch(), this.myRef.current);
-  }
+  const currentRole = cv.work.entries
+    .filter(
+      ({ startDate }: Work) =>
+        !dateService.IsFuture(startDate.toString())
+    )
+    .sort(
+      (a, b) =>
+        dateService.toUnix(b.startDate.toString()) -
+        dateService.toUnix(a.startDate.toString())
+    )[0];
 
-  render() {
-    const currentRole = this.props.cv.work.entries
-      .filter(
-        ({ startDate }: Work) =>
-          !this.dateService.IsFuture(startDate.toString())
-      )
-      .sort(
-        (a, b) =>
-          this.dateService.toUnix(b.startDate.toString()) -
-          this.dateService.toUnix(a.startDate.toString())
-      )[0];
-
-    return (
-      <section id="home">
-        <Container fluid ref={this.myRef} className="sketch-backstretch">
-          <div className="backstretch-headline">
-            <Row className="backstretch-main">
-              <Col>{this.props.cv.about.entry.name}</Col>
-            </Row>
-            <div className="centered line"></div>
-            <Row className="backstretch-tag">
-              <Col>{this.props.cv.about.entry.label}</Col>
-            </Row>
-            <Row className="backstretch-logo">
-              <Col>
-                <DynamicImage
-                  image={currentRole.logo.file.url}
-                  alt={currentRole.company}
-                  className="centered image-item work-logo"
-                />
-              </Col>
-            </Row>
-          </div>
-        </Container>
-        <Container fluid className="scroll-indicator">
-          <ScrollIndicator />
-        </Container>
-      </section>
-    );
-  }
+  return (
+    <section id="home">
+      <Container fluid ref={p5Ref} className="sketch-backstretch">
+        <div className="backstretch-headline">
+          <Row className="backstretch-main">
+            <Col>{cv.about.entry.name}</Col>
+          </Row>
+          <div className="centered line"></div>
+          <Row className="backstretch-tag">
+            <Col>{cv.about.entry.label}</Col>
+          </Row>
+          <Row className="backstretch-logo">
+            <Col>
+              <DynamicImage
+                image={currentRole.logo.file.url}
+                alt={currentRole.company}
+                className="centered image-item work-logo"
+              />
+            </Col>
+          </Row>
+        </div>
+      </Container>
+      <Container fluid className="scroll-indicator">
+        <ScrollIndicator />
+      </Container>
+    </section>
+  );
 }
