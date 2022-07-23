@@ -2,7 +2,7 @@ import React from "react";
 import { Fade } from "react-awesome-reveal";
 import { Row, Col } from "react-bootstrap";
 import { PDFDownloadLink } from "@react-pdf/renderer";
-import { resolve } from "inversify-react";
+import { useInjection } from "inversify-react";
 
 import * as pdfjs from "pdfjs-dist/legacy/build/pdf.js";
 
@@ -18,54 +18,10 @@ import "./CVPreview.scss";
 pdfjs.GlobalWorkerOptions.workerSrc =
   "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf.worker.min.js";
 
-export default class CVPreview extends React.Component<CVProps> {
-  @resolve(IDateService.$) private readonly dateService!: IDateService;
+const CVPreview: React.FC<CVProps> = ({ cv }: CVProps): JSX.Element => {
+  const dateService = useInjection(IDateService.$);
 
-  constructor(props: CVProps, context: {}) {
-    super(props, context);
-    this.dateService.format("DD-MM-YYYYTHH:mm:ss");
-  }
-
-  render(): JSX.Element {
-    return (
-      <Fade triggerOnce direction="up">
-        <Section id="cv" bg="section-light" title="Download My CV">
-          <Row>
-            <Col>
-              Please click or tap on the preview below to receive a copy 🙏
-            </Col>
-          </Row>
-          <Row className="section-content">
-            <Col className="centered featured">
-              <Fade triggerOnce direction="up" delay={0.2}>
-                <PDFDownloadLink
-                  document={CV.render(this.props.cv, this.dateService)}
-                  fileName={`daniel_william_clarke_cv_${this.dateService.CurrentTimestamp()}.pdf`}
-                >
-                  {({ url }) => {
-                    if (!url) {
-                      return <></>;
-                    }
-
-                    return (
-                      <canvas
-                        className="pdf-canvas"
-                        ref={(canvas: HTMLCanvasElement) =>
-                          this.renderPDF(url!, canvas)
-                        }
-                      ></canvas>
-                    );
-                  }}
-                </PDFDownloadLink>
-              </Fade>
-            </Col>
-          </Row>
-        </Section>
-      </Fade>
-    );
-  }
-
-  private async renderPDF(url: string, canvas: HTMLCanvasElement) {
+  const renderPDF = async (url: string, canvas: HTMLCanvasElement) => {
     if (!url || !canvas) {
       return;
     }
@@ -96,4 +52,43 @@ export default class CVPreview extends React.Component<CVProps> {
       viewport: viewport,
     });
   }
-}
+
+  return (
+    <Fade triggerOnce direction="up">
+      <Section id="cv" bg="section-light" title="Download My CV">
+        <Row>
+          <Col>
+            Please click or tap on the preview below to receive a copy 🙏
+          </Col>
+        </Row>
+        <Row className="section-content">
+          <Col className="centered featured">
+            <Fade triggerOnce direction="up" delay={0.2}>
+              <PDFDownloadLink
+                document={CV.render(cv, dateService)}
+                fileName={`daniel_william_clarke_cv_${dateService.CurrentTimestamp()}.pdf`}
+              >
+                {({ url }) => {
+                  if (!url) {
+                    return <></>;
+                  }
+
+                  return (
+                    <canvas
+                      className="pdf-canvas"
+                      ref={(canvas: HTMLCanvasElement) =>
+                        renderPDF(url!, canvas)
+                      }
+                    ></canvas>
+                  );
+                }}
+              </PDFDownloadLink>
+            </Fade>
+          </Col>
+        </Row>
+      </Section>
+    </Fade>
+  );
+};
+
+export default CVPreview;
