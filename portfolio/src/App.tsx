@@ -12,7 +12,7 @@ import { SketchBackstretch } from "./components/backstretch/SketchBackstretch";
 import { Blog } from "./components/blog/Blog";
 import { BlogPost } from "./components/blog/BlogPost";
 import { Contact } from "./components/contact/Contact";
-import NavPanel from "./components/nav/NavPanel";
+import { NavPanel } from "./components/nav/NavPanel";
 import { Profile } from "./components/Profile";
 import { Post } from "./model/BlogPost";
 import { CV as CVModel } from "./model/CVModel";
