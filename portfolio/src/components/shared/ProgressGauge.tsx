@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   buildStyles,
   CircularProgressbarWithChildren,
@@ -13,58 +13,43 @@ type ProgressGaugeProps = {
   children: (color: string) => JSX.Element;
 };
 
-type ProgressGaugeState = {
-  colormap: any;
-  isVisible: boolean;
-};
+export const ProgressGauge: React.FC<ProgressGaugeProps> = ({ value, colors, children }: ProgressGaugeProps): JSX.Element => {
+  const [visible, setVisible] = useState(false);
+  const colormap = interpolate(colors);
 
-export class ProgressGauge extends React.Component<
-  ProgressGaugeProps,
-  ProgressGaugeState
-> {
-  constructor(props: ProgressGaugeProps) {
-    super(props);
-    this.state = {
-      colormap: interpolate(this.props.colors),
-      isVisible: false,
-    };
-  }
+  return (
+    <VisibilitySensor>
+      {({ isVisible }) => {
+        if (isVisible && !visible) {
+          setVisible(isVisible);
+        }
 
-  render(): JSX.Element {
-    return (
-      <VisibilitySensor>
-        {({ isVisible }) => {
-          if (isVisible && !this.state.isVisible) {
-            this.setState({ isVisible });
-          }
-
-          return (
-            <ProgressProvider
-              valueStart={0}
-              valueEnd={this.state.isVisible ? this.props.value : 1}
-            >
-              {(value: number): JSX.Element => {
-                const color = this.state.colormap(value / 100);
-                return (
-                  <CircularProgressbarWithChildren
-                    value={value}
-                    circleRatio={0.75}
-                    styles={buildStyles({
-                      strokeLinecap: "round",
-                      rotation: 1 / 2 + 1 / 8,
-                      trailColor: "#eeeeee55",
-                      pathColor: color,
-                      pathTransitionDuration: 2.0,
-                    })}
-                  >
-                    {this.props.children(color)}
-                  </CircularProgressbarWithChildren>
-                );
-              }}
-            </ProgressProvider>
-          );
-        }}
-      </VisibilitySensor>
-    );
-  }
+        return (
+          <ProgressProvider
+            valueStart={0}
+            valueEnd={visible ? value : 1}
+          >
+            {(value: number): JSX.Element => {
+              const color = colormap(value / 100);
+              return (
+                <CircularProgressbarWithChildren
+                  value={value}
+                  circleRatio={0.75}
+                  styles={buildStyles({
+                    strokeLinecap: "round",
+                    rotation: 1 / 2 + 1 / 8,
+                    trailColor: "#eeeeee55",
+                    pathColor: color,
+                    pathTransitionDuration: 2.0,
+                  })}
+                >
+                  {children(color)}
+                </CircularProgressbarWithChildren>
+              );
+            }}
+          </ProgressProvider>
+        );
+      }}
+    </VisibilitySensor>
+  );
 }

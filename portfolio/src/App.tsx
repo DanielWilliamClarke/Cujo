@@ -3,8 +3,7 @@ import { Fade } from "react-awesome-reveal";
 import {
   Route,
   RouteComponentProps,
-  Switch,
-  withRouter,
+  Switch
 } from "react-router-dom";
 
 import { Copyright } from "./components/backstretch/Copyright";
@@ -28,58 +27,56 @@ const CVExport = React.lazy(
 );
 
 type AppProps = {
-  cv: CVModel | undefined;
-  blog: Entries<Post> | undefined;
+  cv: CVModel;
+  blog: Entries<Post>;
 };
 
 type BlogRouteParams = { id: string };
 
-class App extends React.Component<AppProps & RouteComponentProps> {
-  render(): JSX.Element {
-    return (
-      <Switch>
-        <Route exact path="/cv">
-          {<CVExport cv={this.props.cv!} />}
-        </Route>
-        <Route exact path="/*">
-          {this.displayApp()}
-        </Route>
-      </Switch>
-    );
-  }
+export const App: React.FC<AppProps> = ({ cv, blog }: AppProps): JSX.Element => {
+  return (
+    <Switch>
+      <Route exact path="/cv">
+        <CVExport cv={cv} />
+      </Route>
+      <Route exact path="/*">
+        <Portfolio cv={cv} blog={blog} />
+      </Route>
+    </Switch>
+  )
+};
 
-  private displayApp(): JSX.Element {
-    return (
-      <>
-        <Fade triggerOnce damping={0.01}>
-          <SketchBackstretch cv={this.props.cv!} />
-        </Fade>
-        <NavPanel />
-        <div className="app">
-          <Switch>
-            <Route exact path="/">
-              <Profile cv={this.props.cv!} />
-            </Route>
-            <Route path={"/blog/:id"}>
-              {({ match }: RouteComponentProps<BlogRouteParams>): JSX.Element =>
-                this.props.blog ? (
-                  <BlogPost id={match.params.id} blog={this.props.blog} />
-                ) : (
-                  <></>
-                )
-              }
-            </Route>
-          </Switch>
-          {this.props.blog && <Blog blog={this.props.blog} />}
-          <CVPreview cv={this.props.cv!} />
-          <footer id="footer">
-            <Contact profiles={this.props.cv!.about.entry.profiles} />
-            <Copyright name={this.props.cv!.about.entry.name}/>
-          </footer>
-        </div>
-      </>
-    );
-  }
-}
+export const Portfolio: React.FC<AppProps> = ({ cv, blog }: AppProps): JSX.Element => {
+  return (
+    <>
+      <Fade triggerOnce damping={0.01}>
+        <SketchBackstretch cv={cv} />
+      </Fade>
+      <NavPanel />
+      <div className="app">
+        <Switch>
+          <Route exact path="/">
+            <Profile cv={cv} />
+          </Route>
+          <Route path={"/blog/:id"}>
+            {({ match }: RouteComponentProps<BlogRouteParams>): JSX.Element =>
+              blog ? (
+                <BlogPost id={match.params.id} blog={blog} />
+              ) : (
+                <></>
+              )
+            }
+          </Route>
+        </Switch>
+        {blog && <Blog blog={blog} />}
+        <CVPreview cv={cv} />
+        <footer id="footer">
+          <Contact profiles={cv.about.entry.profiles} />
+          <Copyright name={cv.about.entry.name}/>
+        </footer>
+      </div>
+    </>
+  );
+};
 
-export default withRouter(App);
+export default App;

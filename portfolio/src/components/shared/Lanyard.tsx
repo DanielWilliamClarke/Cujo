@@ -3,24 +3,20 @@ import { Badge } from "react-bootstrap";
 
 import "./Lanyard.scss";
 
-type LanyardProps = {
+type LanyardProps = HTMLAttributes<HTMLImageElement> & {
   tags: string[];
 };
 
-export class Lanyard extends React.Component<
-  LanyardProps & HTMLAttributes<HTMLImageElement>
-> {
-  render(): JSX.Element {
-    return (
-      <div className={`${this.props.className} lanyard`}>
-        {this.props.tags.map(
-          (tag: string): JSX.Element => (
-            <Badge bg="portfolio" className="tag">
-              {tag}
-            </Badge>
-          )
-        )}
-      </div>
-    );
-  }
+export const Lanyard: React.FC<LanyardProps> = ({ tags, className }: LanyardProps): JSX.Element => {
+  return (
+    <div className={`${className} lanyard`}>
+      {tags.map(
+        (tag: string): JSX.Element => (
+          <Badge bg="portfolio" className="tag">
+            {tag}
+          </Badge>
+        )
+      )}
+    </div>
+  );
 }

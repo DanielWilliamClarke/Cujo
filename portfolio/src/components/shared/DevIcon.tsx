@@ -1,5 +1,5 @@
 import React from "react";
-import { resolve } from "inversify-react";
+import { useInjection } from "inversify-react";
 import { DevIcon } from "../../model/CVModel";
 import { IIconService } from "../../services/IconService";
 
@@ -10,26 +10,23 @@ type DevIconProps = {
   color?: string;
 };
 
-export class DevIconName extends React.Component<DevIconProps> {
-  @resolve(IIconService.$) private readonly iconService!: IIconService;
+export const DevIconName: React.FC<DevIconProps> = ({ icon, color }: DevIconProps): JSX.Element => {
+  const iconService = useInjection(IIconService.$);
+  let iconComponent: JSX.Element;
 
-  render(): JSX.Element {
-    let iconComponent: JSX.Element;
-
-    const Icon = this.iconService.get(this.props.icon.name);
-    if (Icon) {
-      iconComponent = <Icon className="icon-override" />;
-    } else {
-      iconComponent = (
-        <span className={`icon devicon-${this.props.icon.icon}`} />
-      );
-    }
-
-    return (
-      <div className="dev-icon" style={{ color: this.props.color }}>
-        {iconComponent}
-        <p className="icon-name">{this.props.icon.name}</p>
-      </div>
+  const Icon = iconService.get(icon.name);
+  if (Icon) {
+    iconComponent = <Icon className="icon-override" />;
+  } else {
+    iconComponent = (
+      <span className={`icon devicon-${icon.icon}`} />
     );
   }
-}
+
+  return (
+    <div className="dev-icon" style={{ color: color }}>
+      {iconComponent}
+      <p className="icon-name">{icon.name}</p>
+    </div>
+  );
+};
