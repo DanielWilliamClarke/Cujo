@@ -15,72 +15,70 @@ type AboutProps = {
   about: Entry<AboutModel>;
 };
 
-export class About extends React.Component<AboutProps> {
-  render(): JSX.Element {
-    const options = {
-      renderNode: {
-        [INLINES.HYPERLINK]: (
-          { data }: Block | Inline,
-          children: ReactNode
-        ): JSX.Element => (
-          <a href={data.uri} target="_blank" rel="noopener noreferrer">
-            {children}
-          </a>
-        ),
-      },
-    };
-
-    return (
-      <Section id="about" title="About">
-        <Row className="section-content">
-          <Zoom triggerOnce damping={0.01}>
-            <Carousel
-              indicators
-              wrap={true}
-              slide={true}
-              nextLabel={""}
-              prevLabel={""}
-            >
-              {this.props.about.entry.images.map((media: Media) => (
-                <Carousel.Item>
-                  <DynamicImage
-                    image={media.file.url}
-                    alt="Image not found!"
-                    className="headshot"
-                  />
-                </Carousel.Item>
-              ))}
-            </Carousel>
-          </Zoom>
-        </Row>
-
-        <Row className="section-content">
-          <Col className="text-column">
-            <Fade triggerOnce direction="left">
-              {documentToReactComponents(this.props.about.entry.about, options)}
-            </Fade>
-          </Col>
-
-          <Col className="text-column">
-            <Fade triggerOnce direction="right">
-              {documentToReactComponents(
-                this.props.about.entry.interests,
-                options
-              )}
-            </Fade>
-          </Col>
-        </Row>
-
-        <Row className="section-content">
-          <Zoom triggerOnce damping={0.01}>
-            <Col className="mailto">
-              <a href={`mailto:${this.props.about.entry.email}`}>
-                {this.props.about.entry.email}
-              </a>
-            </Col>
-          </Zoom>
-        </Row>
-      </Section>
-    );
+export const About: React.FC<AboutProps> = ({ about }: AboutProps): JSX.Element => {
+  const options = {
+    renderNode: {
+      [INLINES.HYPERLINK]: (
+        { data }: Block | Inline,
+        children: ReactNode
+      ): JSX.Element => (
+        <a href={data.uri} target="_blank" rel="noopener noreferrer">
+          {children}
+        </a>
+      ),
+    }
   }
-}
+
+  return (
+    <Section id="about" title="About">
+      <Row className="section-content">
+        <Zoom triggerOnce damping={0.01}>
+          <Carousel
+            indicators
+            wrap={true}
+            slide={true}
+            nextLabel={""}
+            prevLabel={""}
+          >
+            {about.entry.images.map((media: Media) => (
+              <Carousel.Item>
+                <DynamicImage
+                  image={media.file.url}
+                  alt="Image not found!"
+                  className="headshot"
+                />
+              </Carousel.Item>
+            ))}
+          </Carousel>
+        </Zoom>
+      </Row>
+
+      <Row className="section-content">
+        <Col className="text-column">
+          <Fade triggerOnce direction="left">
+            {documentToReactComponents(about.entry.about, options)}
+          </Fade>
+        </Col>
+
+        <Col className="text-column">
+          <Fade triggerOnce direction="right">
+            {documentToReactComponents(
+              about.entry.interests,
+              options
+            )}
+          </Fade>
+        </Col>
+      </Row>
+
+      <Row className="section-content">
+        <Zoom triggerOnce damping={0.01}>
+          <Col className="mailto">
+            <a href={`mailto:${about.entry.email}`}>
+              {about.entry.email}
+            </a>
+          </Col>
+        </Zoom>
+      </Row>
+    </Section>
+  );
+};
