@@ -1,7 +1,7 @@
-import { resolve } from "inversify-react";
+import { useInjection } from "inversify-react";
 import React from "react";
 import { Container } from "react-bootstrap";
-import { IconWithDefaultState, IIconService } from "../../services/IconService";
+import { IIconService } from "../../services/IconService";
 
 import { Heading } from "./Heading";
 import { DividerProps, TriangleDivider } from "./TriangleDivider";
@@ -12,38 +12,30 @@ type SectionProps = {
   noSeparator?: boolean;
   bg?: string;
   withDivider?: DividerProps;
+  children?: React.ReactNode;
 };
 
-export class Section extends React.Component<
-  SectionProps,
-  IconWithDefaultState
-> {
-  @resolve(IIconService.$) private readonly iconService!: IIconService;
+export const Section: React.FC<SectionProps> = ({ children, ...props }: SectionProps): JSX.Element => {
+  const iconService = useInjection(IIconService.$);
+  const Icon = iconService.getWithDefault(props.id);
 
-  constructor(props: SectionProps, context: {}) {
-    super(props, context);
-    this.state = { icon: this.iconService.getWithDefault(this.props.id) };
-  }
-
-  render(): JSX.Element {
-    return (
-      <section
-        id={this.props.id}
-        className={`${this.props.bg ?? "section"} ${this.props.id}`}
-      >
-        {this.props.withDivider && (
-          <TriangleDivider {...this.props.withDivider} />
-        )}
-        <Container>
-          <Heading
-            title={this.props.title}
-            noSeparator={this.props.noSeparator}
-          />
-          {this.props.children}
-          <div className="centered short-line" />
-          <this.state.icon className="section-icon" />
-        </Container>
-      </section>
-    );
-  }
-}
+  return (
+    <section
+      id={props.id}
+      className={`${props.bg ?? "section"} ${props.id}`}
+    >
+      {props.withDivider && (
+        <TriangleDivider {...props.withDivider} />
+      )}
+      <Container>
+        <Heading
+          title={props.title}
+          noSeparator={props.noSeparator}
+        />
+        {children}
+        <div className="centered short-line" />
+        <Icon className="section-icon" />
+      </Container>
+    </section>
+  );
+};

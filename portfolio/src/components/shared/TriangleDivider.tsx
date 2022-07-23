@@ -7,18 +7,16 @@ export type DividerProps = {
   foreground: string;
 };
 
-export class TriangleDivider extends React.Component<DividerProps> {
-  render(): JSX.Element {
-    const myStyle: CSSProperties = {
-      borderLeftColor: this.props.background,
-      borderRightColor: this.props.background,
-      borderTopColor: this.props.foreground,
-    };
+export const TriangleDivider: React.FC<DividerProps> = ({ background, foreground }: DividerProps): JSX.Element => {
+  const myStyle: CSSProperties = {
+    borderLeftColor: background,
+    borderRightColor: background,
+    borderTopColor: foreground,
+  };
 
-    return (
-      <div className="triangle-divider">
-        <div style={myStyle}></div>
-      </div>
-    );
-  }
-}
+  return (
+    <div className="triangle-divider">
+      <div style={myStyle}></div>
+    </div>
+  );
+};

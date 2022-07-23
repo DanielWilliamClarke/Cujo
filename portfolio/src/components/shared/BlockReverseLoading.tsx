@@ -2,29 +2,25 @@ import React, { CSSProperties } from "react";
 
 import "./BlockReverseLoading.scss";
 
-type BoxProps = {
-  speed: number;
-  size: number;
-};
-
 type LoadingProps = {
   style: CSSProperties;
-  box: BoxProps;
+  box: {
+    speed: number;
+    size: number;
+  }
 };
 
-export class BlockReverseLoading extends React.Component<LoadingProps> {
-  render() {
-    return (
-      <div className="loading-container" style={this.props.style}>
-        <div
-          className="box"
-          style={{
-            width: this.props.box.size,
-            height: this.props.box.size,
-            animationDuration: `${this.props.box.speed}s`,
-          }}
-        />
-      </div>
-    );
-  }
-}
+export const BlockReverseLoading: React.FC<LoadingProps> = ({ style, box }: LoadingProps): JSX.Element => {
+  return (
+    <div className="loading-container" style={style}>
+      <div
+        className="box"
+        style={{
+          width: box.size,
+          height: box.size,
+          animationDuration: `${box.speed}s`,
+        }}
+      />
+    </div>
+  );
+};

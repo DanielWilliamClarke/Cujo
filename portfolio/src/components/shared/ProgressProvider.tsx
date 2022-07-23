@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 type ProgressProps = {
   valueStart: number;
@@ -6,46 +6,19 @@ type ProgressProps = {
   children: (value: number) => JSX.Element;
 };
 
-type ProgressState = {
-  value: number;
-  timeout?: number;
-};
+export const ProgressProvider: React.FC<ProgressProps> = ({ valueStart, valueEnd, children }: ProgressProps): JSX.Element => {
+  const [value, setValue] = useState(valueStart);
 
-export class ProgressProvider extends React.Component<
-  ProgressProps,
-  ProgressState
-> {
-  constructor(props: ProgressProps) {
-    super(props);
-    this.state = {
-      value: this.props.valueStart,
-      timeout: undefined,
-    };
-  }
+  useEffect(() => {
+    const timeout = window.setTimeout(() => setValue(valueEnd), 0);
+    return () => window.clearTimeout(timeout);
+  });
 
-  componentDidMount() {
-    this.setState({
-      timeout: window.setTimeout(() => {
-        this.setState({
-          value: this.props.valueEnd,
-        });
-      }, 0),
-    });
-  }
-
-  componentDidUpdate(prevProps: ProgressProps, prevState: ProgressState) {
-    if (prevProps.valueEnd !== this.props.valueEnd) {
-      this.setState({
-        value: this.props.valueEnd,
-      });
+  useEffect(() => {
+    if (value !== valueEnd) {
+      setValue(valueEnd);
     }
-  }
+  }, [valueEnd, value]);
 
-  componentWillUnmount() {
-    window.clearTimeout(this.state.timeout);
-  }
-
-  render(): JSX.Element {
-    return this.props.children(this.state.value);
-  }
-}
+  return children(value);
+};

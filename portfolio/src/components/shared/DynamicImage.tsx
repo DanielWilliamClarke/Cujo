@@ -1,64 +1,16 @@
-import React, { HTMLAttributes } from "react";
+import React, { HTMLAttributes, useEffect, useState } from "react";
 
-type ImageProps = {
+type ImageProps = HTMLAttributes<HTMLImageElement> & {
   image: string;
   alt: string;
 };
 
-type ImageState = {
-  loaded: string;
-};
-
-export class DynamicImage extends React.Component<
-  ImageProps & HTMLAttributes<HTMLImageElement>,
-  ImageState
-> {
-  constructor(props: ImageProps & HTMLAttributes<HTMLImageElement>) {
-    super(props);
-    this.state = { loaded: "" };
+namespace ImageLocator {
+  export const buildImageUri = (image: string): any => {
+    return isUrl(image) ? image : require(`../../assets/${image}`).default;
   }
 
-  async componentDidMount() {
-    await this.load();
-  }
-
-  render(): JSX.Element {
-    return (
-      <img
-        src={this.state.loaded}
-        alt={this.props.alt}
-        className={this.props.className}
-      />
-    );
-  }
-
-  private handleLoad(loaded: string): void {
-    this.setState({ loaded });
-  }
-
-  private load(): Promise<boolean> {
-    return new Promise((resolve) => {
-      const uri = ImageLocator.buildImageUri(this.props.image);
-      if (uri) {
-        const handleLoad = (): void => {
-          this.handleLoad(uri);
-          image.removeEventListener("load", handleLoad);
-          resolve(true);
-        };
-        const image = new Image();
-        image.addEventListener("load", handleLoad.bind(this));
-        image.src = uri;
-      }
-    });
-  }
-}
-
-export class ImageLocator {
-  public static buildImageUri(image: string): any {
-    return this.isUrl(image) ? image : require(`../../assets/${image}`).default;
-  }
-
-  private static isUrl(image: string): boolean {
+  const isUrl = (image: string): boolean => {
     if (image.startsWith("//images.")) {
       image = `https:${image}`;
     }
@@ -73,3 +25,33 @@ export class ImageLocator {
     return ["http:", "https:"].includes(url.protocol);
   }
 }
+
+export const DynamicImage: React.FC<ImageProps> =
+  ({ image, alt, className }: ImageProps): JSX.Element => {
+    const [loaded, setLoaded] = useState("");
+
+    useEffect(() => {
+      new Promise((resolve) => {
+        const uri = ImageLocator.buildImageUri(image);
+        if (uri) {
+          const handleLoad = (): void => {
+            setLoaded(uri);
+            image.removeEventListener("load", handleLoad);
+            resolve(true);
+          };
+          const image = new Image();
+          image.addEventListener("load", handleLoad.bind(this));
+          image.src = uri;
+        }
+      });
+    });
+
+    return (
+      <img
+        src={loaded}
+        alt={alt}
+        className={className}
+      />
+    );
+  };
+  
