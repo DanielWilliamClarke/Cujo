@@ -9,71 +9,71 @@ import { Work } from "../../../model/CVModel";
 import styles from "../../shared/style.module.scss";
 import { Header } from "./Header";
 
-const pdfStyles = StyleSheet.create({
-  experience: {
-    fontSize: 10,
-    marginBottom: 12,
-  },
-  company: {
-    fontSize: 10,
-  },
-  role: {
-    fontSize: 11,
-  },
-  dates: {
-    color: styles.colorMuted,
-  },
-  lanyard: {
-    display: "flex",
-    flexDirection: "row",
-    marginVertical: 5,
-  },
-  pill: {
-    backgroundColor: "#1CAED3",
-    borderRadius: "100%",
-    paddingHorizontal: 5,
-    paddingVertical: 2,
-    marginRight: 3,
-    marginVertical: 3,
-    color: "#ffffff",
-  },
-  experienceItem: {
-    marginBottom: "5px",
-    display: "flex",
-    flexDirection: "row",
-  },
-  experienceIcon: {
-    width: "30px",
-    height: "30px",
-    borderRadius: "100%",
-    marginRight: "10px",
-    display: "flex",
-    justifyContent: "center",
-    alignContent: "center",
-    flexDirection: "row",
-  }
-});
+export namespace Experience {
+  const pdfStyles = StyleSheet.create({
+    experience: {
+      fontSize: 10,
+      marginBottom: 12,
+    },
+    company: {
+      fontSize: 10,
+    },
+    role: {
+      fontSize: 11,
+    },
+    dates: {
+      color: styles.colorMuted,
+    },
+    lanyard: {
+      display: "flex",
+      flexDirection: "row",
+      marginVertical: 5,
+    },
+    pill: {
+      backgroundColor: "#1CAED3",
+      borderRadius: "100%",
+      paddingHorizontal: 5,
+      paddingVertical: 2,
+      marginRight: 3,
+      marginVertical: 3,
+      color: "#ffffff",
+    },
+    experienceItem: {
+      marginBottom: "5px",
+      display: "flex",
+      flexDirection: "row",
+    },
+    experienceIcon: {
+      width: "30px",
+      height: "30px",
+      borderRadius: "100%",
+      marginRight: "10px",
+      display: "flex",
+      justifyContent: "center",
+      alignContent: "center",
+      flexDirection: "row",
+    }
+  });
 
-const options = {
-  renderNode: {
-    [BLOCKS.DOCUMENT]: (_: any, children: ReactNode) => <View>{children}</View>,
-    [BLOCKS.PARAGRAPH]: (_: any, children: ReactNode) => (
-      <View>{children}</View>
+  const options = {
+    renderNode: {
+      [BLOCKS.DOCUMENT]: (_: any, children: ReactNode) => <View>{children}</View>,
+      [BLOCKS.PARAGRAPH]: (_: any, children: ReactNode) => (
+        <View>{children}</View>
+      ),
+    },
+    renderText: (text: string): ReactNode => (
+      <Text>{text.trim()}</Text>
     ),
-  },
-  renderText: (text: string): ReactNode => (
-    <Text>{text.trim()}</Text>
-  ),
-};
+  };
 
-export class Experience {
-  private static dateService: IDateService = (() => {
+  const dateService: IDateService = (() => {
     const service = new DateService();
     service.format("MMMM YYYY", "YYYY-MM-DD");
     return service;
   })();
 
-  static render(work: Work[], withContinue: boolean = false): JSX.Element {
+  export const render = (work: Work[], withContinue: boolean = false): JSX.Element => {
     return (
       <View>
         {Header.render(`experience ${withContinue ? "(cont)" : ""}`)}
@@ -87,7 +87,7 @@ export class Experience {
                 />
                 <View>
                   <Text style={pdfStyles.dates}>
-                    {this.dateService.toRangeWithDuration(
+                    {dateService.toRangeWithDuration(
                       work.startDate.toString(),
                       work.endDate?.toString() ?? "Present"
                     )}
@@ -107,7 +107,7 @@ export class Experience {
                   </Text>
                 </View>
               </View>
-              {this.createLanyard(work.highlights)}
+              {createLanyard(work.highlights)}
               {documentToReactComponents(work.summary, options)}
             </View>
           ))}
@@ -116,7 +116,7 @@ export class Experience {
     );
   }
 
-  private static createLanyard(tags: string[]): JSX.Element {
+  const createLanyard = (tags: string[]): JSX.Element => {
     return (
       <View style={pdfStyles.lanyard}>
         {tags.map((tag) => (

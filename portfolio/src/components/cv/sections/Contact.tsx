@@ -5,42 +5,42 @@ import { CV } from "../../../model/CVModel";
 import styles from "../../shared/style.module.scss";
 import { Header } from "./Header";
 
-const pdfStyles = StyleSheet.create({
-  contact: {
-    backgroundColor: "#212121",
-    width: "30%",
-    margin: "15px",
-  },
-  contactIcon: {
-    width: "30px",
-    height: "30px",
-    borderRadius: "100%",
-    backgroundColor: "#1CAED3",
-    marginRight: "10px",
-    display: "flex",
-    justifyContent: "center",
-    alignContent: "center",
-    flexDirection: "row",
-  },
-  contactItem: {
-    marginBottom: "10px",
-    display: "flex",
-    flexDirection: "row",
-  },
-  contactValue: {
-    color: styles.colorMuted,
-  },
-});
+export namespace Contact {
+  const pdfStyles = StyleSheet.create({
+    contact: {
+      backgroundColor: "#212121",
+      width: "30%",
+      margin: "15px",
+    },
+    contactIcon: {
+      width: "30px",
+      height: "30px",
+      borderRadius: "100%",
+      backgroundColor: "#1CAED3",
+      marginRight: "10px",
+      display: "flex",
+      justifyContent: "center",
+      alignContent: "center",
+      flexDirection: "row",
+    },
+    contactItem: {
+      marginBottom: "10px",
+      display: "flex",
+      flexDirection: "row",
+    },
+    contactValue: {
+      color: styles.colorMuted,
+    },
+  });
 
-export class Contact {
-  static render(cv: CV, withHeader?: boolean): JSX.Element {
+  export const render = (cv: CV, withHeader?: boolean): JSX.Element => {
     return (
       <View style={pdfStyles.contact}>
         {withHeader && Header.render("contact")}
-        {this.createContactItem("Phone", cv.about.entry.phone, "phone_in_talk")}
-        {this.createContactItem("Email", cv.about.entry.email, "email")}
-        {this.createContactItem("Website", cv.about.entry.website, "link")}
-        {this.createContactItem(
+        {createContactItem("Phone", cv.about.entry.phone, "phone_in_talk")}
+        {createContactItem("Email", cv.about.entry.email, "email")}
+        {createContactItem("Website", cv.about.entry.website, "link")}
+        {createContactItem(
           "Address",
           "Crawley, UK".toUpperCase(),
           "house"
@@ -49,11 +49,11 @@ export class Contact {
     );
   }
 
-  private static createContactItem(
+  const createContactItem = (
     title: string,
     value: string,
     iconName: string
-  ): JSX.Element {
+  ): JSX.Element => {
     return (
       <View style={pdfStyles.contactItem}>
         <View style={pdfStyles.contactIcon}>

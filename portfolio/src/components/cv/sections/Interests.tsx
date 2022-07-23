@@ -8,19 +8,19 @@ import { Block } from "@contentful/rich-text-types";
 import { CV } from "../../../model/CVModel";
 import { Header } from "./Header";
 
-const pdfStyles = StyleSheet.create({
-  paragraph: {
-    marginBottom: "10px",
-    fontSize: 10,
-  },
-  bullet: {
-    fontSize: 10,
-    marginTop: 5,
-  },
-});
+export namespace Interests {
+  const pdfStyles = StyleSheet.create({
+    paragraph: {
+      marginBottom: "10px",
+      fontSize: 10,
+    },
+    bullet: {
+      fontSize: 10,
+      marginTop: 5,
+    },
+  });
 
-export class Interests {
-  static render(cv: CV): JSX.Element {
+  export const render = (cv: CV): JSX.Element => {
     return (
       <View>
         {cv.about.entry.interests.content.map((node: Block, index: number) => {
