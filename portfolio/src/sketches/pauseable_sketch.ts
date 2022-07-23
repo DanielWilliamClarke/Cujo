@@ -1,9 +1,9 @@
 import p5 from "p5";
 import { Sketch } from ".";
 
-export function pauseableSketch(
+export const pauseableSketch = (
   sketchBuilder: (p: p5) => Sketch
-): (p: p5) => void {
+): (p: p5) => void => {
   return (p: p5): void => {
     const sketch = sketchBuilder(p);
     let isPaused = false;

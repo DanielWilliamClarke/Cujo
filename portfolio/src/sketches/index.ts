@@ -30,7 +30,7 @@ export interface Sketch {
   draw(): void;
 }
 
-export function getSketch(): (p: p5) => void {
+export const getSketch = (): (p: p5) => void => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const sketchBuilder: (p: p5) => Sketch = [
     (p: p5) => new Conway(p),
