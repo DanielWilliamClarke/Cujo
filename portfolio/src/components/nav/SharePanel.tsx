@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container } from "react-bootstrap";
 import { Fade } from "react-awesome-reveal";
 
@@ -26,94 +26,82 @@ interface ShareProps {
   hashtag: string;
 }
 
-type ShareState = {
-  show: boolean;
-  slim: boolean;
-};
+export const SharePanel: React.FC<ShareProps> = ({url, title, body, hashtag}: ShareProps): JSX.Element => {
 
-export class SharePanel extends React.Component<ShareProps, ShareState> {
-  private size: number = 40;
+  const [show, setShow] = useState(false);
+  const [slim, setSlim] = useState(true);
 
-  constructor(props: ShareProps) {
-    super(props);
+  window.addEventListener("scroll", () => {
+    setShow(window.scrollY > 0);
+  });
+  window.addEventListener("resize", () => {
+    setSlim(window.innerWidth < 600);
+  });
 
-    this.state = { show: false, slim: true };
-    window.addEventListener("scroll", this.listenScrollEvent);
-    window.addEventListener("resize", this.listenResize);
-  }
-
-  render(): JSX.Element {
-    return (
-      <Container className="share-panel">
-        {this.state.show && (
-          <Fade triggerOnce direction={this.state.slim ? "up" : "left"}>
-            <LinkedinShareButton
-              url={this.props.url}
-              title={this.prepareTitle(this.props.title)}
-              summary={this.sanitize(this.props.body)}
-            >
-              <LinkedinIcon size={this.size} />
-            </LinkedinShareButton>
-
-            <FacebookShareButton
-              url={this.props.url}
-              quote={this.prepareTitle(this.props.title)}
-              hashtag={this.props.hashtag}
-            >
-              <FacebookIcon size={this.size} />
-            </FacebookShareButton>
-
-            <RedditShareButton
-              url={this.props.url}
-              title={this.prepareTitle(this.props.title)}
-            >
-              <RedditIcon size={this.size} />
-            </RedditShareButton>
-
-            <TwitterShareButton
-              url={this.props.url}
-              title={this.prepareTitle(this.props.title)}
-              hashtags={[this.props.hashtag]}
-            >
-              <TwitterIcon size={this.size} />
-            </TwitterShareButton>
-
-            <WhatsappShareButton
-              url={this.props.url}
-              title={this.prepareTitle(this.props.title)}
-              separator=" - "
-            >
-              <WhatsappIcon size={this.size} />
-            </WhatsappShareButton>
-
-            <EmailShareButton
-              url={this.props.url}
-              subject={this.prepareTitle(this.props.title)}
-              body={this.sanitize(this.props.body)}
-              separator=" - "
-            >
-              <EmailIcon size={this.size} />
-            </EmailShareButton>
-          </Fade>
-        )}
-      </Container>
-    );
-  }
-
-  private listenScrollEvent = () => {
-    this.setState({ show: window.scrollY > 0 });
-  };
-
-  private listenResize = () => {
-    this.setState({ slim: window.innerWidth < 600 });
-  };
-
-  private sanitize(input: string): string {
+  const sanitize = (input: string): string => {
     return input.replace(/(<([^>]+)>)/gi, "");
   }
 
-  private prepareTitle(title: string | undefined): string {
+  const prepareTitle = (title: string | undefined): string => {
     const prefix = "DanielClarke.tech";
     return title ? `${prefix} - ${title}` : prefix;
   }
+
+  const size: number = 40;
+
+  return (
+    <Container className="share-panel">
+      {show && (
+        <Fade triggerOnce direction={slim ? "up" : "left"}>
+          <LinkedinShareButton
+            url={url}
+            title={prepareTitle(title)}
+            summary={sanitize(body)}
+          >
+            <LinkedinIcon size={size} />
+          </LinkedinShareButton>
+
+          <FacebookShareButton
+            url={url}
+            quote={prepareTitle(title)}
+            hashtag={hashtag}
+          >
+            <FacebookIcon size={size} />
+          </FacebookShareButton>
+
+          <RedditShareButton
+            url={url}
+            title={prepareTitle(title)}
+          >
+            <RedditIcon size={size} />
+          </RedditShareButton>
+
+          <TwitterShareButton
+            url={url}
+            title={prepareTitle(title)}
+            hashtags={[hashtag]}
+          >
+            <TwitterIcon size={size} />
+          </TwitterShareButton>
+
+          <WhatsappShareButton
+            url={url}
+            title={prepareTitle(title)}
+            separator=" - "
+          >
+            <WhatsappIcon size={size} />
+          </WhatsappShareButton>
+
+          <EmailShareButton
+            url={url}
+            subject={prepareTitle(title)}
+            body={sanitize(body)}
+            separator=" - "
+          >
+            <EmailIcon size={size} />
+          </EmailShareButton>
+        </Fade>
+      )}
+    </Container>
+  );
 }
