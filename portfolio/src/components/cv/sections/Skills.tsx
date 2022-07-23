@@ -28,8 +28,8 @@ const pdfStyles = StyleSheet.create({
   },
 });
 
-export class Skills {
-  static render(cv: CVModel): JSX.Element {
+export namespace Skills {
+  export const render = (cv: CVModel): JSX.Element => {
     return (
       <View>
         {Header.render("skills")}
@@ -39,16 +39,16 @@ export class Skills {
             website linked above for a complete list!
           </Text>
         </View>
-        {this.mapSkills(cv.skills.entry.favorite)}
+        {mapSkills(cv.skills.entry.favorite)}
       </View>
     );
   }
 
-  private static mapSkills(skills: Skill[]): JSX.Element[] {
+  const mapSkills = (skills: Skill[]): JSX.Element[] => {
     return skills.map((skill: Skill) => (
       <View style={pdfStyles.skillItem}>
         <View style={pdfStyles.skillIcon}>
-          {this.createDevicon(skill.icon.icon)}
+          {createDevicon(skill.icon.icon)}
         </View>
         <View>
           <Text
@@ -61,13 +61,13 @@ export class Skills {
           >
             {skill.name.toUpperCase()}
           </Text>
-          {this.createBar(skill.level)}
+          {createBar(skill.level)}
         </View>
       </View>
     ));
   }
 
-  static createDevicon(icon: string): JSX.Element {
+  const createDevicon = (icon: string): JSX.Element => {
     return (
       <Image
         src={require(`../../../assets/icons/${icon}.png`).default}
@@ -76,7 +76,7 @@ export class Skills {
     );
   }
 
-  static createBar(level: number): JSX.Element {
+  const createBar = (level: number): JSX.Element =>{
     return (
       <View>
         <View

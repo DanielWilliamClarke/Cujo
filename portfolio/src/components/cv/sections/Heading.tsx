@@ -5,44 +5,45 @@ import { IDateService } from "../../../services/DateService";
 import styles from "../../shared/style.module.scss";
 import { CV, Work } from "../../../model/CVModel";
 
-const pdfStyles = StyleSheet.create({
-  body: {
-    fontFamily: "Helvetica",
-  },
-  header: {
-    backgroundColor: "#1CAED3",
-    width: "100%",
-    height: "15%",
-    textAlign: "center",
-  },
-  heading: {
-    display: "flex",
-    justifyContent: "center",
-    alignContent: "center",
-    flexDirection: "row",
-    width: "100%",
-    marginTop: "5.5%",
-    fontFamily: "Helvetica-Bold",
-  },
-  name: {
-    margin: "2px",
-    fontSize: "40",
-    fontWeight: "heavy",
-    color: "#1f242c",
-  },
-  headline: {
-    justifyContent: "center",
-    alignContent: "center",
-    flexDirection: "row",
-  },
-  role: {
-    color: "#ffffff",
-    fontSize: "15",
-  },
-});
+export namespace Heading {
+  const pdfStyles = StyleSheet.create({
+    body: {
+      fontFamily: "Helvetica",
+    },
+    header: {
+      backgroundColor: "#1CAED3",
+      width: "100%",
+      height: "15%",
+      textAlign: "center",
+    },
+    heading: {
+      display: "flex",
+      justifyContent: "center",
+      alignContent: "center",
+      flexDirection: "row",
+      width: "100%",
+      marginTop: "5.5%",
+      fontFamily: "Helvetica-Bold",
+    },
+    name: {
+      margin: "2px",
+      fontSize: "40",
+      fontWeight: "heavy",
+      color: "#1f242c",
+    },
+    headline: {
+      justifyContent: "center",
+      alignContent: "center",
+      flexDirection: "row",
+    },
+    role: {
+      color: "#ffffff",
+      fontSize: "15",
+    },
+  });
+  
 
-export class Heading {
-  static render(cv: CV, dateService: IDateService): JSX.Element {
+  export const render = (cv: CV, dateService: IDateService): JSX.Element => {
     const colors = [styles.colorLightBg, styles.colorLightBg, "#ffffff"];
     const nameParts = cv.about.entry.name
       .split(" ")

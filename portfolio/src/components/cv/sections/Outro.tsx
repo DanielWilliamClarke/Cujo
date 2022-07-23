@@ -3,25 +3,25 @@ import { View, StyleSheet, Text } from "@react-pdf/renderer";
 import { CV } from "../../../model/CVModel";
 import { Contact } from "./Contact";
 
-const pdfStyles = StyleSheet.create({
-  outro: {
-    display: "flex",
-    flexDirection: "row",
-    height: "18.5%",
-    backgroundColor: "#222222",
-    fontSize: "10",
-    color: "#ffffff",
-  },
-  references: {
-    flexDirection: "column",
-    backgroundColor: "#222222",
-    width: "70%",
-    margin: "15px",
-  },
-});
+export namespace Outro {
+  const pdfStyles = StyleSheet.create({
+    outro: {
+      display: "flex",
+      flexDirection: "row",
+      height: "18.5%",
+      backgroundColor: "#222222",
+      fontSize: "10",
+      color: "#ffffff",
+    },
+    references: {
+      flexDirection: "column",
+      backgroundColor: "#222222",
+      width: "70%",
+      margin: "15px",
+    },
+  });
 
-export class Outro {
-  static render(cv: CV): JSX.Element {
+  export const render = (cv: CV): JSX.Element => {
     return (
       <View style={pdfStyles.outro}>
         <View style={pdfStyles.references}>

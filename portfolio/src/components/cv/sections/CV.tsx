@@ -22,30 +22,30 @@ Font.registerHyphenationCallback(word => (
   [word]
 ));
 
-const pdfStyles = StyleSheet.create({
-  body: {
-    fontFamily: "Helvetica",
-  },
-  contentRow: {
-    flex: 1,
-    flexDirection: "row",
-    flexGrow: 1,
-  },
-  left: {
-    paddingHorizontal: 15,
-    paddingVertical: 8,
-    width: "50%",
-  },
-  right: {
-    paddingHorizontal: 15,
-    paddingVertical: 8,
-    width: "50%",
-    backgroundColor: styles.colorOffWhite,
-  },
-});
+export namespace CV {
+  const pdfStyles = StyleSheet.create({
+    body: {
+      fontFamily: "Helvetica",
+    },
+    contentRow: {
+      flex: 1,
+      flexDirection: "row",
+      flexGrow: 1,
+    },
+    left: {
+      paddingHorizontal: 15,
+      paddingVertical: 8,
+      width: "50%",
+    },
+    right: {
+      paddingHorizontal: 15,
+      paddingVertical: 8,
+      width: "50%",
+      backgroundColor: styles.colorOffWhite,
+    },
+  });
 
-export class CV {
-  static render(cv: CVModel, dateService: IDateService): JSX.Element {
+  export const render = (cv: CVModel, dateService: IDateService): JSX.Element => {
     const experience = cv.work.entries
       .filter(
         ({ startDate }: Work) => !dateService.IsFuture(startDate.toString())

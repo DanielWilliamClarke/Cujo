@@ -8,27 +8,27 @@ import { Header } from "./Header";
 
 import styles from "../../shared/style.module.scss";
 
-const pdfStyles = StyleSheet.create({
-  education: {
-    fontSize: 10,
-    marginBottom: 10,
-  },
-  institution: {
-    fontSize: 12,
-  },
-  dates: {
-    color: styles.colorMuted,
-  },
-});
+export namespace Education {
+  const pdfStyles = StyleSheet.create({
+    education: {
+      fontSize: 10,
+      marginBottom: 10,
+    },
+    institution: {
+      fontSize: 12,
+    },
+    dates: {
+      color: styles.colorMuted,
+    },
+  });
 
-export class Education {
-  private static dateService: IDateService = (() => {
+  const dateService: IDateService = (() => {
     const service = new DateService();
     service.format("MMMM YYYY", "YYYY-MM-DD");
     return service;
   })();
 
-  static render(cv: CV): JSX.Element {
+  export const render = (cv: CV): JSX.Element => {
     return (
       <View>
         {Header.render("education")}
@@ -36,13 +36,13 @@ export class Education {
           {cv.education.entries
             .sort(
               (a, b) =>
-                this.dateService.toUnix(b.startDate.toString()) -
-                this.dateService.toUnix(a.startDate.toString())
+                dateService.toUnix(b.startDate.toString()) -
+                dateService.toUnix(a.startDate.toString())
             )
             .map((education: EducationModel) => (
               <View style={pdfStyles.education}>
                 <Text style={pdfStyles.dates}>
-                  {this.dateService.toRange(
+                  {dateService.toRange(
                     education.startDate.toString(),
                     education.endDate.toString()
                   )}
