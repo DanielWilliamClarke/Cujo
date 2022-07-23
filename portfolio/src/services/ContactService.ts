@@ -1,9 +1,13 @@
 import axios, { AxiosResponse } from "axios";
-import { injectable } from "inversify";
+import { injectable, interfaces } from "inversify";
 
 export interface IContactService {
     submit (data: FormData): Promise<boolean>;
 }
+
+export namespace IContactService {
+    export const $: interfaces.ServiceIdentifier<IContactService> = Symbol('IContactService');
+  }
 
 type ContactResponse = {
     next: string;

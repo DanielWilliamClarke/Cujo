@@ -14,7 +14,7 @@ container.bind<IDateService>(IDateService.$).to(DateService);
 container.bind<ICujoService>("CujoService").to(CujoService).inSingletonScope();
 
 // Setup ContactService
-container.bind<IContactService>("ContactService").to(ContactService).inSingletonScope();
+container.bind<IContactService>(IContactService.$).to(ContactService).inSingletonScope();
 
 // Setup IconService
 container.bind<IIconService>(IIconService.$).to(IconService).inSingletonScope();

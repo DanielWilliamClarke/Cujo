@@ -7,10 +7,6 @@ export type DividerProps = {
   foreground: string;
 };
 
-export type withDividerState = {
-  divider: DividerProps;
-};
-
 export class TriangleDivider extends React.Component<DividerProps> {
   render(): JSX.Element {
     const myStyle: CSSProperties = {
