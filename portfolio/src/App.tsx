@@ -46,7 +46,7 @@ export const App: React.FC<AppProps> = ({ cv, blog }: AppProps): JSX.Element => 
   )
 };
 
-export const Portfolio: React.FC<AppProps> = ({ cv, blog }: AppProps): JSX.Element => {
+const Portfolio: React.FC<AppProps> = ({ cv, blog }: AppProps): JSX.Element => {
   return (
     <>
       <Fade triggerOnce damping={0.01}>

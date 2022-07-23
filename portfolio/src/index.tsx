@@ -6,7 +6,7 @@ import setupLogRocketReact from "logrocket-react";
 import React, { Suspense } from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router } from "react-router-dom";
-import { createClient, useQuery, Provider as UrqlProvider } from 'urql';
+import { createClient, Provider as UrqlProvider, useQuery } from 'urql';
 
 import { BlockReverseLoading } from "./components/shared/BlockReverseLoading";
 import { container } from "./ioc";
@@ -14,8 +14,8 @@ import { Post } from "./model/BlogPost";
 import { CV } from "./model/CVModel";
 import { Entries } from "./model/Includes";
 
-import "react-vertical-timeline-component/style.min.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "react-vertical-timeline-component/style.min.css";
 import "./index.scss";
 
 import CujoQuery from './Cujo.gql';
