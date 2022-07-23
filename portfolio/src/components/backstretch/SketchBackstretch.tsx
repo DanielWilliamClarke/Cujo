@@ -1,5 +1,5 @@
 import p5 from "p5";
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { useInjection } from "inversify-react";
 import { IDateService } from "../../services/DateService";
@@ -16,10 +16,10 @@ export const SketchBackstretch: React.FC<CVProps> = ({ cv }: CVProps): JSX.Eleme
   dateService.format("MMMM YYYY", "YYYY-MM-DD")
 
   // Similar to componentDidMount and componentDidUpdate:
-  const p5Ref = React.createRef<any>();
+  const p5Ref = useMemo(() => React.createRef<any>(), []);
   useEffect(() => {
     new p5(getSketch(), p5Ref.current);
-  }, []);
+  }, [p5Ref]);
 
   const currentRole = cv.work.entries
     .filter(
