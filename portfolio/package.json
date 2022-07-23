@@ -14,7 +14,9 @@
     "sasslint": "sass-lint -v",
     "sasslint:fix": "sass-lint-auto-fix",
     "clean": "rm -rf node_modules && rm -rf package-lock.json",
-    "analyze": "source-map-explorer 'build/static/js/*.js'"
+    "analyze": "source-map-explorer 'build/static/js/*.js'",
+    "lint": "eslint src --ext .js,.ts,.tsx --max-warnings=0",
+    "fix": "eslint src --ext .js,.ts,.tsx --fix"
   },
   "eslintConfig": {
     "extends": "react-app"

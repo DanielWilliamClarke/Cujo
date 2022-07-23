@@ -9,7 +9,7 @@ import {
 } from "@contentful/rich-text-types";
 import { Helmet } from "react-helmet";
 
-import { resolve, useInjection } from "inversify-react";
+import { useInjection } from "inversify-react";
 import React, { ReactNode } from "react";
 import { Fade } from "react-awesome-reveal";
 import { Col, Row } from "react-bootstrap";
