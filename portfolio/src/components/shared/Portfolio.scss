@@ -221,7 +221,7 @@
   }
 
   .bg-dark {
-    background-color: $card-color !important;
+    background-color: $card-color  !important;
   }
 
   .dev-icon {
@@ -277,17 +277,18 @@
 }
 
 .app {
-  @include alternating-section(
-    "odd",
+  .profile {
+    @include alternating-section("odd",
     $col-bg-light,
     $col-accent-zing,
-    $col-bg-dark
-  );
-  @include alternating-section("even", $col-bg-dark, $col-sub-brand);
-
+    $col-bg-dark );
+    @include alternating-section("even", $col-bg-dark, $col-sub-brand);
+  }
+  
   .section-light {
     @include section-coloring($col-bg-light, $col-accent-zing, $col-bg-dark);
   }
+
   .section-dark {
     @include section-coloring($col-bg-dark, $col-sub-brand, $col-bg-light);
   }

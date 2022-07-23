@@ -1,4 +1,4 @@
-import { resolve } from "inversify-react";
+import { useInjection } from "inversify-react";
 import React from "react";
 import { Col, Row } from "react-bootstrap";
 import {
@@ -9,7 +9,7 @@ import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import { Entries, Media } from "../../model/Includes";
 import { Work } from "../../model/CVModel";
 import { IDateService } from "../../services/DateService";
-import { IconWithDefaultState, IIconService } from "../../services/IconService";
+import { IIconService } from "../../services/IconService";
 import { DynamicImage } from "../shared/DynamicImage";
 import { Lanyard } from "../shared/Lanyard";
 import { Section } from "../shared/Section";
@@ -21,100 +21,96 @@ type WorkProps = {
   work: Entries<Work>;
 };
 
-export class Experience extends React.Component<
-  WorkProps,
-  IconWithDefaultState
-> {
-  @resolve(IDateService.$) private readonly dateService!: IDateService;
-  @resolve(IIconService.$) private readonly iconService!: IIconService;
+type RoleProps = {
+  role: Work;
+};
 
-  constructor(props: WorkProps, context: {}) {
-    super(props, context);
-    this.dateService.format("MMMM YYYY", "YYYY-MM-DD");
-    this.state = { icon: this.iconService.getWithDefault("work") };
-  }
+export const Experience: React.FC<WorkProps> = ({ work }: WorkProps): JSX.Element => {
+  const dateService = useInjection(IDateService.$);
+  dateService.format("MMMM YYYY", "YYYY-MM-DD")
 
-  render(): JSX.Element {
-    return (
-      <Section id="experience" title="Experience">
-        <VerticalTimeline className="timeline">
-          {this.props.work.entries
-            .filter(
-              ({ startDate }: Work) =>
-                !this.dateService.IsFuture(startDate.toString())
+  const iconService = useInjection(IIconService.$);
+  const Icon = iconService.getWithDefault("work");
+
+  return (
+    <Section id="experience" title="Experience">
+      <VerticalTimeline className="timeline">
+        {work.entries
+          .filter(
+            ({ startDate }: Work) =>
+              !dateService.IsFuture(startDate.toString())
+          )
+          .sort(
+            (a: Work, b: Work) =>
+              dateService.toUnix(b.startDate.toString()) -
+              dateService.toUnix(a.startDate.toString())
+          )
+          .map(
+            (work: Work, index: number): JSX.Element => (
+              <VerticalTimelineElement
+                className="vertical-timeline-element--work"
+                key={index}
+                date={dateService.toRangeWithDuration(
+                  work.startDate.toString(),
+                  work.endDate?.toString() ?? "Present"
+                )}
+                icon={<Icon />}
+              >
+                <Role role={work} />
+              </VerticalTimelineElement>
             )
-            .sort(
-              (a: Work, b: Work) =>
-                this.dateService.toUnix(b.startDate.toString()) -
-                this.dateService.toUnix(a.startDate.toString())
-            )
-            .map(
-              (work: Work, index: number): JSX.Element => (
-                <VerticalTimelineElement
-                  className="vertical-timeline-element--work"
-                  key={index}
-                  date={this.dateService.toRangeWithDuration(
-                    work.startDate.toString(),
-                    work.endDate?.toString() ?? "Present"
-                  )}
-                  icon={<this.state.icon />}
-                >
-                  {this.renderRole(work)}
-                </VerticalTimelineElement>
-              )
-            )}
-        </VerticalTimeline>
-      </Section>
-    );
-  }
+          )}
+      </VerticalTimeline>
+    </Section>
+  );
+};
 
-  private renderRole(work: Work): JSX.Element {
-    return (
-      <>
-        <Lanyard tags={[work.company, ...work.highlights]} />
+const Role: React.FC<RoleProps> = ({ role }: RoleProps): JSX.Element => {
+  return (
+    <>
+      <Lanyard tags={[role.company, ...role.highlights]} />
 
-        <Row className="header">
-          <Col className="headline">
-            <h3>
-              <span className="at">{work.position}</span>
-              <span>
-                <a
-                  title={work.company}
-                  href={work.website}
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  <DynamicImage
-                    image={work.logo.file.url}
-                    alt={work.company}
-                    className="centered image-item work-logo"
-                  />
-                </a>
-              </span>
-            </h3>
+      <Row className="header">
+        <Col className="headline">
+          <h3>
+            <span className="at">{role.position}</span>
+            <span>
+              <a
+                title={role.company}
+                href={role.website}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <DynamicImage
+                  image={role.logo.file.url}
+                  alt={role.company}
+                  className="centered image-item work-logo"
+                />
+              </a>
+            </span>
+          </h3>
+        </Col>
+      </Row>
+
+      <Row>
+        <Col>
+          {documentToReactComponents(role.summary)}
+        </Col>
+      </Row>
+
+      <Row className="images">
+        {role.images.map((image: Media) => (
+          <Col className="col-item">
+            <DynamicImage
+              image={image.file.url}
+              alt={`${role.position} - Image not found!`}
+              className="centered image-item"
+            />
           </Col>
-        </Row>
+        ))}
+      </Row>
 
-        <Row>
-          <Col>
-            {documentToReactComponents(work.summary)}
-          </Col>
-        </Row>
-
-        <Row className="images">
-          {work.images.map((image: Media) => (
-            <Col className="col-item">
-              <DynamicImage
-                image={image.file.url}
-                alt={`${work.position} - Image not found!`}
-                className="centered image-item"
-              />
-            </Col>
-          ))}
-        </Row>
-
-        <div className="centered short-line" />
-      </>
-    );
-  }
-}
+      <div className="centered short-line" />
+    </>
+  );
+};

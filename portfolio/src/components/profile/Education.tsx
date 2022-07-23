@@ -1,4 +1,4 @@
-import { resolve } from "inversify-react";
+import { useInjection } from "inversify-react";
 import React from "react";
 import { Col, Row } from "react-bootstrap";
 import {
@@ -9,7 +9,7 @@ import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import { Entries, Media } from "../../model/Includes";
 import { Education as EducationModel } from "../../model/CVModel";
 import { IDateService } from "../../services/DateService";
-import { IconWithDefaultState, IIconService } from "../../services/IconService";
+import { IIconService } from "../../services/IconService";
 import { DynamicImage } from "../shared/DynamicImage";
 import { Lanyard } from "../shared/Lanyard";
 import { Section } from "../shared/Section";
@@ -21,83 +21,79 @@ type EducationProps = {
   education: Entries<EducationModel>;
 };
 
-export class Education extends React.Component<
-  EducationProps,
-  IconWithDefaultState
-> {
-  @resolve(IDateService.$) private readonly dateService!: IDateService;
-  @resolve(IIconService.$) private readonly iconService!: IIconService;
+type InstitutionModel = {
+  institution: EducationModel;
+};
 
-  constructor(props: EducationProps, context: {}) {
-    super(props, context);
-    this.dateService.format("MMMM YYYY", "YYYY-MM-DD");
-    this.state = { icon: this.iconService.getWithDefault("school") };
-  }
+export const Education: React.FC<EducationProps> = ({ education }: EducationProps): JSX.Element => {
+  const dateService = useInjection(IDateService.$);
+  dateService.format("MMMM YYYY", "YYYY-MM-DD")
 
-  render(): JSX.Element {
-    return (
-      <Section id="education" title="Education">
-        <VerticalTimeline className="timeline">
-          {this.props.education.entries
-            .sort(
-              (a, b) =>
-                this.dateService.toUnix(b.startDate.toString()) -
-                this.dateService.toUnix(a.startDate.toString())
-            )
-            .map((e: EducationModel, index: number) => (
-              <VerticalTimelineElement
-                className="vertical-timeline-element--work"
-                key={index}
-                date={this.dateService.toRange(
-                  e.startDate.toString(),
-                  e.endDate.toString()
-                )}
-                icon={<this.state.icon />}
-              >
-                {this.renderInstitution(e)}
-              </VerticalTimelineElement>
-            ))}
-        </VerticalTimeline>
-      </Section>
-    );
-  }
+  const iconService = useInjection(IIconService.$);
+  const Icon = iconService.getWithDefault("school");
 
-  private renderInstitution(e: EducationModel): JSX.Element {
-    return (
-      <>
-        {e.grade !== "" && <Lanyard tags={[e.grade]} />}
-
-        <Row className="header">
-          <Col className="Qualification-type">
-            <h3>{e.institution}</h3>
-            <h4>
-              {e.studyType}
-              <span className="dot" />
-              {e.area}
-            </h4>
-          </Col>
-        </Row>
-
-        <Row>
-          <Col>{documentToReactComponents(e.summary)}</Col>
-        </Row>
-
-        <Row className="images">
-          {e.images.map((image: Media) => (
-            <Col className="col-item">
-              <a href={e.link} rel="noopener noreferrer" target="_blank">
-                <DynamicImage
-                  image={image.file.url}
-                  alt={`${e.institution} - Image not found!`}
-                  className="centered image-item"
-                />
-              </a>
-            </Col>
+  return (
+    <Section id="education" title="Education">
+      <VerticalTimeline className="timeline">
+        {education.entries
+          .sort(
+            (a, b) =>
+              dateService.toUnix(b.startDate.toString()) -
+              dateService.toUnix(a.startDate.toString())
+          )
+          .map((e: EducationModel, index: number) => (
+            <VerticalTimelineElement
+              className="vertical-timeline-element--work"
+              key={index}
+              date={dateService.toRange(
+                e.startDate.toString(),
+                e.endDate.toString()
+              )}
+              icon={<Icon />}
+            >
+              <Institution institution={e} />
+            </VerticalTimelineElement>
           ))}
-        </Row>
+      </VerticalTimeline>
+    </Section>
+  );
+};
 
-        <div className="centered short-line" />
-      </>
-    );
-  }
-}
+ const Institution: React.FC<InstitutionModel> = ({ institution }: InstitutionModel): JSX.Element => {
+  return (
+    <>
+      {institution.grade !== "" && <Lanyard tags={[institution.grade]} />}
+
+      <Row className="header">
+        <Col className="Qualification-type">
+          <h3>{institution.institution}</h3>
+          <h4>
+            {institution.studyType}
+            <span className="dot" />
+            {institution.area}
+          </h4>
+        </Col>
+      </Row>
+
+      <Row>
+        <Col>{documentToReactComponents(institution.summary)}</Col>
+      </Row>
+
+      <Row className="images">
+        {institution.images.map((image: Media) => (
+          <Col className="col-item">
+            <a href={institution.link} rel="noopener noreferrer" target="_blank">
+              <DynamicImage
+                image={image.file.url}
+                alt={`${institution.institution} - Image not found!`}
+                className="centered image-item"
+              />
+            </a>
+          </Col>
+        ))}
+      </Row>
+
+      <div className="centered short-line" />
+    </>
+  );
+};
