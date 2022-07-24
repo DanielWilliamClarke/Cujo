@@ -1,5 +1,5 @@
 import { useInjection } from "inversify-react";
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useState, useCallback, useMemo } from "react";
 import { Row, Col, Form, Button } from "react-bootstrap";
 
 import { Fade, Zoom } from "react-awesome-reveal";
@@ -19,19 +19,20 @@ type ContactProps = {
 export const Contact: React.FC<ContactProps> = ({ profiles }: ContactProps): JSX.Element => {
   const contactService = useInjection(IContactService.$);
   const [status, setStatus] = useState(false);
-  const divider = {
+  
+  const divider = useMemo(() => ({
     background: styles.colorBrand,
     foreground: styles.colorDarkBg,
-  };
+  }), []);
 
-  const handleSubmit = async (event: ChangeEvent<HTMLFormElement>) => {
+  const handleSubmit = useCallback(async (event: ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
     const status = await contactService.submit(
       new FormData(event.target)
     );
     event.target.reset();
     setStatus(status);
-  }
+  }, [contactService]);
 
   return (
     <Fade triggerOnce direction="up">

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { Fade } from "react-awesome-reveal";
 import { Row, Col } from "react-bootstrap";
 import { PDFDownloadLink } from "@react-pdf/renderer";
@@ -21,7 +21,7 @@ pdfjs.GlobalWorkerOptions.workerSrc =
 const CVPreview: React.FC<CVProps> = ({ cv }: CVProps): JSX.Element => {
   const dateService = useInjection(IDateService.$);
 
-  const renderPDF = async (url: string, canvas: HTMLCanvasElement) => {
+  const renderPDF = useCallback(async (url: string, canvas: HTMLCanvasElement) => {
     if (!url || !canvas) {
       return;
     }
@@ -51,7 +51,7 @@ const CVPreview: React.FC<CVProps> = ({ cv }: CVProps): JSX.Element => {
       transform: transform,
       viewport: viewport,
     });
-  }
+  }, []);
 
   return (
     <Fade triggerOnce direction="up">

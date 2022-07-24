@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import {
   buildStyles,
   CircularProgressbarWithChildren,
@@ -15,7 +15,7 @@ type ProgressGaugeProps = {
 
 export const ProgressGauge: React.FC<ProgressGaugeProps> = ({ value, colors, children }: ProgressGaugeProps): JSX.Element => {
   const [visible, setVisible] = useState(false);
-  const colormap = interpolate(colors);
+  const colormap = useMemo(() => interpolate(colors), [colors]);
 
   return (
     <VisibilitySensor>
