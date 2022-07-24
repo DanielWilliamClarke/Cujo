@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import { Fade } from "react-awesome-reveal";
 
@@ -27,25 +27,26 @@ interface ShareProps {
 }
 
 export const SharePanel: React.FC<ShareProps> = ({url, title, body, hashtag}: ShareProps): JSX.Element => {
-
   const [show, setShow] = useState(false);
   const [slim, setSlim] = useState(true);
 
-  window.addEventListener("scroll", () => {
-    setShow(window.scrollY > 0);
-  });
-  window.addEventListener("resize", () => {
-    setSlim(window.innerWidth < 600);
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      setShow(window.scrollY > 0);
+    });
+    window.addEventListener("resize", () => {
+      setSlim(window.innerWidth < 600);
+    });
   });
 
-  const sanitize = (input: string): string => {
+  const sanitize = useCallback((input: string): string => {
     return input.replace(/(<([^>]+)>)/gi, "");
-  }
+  }, []);
 
-  const prepareTitle = (title: string | undefined): string => {
+  const prepareTitle = useCallback((title: string | undefined): string => {
     const prefix = "DanielClarke.tech";
     return title ? `${prefix} - ${title}` : prefix;
-  }
+  }, []);
 
   const size: number = 40;
 

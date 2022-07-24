@@ -21,16 +21,18 @@ export const SketchBackstretch: React.FC<CVProps> = ({ cv }: CVProps): JSX.Eleme
     new p5(getSketch(), p5Ref.current);
   }, [p5Ref]);
 
-  const currentRole = cv.work.entries
-    .filter(
-      ({ startDate }: Work) =>
-        !dateService.IsFuture(startDate.toString())
-    )
-    .sort(
-      (a, b) =>
-        dateService.toUnix(b.startDate.toString()) -
-        dateService.toUnix(a.startDate.toString())
-    )[0];
+  const currentRole = useMemo(() => {
+    return cv.work.entries
+      .filter(
+        ({ startDate }: Work) =>
+          !dateService.IsFuture(startDate.toString())
+      )
+      .sort(
+        (a, b) =>
+          dateService.toUnix(b.startDate.toString()) -
+          dateService.toUnix(a.startDate.toString())
+      )[0]
+  }, [cv.work.entries, dateService]);
 
   return (
     <section id="home">

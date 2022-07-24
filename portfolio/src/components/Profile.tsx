@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { Fade } from "react-awesome-reveal";
 import { Helmet } from "react-helmet";
 
@@ -11,9 +11,9 @@ import { Projects } from "./profile/Projects";
 import { Technical } from "./profile/Technical";
 
 export const Profile: React.FC<CVProps> = ({ cv }: CVProps): JSX.Element => {
-  const portfolioProject = cv.projects.entries.find(
+  const portfolioProject = useMemo(() => cv.projects.entries.find(
     (project: Project) => project.rank === 2
-  );
+  ), [cv]);
 
   return (
     <>

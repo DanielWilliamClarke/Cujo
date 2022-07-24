@@ -1,5 +1,5 @@
 import { useInjection } from "inversify-react";
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Nav, Navbar } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
 import Scrollspy from "react-scrollspy";
@@ -12,19 +12,22 @@ export const NavPanel: React.FC = (): JSX.Element => {
   const [bg, setBg] = useState<string | undefined>(undefined);
   const location = useLocation();
 
-  const buildMenuItems = (): string[] => {
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      setBg(window.scrollY < window.innerHeight ? undefined : "dark");
+    });
+  })
+
+  const buildMenuItems = useCallback((): string[] => {
     return location.pathname === "/"
       ? ["about", "experience", "education", "skills", "projects"]
       : ["post"];
-  };
+  }, [location]);
 
-  window.addEventListener("scroll", () => {
-    setBg(window.scrollY < window.innerHeight ? undefined : "dark");
-  });
-
-  const menu = ["home"]
+  const menu = useMemo(() => (["home"]
     .concat(buildMenuItems())
-    .concat(["blog", "cv", "profiles"]);
+    .concat(["blog", "cv", "profiles"])), 
+    [buildMenuItems]);
 
   return (
       <Navbar

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { Row, Col } from "react-bootstrap";
 import { Zoom } from "react-awesome-reveal";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
@@ -82,11 +82,11 @@ export const Technical: React.FC<TechnicalProps> = ({ skills }: TechnicalProps):
 const SkillsSection: React.FC<SkillsProps> = ({ skills, summary, search }: SkillsProps): JSX.Element => {
   const gaugeColors = ["#FB6962", "#FB6962", "#FCFC99", "#0CC078", "#0CC078"];
 
-  const filterSkills = (name: string): boolean => {
+  const filterSkills = useCallback((name: string): boolean => {
     return search.length
       ? name.toLowerCase().includes(search.toLowerCase())
       : true;
-  }
+  }, [search]);
 
   return (
     <>

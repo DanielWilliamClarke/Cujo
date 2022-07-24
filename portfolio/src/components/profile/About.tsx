@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useMemo } from "react";
 import { Row, Col, Carousel } from "react-bootstrap";
 import { Fade, Zoom } from "react-awesome-reveal";
 import { Block, INLINES, Inline } from "@contentful/rich-text-types";
@@ -16,7 +16,7 @@ type AboutProps = {
 };
 
 export const About: React.FC<AboutProps> = ({ about }: AboutProps): JSX.Element => {
-  const options = {
+  const options = useMemo(() => ({
     renderNode: {
       [INLINES.HYPERLINK]: (
         { data }: Block | Inline,
@@ -27,7 +27,7 @@ export const About: React.FC<AboutProps> = ({ about }: AboutProps): JSX.Element 
         </a>
       ),
     }
-  }
+  }), []);
 
   return (
     <Section id="about" title="About">

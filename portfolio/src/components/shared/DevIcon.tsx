@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { useInjection } from "inversify-react";
 import { DevIcon } from "../../model/CVModel";
 import { IIconService } from "../../services/IconService";
@@ -12,16 +12,15 @@ type DevIconProps = {
 
 export const DevIconName: React.FC<DevIconProps> = ({ icon, color }: DevIconProps): JSX.Element => {
   const iconService = useInjection(IIconService.$);
-  let iconComponent: JSX.Element;
 
-  const Icon = iconService.get(icon.name);
-  if (Icon) {
-    iconComponent = <Icon className="icon-override" />;
-  } else {
-    iconComponent = (
-      <span className={`icon devicon-${icon.icon}`} />
-    );
-  }
+  const iconComponent = useMemo(() => {
+    const Icon = iconService.get(icon.name);
+    if (Icon) {
+      return <Icon className="icon-override" />;
+    } else {
+      return <span className={`icon devicon-${icon.icon}`} />;
+    }
+  }, [iconService, icon]);
 
   return (
     <div className="dev-icon" style={{ color: color }}>

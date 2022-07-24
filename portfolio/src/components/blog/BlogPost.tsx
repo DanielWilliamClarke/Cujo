@@ -10,7 +10,7 @@ import {
 import { Helmet } from "react-helmet";
 
 import { useInjection } from "inversify-react";
-import React, { ReactNode } from "react";
+import React, { ReactNode, useMemo } from "react";
 import { Fade } from "react-awesome-reveal";
 import { Col, Row } from "react-bootstrap";
 import readingTime from "reading-time";
@@ -42,9 +42,9 @@ export const BlogPost: React.FC<BlogProps> = ({ id, blog }: BlogProps): JSX.Elem
   const dateService = useInjection(IDateService.$);
   dateService.format("Do MMMM YYYY HH:mm:ss");
 
-  const post = blog.entries.find(
+  const post = useMemo(() => blog.entries.find(
     (post: Post) => post.id === id
-  );
+  ), [blog.entries, id]);
 
   return (
     <>
@@ -75,7 +75,7 @@ const PostContent: React.FC<PostProps> = ({ post, includes }: PostProps) => {
   dateService.format("Do MMMM YYYY HH:mm:ss");
 
   const stats = readingTime(documentToPlainTextString(post.content));
-  const options = {
+  const options = useMemo(() => ({
     renderMark: {
       [MARKS.CODE]: (text: ReactNode): JSX.Element => (
         <SyntaxHighlighter
@@ -89,7 +89,7 @@ const PostContent: React.FC<PostProps> = ({ post, includes }: PostProps) => {
       ),
     },
     renderNode: {
-      [BLOCKS.HR]: (node: Block | Inline): JSX.Element => (
+      [BLOCKS.HR]: (): JSX.Element => (
         <div className="long-line centered" />
       ),
       [INLINES.HYPERLINK]: (
@@ -126,7 +126,7 @@ const PostContent: React.FC<PostProps> = ({ post, includes }: PostProps) => {
         );
       },
     },
-  };
+  }), [includes]);
 
   return (
     <Fade triggerOnce direction="left">
