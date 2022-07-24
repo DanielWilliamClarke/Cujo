@@ -3,6 +3,7 @@ import { Fade } from "react-awesome-reveal";
 import {
   Route,
   RouteComponentProps,
+  BrowserRouter as Router,
   Switch
 } from "react-router-dom";
 
@@ -35,14 +36,16 @@ type BlogRouteParams = { id: string };
 
 export const App: React.FC<AppProps> = ({ cv, blog }: AppProps): JSX.Element => {
   return (
-    <Switch>
-      <Route exact path="/cv">
-        <CVExport cv={cv} />
-      </Route>
-      <Route exact path="/*">
-        <Portfolio cv={cv} blog={blog} />
-      </Route>
-    </Switch>
+    <Router>
+      <Switch>
+        <Route exact path="/cv">
+          <CVExport cv={cv} />
+        </Route>
+        <Route exact path="/*">
+          <Portfolio cv={cv} blog={blog} />
+        </Route>
+      </Switch>
+    </Router>
   )
 };
 
