@@ -60,15 +60,11 @@ const Portfolio: React.FC<AppProps> = ({ cv, blog }: AppProps): JSX.Element => {
           </Route>
           <Route path={"/blog/:id"}>
             {({ match }: RouteComponentProps<BlogRouteParams>): JSX.Element =>
-              blog ? (
-                <BlogPost id={match.params.id} blog={blog} />
-              ) : (
-                <></>
-              )
+              <BlogPost id={match.params.id} blog={blog} />
             }
           </Route>
         </Switch>
-        {blog && <Blog blog={blog} />}
+        <Blog blog={blog} />
         <CVPreview cv={cv} />
         <footer id="footer">
           <Contact profiles={cv.about.entry.profiles} />

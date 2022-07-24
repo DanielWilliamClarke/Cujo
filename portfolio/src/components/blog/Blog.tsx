@@ -84,12 +84,9 @@ const BlogSummaryPanel: React.FC<BlogSummaryProps> = ({ post, index }: BlogSumma
               {dateService.toSentence(post.sys.createdAt.toString())}{" "}
             </Card.Text>
             <Lanyard tags={post.tags} />
-            <Card.Text
-              className="text-muted"
-              dangerouslySetInnerHTML={{
-                __html: post.excerpt,
-              }}
-            />
+            <Card.Text className="text-muted">
+              {post.excerpt}
+            </Card.Text>
             <small className="text-muted">{stats.text}</small>
           </Card.Body>
 
