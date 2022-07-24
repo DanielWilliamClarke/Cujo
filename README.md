@@ -204,12 +204,12 @@ docker-compose --env-file <SECRET ENV FILE> -f prod.compose.yaml down (-v)
 
 ## // Todo
 
-- [ ] Swap React class components for React functional components
 - [ ] Add Rust code coverage
 - [ ] Write front end tests
 
 ## // Done
 
+- [x] Swap React class components for React functional components
 - [x] Use GraphQL client to frontend
 - [x] Add a GraphQL API to backend
 - [x] Trigger recache on contentful update
