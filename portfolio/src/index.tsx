@@ -53,7 +53,7 @@ export const Cujo: React.FC = (): JSX.Element => {
     );
   }
 
-  window.prerenderReady = true;
+  setTimeout(() => window.prerenderReady = true, 2000);
   const { cv, blog } = data!
   return (
     <Router>
