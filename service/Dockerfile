@@ -1,16 +1,13 @@
 #BUILD -----------------------------------
-FROM rust:1.59 as build
+FROM rustlang/rust:nightly as build
 
 WORKDIR ./cujo
 
 COPY . .
-RUN rustup default nightly && \
-  cargo install --path .
+RUN cargo install --path .
 
 #RELEASE -----------------------------------
-FROM debian:buster-slim
-
-RUN apt-get update -y && apt-get install -y ca-certificates libssl-dev
+FROM gcr.io/distroless/cc-debian11
 
 WORKDIR /cujo
 

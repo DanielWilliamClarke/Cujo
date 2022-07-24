@@ -5,7 +5,6 @@ import LogRocket from "logrocket";
 import setupLogRocketReact from "logrocket-react";
 import React, { Suspense } from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter as Router } from "react-router-dom";
 import { createClient, Provider as UrqlProvider, useQuery } from 'urql';
 
 import { BlockReverseLoading } from "./components/shared/BlockReverseLoading";
@@ -56,11 +55,9 @@ export const Cujo: React.FC = (): JSX.Element => {
   setTimeout(() => window.prerenderReady = true, 2000);
   const { cv, blog } = data!
   return (
-    <Router>
-      <Suspense fallback={<div>Loading...</div>}>
-        <App cv={cv} blog={blog} />
-      </Suspense>
-    </Router>
+    <Suspense fallback={<div>Loading...</div>}>
+      <App cv={cv} blog={blog} />
+    </Suspense>
   );
 }
 
