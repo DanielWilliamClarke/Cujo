@@ -157,3 +157,5 @@ const PostContent: React.FC<PostProps> = ({ post, includes }: PostProps) => {
     </Fade>
   );
 }
+
+export default BlogPost;

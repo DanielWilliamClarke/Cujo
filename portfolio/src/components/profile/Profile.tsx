@@ -1,14 +1,15 @@
+import { profile } from "console";
 import React, { useMemo } from "react";
 import { Fade } from "react-awesome-reveal";
 import { Helmet } from "react-helmet";
 
-import { CVProps, Project } from "../model/CVModel";
-import { SharePanel } from "./nav/SharePanel";
-import { About } from "./profile/About";
-import { Education } from "./profile/Education";
-import { Experience } from "./profile/Experience";
-import { Projects } from "./profile/Projects";
-import { Technical } from "./profile/Technical";
+import { CVProps, Project } from "../../model/CVModel";
+import { SharePanel } from "../nav/SharePanel";
+import { About } from "./About";
+import { Education } from "./Education";
+import { Experience } from "./Experience";
+import { Projects } from "./Projects";
+import { Technical } from "./Technical";
 
 export const Profile: React.FC<CVProps> = ({ cv }: CVProps): JSX.Element => {
   const portfolioProject = useMemo(() => cv.projects.entries.find(
@@ -57,3 +58,5 @@ export const Profile: React.FC<CVProps> = ({ cv }: CVProps): JSX.Element => {
     </>
   );
 };
+
+export default Profile;
