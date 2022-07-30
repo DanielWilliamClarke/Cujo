@@ -1,4 +1,3 @@
-import { profile } from "console";
 import React, { useMemo } from "react";
 import { Fade } from "react-awesome-reveal";
 import { Helmet } from "react-helmet";
