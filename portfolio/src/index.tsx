@@ -56,7 +56,7 @@ export const Cujo: React.FC = (): JSX.Element => {
     );
   }
 
-  setTimeout(() => window.prerenderReady = true, 2000);
+  setTimeout(() => window.prerenderReady = true, 3000);
   const { cv, blog } = data!
   return (
     <Suspense fallback={<div>Loading...</div>}>
