@@ -308,3 +308,4 @@ docker-compose --env-file <SECRET ENV FILE> -f prod.compose.yaml down (-v)
 - GraphQL Client load GQL files - `GraphQL` <https://github.com/apollographql/graphql-tag/issues/42>
   - Craco Plugin - `GraphQL`  <https://www.npmjs.com/package/craco-graphql-loader>
 - GraphQL Request - `GraphQL`  <https://github.com/prisma-labs/graphql-request>
+- GZipping bundles to load page faster - `GZip` <https://stackoverflow.com/questions/55704772/how-to-compress-build-with-without-ejecting-create-react-app-also-include-compr>
