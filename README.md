@@ -204,11 +204,15 @@ docker-compose --env-file <SECRET ENV FILE> -f prod.compose.yaml down (-v)
 
 ## // Todo
 
+- [ ] Find out why all images are loading twice
+- [ ] Convert all pngs and jpgs to Avifs
+- [ ] Switch all gifs to WebMs
 - [ ] Add Rust code coverage
 - [ ] Write front end tests
 
 ## // Done
 
+- [x] Fixed huge react bundle sizes - it was `react-icons` the whole time
 - [x] Swap React class components for React functional components
 - [x] Use GraphQL client to frontend
 - [x] Add a GraphQL API to backend
