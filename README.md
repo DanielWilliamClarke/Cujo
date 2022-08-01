@@ -309,3 +309,5 @@ docker-compose --env-file <SECRET ENV FILE> -f prod.compose.yaml down (-v)
   - Craco Plugin - `GraphQL`  <https://www.npmjs.com/package/craco-graphql-loader>
 - GraphQL Request - `GraphQL`  <https://github.com/prisma-labs/graphql-request>
 - GZipping bundles to load page faster - `GZip` <https://stackoverflow.com/questions/55704772/how-to-compress-build-with-without-ejecting-create-react-app-also-include-compr>
+- React Icons Tree shaking doesn't work - `React` <https://github.com/react-icons/react-icons/issues/289>
+  - Styled Icons to the rescue <https://github.com/styled-icons/styled-icons>
