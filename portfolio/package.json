@@ -65,7 +65,6 @@
     "react-circular-progressbar": "^2.0.4",
     "react-dom": "^17.0.2",
     "react-helmet": "^6.1.0",
-    "react-icons": "^4.2.0",
     "react-router-dom": "^5.2.0",
     "react-scrollspy": "^3.4.3",
     "react-share": "^4.4.0",
@@ -75,8 +74,10 @@
     "reading-time": "^1.5.0",
     "reflect-metadata": "^0.1.13",
     "simplex-noise": "^2.4.0",
-    "util": "^0.12.4",
-    "urql": "^2.2.3"
+    "styled-components": "^5.3.5",
+    "styled-icons": "^10.45.0",
+    "urql": "^2.2.3",
+    "util": "^0.12.4"
   },
   "devDependencies": {
     "@craco/craco": "^6.4.5",

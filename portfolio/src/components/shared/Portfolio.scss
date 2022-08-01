@@ -55,7 +55,7 @@
   .section-icon {
     font-size: calc(20px + 0.25vw);
     margin-top: 20px;
-    width: 100%;
+    width: calc(20px + .25vw);
   }
 }
 
@@ -307,15 +307,13 @@
   .section-dark,
   .section-light,
   .section {
-    text-align: left;
-
     .container {
       padding-top: 20px;
+      text-align: left;
     }
 
     .section-icon {
       text-align: center !important;
-      width: 100%;
     }
   }
 

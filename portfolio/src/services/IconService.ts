@@ -1,39 +1,39 @@
 import { injectable, interfaces } from "inversify";
-import { IconType } from "react-icons";
-import { GiCardDraw } from "react-icons/gi";
-import { FaDeviantart, FaWizardsOfTheCoast } from "react-icons/fa";
-import { HiLightBulb, HiLightningBolt } from "react-icons/hi";
-import {
-  SiNotion,
-  SiAndroidstudio,
-  SiContentful,
-  SiXcode,
-  SiReactivex,
-  SiAzuredevops,
-  SiCmake,
-  SiP5Dotjs,
-  SiPowershell,
-  SiVultr,
-  SiSfml,
-} from "react-icons/si";
-import {
-  MdBolt,
-  MdBook,
-  MdCampaign,
-  MdFingerprint,
-  MdHardware,
-  MdHistoryEdu,
-  MdHome,
-  MdLoyalty,
-  MdReportProblem,
-  MdSchool,
-  MdCatchingPokemon,
-  MdCloudDownload,
-} from "react-icons/md";
+import { StyledIcon } from '@styled-icons/styled-icon';
+
+import { HatWizard } from "@styled-icons/fa-solid/HatWizard";
+import { WizardsOfTheCoast } from "@styled-icons/fa-brands/WizardsOfTheCoast";
+import { Deviantart } from "@styled-icons/boxicons-logos/Deviantart";
+import { LightBulb } from "@styled-icons/heroicons-outline/LightBulb";
+
+import { Notion } from "@styled-icons/simple-icons/Notion";
+import { Androidstudio } from "@styled-icons/simple-icons/Androidstudio";
+import { Contentful } from "@styled-icons/simple-icons/Contentful";
+import { Xcode } from "@styled-icons/simple-icons/Xcode";
+import { Reactivex } from "@styled-icons/simple-icons/Reactivex";
+import { Azuredevops } from "@styled-icons/simple-icons/Azuredevops";
+import { Cmake } from "@styled-icons/simple-icons/Cmake";
+import { P5dotjs } from "@styled-icons/simple-icons/P5dotjs";
+import { Powershell } from "@styled-icons/simple-icons/Powershell";
+import { Vultr } from "@styled-icons/simple-icons/Vultr";
+import { Sfml } from "@styled-icons/simple-icons/Sfml";
+
+import { Bolt } from "@styled-icons/material/Bolt";
+import { Book } from "@styled-icons/material/Book";
+import { Campaign } from "@styled-icons/material/Campaign";
+import { Fingerprint } from "@styled-icons/material/Fingerprint";
+import { Hardware } from "@styled-icons/material/Hardware";
+import { HistoryEdu } from "@styled-icons/material/HistoryEdu";
+import { Home } from "@styled-icons/material/Home";
+import { Loyalty } from "@styled-icons/material/Loyalty";
+import { ReportProblem } from "@styled-icons/material/ReportProblem";
+import { School } from "@styled-icons/material/School";
+import { CatchingPokemon } from "@styled-icons/material/CatchingPokemon";
+import { CloudDownload } from "@styled-icons/material/CloudDownload";
 
 export interface IIconService {
-  get(id: string): IconType | undefined;
-  getWithDefault(id: string): IconType;
+  get(id: string): StyledIcon | undefined;
+  getWithDefault(id: string): StyledIcon;
 }
 
 export namespace IIconService {
@@ -41,52 +41,52 @@ export namespace IIconService {
 }
 
 type IconMap = {
-  [key: string]: IconType;
+  [key: string]: StyledIcon;
 };
 
 export type IconWithDefaultState = {
-  icon: IconType;
+  icon: StyledIcon;
 };
 
 @injectable()
 export class IconService implements IIconService {
   iconMap: IconMap = {
-    home: MdHome,
-    about: MdFingerprint,
-    experience: MdLoyalty,
-    education: MdSchool,
-    skills: MdBolt,
-    projects: MdHardware,
-    blog: MdBook,
-    cv: MdCloudDownload,
-    post: MdHistoryEdu,
-    profiles: MdCampaign,
-    work: HiLightningBolt,
-    school: HiLightBulb,
+    home: Home,
+    about: Fingerprint,
+    experience: Loyalty,
+    education: School,
+    skills: Bolt,
+    projects: Hardware,
+    blog: Book,
+    cv: CloudDownload,
+    post: HistoryEdu,
+    profiles: Campaign,
+    work: Bolt,
+    school: LightBulb,
 
     // DevIcon overrides
-    DeviantArt: FaDeviantart,
-    Notion: SiNotion,
-    "Android Studio": SiAndroidstudio,
-    Contentful: SiContentful,
-    XCode: SiXcode,
-    Rx: SiReactivex,
-    "Azure DevOps": SiAzuredevops,
-    CMake: SiCmake,
-    Pokémon: MdCatchingPokemon,
-    "p5.js": SiP5Dotjs,
-    Powershell: SiPowershell,
-    Magic: FaWizardsOfTheCoast,
-    Vultr: SiVultr,
-    MoxField: GiCardDraw,
-    SFML: SiSfml,
+    DeviantArt: Deviantart,
+    Notion: Notion,
+    "Android Studio": Androidstudio,
+    Contentful: Contentful,
+    XCode: Xcode,
+    Rx: Reactivex,
+    "Azure DevOps": Azuredevops,
+    CMake: Cmake,
+    Pokémon: CatchingPokemon,
+    "p5.js": P5dotjs,
+    Powershell: Powershell,
+    Magic: WizardsOfTheCoast,
+    Vultr: Vultr,
+    MoxField: HatWizard,
+    SFML: Sfml,
   };
 
-  get(id: string): IconType | undefined {
+  get(id: string): StyledIcon | undefined {
     return this.iconMap[id];
   }
 
-  getWithDefault(id: string): IconType {
-    return this.iconMap[id] ?? MdReportProblem;
+  getWithDefault(id: string): StyledIcon {
+    return this.iconMap[id] ?? ReportProblem;
   }
 }

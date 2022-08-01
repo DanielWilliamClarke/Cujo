@@ -34,8 +34,8 @@ export const Section: React.FC<SectionProps> = ({ children, ...props }: SectionP
         />
         {children}
         <div className="centered short-line" />
-        <Icon className="section-icon" />
       </Container>
+      <Icon className="centered section-icon" />
     </section>
   );
 };
