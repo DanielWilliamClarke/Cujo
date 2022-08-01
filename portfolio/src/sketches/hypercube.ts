@@ -1,5 +1,5 @@
 import p5 from "p5";
-import { Sketch } from ".";
+import { Sketch, sample } from ".";
 import { Vector4D, MatrixUtils } from "./matrix_utils";
 
 type RotationGenerator = (angle: number) => number[][];
@@ -66,8 +66,8 @@ export class Hypercube implements Sketch {
   ];
 
   private currentRotations: RotationGenerator[] = [
-    this.generators3d.sample(),
-    this.generators4d.sample(),
+    sample(this.generators3d),
+    sample(this.generators4d),
   ];
 
   constructor(private readonly p: p5) {}

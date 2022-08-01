@@ -1,18 +1,5 @@
 import p5 from "p5";
-import { Sketch } from ".";
-
-declare global {
-  interface Array<T> {
-    sample(): T;
-  }
-}
-
-if (!Array.prototype.sample) {
-  // eslint-disable-next-line no-extend-native
-  Array.prototype.sample = function (): any {
-    return this[Math.floor(Math.random() * this.length)];
-  };
-}
+import { Sketch, sample } from ".";
 
 export class Phylotaxis implements Sketch {
   private n = 0;
@@ -48,7 +35,7 @@ export class Phylotaxis implements Sketch {
     this.p.blendMode(this.p.DIFFERENCE);
     this.p.createCanvas(window.innerWidth, window.innerHeight, this.p.WEBGL);
     this.p.perspective();
-    this.selectedGenerator = this.magicAngleGenerators.sample();
+    this.selectedGenerator = sample(this.magicAngleGenerators);
   }
 
   windowResized() {
@@ -107,7 +94,7 @@ export class Phylotaxis implements Sketch {
     }
     this.n += this.growth ? this.increment : -this.increment;
     if (this.n <= 0) {
-      this.selectedGenerator = this.magicAngleGenerators.sample();
+      this.selectedGenerator = sample(this.magicAngleGenerators);
     }
 
     this.start += 5;
