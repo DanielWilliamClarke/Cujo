@@ -20,7 +20,9 @@ import "./index.scss";
 
 import CujoQuery from './Cujo.gql';
 
-const Portfolio = React.lazy(() => import(/* webpackChunkName: "App" */ "./components/App"));
+const Portfolio = React.lazy(
+  () => import(/* webpackChunkName: "App" */ "./components/App")
+);
 const CVExport = React.lazy(
   () => import(/* webpackChunkName: "CVExport" */ "./components/cv/CVExport")
 );
