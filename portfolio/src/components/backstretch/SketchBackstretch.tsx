@@ -15,12 +15,6 @@ export const SketchBackstretch: React.FC<CVProps> = ({ cv }: CVProps): JSX.Eleme
   const dateService = useInjection(IDateService.$);
   dateService.format("MMMM YYYY", "YYYY-MM-DD")
 
-  // Similar to componentDidMount and componentDidUpdate:
-  const p5Ref = useMemo(() => React.createRef<any>(), []);
-  useEffect(() => {
-    new p5(getSketch(), p5Ref.current);
-  }, [p5Ref]);
-
   const currentRole = useMemo(() => {
     return cv.work.entries
       .filter(
@@ -33,6 +27,12 @@ export const SketchBackstretch: React.FC<CVProps> = ({ cv }: CVProps): JSX.Eleme
           dateService.toUnix(a.startDate.toString())
       )[0]
   }, [cv.work.entries, dateService]);
+
+  // Similar to componentDidMount and componentDidUpdate:
+  const p5Ref = useMemo(() => React.createRef<any>(), []);
+  useEffect(() => {
+    new p5(getSketch(cv, currentRole), p5Ref.current);
+  }, [p5Ref, cv, currentRole]);
 
   return (
     <section id="home">

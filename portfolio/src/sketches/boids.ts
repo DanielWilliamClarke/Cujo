@@ -1,9 +1,16 @@
 import p5 from "p5";
 import { Sketch } from ".";
+import { CV, Skill, Work } from "../model/CVModel";
+import { DateService, IDateService } from "../services/DateService";
 
 const fontName = require("../assets/QuartzoBold-W9lv.otf").default;
 
 const p5v: { sub(a: p5.Vector, b: p5.Vector): p5.Vector } = p5.Vector;
+
+type BoidsWord = {
+  word: string;
+  angle: number;
+}
 
 export class Boids implements Sketch {
   private vehicles: Vehicle[] = [];
@@ -11,26 +18,32 @@ export class Boids implements Sketch {
   private sampleFactor: number = 0.1;
 
   private wordIndex = 0;
-  private words = [
-    { word: "Daniel", angle: 120 },
-    { word: "William", angle: -120 },
-    { word: "Clarke", angle: 120 },
-    { word: "Full Stack", angle: -120 },
-    { word: "Software", angle: 120 },
-    { word: "Engineer", angle: -120 },
-    { word: "Freetrade", angle: 120 },
-    { word: "Rust", angle: -120 },
-    { word: "Golang", angle: 120 },
-    { word: "C++", angle: -120 },
-    { word: "Kotlin", angle: 120 },
-    { word: "Swift", angle: -120 },
-    { word: "TypeScript", angle: 120 },
-  ];
+
+  private words: BoidsWord[];
 
   constructor(
     private readonly p: p5,
+    private readonly cv: CV,
+    private readonly currentRole: Work,
+    private readonly dateService: IDateService = new DateService(),
     private readonly noiseGenerator: NoiseGenerator = new NoiseGenerator(p)
-  ) {}
+  ) {
+    this.dateService.format("MMMM YYYY", "YYYY-MM-DD")
+
+    this.words = [
+      ...this.cv.about.entry.name.split(" "),
+      ...currentRole.position.split(" "),
+      this.currentRole.company,
+      ...[
+        ...this.cv.skills.entry.favorite.map((skill: Skill) => skill.name),
+        ...this.cv.skills.entry.current.map((skill: Skill) => skill.name),
+        ...this.cv.skills.entry.used.map((skill: Skill) => skill.name)
+      ].sort(() => Math.random() - 0.5)
+    ].map((word: string, index: number) => ({
+      word,
+      angle: index % 2 ? 120 : -120
+    }))
+  }
 
   private myFont!: p5.Font;
   preload() {
@@ -63,7 +76,7 @@ export class Boids implements Sketch {
     this.p.rotateX(120);
 
     this.p.rotateY(this.words[this.wordIndex].angle);
-    this.p.scale(0.7);
+    this.p.scale(0.2);
 
     this.vehicles.forEach((v: Vehicle) =>
       v.behaviors(this.noiseGenerator.getCoord()).update().show()
@@ -75,8 +88,8 @@ export class Boids implements Sketch {
 
     const fontSize = this.getFontSizeTextInBounds(
       newText,
-      this.p.width - padding,
-      this.p.height - padding
+      this.p.width * 3,
+      this.p.height * 3
     );
     var bounds = this.myFont.textBounds(newText, 0, 0, fontSize) as {
       w: number;
@@ -155,7 +168,7 @@ export class Boids implements Sketch {
         v.setTarget(this.p.createVector(points[index].x, points[index].y));
         const hue = this.p.map(index, 0, length, 0, 255);
         v.setColor(new HSLA(hue, 60, 100));
-        v.setSize(this.p.max(5, this.p.width * 0.001));
+        v.setSize(this.p.max(10, this.p.width * 0.001));
       });
   };
 }
