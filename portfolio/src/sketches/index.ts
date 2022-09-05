@@ -1,6 +1,6 @@
 import p5 from "p5";
 import { CV, Work } from "../model/CVModel";
-import { conway3D } from "./conway_3d"
+// import { conway3D } from "./conway_3d"
 import { Boids } from "./boids";
 import { Boxes } from "./boxes";
 import { Conway } from "./conway";

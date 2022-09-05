@@ -84,8 +84,6 @@ export class Boids implements Sketch {
   }
 
   private setupBoidsForWord = (newText: string) => {
-    const padding = this.p.width * 0.1;
-
     const fontSize = this.getFontSizeTextInBounds(
       newText,
       this.p.width * 3,
