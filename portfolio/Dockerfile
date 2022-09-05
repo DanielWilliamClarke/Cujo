@@ -1,5 +1,5 @@
 #BUILD -----------------------------------
-FROM node:14.15.5-alpine as build
+FROM node:14.20.0-alpine as build
 
 ARG BUILD_MODE
 
