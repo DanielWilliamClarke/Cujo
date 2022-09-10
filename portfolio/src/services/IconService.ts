@@ -1,4 +1,4 @@
-import { injectable, interfaces } from "inversify";
+import { interfaces } from "inversify";
 import { StyledIcon } from '@styled-icons/styled-icon';
 
 import { HatWizard } from "@styled-icons/fa-solid/HatWizard";
@@ -48,7 +48,6 @@ export type IconWithDefaultState = {
   icon: StyledIcon;
 };
 
-@injectable()
 export class IconService implements IIconService {
   iconMap: IconMap = {
     home: Home,

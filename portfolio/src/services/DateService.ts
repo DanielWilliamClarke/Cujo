@@ -1,4 +1,4 @@
-import { injectable, interfaces } from "inversify";
+import { interfaces } from "inversify";
 import moment from "moment";
 import util from "util";
 
@@ -17,7 +17,6 @@ export namespace IDateService {
   export const $: interfaces.ServiceIdentifier<IDateService> = Symbol('IDateService');
 }
 
-@injectable()
 export class DateService implements IDateService {
   private outFormat: string | undefined;
   private inFormat: string | undefined;
