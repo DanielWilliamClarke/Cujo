@@ -3,7 +3,9 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Nav, Navbar } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
 import Scrollspy from "react-scrollspy";
+
 import { IIconService } from "../../services/IconService";
+import { ThemeSetter } from "../theme/ThemeSetter";
 
 import "./NavPanel.scss";
 
@@ -57,6 +59,8 @@ export const NavPanel: React.FC = (): JSX.Element => {
               );
             })}
           </Scrollspy>
+
+          <ThemeSetter/>
         </Nav>
       </Navbar>
     );

@@ -2,23 +2,28 @@
 
 .sketch-backstretch {
   align-items: center;
-  background: $col-bg-light;
-  background: linear-gradient(
-    0deg,
-    $col-back-grad-sketch-high,
-    $col-back-grad-sketch-low 60%
-  );
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  color: $col-text-main;
+  
   display: flex;
   height: 100vh;
   justify-content: center;
   text-align: center;
   transition: 0.5;
   margin-bottom: -70px;
+
+  color: ft($theme-dark, $col-text-main);
+
+  @include themed() {
+    background: t($col-bg-light);
+    background: linear-gradient(
+      0deg,
+      t($col-back-grad-sketch-high),
+      t($col-back-grad-sketch-low) 60%
+    );
+  }
 
   canvas {
     position: absolute;
@@ -31,17 +36,24 @@
     .backstretch-main {
       font-size: calc(30px + 3vw);
       font-weight: 700;
-      text-shadow: 0 0 50px $col-bg-dark;
+      @include themed() {
+        text-shadow: 0 0 50px t($col-back-text-shadow);
+      }
     }
 
     .backstretch-tag {
       font-size: calc(15px + 1vw);
-      font-weight: 100;
-      text-shadow: 0 0 50px $col-bg-dark;
+      font-weight: 400;
+
+      @include themed() {
+        text-shadow: 0 0 50px t($col-back-text-shadow);
+      }
     }
 
     .line {
-      background-color: $col-main-brand;
+      @include themed() {
+        background-color: t($col-main-brand);
+      }
     }
   }
 

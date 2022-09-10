@@ -30,7 +30,9 @@
     }
 
     &.active {
-      color: $col-main-brand !important;
+      @include themed() {
+        color: t($col-main-brand) !important;
+      }
     }
 
     &.active,

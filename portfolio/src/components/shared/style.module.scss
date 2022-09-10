@@ -1,10 +1,17 @@
 @import "./Palette.scss";
 
 :export {
-  colorBrand: $col-main-brand;
-  colorSubBrand: $col-sub-brand;
-  colorDarkBg: $col-bg-light;
-  colorLightBg: $col-bg-dark;
-  colorMuted: $col-text-muted;
-  colorOffWhite: $col-back-off-white;
+  dark-colorBrand: ft($theme-dark, $col-main-brand);
+  dark-colorSubBrand: ft($theme-dark, $col-sub-brand);
+  dark-colorDarkBg: ft($theme-dark, $col-bg-light);
+  dark-colorLightBg: ft($theme-dark, $col-bg-dark);
+  dark-colorMuted: ft($theme-dark, $col-text-muted);
+  dark-colorOffWhite: ft($theme-dark, $col-back-off-white);
+
+  light-colorBrand: ft($theme-light, $col-main-brand);
+  light-colorSubBrand: ft($theme-light, $col-sub-brand);
+  light-colorDarkBg: ft($theme-light, $col-bg-light);
+  light-colorLightBg: ft($theme-light, $col-bg-dark);
+  light-colorMuted: ft($theme-light, $col-text-muted);
+  light-colorOffWhite: ft($theme-light, $col-back-off-white);
 }

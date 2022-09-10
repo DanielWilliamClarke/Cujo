@@ -2,14 +2,24 @@
 
 .skills {
   .skill-items {
-    color: $col-text-title;
     font-weight: 500;
     padding: 20px 0;
+    border-radius: 6px;
+    padding: 30px;
+    margin-bottom: 30px;
+    background: ft($theme-dark, $col-bg-light);
+
+    @include themed() {
+      color: t($col-text-title);
+    }
 
     .col {
       min-width: 200px;
       max-width: 220px;
-      text-shadow: 0 0 25px $col-shadow;
+
+      @include themed() {
+        text-shadow: 0 0 25px t($col-shadow);
+      }
     }
   }
 
@@ -31,13 +41,16 @@
   .skills-input {
     transition: 0.5s;
     border-radius: 6px;
-    background: $col-bg-light;
-    color: $col-text-main;
-    border: 1px solid $col-bg-dark;
     width: 50%;
     font-size: 2em;
     margin: 10px 0;
     text-align: center;
+
+    @include themed() {
+      background: t($col-bg-light);
+      color: t($col-text-main);
+      border: 1px solid t($col-bg-dark);
+    }
 
     &:focus-within {
       width: 100%;

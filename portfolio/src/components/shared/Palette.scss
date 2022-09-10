@@ -1,27 +1,129 @@
-// Brand colors
-$col-main-brand: #ffd166;
-$col-sub-brand: #118ab2;
-$col-accent-zing: #ef476f;
+$theme-dark: "dark";
+$theme-light: "light";
 
-$col-accent-high: #06d6a0;
-$col-accent-low: #118ab2;
+$themes: (
+    dark: ( // Brand $colors
+        col-main-brand: #ffd166,
+        col-sub-brand: #118ab2,
+        col-accent-zing: #ef476f,
 
-// Text colors
-$col-text-main: #eeeeee;
-$col-text-title: #cccccc;
-$col-text-heading: #dddddd;
-$col-text-muted: #999999;
+        col-accent-high: #06d6a0,
+        col-accent-low: #118ab2,
 
-// background colours
-$col-shadow: #222222;
-$col-bg-light: #1f242c;
-$col-bg-dark: #1d424e;
+        // Text $colors
+        col-text-main: #eeeeee,
+        col-text-title: #cccccc,
+        col-text-heading: #dddddd,
+        col-text-muted: #999999,
 
-// gradient colours
-$col-back-grad-high: #4b6cb74d;
-$col-back-grad-low: #1828484d;
+        // background $colours
+        col-shadow: #222222,
+        col-bg-light: #1f242c,
+        col-bg-dark: #1d424e,
 
-$col-back-grad-sketch-high: #118ab24d;
-$col-back-grad-sketch-low: #18284844;
+        // gradient $colours
+        col-back-grad-sketch-high: #118ab24d,
+        col-back-grad-sketch-low: #18284844,
+        col-back-text-shadow: #1d424e,
 
-$col-back-off-white: #fdfdfd;
+        col-contact-text: #1f242c,
+        col-contact-input: #cccccc,
+        
+        col-back-off-white: #fdfdfd,
+
+        col-timeline-line: #ffffff,
+
+        work-logo-brightness: 100%
+    ),
+    light: ( // Brand $colors
+        col-main-brand: #06d6a0,
+        col-sub-brand: #118ab2,
+        col-accent-zing: #f67451,
+
+        col-accent-high: #372248,
+        col-accent-low: #171123,
+
+        // Text $colors
+        col-text-main: #333333,
+        col-text-title: #555555,
+        col-text-heading: #666666,
+        col-text-muted: #888888,
+
+        // background $colours
+        col-shadow: #22222200,
+        col-bg-light: #F2EFE6,
+        col-bg-dark: #FFFCF2,
+
+        // 403d39 252422
+
+        // gradient $colours
+        col-back-grad-sketch-high: #118ab24d,
+        col-back-grad-sketch-low: #18284844,
+        col-back-text-shadow: #00000000,
+
+        col-contact-text: #1f242c,
+        col-contact-input: #cccccc,
+
+        col-back-off-white: #fdfdfd,
+        col-timeline-line: #333333,
+
+        work-logo-brightness: 0%
+    )
+);
+
+@mixin themed() {
+    @each $theme, $map in $themes {
+        .theme--#{$theme} & {
+            transition: 0.5s;
+            $theme-map: () !global;
+
+            @each $key, $submap in $map {
+                $value: ft($theme, $key);
+                $theme-map: map-merge($theme-map, ($key: $value)) !global;
+            }
+
+            @content;
+            $theme-map: null !global;
+        }
+    }
+}
+
+@function t($key) {
+    @return map-get($theme-map, $key);
+}
+
+// force theme
+@function ft($theme, $key) {
+    @return map-get(map-get($themes, $theme), '#{$key}');
+}
+
+$col-main-brand: 'col-main-brand';
+$col-sub-brand: 'col-sub-brand';
+$col-accent-zing: 'col-accent-zing';
+
+$col-accent-high: 'col-accent-high';
+$col-accent-low: 'col-accent-low';
+
+// Text $colors
+$col-text-main: 'col-text-main';
+$col-text-title: 'col-text-title';
+$col-text-heading: 'col-text-heading';
+$col-text-muted: 'col-text-muted';
+
+// background $colours
+$col-shadow: 'col-shadow';
+$col-bg-light: 'col-bg-light';
+$col-bg-dark: 'col-bg-dark';
+
+$col-contact-text: 'col-contact-text';
+$col-contact-input: 'col-contact-input';
+
+$col-back-grad-sketch-high: 'col-back-grad-sketch-high';
+$col-back-grad-sketch-low: 'col-back-grad-sketch-low';
+$col-back-text-shadow: 'col-back-text-shadow';
+
+$col-back-off-white: 'col-back-off-white';
+
+$col-timeline-line: 'col-timeline-line';
+
+$work-logo-brightness: 'work-logo-brightness';

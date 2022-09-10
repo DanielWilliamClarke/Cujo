@@ -50,10 +50,12 @@
 
   .code-snippet {
     border-radius: 6px;
-    box-shadow: 0 0 25px $col-shadow;
-
     width: 75%;
     margin: 50px auto;
+
+    @include themed() {
+      box-shadow: 0 0 25px t($col-shadow);
+    }
   }
 
   .text-muted {

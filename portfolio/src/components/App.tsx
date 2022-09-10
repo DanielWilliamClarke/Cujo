@@ -6,14 +6,15 @@ import {
   Switch
 } from "react-router-dom";
 
+import { Post } from "../model/BlogPost";
+import { CV as CVModel } from "../model/CVModel";
+import { Entries } from "../model/Includes";
 import { Copyright } from "./backstretch/Copyright";
 import { SketchBackstretch } from "./backstretch/SketchBackstretch";
 import { Blog } from "./blog/Blog";
 import { Contact } from "./contact/Contact";
 import { NavPanel } from "./nav/NavPanel";
-import { Post } from "../model/BlogPost";
-import { CV as CVModel } from "../model/CVModel";
-import { Entries } from "../model/Includes";
+import { ThemeProvider } from "./theme/ThemeProvider";
 
 import "./App.scss";
 import CVPreview from "./cv/CVPreview";
@@ -34,7 +35,7 @@ type BlogRouteParams = { id: string };
 
 export const Portfolio: React.FC<AppProps> = ({ cv, blog }: AppProps): JSX.Element => {
   return (
-    <>
+    <ThemeProvider>
       <Fade triggerOnce damping={0.01}>
         <SketchBackstretch cv={cv} />
       </Fade>
@@ -57,7 +58,7 @@ export const Portfolio: React.FC<AppProps> = ({ cv, blog }: AppProps): JSX.Eleme
           <Copyright name={cv.about.entry.name}/>
         </footer>
       </div>
-    </>
+    </ThemeProvider>
   );
 };
 

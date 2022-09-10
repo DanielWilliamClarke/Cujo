@@ -1,18 +1,23 @@
 @import "../shared/Palette.scss";
 
 .copyright-footer {
-  background-color: $col-bg-light !important;
-
-  .row {
-    margin-bottom: 10px;
-  }
+  color: ft($theme-dark, col-text-main) !important;
+  background-color: ft($theme-dark, $col-bg-light) !important;
 
   .copyright:after {
-    color: $col-main-brand !important;
+    @include themed() {
+      color: t($col-main-brand) !important;
+    }
   }
 
   .short-line {
-    background-color: $col-main-brand !important;
+    @include themed() {
+      background-color: t($col-main-brand) !important;
+    }
+  }
+
+  .row {
+    margin-bottom: 10px;
   }
 }
 

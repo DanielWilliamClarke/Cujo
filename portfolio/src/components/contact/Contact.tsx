@@ -1,6 +1,6 @@
 import { useInjection } from "inversify-react";
-import React, { ChangeEvent, useState, useCallback, useMemo } from "react";
-import { Row, Col, Form, Button } from "react-bootstrap";
+import React, { ChangeEvent, useCallback, useContext, useMemo, useState } from "react";
+import { Button, Col, Form, Row } from "react-bootstrap";
 
 import { Fade, Zoom } from "react-awesome-reveal";
 
@@ -8,9 +8,11 @@ import { Profile } from "../../model/CVModel";
 import { IContactService } from "../../services/ContactService";
 import { DevIconName } from "../shared/DevIcon";
 import { Section } from "../shared/Section";
+import ThemeContext from "../theme/ThemeContext";
+import { DividerProps } from "../shared/TriangleDivider";
 
-import "./Contact.scss";
 import styles from "../shared/style.module.scss";
+import "./Contact.scss";
 
 type ContactProps = {
   profiles: Profile[];
@@ -18,12 +20,13 @@ type ContactProps = {
 
 export const Contact: React.FC<ContactProps> = ({ profiles }: ContactProps): JSX.Element => {
   const contactService = useInjection(IContactService.$);
+  const { theme } = useContext(ThemeContext);
   const [status, setStatus] = useState(false);
-  
-  const divider = useMemo(() => ({
-    background: styles.colorBrand,
-    foreground: styles.colorDarkBg,
-  }), []);
+
+  const divider = useMemo<DividerProps>(() => ({
+    background: styles[`${theme}-colorBrand`],
+    foreground: styles[`${theme}-colorDarkBg`],
+  }), [theme ]);
 
   const handleSubmit = useCallback(async (event: ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -32,7 +35,7 @@ export const Contact: React.FC<ContactProps> = ({ profiles }: ContactProps): JSX
     );
     event.target.reset();
     setStatus(status);
-  }, [contactService]);
+  }, [ contactService ]);
 
   return (
     <Fade triggerOnce direction="up">

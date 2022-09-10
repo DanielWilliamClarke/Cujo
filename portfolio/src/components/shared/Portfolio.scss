@@ -3,10 +3,13 @@
 .section,
 .section-light,
 .section-dark {
-  color: $col-text-main;
   margin: 0 auto;
   padding: 75px 0;
   position: relative;
+
+  @include themed() {
+    color: t($col-text-main);
+  }
 
   .section-title {
     color: $col-text-title;
@@ -17,6 +20,10 @@
     padding: 0;
     text-align: center;
     text-transform: capitalize;
+
+    @include themed() {
+      color: t($col-text-title);
+    }
   }
 
   .section-content {
@@ -27,9 +34,12 @@
   h4,
   h5,
   h6 {
-    color: $col-text-heading;
     font-weight: 700;
     text-transform: capitalize;
+
+    @include themed() {
+      color: t($col-text-heading);
+    }
   }
 
   h3 {
@@ -68,10 +78,13 @@
 .line,
 .short-line,
 .long-line {
-  background: $col-text-title;
   display: block;
   height: 1px;
   padding: 0 !important;
+
+  @include themed() {
+    background: t($col-text-title);
+  }
 }
 
 .line {
@@ -179,12 +192,21 @@
 
 .timeline {
   .vertical-timeline-element-content {
-    color: $col-text-main;
     box-shadow: none;
     transition: 0.5s;
 
     &:hover {
       transform: scale(1.02);
+    }
+
+    @include themed() {
+      color: t($col-text-main);
+    }
+  }
+
+  &:before {
+    @include themed() {
+      background: t($col-timeline-line);
     }
   }
 }
@@ -196,50 +218,69 @@
 }
 
 @mixin section-coloring($bg, $color, $card-color) {
-  background-color: $bg;
-
+  @include themed() {
+    background-color: t($bg);
+  }
+ 
   .short-line,
   .line,
   .long-line {
-    background-color: $color;
+    @include themed() {
+      background-color: t($color);
+    }
   }
 
   .col-item::after {
-    color: $color;
+    @include themed() {
+      color: t($color);
+    }
   }
 
   .dot::after,
   .dash::after,
   .at::after,
   .copyright:after {
-    color: $color;
     margin: 0 10px;
+
+    @include themed() {
+      color: t($color);
+    }
   }
 
   li::marker {
-    color: $color;
+    @include themed() {
+      color: t($color);
+    }
   }
 
   .bg-dark {
-    background-color: $card-color  !important;
+    @include themed() {
+      background-color: t($card-color)  !important;
+    }
   }
 
   .dev-icon {
     transition: 0.5s;
 
     &:hover {
-      color: $color;
       transform: scale(1.2);
+      @include themed() {
+        color: t($color);
+      }
     }
   }
 
   .section-icon {
-    color: $color;
+    @include themed() {
+      color: t($color);
+    }
   }
 
   .image-item,
   img {
-    box-shadow: 0 0 25px $col-shadow;
+    @include themed() {
+      box-shadow: 0 0 25px t($col-shadow);
+    }
   }
 
   .timeline {
@@ -247,20 +288,32 @@
     margin-top: 20px;
 
     .vertical-timeline-element-icon {
-      background-color: $color;
+      @include themed() {
+        background-color: t($color);
+      }
+
+      svg {
+        color: ft($theme-dark, $col-text-main);
+      }
     }
 
     .vertical-timeline-element-content {
-      background-color: $card-color;
+      @include themed() {
+        background-color: t($card-color);
+      }
     }
 
     .vertical-timeline-element-content-arrow {
-      border-right: 7px solid $card-color;
+      @include themed() {
+        border-right: 7px solid t($card-color);
+      }
     }
   }
 
   .bg-portfolio {
-    background-color: $color;
+    @include themed() {
+      background-color: t($color);
+    }
   }
 }
 

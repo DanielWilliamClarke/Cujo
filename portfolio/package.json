@@ -46,8 +46,9 @@
   "dependencies": {
     "@contentful/rich-text-plain-text-renderer": "^15.11.1",
     "@contentful/rich-text-react-renderer": "^15.11.1",
-    "@react-pdf/renderer": "2.1.0",
+    "@lottiefiles/react-lottie-player": "^3.4.7",
     "@react-pdf/font": "2.2.0",
+    "@react-pdf/renderer": "2.1.0",
     "axios": "^0.21.1",
     "bootstrap": "^5.1.0",
     "color-interpolate": "^1.0.5",

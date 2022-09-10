@@ -1,12 +1,16 @@
 @import "../shared/Palette.scss";
 
 .profiles {
-  background-color: $col-main-brand !important;
-  color: $col-bg-light !important;
+  @include themed() {
+    background-color: t($col-main-brand) !important;
+    color: t($col-contact-text) !important;
+  }
 
   .section-title,
   h3 {
-    color: $col-bg-light;
+    @include themed() {
+      color: t($col-contact-text);
+    }
   }
 
   h3 {
@@ -16,11 +20,15 @@
   .line,
   .long-line,
   .short-line {
-    background-color: $col-bg-light !important;
+    @include themed() {
+      background-color: t($col-contact-text) !important;
+    }
   }
 
   .section-icon {
-    color: $col-bg-light !important;
+    @include themed() {
+      color: t($col-contact-text) !important;
+    }
   }
 
   .socials {
@@ -37,12 +45,17 @@
       width: 175px;
 
       &:hover {
-        background-color: #{$col-bg-light}cc;
+        @include themed() {
+          background-color: #{t($col-contact-text)}cc;
+        }
 
         .dev-icon {
-          color: $col-main-brand !important;
           transition-delay: 0.1s;
           transform: scale(1.2);
+
+          @include themed() {
+            color: t($col-main-brand) !important;
+          }
         }
       }
     }
@@ -50,8 +63,10 @@
     a {
       &:link,
       &:visited {
-        color: $col-bg-light;
         text-decoration: none;
+        @include themed() {
+          color: t($col-contact-text);
+        }
       }
     }
   }
@@ -76,10 +91,13 @@
     width: 500px;
 
     .contact-input {
-      background: $col-bg-light;
-      color: $col-text-main;
-      border: 1px solid $col-bg-dark;
       margin: 10px 0;
+
+      @include themed() {
+        background: t($col-contact-text);
+        color: t($col-contact-input);
+        border: 1px solid t($col-bg-dark);
+      }
     }
 
     .btn {
