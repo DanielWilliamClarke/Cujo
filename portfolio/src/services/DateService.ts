@@ -1,3 +1,5 @@
+/* eslint-disable  @typescript-eslint/no-unused-vars */
+
 import { injectable, interfaces } from "inversify";
 import moment from "moment";
 import util from "util";

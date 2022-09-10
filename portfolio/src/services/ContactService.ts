@@ -1,3 +1,5 @@
+/* eslint-disable  @typescript-eslint/no-unused-vars */
+
 import axios, { AxiosResponse } from "axios";
 import { injectable, interfaces } from "inversify";
 

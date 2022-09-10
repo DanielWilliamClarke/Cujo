@@ -50,7 +50,7 @@ jobs:
 
   test-build-push-portfolio:
     docker:
-      - image: cimg/node:14.17.5
+      - image: cimg/node:14.20.0
     resource_class: large
     steps:
       - checkout

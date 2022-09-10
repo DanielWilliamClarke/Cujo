@@ -1,3 +1,5 @@
+/* eslint-disable  @typescript-eslint/no-unused-vars */
+
 import { injectable, interfaces } from "inversify";
 import { StyledIcon } from '@styled-icons/styled-icon';
 
@@ -83,6 +85,7 @@ export class IconService implements IIconService {
   };
 
   get(id: string): StyledIcon | undefined {
+    const a = 0;
     return this.iconMap[id];
   }
 
