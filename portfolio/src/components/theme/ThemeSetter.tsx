@@ -6,6 +6,8 @@ import switcher from '../../assets/theme_toggle.json';
 
 import ThemeContext from "./ThemeContext";
 
+import './ThemeSetter.scss';
+
 enum ThemeOptions {
   LIGHT = "light",
   DARK = "dark"
@@ -29,7 +31,10 @@ export const ThemeSetter: React.FC = () => {
   };
 
   return (
-    <div onClick={toggle}>
+    <div
+      className="theme-toggle"
+      onClick={toggle
+      }>
       <Player
         onEvent={(event) => {
           if (event === 'load') {
@@ -43,7 +48,10 @@ export const ThemeSetter: React.FC = () => {
         loop={false}
         controls={false}
         src={switcher}
-        style={{ height: '75px', width: '75px' }}
+        style={{
+          height: '75px',
+          width: '75px'
+        }}
       />
     </div>
   );
