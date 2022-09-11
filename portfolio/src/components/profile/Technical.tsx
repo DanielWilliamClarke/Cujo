@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { HTMLAttributes, useCallback, useState } from "react";
 import { Row, Col } from "react-bootstrap";
 import { Zoom } from "react-awesome-reveal";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
@@ -17,7 +17,7 @@ type TechnicalProps = {
   skills: Entry<Skills>;
 };
 
-type SkillsProps = {
+type SkillsProps = HTMLAttributes<HTMLDivElement> & {
   summary: Document;
   skills: Skill[];
   search: string;
@@ -53,20 +53,21 @@ export const Technical: React.FC<TechnicalProps> = ({ skills }: TechnicalProps):
       <SkillsSection
         skills={skills.entry.current}
         summary={skills.entry.currentSummary}
-        search={search} 
-        />
+        search={search}
+      />
 
       <SkillsSection
         skills={skills.entry.favorite}
         summary={skills.entry.favoriteSummary}
         search={search}
-        />
+      />
 
       <SkillsSection
         skills={skills.entry.used}
         summary={skills.entry.usedSummary}
-        search={search} 
-        />
+        search={search}
+        className="skills-small"
+      />
 
       <Row className="section-content">
         <Col>
@@ -79,7 +80,9 @@ export const Technical: React.FC<TechnicalProps> = ({ skills }: TechnicalProps):
   );
 }
 
-const SkillsSection: React.FC<SkillsProps> = ({ skills, summary, search }: SkillsProps): JSX.Element => {
+const SkillsSection: React.FC<SkillsProps> = (
+  { skills, summary, search, className = "" }: SkillsProps
+): JSX.Element => {
   const gaugeColors = ["#FB6962", "#FB6962", "#FCFC99", "#0CC078", "#0CC078"];
 
   const filterSkills = useCallback((name: string): boolean => {
@@ -93,7 +96,7 @@ const SkillsSection: React.FC<SkillsProps> = ({ skills, summary, search }: Skill
       <Row className="section-content">
         <Col>{documentToReactComponents(summary)}</Col>
       </Row>
-      <Row className="skill-items">
+      <Row className={`skill-items ${className}`}>
         <Zoom triggerOnce cascade damping={0.01} className="col centered">
           {skills
             .filter(({ name }: Skill) => filterSkills(name))

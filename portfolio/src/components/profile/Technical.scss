@@ -38,6 +38,24 @@
     }
   }
 
+  .skills-small {
+    .icon-override,
+    .icon {
+      font-size: 30px;
+      width: 30px;
+    }
+
+    .icon-name {
+      font-size: 0.6rem;
+      margin: 0.2rem;
+    }
+
+    .col {
+      min-width: 125px !important;
+      max-width: 125px !important;
+    }
+  }
+
   .skills-input {
     transition: 0.5s;
     border-radius: 6px;
