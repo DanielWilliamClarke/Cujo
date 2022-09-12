@@ -1,21 +1,24 @@
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { useInjection } from "inversify-react";
-import React from "react";
+import React, { useContext, useMemo } from "react";
 import { Col, Row } from "react-bootstrap";
 import {
   VerticalTimeline,
-  VerticalTimelineElement,
+  VerticalTimelineElement
 } from "react-vertical-timeline-component";
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import { Entries, Media } from "../../model/Includes";
 import { Education as EducationModel } from "../../model/CVModel";
+import { Entries, Media } from "../../model/Includes";
 import { IDateService } from "../../services/DateService";
 import { IIconService } from "../../services/IconService";
 import { DynamicImage } from "../shared/DynamicImage";
 import { Lanyard } from "../shared/Lanyard";
 import { Section } from "../shared/Section";
+import ThemeContext from "../theme/ThemeContext";
 
 import "../shared/Portfolio.scss";
 import "./Education.scss";
+
+import styles from "../shared/style.module.scss";
 
 type EducationProps = {
   education: Entries<EducationModel>;
@@ -31,6 +34,10 @@ export const Education: React.FC<EducationProps> = ({ education }: EducationProp
 
   const iconService = useInjection(IIconService.$);
   const Icon = iconService.getWithDefault("school");
+  const BabyIcon = iconService.getWithDefault("baby");
+  
+  const { theme } = useContext(ThemeContext);
+  const background = useMemo(() => (styles[`${theme}-colorBrand`]), [ theme ]);
 
   return (
     <Section id="education" title="Education">
@@ -54,6 +61,11 @@ export const Education: React.FC<EducationProps> = ({ education }: EducationProp
               <Institution institution={e} />
             </VerticalTimelineElement>
           ))}
+          <VerticalTimelineElement
+            iconStyle={{ background }}
+            contentStyle={{ backgroundColor: 'transparent' }}
+            icon={<BabyIcon />}
+          />
       </VerticalTimeline>
     </Section>
   );

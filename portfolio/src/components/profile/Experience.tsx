@@ -1,5 +1,5 @@
 import { useInjection } from "inversify-react";
-import React from "react";
+import React, { useContext, useMemo } from "react";
 import { Col, Row } from "react-bootstrap";
 import {
   VerticalTimeline,
@@ -14,8 +14,12 @@ import { DynamicImage } from "../shared/DynamicImage";
 import { Lanyard } from "../shared/Lanyard";
 import { Section } from "../shared/Section";
 
+import ThemeContext from "../theme/ThemeContext";
+
 import "../shared/Portfolio.scss";
 import "./Experience.scss";
+
+import styles from "../shared/style.module.scss";
 
 type WorkProps = {
   work: Entries<Work>;
@@ -31,6 +35,10 @@ export const Experience: React.FC<WorkProps> = ({ work }: WorkProps): JSX.Elemen
 
   const iconService = useInjection(IIconService.$);
   const Icon = iconService.getWithDefault("work");
+  const EducationIcon = iconService.getWithDefault("education");
+  
+  const { theme } = useContext(ThemeContext);
+  const background = useMemo(() => (styles[`${theme}-colorBrand`]), [ theme ]);
 
   return (
     <Section id="experience" title="Experience">
@@ -60,6 +68,11 @@ export const Experience: React.FC<WorkProps> = ({ work }: WorkProps): JSX.Elemen
               </VerticalTimelineElement>
             )
           )}
+          <VerticalTimelineElement
+            iconStyle={{ background }}
+            contentStyle={{ backgroundColor: 'transparent' }}
+            icon={<EducationIcon />}
+          />
       </VerticalTimeline>
     </Section>
   );

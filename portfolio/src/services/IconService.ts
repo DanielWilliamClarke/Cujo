@@ -32,6 +32,7 @@ import { ReportProblem } from "@styled-icons/material/ReportProblem";
 import { School } from "@styled-icons/material/School";
 import { CatchingPokemon } from "@styled-icons/material/CatchingPokemon";
 import { PaperPlane } from "@styled-icons/boxicons-regular/PaperPlane";
+import { Baby } from '@styled-icons/fa-solid/Baby';
 
 export interface IIconService {
   get(id: string): StyledIcon | undefined;
@@ -65,6 +66,7 @@ export class IconService implements IIconService {
     contact: Campaign,
     work: Bolt,
     school: LightBulb,
+    baby: Baby,
 
     // DevIcon overrides
     DeviantArt: Deviantart,
