@@ -1,6 +1,6 @@
 import React, { ReactNode, useMemo } from "react";
 import { Row, Col, Carousel } from "react-bootstrap";
-import { Fade, Zoom } from "react-awesome-reveal";
+import { Fade } from "react-awesome-reveal";
 import { Block, INLINES, Inline } from "@contentful/rich-text-types";
 import { Entry, Media } from "../../model/Includes";
 import { About as AboutModel } from "../../model/CVModel";
