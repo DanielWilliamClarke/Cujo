@@ -26,7 +26,7 @@ export const Contact: React.FC<ContactProps> = ({ profiles }: ContactProps): JSX
   const divider = useMemo<DividerProps>(() => ({
     background: styles[`${theme}-colorBrand`],
     foreground: styles[`${theme}-colorDarkBg`],
-  }), [theme ]);
+  }), [ theme ]);
 
   const handleSubmit = useCallback(async (event: ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -40,8 +40,8 @@ export const Contact: React.FC<ContactProps> = ({ profiles }: ContactProps): JSX
   return (
     <Fade triggerOnce direction="up">
       <Section
-        id="profiles"
-        title="Profiles"
+        id="contact"
+        title="Contact"
         withDivider={divider}
       >
         <Row className="section-content socials">
@@ -65,7 +65,7 @@ export const Contact: React.FC<ContactProps> = ({ profiles }: ContactProps): JSX
           <div className="contact-form centered">
             <Row className="form-title">
               <Col>
-                <h3>Send me a message!</h3>
+                <h3>Get in touch!</h3>
               </Col>
             </Row>
             <Form onSubmit={handleSubmit}>
@@ -74,7 +74,7 @@ export const Contact: React.FC<ContactProps> = ({ profiles }: ContactProps): JSX
                   type="email"
                   name="email"
                   className="contact-input"
-                  placeholder="Your email"
+                  placeholder="email"
                 />
               </Form.Group>
               <Form.Group controlId="formMessage">
@@ -83,7 +83,7 @@ export const Contact: React.FC<ContactProps> = ({ profiles }: ContactProps): JSX
                   name="message"
                   rows={5}
                   className="contact-input"
-                  placeholder="Your Message"
+                  placeholder="message"
                 />
               </Form.Group>
               <Button variant="outline-dark" type="submit">

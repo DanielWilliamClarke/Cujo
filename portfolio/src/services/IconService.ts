@@ -31,7 +31,7 @@ import { Loyalty } from "@styled-icons/material/Loyalty";
 import { ReportProblem } from "@styled-icons/material/ReportProblem";
 import { School } from "@styled-icons/material/School";
 import { CatchingPokemon } from "@styled-icons/material/CatchingPokemon";
-import { CloudDownload } from "@styled-icons/material/CloudDownload";
+import { PaperPlane } from "@styled-icons/boxicons-regular/PaperPlane";
 
 export interface IIconService {
   get(id: string): StyledIcon | undefined;
@@ -60,9 +60,9 @@ export class IconService implements IIconService {
     skills: Bolt,
     projects: Hardware,
     blog: Book,
-    cv: CloudDownload,
+    cv: PaperPlane,
     post: HistoryEdu,
-    profiles: Campaign,
+    contact: Campaign,
     work: Bolt,
     school: LightBulb,
 

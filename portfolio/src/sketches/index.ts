@@ -1,4 +1,6 @@
 import p5 from "p5";
+import { detect } from "detect-browser";
+
 import { CV, Work } from "../model/CVModel";
 // import { conway3D } from "./conway_3d"
 import { Boids } from "./boids";
@@ -22,18 +24,24 @@ export interface Sketch {
   draw(): void;
 }
 
+type SketchBuilder = (p: p5) => Sketch;
+
 export const getSketch = (cv: CV, currentRole: Work): (p: p5) => void => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const sketchBuilder: (p: p5) => Sketch = sample([
+  const sketches: SketchBuilder[] = [
     (p: p5) => new Conway(p),
     (p: p5) => new Hex(p),
     (p: p5) => new Waves(p),
-    (p: p5) => new Boxes(p),
     (p: p5) => new Phylotaxis(p),
     (p: p5) => new Hypercube(p),
     (p: p5) => new Grid(p),
     (p: p5) => new Boids(p, cv, currentRole),
-  ]);
+  ];
 
-  return pauseableSketch(sketchBuilder);
+  // Boxes is super slow on Safari
+  const browser = detect();
+  if(browser?.name !== "safari") {
+    sketches.push((p: p5) => new Boxes(p))
+  }
+
+  return pauseableSketch(sample(sketches));
 }

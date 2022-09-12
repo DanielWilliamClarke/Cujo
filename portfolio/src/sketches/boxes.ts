@@ -43,7 +43,7 @@ export class Boxes implements Sketch {
 
   draw() {
     this.p.background(0);
-    this.p.orbitControl();
+    // this.p.orbitControl();
     this.p.rotateX(this.ma);
     this.p.rotateY((this.yAngle += 0.001));
 

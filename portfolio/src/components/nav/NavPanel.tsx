@@ -28,7 +28,7 @@ export const NavPanel: React.FC = (): JSX.Element => {
 
   const menu = useMemo(() => (["home"]
     .concat(buildMenuItems())
-    .concat(["blog", "cv", "profiles"])), 
+    .concat(["blog", "cv", "contact"])), 
     [buildMenuItems]);
 
   return (

@@ -55,7 +55,7 @@ const CVPreview: React.FC<CVProps> = ({ cv }: CVProps): JSX.Element => {
 
   return (
     <Fade triggerOnce direction="up">
-      <Section id="cv" bg="section-light" title="Download My CV">
+      <Section id="cv" bg="section-light" title="Download my CV">
         <Row>
           <Col>
             Please click or tap on the preview below to receive a copy 🙏
@@ -77,9 +77,9 @@ const CVPreview: React.FC<CVProps> = ({ cv }: CVProps): JSX.Element => {
                     <canvas
                       className="pdf-canvas"
                       ref={(canvas: HTMLCanvasElement) =>
-                        renderPDF(url!, canvas)
+                        renderPDF(url, canvas)
                       }
-                    ></canvas>
+                    />
                   );
                 }}
               </PDFDownloadLink>

@@ -1,6 +1,6 @@
 @import "../shared/Palette.scss";
 
-.profiles {
+.contact {
   @include themed() {
     background-color: t($col-main-brand) !important;
     color: t($col-contact-text) !important;
@@ -112,7 +112,7 @@
 }
 
 @media screen and (max-width: 700px) {
-  .profiles {
+  .contact {
     .form-title,
     .contact-response {
       text-align: center;
