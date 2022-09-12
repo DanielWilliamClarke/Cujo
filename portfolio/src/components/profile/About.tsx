@@ -32,52 +32,43 @@ export const About: React.FC<AboutProps> = ({ about }: AboutProps): JSX.Element 
   return (
     <Section id="about" title="About">
       <Row className="section-content">
-        <Zoom triggerOnce damping={0.01}>
-          <Carousel
-            indicators
-            wrap={true}
-            slide={true}
-            nextLabel={""}
-            prevLabel={""}
-          >
-            {about.entry.images.map((media: Media) => (
-              <Carousel.Item>
-                <DynamicImage
-                  image={media.file.url}
-                  alt="Image not found!"
-                  className="headshot"
-                />
-              </Carousel.Item>
-            ))}
-          </Carousel>
-        </Zoom>
-      </Row>
-
-      <Row className="section-content">
         <Col className="text-column">
-          <Fade triggerOnce direction="left">
-            {documentToReactComponents(about.entry.about, options)}
+          <Fade className="carousel" triggerOnce direction="left">
+            <Carousel
+              indicators
+              wrap={true}
+              slide={true}
+              nextLabel={""}
+              prevLabel={""}
+            >
+              {about.entry.images.map((media: Media) => (
+                <Carousel.Item>
+                  <DynamicImage
+                    image={media.file.url}
+                    alt="Image not found!"
+                    className="headshot"
+                  />
+                </Carousel.Item>
+              ))}
+            </Carousel>
           </Fade>
         </Col>
 
         <Col className="text-column">
-          <Fade triggerOnce direction="right">
-            {documentToReactComponents(
-              about.entry.interests,
-              options
-            )}
-          </Fade>
+          <div className="about-section">
+            <Fade triggerOnce direction="right">
+              {documentToReactComponents(about.entry.about, options)}
+            </Fade>
+          </div>
+          <div className="about-section">
+            <Fade triggerOnce direction="right" damping={0.01}>
+              {documentToReactComponents(
+                about.entry.interests,
+                options
+              )}
+            </Fade>
+          </div>
         </Col>
-      </Row>
-
-      <Row className="section-content">
-        <Zoom triggerOnce damping={0.01}>
-          <Col className="mailto">
-            <a href={`mailto:${about.entry.email}`}>
-              {about.entry.email}
-            </a>
-          </Col>
-        </Zoom>
       </Row>
     </Section>
   );

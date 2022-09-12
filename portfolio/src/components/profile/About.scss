@@ -1,8 +1,20 @@
 .about {
-  .interests {
-    p {
-      margin-bottom: 0.5rem;
-    }
+  .text-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 20px;
+  }
+
+  .carousel {
+    align-items: center;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+  }
+  
+  .about-section {
+    margin-bottom: 30px;
   }
 
   .mailto {
@@ -11,10 +23,11 @@
 
   .headshot {
     border-radius: 6px;
-    height: auto;
-    max-height: 500px;
+    height: 800px;
+    max-height: 100%;
     max-width: 500px;
     object-fit: cover;
     width: 100%;
   }
 }
+
