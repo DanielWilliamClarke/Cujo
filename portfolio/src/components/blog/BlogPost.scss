@@ -12,8 +12,8 @@
 
   .section-title,
   .blog-date {
-    text-align: center;
     margin: 10px 0;
+    text-align: center;
   }
 
   .blog-content {
@@ -36,8 +36,8 @@
   iframe,
   img {
     border-radius: 6px;
-    max-width: 100%;
     height: auto;
+    max-width: 100%;
   }
 
   iframe {
@@ -50,8 +50,8 @@
 
   .code-snippet {
     border-radius: 6px;
-    width: 75%;
     margin: 50px auto;
+    width: 75%;
 
     @include themed() {
       box-shadow: 0 0 25px t($col-shadow);

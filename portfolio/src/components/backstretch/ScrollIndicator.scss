@@ -1,24 +1,24 @@
 @import "../shared/Palette.scss";
 
 .indicator-container {
-  position: absolute;
-  width: 24px;
   height: 24px;
+  opacity: 0;
+  position: absolute;
   transition: opacity 1s ease-in-out;
 
-  opacity: 0;
+  width: 24px;
 
   &.visible {
     opacity: 1;
   }
 
   .chevron {
-    position: absolute;
-    width: 28px;
+    animation: move 3s ease-out infinite;
     height: 8px;
     opacity: 0;
+    position: absolute;
     transform: scale3d(0.5, 0.5, 0.5);
-    animation: move 3s ease-out infinite;
+    width: 28px;
 
     &:first-child {
       animation: move 3s ease-out 1s infinite;
@@ -31,9 +31,9 @@
     &::before,
     &::after {
       content: " ";
+      height: 100%;
       position: absolute;
       top: 0;
-      height: 100%;
       width: 51%;
 
       @include themed() {
@@ -48,8 +48,8 @@
 
     &::after {
       right: 0;
-      width: 50%;
       transform: skew(0deg, -33deg);
+      width: 50%;
     }
   }
 
@@ -75,14 +75,14 @@
   }
 
   .text {
+    animation: pulse 2s linear alternate infinite;
     display: block;
-    margin-top: 75px;
-    margin-left: -25px;
     font-size: 12px;
+    margin-left: -25px;
+    margin-top: 75px;
+    opacity: 0.25;
     text-transform: uppercase;
     white-space: nowrap;
-    opacity: 0.25;
-    animation: pulse 2s linear alternate infinite;
 
     @include themed() {
       color: t($col-main-brand);

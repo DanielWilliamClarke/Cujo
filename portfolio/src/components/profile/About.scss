@@ -12,9 +12,9 @@
   .headshot {
     border-radius: 6px;
     height: auto;
-    width: 100%;
-    max-width: 500px;
     max-height: 500px;
+    max-width: 500px;
     object-fit: cover;
+    width: 100%;
   }
 }

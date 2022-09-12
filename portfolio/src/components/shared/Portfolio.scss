@@ -163,12 +163,12 @@
 
 .carousel-indicators {
   li {
+    background-color: #fff;
     height: 2px;
-    width: 30px;
     margin: 2px;
-    background-color: white;
     opacity: 0.5;
     transition: opacity 0.6s ease-in-out;
+    width: 30px;
 
     &.active {
       opacity: 1;
@@ -212,9 +212,9 @@
 }
 
 .badge {
+  color: #fff;
   font-weight: 500;
   margin: 2px;
-  color: #ffffff;
 }
 
 @mixin section-coloring($bg, $color, $card-color) {
@@ -284,8 +284,8 @@
   }
 
   .timeline {
-    text-align: left;
     margin-top: 20px;
+    text-align: left;
 
     .vertical-timeline-element-icon {
       @include themed() {
@@ -319,6 +319,7 @@
 
 @mixin alternating-section($side, $bg, $color, $card-color: $col-bg-light) {
   div:nth-child(#{$side}) {
+
     .section {
       @include section-coloring($bg, $color, $card-color);
     }
@@ -334,7 +335,7 @@
     @include alternating-section("odd",
     $col-bg-light,
     $col-accent-zing,
-    $col-bg-dark );
+    $col-bg-dark);
     @include alternating-section("even", $col-bg-dark, $col-sub-brand);
   }
   

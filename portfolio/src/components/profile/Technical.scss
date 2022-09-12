@@ -2,20 +2,24 @@
 
 .skills {
   .skill-items {
-    font-weight: 500;
-    padding: 20px 0;
-    border-radius: 6px;
-    padding: 30px;
-    margin-bottom: 30px;
+    align-items: center;
     background: ft($theme-dark, $col-bg-light);
+    border-radius: 6px;
+    display: flex;
+    font-weight: 500;
+    margin-bottom: 30px;
+    min-height: 160px;
+    padding: 10px;
+    padding-top: 10px;
 
     @include themed() {
       color: t($col-text-title);
     }
 
     .col {
-      min-width: 200px;
-      max-width: 220px;
+      max-width: 150px;
+      min-width: 150px;
+      padding: 0 5px;
 
       @include themed() {
         text-shadow: 0 0 25px t($col-shadow);
@@ -28,12 +32,12 @@
 
     .icon-override,
     .icon {
-      font-size: 75px;
-      width: 75px;
+      font-size: 55px;
+      width: 55px;
     }
 
     .icon-name {
-      font-size: 1rem;
+      font-size: 0.7rem;
       margin: 0.2rem;
     }
   }
@@ -51,23 +55,23 @@
     }
 
     .col {
-      min-width: 125px !important;
-      max-width: 125px !important;
+      max-width: 110px !important;
+      min-width: 110px !important;
     }
   }
 
   .skills-input {
-    transition: 0.5s;
     border-radius: 6px;
-    width: 50%;
     font-size: 2em;
     margin: 10px 0;
     text-align: center;
+    transition: 0.5s;
+    width: 50%;
 
     @include themed() {
       background: t($col-bg-light);
-      color: t($col-text-main);
       border: 1px solid t($col-bg-dark);
+      color: t($col-text-main);
     }
 
     &:focus-within {

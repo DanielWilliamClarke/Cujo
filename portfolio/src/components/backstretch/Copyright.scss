@@ -1,8 +1,8 @@
 @import "../shared/Palette.scss";
 
 .copyright-footer {
-  color: ft($theme-dark, col-text-main) !important;
   background-color: ft($theme-dark, $col-bg-light) !important;
+  color: ft($theme-dark, col-text-main) !important;
 
   .copyright:after {
     @include themed() {

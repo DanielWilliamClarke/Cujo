@@ -2,22 +2,22 @@
 
 .navbar {
   height: 70px;
-  transition: 0.5s;
   padding: 0;
+  transition: 0.5s;
 
   nav {
     display: flex;
   }
 
   .nav-link {
-    transition: 0.5s;
-    text-align: center;
-    line-height: 15px;
     display: flex;
+    line-height: 15px;
+    text-align: center;
+    transition: 0.5s;
 
     svg,
     .nav-label {
-      margin: auto 0px;
+      margin: auto 0;
     }
 
     svg {

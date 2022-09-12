@@ -50,8 +50,8 @@
         }
 
         .dev-icon {
-          transition-delay: 0.1s;
           transform: scale(1.2);
+          transition-delay: 0.1s;
 
           @include themed() {
             color: t($col-main-brand) !important;
@@ -95,8 +95,8 @@
 
       @include themed() {
         background: t($col-contact-text);
-        color: t($col-contact-input);
         border: 1px solid t($col-bg-dark);
+        color: t($col-contact-input);
       }
     }
 
@@ -106,8 +106,8 @@
   }
 
   .contact-response {
-    transition: 2s;
     padding-bottom: 15px;
+    transition: 2s;
   }
 }
 

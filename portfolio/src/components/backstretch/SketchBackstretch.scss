@@ -7,14 +7,14 @@
   background-repeat: no-repeat;
   background-size: cover;
   
+  color: ft($theme-dark, $col-text-main);
   display: flex;
   height: 100vh;
   justify-content: center;
-  text-align: center;
-  transition: 0.5;
   margin-bottom: -70px;
+  text-align: center;
 
-  color: ft($theme-dark, $col-text-main);
+  transition: 0.5;
 
   @include themed() {
     background: t($col-bg-light);
@@ -65,16 +65,16 @@
 
   .my-logo {
     height: 7em;
-    top: 35px;
     position: relative;
+    top: 35px;
   }
 }
 
 .scroll-indicator {
-  position: absolute;
   bottom: 28%;
   display: flex;
   justify-content: space-around;
+  position: absolute;
 }
 
 @media screen and (max-width: 1024px) {
@@ -96,6 +96,7 @@
     .backstretch-main {
       font-size: 30px;
     }
+
     .backstretch-tag {
       font-size: 15px;
     }
