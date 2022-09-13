@@ -1,7 +1,7 @@
 import React, { ReactNode, useMemo } from "react";
 import { Row, Col, Carousel } from "react-bootstrap";
 import { Fade } from "react-awesome-reveal";
-import { Block, INLINES, Inline } from "@contentful/rich-text-types";
+import { Block, INLINES, Inline, MARKS } from "@contentful/rich-text-types";
 import { Entry, Media } from "../../model/Includes";
 import { About as AboutModel } from "../../model/CVModel";
 import { DynamicImage } from "../shared/DynamicImage";
@@ -26,8 +26,19 @@ export const About: React.FC<AboutProps> = ({ about }: AboutProps): JSX.Element 
           {children}
         </a>
       ),
-    }
+    },
   }), []);
+
+  const statementOptions = useMemo(() => ({
+    ...options,
+    renderMark: {
+      [MARKS.BOLD]:  (text: ReactNode): JSX.Element => (
+        <b className="about-focus">
+          {text}
+        </b>
+      )
+    }
+  }), [ options ]);
 
   return (
     <Section id="about" title="About">
@@ -57,7 +68,7 @@ export const About: React.FC<AboutProps> = ({ about }: AboutProps): JSX.Element 
         <Col className="text-column">
           <div className="about-section">
             <Fade triggerOnce direction="right">
-              {documentToReactComponents(about.entry.about, options)}
+              {documentToReactComponents(about.entry.about, statementOptions)}
             </Fade>
           </div>
           <div className="about-section">
