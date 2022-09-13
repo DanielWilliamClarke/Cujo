@@ -58,6 +58,7 @@ fragment Work on WorkEntries {
     images {
       ...ImageUrl
     }
+    hideFromCv
   }
   includes
 }

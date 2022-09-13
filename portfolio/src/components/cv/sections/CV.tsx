@@ -48,7 +48,7 @@ export namespace CV {
   export const render = (cv: CVModel, dateService: IDateService): JSX.Element => {
     const experience = cv.work.entries
       .filter(
-        ({ startDate }: Work) => !dateService.IsFuture(startDate.toString())
+        ({ startDate, hideFromCv }: Work) => !hideFromCv && !dateService.IsFuture(startDate.toString())
       )
       .sort(
         (a: Work, b: Work) =>

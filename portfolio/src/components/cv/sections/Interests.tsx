@@ -23,15 +23,11 @@ export namespace Interests {
   export const render = (cv: CV): JSX.Element => {
     return (
       <View>
+        {Header.render("interests")}
         {cv.about.entry.interests.content.map((node: Block, index: number) => {
           const line = documentToPlainTextString(node);
-          if (!index) {
-            return Header.render(line);
-          }
-          if (index === 1) {
-            return <Text style={pdfStyles.paragraph}>{line.trimStart()}</Text>;
-          }
-          return <Text style={pdfStyles.bullet}>{line.trimStart()}</Text>;
+          const style = !index ? pdfStyles.paragraph : pdfStyles.bullet
+          return <Text style={style}>{line.trimStart()}</Text>;
         })}
       </View>
     );

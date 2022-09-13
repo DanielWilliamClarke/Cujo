@@ -32,10 +32,7 @@ export namespace Intro {
   const options = {
     renderNode: {
       [BLOCKS.DOCUMENT]: (_: any, children: ReactNode) => <View>{children}</View>,
-      [BLOCKS.HEADING_3]: () => Header.render("profile"),
-      [BLOCKS.PARAGRAPH]: (_: any, children: ReactNode) => (
-        <View>{children}</View>
-      ),
+      [BLOCKS.PARAGRAPH]: (_: any, children: ReactNode) => <View>{children}</View>
     },
     renderText: (text: string): ReactNode => (
       <Text style={pdfStyles.paragraph}>{text.trim()}</Text>
@@ -46,6 +43,7 @@ export namespace Intro {
     return (
       <View style={pdfStyles.intro}>
         <View style={pdfStyles.profile}>
+          {Header.render("profile")}
           {documentToReactComponents(cv.about.entry.about, options)}
         </View>
         {Contact.render(cv, true)}

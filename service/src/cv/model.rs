@@ -115,6 +115,7 @@ pub struct Work {
     pub summary: Value,
     pub logo: Asset,
     pub images: Vec<Asset>,
+    pub hide_from_cv: Option<bool>,
 }
 
 #[derive(SimpleObject, Serialize, Deserialize, Debug, Clone)]

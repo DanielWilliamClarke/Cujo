@@ -35,6 +35,7 @@ export interface Work {
   summary: Document;
   logo: Media;
   images: Media[];
+  hideFromCv: boolean;
 }
 
 export interface Education {
