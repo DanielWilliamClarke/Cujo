@@ -41,7 +41,7 @@ export class Boids implements Sketch {
       ].sort(() => Math.random() - 0.5)
     ].map((word: string, index: number) => ({
       word,
-      angle: index % 2 ? 120 : -120
+      angle: index % 2 ? 270 : -270
     }))
   }
 
@@ -57,13 +57,15 @@ export class Boids implements Sketch {
     this.p.smooth();
     this.p.noStroke();
 
-    this.setupBoidsForWord(this.words[this.wordIndex].word);
+    const {word, angle} = this.words[this.wordIndex];
+    this.setupBoidsForWord(word, angle);
     setInterval(() => {
       this.wordIndex++;
       if (this.wordIndex >= this.words.length) {
         this.wordIndex = 0;
       }
-      this.setupBoidsForWord(this.words[this.wordIndex].word);
+      const {word, angle} = this.words[this.wordIndex];
+      this.setupBoidsForWord(word, angle);
     }, 3000);
   }
 
@@ -75,7 +77,7 @@ export class Boids implements Sketch {
     this.p.background(0);
     this.p.rotateX(120);
 
-    this.p.rotateY(this.words[this.wordIndex].angle);
+    // this.p.rotateY(this.words[this.wordIndex].angle);
     this.p.scale(0.2);
 
     this.vehicles.forEach((v: Vehicle) =>
@@ -83,7 +85,7 @@ export class Boids implements Sketch {
     );
   }
 
-  private setupBoidsForWord = (newText: string) => {
+  private setupBoidsForWord = (newText: string, angle: number) => {
     const fontSize = this.getFontSizeTextInBounds(
       newText,
       this.p.width * 3,
@@ -98,7 +100,8 @@ export class Boids implements Sketch {
     const points = this.myFont.textToPoints(newText, x, y, fontSize, {
       sampleFactor: this.sampleFactor,
     });
-    this.migrateToNewPoints(points);
+
+    this.migrateToNewPoints(points, angle);
   };
 
   private getFontSizeTextInBounds = (
@@ -118,7 +121,7 @@ export class Boids implements Sketch {
     return fontSize;
   };
 
-  private migrateToNewPoints = (points: p5.Vector[]) => {
+  private migrateToNewPoints = (points: p5.Vector[], angle: number) => {
     if (!this.vehicles.length) {
       //FIRST TIME CREATION
       this.vehicles.push(
@@ -163,7 +166,8 @@ export class Boids implements Sketch {
       .sort((a, b) => a.sort - b.sort)
       .map(({ value }) => value)
       .forEach((v, index, { length }) => {
-        v.setTarget(this.p.createVector(points[index].x, points[index].y));
+        const vec = this.p.createVector(points[index].x, points[index].y);
+        v.setTarget(vec.rotate(angle));
         const hue = this.p.map(index, 0, length, 0, 255);
         v.setColor(new HSLA(hue, 60, 100));
         v.setSize(this.p.max(10, this.p.width * 0.001));
