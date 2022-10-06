@@ -1,0 +1,11 @@
+.lanyard {
+  .tag {
+    text-transform: capitalize;
+    transition: 0.2s;
+
+    &:hover {
+      margin: 0 1%;
+      transform: scale(1.05);
+    }
+  }
+}

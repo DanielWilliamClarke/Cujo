@@ -1,0 +1,30 @@
+@import "../shared/Palette.scss";
+
+.copyright-footer {
+  background-color: ft($theme-dark, $col-bg-light) !important;
+  color: ft($theme-dark, col-text-main) !important;
+
+  .copyright:after {
+    @include themed() {
+      color: t($col-main-brand) !important;
+    }
+  }
+
+  .short-line {
+    @include themed() {
+      background-color: t($col-main-brand) !important;
+    }
+  }
+
+  .row {
+    margin-bottom: 10px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .copyright-footer {
+    .row {
+      text-align: center;
+    }
+  }
+}

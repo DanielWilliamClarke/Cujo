@@ -1,0 +1,101 @@
+@import "../shared/Palette.scss";
+
+.skills {
+  .skill-items {
+    align-items: center;
+    background: ft($theme-dark, $col-bg-light);
+    border-radius: 6px;
+    display: flex;
+    font-weight: 500;
+    margin-bottom: 30px;
+    min-height: 160px;
+    padding: 10px;
+    padding-top: 10px;
+
+    @include themed() {
+      color: t($col-text-title);
+    }
+
+    .col {
+      max-width: 150px;
+      min-width: 150px;
+      padding: 0 5px;
+
+      @include themed() {
+        text-shadow: 0 0 25px t($col-shadow);
+      }
+    }
+  }
+
+  .dev-icon {
+    width: 100%;
+
+    .icon-override,
+    .icon {
+      font-size: 55px;
+      width: 55px;
+    }
+
+    .icon-name {
+      font-size: 0.7rem;
+      margin: 0.2rem;
+    }
+  }
+
+  .skills-small {
+    .icon-override,
+    .icon {
+      font-size: 30px;
+      width: 30px;
+    }
+
+    .icon-name {
+      font-size: 0.6rem;
+      margin: 0.2rem;
+    }
+
+    .col {
+      max-width: 110px !important;
+      min-width: 110px !important;
+    }
+  }
+
+  .skills-input {
+    border-radius: 6px;
+    font-size: 2em;
+    margin: 10px 0;
+    text-align: center;
+    transition: 0.5s;
+    width: 50%;
+
+    @include themed() {
+      background: t($col-bg-light);
+      border: 1px solid t($col-bg-dark);
+      color: t($col-text-main);
+    }
+
+    &:focus-within {
+      width: 100%;
+    }
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .skills {
+    .skill-items {
+      margin: 20px 0;
+    }
+
+    .col {
+      flex-basis: 0;
+    }
+
+    .dev-icon {
+      text-align: center;
+    }
+
+    .search {
+      text-align: center;
+    }
+  }
+}

@@ -1,0 +1,111 @@
+.projects {
+  .project {
+    padding: 60px 0;
+
+    .project-image,
+    .project-content {
+      align-content: center;
+      display: flex;
+      flex-wrap: wrap;
+      text-align: left;
+    }
+
+    .project-content {
+      .content {
+        padding-bottom: 10px;
+
+        .summary {
+          padding-top: 20px;
+        }
+      }
+
+      .content {
+        padding-top: 10px;
+        width: 100%;
+      }
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .dev-icon {
+      text-align: center;
+      width: 75px;
+
+      .icon-override,
+      .icon {
+        font-size: 75px;
+        width: 75px;
+      }
+
+      .icon-name {
+        font-size: 1rem;
+        margin: 0.2rem;
+      }
+    }
+
+    .project-image {
+      .image-link {
+        display: inline-block;
+        position: relative;
+        transition: 0.5s;
+        width: 100%;
+
+        img {
+          border-radius: 6px;
+          max-height: 350px;
+          object-fit: cover;
+          width: 100%;
+        }
+
+        .overlay {
+          background-color: #000;
+          border-radius: 6px;
+          transition: 0.5s;
+        }
+
+        .overlay,
+        .dev-icon {
+          align-items: center;
+          display: flex;
+          flex-direction: column;
+          height: 100%;
+          justify-content: center;
+          left: 0;
+          opacity: 0;
+          position: absolute;
+          top: 0;
+          width: 100%;
+        }
+
+        &:hover {
+          transform: scale(1.05);
+
+          .overlay {
+            opacity: 0.7;
+          }
+
+          .dev-icon {
+            opacity: 1;
+          }
+        }
+      }
+    }
+  }
+
+  .project-panels:nth-child(even) {
+    .row {
+      flex-direction: row-reverse;
+    }
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .projects {
+    .project-image {
+      padding-bottom: 30px;
+    }
+  }
+}

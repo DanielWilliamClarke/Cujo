@@ -1,0 +1,21 @@
+@import "../shared/Palette.scss";
+
+.experience {
+  .header {
+    margin-top: 10px;
+  }
+
+  .headline {
+    span {
+      margin: 0 2px;
+    }
+  }
+
+  .work-logo {
+    height: 20px;
+
+    @include themed() {
+      filter: brightness(t($work-logo-brightness));
+    }
+  }
+}

@@ -1,0 +1,104 @@
+@import "../shared/Palette.scss";
+
+.sketch-backstretch {
+  align-items: center;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  
+  color: ft($theme-dark, $col-text-main);
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  margin-bottom: -70px;
+  text-align: center;
+
+  transition: 0.5;
+
+  @include themed() {
+    background: t($col-bg-light);
+    background: linear-gradient(
+      0deg,
+      t($col-back-grad-sketch-high),
+      t($col-back-grad-sketch-low) 60%
+    );
+  }
+
+  canvas {
+    position: absolute;
+    z-index: -1;
+  }
+
+  .backstretch-headline {
+    user-select: none;
+
+    .backstretch-main {
+      font-size: calc(30px + 3vw);
+      font-weight: 700;
+      @include themed() {
+        text-shadow: 0 0 50px t($col-back-text-shadow);
+      }
+    }
+
+    .backstretch-tag {
+      font-size: calc(15px + 1vw);
+      font-weight: 400;
+
+      @include themed() {
+        text-shadow: 0 0 50px t($col-back-text-shadow);
+      }
+    }
+
+    .line {
+      @include themed() {
+        background-color: t($col-main-brand);
+      }
+    }
+  }
+
+  .backstretch-logo {
+    img {
+      height: 20px;
+    }
+  }
+
+  .my-logo {
+    height: 7em;
+    position: relative;
+    top: 35px;
+  }
+}
+
+.scroll-indicator {
+  bottom: 28%;
+  display: flex;
+  justify-content: space-around;
+  position: absolute;
+}
+
+@media screen and (max-width: 1024px) {
+  .sketch-backstretch {
+    background-position: 100%;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .sketch-backstretch {
+    .backstretch-main {
+      font-size: 50px;
+    }
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .sketch-backstretch {
+    .backstretch-main {
+      font-size: 30px;
+    }
+
+    .backstretch-tag {
+      font-size: 15px;
+    }
+  }
+}

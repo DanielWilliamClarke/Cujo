@@ -1,0 +1,97 @@
+@import "../shared/Palette.scss";
+
+.indicator-container {
+  height: 24px;
+  opacity: 0;
+  position: absolute;
+  transition: opacity 1s ease-in-out;
+
+  width: 24px;
+
+  &.visible {
+    opacity: 1;
+  }
+
+  .chevron {
+    animation: move 3s ease-out infinite;
+    height: 8px;
+    opacity: 0;
+    position: absolute;
+    transform: scale3d(0.5, 0.5, 0.5);
+    width: 28px;
+
+    &:first-child {
+      animation: move 3s ease-out 1s infinite;
+    }
+
+    &:nth-child(2) {
+      animation: move 3s ease-out 2s infinite;
+    }
+
+    &::before,
+    &::after {
+      content: " ";
+      height: 100%;
+      position: absolute;
+      top: 0;
+      width: 51%;
+
+      @include themed() {
+        background-color: t($col-main-brand);
+      }
+    }
+
+    &::before {
+      left: 0;
+      transform: skew(0deg, 33deg);
+    }
+
+    &::after {
+      right: 0;
+      transform: skew(0deg, -33deg);
+      width: 50%;
+    }
+  }
+
+  @keyframes move {
+    25% {
+      opacity: 1;
+    }
+
+    33% {
+      opacity: 1;
+      transform: translateY(30px);
+    }
+
+    67% {
+      opacity: 1;
+      transform: translateY(40px);
+    }
+
+    100% {
+      opacity: 0;
+      transform: translateY(55px) scale3d(0.5, 0.5, 0.5);
+    }
+  }
+
+  .text {
+    animation: pulse 2s linear alternate infinite;
+    display: block;
+    font-size: 12px;
+    margin-left: -25px;
+    margin-top: 75px;
+    opacity: 0.25;
+    text-transform: uppercase;
+    white-space: nowrap;
+
+    @include themed() {
+      color: t($col-main-brand);
+    }
+  }
+
+  @keyframes pulse {
+    to {
+      opacity: 1;
+    }
+  }
+}
