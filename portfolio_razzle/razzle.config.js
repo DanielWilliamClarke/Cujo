@@ -19,10 +19,10 @@ module.exports = {
                     writeToDisk: { filename },
                 })
             );
+
+            //enable sourcemaps
+            config.devtool = 'eval-cheap-module-source-map';
         }
-
-        config.devtool = 'eval-cheap-module-source-map';
-
 
         return config;
     },

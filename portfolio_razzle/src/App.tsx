@@ -1,15 +1,16 @@
 import "reflect-metadata";
 
-import React from 'react';
-import { createClient } from 'urql';
 import { Provider as IocProvider } from "inversify-react";
-import { Provider as UrqlProvider } from 'urql';
+import React from 'react';
+import { createClient, Provider as UrqlProvider } from 'urql';
 import { container } from "./ioc";
 
 import { Cujo } from "./Cujo";
 
+import { runtimeConfig } from './config';
+
 const urqlClient = createClient({
-    url: 'http://localhost:5001/graphql',
+    url: runtimeConfig.CUJO_SERVICE_URL ?? '',
 });
 
 const App = () => (

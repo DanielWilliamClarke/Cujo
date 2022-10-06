@@ -1,14 +1,15 @@
-import express from 'express';
-import cors from 'cors';
-import React from 'react';
 import { ChunkExtractor, ChunkExtractorManager } from "@loadable/server";
+import cors from 'cors';
+import express from 'express';
+import path from "path";
+import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { StaticRouterContext } from "react-router";
 import { StaticRouter } from 'react-router-dom';
 import App from "./App";
-import path from "path";
+import { runtimeConfig } from './config';
 
- const assets: Record<string, any> = require(process.env.RAZZLE_ASSETS_MANIFEST!);
+const assets: Record<string, any> = require(process.env.RAZZLE_ASSETS_MANIFEST!);
 
 const cssLinksFromAssets = (assets: Record<string, any>, entrypoint: string) => {
   return assets[entrypoint] ? assets[entrypoint].css ?
@@ -36,20 +37,20 @@ export const renderApp = (req: express.Request, res: express.Response) => {
 
   const markup = renderToString(
     <ChunkExtractorManager extractor={extractor}>
-    <StaticRouter context={context} location={req.url}>
-      <App />
-    </StaticRouter>
+      <StaticRouter context={context} location={req.url}>
+        <App />
+      </StaticRouter>
     </ChunkExtractorManager>
   );
 
-    // collect script tags
-    const scriptTags = extractor.getScriptTags();
+  // collect script tags
+  const scriptTags = extractor.getScriptTags();
 
-    // collect "preload/prefetch" links
-    const linkTags = extractor.getLinkTags();
-  
-    // collect style tags
-    const styleTags = extractor.getStyleTags();
+  // collect "preload/prefetch" links
+  const linkTags = extractor.getLinkTags();
+
+  // collect style tags
+  const styleTags = extractor.getStyleTags();
 
   if (context.url) {
     return { redirect: context.url };
@@ -80,6 +81,7 @@ export const renderApp = (req: express.Request, res: express.Response) => {
       <title>Daniel William Clarke</title>
     </head>
     <body>
+      <script>window.env = ${JSON.stringify(runtimeConfig)};</script>
        <div id="root">${markup}</div>
       ${scriptTags}
     </body>

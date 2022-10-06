@@ -15,12 +15,10 @@ import { CV } from "./sections/CV";
 
 import "./CVPreview.scss";
 
-const CVPreview: React.FC<CVProps> = ({ cv }: CVProps): JSX.Element => {
+// This is quite dumb but works
+pdfjs.GlobalWorkerOptions.workerSrc = pdfjsWorker;
 
-  // // This is quite dumb but works
-  pdfjs.GlobalWorkerOptions.workerSrc = pdfjsWorker;
-  // pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
-  console.log("rendered in server")
+const CVPreview: React.FC<CVProps> = ({ cv }: CVProps): JSX.Element => {
   const dateService = useInjection(IDateService.$);
 
   const renderPDF = useCallback(async (url: string, canvas: HTMLCanvasElement) => {
@@ -73,7 +71,7 @@ const CVPreview: React.FC<CVProps> = ({ cv }: CVProps): JSX.Element => {
             <Fade triggerOnce direction="up" delay={0.2}>
               <PDFDownloadLink
                 document={CV.render(cv, dateService)}
-                fileName={`daniel_william_clarke_cv.pdf`}
+                fileName={`daniel_william_clarke_cv_${dateService.CurrentTimestamp()}.pdf`}
               >
                 {({ url }) => {
                   if (!url) {

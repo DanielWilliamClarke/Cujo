@@ -22,7 +22,8 @@ FROM node:16.15.0-alpine as release
 
 WORKDIR /portfolio
 
-COPY --from=build /portfolio/build .
+COPY --from=build /portfolio/node_modules ./node_modules
+COPY --from=build /portfolio/build ./build
 
 EXPOSE 3000
 
@@ -32,4 +33,4 @@ EXPOSE 3000
 # Start Nginx server
 # CMD ["/bin/sh", "-c", "echo \"Starting Portfolio...\" && nginx -g \"daemon off;\""]
 
-CMD [ "node", "build/server.js" ]
+CMD [ "node", "./build/server.js" ]
