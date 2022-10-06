@@ -3,21 +3,25 @@ version: "3.6"
 services:
   portfolio:
     build:
-      context: ./portfolio
+      context: ./portfolio_razzle
     depends_on:
       - service
     ports:
-      - "3000:8080"
+      - "3000:3000"
+      - "3001:3001"
     volumes:
-      - ./portfolio/build:/usr/share/nginx/html
+      # - ./portfolio/build:/portfolio/build
+      - ./portfolio_razzle:/portfolio
+    environment:
+      - CUJO_SERVICE_URL=http://localhost:5001/graphql
     networks:
       - cujo
 
   service:
     build:
       context: ./service
-    expose:
-      - 5000
+    ports:
+      - "5001:5001"
     env_file:
       - ./service/.env
       - ./service/.sensitive-env

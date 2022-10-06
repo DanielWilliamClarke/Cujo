@@ -13,24 +13,31 @@ RUN npm install --legacy-peer-deps
 
 COPY . /portfolio
 
-RUN npm run build -- --noninteractive
-
-#RELEASE -----------------------------------
-FROM node:16.15.0-alpine as release
-
-# RUN chown nginx:nginx /usr/share/nginx/html/*
-
-WORKDIR /portfolio
-
-COPY --from=build /portfolio/node_modules ./node_modules
-COPY --from=build /portfolio/build ./build
-
 EXPOSE 3000
+EXPOSE 3001
 
-# RUN rm /etc/nginx/conf.d/default.conf
-# COPY nginx/nginx.conf /etc/nginx/conf.d
+CMD [ "npm", "start" ]
 
-# Start Nginx server
-# CMD ["/bin/sh", "-c", "echo \"Starting Portfolio...\" && nginx -g \"daemon off;\""]
 
-CMD [ "node", "./build/server.js" ]
+# RUN npm run build -- --noninteractive
+
+# #RELEASE -----------------------------------
+# FROM node:16.15.0-alpine as release
+
+# # RUN chown nginx:nginx /usr/share/nginx/html/*
+
+# WORKDIR /portfolio
+
+# COPY --from=build /portfolio/node_modules ./node_modules
+# COPY --from=build /portfolio/build ./build
+
+# EXPOSE 3000
+# EXPOSE 3001
+
+# # RUN rm /etc/nginx/conf.d/default.conf
+# # COPY nginx/nginx.conf /etc/nginx/conf.d
+
+# # Start Nginx server
+# # CMD ["/bin/sh", "-c", "echo \"Starting Portfolio...\" && nginx -g \"daemon off;\""]
+
+# CMD [ "node", "./build/server.js" ]
