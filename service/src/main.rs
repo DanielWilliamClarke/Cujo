@@ -7,10 +7,11 @@ extern crate log;
 
 use std::sync::Mutex;
 
-use actix_web::{middleware::Logger, web::Data, App, HttpServer};
+use actix_web::{middleware::Logger, web::Data, App, HttpServer, http};
 use contentful::{ContentfulClient, ContentfulConfig};
 use dotenv::dotenv;
 use listenfd::ListenFd;
+use actix_cors::Cors;
 
 mod auth;
 mod blog;
@@ -56,7 +57,14 @@ async fn main() -> std::io::Result<()> {
     let schema = create_schema_with_cache(cache.clone());
 
     let mut server = HttpServer::new(move || {
+        let cors = Cors::default()
+        .allowed_origin("http://localhost:3000")
+        .allowed_methods(vec!["GET", "POST"])
+        .allowed_headers(vec![http::header::AUTHORIZATION, http::header::ACCEPT, http::header::CONTENT_TYPE])
+        .max_age(3600);
+
         App::new()
+            .wrap(cors)
             .wrap(Logger::default())
             .app_data(Data::new(auth_client.clone()))
             .app_data(Data::new(redirect_client.clone()))

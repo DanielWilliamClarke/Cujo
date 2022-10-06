@@ -169,7 +169,9 @@ pub struct Profile {
 }
 
 #[derive(SimpleObject, Serialize, Deserialize, Debug, Clone)]
+#[serde(rename_all = "camelCase")]
 pub struct DevIcon {
     pub name: String,
     pub icon: String,
+    pub icon_image: Option<Asset>
 }
