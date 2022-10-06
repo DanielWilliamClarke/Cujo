@@ -58,10 +58,10 @@ async fn main() -> std::io::Result<()> {
 
     let mut server = HttpServer::new(move || {
         let cors = Cors::default()
-        .allowed_origin("http://localhost:3000")
-        .allowed_methods(vec!["GET", "POST"])
-        .allowed_headers(vec![http::header::AUTHORIZATION, http::header::ACCEPT, http::header::CONTENT_TYPE])
-        .max_age(3600);
+            .allowed_origin("http://localhost:3000")
+            .allowed_methods(vec!["GET", "POST"])
+            .allowed_headers(vec![http::header::AUTHORIZATION, http::header::ACCEPT, http::header::CONTENT_TYPE])
+            .max_age(3600);
 
         App::new()
             .wrap(cors)
