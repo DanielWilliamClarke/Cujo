@@ -15,6 +15,9 @@ query CujoQuery {
     projects {
       ...Project
     }
+    readingList { 
+      ...ReadingList
+    }
   }
   blog {
     ...Blog
@@ -119,6 +122,19 @@ fragment Project on ProjectEntries {
     tags
     icon {
       ...DevIcon
+    }
+  }
+  includes
+}
+
+fragment ReadingList on ReadingListEntries {
+  entries {
+    title
+    progress
+    author
+    amazonLink
+    cover {
+      ...ImageUrl
     }
   }
   includes

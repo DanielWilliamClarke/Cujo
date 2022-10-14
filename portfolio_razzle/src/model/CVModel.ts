@@ -11,6 +11,7 @@ export interface CV {
   education: Entries<Education>;
   skills: Entry<Skills>;
   projects: Entries<Project>;
+  readingList: Entries<Book>;
 }
 
 export interface About {
@@ -74,6 +75,21 @@ export interface Project {
   summary: Document;
   tags: string[];
   icon: DevIcon;
+}
+
+export enum BookProgress {
+  PRIORITY = 'PRIORITY',
+  NOT_STARTED = 'NOT_STARTED',
+  READING = 'READING',
+  COMPLETED = 'COMPLETED'
+}
+
+export interface Book {
+  title: string;
+  cover: Media;
+  author: string;
+  progress: BookProgress,
+  amazonLink?: string 
 }
 
 export interface Profile {
