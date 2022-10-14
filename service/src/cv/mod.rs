@@ -6,5 +6,5 @@ mod model;
 pub use cv_reader::CVReader;
 pub use model::{
     About, AboutEntry, Education, EducationEntries, Project, ProjectEntries, Skills, SkillsEntry,
-    Work, WorkEntries, CV,
+    Work, WorkEntries, CV, ReadingListEntries, Book
 };

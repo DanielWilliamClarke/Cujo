@@ -7,9 +7,9 @@ use contentful::{ContentfulClient, Entries, Entry, QueryBuilder};
 use futures::try_join;
 use serde::{de::DeserializeOwned, Serialize};
 
-use super::{About, Education, Project, Skills, Work, CV};
+use super::{About, Book, Education, Project, Skills, Work, CV};
 use crate::{
-    cv::{model::AboutEntry, EducationEntries, ProjectEntries, SkillsEntry, WorkEntries},
+    cv::{model::AboutEntry, EducationEntries, ProjectEntries, SkillsEntry, WorkEntries, ReadingListEntries},
     util::Reader,
 };
 
@@ -60,12 +60,13 @@ impl Reader for CVReader {
 
     async fn get(&self) -> Result<Self::Data, Self::Error> {
         let now = Instant::now();
-        let (about, work, education, skills, projects) = try_join!(
+        let (about, work, education, skills, projects, books) = try_join!(
             self.get_cv_entry::<About>("interests", 0),
             self.get_cv_entries::<Work>("work"),
             self.get_cv_entries::<Education>("education"),
             self.get_cv_entry::<Skills>("skills", 0),
             self.get_cv_entries::<Project>("project"),
+            self.get_cv_entries::<Book>("readingList")
         )?;
         let elapsed = now.elapsed();
 
@@ -76,6 +77,7 @@ impl Reader for CVReader {
             education: EducationEntries::new(education.unwrap()),
             skills: SkillsEntry::new(skills.unwrap()),
             projects: ProjectEntries::new(projects.unwrap()),
+            reading_list: ReadingListEntries::new(books.unwrap())
         })
     }
 }

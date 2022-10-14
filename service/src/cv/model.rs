@@ -13,6 +13,7 @@ pub struct CV {
     pub education: EducationEntries,
     pub skills: SkillsEntry,
     pub projects: ProjectEntries,
+    pub reading_list: ReadingListEntries
 }
 
 #[derive(SimpleObject, Serialize, Deserialize, Debug, Clone)]
@@ -91,6 +92,21 @@ impl ProjectEntries {
 }
 
 #[derive(SimpleObject, Serialize, Deserialize, Debug, Clone)]
+pub struct ReadingListEntries {
+    pub entries: Vec<Book>,
+    pub includes: Option<Value>,
+}
+
+impl ReadingListEntries {
+    pub fn new(item: Entries<Book>) -> Self {
+        ReadingListEntries {
+            entries: item.entries,
+            includes: item.includes,
+        }
+    }
+}
+
+#[derive(SimpleObject, Serialize, Deserialize, Debug, Clone)]
 pub struct About {
     pub name: String,
     pub label: String,
@@ -160,6 +176,16 @@ pub struct Project {
     pub summary: Value,
     pub tags: Vec<String>,
     pub icon: DevIcon,
+}
+
+#[derive(SimpleObject, Serialize, Deserialize, Debug, Clone)]
+#[serde(rename_all = "camelCase")]
+pub struct Book {
+    pub title: String,
+    pub cover: Asset,
+    pub author: String,
+    pub progress: String,
+    pub amazon_link: Option<String>,
 }
 
 #[derive(SimpleObject, Serialize, Deserialize, Debug, Clone)]
