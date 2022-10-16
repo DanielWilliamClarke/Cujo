@@ -1,43 +1,31 @@
 #BUILD -----------------------------------
 FROM node:16.15.0-alpine as build
 
-ARG BUILD_MODE
-
 WORKDIR /portfolio
 
 COPY package.json /portfolio/package.json
 
 RUN apk add git
-RUN npm set unsafe-perm true
 RUN npm install --legacy-peer-deps
 
 COPY . /portfolio
 
+#build runtime
+RUN npm run build:ci
+
+# only install prod dependencies
+RUN rm -rf ./node_modules
+RUN npm install --legacy-peer-deps --omit=dev
+
+#RELEASE -----------------------------------
+FROM node:16.15.0-alpine as release
+
+WORKDIR /portfolio
+
+COPY --from=build /portfolio/node_modules ./node_modules
+COPY --from=build /portfolio/build /portfolio/build
+
 EXPOSE 3000
 EXPOSE 3001
 
-CMD [ "npm", "start" ]
-
-
-# RUN npm run build -- --noninteractive
-
-# #RELEASE -----------------------------------
-# FROM node:16.15.0-alpine as release
-
-# # RUN chown nginx:nginx /usr/share/nginx/html/*
-
-# WORKDIR /portfolio
-
-# COPY --from=build /portfolio/node_modules ./node_modules
-# COPY --from=build /portfolio/build ./build
-
-# EXPOSE 3000
-# EXPOSE 3001
-
-# # RUN rm /etc/nginx/conf.d/default.conf
-# # COPY nginx/nginx.conf /etc/nginx/conf.d
-
-# # Start Nginx server
-# # CMD ["/bin/sh", "-c", "echo \"Starting Portfolio...\" && nginx -g \"daemon off;\""]
-
-# CMD [ "node", "./build/server.js" ]
+CMD [ "node", "./build/server.js" ]
