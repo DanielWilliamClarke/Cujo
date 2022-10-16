@@ -29,7 +29,6 @@ type CujoResponse = {
 };
 
 export const Cujo: React.FC = (): JSX.Element => {
-  console.log("hey")
   const [{ data, fetching }] = useQuery<CujoResponse>({
     query: CujoQuery,
   });
