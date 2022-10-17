@@ -1,5 +1,5 @@
 import { useQuery } from 'urql';
-
+import loadable from '@loadable/component';
 import React, { Suspense } from "react";
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
@@ -16,19 +16,15 @@ import "./Cujo.scss";
 
 import CujoQuery from './Cujo.gql';
 
-const Portfolio = React.lazy(
-  () => import(/* webpackChunkName: "App" */ "./components/App")
-);
-const CVExport = React.lazy(
-  () => import(/* webpackChunkName: "CVExport" */ "./components/cv/CVExport")
-);
+const Portfolio = loadable(() => import(/* webpackChunkName: "Portfolio" */  "./components/App"));
+const CVExport = loadable(() => import(/* webpackChunkName: "CVExport" */  "./components/cv/CVExport"));
 
 type CujoResponse = {
   cv: CV;
   blog: Entries<Post>;
 };
 
-export const Cujo: React.FC = (): JSX.Element => {
+const Cujo: React.FC = (): JSX.Element => {
   const [{ data, fetching }] = useQuery<CujoResponse>({
     query: CujoQuery,
   });
@@ -65,3 +61,5 @@ export const Cujo: React.FC = (): JSX.Element => {
     </Suspense>
   );
 }
+
+export default Cujo;

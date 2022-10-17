@@ -34,6 +34,7 @@
     "detect-browser": "^5.3.0",
     "express": "^4.17.1",
     "graphql": "^16.5.0",
+    "http-proxy-middleware": "^2.0.6",
     "inversify": "^6.0.1",
     "inversify-react": "^1.0.2",
     "logrocket": "^2.2.1",
@@ -59,11 +60,14 @@
     "styled-components": "^5.3.5",
     "styled-icons": "^10.45.0",
     "urql": "^2.2.3",
-    "util": "^0.12.4"
+    "util": "^0.12.4",
+    "compression": "^1.7.4",
+    "express-static-gzip": "^2.1.7"
   },
   "devDependencies": {
     "@loadable/babel-plugin": "^5.13.2",
     "@loadable/webpack-plugin": "^5.15.0",
+    "@types/compression": "^1.7.2",
     "@types/cors": "^2.8.12",
     "@types/dat.gui": "^0.7.7",
     "@types/express": "^4.17.6",
@@ -83,19 +87,22 @@
     "@types/react-vertical-timeline-component": "^3.0.1",
     "@types/webpack-env": "^1.15.2",
     "babel-preset-razzle": "4.2.15",
-    "eslint": "^8.24.0",
+    "compression-webpack-plugin": "^6.0.5",
+    "eslint": "^8.25.0",
     "html-webpack-plugin": "^4.5.2",
     "mini-css-extract-plugin": "^0.9.0",
     "razzle": "4.2.15",
     "razzle-dev-utils": "4.2.15",
     "razzle-plugin-graphql": "^4.2.17",
+    "razzle-plugin-purgecss": "^1.0.1",
     "razzle-plugin-scss": "^4.2.17",
     "razzle-plugin-typescript": "^4.2.17",
     "sass": "^1.35.1",
     "sass-lint-auto-fix": "^0.21.2",
     "typescript": "^4.8.4",
     "webpack": "^4.44.1",
-    "webpack-dev-server": "^3.11.2"
+    "webpack-dev-server": "^3.11.2",
+    "zlib": "^1.0.5"
   },
   "resolutions": {
     "@react-pdf/font": "2.2.0",

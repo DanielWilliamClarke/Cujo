@@ -1,6 +1,8 @@
 import { ChunkExtractor, ChunkExtractorManager } from "@loadable/server";
 import { createProxyMiddleware } from 'http-proxy-middleware';
 import cors from 'cors';
+import compression from 'compression';
+import expressStaticGzip from 'express-static-gzip';
 import express from 'express';
 import path from "path";
 import React from 'react';
@@ -95,13 +97,17 @@ const server = express()
   .disable('x-powered-by')
   .use(cors())
   .options('*', cors())
-  .use(express.static(process.env.RAZZLE_PUBLIC_DIR!))
+  .use(compression())
+  .use(expressStaticGzip(process.env.RAZZLE_PUBLIC_DIR!, {
+    enableBrotli: true,
+    orderPreference: ['br', 'gz'],
+  }))
   .use('/api', createProxyMiddleware({
     target: process.env.CUJO_SERVICE_URL,
     pathRewrite: {'^/api' : ''},
     changeOrigin: true,
   }))
-  .get('/', (req: express.Request, res: express.Response) => {
+  .get('/*', (req: express.Request, res: express.Response) => {
     const { html = '', redirect = false } = renderApp(req, res);
     if (redirect) {
       res.redirect(redirect);

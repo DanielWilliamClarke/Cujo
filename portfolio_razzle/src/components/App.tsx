@@ -16,17 +16,12 @@ import { NavPanel } from "./nav/NavPanel";
 import { ThemeProvider } from "./theme/ThemeProvider";
 
 import "./App.scss";
-import CVPreview from "./cv/CVPreview";
 import loadable from "@loadable/component";
 
-const BlogPost = React.lazy(
-  () => import(/* webpackChunkName: "BlogPost" */ "./blog/BlogPost")
-);
-const Profile = React.lazy(
-  () => import(/* webpackChunkName: "Profile" */ "./profile/Profile")
-);
-
-const SketchBackstretch = loadable(() => import("./backstretch/SketchBackstretch"));
+const BlogPost = loadable(() => import(/* webpackChunkName: "BlogPost" */ "./blog/BlogPost"));
+const Profile = loadable(() => import(/* webpackChunkName: "Profile" */ "./profile/Profile"));
+const CVPreview = loadable(() => import(/* webpackChunkName: "CVPreview" */ "./cv/CVPreview"));
+const SketchBackstretch = loadable(() => import(/* webpackChunkName: "SketchBackstretch" */ "./backstretch/SketchBackstretch"));
 
 type AppProps = {
   cv: CVModel;
