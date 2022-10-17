@@ -69,7 +69,7 @@ export const Contact: React.FC<ContactProps> = ({ profiles }: ContactProps): JSX
                 <h3>Get in touch!</h3>
               </Col>
             </Row>
-            <Form onSubmit={handleSubmit}>
+            <Form onSubmit={async () => handleSubmit}>
               <Form.Group controlId="formEmail">
                 <Form.Control
                   type="email"

@@ -38,11 +38,11 @@ export const Profile: React.FC<CVProps> = ({ cv }: CVProps): JSX.Element => {
       <div className="profile">
         <div>
           {[
-            <About about={cv.about} />,
-            <Experience work={cv.work} />,
-            <Education education={cv.education} />,
-            <Technical skills={cv.skills} />,
-            <Projects projects={cv.projects} />
+            <About key='about' about={cv.about} />,
+            <Experience key='work' work={cv.work} />,
+            <Education key='education' education={cv.education} />,
+            <Technical key='skills' skills={cv.skills} />,
+            <Projects key='projects' projects={cv.projects} />
           ].map((element: JSX.Element, index: number) => (
             <Fade
               triggerOnce

@@ -13,6 +13,8 @@ loadableReady().then(() => {
     </BrowserRouter>,
     document.getElementById('root')
   );
+}).catch((err) => {
+  throw err;
 });
 
 if (module.hot != null) {

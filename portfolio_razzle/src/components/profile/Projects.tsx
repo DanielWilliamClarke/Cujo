@@ -19,7 +19,7 @@ interface ProjectsProps {
 
 interface ProjectProps {
   project: Project
-  index?: number
+  index: number
 }
 
 export const Projects: React.FC<ProjectsProps> = ({ projects }: ProjectsProps): JSX.Element => {
@@ -37,11 +37,11 @@ export const Projects: React.FC<ProjectsProps> = ({ projects }: ProjectsProps): 
 const ProjectSection: React.FC<ProjectProps> = ({ project, index }: ProjectProps): JSX.Element => {
   return (
     <Container className="project-panels">
-        <Fade triggerOnce direction={index! % 2 ? 'left' : 'right'}>
+        <Fade triggerOnce direction={index % 2 ? 'left' : 'right'}>
           <div className="centered line" />
           <Row className="project">
-            <ProjectImage project={project} />
-            <ProjectContent project={project} />
+            <ProjectImage project={project} index={index} />
+            <ProjectContent project={project} index={index} />
           </Row>
         </Fade>
       </Container>

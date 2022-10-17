@@ -11,8 +11,6 @@ import { StaticRouterContext } from 'react-router';
 import { StaticRouter } from 'react-router-dom';
 import App from './App';
 
-const assets: Record<string, any> = require(process.env.RAZZLE_ASSETS_MANIFEST!);
-
 export const renderApp = (req: express.Request, res: express.Response) => {
   const context: StaticRouterContext = {};
 
