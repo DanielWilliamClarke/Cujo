@@ -1,13 +1,13 @@
-import React from "react";
-import { useInjection } from "inversify-react";
-import { Container, Row, Col } from "react-bootstrap";
-import { IDateService } from "../../services/DateService";
+import React from 'react';
+import { useInjection } from 'inversify-react';
+import { Container, Row, Col } from 'react-bootstrap';
+import { IDateService } from '../../services/DateService';
 
-import "./Copyright.scss";
+import './Copyright.scss';
 
-type NameProps = {name : string}
+interface NameProps { name: string };
 
-export const Copyright: React.FC<NameProps> = ({ name }: NameProps): JSX.Element => { 
+export const Copyright: React.FC<NameProps> = ({ name }: NameProps): JSX.Element => {
   const dateService = useInjection(IDateService.$);
 
   return (
@@ -23,4 +23,4 @@ export const Copyright: React.FC<NameProps> = ({ name }: NameProps): JSX.Element
     </Container>
   </section>
   );
-}
+};

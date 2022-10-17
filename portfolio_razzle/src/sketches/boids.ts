@@ -1,36 +1,36 @@
-import p5 from "p5";
-import { Sketch } from ".";
-import { CV, Skill, Work } from "../model/CVModel";
-import { DateService, IDateService } from "../services/DateService";
+import p5 from 'p5';
+import { Sketch } from '.';
+import { CV, Skill, Work } from '../model/CVModel';
+import { DateService, IDateService } from '../services/DateService';
 
-const p5v: { sub(a: p5.Vector, b: p5.Vector): p5.Vector } = p5.Vector;
+const p5v: { sub: (a: p5.Vector, b: p5.Vector) => p5.Vector } = p5.Vector;
 
-type BoidsWord = {
-  word: string;
-  angle: number;
-}
+interface BoidsWord {
+  word: string
+  angle: number
+};
 
 export class Boids implements Sketch {
-  private vehicles: Vehicle[] = [];
-  private dotSize: number = 10;
-  private sampleFactor: number = 0.1;
+  private readonly vehicles: Vehicle[] = [];
+  private readonly dotSize: number = 10;
+  private readonly sampleFactor: number = 0.1;
 
   private wordIndex = 0;
 
-  private words: BoidsWord[];
+  private readonly words: BoidsWord[];
 
-  constructor(
+  constructor (
     private readonly p: p5,
     private readonly cv: CV,
     private readonly currentRole: Work,
     private readonly dateService: IDateService = new DateService(),
     private readonly noiseGenerator: NoiseGenerator = new NoiseGenerator(p)
   ) {
-    this.dateService.format("MMMM YYYY", "YYYY-MM-DD")
+    this.dateService.format('MMMM YYYY', 'YYYY-MM-DD');
 
     this.words = [
-      ...this.cv.about.entry.name.split(" "),
-      ...currentRole.position.split(" "),
+      ...this.cv.about.entry.name.split(' '),
+      ...currentRole.position.split(' '),
       this.currentRole.company,
       ...[
         ...this.cv.skills.entry.favorite.map((skill: Skill) => skill.name),
@@ -40,38 +40,38 @@ export class Boids implements Sketch {
     ].map((word: string, index: number) => ({
       word,
       angle: index % 2 ? 270 : -270
-    }))
+    }));
   }
 
   private myFont!: p5.Font;
-  preload() {
-    this.myFont = this.p.loadFont(`/assets/fonts/QuartzoBold-W9lv.otf`);
+  preload () {
+    this.myFont = this.p.loadFont('/assets/fonts/QuartzoBold-W9lv.otf');
   }
 
-  setup() {
+  setup () {
     this.p.frameRate(60);
     this.p.createCanvas(window.innerWidth, window.innerHeight, this.p.WEBGL);
     this.p.colorMode(this.p.HSB);
     this.p.smooth();
     this.p.noStroke();
 
-    const {word, angle} = this.words[this.wordIndex];
+    const { word, angle } = this.words[this.wordIndex];
     this.setupBoidsForWord(word, angle);
     setInterval(() => {
       this.wordIndex++;
       if (this.wordIndex >= this.words.length) {
         this.wordIndex = 0;
       }
-      const {word, angle} = this.words[this.wordIndex];
+      const { word, angle } = this.words[this.wordIndex];
       this.setupBoidsForWord(word, angle);
     }, 3000);
   }
 
-  windowResized() {
+  windowResized () {
     this.p.resizeCanvas(window.innerWidth, window.innerHeight);
   }
 
-  draw() {
+  draw () {
     this.p.background(0);
     this.p.rotateX(120);
 
@@ -83,26 +83,26 @@ export class Boids implements Sketch {
     );
   }
 
-  private setupBoidsForWord = (newText: string, angle: number) => {
+  private readonly setupBoidsForWord = (newText: string, angle: number) => {
     const fontSize = this.getFontSizeTextInBounds(
       newText,
       this.p.width * 3,
       this.p.height * 3
     );
-    var bounds = this.myFont.textBounds(newText, 0, 0, fontSize) as {
-      w: number;
-      h: number;
+    const bounds = this.myFont.textBounds(newText, 0, 0, fontSize) as {
+      w: number
+      h: number
     };
     const x = this.p.width / 2 - bounds.w / 2;
     const y = this.p.height / 2 + bounds.h / 2;
     const points = this.myFont.textToPoints(newText, x, y, fontSize, {
-      sampleFactor: this.sampleFactor,
+      sampleFactor: this.sampleFactor
     });
 
     this.migrateToNewPoints(points, angle);
   };
 
-  private getFontSizeTextInBounds = (
+  private readonly getFontSizeTextInBounds = (
     text: string,
     boundsWidth: number,
     boundsHeight: number
@@ -112,16 +112,16 @@ export class Boids implements Sketch {
     while (bounds.w < boundsWidth && bounds.h < boundsHeight) {
       fontSize += 2;
       bounds = this.myFont.textBounds(text, 0, 0, fontSize) as {
-        w: number;
-        h: number;
+        w: number
+        h: number
       };
     }
     return fontSize;
   };
 
-  private migrateToNewPoints = (points: p5.Vector[], angle: number) => {
-    if (!this.vehicles.length) {
-      //FIRST TIME CREATION
+  private readonly migrateToNewPoints = (points: p5.Vector[], angle: number) => {
+    if (this.vehicles.length === 0) {
+      // FIRST TIME CREATION
       this.vehicles.push(
         ...points.map(
           (point: p5.Vector): Vehicle =>
@@ -142,8 +142,8 @@ export class Boids implements Sketch {
       const difference = points.length - this.vehicles.length;
       const randomIndex = this.p.floor(this.p.random(this.vehicles.length));
       if (difference > 0) {
-        //MORE POINTS NEEDED
-        for (var i = 0; i < difference; i++) {
+        // MORE POINTS NEEDED
+        for (let i = 0; i < difference; i++) {
           this.vehicles.splice(
             randomIndex,
             0,
@@ -151,8 +151,8 @@ export class Boids implements Sketch {
           );
         }
       } else if (difference < 0) {
-        //LESS POINTS NEEDED
-        for (var j = 0; j < -difference; j++) {
+        // LESS POINTS NEEDED
+        for (let j = 0; j < -difference; j++) {
           this.vehicles.splice(randomIndex, 1);
         }
       }
@@ -174,7 +174,7 @@ export class Boids implements Sketch {
 }
 
 class HSLA {
-  constructor(
+  constructor (
     public h: number = 255,
     public s: number = 255,
     public b: number = 255,
@@ -184,21 +184,21 @@ class HSLA {
 
 class Vehicle {
   private color!: HSLA;
-  private arriveDistance: number = 100;
-  private fleeRadius: number = 100;
-  private maxSpeed: number = 20;
-  private maxForce: number = 4;
+  private readonly arriveDistance: number = 100;
+  private readonly fleeRadius: number = 100;
+  private readonly maxSpeed: number = 20;
+  private readonly maxForce: number = 4;
 
-  constructor(
-    private p: p5,
+  constructor (
+    private readonly p: p5,
     private radius: number,
     private target: p5.Vector,
-    private position: p5.Vector,
-    private acceleration: p5.Vector,
-    private velocity: p5.Vector
+    private readonly position: p5.Vector,
+    private readonly acceleration: p5.Vector,
+    private readonly velocity: p5.Vector
   ) {}
 
-  copy() {
+  copy () {
     return new Vehicle(
       this.p,
       this.radius,
@@ -209,14 +209,14 @@ class Vehicle {
     );
   }
 
-  update() {
+  update () {
     this.position.add(this.velocity);
     this.velocity.add(this.acceleration);
     this.acceleration.mult(0);
     return this;
   }
 
-  show(point: p5.Vector = this.position, color: HSLA = this.color) {
+  show (point: p5.Vector = this.position, color: HSLA = this.color) {
     this.p.push();
 
     this.p.translate(point.x - this.p.width / 2, point.y - this.p.height / 2);
@@ -228,9 +228,9 @@ class Vehicle {
     this.p.pop();
   }
 
-  behaviors(agitator: p5.Vector) {
-    var arrive = this.arrive(this.target);
-    var flee = this.flee(agitator);
+  behaviors (agitator: p5.Vector) {
+    const arrive = this.arrive(this.target);
+    const flee = this.flee(agitator);
 
     // const oldR = this.radius;
     // this.radius = 50;
@@ -246,42 +246,42 @@ class Vehicle {
     return this;
   }
 
-  setTarget(t: p5.Vector) {
+  setTarget (t: p5.Vector) {
     this.target = t;
   }
 
-  setColor(c: HSLA) {
+  setColor (c: HSLA) {
     this.color = c;
   }
 
-  setSize(s: number) {
+  setSize (s: number) {
     this.radius = s;
   }
 
-  applyForce(f: p5.Vector) {
+  applyForce (f: p5.Vector) {
     this.acceleration.add(f);
   }
 
-  arrive(target: p5.Vector) {
-    var desired = p5v.sub(target, this.position);
-    var d = desired.mag();
-    var speed = this.maxSpeed;
+  arrive (target: p5.Vector) {
+    const desired = p5v.sub(target, this.position);
+    const d = desired.mag();
+    let speed = this.maxSpeed;
     if (d < this.arriveDistance) {
       speed = this.p.map(d, 0, this.arriveDistance, 0, this.maxSpeed);
     }
     desired.setMag(speed);
-    var steer = p5v.sub(desired, this.velocity);
+    const steer = p5v.sub(desired, this.velocity);
     steer.limit(this.maxForce);
     return steer;
   }
 
-  flee(target: p5.Vector) {
-    var desired = p5v.sub(target, this.position);
-    var d = desired.mag();
+  flee (target: p5.Vector) {
+    const desired = p5v.sub(target, this.position);
+    const d = desired.mag();
     if (d < this.fleeRadius) {
       desired.setMag(this.maxSpeed);
       desired.mult(-1);
-      var steer = p5v.sub(desired, this.velocity);
+      const steer = p5v.sub(desired, this.velocity);
       steer.limit(this.maxForce);
       return steer;
     } else {
@@ -291,13 +291,13 @@ class Vehicle {
 }
 
 class NoiseGenerator {
-  constructor(
-    private p: p5,
+  constructor (
+    private readonly p: p5,
     private xoff: number = 0,
     private yoff: number = 0
   ) {}
 
-  getCoord(): p5.Vector {
+  getCoord (): p5.Vector {
     this.xoff += 0.00001;
     this.yoff += 0.00001;
     return this.p.createVector(

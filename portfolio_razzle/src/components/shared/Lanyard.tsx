@@ -1,10 +1,10 @@
-import React, { HTMLAttributes } from "react";
-import { Badge } from "react-bootstrap";
+import React, { HTMLAttributes } from 'react';
+import { Badge } from 'react-bootstrap';
 
-import "./Lanyard.scss";
+import './Lanyard.scss';
 
 type LanyardProps = HTMLAttributes<HTMLImageElement> & {
-  tags: string[];
+  tags: string[]
 };
 
 export const Lanyard: React.FC<LanyardProps> = ({ tags, className }: LanyardProps): JSX.Element => {
@@ -19,4 +19,4 @@ export const Lanyard: React.FC<LanyardProps> = ({ tags, className }: LanyardProp
       )}
     </div>
   );
-}
+};

@@ -1,14 +1,15 @@
-import p5 from "p5";
-import { Sketch } from ".";
+import p5 from 'p5';
+import { Sketch } from '.';
 
 class HSLA {
-  constructor(
+  constructor (
     public h: number = 0,
     public s: number = 0,
     public b: number = 0,
     public a: number = 1
   ) {}
-  toString() {
+
+  toString () {
     return `hsla(${this.h}, ${this.s}%, ${this.b}%, ${this.a})`;
   }
 }
@@ -34,11 +35,11 @@ const options = {
   baseLightInputMultiplier: 0.01,
   addedLightInputMultiplier: 0.01,
   repaintAlpha: 0.05,
-  hueChange: 5,
+  hueChange: 5
 };
 
 class HexLine {
-  constructor(
+  constructor (
     public dieX: number = 0,
     public dieY: number = 0,
     public x: number = 0,
@@ -56,7 +57,7 @@ class HexLine {
     this.reset();
   }
 
-  reset(): void {
+  reset (): void {
     this.x = 0;
     this.y = 0;
     this.addedX = 0;
@@ -72,7 +73,7 @@ class HexLine {
     this.beginPhase();
   }
 
-  beginPhase(): void {
+  beginPhase (): void {
     this.x += this.addedX;
     this.y += this.addedY;
 
@@ -95,7 +96,7 @@ class HexLine {
     }
   }
 
-  step(p: p5, ctx: any, centerX: number, centerY: number): void {
+  step (p: p5, ctx: any, centerX: number, centerY: number): void {
     ++this.time;
     ++this.cumulativeTime;
 
@@ -141,7 +142,7 @@ class HexLine {
 }
 
 export class Hex implements Sketch {
-  private lines: HexLine[] = [];
+  private readonly lines: HexLine[] = [];
 
   private screenWidth = 0;
   private screenHeight = 0;
@@ -152,18 +153,18 @@ export class Hex implements Sketch {
 
   private ctx: any;
 
-  constructor(private readonly p: p5) {}
+  constructor (private readonly p: p5) {}
 
-  preload(): void {}
+  preload (): void {}
 
-  setup() {
+  setup () {
     this.p.frameRate(60);
     this.p.colorMode(this.p.HSB, 100);
     this.p.createCanvas(window.innerWidth, window.innerHeight);
     this.p.background(0);
 
-    const canvas = document.getElementById("defaultCanvas0") as any;
-    this.ctx = canvas.getContext("2d");
+    const canvas = document.getElementById('defaultCanvas0') as any;
+    this.ctx = canvas.getContext('2d');
 
     this.screenWidth = this.p.width = window.innerWidth;
     this.screenHeight = this.p.height = window.innerHeight;
@@ -173,7 +174,7 @@ export class Hex implements Sketch {
     this.dieY = this.screenHeight / 2 / options.len;
   }
 
-  windowResized() {
+  windowResized () {
     this.p.resizeCanvas(window.innerWidth, window.innerHeight);
     this.screenWidth = this.p.width = window.innerWidth;
     this.screenHeight = this.p.height = window.innerHeight;
@@ -183,14 +184,14 @@ export class Hex implements Sketch {
     this.dieY = this.screenHeight / 2 / options.len;
   }
 
-  draw() {
+  draw () {
     ++TICK;
 
-    this.ctx.globalCompositeOperation = "source-over";
+    this.ctx.globalCompositeOperation = 'source-over';
     this.ctx.shadowBlur = 0;
     this.ctx.fillStyle = `rgba(0,0,0,${options.repaintAlpha})`;
     this.ctx.fillRect(0, 0, this.screenWidth, this.screenHeight);
-    this.ctx.globalCompositeOperation = "lighter";
+    this.ctx.globalCompositeOperation = 'lighter';
 
     if (
       this.lines.length < options.count &&

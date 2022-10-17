@@ -1,16 +1,16 @@
-import p5 from "p5";
-import { Sketch } from ".";
-import { Ease } from "./easing";
+import p5 from 'p5';
+import { Sketch } from '.';
+import { Ease } from './easing';
 
 export class Boxes implements Sketch {
-  private minW: number = 32;
-  private maxW: number = 64;
-  private minH: number = 30;
-  private maxH: number = 360;
-  private padding: number = 50;
+  private readonly minW: number = 32;
+  private readonly maxW: number = 64;
+  private readonly minH: number = 30;
+  private readonly maxH: number = 360;
+  private readonly padding: number = 50;
 
-  private size: number = 1000;
-  private halfSize: number = 1000 / 2;
+  private readonly size: number = 1000;
+  private readonly halfSize: number = 1000 / 2;
 
   private ma: number = 0;
   private yAngle: number = -this.p.QUARTER_PI;
@@ -21,11 +21,11 @@ export class Boxes implements Sketch {
   private opacity: number = 0;
   private opacityProgress: number = 0;
 
-  constructor(private readonly p: p5) {}
+  constructor (private readonly p: p5) {}
 
-  preload(): void {}
+  preload (): void {}
 
-  setup() {
+  setup () {
     this.p.frameRate(60);
     this.p.createCanvas(window.innerWidth, window.innerHeight, this.p.WEBGL);
     this.p.colorMode(this.p.HSB);
@@ -37,11 +37,11 @@ export class Boxes implements Sketch {
     this.p.perspective();
   }
 
-  windowResized() {
+  windowResized () {
     this.p.resizeCanvas(window.innerWidth, window.innerHeight);
   }
 
-  draw() {
+  draw () {
     this.p.background(0);
     // this.p.orbitControl();
     this.p.rotateX(this.ma);
@@ -82,7 +82,7 @@ export class Boxes implements Sketch {
     this.angle -= 0.01;
     this.colorAngle -= 0.005;
 
-    //easeOutCubic
+    // easeOutCubic
     this.opacityProgress += 0.01;
     this.opacity = Ease.easeInOutCubic(this.opacityProgress);
   }

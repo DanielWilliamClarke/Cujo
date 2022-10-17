@@ -1,44 +1,44 @@
-import { useInjection } from "inversify-react";
-import React, { useContext, useMemo } from "react";
-import { Col, Row } from "react-bootstrap";
+import { useInjection } from 'inversify-react';
+import React, { useContext, useMemo } from 'react';
+import { Col, Row } from 'react-bootstrap';
 import {
   VerticalTimeline,
-  VerticalTimelineElement,
-} from "react-vertical-timeline-component";
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import { Entries, Media } from "../../model/Includes";
-import { Work } from "../../model/CVModel";
-import { IDateService } from "../../services/DateService";
-import { IIconService } from "../../services/IconService";
-import { DynamicImage } from "../shared/DynamicImage";
-import { Lanyard } from "../shared/Lanyard";
-import { Section } from "../shared/Section";
+  VerticalTimelineElement
+} from 'react-vertical-timeline-component';
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import { Entries, Media } from '../../model/Includes';
+import { Work } from '../../model/CVModel';
+import { IDateService } from '../../services/DateService';
+import { IIconService } from '../../services/IconService';
+import { DynamicImage } from '../shared/DynamicImage';
+import { Lanyard } from '../shared/Lanyard';
+import { Section } from '../shared/Section';
 
-import ThemeContext from "../theme/ThemeContext";
+import ThemeContext from '../theme/ThemeContext';
 
-import "../shared/Portfolio.scss";
-import "./Experience.scss";
+import '../shared/Portfolio.scss';
+import './Experience.scss';
 
-import styles from "../shared/style.module.scss";
+import styles from '../shared/style.module.scss';
 
-type WorkProps = {
-  work: Entries<Work>;
-};
+interface WorkProps {
+  work: Entries<Work>
+}
 
-type RoleProps = {
-  role: Work;
-};
+interface RoleProps {
+  role: Work
+}
 
 export const Experience: React.FC<WorkProps> = ({ work }: WorkProps): JSX.Element => {
   const dateService = useInjection(IDateService.$);
-  dateService.format("MMMM YYYY", "YYYY-MM-DD")
+  dateService.format('MMMM YYYY', 'YYYY-MM-DD');
 
   const iconService = useInjection(IIconService.$);
-  const Icon = iconService.getWithDefault("work");
-  const EducationIcon = iconService.getWithDefault("education");
-  
+  const Icon = iconService.getWithDefault('work');
+  const EducationIcon = iconService.getWithDefault('education');
+
   const { theme } = useContext(ThemeContext);
-  const background = useMemo(() => (styles[`${theme}-colorBrand`]), [ theme ]);
+  const background = useMemo(() => (styles[`${theme}-colorBrand`]), [theme]);
 
   return (
     <Section id="experience" title="Experience">
@@ -60,7 +60,7 @@ export const Experience: React.FC<WorkProps> = ({ work }: WorkProps): JSX.Elemen
                 key={index}
                 date={dateService.toRangeWithDuration(
                   work.startDate.toString(),
-                  work.endDate?.toString() ?? "Present"
+                  work.endDate?.toString() ?? 'Present'
                 )}
                 icon={<Icon />}
               >

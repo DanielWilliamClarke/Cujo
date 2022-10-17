@@ -1,17 +1,17 @@
-import React, { CSSProperties } from "react";
+import React, { CSSProperties } from 'react';
 
-import "./TriangleDivider.scss";
+import './TriangleDivider.scss';
 
-export type DividerProps = {
-  background: string;
-  foreground: string;
-};
+export interface DividerProps {
+  background: string
+  foreground: string
+}
 
 export const TriangleDivider: React.FC<DividerProps> = ({ background, foreground }: DividerProps): JSX.Element => {
   const myStyle: CSSProperties = {
     borderLeftColor: background,
     borderRightColor: background,
-    borderTopColor: foreground,
+    borderTopColor: foreground
   };
 
   return (

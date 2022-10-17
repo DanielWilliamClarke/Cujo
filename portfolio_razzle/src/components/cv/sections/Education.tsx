@@ -1,37 +1,37 @@
-import React from "react";
-import { View, StyleSheet, Text } from "@react-pdf/renderer";
+import React from 'react';
+import { View, StyleSheet, Text } from '@react-pdf/renderer';
 
-import { DateService, IDateService } from "../../../services/DateService";
-import { CV, Education as EducationModel } from "../../../model/CVModel";
+import { DateService, IDateService } from '../../../services/DateService';
+import { CV, Education as EducationModel } from '../../../model/CVModel';
 
-import { Header } from "./Header";
+import { Header } from './Header';
 
-import styles from "../../shared/style.module.scss";
+import styles from '../../shared/style.module.scss';
 
 export namespace Education {
   const pdfStyles = StyleSheet.create({
     education: {
       fontSize: 10,
-      marginBottom: 10,
+      marginBottom: 10
     },
     institution: {
-      fontSize: 12,
+      fontSize: 12
     },
     dates: {
-      color: styles.colorMuted,
-    },
+      color: styles.colorMuted
+    }
   });
 
   const dateService: IDateService = (() => {
     const service = new DateService();
-    service.format("MMMM YYYY", "YYYY-MM-DD");
+    service.format('MMMM YYYY', 'YYYY-MM-DD');
     return service;
   })();
 
   export const render = (cv: CV): JSX.Element => {
     return (
       <View>
-        {Header.render("education")}
+        {Header.render('education')}
         <View>
           {cv.education.entries
             .sort(
@@ -50,11 +50,11 @@ export namespace Education {
                 <Text
                   style={[
                     pdfStyles.institution,
-                    { fontFamily: "Helvetica-Bold" },
+                    { fontFamily: 'Helvetica-Bold' }
                   ]}
                 >
-                  {education.area}{" "}
-                  {education.grade ? `| ${education.grade}` : ""}
+                  {education.area}{' '}
+                  {education.grade ? `| ${education.grade}` : ''}
                 </Text>
                 <Text>{education.institution}</Text>
               </View>
@@ -62,5 +62,5 @@ export namespace Education {
         </View>
       </View>
     );
-  }
+  };
 }

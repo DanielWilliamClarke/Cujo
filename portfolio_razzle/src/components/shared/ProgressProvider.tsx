@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
-type ProgressProps = {
-  valueStart: number;
-  valueEnd: number;
-  children: (value: number) => JSX.Element;
-};
+interface ProgressProps {
+  valueStart: number
+  valueEnd: number
+  children: (value: number) => JSX.Element
+}
 
 export const ProgressProvider: React.FC<ProgressProps> = ({ valueStart, valueEnd, children }: ProgressProps): JSX.Element => {
   const [value, setValue] = useState(valueStart);

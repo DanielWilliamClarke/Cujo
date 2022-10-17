@@ -1,5 +1,5 @@
-import p5 from "p5";
-import { Sketch } from ".";
+import p5 from 'p5';
+import { Sketch } from '.';
 
 export const pauseableSketch = (
   sketchBuilder: (p: p5) => Sketch
@@ -9,7 +9,7 @@ export const pauseableSketch = (
     let isPaused = false;
 
     window.addEventListener(
-      "scroll",
+      'scroll',
       () => (isPaused = window.scrollY > window.innerHeight)
     );
 
@@ -21,4 +21,4 @@ export const pauseableSketch = (
 
     p.draw = () => !isPaused && sketch.draw();
   };
-}
+};

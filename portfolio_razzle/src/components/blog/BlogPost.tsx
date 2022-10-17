@@ -1,46 +1,46 @@
-import { documentToPlainTextString } from "@contentful/rich-text-plain-text-renderer";
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import { documentToPlainTextString } from '@contentful/rich-text-plain-text-renderer';
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import {
   Block,
   BLOCKS,
   MARKS,
   INLINES,
-  Inline,
-} from "@contentful/rich-text-types";
-import { Helmet } from "react-helmet";
+  Inline
+} from '@contentful/rich-text-types';
+import { Helmet } from 'react-helmet';
 
-import { useInjection } from "inversify-react";
-import React, { ReactNode, useMemo } from "react";
-import { Fade } from "react-awesome-reveal";
-import { Col, Row } from "react-bootstrap";
-import readingTime from "reading-time";
-import SyntaxHighlighter from "react-syntax-highlighter";
-import { obsidian } from "react-syntax-highlighter/dist/esm/styles/hljs";
+import { useInjection } from 'inversify-react';
+import React, { ReactNode, useMemo } from 'react';
+import { Fade } from 'react-awesome-reveal';
+import { Col, Row } from 'react-bootstrap';
+import readingTime from 'reading-time';
+import SyntaxHighlighter from 'react-syntax-highlighter';
+import { obsidian } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
-import { Post } from "../../model/BlogPost";
-import { getAsset, Entries, Includes } from "../../model/Includes";
-import { IDateService } from "../../services/DateService";
-import { Lanyard } from "../shared/Lanyard";
-import { Section } from "../shared/Section";
-import { SharePanel } from "../nav/SharePanel";
+import { Post } from '../../model/BlogPost';
+import { getAsset, Entries, Includes } from '../../model/Includes';
+import { IDateService } from '../../services/DateService';
+import { Lanyard } from '../shared/Lanyard';
+import { Section } from '../shared/Section';
+import { SharePanel } from '../nav/SharePanel';
 
-import "../shared/Portfolio.scss";
-import "./BlogPost.scss";
-import "highlight.js/scss/tomorrow-night-eighties.scss";
+import '../shared/Portfolio.scss';
+import './BlogPost.scss';
+import 'highlight.js/scss/tomorrow-night-eighties.scss';
 
-type BlogProps = {
-  id: string;
-  blog: Entries<Post>;
-};
+interface BlogProps {
+  id: string
+  blog: Entries<Post>
+}
 
-type PostProps = {
-  post: Post;
+interface PostProps {
+  post: Post
   includes: Includes
-};
+}
 
 export const BlogPost: React.FC<BlogProps> = ({ id, blog }: BlogProps): JSX.Element => {
   const dateService = useInjection(IDateService.$);
-  dateService.format("Do MMMM YYYY HH:mm:ss");
+  dateService.format('Do MMMM YYYY HH:mm:ss');
 
   const post = useMemo(() => blog.entries.find(
     (post: Post) => post.id === id
@@ -48,7 +48,7 @@ export const BlogPost: React.FC<BlogProps> = ({ id, blog }: BlogProps): JSX.Elem
 
   return (
     <>
-      {post && (
+      {(post != null) && (
         <>
           <SharePanel
             url={window.location.href}
@@ -67,12 +67,12 @@ export const BlogPost: React.FC<BlogProps> = ({ id, blog }: BlogProps): JSX.Elem
         </>
       )}
     </>
-  )
-}
+  );
+};
 
 const PostContent: React.FC<PostProps> = ({ post, includes }: PostProps) => {
   const dateService = useInjection(IDateService.$);
-  dateService.format("Do MMMM YYYY HH:mm:ss");
+  dateService.format('Do MMMM YYYY HH:mm:ss');
 
   const stats = readingTime(documentToPlainTextString(post.content));
   const options = useMemo(() => ({
@@ -86,7 +86,7 @@ const PostContent: React.FC<PostProps> = ({ post, includes }: PostProps) => {
         >
           {text}
         </SyntaxHighlighter>
-      ),
+      )
     },
     renderNode: {
       [BLOCKS.HR]: (): JSX.Element => (
@@ -104,7 +104,7 @@ const PostContent: React.FC<PostProps> = ({ post, includes }: PostProps) => {
         if (
           node.content.length === 1 &&
           node.content[0].marks.find(
-            ({ type }: { type: string }) => type === "code"
+            ({ type }: { type: string }) => type === 'code'
           )
         ) {
           return <div>{children}</div>;
@@ -116,7 +116,7 @@ const PostContent: React.FC<PostProps> = ({ post, includes }: PostProps) => {
           includes,
           node.data.target.sys.id
         );
-  
+
         return (
           <Row className="section-content">
             <Col className="centered featured">
@@ -124,8 +124,8 @@ const PostContent: React.FC<PostProps> = ({ post, includes }: PostProps) => {
             </Col>
           </Row>
         );
-      },
-    },
+      }
+    }
   }), [includes]);
 
   return (
@@ -137,7 +137,7 @@ const PostContent: React.FC<PostProps> = ({ post, includes }: PostProps) => {
 
         <Lanyard className="tags" tags={post.tags} />
 
-        {post.media && (
+        {(post.media != null) && (
           <>
             <Row className="section-content">
               <Col className="centered featured">
@@ -156,6 +156,6 @@ const PostContent: React.FC<PostProps> = ({ post, includes }: PostProps) => {
       </Section>
     </Fade>
   );
-}
+};
 
 export default BlogPost;

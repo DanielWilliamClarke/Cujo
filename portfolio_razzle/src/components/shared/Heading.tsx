@@ -1,12 +1,12 @@
-import React from "react";
-import { Col, Row } from "react-bootstrap";
+import React from 'react';
+import { Col, Row } from 'react-bootstrap';
 
-type HeadingProps = {
-  title: string;
-  noSeparator?: boolean;
-};
+interface HeadingProps {
+  title: string
+  noSeparator?: boolean
+}
 
-export const Heading: React.FC<HeadingProps> = ({ title, noSeparator}: HeadingProps): JSX.Element => {
+export const Heading: React.FC<HeadingProps> = ({ title, noSeparator }: HeadingProps): JSX.Element => {
   return (
     <Row>
       <Col>

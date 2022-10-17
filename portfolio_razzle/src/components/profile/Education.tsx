@@ -1,43 +1,43 @@
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import { useInjection } from "inversify-react";
-import React, { useContext, useMemo } from "react";
-import { Col, Row } from "react-bootstrap";
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import { useInjection } from 'inversify-react';
+import React, { useContext, useMemo } from 'react';
+import { Col, Row } from 'react-bootstrap';
 import {
   VerticalTimeline,
   VerticalTimelineElement
-} from "react-vertical-timeline-component";
-import { Education as EducationModel } from "../../model/CVModel";
-import { Entries, Media } from "../../model/Includes";
-import { IDateService } from "../../services/DateService";
-import { IIconService } from "../../services/IconService";
-import { DynamicImage } from "../shared/DynamicImage";
-import { Lanyard } from "../shared/Lanyard";
-import { Section } from "../shared/Section";
-import ThemeContext from "../theme/ThemeContext";
+} from 'react-vertical-timeline-component';
+import { Education as EducationModel } from '../../model/CVModel';
+import { Entries, Media } from '../../model/Includes';
+import { IDateService } from '../../services/DateService';
+import { IIconService } from '../../services/IconService';
+import { DynamicImage } from '../shared/DynamicImage';
+import { Lanyard } from '../shared/Lanyard';
+import { Section } from '../shared/Section';
+import ThemeContext from '../theme/ThemeContext';
 
-import "../shared/Portfolio.scss";
-import "./Education.scss";
+import '../shared/Portfolio.scss';
+import './Education.scss';
 
-import styles from "../shared/style.module.scss";
+import styles from '../shared/style.module.scss';
 
-type EducationProps = {
-  education: Entries<EducationModel>;
-};
+interface EducationProps {
+  education: Entries<EducationModel>
+}
 
-type InstitutionModel = {
-  institution: EducationModel;
-};
+interface InstitutionModel {
+  institution: EducationModel
+}
 
 export const Education: React.FC<EducationProps> = ({ education }: EducationProps): JSX.Element => {
   const dateService = useInjection(IDateService.$);
-  dateService.format("MMMM YYYY", "YYYY-MM-DD")
+  dateService.format('MMMM YYYY', 'YYYY-MM-DD');
 
   const iconService = useInjection(IIconService.$);
-  const Icon = iconService.getWithDefault("school");
-  const BabyIcon = iconService.getWithDefault("baby");
-  
+  const Icon = iconService.getWithDefault('school');
+  const BabyIcon = iconService.getWithDefault('baby');
+
   const { theme } = useContext(ThemeContext);
-  const background = useMemo(() => (styles[`${theme}-colorBrand`]), [ theme ]);
+  const background = useMemo(() => (styles[`${theme}-colorBrand`]), [theme]);
 
   return (
     <Section id="education" title="Education">
@@ -71,10 +71,10 @@ export const Education: React.FC<EducationProps> = ({ education }: EducationProp
   );
 };
 
- const Institution: React.FC<InstitutionModel> = ({ institution }: InstitutionModel): JSX.Element => {
+const Institution: React.FC<InstitutionModel> = ({ institution }: InstitutionModel): JSX.Element => {
   return (
     <>
-      {institution.grade !== "" && <Lanyard tags={[institution.grade]} />}
+      {institution.grade !== '' && <Lanyard tags={[institution.grade]} />}
 
       <Row className="header">
         <Col className="Qualification-type">

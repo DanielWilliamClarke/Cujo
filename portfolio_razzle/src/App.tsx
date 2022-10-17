@@ -1,13 +1,13 @@
-import "reflect-metadata";
+import 'reflect-metadata';
 
-import { Provider as IocProvider } from "inversify-react";
+import { Provider as IocProvider } from 'inversify-react';
 import React from 'react';
 import { createClient, Provider as UrqlProvider } from 'urql';
-import { container } from "./ioc";
-import Cujo from "./Cujo";
+import { container } from './ioc';
+import Cujo from './Cujo';
 
 const urqlClient = createClient({
-    url: '/api/graphql',
+  url: '/api/graphql'
 });
 
 const App = () => (

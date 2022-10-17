@@ -1,15 +1,15 @@
-import p5 from "p5";
-import { Vector4D } from "./matrix_utils";
-import { Ease } from "./easing";
-import { Sketch } from ".";
+import p5 from 'p5';
+import { Vector4D } from './matrix_utils';
+import { Ease } from './easing';
+import { Sketch } from '.';
 
 class GridUtil {
-  static getSquareGrid(
+  static getSquareGrid (
     totalX: number,
     totalY: number,
     scale: number
   ): Vector4D[] {
-    const vectors: [number, number][] = [];
+    const vectors: Array<[number, number]> = [];
     for (let x = -totalX; x <= totalX; x++) {
       for (let y = -totalY; y <= totalY; y++) {
         vectors.push([x, y]);
@@ -22,7 +22,7 @@ class GridUtil {
     });
   }
 
-  static getPolygonPoints(num: number, poly: number): p5.Vector[] {
+  static getPolygonPoints (num: number, poly: number): p5.Vector[] {
     const points: p5.Vector[] = [];
     for (let j = 0; j < poly; j++) {
       for (let i = 0; i < num / poly; i++) {
@@ -54,13 +54,13 @@ export class Grid implements Sketch {
   private screenWidth = 0;
   private screenHeight = 0;
 
-  private timeScale = 0.005;
+  private readonly timeScale = 0.005;
   private t = 0;
 
-  private scale = 150;
+  private readonly scale = 150;
   private totalX = 0;
   private totalY = 0;
-  private lineWidth = 10;
+  private readonly lineWidth = 10;
 
   private shapes: Vector4D[] = [];
   private hexPoints: p5.Vector[] = [];
@@ -69,11 +69,11 @@ export class Grid implements Sketch {
 
   private ctx: any;
 
-  constructor(private readonly p: p5) {}
+  constructor (private readonly p: p5) {}
 
-  preload(): void {}
+  preload (): void {}
 
-  setup() {
+  setup () {
     this.p.frameRate(60);
     this.p.colorMode(this.p.HSB, 100);
     this.p.createCanvas(window.innerWidth, window.innerHeight);
@@ -84,8 +84,8 @@ export class Grid implements Sketch {
     this.totalX = Math.ceil(this.screenWidth / 2 / this.scale);
     this.totalY = Math.ceil(this.screenHeight / 2 / this.scale);
 
-    const canvas = document.getElementById("defaultCanvas0") as any;
-    this.ctx = canvas.getContext("2d");
+    const canvas = document.getElementById('defaultCanvas0') as any;
+    this.ctx = canvas.getContext('2d');
 
     this.shapes = GridUtil.getSquareGrid(this.totalX, this.totalY, this.scale);
     this.hexPoints = GridUtil.getPolygonPoints(360, 4);
@@ -97,23 +97,23 @@ export class Grid implements Sketch {
     this.size = Math.floor((this.scale * Math.sqrt(2)) / 2);
   }
 
-  windowResized(): void {
+  windowResized (): void {
     this.setup();
   }
 
-  draw() {
+  draw () {
     this.t += this.timeScale;
 
     this.ctx.save();
-    this.ctx.fillStyle = `rgba(0,0,0,0.05)`;
+    this.ctx.fillStyle = 'rgba(0,0,0,0.05)';
     this.ctx.fillRect(0, 0, this.screenWidth, this.screenHeight);
 
     this.ctx.translate(this.screenWidth / 2, this.screenHeight / 2);
 
-    this.ctx.lineCap = "sqaure";
+    this.ctx.lineCap = 'sqaure';
 
     this.shapes.forEach((shape: Vector4D): void => {
-      let scaledT = Ease.easeInOutQuad(
+      const scaledT = Ease.easeInOutQuad(
         Math.abs((this.t - shape.z / this.maxDist) % 1)
       );
 
@@ -128,10 +128,10 @@ export class Grid implements Sketch {
       this.ctx.rotate(Math.PI / 2);
       this.ctx.translate(-x, -y);
 
-      let start = Math.floor(
+      const start = Math.floor(
         this.p.map(scaledT, 0, 1, 0, this.hexPoints.length - 1)
       );
-      let end = Math.ceil(
+      const end = Math.ceil(
         this.p.map(scaledT, 0, 1, start + 1, this.hexPoints.length - 1)
       );
 

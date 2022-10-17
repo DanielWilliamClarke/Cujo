@@ -1,16 +1,16 @@
 
-import React, { useContext, useRef } from "react";
+import React, { useContext, useRef } from 'react';
 import { Player } from '@lottiefiles/react-lottie-player';
 
 import switcher from '../../assets/theme_toggle.json';
 
-import ThemeContext from "./ThemeContext";
+import ThemeContext from './ThemeContext';
 
 import './ThemeSetter.scss';
 
 enum ThemeOptions {
-  LIGHT = "light",
-  DARK = "dark"
+  LIGHT = 'light',
+  DARK = 'dark'
 }
 
 export const ThemeSetter: React.FC = () => {
@@ -24,7 +24,7 @@ export const ThemeSetter: React.FC = () => {
     const isLight = theme === ThemeOptions.LIGHT;
     setTheme(isLight ? ThemeOptions.DARK : ThemeOptions.LIGHT);
 
-    player.current?.setSeeker(getFrame(isLight))
+    player.current?.setSeeker(getFrame(isLight));
     player.current?.setPlayerDirection(getDirection(isLight));
 
     player.current?.play();
@@ -55,4 +55,4 @@ export const ThemeSetter: React.FC = () => {
       />
     </div>
   );
-}
+};

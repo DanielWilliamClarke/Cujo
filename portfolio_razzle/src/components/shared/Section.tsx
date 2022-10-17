@@ -1,19 +1,19 @@
-import { useInjection } from "inversify-react";
-import React from "react";
-import { Container } from "react-bootstrap";
-import { IIconService } from "../../services/IconService";
+import { useInjection } from 'inversify-react';
+import React from 'react';
+import { Container } from 'react-bootstrap';
+import { IIconService } from '../../services/IconService';
 
-import { Heading } from "./Heading";
-import { DividerProps, TriangleDivider } from "./TriangleDivider";
+import { Heading } from './Heading';
+import { DividerProps, TriangleDivider } from './TriangleDivider';
 
-type SectionProps = {
-  id: string;
-  title: string;
-  noSeparator?: boolean;
-  bg?: string;
-  withDivider?: DividerProps;
-  children?: React.ReactNode;
-};
+interface SectionProps {
+  id: string
+  title: string
+  noSeparator?: boolean
+  bg?: string
+  withDivider?: DividerProps
+  children?: React.ReactNode
+}
 
 export const Section: React.FC<SectionProps> = ({ children, ...props }: SectionProps): JSX.Element => {
   const iconService = useInjection(IIconService.$);
@@ -22,9 +22,9 @@ export const Section: React.FC<SectionProps> = ({ children, ...props }: SectionP
   return (
     <section
       id={props.id}
-      className={`${props.bg ?? "section"} ${props.id}`}
+      className={`${props.bg ?? 'section'} ${props.id}`}
     >
-      {props.withDivider && (
+      {(props.withDivider != null) && (
         <TriangleDivider {...props.withDivider} />
       )}
       <Container>

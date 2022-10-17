@@ -1,18 +1,18 @@
-import p5 from "p5";
-import { Sketch, sample } from ".";
+import p5 from 'p5';
+import { Sketch, sample } from '.';
 
 export class Phylotaxis implements Sketch {
   private n = 0;
-  private c = 12;
+  private readonly c = 12;
   private start = 0;
   private growth: boolean = true;
 
-  private magicAngle = 137.6;
-  private maxParticles = 3000;
-  private increment = 5;
+  private readonly magicAngle = 137.6;
+  private readonly maxParticles = 3000;
+  private readonly increment = 5;
 
   private selectedGenerator!: (i: number) => number;
-  private magicAngleGenerators: ((i: number) => number)[] = [
+  private readonly magicAngleGenerators: Array<(i: number) => number> = [
     (input: number): number => {
       let ma = this.p.sin(input);
       ma = this.p.map(ma, -1, 1, 137.3, 137.6);
@@ -21,14 +21,14 @@ export class Phylotaxis implements Sketch {
     (input: number): number => 137.6,
     (input: number): number => 137.5,
     (input: number): number => 180,
-    (input: number): number => 99.5,
+    (input: number): number => 99.5
   ];
 
-  constructor(private readonly p: p5) {}
+  constructor (private readonly p: p5) {}
 
-  preload(): void {}
+  preload (): void {}
 
-  setup() {
+  setup () {
     this.p.frameRate(144);
     this.p.colorMode(this.p.HSB);
     this.p.angleMode(this.p.DEGREES);
@@ -38,15 +38,15 @@ export class Phylotaxis implements Sketch {
     this.selectedGenerator = sample(this.magicAngleGenerators);
   }
 
-  windowResized() {
+  windowResized () {
     this.p.resizeCanvas(window.innerWidth, window.innerHeight);
   }
 
-  draw() {
+  draw () {
     this.p.background(0);
     this.p.orbitControl();
 
-    for (var i = 0; i < this.n; i++) {
+    for (let i = 0; i < this.n; i++) {
       // vary magic angle
       const ma = this.selectedGenerator(i);
 

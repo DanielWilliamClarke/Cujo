@@ -1,34 +1,34 @@
-import React from "react";
-import { Fade } from "react-awesome-reveal";
+import React from 'react';
+import { Fade } from 'react-awesome-reveal';
 import {
   Route,
   RouteComponentProps,
   Switch
-} from "react-router-dom";
+} from 'react-router-dom';
 
-import { Post } from "../model/BlogPost";
-import { CV as CVModel } from "../model/CVModel";
-import { Entries } from "../model/Includes";
-import { Copyright } from "./backstretch/Copyright";
-import { Blog } from "./blog/Blog";
-import { Contact } from "./contact/Contact";
-import { NavPanel } from "./nav/NavPanel";
-import { ThemeProvider } from "./theme/ThemeProvider";
+import { Post } from '../model/BlogPost';
+import { CV as CVModel } from '../model/CVModel';
+import { Entries } from '../model/Includes';
+import { Copyright } from './backstretch/Copyright';
+import { Blog } from './blog/Blog';
+import { Contact } from './contact/Contact';
+import { NavPanel } from './nav/NavPanel';
+import { ThemeProvider } from './theme/ThemeProvider';
 
-import "./App.scss";
-import loadable from "@loadable/component";
+import './App.scss';
+import loadable from '@loadable/component';
 
-const BlogPost = loadable(() => import(/* webpackChunkName: "BlogPost" */ "./blog/BlogPost"));
-const Profile = loadable(() => import(/* webpackChunkName: "Profile" */ "./profile/Profile"));
-const CVPreview = loadable(() => import(/* webpackChunkName: "CVPreview" */ "./cv/CVPreview"));
-const SketchBackstretch = loadable(() => import(/* webpackChunkName: "SketchBackstretch" */ "./backstretch/SketchBackstretch"));
+const BlogPost = loadable(async () => await import(/* webpackChunkName: "BlogPost" */ './blog/BlogPost'));
+const Profile = loadable(async () => await import(/* webpackChunkName: "Profile" */ './profile/Profile'));
+const CVPreview = loadable(async () => await import(/* webpackChunkName: "CVPreview" */ './cv/CVPreview'));
+const SketchBackstretch = loadable(async () => await import(/* webpackChunkName: "SketchBackstretch" */ './backstretch/SketchBackstretch'));
 
-type AppProps = {
-  cv: CVModel;
-  blog: Entries<Post>;
-};
+interface AppProps {
+  cv: CVModel
+  blog: Entries<Post>
+}
 
-type BlogRouteParams = { id: string };
+interface BlogRouteParams { id: string }
 
 export const Portfolio: React.FC<AppProps> = ({ cv, blog }: AppProps): JSX.Element => {
   return (
@@ -42,7 +42,7 @@ export const Portfolio: React.FC<AppProps> = ({ cv, blog }: AppProps): JSX.Eleme
           <Route exact path="/">
             <Profile cv={cv} />
           </Route>
-          <Route path={"/blog/:id"}>
+          <Route path={'/blog/:id'}>
             {({ match }: RouteComponentProps<BlogRouteParams>): JSX.Element =>
               <BlogPost id={match.params.id} blog={blog} />
             }

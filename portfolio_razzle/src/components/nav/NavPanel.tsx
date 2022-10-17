@@ -1,13 +1,13 @@
-import { useInjection } from "inversify-react";
-import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { Nav, Navbar } from "react-bootstrap";
-import { useLocation } from "react-router-dom";
-import Scrollspy from "react-scrollspy";
+import { useInjection } from 'inversify-react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { Nav, Navbar } from 'react-bootstrap';
+import { useLocation } from 'react-router-dom';
+import Scrollspy from 'react-scrollspy';
 
-import { IIconService } from "../../services/IconService";
-import { ThemeSetter } from "../theme/ThemeSetter";
+import { IIconService } from '../../services/IconService';
+import { ThemeSetter } from '../theme/ThemeSetter';
 
-import "./NavPanel.scss";
+import './NavPanel.scss';
 
 export const NavPanel: React.FC = (): JSX.Element => {
   const iconService = useInjection(IIconService.$);
@@ -15,21 +15,21 @@ export const NavPanel: React.FC = (): JSX.Element => {
   const location = useLocation();
 
   useEffect(() => {
-    window.addEventListener("scroll", () => {
-      setBg(window.scrollY < window.innerHeight ? undefined : "dark");
+    window.addEventListener('scroll', () => {
+      setBg(window.scrollY < window.innerHeight ? undefined : 'dark');
     });
-  })
+  });
 
   const buildMenuItems = useCallback((): string[] => {
-    return location.pathname === "/"
-      ? ["about", "experience", "education", "skills", "projects"]
-      : ["post"];
+    return location.pathname === '/'
+      ? ['about', 'experience', 'education', 'skills', 'projects']
+      : ['post'];
   }, [location]);
 
-  const menu = useMemo(() => (["home"]
+  const menu = useMemo(() => (['home']
     .concat(buildMenuItems())
-    .concat(["blog", "cv", "contact"])), 
-    [buildMenuItems]);
+    .concat(['blog', 'cv', 'contact'])),
+  [buildMenuItems]);
 
   return (
       <Navbar
@@ -38,7 +38,7 @@ export const NavPanel: React.FC = (): JSX.Element => {
         variant="dark"
         className="justify-content-center"
       >
-        <Nav justify navbarScroll style={{ textTransform: "capitalize" }}>
+        <Nav justify navbarScroll style={{ textTransform: 'capitalize' }}>
           <Scrollspy
             items={menu}
             currentClassName="active"
@@ -47,7 +47,7 @@ export const NavPanel: React.FC = (): JSX.Element => {
           >
             {menu.map((link: string): JSX.Element => {
               const href =
-                link !== "home"
+                link !== 'home'
                   ? `${location.pathname}#${link}`
                   : `/#${link}`;
               const NavIcon = iconService.getWithDefault(link);
@@ -63,5 +63,5 @@ export const NavPanel: React.FC = (): JSX.Element => {
           <ThemeSetter/>
         </Nav>
       </Navbar>
-    );
+  );
 };

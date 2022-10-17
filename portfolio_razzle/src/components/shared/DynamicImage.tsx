@@ -1,17 +1,17 @@
-import React, { HTMLAttributes, useEffect, useState } from "react";
+import React, { HTMLAttributes, useEffect, useState } from 'react';
 
 type ImageProps = HTMLAttributes<HTMLImageElement> & {
-  image: string;
-  alt: string;
+  image: string
+  alt: string
 };
 
 namespace ImageLocator {
   export const buildImageUri = (image: string): any => {
     return isUrl(image) ? image : require(`../../assets/${image}`).default;
-  }
+  };
 
   const isUrl = (image: string): boolean => {
-    if (image.startsWith("//images.")) {
+    if (image.startsWith('//images.')) {
       image = `https:${image}`;
     }
 
@@ -22,13 +22,13 @@ namespace ImageLocator {
       return false;
     }
 
-    return ["http:", "https:"].includes(url.protocol);
-  }
+    return ['http:', 'https:'].includes(url.protocol);
+  };
 }
 
 export const DynamicImage: React.FC<ImageProps> =
   ({ image, alt, className }: ImageProps): JSX.Element => {
-    const [loaded, setLoaded] = useState("");
+    const [loaded, setLoaded] = useState('');
 
     useEffect(() => {
       new Promise((resolve) => {
@@ -36,11 +36,11 @@ export const DynamicImage: React.FC<ImageProps> =
         if (uri) {
           const handleLoad = (): void => {
             setLoaded(uri);
-            image.removeEventListener("load", handleLoad);
+            image.removeEventListener('load', handleLoad);
             resolve(true);
           };
           const image = new Image();
-          image.addEventListener("load", handleLoad.bind(this));
+          image.addEventListener('load', handleLoad.bind(this));
           image.src = uri;
         }
       });
@@ -54,4 +54,3 @@ export const DynamicImage: React.FC<ImageProps> =
       />
     );
   };
-  

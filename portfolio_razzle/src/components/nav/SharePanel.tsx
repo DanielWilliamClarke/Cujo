@@ -1,6 +1,6 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { Container } from "react-bootstrap";
-import { Fade } from "react-awesome-reveal";
+import React, { useCallback, useEffect, useState } from 'react';
+import { Container } from 'react-bootstrap';
+import { Fade } from 'react-awesome-reveal';
 
 import {
   FacebookShareButton,
@@ -14,37 +14,37 @@ import {
   LinkedinIcon,
   WhatsappIcon,
   RedditIcon,
-  EmailIcon,
-} from "react-share";
+  EmailIcon
+} from 'react-share';
 
-import "./SharePanel.scss";
+import './SharePanel.scss';
 
 interface ShareProps {
-  url: string;
-  title: string;
-  body: string;
-  hashtag: string;
+  url: string
+  title: string
+  body: string
+  hashtag: string
 }
 
-export const SharePanel: React.FC<ShareProps> = ({url, title, body, hashtag}: ShareProps): JSX.Element => {
+export const SharePanel: React.FC<ShareProps> = ({ url, title, body, hashtag }: ShareProps): JSX.Element => {
   const [show, setShow] = useState(false);
   const [slim, setSlim] = useState(true);
 
   useEffect(() => {
-    window.addEventListener("scroll", () => {
+    window.addEventListener('scroll', () => {
       setShow(window.scrollY > 0);
     });
-    window.addEventListener("resize", () => {
+    window.addEventListener('resize', () => {
       setSlim(window.innerWidth < 600);
     });
   });
 
   const sanitize = useCallback((input: string): string => {
-    return input.replace(/(<([^>]+)>)/gi, "");
+    return input.replace(/(<([^>]+)>)/gi, '');
   }, []);
 
   const prepareTitle = useCallback((title: string | undefined): string => {
-    const prefix = "DanielClarke.tech";
+    const prefix = 'DanielClarke.tech';
     return title ? `${prefix} - ${title}` : prefix;
   }, []);
 
@@ -53,7 +53,7 @@ export const SharePanel: React.FC<ShareProps> = ({url, title, body, hashtag}: Sh
   return (
     <Container className="share-panel">
       {show && (
-        <Fade triggerOnce direction={slim ? "up" : "left"}>
+        <Fade triggerOnce direction={slim ? 'up' : 'left'}>
           <LinkedinShareButton
             url={url}
             title={prepareTitle(title)}
@@ -105,4 +105,4 @@ export const SharePanel: React.FC<ShareProps> = ({url, title, body, hashtag}: Sh
       )}
     </Container>
   );
-}
+};

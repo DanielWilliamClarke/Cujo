@@ -1,21 +1,21 @@
-import React from "react";
-import { Document, StyleSheet, Page, View, Font } from "@react-pdf/renderer";
-import { IDateService } from "../../../services/DateService";
+import React from 'react';
+import { Document, StyleSheet, Page, View, Font } from '@react-pdf/renderer';
+import { IDateService } from '../../../services/DateService';
 
-import styles from "../../shared/style.module.scss";
-import { CV as CVModel, Work } from "../../../model/CVModel";
+import styles from '../../shared/style.module.scss';
+import { CV as CVModel, Work } from '../../../model/CVModel';
 
-import { Heading } from "./Heading";
-import { Intro } from "./Intro";
-import { Skills } from "./Skills";
-import { Education } from "./Education";
-import { Experience } from "./Experience";
-import { Outro } from "./Outro";
-import { Interests } from "./Interests";
+import { Heading } from './Heading';
+import { Intro } from './Intro';
+import { Skills } from './Skills';
+import { Education } from './Education';
+import { Experience } from './Experience';
+import { Outro } from './Outro';
+import { Interests } from './Interests';
 
 Font.registerEmojiSource({
-  format: "png",
-  url: "https://twemoji.maxcdn.com/2/72x72/",
+  format: 'png',
+  url: 'https://twemoji.maxcdn.com/2/72x72/'
 });
 
 Font.registerHyphenationCallback(word => (
@@ -25,24 +25,24 @@ Font.registerHyphenationCallback(word => (
 export namespace CV {
   const pdfStyles = StyleSheet.create({
     body: {
-      fontFamily: "Helvetica",
+      fontFamily: 'Helvetica'
     },
     contentRow: {
       flex: 1,
-      flexDirection: "row",
-      flexGrow: 1,
+      flexDirection: 'row',
+      flexGrow: 1
     },
     left: {
       paddingHorizontal: 15,
       paddingVertical: 8,
-      width: "50%",
+      width: '50%'
     },
     right: {
       paddingHorizontal: 15,
       paddingVertical: 8,
-      width: "50%",
-      backgroundColor: styles.colorOffWhite,
-    },
+      width: '50%',
+      backgroundColor: styles.colorOffWhite
+    }
   });
 
   export const render = (cv: CVModel, dateService: IDateService): JSX.Element => {
@@ -85,5 +85,5 @@ export namespace CV {
         </Page>
       </Document>
     );
-  }
+  };
 }

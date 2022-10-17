@@ -1,26 +1,26 @@
-import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
-import { Fade } from "react-awesome-reveal";
+import React from 'react';
+import { Container, Row, Col } from 'react-bootstrap';
+import { Fade } from 'react-awesome-reveal';
 
-import { Entries } from "../../model/Includes";
-import { Project } from "../../model/CVModel";
-import { DevIconName } from "../shared/DevIcon";
-import { DynamicImage } from "../shared/DynamicImage";
-import { Lanyard } from "../shared/Lanyard";
-import { Section } from "../shared/Section";
+import { Entries } from '../../model/Includes';
+import { Project } from '../../model/CVModel';
+import { DevIconName } from '../shared/DevIcon';
+import { DynamicImage } from '../shared/DynamicImage';
+import { Lanyard } from '../shared/Lanyard';
+import { Section } from '../shared/Section';
 
-import "../shared/Portfolio.scss";
-import "./Projects.scss";
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import '../shared/Portfolio.scss';
+import './Projects.scss';
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
-type ProjectsProps = {
-  projects: Entries<Project>;
-};
+interface ProjectsProps {
+  projects: Entries<Project>
+}
 
-type ProjectProps = {
-  project: Project;
+interface ProjectProps {
+  project: Project
   index?: number
-};
+}
 
 export const Projects: React.FC<ProjectsProps> = ({ projects }: ProjectsProps): JSX.Element => {
   return (
@@ -37,7 +37,7 @@ export const Projects: React.FC<ProjectsProps> = ({ projects }: ProjectsProps): 
 const ProjectSection: React.FC<ProjectProps> = ({ project, index }: ProjectProps): JSX.Element => {
   return (
     <Container className="project-panels">
-        <Fade triggerOnce direction={index! % 2 ? "left" : "right"}>
+        <Fade triggerOnce direction={index! % 2 ? 'left' : 'right'}>
           <div className="centered line" />
           <Row className="project">
             <ProjectImage project={project} />

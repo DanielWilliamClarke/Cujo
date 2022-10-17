@@ -1,8 +1,8 @@
-import { Container } from "inversify";
+import { Container } from 'inversify';
 
-import { ContactService, IContactService } from "./services/ContactService";
-import { IDateService, DateService } from "./services/DateService";
-import { IconService, IIconService } from "./services/IconService";
+import { ContactService, IContactService } from './services/ContactService';
+import { IDateService, DateService } from './services/DateService';
+import { IconService, IIconService } from './services/IconService';
 
 export const container = new Container();
 

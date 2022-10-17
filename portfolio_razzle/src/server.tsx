@@ -1,15 +1,15 @@
-import { ChunkExtractor, ChunkExtractorManager } from "@loadable/server";
+import { ChunkExtractor, ChunkExtractorManager } from '@loadable/server';
 import { createProxyMiddleware } from 'http-proxy-middleware';
 import cors from 'cors';
 import compression from 'compression';
 import expressStaticGzip from 'express-static-gzip';
 import express from 'express';
-import path from "path";
+import path from 'path';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
-import { StaticRouterContext } from "react-router";
+import { StaticRouterContext } from 'react-router';
 import { StaticRouter } from 'react-router-dom';
-import App from "./App";
+import App from './App';
 
 const assets: Record<string, any> = require(process.env.RAZZLE_ASSETS_MANIFEST!);
 
@@ -18,9 +18,9 @@ export const renderApp = (req: express.Request, res: express.Response) => {
 
   // We create an extractor from the statsFile
   const extractor = new ChunkExtractor({
-    statsFile: path.resolve("build/loadable-stats.json"),
+    statsFile: path.resolve('build/loadable-stats.json'),
     // razzle client bundle entrypoint is client.js
-    entrypoints: ["client"],
+    entrypoints: ['client']
   });
 
   const markup = renderToString(
@@ -87,18 +87,18 @@ const server = express()
   // Serve compressed clientside assetes
   .use(expressStaticGzip(process.env.RAZZLE_PUBLIC_DIR!, {
     enableBrotli: true,
-    orderPreference: ['br', 'gz'],
+    orderPreference: ['br', 'gz']
   }))
   // Proxy to backend service
   .use('/api', createProxyMiddleware({
     target: process.env.CUJO_SERVICE_URL,
-    pathRewrite: {'^/api' : ''},
-    changeOrigin: true,
+    pathRewrite: { '^/api': '' },
+    changeOrigin: true
   }))
   // Proxy to assets
   .use('/assets', createProxyMiddleware({
     target: process.env.CUJO_ASSETS_URL,
-    changeOrigin: true,
+    changeOrigin: true
   }))
   // Serve website
   .get('/*', (req: express.Request, res: express.Response) => {

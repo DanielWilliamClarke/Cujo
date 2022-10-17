@@ -1,14 +1,14 @@
-import React, { CSSProperties } from "react";
+import React, { CSSProperties } from 'react';
 
-import "./BlockReverseLoading.scss";
+import './BlockReverseLoading.scss';
 
-type LoadingProps = {
-  style: CSSProperties;
+interface LoadingProps {
+  style: CSSProperties
   box: {
-    speed: number;
-    size: number;
+    speed: number
+    size: number
   }
-};
+}
 
 export const BlockReverseLoading: React.FC<LoadingProps> = ({ style, box }: LoadingProps): JSX.Element => {
   return (
@@ -18,7 +18,7 @@ export const BlockReverseLoading: React.FC<LoadingProps> = ({ style, box }: Load
         style={{
           width: box.size,
           height: box.size,
-          animationDuration: `${box.speed}s`,
+          animationDuration: `${box.speed}s`
         }}
       />
     </div>

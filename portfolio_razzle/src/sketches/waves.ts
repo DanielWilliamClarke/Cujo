@@ -1,10 +1,10 @@
-import dat from "dat.gui";
-import p5 from "p5";
-import { Sketch } from ".";
+import dat from 'dat.gui';
+import p5 from 'p5';
+import { Sketch } from '.';
 
-const SimplexNoise = require("simplex-noise");
+const SimplexNoise = require('simplex-noise');
 class HSLA {
-  constructor(
+  constructor (
     public h: number = 0,
     public s: number = 0,
     public b: number = 0,
@@ -16,13 +16,13 @@ class Particle {
   public pastX: number = 0;
   public pastY: number = 0;
 
-  constructor(
+  constructor (
     public x: number = 0,
     public y: number = 0,
     public color: HSLA = new HSLA()
   ) {}
 
-  init(
+  init (
     hueBase: number,
     screenWidth: number,
     screenHeight: number,
@@ -38,27 +38,27 @@ class Particle {
     this.color.a = 0.95;
   }
 
-  persistPosition(): void {
+  persistPosition (): void {
     this.pastX = this.x;
     this.pastY = this.y;
   }
 
-  integratePosition(x: number, y: number): void {
+  integratePosition (x: number, y: number): void {
     this.x += x;
     this.y += y;
   }
 }
 
 class NoiseGenerator {
-  constructor(private sn: any) {}
+  constructor (private sn: any) {}
 
-  getNoise(x: number, y: number, z: number): number {
-    var octaves = 12,
-      fallout = 0.3,
-      amp = 1,
-      f = 1,
-      sum = 0,
-      i;
+  getNoise (x: number, y: number, z: number): number {
+    const octaves = 12;
+    const fallout = 0.3;
+    let amp = 1;
+    let f = 1;
+    let sum = 0;
+    let i;
 
     for (i = 0; i < octaves; ++i) {
       amp *= fallout;
@@ -69,14 +69,14 @@ class NoiseGenerator {
     return sum;
   }
 
-  refresh(sn: any) {
+  refresh (sn: any) {
     this.sn = sn;
   }
 }
 
 export class Waves implements Sketch {
-  private totalParticles = 1500;
-  private particles: Particle[] = [];
+  private readonly totalParticles = 1500;
+  private readonly particles: Particle[] = [];
   private screenWidth = 0;
   private screenHeight = 0;
   private centerX = 0;
@@ -84,32 +84,32 @@ export class Waves implements Sketch {
   private hueBase = 0;
 
   private fluffOff = 0;
-  private fluffInc = 0.05;
+  private readonly fluffInc = 0.05;
 
   private zOff = 0;
-  private zInc = 0.001;
+  private readonly zInc = 0.001;
 
-  private clearIn = 20000;
+  private readonly clearIn = 20000;
 
-  private parameters = {
+  private readonly parameters = {
     base: 200,
     step: 9,
-    bearing: 14,
+    bearing: 14
   };
 
-  constructor(
+  constructor (
     private readonly p: p5,
     private readonly noiseGenerator: NoiseGenerator = new NoiseGenerator(
       new SimplexNoise()
     ),
     private readonly gui: dat.GUI = new dat.GUI()
   ) {
-    //this.setupDatGui();
+    // this.setupDatGui();
   }
 
-  preload(): void {}
+  preload (): void {}
 
-  setup() {
+  setup () {
     this.p.frameRate(60);
     this.p.colorMode(this.p.HSB, 100);
 
@@ -121,7 +121,7 @@ export class Waves implements Sketch {
     this.centerX = this.screenWidth / 2;
     this.centerY = this.screenHeight / 2;
 
-    for (var i = 0, len = this.totalParticles; i < len; i++) {
+    for (let i = 0, len = this.totalParticles; i < len; i++) {
       const p = new Particle();
       p.init(
         this.hueBase,
@@ -134,7 +134,7 @@ export class Waves implements Sketch {
     }
   }
 
-  windowResized() {
+  windowResized () {
     this.p.resizeCanvas(window.innerWidth, window.innerHeight);
     this.screenWidth = this.p.width = window.innerWidth;
     this.screenHeight = this.p.height = window.innerHeight;
@@ -143,7 +143,7 @@ export class Waves implements Sketch {
     this.noiseGenerator.refresh(new SimplexNoise());
   }
 
-  draw() {
+  draw () {
     const elapsedTime = this.p.millis();
     const r = Math.abs(elapsedTime % this.clearIn);
     if (r <= 1000) {
@@ -213,16 +213,16 @@ export class Waves implements Sketch {
     this.hueBase += 0.1;
   }
 
-  private setupDatGui() {
+  private setupDatGui () {
     this.gui.remember(this.parameters);
     this.gui
-      .add(this.parameters, "base")
+      .add(this.parameters, 'base')
       .min(100)
       .max(1000)
       .step(100)
       .onFinishChange(() => this.p.background(0));
     this.gui
-      .add(this.parameters, "step")
+      .add(this.parameters, 'step')
       .min(5)
       .max(20)
       .step(1)
@@ -234,7 +234,7 @@ export class Waves implements Sketch {
     //   .step(0.05)
     //   .onFinishChange(() => this.p.background(0));
     this.gui
-      .add(this.parameters, "bearing")
+      .add(this.parameters, 'bearing')
       .min(0)
       .max(100)
       .step(1)

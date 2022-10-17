@@ -1,34 +1,34 @@
-import React, { HTMLAttributes, useCallback, useState } from "react";
-import { Row, Col } from "react-bootstrap";
-import { Zoom } from "react-awesome-reveal";
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import { Document } from "@contentful/rich-text-types";
+import React, { HTMLAttributes, useCallback, useState } from 'react';
+import { Row, Col } from 'react-bootstrap';
+import { Zoom } from 'react-awesome-reveal';
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import { Document } from '@contentful/rich-text-types';
 
-import { Entry } from "../../model/Includes";
-import { Skills, Skill } from "../../model/CVModel";
-import { DevIconName } from "../shared/DevIcon";
-import { Section } from "../shared/Section";
-import { ProgressGauge } from "../shared/ProgressGauge";
+import { Entry } from '../../model/Includes';
+import { Skills, Skill } from '../../model/CVModel';
+import { DevIconName } from '../shared/DevIcon';
+import { Section } from '../shared/Section';
+import { ProgressGauge } from '../shared/ProgressGauge';
 
-import "../shared/Portfolio.scss";
-import "./Technical.scss";
+import '../shared/Portfolio.scss';
+import './Technical.scss';
 
-type TechnicalProps = {
-  skills: Entry<Skills>;
-};
-
-type SkillsProps = HTMLAttributes<HTMLDivElement> & {
-  summary: Document;
-  skills: Skill[];
-  search: string;
+interface TechnicalProps {
+  skills: Entry<Skills>
 }
 
+type SkillsProps = HTMLAttributes<HTMLDivElement> & {
+  summary: Document
+  skills: Skill[]
+  search: string
+};
+
 export const Technical: React.FC<TechnicalProps> = ({ skills }: TechnicalProps): JSX.Element => {
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState('');
 
   const handleSearchInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(event.target.value);
-  }
+  };
 
   return (
     <Section id="skills" title="Skills">
@@ -78,12 +78,12 @@ export const Technical: React.FC<TechnicalProps> = ({ skills }: TechnicalProps):
       </Row>
     </Section>
   );
-}
+};
 
 const SkillsSection: React.FC<SkillsProps> = (
-  { skills, summary, search, className = "" }: SkillsProps
+  { skills, summary, search, className = '' }: SkillsProps
 ): JSX.Element => {
-  const gaugeColors = ["#FB6962", "#FB6962", "#FCFC99", "#0CC078", "#0CC078"];
+  const gaugeColors = ['#FB6962', '#FB6962', '#FCFC99', '#0CC078', '#0CC078'];
 
   const filterSkills = useCallback((name: string): boolean => {
     return search.length

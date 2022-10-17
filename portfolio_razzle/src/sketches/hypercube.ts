@@ -1,25 +1,25 @@
-import p5 from "p5";
-import { Sketch, sample } from ".";
-import { Vector4D, MatrixUtils } from "./matrix_utils";
+import p5 from 'p5';
+import { Sketch, sample } from '.';
+import { Vector4D, MatrixUtils } from './matrix_utils';
 
 type RotationGenerator = (angle: number) => number[][];
 
 export class Hypercube implements Sketch {
-  private matrixUtils = new MatrixUtils(this.p);
-  private distance = 2;
+  private readonly matrixUtils = new MatrixUtils(this.p);
+  private readonly distance = 2;
 
-  private points: Vector4D[] = [];
+  private readonly points: Vector4D[] = [];
   private angle: number = 0;
   private colorAngle: number = 0;
   private ctx: any = null;
 
-  private generators3d: RotationGenerator[] = [
+  private readonly generators3d: RotationGenerator[] = [
     (angle: number) => [
       // XY
       [this.p.cos(angle), -this.p.sin(angle), 0, 0],
       [this.p.sin(angle), this.p.cos(angle), 0, 0],
       [0, 0, 1, 0],
-      [0, 0, 0, 1],
+      [0, 0, 0, 1]
     ],
 
     (angle: number) => [
@@ -27,7 +27,7 @@ export class Hypercube implements Sketch {
       [this.p.cos(angle), 0, -this.p.sin(angle), 0],
       [0, 1, 0, 0],
       [this.p.sin(angle), 0, this.p.cos(angle), 0],
-      [0, 0, 0, 1],
+      [0, 0, 0, 1]
     ],
 
     (angle: number) => [
@@ -35,17 +35,17 @@ export class Hypercube implements Sketch {
       [1, 0, 0, 0],
       [0, this.p.cos(angle), -this.p.sin(angle), 0],
       [0, this.p.sin(angle), this.p.cos(angle), 0],
-      [0, 0, 0, 1],
-    ],
+      [0, 0, 0, 1]
+    ]
   ];
 
-  private generators4d: RotationGenerator[] = [
+  private readonly generators4d: RotationGenerator[] = [
     (angle: number) => [
       // XW
       [this.p.cos(angle), 0, 0, -this.p.sin(angle)],
       [0, 1, 0, 0],
       [0, 0, 1, 0],
-      [this.p.sin(angle), 0, 0, this.p.cos(angle)],
+      [this.p.sin(angle), 0, 0, this.p.cos(angle)]
     ],
 
     (angle: number) => [
@@ -53,7 +53,7 @@ export class Hypercube implements Sketch {
       [1, 0, 0, 0],
       [0, this.p.cos(angle), 0, -this.p.sin(angle)],
       [0, 0, 1, 0],
-      [0, this.p.sin(angle), 0, this.p.cos(angle)],
+      [0, this.p.sin(angle), 0, this.p.cos(angle)]
     ],
 
     (angle: number) => [
@@ -61,20 +61,20 @@ export class Hypercube implements Sketch {
       [1, 0, 0, 0],
       [0, 1, 0, 0],
       [0, 0, this.p.cos(angle), -this.p.sin(angle)],
-      [0, 0, this.p.sin(angle), this.p.cos(angle)],
-    ],
+      [0, 0, this.p.sin(angle), this.p.cos(angle)]
+    ]
   ];
 
-  private currentRotations: RotationGenerator[] = [
+  private readonly currentRotations: RotationGenerator[] = [
     sample(this.generators3d),
-    sample(this.generators4d),
+    sample(this.generators4d)
   ];
 
-  constructor(private readonly p: p5) {}
+  constructor (private readonly p: p5) {}
 
-  preload(): void {}
+  preload (): void {}
 
-  setup() {
+  setup () {
     this.p.createCanvas(this.p.windowWidth, this.p.windowHeight, this.p.WEBGL);
     this.p.colorMode(this.p.HSB);
     this.p.ortho(
@@ -87,21 +87,21 @@ export class Hypercube implements Sketch {
     );
 
     // transparency ordering workaround
-    const canvas = document.getElementById("defaultCanvas0") as any;
-    this.ctx = canvas.getContext("webgl");
+    const canvas = document.getElementById('defaultCanvas0') as any;
+    this.ctx = canvas.getContext('webgl');
     this.ctx.disable(this.ctx.DEPTH_TEST);
 
     // Generate 4D points
     for (let i = 0; i < 16; i++) {
-      let x = i & 1 ? -1 : 1;
-      let y = i & 2 ? -1 : 1;
-      let z = i & 4 ? -1 : 1;
-      let w = i & 8 ? -1 : 1;
+      const x = i & 1 ? -1 : 1;
+      const y = i & 2 ? -1 : 1;
+      const z = i & 4 ? -1 : 1;
+      const w = i & 8 ? -1 : 1;
       this.points.push(new Vector4D(x, y, z, w));
     }
   }
 
-  windowResized() {
+  windowResized () {
     this.p.resizeCanvas(window.innerWidth, window.innerHeight);
     this.p.ortho(
       -window.innerWidth,
@@ -113,7 +113,7 @@ export class Hypercube implements Sketch {
     );
   }
 
-  draw() {
+  draw () {
     this.p.background(0);
     this.p.rotateX(35.264);
     this.p.rotateY(-this.p.QUARTER_PI);
@@ -136,7 +136,7 @@ export class Hypercube implements Sketch {
         const projection = [
           [w, 0, 0, 0],
           [0, w, 0, 0],
-          [0, 0, w, 0],
+          [0, 0, w, 0]
         ];
         const projected = this.matrixUtils.Matmul(
           projection,
@@ -156,12 +156,12 @@ export class Hypercube implements Sketch {
       [...this.getEvenPoints(projected3d, 0, 16, 1)],
       [
         ...this.getEvenPoints(projected3d, 0, 16, 0, 4),
-        ...this.getEvenPoints(projected3d, 0, 16, 1, 4),
+        ...this.getEvenPoints(projected3d, 0, 16, 1, 4)
       ],
       [
         ...this.getEvenPoints(projected3d, 0, 16, 2, 4),
-        ...this.getEvenPoints(projected3d, 0, 16, 3, 4),
-      ],
+        ...this.getEvenPoints(projected3d, 0, 16, 3, 4)
+      ]
     ].forEach((cube: p5.Vector[], index: number): void =>
       this.drawCube(
         cube,
@@ -173,13 +173,13 @@ export class Hypercube implements Sketch {
     this.colorAngle += 0.05;
   }
 
-  private drawSquare = (...points: p5.Vector[]) => {
+  private readonly drawSquare = (...points: p5.Vector[]) => {
     this.p.beginShape();
-    for (let point of points) this.p.vertex(point.x, point.y, point.z);
+    for (const point of points) this.p.vertex(point.x, point.y, point.z);
     this.p.endShape(this.p.CLOSE);
   };
 
-  private drawCube = (points: p5.Vector[], hue: number): void => {
+  private readonly drawCube = (points: p5.Vector[], hue: number): void => {
     this.p.fill(hue, 100, 100, 0.05);
     this.p.stroke(hue, 100, 100);
     this.p.strokeWeight(2);
@@ -192,14 +192,14 @@ export class Hypercube implements Sketch {
     this.drawSquare(points[0], points[2], points[6], points[4]);
   };
 
-  private getEvenPoints = (
+  private readonly getEvenPoints = (
     points: p5.Vector[],
     start: number,
     end: number,
     offset: number = 0,
     step: number = 2
   ) => {
-    let result = [];
+    const result = [];
     for (let i = start; i < end; i += step) {
       result.push(points[i + offset]);
     }

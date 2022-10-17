@@ -1,17 +1,17 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState } from 'react';
 import {
   buildStyles,
-  CircularProgressbarWithChildren,
-} from "react-circular-progressbar";
-import VisibilitySensor from "react-visibility-sensor";
-import { ProgressProvider } from "../shared/ProgressProvider";
-const interpolate = require("color-interpolate");
+  CircularProgressbarWithChildren
+} from 'react-circular-progressbar';
+import VisibilitySensor from 'react-visibility-sensor';
+import { ProgressProvider } from '../shared/ProgressProvider';
+const interpolate = require('color-interpolate');
 
-type ProgressGaugeProps = {
-  value: number;
-  colors: string[];
-  children: (color: string) => JSX.Element;
-};
+interface ProgressGaugeProps {
+  value: number
+  colors: string[]
+  children: (color: string) => JSX.Element
+}
 
 export const ProgressGauge: React.FC<ProgressGaugeProps> =
   ({ value, colors, children }: ProgressGaugeProps): JSX.Element => {
@@ -37,11 +37,11 @@ export const ProgressGauge: React.FC<ProgressGaugeProps> =
                     value={value}
                     circleRatio={0.75}
                     styles={buildStyles({
-                      strokeLinecap: "round",
+                      strokeLinecap: 'round',
                       rotation: 1 / 2 + 1 / 8,
-                      trailColor: "#eeeeee55",
+                      trailColor: '#eeeeee55',
                       pathColor: color,
-                      pathTransitionDuration: 2.0,
+                      pathTransitionDuration: 2.0
                     })}
                   >
                     {children(color)}
@@ -53,4 +53,4 @@ export const ProgressGauge: React.FC<ProgressGaugeProps> =
         }}
       </VisibilitySensor>
     );
-  }
+  };

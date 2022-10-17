@@ -1,19 +1,19 @@
-import p5 from "p5";
-import React, { useEffect, useMemo } from "react";
-import { Container, Row, Col } from "react-bootstrap";
-import { useInjection } from "inversify-react";
-import { IDateService } from "../../services/DateService";
-import { getSketch } from "../../sketches";
-import { CVProps, Work } from "../../model/CVModel";
+import p5 from 'p5';
+import React, { useEffect, useMemo } from 'react';
+import { Container, Row, Col } from 'react-bootstrap';
+import { useInjection } from 'inversify-react';
+import { IDateService } from '../../services/DateService';
+import { getSketch } from '../../sketches';
+import { CVProps, Work } from '../../model/CVModel';
 
-import "./SketchBackstretch.scss";
+import './SketchBackstretch.scss';
 
-import { ScrollIndicator } from "./ScrollIndicator";
-import { DynamicImage } from "../shared/DynamicImage";
+import { ScrollIndicator } from './ScrollIndicator';
+import { DynamicImage } from '../shared/DynamicImage';
 
 const SketchBackstretch: React.FC<CVProps> = ({ cv }: CVProps): JSX.Element => {
   const dateService = useInjection(IDateService.$);
-  dateService.format("MMMM YYYY", "YYYY-MM-DD")
+  dateService.format('MMMM YYYY', 'YYYY-MM-DD');
 
   const currentRole = useMemo(() => {
     return cv.work.entries
@@ -25,7 +25,7 @@ const SketchBackstretch: React.FC<CVProps> = ({ cv }: CVProps): JSX.Element => {
         (a, b) =>
           dateService.toUnix(b.startDate.toString()) -
           dateService.toUnix(a.startDate.toString())
-      )[0]
+      )[0];
   }, [cv.work.entries, dateService]);
 
   // Similar to componentDidMount and componentDidUpdate:
@@ -61,6 +61,6 @@ const SketchBackstretch: React.FC<CVProps> = ({ cv }: CVProps): JSX.Element => {
       </Container>
     </section>
   );
-}
+};
 
 export default SketchBackstretch;
