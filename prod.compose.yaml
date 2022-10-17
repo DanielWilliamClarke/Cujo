@@ -53,12 +53,14 @@ services:
       - VIRTUAL_PORT=8080
       - LETSENCRYPT_HOST=${DOMAIN}
       - LETSENCRYPT_EMAIL=dc@${DOMAIN}
+      - CUJO_SERVICE_URL=${CUJO_SERVICE_URL}
     networks:
       - cujo
 
   service:
     image: dclarkious/cujo-rust:latest
     container_name: service
+    restart: always
     expose:
       - 5001
     environment:

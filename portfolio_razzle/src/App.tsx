@@ -7,10 +7,8 @@ import { container } from "./ioc";
 
 import { Cujo } from "./Cujo";
 
-import { runtimeConfig } from './config';
-
 const urqlClient = createClient({
-    url: runtimeConfig.CUJO_SERVICE_URL ?? '',
+    url: '/api/graphql',
 });
 
 const App = () => (

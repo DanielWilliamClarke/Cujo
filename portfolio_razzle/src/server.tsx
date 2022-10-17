@@ -1,4 +1,5 @@
 import { ChunkExtractor, ChunkExtractorManager } from "@loadable/server";
+import { createProxyMiddleware } from 'http-proxy-middleware';
 import cors from 'cors';
 import express from 'express';
 import path from "path";
@@ -7,7 +8,6 @@ import { renderToString } from 'react-dom/server';
 import { StaticRouterContext } from "react-router";
 import { StaticRouter } from 'react-router-dom';
 import App from "./App";
-import { runtimeConfig } from './config';
 
 const assets: Record<string, any> = require(process.env.RAZZLE_ASSETS_MANIFEST!);
 
@@ -81,8 +81,7 @@ export const renderApp = (req: express.Request, res: express.Response) => {
       <title>Daniel William Clarke</title>
     </head>
     <body>
-      <script>window.env = ${JSON.stringify(runtimeConfig)};</script>
-       <div id="root">${markup}</div>
+      <div id="root">${markup}</div>
       ${scriptTags}
     </body>
     </html>
@@ -97,7 +96,12 @@ const server = express()
   .use(cors())
   .options('*', cors())
   .use(express.static(process.env.RAZZLE_PUBLIC_DIR!))
-  .get('/*', (req: express.Request, res: express.Response) => {
+  .use('/api', createProxyMiddleware({
+    target: process.env.CUJO_SERVICE_URL,
+    pathRewrite: {'^/api' : ''},
+    changeOrigin: true,
+  }))
+  .get('/', (req: express.Request, res: express.Response) => {
     const { html = '', redirect = false } = renderApp(req, res);
     if (redirect) {
       res.redirect(redirect);
