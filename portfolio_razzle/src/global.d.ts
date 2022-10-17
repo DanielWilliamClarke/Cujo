@@ -10,4 +10,7 @@ declare module "*.gql" {
   export default content;
 }
 
+declare module "*.otf";
+declare module "*.ttf";
+
 declare module 'pdfjs-dist/legacy/build/pdf.worker.entry';

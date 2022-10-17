@@ -13,20 +13,6 @@ import App from "./App";
 
 const assets: Record<string, any> = require(process.env.RAZZLE_ASSETS_MANIFEST!);
 
-const cssLinksFromAssets = (assets: Record<string, any>, entrypoint: string) => {
-  return assets[entrypoint] ? assets[entrypoint].css ?
-    assets[entrypoint].css.map((asset: any) =>
-      `<link rel="stylesheet" href="${asset}">`
-    ).join('') : '' : '';
-};
-
-// const jsScriptTagsFromAssets = (assets: Record<string, any>, entrypoint: string, extra = '') => {
-//   return assets[entrypoint] ? assets[entrypoint].js ?
-//     assets[entrypoint].js.map((asset: any) =>
-//       `<script src="${asset}"${extra}></script>`
-//     ).join('') : '' : '';
-// };
-
 export const renderApp = (req: express.Request, res: express.Response) => {
   const context: StaticRouterContext = {};
 
@@ -98,15 +84,23 @@ const server = express()
   .use(cors())
   .options('*', cors())
   .use(compression())
+  // Serve compressed clientside assetes
   .use(expressStaticGzip(process.env.RAZZLE_PUBLIC_DIR!, {
     enableBrotli: true,
     orderPreference: ['br', 'gz'],
   }))
+  // Proxy to backend service
   .use('/api', createProxyMiddleware({
     target: process.env.CUJO_SERVICE_URL,
     pathRewrite: {'^/api' : ''},
     changeOrigin: true,
   }))
+  // Proxy to assets
+  .use('/assets', createProxyMiddleware({
+    target: process.env.CUJO_ASSETS_URL,
+    changeOrigin: true,
+  }))
+  // Serve website
   .get('/*', (req: express.Request, res: express.Response) => {
     const { html = '', redirect = false } = renderApp(req, res);
     if (redirect) {

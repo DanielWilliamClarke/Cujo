@@ -83,19 +83,19 @@ module.exports = {
             test: /\.js$|\.css$|\.html$/,
             threshold: 10240,
             minRatio: 0.8,
-          }),
-          new CompressionPlugin({
-            filename: "[path][base].br",
-            algorithm: "brotliCompress",
-            test: /\.(js|css|html|svg)$/,
-            compressionOptions: {
-              params: {
-                [zlib.constants.BROTLI_PARAM_QUALITY]: 11,
-              },
-            },
-            threshold: 10240,
-            minRatio: 0.8,
-          }),
+        }),
+            new CompressionPlugin({
+                filename: "[path][base].br",
+                algorithm: "brotliCompress",
+                test: /\.(js|css|html|svg)$/,
+                compressionOptions: {
+                    params: {
+                        [zlib.constants.BROTLI_PARAM_QUALITY]: 11,
+                    },
+                },
+                threshold: 10240,
+                minRatio: 0.8,
+            }),
         );
 
         //enable sourcemaps
@@ -121,11 +121,21 @@ module.exports = {
         }
 
         // -- Disable HMR
-        if (isClient && isDev) {
-            config.plugins = config.plugins.filter(
-                plugin => !(plugin instanceof webpack.HotModuleReplacementPlugin)
-            );
-        }
+        // if (isClient && isDev) {
+        //     config.plugins = config.plugins.filter(
+        //         plugin => !(plugin instanceof webpack.HotModuleReplacementPlugin)
+        //     );
+        // }
+
+        config.module.rules.push({
+            test: /\.(woff2|woff|eot|ttf|otf)$/,
+            loader: 'file-loader',
+            options: {
+                name: '[name].[ext]',
+                outputPath: 'assets/fonts/',
+                publicPath: 'assets/fonts/'
+              }
+          });
 
         return config;
     },
@@ -148,11 +158,11 @@ module.exports = {
                     experimentalWatchApi: true,
                     happyPackMode: true
                 },
-                forkTsChecker: {
-                    eslint: {
-                        files: ['*.js', '*.jsx', '*.ts', '*.tsx'],
-                    }
-                },
+                // forkTsChecker: {
+                //     eslint: {
+                //         files: ['*.js', '*.jsx', '*.ts', '*.tsx'],
+                //     }
+                // },
             },
         },
     ],

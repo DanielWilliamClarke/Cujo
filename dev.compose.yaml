@@ -9,12 +9,13 @@ services:
       - service
     ports:
       - "3000:3000"
-      - "3001:3001"
+      - "3001:3001" # assets
     # volumes:
       # - ./portfolio/build:/portfolio/build
       # - ./portfolio_razzle:/portfolio
     environment:
       - CUJO_SERVICE_URL=http://service:5001
+      - CUJO_ASSETS_URL=http://portfolio:3001
     networks:
       - cujo
 

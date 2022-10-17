@@ -3,8 +3,6 @@ import { Sketch } from ".";
 import { CV, Skill, Work } from "../model/CVModel";
 import { DateService, IDateService } from "../services/DateService";
 
-const fontName = require("../assets/QuartzoBold-W9lv.otf").default;
-
 const p5v: { sub(a: p5.Vector, b: p5.Vector): p5.Vector } = p5.Vector;
 
 type BoidsWord = {
@@ -47,7 +45,7 @@ export class Boids implements Sketch {
 
   private myFont!: p5.Font;
   preload() {
-    this.myFont = this.p.loadFont(fontName);
+    this.myFont = this.p.loadFont(`/assets/fonts/QuartzoBold-W9lv.otf`);
   }
 
   setup() {
