@@ -1,32 +1,14 @@
 
-import { Provider } from 'inversify-react';
-import Portfolio from '../app/components/App';
-import { useQuery } from 'urql';
-import { withUrqlClient } from 'next-urql';
+import Portfolio from '../src/components/App';
 
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'react-vertical-timeline-component/style.min.css';
-import { CujoProps, UrqlState, fetchCujo, apiUrl } from '../app/CujoFetch';
-import { container } from '../app/ioc';
-import './Cujo.scss';
-import CujoQuery from './Cujo.gql';
+import { CujoProps, fetchCujo, CujoProvider, URQLStateProps, wrapComponent } from '../src/Cujo';
 
-export const getServerSideProps = async (): Promise<UrqlState> => await fetchCujo();
+export const getServerSideProps = async (): Promise<URQLStateProps> => await fetchCujo();
 
-const Blog: React.FC = (): JSX.Element => {
-    const [{ data }] = useQuery<CujoProps>({ query: CujoQuery });
-    if (!data) {
-        throw new Error('No data returned');
-    }
-
-    const { cv, blog } = data;
-    return (
-        <Provider container={container}>
+export default wrapComponent((): JSX.Element => (
+    <CujoProvider>
+        {({ cv, blog }: CujoProps) => (
             <Portfolio cv={cv} blog={blog} />
-        </Provider>
-    )
-}
-
-export default withUrqlClient(
-    (ssr) => ({ url: apiUrl }),
-)(Blog);
+        )}
+    </CujoProvider>
+));

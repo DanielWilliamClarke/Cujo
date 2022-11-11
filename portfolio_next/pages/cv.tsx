@@ -1,21 +1,33 @@
-import CVExport from "../app/components/cv/CVExport";
-import { withUrqlClient } from 'next-urql';
-import { useQuery } from 'urql';
-import { fetchCujo, CujoProps, apiUrl, UrqlState } from "../app/CujoFetch";
-import CujoQuery from './Cujo.gql';
+import dynamic from "next/dynamic";
+import { Suspense } from "react";
+import { BlockReverseLoading } from "../src/components/shared/BlockReverseLoading";
+import { fetchCujo, CujoProps, CujoProvider, wrapComponent, URQLStateProps } from "../src/Cujo";
 
-export const getServerSideProps = async (): Promise<UrqlState> => await fetchCujo();
+const CVExport = dynamic(() => import("../src/components/cv/CVExport"), {
+    ssr: false,
+})
 
-const CV: React.FC = (): JSX.Element => {
-    const [{ data }] = useQuery<CujoProps>({ query: CujoQuery });
-    if (!data) {
-        throw new Error('No data returned');
-    }
+export const getServerSideProps = async (): Promise<URQLStateProps> => await fetchCujo();
 
-    const { cv } = data;
-    return <CVExport cv={cv} />
-};
+const loading = (
+    <BlockReverseLoading
+        style={{
+            height: "100vh",
+            width: "auto",
+        }}
+        box={{
+            speed: 3,
+            size: 50,
+        }}
+    />
+);
 
-export default withUrqlClient(
-    (ssr) => ({ url: apiUrl }),
-)(CV);
+export default wrapComponent((): JSX.Element => (
+    <CujoProvider>
+        {({ cv }: CujoProps) => (
+            <Suspense fallback={loading}>
+                <CVExport cv={cv} />
+            </Suspense>
+        )}
+    </CujoProvider>
+));
