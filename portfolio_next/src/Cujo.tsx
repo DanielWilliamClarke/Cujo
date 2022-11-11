@@ -74,5 +74,5 @@ export const CujoProvider: React.FC<CujoProviderProps> = ({ children }: CujoProv
 }
 
 export const wrapComponent = (component: React.FC) => withUrqlClient(
-  ssr => ({ url }),
+  () => ({ url }),
 )(component);

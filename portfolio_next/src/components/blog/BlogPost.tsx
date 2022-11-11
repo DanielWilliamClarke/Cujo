@@ -26,7 +26,6 @@ import { SharePanel } from '../nav/SharePanel';
 
 import '../shared/Portfolio.module.scss';
 import './BlogPost.module.scss';
-import { useRouter } from 'next/router';
 
 interface BlogProps {
   id: string
