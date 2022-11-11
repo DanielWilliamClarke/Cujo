@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import ThemeContext, { initialThemeState } from './ThemeContext';
 
-export const ThemeProvider: React.FC = ({ children }) => {
+type ThemeProviderProps = { 
+  children?: React.ReactNode
+};
+
+export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }: ThemeProviderProps) => {
   const [theme, setTheme] = useState(initialThemeState.theme);
 
   const localStorage = window.localStorage;

@@ -1,10 +1,10 @@
 import { useInjection } from 'inversify-react';
+import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Nav, Navbar } from 'react-bootstrap';
-import { useLocation } from 'react-router-dom';
 import Scrollspy from 'react-scrollspy';
-
 import { IIconService } from '../../services/IconService';
+
 import { ThemeSetter } from '../theme/ThemeSetter';
 
 import './NavPanel.scss';
@@ -12,7 +12,7 @@ import './NavPanel.scss';
 export const NavPanel: React.FC = (): JSX.Element => {
   const iconService = useInjection(IIconService.$);
   const [bg, setBg] = useState<string | undefined>(undefined);
-  const location = useLocation();
+  const router = useRouter()
 
   useEffect(() => {
     window.addEventListener('scroll', () => {
@@ -21,10 +21,10 @@ export const NavPanel: React.FC = (): JSX.Element => {
   });
 
   const buildMenuItems = useCallback((): string[] => {
-    return location.pathname === '/'
+    return router.pathname === '/'
       ? ['about', 'experience', 'education', 'skills', 'projects']
       : ['post'];
-  }, [location]);
+  }, [router]);
 
   const menu = useMemo(() => (['home']
     .concat(buildMenuItems())
@@ -48,7 +48,7 @@ export const NavPanel: React.FC = (): JSX.Element => {
             {menu.map((link: string): JSX.Element => {
               const href =
                 link !== 'home'
-                  ? `${location.pathname}#${link}`
+                  ? `${router.pathname}#${link}`
                   : `/#${link}`;
               const NavIcon = iconService.getWithDefault(link);
               return (
