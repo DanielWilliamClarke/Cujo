@@ -3,12 +3,6 @@ import { Suspense } from "react";
 import { BlockReverseLoading } from "../src/components/shared/BlockReverseLoading";
 import { fetchCujo, CujoProps, CujoProvider, wrapComponent, URQLStateProps } from "../src/Cujo";
 
-const CVExport = dynamic(() => import("../src/components/cv/CVExport"), {
-    ssr: false,
-})
-
-export const getServerSideProps = async (): Promise<URQLStateProps> => await fetchCujo();
-
 const loading = (
     <BlockReverseLoading
         style={{
@@ -22,10 +16,17 @@ const loading = (
     />
 );
 
+const CVExport = dynamic(() => import("../src/components/cv/CVExport"), {
+    ssr: false,
+    loading: () => loading
+})
+
+export const getServerSideProps = async (): Promise<URQLStateProps> => await fetchCujo();
+
 export default wrapComponent((): JSX.Element => (
     <CujoProvider>
         {({ cv }: CujoProps) => (
-            <Suspense fallback={loading}>
+            <Suspense>
                 <CVExport cv={cv} />
             </Suspense>
         )}
