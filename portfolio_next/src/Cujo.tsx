@@ -109,7 +109,7 @@ const CujoProvider: React.FC<CujoProviderProps> = ({ children }: CujoProviderPro
   )
 }
 
-const buildComponent = (children: (props: CujoProps) => JSX.Element): React.FC => {
+const buildPage = (children: (props: CujoProps) => JSX.Element): React.FC => {
   return () => (
     <CujoProvider>
       {children}
@@ -117,6 +117,6 @@ const buildComponent = (children: (props: CujoProps) => JSX.Element): React.FC =
   )
 }
 
-export const wrapComponent = (children: (props: CujoProps) => JSX.Element) => withUrqlClient(
+export const wrapPage = (children: (props: CujoProps) => JSX.Element) => withUrqlClient(
   () => ({ url }),
-)(buildComponent(children));
+)(buildPage(children));

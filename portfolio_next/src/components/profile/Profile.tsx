@@ -64,5 +64,3 @@ export const Profile: React.FC<CVProps> = ({ cv }: CVProps): JSX.Element => {
     </>
   );
 };
-
-export default Profile;

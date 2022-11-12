@@ -63,5 +63,3 @@ export const Portfolio: React.FC<AppProps> = ({ cv, blog, children }: AppProps):
     </div>
   </ThemeProvider>
 );
-
-export default Portfolio;

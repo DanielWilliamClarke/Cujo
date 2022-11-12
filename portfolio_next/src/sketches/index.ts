@@ -3,7 +3,7 @@ import { detect } from 'detect-browser';
 
 import { CV, Work } from '../model/CVModel';
 // import { conway3D } from "./conway_3d"
-// import { Boids } from './boids';
+import { Boids } from './boids';
 import { Boxes } from './boxes';
 import { Conway } from './conway';
 import { Grid } from './grid';
@@ -34,7 +34,7 @@ export const getSketch = (cv: CV, currentRole: Work): (p: p5) => void => {
     (p: p5) => new Phylotaxis(p),
     (p: p5) => new Hypercube(p),
     (p: p5) => new Grid(p),
-    // (p: p5) => new Boids(p, cv, currentRole)
+    (p: p5) => new Boids(p, cv, currentRole)
   ];
 
   // Boxes is super slow on Safari

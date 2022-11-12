@@ -46,12 +46,12 @@ export class Boids implements Sketch {
 
   private myFont!: p5.Font;
   preload () {
-    this.myFont = this.p.loadFont('./QuartzoBold-W9lv.otf');
+    this.myFont = this.p.loadFont('./fonts/QuartzoBold-W9lv.otf');
   }
 
   setup () {
     this.p.frameRate(60);
-    this.p.resizeCanvas(window.innerWidth, window.innerHeight);
+    this.p.createCanvas(window.innerWidth, window.innerHeight, this.p.WEBGL);
     // this.p.setRe
     this.p.colorMode(this.p.HSB);
     this.p.smooth();

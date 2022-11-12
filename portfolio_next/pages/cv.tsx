@@ -2,7 +2,7 @@ import { GetStaticProps } from "next";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
 import { BlockReverseLoading } from "../src/components/shared/BlockReverseLoading";
-import { CujoProps, wrapComponent, fetchCujoProps } from "../src/Cujo";
+import { CujoProps, wrapPage, fetchCujoProps } from "../src/Cujo";
 
 const loading = (
     <BlockReverseLoading
@@ -24,7 +24,7 @@ const CVExport = dynamic(() => import("../src/components/cv/CVExport"), {
 
 export const getStaticProps: GetStaticProps = fetchCujoProps;
 
-export default wrapComponent(({ cv }: CujoProps): JSX.Element => (
+export default wrapPage(({ cv }: CujoProps): JSX.Element => (
     <Suspense>
         <CVExport cv={cv} />
     </Suspense>
