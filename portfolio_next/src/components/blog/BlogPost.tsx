@@ -14,7 +14,6 @@ import React, { ReactNode, useEffect, useMemo, useState } from 'react';
 import { Fade } from 'react-awesome-reveal';
 import { Col, Row } from 'react-bootstrap';
 import readingTime from 'reading-time';
-import SyntaxHighlighter from 'react-syntax-highlighter';
 import { obsidian } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
 
 import { Post } from '../../model/BlogPost';
@@ -23,6 +22,11 @@ import { IDateService } from '../../services/DateService';
 import { Lanyard } from '../shared/Lanyard';
 import { Section } from '../shared/Section';
 import { SharePanel } from '../nav/SharePanel';
+import dynamic from 'next/dynamic';
+
+const SyntaxHighlighter = dynamic(() => import('react-syntax-highlighter'), {
+  ssr: false
+})
 
 interface BlogProps {
   id: string
@@ -85,7 +89,7 @@ const PostContent: React.FC<PostProps> = ({ post, includes }: PostProps) => {
           style={obsidian}
           showLineNumbers
         >
-          {text?.toString() ?? ''}
+          {text as string}
         </SyntaxHighlighter>
       )
     },
@@ -101,17 +105,9 @@ const PostContent: React.FC<PostProps> = ({ post, includes }: PostProps) => {
           {children}
         </a>
       ),
-      [BLOCKS.PARAGRAPH]: (node: any, children: ReactNode) => {
-        if (
-          node.content.length === 1 &&
-          node.content[0].marks.find(
-            ({ type }: { type: string }) => type === 'code'
-          )
-        ) {
-          return <div>{children}</div>;
-        }
-        return <p>{children}</p>;
-      },
+      [BLOCKS.PARAGRAPH]: (node: any, children: ReactNode) => (
+        <div>{children}</div>
+      ),
       [BLOCKS.EMBEDDED_ASSET]: (node: Block | Inline): JSX.Element => {
         const media = getAsset(
           includes,
