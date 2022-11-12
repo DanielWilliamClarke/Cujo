@@ -2,7 +2,8 @@ import dat from 'dat.gui';
 import p5 from 'p5';
 import { Sketch } from '.';
 
-const SimplexNoise = require('simplex-noise');
+import { createNoise3D, NoiseFunction3D } from 'simplex-noise';
+
 class HSLA {
   constructor (
     public h: number = 0,
@@ -50,7 +51,7 @@ class Particle {
 }
 
 class NoiseGenerator {
-  constructor (private sn: any) {}
+  constructor (private noise3D: NoiseFunction3D) {}
 
   getNoise (x: number, y: number, z: number): number {
     const octaves = 12;
@@ -62,15 +63,15 @@ class NoiseGenerator {
 
     for (i = 0; i < octaves; ++i) {
       amp *= fallout;
-      sum += amp * (this.sn.noise3D(x * f, y * f, z * f) + 1) * 0.5;
+      sum += amp * (this.noise3D(x * f, y * f, z * f) + 1) * 0.5;
       f *= 2;
     }
 
     return sum;
   }
 
-  refresh (sn: any) {
-    this.sn = sn;
+  refresh (noise3D: NoiseFunction3D) {
+    this.noise3D = noise3D;
   }
 }
 
@@ -100,7 +101,7 @@ export class Waves implements Sketch {
   constructor (
     private readonly p: p5,
     private readonly noiseGenerator: NoiseGenerator = new NoiseGenerator(
-      new SimplexNoise()
+      createNoise3D()
     ),
     private readonly gui: dat.GUI = new dat.GUI()
   ) {
@@ -140,7 +141,7 @@ export class Waves implements Sketch {
     this.screenHeight = this.p.height = window.innerHeight;
     this.centerX = window.innerWidth / 2;
     this.centerY = window.innerHeight / 2;
-    this.noiseGenerator.refresh(new SimplexNoise());
+    this.noiseGenerator.refresh(createNoise3D());
   }
 
   draw () {
