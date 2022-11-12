@@ -4,6 +4,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-vertical-timeline-component/style.min.css';
 import 'highlight.js/scss/tomorrow-night-eighties.scss';
 
+import 'devicon/devicon.min.css';
+
 // This is real dumb
 import '../src/components/backstretch/Copyright.scss';
 import '../src/components/backstretch/ScrollIndicator.scss';
