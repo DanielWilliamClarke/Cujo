@@ -67,4 +67,6 @@ const SketchBackstretch: React.FC<CVProps> = React.memo(({ cv }: CVProps): JSX.E
     ), []);
 });
 
+SketchBackstretch.displayName = 'SketchBackstretch';
+
 export default SketchBackstretch;

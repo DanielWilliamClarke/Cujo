@@ -15,7 +15,7 @@ import { Fade } from 'react-awesome-reveal';
 import { Col, Row } from 'react-bootstrap';
 import readingTime from 'reading-time';
 import SyntaxHighlighter from 'react-syntax-highlighter';
-import { obsidian } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import { obsidian } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
 
 import { Post } from '../../model/BlogPost';
 import { getAsset, Entries, Includes } from '../../model/Includes';
@@ -85,7 +85,7 @@ const PostContent: React.FC<PostProps> = ({ post, includes }: PostProps) => {
           style={obsidian}
           showLineNumbers
         >
-          {text}
+          {text?.toString() ?? ''}
         </SyntaxHighlighter>
       )
     },
