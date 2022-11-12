@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 
-import './ScrollIndicator.module.scss';
-
 export const ScrollIndicator: React.FC = (): JSX.Element => {
   const [visible, setVisible] = useState(true);
   

@@ -13,8 +13,6 @@ import { Section } from '../shared/Section';
 
 import { CV } from './sections/CV';
 
-import './CVPreview.module.scss';
-
 // This is quite dumb but works
 pdfjs.GlobalWorkerOptions.workerSrc = pdfjsWorker;
 

@@ -24,9 +24,6 @@ import { Lanyard } from '../shared/Lanyard';
 import { Section } from '../shared/Section';
 import { SharePanel } from '../nav/SharePanel';
 
-import '../shared/Portfolio.module.scss';
-import './BlogPost.module.scss';
-
 interface BlogProps {
   id: string
   blog: Entries<Post>

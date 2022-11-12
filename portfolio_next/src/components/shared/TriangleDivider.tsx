@@ -1,7 +1,5 @@
 import React, { CSSProperties } from 'react';
 
-import './TriangleDivider.module.scss';
-
 export interface DividerProps {
   background: string
   foreground: string

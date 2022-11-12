@@ -7,8 +7,6 @@ import { IIconService } from '../../services/IconService';
 
 import { ThemeSetter } from '../theme/ThemeSetter';
 
-import './NavPanel.module.scss';
-
 export const NavPanel: React.FC = (): JSX.Element => {
   const iconService = useInjection(IIconService.$);
   const [bg, setBg] = useState<string | undefined>(undefined);

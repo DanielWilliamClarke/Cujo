@@ -10,8 +10,6 @@ import { DevIconName } from '../shared/DevIcon';
 import { Section } from '../shared/Section';
 import { ProgressGauge } from '../shared/ProgressGauge';
 
-import '../shared/Portfolio.module.scss';
-import './Technical.module.scss';
 
 interface TechnicalProps {
   skills: Entry<Skills>

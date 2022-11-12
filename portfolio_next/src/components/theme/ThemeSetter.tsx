@@ -6,8 +6,6 @@ import switcher from '../../assets/theme_toggle.json';
 
 import ThemeContext from './ThemeContext';
 
-import './ThemeSetter.module.scss';
-
 enum ThemeOptions {
   LIGHT = 'light',
   DARK = 'dark'

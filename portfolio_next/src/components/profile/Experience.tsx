@@ -16,9 +16,6 @@ import { Section } from '../shared/Section';
 
 import ThemeContext from '../theme/ThemeContext';
 
-import '../shared/Portfolio.module.scss';
-import './Experience.module.scss';
-
 import styles from '../shared/style.module.scss';
 
 interface WorkProps {

@@ -12,7 +12,6 @@ import ThemeContext from '../theme/ThemeContext';
 import { DividerProps } from '../shared/TriangleDivider';
 
 import styles from '../shared/style.module.scss';
-import './Contact.module.scss';
 
 interface ContactProps {
   profiles: Profile[]

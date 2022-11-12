@@ -3,8 +3,6 @@ import { useInjection } from 'inversify-react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { IDateService } from '../../services/DateService';
 
-import './Copyright.module.scss';
-
 interface NameProps { name: string };
 
 export const Copyright: React.FC<NameProps> = ({ name }: NameProps): JSX.Element => {

@@ -17,8 +17,6 @@ import {
   EmailIcon
 } from 'react-share';
 
-import './SharePanel.module.scss';
-
 interface ShareProps {
   url: string
   title: string

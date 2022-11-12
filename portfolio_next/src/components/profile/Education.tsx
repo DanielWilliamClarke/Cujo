@@ -15,9 +15,6 @@ import { Lanyard } from '../shared/Lanyard';
 import { Section } from '../shared/Section';
 import ThemeContext from '../theme/ThemeContext';
 
-import '../shared/Portfolio.module.scss';
-import './Education.module.scss';
-
 import styles from '../shared/style.module.scss';
 
 interface EducationProps {

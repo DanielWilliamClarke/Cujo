@@ -10,17 +10,8 @@ import { Contact } from './contact/Contact';
 import { NavPanel } from './nav/NavPanel';
 import { ThemeProvider } from './theme/ThemeProvider';
 
-import './App.module.scss';
 import dynamic from 'next/dynamic';
 import { BlockReverseLoading } from './shared/BlockReverseLoading';
-
-const SketchBackstretch = dynamic(() => import('./backstretch/SketchBackstretch'), {
-  ssr: false,
-})
-
-const CVPreview = dynamic(() => import('./cv/CVPreview'), {
-  ssr: false,
-})
 
 const loading = (
   <BlockReverseLoading
@@ -35,6 +26,16 @@ const loading = (
   />
 );
 
+const SketchBackstretch = dynamic(() => import('./backstretch/SketchBackstretch'), {
+  ssr: false,
+  loading: () => loading
+});
+
+const CVPreview = dynamic(() => import('./cv/CVPreview'), {
+  ssr: false,
+  loading: () => loading
+});
+
 type AppProps = {
   cv: CVModel
   blog: Entries<Post>
@@ -43,21 +44,23 @@ type AppProps = {
 
 export const Portfolio: React.FC<AppProps> = ({ cv, blog, children }: AppProps): JSX.Element => (
   <ThemeProvider>
-    <Suspense fallback={loading}>
+    <Suspense>
       <Fade triggerOnce damping={0.01}>
         <SketchBackstretch cv={cv} />
       </Fade>
-      <NavPanel />
-      <div className="app">
-        {children}
-        <Blog blog={blog} />
-        <CVPreview cv={cv} />
-        <footer id="footer">
-          <Contact profiles={cv.about.entry.profiles} />
-          <Copyright name={cv.about.entry.name} />
-        </footer>
-      </div>
     </Suspense>
+    <NavPanel />
+    <div className="app">
+      {children}
+      <Blog blog={blog} />
+      <Suspense>
+        <CVPreview cv={cv} />
+      </Suspense>
+      <footer id="footer">
+        <Contact profiles={cv.about.entry.profiles} />
+        <Copyright name={cv.about.entry.name} />
+      </footer>
+    </div>
   </ThemeProvider>
 );
 

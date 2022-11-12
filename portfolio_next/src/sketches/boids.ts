@@ -1,4 +1,5 @@
 import p5 from 'p5';
+import { T } from 'styled-icons/fa-solid';
 import { Sketch } from '.';
 import { CV, Skill, Work } from '../model/CVModel';
 import { DateService, IDateService } from '../services/DateService';
@@ -50,7 +51,8 @@ export class Boids implements Sketch {
 
   setup () {
     this.p.frameRate(60);
-    this.p.createCanvas(window.innerWidth, window.innerHeight, this.p.WEBGL);
+    this.p.resizeCanvas(window.innerWidth, window.innerHeight);
+    // this.p.setRe
     this.p.colorMode(this.p.HSB);
     this.p.smooth();
     this.p.noStroke();

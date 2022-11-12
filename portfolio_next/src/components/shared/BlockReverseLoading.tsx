@@ -1,7 +1,5 @@
 import React, { CSSProperties } from 'react';
 
-import './BlockReverseLoading.module.scss';
-
 interface LoadingProps {
   style: CSSProperties
   box: {

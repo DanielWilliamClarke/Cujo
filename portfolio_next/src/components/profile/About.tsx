@@ -7,8 +7,6 @@ import { About as AboutModel } from '../../model/CVModel';
 import { DynamicImage } from '../shared/DynamicImage';
 import { Section } from '../shared/Section';
 
-import '../shared/Portfolio.module.scss';
-import './About.module.scss';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
 interface AboutProps {

@@ -1,8 +1,6 @@
 import React, { HTMLAttributes } from 'react';
 import { Badge } from 'react-bootstrap';
 
-import './Lanyard.module.scss';
-
 type LanyardProps = HTMLAttributes<HTMLImageElement> & {
   tags: string[]
 };

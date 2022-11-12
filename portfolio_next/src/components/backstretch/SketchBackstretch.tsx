@@ -6,12 +6,13 @@ import { IDateService } from '../../services/DateService';
 import { getSketch } from '../../sketches';
 import { CVProps, Work } from '../../model/CVModel';
 
-import './SketchBackstretch.module.scss';
-
 import { ScrollIndicator } from './ScrollIndicator';
 import { DynamicImage } from '../shared/DynamicImage';
 
-const SketchBackstretch: React.FC<CVProps> = ({ cv }: CVProps): JSX.Element => {
+// This stops any re-renders from creating multiple canvas'
+let rendered = false;
+
+const SketchBackstretch: React.FC<CVProps> = React.memo(({ cv }: CVProps): JSX.Element => {
   const dateService = useInjection(IDateService.$);
   dateService.format('MMMM YYYY', 'YYYY-MM-DD');
 
@@ -31,10 +32,13 @@ const SketchBackstretch: React.FC<CVProps> = ({ cv }: CVProps): JSX.Element => {
   // Similar to componentDidMount and componentDidUpdate:
   const p5Ref = useMemo(() => React.createRef<any>(), []);
   useEffect(() => {
-    new p5(getSketch(cv, currentRole), p5Ref.current);
-  }, [p5Ref, cv, currentRole]);
-
-  return (
+    if(!rendered) {
+      new p5(getSketch(cv, currentRole), p5Ref.current);
+      rendered = true;
+    }
+  }, []);
+  
+  return useMemo(() => (
     <section id="home">
       <Container fluid ref={p5Ref} className="sketch-backstretch">
         <div className="backstretch-headline">
@@ -60,7 +64,7 @@ const SketchBackstretch: React.FC<CVProps> = ({ cv }: CVProps): JSX.Element => {
         <ScrollIndicator />
       </Container>
     </section>
-  );
-};
+    ), []);
+});
 
 export default SketchBackstretch;

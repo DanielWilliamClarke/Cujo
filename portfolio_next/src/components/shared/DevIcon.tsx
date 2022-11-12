@@ -3,8 +3,6 @@ import { useInjection } from 'inversify-react';
 import { DevIcon } from '../../model/CVModel';
 import { IIconService } from '../../services/IconService';
 
-import './DevIcon.module.scss';
-
 interface DevIconProps {
   icon: DevIcon
   color?: string

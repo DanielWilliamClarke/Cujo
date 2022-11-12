@@ -11,9 +11,6 @@ import readingTime from 'reading-time';
 import { documentToPlainTextString } from '@contentful/rich-text-plain-text-renderer';
 import { IIconService } from '../../services/IconService';
 
-import '../shared/Portfolio.module.scss';
-import './Blog.module.scss';
-
 export interface BlogProps {
   blog: Entries<Post>
 }

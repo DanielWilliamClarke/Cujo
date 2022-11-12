@@ -9,8 +9,6 @@ import { DynamicImage } from '../shared/DynamicImage';
 import { Lanyard } from '../shared/Lanyard';
 import { Section } from '../shared/Section';
 
-import '../shared/Portfolio.module.scss';
-import './Projects.module.scss';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
 interface ProjectsProps {
