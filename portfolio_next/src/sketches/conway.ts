@@ -54,6 +54,7 @@ export class Conway implements Sketch {
   draw () {
     // Reset
     this.p.background(0);
+    this.p.lights();
 
     const locX = this.p.mouseX - this.p.height / 2;
     const locY = this.p.mouseY - this.p.width / 2;
@@ -142,7 +143,7 @@ export class Conway implements Sketch {
     );
 
   private readonly randomColor = (): HSLA =>
-    new HSLA(this.p.random(30, 55), this.p.random(80, 100), 60);
+    new HSLA(this.p.randomGaussian(180, 180), this.p.random(80, 100), 60);
 
   private readonly averageColor = (colors: HSLA[]): HSLA => {
     if (colors.length === 1) {

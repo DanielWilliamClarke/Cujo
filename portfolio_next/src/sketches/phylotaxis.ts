@@ -44,7 +44,7 @@ export class Phylotaxis implements Sketch {
 
   draw () {
     this.p.background(0);
-    this.p.orbitControl();
+    // this.p.orbitControl();
 
     for (let i = 0; i < this.n; i++) {
       // vary magic angle
