@@ -2,27 +2,24 @@ import { documentToPlainTextString } from '@contentful/rich-text-plain-text-rend
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import {
   Block,
-  BLOCKS,
-  MARKS,
-  INLINES,
-  Inline
+  BLOCKS, Inline, INLINES, MARKS
 } from '@contentful/rich-text-types';
-import { Helmet } from 'react-helmet';
 
 import { useInjection } from 'inversify-react';
 import React, { ReactNode, useEffect, useMemo, useState } from 'react';
 import { Fade } from 'react-awesome-reveal';
 import { Col, Row } from 'react-bootstrap';
-import readingTime from 'reading-time';
 import { obsidian } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
+import readingTime from 'reading-time';
 
+import dynamic from 'next/dynamic';
+import Head from 'next/head';
 import { Post } from '../../model/BlogPost';
-import { getAsset, Entries, Includes } from '../../model/Includes';
+import { Entries, getAsset, Includes } from '../../model/Includes';
 import { IDateService } from '../../services/DateService';
+import { SharePanel } from '../nav/SharePanel';
 import { Lanyard } from '../shared/Lanyard';
 import { Section } from '../shared/Section';
-import { SharePanel } from '../nav/SharePanel';
-import dynamic from 'next/dynamic';
 
 const SyntaxHighlighter = dynamic(() => import('react-syntax-highlighter'), {
   ssr: false
@@ -61,13 +58,13 @@ export const BlogPost: React.FC<BlogProps> = ({ id, blog }: BlogProps): JSX.Elem
             body={post.excerpt}
             hashtag="DCTechBlog"
           />
-          <Helmet>
+          <Head>
             <title>{post.title}</title>
             <meta property="og:title" content={post.title} />
             <meta property="og:image" content={post.media?.file.url} />
             <meta property="og:description" content={post.excerpt} />
             <meta property="og:url" content={href} />
-          </Helmet>
+          </Head>
           <PostContent post={post} includes={blog.includes} />
         </>
       )}

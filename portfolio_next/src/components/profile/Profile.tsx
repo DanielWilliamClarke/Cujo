@@ -1,6 +1,6 @@
+import Head from 'next/head';
 import React, { useEffect, useMemo, useState } from 'react';
 import { Fade } from 'react-awesome-reveal';
-import { Helmet } from 'react-helmet';
 
 import { CVProps, Project } from '../../model/CVModel';
 import { SharePanel } from '../nav/SharePanel';
@@ -28,7 +28,8 @@ export const Profile: React.FC<CVProps> = ({ cv }: CVProps): JSX.Element => {
         body={cv.about.entry.label}
         hashtag="DCTechPortfolio"
       />
-      <Helmet>
+      <Head>
+        <title>{cv.about.entry.name}</title>
         <meta property="og:title" content={cv.about.entry.name} />
         <meta
           property="og:image"
@@ -39,7 +40,7 @@ export const Profile: React.FC<CVProps> = ({ cv }: CVProps): JSX.Element => {
           content={cv.about.entry.label}
         />
         <meta property="og:url" content={href} />
-      </Helmet>
+      </Head>
       <div className="profile">
         <div>
           {[

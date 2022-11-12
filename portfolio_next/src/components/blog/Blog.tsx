@@ -30,19 +30,19 @@ export const Blog: React.FC<BlogProps> = ({ blog }: BlogProps): JSX.Element => {
         <Row xs={1} md={2} className="g-4 blog-cards">
           {(blog.entries.length > 0)
             ? (
-                blog.entries
-                  .sort(
-                    (a: Post, b: Post) =>
-                      dateService.toUnix(b.sys.createdAt.toString()) -
-                  dateService.toUnix(a.sys.createdAt.toString())
-                  )
-                  .map((post: Post, index: number) => (
-                <BlogSummaryPanel post={post} index={index} key={index} />
-                  ))
-              )
+              blog.entries
+                .sort(
+                  (a: Post, b: Post) =>
+                    dateService.toUnix(b.sys.createdAt.toString()) -
+                    dateService.toUnix(a.sys.createdAt.toString())
+                )
+                .map((post: Post, index: number) => (
+                  <BlogSummaryPanel post={post} index={index} key={index} />
+                ))
+            )
             : (
-            <Col className="blog-placeholder centered">Coming soon</Col>
-              )}
+              <Col className="blog-placeholder centered">Coming soon</Col>
+            )}
         </Row>
       </Section>
     </Fade>
@@ -66,11 +66,11 @@ const BlogSummaryPanel: React.FC<BlogSummaryProps> = ({ post, index }: BlogSumma
             <Nav.Link href={`/blog/${post.id}`}>
               {(post.media != null)
                 ? (
-                <Card.Img variant="top" src={post.media.file.url} />
-                  )
+                  <Card.Img variant="top" src={post.media.file.url} />
+                )
                 : (
-                <Icon />
-                  )}
+                  <Icon />
+                )}
             </Nav.Link>
           </Nav>
 
