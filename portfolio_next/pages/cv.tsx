@@ -1,7 +1,8 @@
+import { GetStaticProps } from "next";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
 import { BlockReverseLoading } from "../src/components/shared/BlockReverseLoading";
-import { fetchCujo, CujoProps, CujoProvider, wrapComponent, URQLStateProps } from "../src/Cujo";
+import { CujoProps, wrapComponent, fetchCujoProps } from "../src/Cujo";
 
 const loading = (
     <BlockReverseLoading
@@ -21,14 +22,10 @@ const CVExport = dynamic(() => import("../src/components/cv/CVExport"), {
     loading: () => loading
 })
 
-export const getServerSideProps = async (): Promise<URQLStateProps> => await fetchCujo();
+export const getStaticProps: GetStaticProps = fetchCujoProps;
 
-export default wrapComponent((): JSX.Element => (
-    <CujoProvider>
-        {({ cv }: CujoProps) => (
-            <Suspense>
-                <CVExport cv={cv} />
-            </Suspense>
-        )}
-    </CujoProvider>
+export default wrapComponent(({ cv }: CujoProps): JSX.Element => (
+    <Suspense>
+        <CVExport cv={cv} />
+    </Suspense>
 ));

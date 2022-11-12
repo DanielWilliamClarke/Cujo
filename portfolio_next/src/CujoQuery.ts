@@ -178,3 +178,13 @@ fragment DevIcon on DevIcon {
   }
 }
 `
+
+export const CujoBlogPathsQuery = gql`
+query CujoBlogPaths {
+  blog {
+    entries {
+      id
+    }
+  }
+}
+`

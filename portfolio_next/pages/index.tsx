@@ -1,16 +1,13 @@
+import { GetStaticProps } from 'next';
 import Portfolio from '../src/components/App';
 
 import Profile from '../src/components/profile/Profile';
-import { CujoProps, CujoProvider, URQLStateProps, fetchCujo, wrapComponent } from '../src/Cujo';
+import { CujoProps, fetchCujoProps, wrapComponent } from '../src/Cujo';
 
-export const getServerSideProps = async (): Promise<URQLStateProps> => await fetchCujo();
+export const getStaticProps: GetStaticProps = fetchCujoProps;
 
-export default wrapComponent((): JSX.Element => (
-    <CujoProvider>
-        {({ cv, blog }: CujoProps) => (
-            <Portfolio cv={cv} blog={blog}>
-                <Profile cv={cv} />
-            </Portfolio>
-        )}
-    </CujoProvider>
+export default wrapComponent(({ cv, blog }: CujoProps): JSX.Element => (
+    <Portfolio cv={cv} blog={blog}>
+        <Profile cv={cv} />
+    </Portfolio>
 ));

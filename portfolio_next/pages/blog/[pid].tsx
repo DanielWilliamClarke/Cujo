@@ -1,20 +1,18 @@
 import Portfolio from '../../src/components/App';
 
+import { GetStaticPaths, GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 import BlogPost from '../../src/components/blog/BlogPost';
-import { CujoProps, CujoProvider, fetchCujo, URQLStateProps, wrapComponent } from '../../src/Cujo';
+import { CujoProps, fetchCujoBlogPaths, fetchCujoProps, wrapComponent } from '../../src/Cujo';
 
-export const getServerSideProps = async (): Promise<URQLStateProps> => await fetchCujo();
+export const getStaticPaths: GetStaticPaths = fetchCujoBlogPaths;
+export const getStaticProps: GetStaticProps = fetchCujoProps;
 
-export default wrapComponent((): JSX.Element => {
+export default wrapComponent(({ cv, blog }: CujoProps): JSX.Element => {
     const { query: { pid } } = useRouter();
     return (
-        <CujoProvider>
-            {({ cv, blog }: CujoProps) => (
-                <Portfolio cv={cv} blog={blog}>
-                    <BlogPost id={pid as string} blog={blog} />
-                </Portfolio>
-            )}
-        </CujoProvider>
-    )
+        <Portfolio cv={cv} blog={blog}>
+            <BlogPost id={pid as string} blog={blog} />
+        </Portfolio>
+    );
 });
