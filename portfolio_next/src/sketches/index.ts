@@ -29,12 +29,12 @@ type SketchBuilder = (p: p5) => Sketch;
 export const getSketch = (cv: CV, currentRole: Work): (p: p5) => void => {
   const sketches: SketchBuilder[] = [
     (p: p5) => new Conway(p),
-    // (p: p5) => new Hex(p),
-    // (p: p5) => new Waves(p),
-    // (p: p5) => new Phylotaxis(p),
-    // (p: p5) => new Hypercube(p),
-    // (p: p5) => new Grid(p),
-    // (p: p5) => new Boids(p, cv, currentRole)
+    (p: p5) => new Hex(p),
+    (p: p5) => new Waves(p),
+    (p: p5) => new Phylotaxis(p),
+    (p: p5) => new Hypercube(p),
+    (p: p5) => new Grid(p),
+    (p: p5) => new Boids(p, cv, currentRole)
   ];
 
   // Boxes is super slow on Safari
