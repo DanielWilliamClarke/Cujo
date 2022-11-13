@@ -9,7 +9,7 @@
   .section-title,
   h3 {
     @include themed() {
-      color: t($col-contact-text);
+      color: t($col-contact-text) !important;
     }
   }
 
