@@ -1,7 +1,7 @@
 import React from 'react';
 import { Col, Row } from 'react-bootstrap';
 
-interface HeadingProps {
+type HeadingProps = {
   title: string
   noSeparator?: boolean
 }

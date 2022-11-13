@@ -6,7 +6,7 @@ import { DateService, IDateService } from '../services/DateService';
 
 const p5v: { sub: (a: p5.Vector, b: p5.Vector) => p5.Vector } = p5.Vector;
 
-interface BoidsWord {
+type BoidsWord = {
   word: string
   angle: number
 };

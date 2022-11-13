@@ -1,6 +1,6 @@
 import React, { CSSProperties } from 'react';
 
-interface LoadingProps {
+type LoadingProps = {
   style: CSSProperties
   box: {
     speed: number

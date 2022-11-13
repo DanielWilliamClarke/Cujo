@@ -13,7 +13,7 @@ import { DividerProps } from '../shared/TriangleDivider';
 
 import styles from '../shared/style.module.scss';
 
-interface ContactProps {
+type ContactProps = {
   profiles: Profile[]
 }
 

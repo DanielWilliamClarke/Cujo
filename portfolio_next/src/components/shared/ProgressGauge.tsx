@@ -7,7 +7,7 @@ import VisibilitySensor from 'react-visibility-sensor';
 import { ProgressProvider } from './ProgressProvider';
 const interpolate = require('color-interpolate');
 
-interface ProgressGaugeProps {
+type ProgressGaugeProps = {
   value: number
   colors: string[]
   children: (color: string) => JSX.Element

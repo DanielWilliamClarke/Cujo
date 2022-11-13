@@ -25,12 +25,12 @@ const SyntaxHighlighter = dynamic(() => import('react-syntax-highlighter'), {
   ssr: false
 })
 
-interface BlogProps {
+type BlogProps = {
   id: string
   blog: Entries<Post>
 }
 
-interface PostProps {
+type PostProps = {
   post: Post
   includes: Includes
 }

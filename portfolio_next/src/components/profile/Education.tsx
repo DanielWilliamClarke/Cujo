@@ -17,11 +17,11 @@ import ThemeContext from '../theme/ThemeContext';
 
 import styles from '../shared/style.module.scss';
 
-interface EducationProps {
+type EducationProps = {
   education: Entries<EducationModel>
 }
 
-interface InstitutionModel {
+type InstitutionModel = {
   institution: EducationModel
 }
 

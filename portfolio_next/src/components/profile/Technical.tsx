@@ -11,7 +11,7 @@ import { Section } from '../shared/Section';
 import { ProgressGauge } from '../shared/ProgressGauge';
 
 
-interface TechnicalProps {
+type TechnicalProps = {
   skills: Entry<Skills>
 }
 

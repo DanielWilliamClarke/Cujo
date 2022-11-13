@@ -1,6 +1,6 @@
 import React, { CSSProperties } from 'react';
 
-export interface DividerProps {
+export type DividerProps = {
   background: string
   foreground: string
 }

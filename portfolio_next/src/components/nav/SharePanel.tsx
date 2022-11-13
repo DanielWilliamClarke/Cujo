@@ -17,7 +17,7 @@ import {
   EmailIcon
 } from 'react-share';
 
-interface ShareProps {
+type ShareProps = {
   url: string
   title: string
   body: string

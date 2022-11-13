@@ -18,11 +18,11 @@ import ThemeContext from '../theme/ThemeContext';
 
 import styles from '../shared/style.module.scss';
 
-interface WorkProps {
+type WorkProps = {
   work: Entries<Work>
 }
 
-interface RoleProps {
+type RoleProps = {
   role: Work
 }
 

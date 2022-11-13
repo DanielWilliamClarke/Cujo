@@ -11,11 +11,11 @@ import { Section } from '../shared/Section';
 
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
-interface ProjectsProps {
+type ProjectsProps = {
   projects: Entries<Project>
 }
 
-interface ProjectProps {
+type ProjectProps = {
   project: Project
   index: number
 }

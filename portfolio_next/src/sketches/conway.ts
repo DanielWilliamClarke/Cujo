@@ -14,7 +14,8 @@ class Cell {
 }
 
 type Grid = Array<Array<Cell | undefined>>;
-interface Neighbours {
+
+type Neighbours = {
   sum: number
   colors: HSLA[]
 }

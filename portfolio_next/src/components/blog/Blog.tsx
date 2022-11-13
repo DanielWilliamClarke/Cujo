@@ -11,11 +11,11 @@ import readingTime from 'reading-time';
 import { documentToPlainTextString } from '@contentful/rich-text-plain-text-renderer';
 import { IIconService } from '../../services/IconService';
 
-export interface BlogProps {
+export type BlogProps = {
   blog: Entries<Post>
 }
 
-export interface BlogSummaryProps {
+export type BlogSummaryProps = {
   post: Post
   index: number
 }

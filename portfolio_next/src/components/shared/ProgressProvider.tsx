@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-interface ProgressProps {
+type ProgressProps = {
   valueStart: number
   valueEnd: number
   children: (value: number) => JSX.Element

@@ -44,11 +44,11 @@ export namespace IIconService {
   export const $: interfaces.ServiceIdentifier<IIconService> = Symbol('IIconService');
 }
 
-interface IconMap {
+type IconMap = {
   [key: string]: StyledIcon
 }
 
-export interface IconWithDefaultState {
+export type IconWithDefaultState = {
   icon: StyledIcon
 }
 

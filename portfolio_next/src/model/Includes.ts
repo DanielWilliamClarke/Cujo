@@ -1,58 +1,58 @@
-export interface Entries<T> {
+export type Entries<T> = {
   entries: T[]
   includes: Includes
 }
 
-export interface Entry<T> {
+export type Entry<T> = {
   entry: T
   includes: Includes
 }
 
-export interface Includes {
+export type Includes = {
   Asset?: Asset[]
   Entry?: RefEntry[]
 }
 
-export interface Asset {
+export type Asset = {
   fields: Media
   metadata: Metadata
   sys: Sys
 }
 
-export interface RefEntry {
+export type RefEntry = {
   fields: any
   metadata: Metadata
   sys: Sys
 }
 
-export interface Media {
+export type Media = {
   description: string
   file: File
   title: string
 }
 
-export interface File {
+export type File = {
   contentType: string
   details: Details
   fileName: string
   url: string
 }
 
-export interface Details {
+export type Details = {
   image: Image
   size: number
 }
 
-export interface Image {
+export type Image = {
   height: number
   width: number
 }
 
-export interface Metadata {
+export type Metadata = {
   tags: any[]
 }
 
-export interface Sys {
+export type Sys = {
   createdAt: Date
   environment: ContentType
   id: string
@@ -64,11 +64,11 @@ export interface Sys {
   contentType?: ContentType
 }
 
-export interface ContentType {
+export type ContentType = {
   sys: ContentTypeSys
 }
 
-export interface ContentTypeSys {
+export type ContentTypeSys = {
   id: string
   linkType: LinkType
   type: ContentTypeSysType

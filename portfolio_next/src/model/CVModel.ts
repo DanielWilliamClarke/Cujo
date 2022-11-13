@@ -1,11 +1,11 @@
 import { Entries, Entry, Media } from './Includes';
 import { Document } from '@contentful/rich-text-types';
 
-export interface CVProps {
+export type CVProps = {
   cv: CV
 }
 
-export interface CV {
+export type CV = {
   about: Entry<About>
   work: Entries<Work>
   education: Entries<Education>
@@ -14,7 +14,7 @@ export interface CV {
   readingList: Entries<Book>
 }
 
-export interface About {
+export type About = {
   name: string
   label: string
   email: string
@@ -26,7 +26,7 @@ export interface About {
   profiles: Profile[]
 }
 
-export interface Work {
+export type Work = {
   position: string
   company: string
   website: string
@@ -39,7 +39,7 @@ export interface Work {
   hideFromCv: boolean
 }
 
-export interface Education {
+export type Education = {
   institution: string
   link: string
   area: string
@@ -51,7 +51,7 @@ export interface Education {
   images: Media[]
 }
 
-export interface Skills {
+export type Skills = {
   summary: Document
   currentSummary: Document
   current: Skill[]
@@ -61,13 +61,13 @@ export interface Skills {
   used: Skill[]
 }
 
-export interface Skill {
+export type Skill = {
   name: string
   level: number
   icon: DevIcon
 }
 
-export interface Project {
+export type Project = {
   rank: number
   name: string
   link: string
@@ -84,7 +84,7 @@ export enum BookProgress {
   COMPLETED = 'COMPLETED'
 }
 
-export interface Book {
+export type Book = {
   title: string
   cover: Media
   author: string
@@ -92,12 +92,12 @@ export interface Book {
   amazonLink?: string
 }
 
-export interface Profile {
+export type Profile = {
   url: string
   brand: DevIcon
 }
 
-export interface DevIcon {
+export type DevIcon = {
   name: string
   icon: string
   iconImage?: Media

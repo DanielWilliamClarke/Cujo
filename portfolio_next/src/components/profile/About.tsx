@@ -9,7 +9,7 @@ import { Section } from '../shared/Section';
 
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
-interface AboutProps {
+type AboutProps = {
   about: Entry<AboutModel>
 }
 

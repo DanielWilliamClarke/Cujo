@@ -3,7 +3,9 @@ import { useInjection } from 'inversify-react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { IDateService } from '../../services/DateService';
 
-interface NameProps { name: string };
+type NameProps = { 
+  name: string 
+};
 
 export const Copyright: React.FC<NameProps> = ({ name }: NameProps): JSX.Element => {
   const dateService = useInjection(IDateService.$);

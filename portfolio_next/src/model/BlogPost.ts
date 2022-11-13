@@ -1,7 +1,7 @@
 import { Document } from '@contentful/rich-text-types';
 import { Media } from './Includes';
 
-export interface Post {
+export type Post = {
   id: string
   title: string
   content: Document
@@ -11,7 +11,7 @@ export interface Post {
   sys: Sys
 }
 
-export interface Sys {
+export type Sys = {
   id: string
   version: null
   revision: number

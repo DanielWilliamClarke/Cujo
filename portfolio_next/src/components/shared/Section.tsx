@@ -6,7 +6,7 @@ import { IIconService } from '../../services/IconService';
 import { Heading } from './Heading';
 import { DividerProps, TriangleDivider } from './TriangleDivider';
 
-interface SectionProps {
+type SectionProps = {
   id: string
   title: string
   noSeparator?: boolean
