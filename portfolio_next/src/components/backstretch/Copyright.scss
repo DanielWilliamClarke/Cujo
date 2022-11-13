@@ -5,6 +5,7 @@
   color: ft($theme-dark, col-text-main) !important;
 
   .copyright:after {
+    margin: 0 10px;
     @include themed() {
       color: t($col-main-brand) !important;
     }
