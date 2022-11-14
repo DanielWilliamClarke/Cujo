@@ -12,7 +12,7 @@ export const ProgressProvider: React.FC<ProgressProps> = ({ valueStart, valueEnd
   useEffect(() => {
     const timeout = window.setTimeout(() => setValue(valueEnd), 0);
     return () => window.clearTimeout(timeout);
-  }, []);
+  });
 
   useEffect(() => {
     if (value !== valueEnd) {

@@ -74,9 +74,15 @@ export const BlogPost: React.FC<BlogProps> = ({ id, blog }: BlogProps): JSX.Elem
 
 const PostContent: React.FC<PostProps> = ({ post, includes }: PostProps) => {
   const dateService = useInjection(IDateService.$);
-  dateService.format('Do MMMM YYYY HH:mm:ss');
+  dateService.format('Do MMMM YYYY HH:mm');
 
   const stats = readingTime(documentToPlainTextString(post.content));
+
+  const [updatedDate, setUpdatedDate] = useState('');
+  useEffect(() => {
+    setUpdatedDate(dateService.toSentence(post.sys.updatedAt.toString()))
+  }, [post.sys, dateService]);
+
   const options = useMemo(() => ({
     renderMark: {
       [MARKS.CODE]: (text: ReactNode): JSX.Element => (
@@ -126,7 +132,7 @@ const PostContent: React.FC<PostProps> = ({ post, includes }: PostProps) => {
     <Fade triggerOnce direction="left">
       <Section id="post" bg="section-light" title={post.title}>
         <h4 className="blog-date">
-          {dateService.toSentence(post.sys.updatedAt.toString())}
+          {updatedDate}
         </h4>
 
         <Lanyard className="tags" tags={post.tags} />

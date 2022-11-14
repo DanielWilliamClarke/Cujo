@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card, Col, Nav, Row } from 'react-bootstrap';
 import { useInjection } from 'inversify-react';
 import { Fade } from 'react-awesome-reveal';
@@ -54,9 +54,17 @@ const BlogSummaryPanel: React.FC<BlogSummaryProps> = ({ post, index }: BlogSumma
   const Icon = iconService.getWithDefault('post');
 
   const dateService = useInjection(IDateService.$);
-  dateService.format('Do MMMM YYYY HH:mm:ss');
+  dateService.format('Do MMMM YYYY HH:mm');
 
   const stats = readingTime(documentToPlainTextString(post.content));
+
+  const [publishedDate, setPublishedDate] = useState('');
+  const [updatedDate, setUpdatedDate] = useState('');
+
+  useEffect(() => {
+    setPublishedDate(dateService.toSentence(post.sys.createdAt.toString()))
+    setUpdatedDate(dateService.toSentence(post.sys.updatedAt.toString()))
+  }, [post.sys, dateService]);
 
   return (
     <Col>
@@ -81,9 +89,8 @@ const BlogSummaryPanel: React.FC<BlogSummaryProps> = ({ post, index }: BlogSumma
               </Nav.Link>
             </Nav>
             <Card.Text>
-              Published{' '}
-              {dateService.toSentence(post.sys.createdAt.toString())}{' '}
-            </Card.Text>
+              Published {publishedDate}
+            </Card.Text> 
             <Lanyard tags={post.tags} />
             <Card.Text className="text-muted">
               {post.excerpt}
@@ -93,8 +100,7 @@ const BlogSummaryPanel: React.FC<BlogSummaryProps> = ({ post, index }: BlogSumma
 
           <Card.Footer>
             <small className="text-muted">
-              Last updated{' '}
-              {dateService.toSentence(post.sys.updatedAt.toString())}
+              Last updated {updatedDate}
             </small>
           </Card.Footer>
         </Card>
