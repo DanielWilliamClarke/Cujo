@@ -13,7 +13,7 @@ WORKDIR /cujo
 
 COPY package.json package-lock.json* ./
 
-RUN npm ci --legacy-peer-deps
+RUN npm install --legacy-peer-deps
 
 # BUILD --------------------------------///
 FROM node:18.4.0-alpine AS build
