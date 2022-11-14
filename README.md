@@ -317,4 +317,6 @@ docker-compose --env-file <SECRET ENV FILE> -f prod.compose.yaml down (-v)
   - Styled Icons to the rescue <https://github.com/styled-icons/styled-icons>
 - Carousel <https://www.npmjs.com/package/tiny-slider-react>
 - Compiling canvas from source for M1 mac - <https://github.com/Automattic/node-canvas#compiling>
-  
+  - for alpine - <https://github.com/Automattic/node-canvas/issues/866>  
+- Nextjs docker file - <https://github.com/vercel/next.js/tree/canary/examples/with-docker>
+- Fix react-pdf issue in nextjs prod build - <https://stackoverflow.com/questions/72081585/created-pdf-doesnt-display-in-production-build-and-dev-build-page-but-locally>
