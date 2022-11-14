@@ -61,7 +61,7 @@ const BlogSummaryPanel: React.FC<BlogSummaryProps> = ({ post, index }: BlogSumma
   const [publishedDate, setPublishedDate] = useState('');
   const [updatedDate, setUpdatedDate] = useState('');
 
-  // Render date strings on the client
+  // Render date strings on the client as they fail during ISR
   useEffect(() => {
     setPublishedDate(dateService.toSentence(post.sys.createdAt.toString()))
     setUpdatedDate(dateService.toSentence(post.sys.updatedAt.toString()))
