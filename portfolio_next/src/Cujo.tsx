@@ -87,7 +87,7 @@ export const fetchCujoBlogPaths: GetStaticPaths = async () => {
   const { entries } = data.blog;
   return {
     paths: entries.map(({ id: pid }) => ({ params: { pid } })),
-    fallback: true,
+    fallback: 'blocking',
   }
 };
 

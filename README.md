@@ -315,3 +315,6 @@ docker-compose --env-file <SECRET ENV FILE> -f prod.compose.yaml down (-v)
 - GZipping bundles to load page faster - `GZip` <https://stackoverflow.com/questions/55704772/how-to-compress-build-with-without-ejecting-create-react-app-also-include-compr>
 - React Icons Tree shaking doesn't work - `React` <https://github.com/react-icons/react-icons/issues/289>
   - Styled Icons to the rescue <https://github.com/styled-icons/styled-icons>
+- Carousel <https://www.npmjs.com/package/tiny-slider-react>
+- Compiling canvas from source for M1 mac - <https://github.com/Automattic/node-canvas#compiling>
+  
