@@ -12,5 +12,5 @@ workflows:
           base-revision: master
           mapping: |
             service/.* build-service true
-            portfolio/.* build-portfolio true
+            portfolio_next/.* build-portfolio true
           config-path: .circleci/workflows.yaml

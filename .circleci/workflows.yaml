@@ -3,7 +3,7 @@
 version: 2.1
 
 orbs:
-  node: circleci/node@5.0.2
+  node: circleci/node@5.0.3
   rust: circleci/rust@1.6.0
 
 parameters:
@@ -17,7 +17,7 @@ parameters:
 jobs:
   test-build-push-rust:
     docker:
-      - image: cimg/rust:1.53.0
+      - image: cimg/rust:1.65.0
     resource_class: large
     steps:
       - checkout
@@ -50,7 +50,7 @@ jobs:
 
   test-build-push-portfolio:
     docker:
-      - image: cimg/node:14.20.0
+      - image: cimg/node:18.4.0
     resource_class: large
     steps:
       - checkout
@@ -68,8 +68,8 @@ jobs:
       - run:
           name: Build Docker image
           command: |
-            cd portfolio
-            docker build -t $DOCKER_REGISTRY/$IMAGE_NAME_PORTFOLIO:latest --build-arg BUILD_MODE=":prod" .
+            cd portfolio_next
+            docker build -t $DOCKER_REGISTRY/$IMAGE_NAME_PORTFOLIO:latest --build-arg CUJO_SERVICE_URL="$CUJO_SERVICE_URL" .
       - run:
           name: Publish Docker Image
           command: |
