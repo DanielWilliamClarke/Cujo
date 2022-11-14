@@ -3,9 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "CUJO_SERVICE_URL=http://127.0.0.1:5001 next dev",
     "build": "next build",
+    "build:local": "CUJO_SERVICE_URL=http://127.0.0.1:5001 npm run build",
     "start": "next start",
+    "start:local": "CUJO_SERVICE_URL=http://127.0.0.1:5001 npm run start",
     "lint": "next lint"
   },
   "dependencies": {

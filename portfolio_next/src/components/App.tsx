@@ -42,7 +42,9 @@ type AppProps = {
   children?: React.ReactNode
 }
 
-export const Portfolio: React.FC<AppProps> = ({ cv, blog, children }: AppProps): JSX.Element => (
+export const Portfolio: React.FC<AppProps> = (
+  { cv, blog, children }: AppProps
+): JSX.Element => (
   <ThemeProvider>
     <Suspense>
       <Fade triggerOnce damping={0.01}>

@@ -49,7 +49,6 @@ export const fetchCujoProps: GetStaticProps = async () => {
 
   return {
     props: {
-      // urqlState is a keyword here so withUrqlClient can pick it up.
       urqlState: ssrCache.extractData(),
     },
     revalidate: 300
