@@ -53,8 +53,6 @@ services:
       - VIRTUAL_PORT=8080
       - LETSENCRYPT_HOST=${DOMAIN}
       - LETSENCRYPT_EMAIL=dc@${DOMAIN}
-      - CUJO_SERVICE_URL=${CUJO_SERVICE_URL}
-      - CUJO_ASSETS_URL=${CUJO_ASSETS_URL}
     networks:
       - cujo
 
