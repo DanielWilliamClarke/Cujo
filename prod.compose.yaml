@@ -65,6 +65,11 @@ services:
     expose:
       - 5001
     environment:
+      - VIRTUAL_HOST=api.${DOMAIN}
+      - VIRTUAL_PORT=5001
+      - LETSENCRYPT_HOST=api.${DOMAIN}
+      - LETSENCRYPT_EMAIL=dc@${DOMAIN}
+
       - BLOG_HOST=${BLOG_HOST}
       - ACCESS_TOKEN=${ACCESS_TOKEN}
       - SPACE_ID=${SPACE_ID}
