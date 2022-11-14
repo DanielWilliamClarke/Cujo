@@ -2,6 +2,8 @@
 FROM node:18.4.0-alpine AS deps
 
 RUN apk add --no-cache \
+    py3-pip \
+    make \
     build-base \
     g++ \
     cairo-dev \
