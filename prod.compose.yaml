@@ -53,6 +53,7 @@ services:
       - VIRTUAL_PORT=8080
       - LETSENCRYPT_HOST=${DOMAIN}
       - LETSENCRYPT_EMAIL=dc@${DOMAIN}
+      - CUJO_SERVICE_URL=${CUJO_SERVICE_URL}
     networks:
       - cujo
 
@@ -63,11 +64,10 @@ services:
     expose:
       - 5001
     environment:
-      - VIRTUAL_HOST=api.${DOMAIN}
+      - VIRTUAL_HOST=${API_DOMAIN}
       - VIRTUAL_PORT=5001
-      - LETSENCRYPT_HOST=api.${DOMAIN}
+      - LETSENCRYPT_HOST=${API_DOMAIN}
       - LETSENCRYPT_EMAIL=dc@${DOMAIN}
-
       - BLOG_HOST=${BLOG_HOST}
       - ACCESS_TOKEN=${ACCESS_TOKEN}
       - SPACE_ID=${SPACE_ID}
