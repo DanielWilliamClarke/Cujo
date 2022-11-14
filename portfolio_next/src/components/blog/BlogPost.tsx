@@ -78,7 +78,7 @@ const PostContent: React.FC<PostProps> = ({ post, includes }: PostProps) => {
 
   const stats = readingTime(documentToPlainTextString(post.content));
 
-  // Render date strings on the client
+  // Render date strings on the client as they fail during ISR
   const [updatedDate, setUpdatedDate] = useState('');
   useEffect(() => {
     setUpdatedDate(dateService.toSentence(post.sys.updatedAt.toString()))
