@@ -75,7 +75,11 @@ const BlogSummaryPanel: React.FC<BlogSummaryProps> = ({ post, index }: BlogSumma
             <Nav.Link href={`/blog/${post.id}`}>
               {(post.media != null)
                 ? (
-                  <Card.Img variant="top" src={post.media.file.url} />
+                  <Card.Img
+                    variant="top"
+                    src={post.media.file.url}
+                    alt={post.media.description}
+                  />
                 )
                 : (
                   <Icon />
@@ -91,7 +95,7 @@ const BlogSummaryPanel: React.FC<BlogSummaryProps> = ({ post, index }: BlogSumma
             </Nav>
             <Card.Text>
               Published {publishedDate}
-            </Card.Text> 
+            </Card.Text>
             <Lanyard tags={post.tags} />
             <Card.Text className="text-muted">
               {post.excerpt}
