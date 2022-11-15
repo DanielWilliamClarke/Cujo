@@ -57,8 +57,7 @@ const ProjectImage: React.FC<ProjectProps> = ({ project }: ProjectProps): JSX.El
             target="_blank"
           >
             <DynamicImage
-              image={project.image.file.url}
-              alt={`${project.name} project image`}
+              image={project.image}
               className="centered image-item"
             />
             <div className="overlay" />

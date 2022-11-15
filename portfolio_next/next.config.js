@@ -11,7 +11,17 @@ const nextConfig = {
       loader: 'graphql-tag/loader',
     });
     return config;
-  }
+  },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.ctfassets.net',
+        port: '',
+      },
+    ],
+  },
+
 }
 
 module.exports = nextConfig;

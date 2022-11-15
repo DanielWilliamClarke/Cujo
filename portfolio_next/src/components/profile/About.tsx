@@ -53,8 +53,7 @@ export const About: React.FC<AboutProps> = ({ about }: AboutProps): JSX.Element 
               {about.entry.images.map((media: Media, index: number) => (
                 <Carousel.Item key={index}>
                   <DynamicImage
-                    image={media.file.url}
-                    alt="Image not found!"
+                    image={media}
                     className="headshot"
                   />
                 </Carousel.Item>

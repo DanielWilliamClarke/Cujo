@@ -1,18 +1,22 @@
+import NextImage from 'next/image';
 import React, { HTMLAttributes, useEffect, useState } from 'react';
 
+import { Media } from '../../model/Includes';
+
 type ImageProps = HTMLAttributes<HTMLImageElement> & {
-  image: string
-  alt: string
+  image: Media
 };
 
 namespace ImageLocator {
   export const buildImageUri = (image: string): any => {
-    return isUrl(image) ? image : require(`../../assets/${image}`).default;
+    return isUrl(image) ? urlWithProtocol(image) : require(`../../assets/${image}`).default;
   };
+
+  const urlWithProtocol = (image: string) => `https:${image}`;
 
   const isUrl = (image: string): boolean => {
     if (image.startsWith('//images.')) {
-      image = `https:${image}`;
+      image = urlWithProtocol(image);
     }
 
     let url;
@@ -27,12 +31,12 @@ namespace ImageLocator {
 }
 
 export const DynamicImage: React.FC<ImageProps> =
-  ({ image, alt, className }: ImageProps): JSX.Element => {
-    const [loaded, setLoaded] = useState('');
+  ({ image, className }: ImageProps): JSX.Element | null => {
+    const [loaded, setLoaded] = useState(undefined);
 
     useEffect(() => {
       new Promise((resolve) => {
-        const uri = ImageLocator.buildImageUri(image);
+        const uri = ImageLocator.buildImageUri(image.file.url);
         if (uri) {
           const handleLoad = (): void => {
             setLoaded(uri);
@@ -46,11 +50,19 @@ export const DynamicImage: React.FC<ImageProps> =
       });
     });
 
+    if (!loaded) {
+      return null;
+    }
+
+    console.log(image);
+
     return (
-      <img
+      <NextImage
         src={loaded}
-        alt={alt}
+        alt={image.description}
         className={className}
+        width={image.file.details.image.width}
+        height={image.file.details.image.height}
       />
     );
   };

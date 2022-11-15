@@ -92,8 +92,7 @@ const Role: React.FC<RoleProps> = ({ role }: RoleProps): JSX.Element => {
                 target="_blank"
               >
                 <DynamicImage
-                  image={role.logo.file.url}
-                  alt={role.company}
+                  image={role.logo}
                   className="centered image-item work-logo"
                 />
               </a>
@@ -112,8 +111,7 @@ const Role: React.FC<RoleProps> = ({ role }: RoleProps): JSX.Element => {
         {role.images.map((image: Media, index: number) => (
           <Col className="col-item" key={index}>
             <DynamicImage
-              image={image.file.url}
-              alt={`${role.position} - Image not found!`}
+              image={image}
               className="centered image-item"
             />
           </Col>

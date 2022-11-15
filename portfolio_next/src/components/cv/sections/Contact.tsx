@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Text, Image } from '@react-pdf/renderer';
+import { View, StyleSheet, Text, Image as PdfImage } from '@react-pdf/renderer';
 import { CV } from '../../../model/CVModel';
 
 import styles from '../../shared/style.module.scss';
@@ -57,7 +57,7 @@ export namespace Contact {
     return (
       <View style={pdfStyles.contactItem}>
         <View style={pdfStyles.contactIcon}>
-          <Image
+          <PdfImage
             src={`https://material-icons.github.io/material-icons-png/png/white/${iconName}/round-4x.png`}
             style={{ width: '15px', height: '15px', marginTop: '8px' }}
           />

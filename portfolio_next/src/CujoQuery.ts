@@ -167,6 +167,12 @@ fragment ImageUrl on Asset {
   description
   file {
     url
+    details {
+      image {
+        height
+        width
+      }
+    }
   }
 }
 

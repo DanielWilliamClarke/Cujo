@@ -36,7 +36,7 @@ const SketchBackstretch: React.FC<CVProps> = React.memo(({ cv }: CVProps): JSX.E
       new p5(getSketch(cv, currentRole), p5Ref.current);
       rendered = true;
     }
-  }, []);
+  });
   
   return useMemo(() => (
     <section id="home">
@@ -52,8 +52,7 @@ const SketchBackstretch: React.FC<CVProps> = React.memo(({ cv }: CVProps): JSX.E
           <Row className="backstretch-logo">
             <Col>
               <DynamicImage
-                image={currentRole.logo.file.url}
-                alt={currentRole.company}
+                image={currentRole.logo}
                 className="centered image-item work-logo"
               />
             </Col>
@@ -64,7 +63,7 @@ const SketchBackstretch: React.FC<CVProps> = React.memo(({ cv }: CVProps): JSX.E
         <ScrollIndicator />
       </Container>
     </section>
-    ), []);
+    ), [p5Ref, cv.about.entry, currentRole]);
 });
 
 SketchBackstretch.displayName = 'SketchBackstretch';

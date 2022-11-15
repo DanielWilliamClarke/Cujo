@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { View, StyleSheet, Text, Image } from '@react-pdf/renderer';
+import { View, StyleSheet, Text, Image as PdfImage } from '@react-pdf/renderer';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { BLOCKS } from '@contentful/rich-text-types';
 
@@ -81,7 +81,7 @@ export namespace Experience {
           {work.map((work: Work, index: number) => (
             <View key={index} style={pdfStyles.experience}>
               <View style={pdfStyles.experienceItem}>
-                <Image
+                <PdfImage
                   src={work.images[0].file.url}
                   style={pdfStyles.experienceIcon}
                 />

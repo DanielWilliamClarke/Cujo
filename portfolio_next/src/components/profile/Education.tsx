@@ -93,8 +93,7 @@ const Institution: React.FC<InstitutionModel> = ({ institution }: InstitutionMod
           <Col className="col-item" key={index}>
             <a href={institution.link} rel="noopener noreferrer" target="_blank">
               <DynamicImage
-                image={image.file.url}
-                alt={`${institution.institution} - Image not found!`}
+                image={image}
                 className="centered image-item"
               />
             </a>

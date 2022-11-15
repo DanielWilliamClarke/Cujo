@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, Image } from '@react-pdf/renderer';
+import { StyleSheet, View, Text, Image as PdfImage } from '@react-pdf/renderer';
 
 import styles from '../../shared/style.module.scss';
 import { CV as CVModel, Skill } from '../../../model/CVModel';
@@ -70,7 +70,7 @@ export namespace Skills {
 
   const createDevicon = (iconImage: Media): JSX.Element => {
     return (
-      <Image
+      <PdfImage
         src={iconImage.file.url}
         style={{ width: '20px', height: '20px', marginTop: '5px', zIndex: '999999999' }}
       />

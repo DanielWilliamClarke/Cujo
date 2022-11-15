@@ -4,6 +4,7 @@ import {
   Block,
   BLOCKS, Inline, INLINES, MARKS
 } from '@contentful/rich-text-types';
+import Image from 'next/image';
 
 import { useInjection } from 'inversify-react';
 import React, { ReactNode, useEffect, useMemo, useState } from 'react';
@@ -20,6 +21,7 @@ import { IDateService } from '../../services/DateService';
 import { SharePanel } from '../nav/SharePanel';
 import { Lanyard } from '../shared/Lanyard';
 import { Section } from '../shared/Section';
+import { DynamicImage } from '../shared/DynamicImage';
 
 const SyntaxHighlighter = dynamic(() => import('react-syntax-highlighter'), {
   ssr: false
@@ -112,16 +114,22 @@ const PostContent: React.FC<PostProps> = ({ post, includes }: PostProps) => {
       [BLOCKS.PARAGRAPH]: (node: any, children: ReactNode) => (
         <div>{children}</div>
       ),
-      [BLOCKS.EMBEDDED_ASSET]: (node: Block | Inline): JSX.Element => {
+      [BLOCKS.EMBEDDED_ASSET]: (node: Block | Inline): JSX.Element | null => {
         const media = getAsset(
           includes,
           node.data.target.sys.id
         );
 
+        if (!media) {
+          return null;
+        }
+
         return (
           <Row className="section-content">
             <Col className="centered featured">
-              <img src={media?.file.url} alt={media?.description} />
+              <DynamicImage
+                image={media}
+              />
             </Col>
           </Row>
         );
@@ -142,7 +150,9 @@ const PostContent: React.FC<PostProps> = ({ post, includes }: PostProps) => {
           <>
             <Row className="section-content">
               <Col className="centered featured">
-                <img src={post.media.file.url} alt={post.media.description} />
+                <DynamicImage
+                  image={post.media}
+                />
               </Col>
             </Row>
             <div className="line centered" />
