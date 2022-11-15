@@ -1,15 +1,20 @@
 # DEPS --------------------------------///
 FROM node:18.4.0-alpine AS deps
 
-RUN apk add --no-cache \
-    py3-pip \
-    make \
-    build-base \
-    g++ \
-    cairo-dev \
-    jpeg-dev \
-    pango-dev \
-    giflib-dev
+RUN apk update && \
+    apk add \
+        --no-cache \
+        build-base \
+        g++ \
+        make \
+        python3 \
+        py3-pip \
+        cairo-dev \
+        jpeg-dev \
+        pango-dev \
+        giflib-dev
+
+# RUN apk update && apk add python3 make gcc g++ .gyp
 
 WORKDIR /cujo
 
