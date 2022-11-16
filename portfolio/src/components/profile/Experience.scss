@@ -13,6 +13,7 @@
 
   .work-logo {
     height: 20px;
+    max-width: 100px;
 
     @include themed() {
       filter: brightness(t($work-logo-brightness));
