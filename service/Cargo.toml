@@ -1,14 +1,13 @@
 [package]
 name = "cujo"
 version = "0.1.0"
-authors = ["Daniel Clarke <dc@danielclarke.tech>"]
-edition = "2018"
+authors = ["Daniel Clarke <clarkit@gmail.com>"]
+edition = "2022"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
 contentful = { path = "./contentful" }
-
 actix = "0.13.0"
 actix-web = "4.1.0"
 actix-rt = "2.7.0"
