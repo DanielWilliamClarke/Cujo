@@ -18,14 +18,12 @@ mod blog;
 mod cache;
 mod cv;
 mod graphql;
-mod prerender;
 mod rest;
 mod util;
 
 use auth::{Auth0Client, AuthConfig, RedirectClient, RedirectConfig};
 use cache::Cache;
 use graphql::{configure_graphql_service, create_schema_with_cache};
-use prerender::{PrerenderClient, PrerenderConfig};
 use rest::configure_rest_service;
 use serde::Deserialize;
 use util::FromEnv;
@@ -48,7 +46,6 @@ async fn main() -> std::io::Result<()> {
 
     let auth_client = Auth0Client::new(AuthConfig::from_env());
     let redirect_client = RedirectClient::new(RedirectConfig::from_env());
-    let prerender_client = PrerenderClient::new(PrerenderConfig::from_env());
     let contentful_client = ContentfulClient::new(ContentfulConfig::from_env());
 
     let cache = Data::new(Mutex::new(
@@ -68,7 +65,6 @@ async fn main() -> std::io::Result<()> {
             .wrap(Logger::default())
             .app_data(Data::new(auth_client.clone()))
             .app_data(Data::new(redirect_client.clone()))
-            .app_data(Data::new(prerender_client.clone()))
             .app_data(Data::new(contentful_client.clone()))
             .app_data(Data::new(schema.clone()))
             .app_data(cache.clone())
