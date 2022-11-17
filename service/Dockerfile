@@ -1,7 +1,7 @@
 #BUILD -----------------------------------
 FROM rustlang/rust:nightly as build
 
-WORKDIR ./cujo
+WORKDIR /cujo
 
 COPY . .
 RUN cargo install --path .

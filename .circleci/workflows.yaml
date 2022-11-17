@@ -17,7 +17,7 @@ parameters:
 jobs:
   test-build-push-rust:
     docker:
-      - image: cimg/rust:1.65.0
+      - image: cimg/rust:1.66.0
     resource_class: large
     steps:
       - checkout
