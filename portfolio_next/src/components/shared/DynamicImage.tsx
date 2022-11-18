@@ -53,9 +53,7 @@ export const DynamicImage: React.FC<ImageProps> =
     if (!loaded) {
       return null;
     }
-
-    console.log(image);
-
+    
     return (
       <NextImage
         src={loaded}
