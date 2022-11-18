@@ -1,15 +1,15 @@
+import { documentToPlainTextString } from '@contentful/rich-text-plain-text-renderer';
+import { useInjection } from 'inversify-react';
 import React, { useEffect, useState } from 'react';
 import { Card, Col, Nav, Row } from 'react-bootstrap';
-import { useInjection } from 'inversify-react';
-import { Fade } from 'react-awesome-reveal';
-import { IDateService } from '../../services/DateService';
+import readingTime from 'reading-time';
 import { Post } from '../../model/BlogPost';
 import { Entries } from '../../model/Includes';
-import { Lanyard } from '../shared/Lanyard';
-import { Section } from '../shared/Section';
-import readingTime from 'reading-time';
-import { documentToPlainTextString } from '@contentful/rich-text-plain-text-renderer';
+import { IDateService } from '../../services/DateService';
 import { IIconService } from '../../services/IconService';
+import { Lanyard } from '../shared/Lanyard';
+import { Reveal } from '../shared/Reveal';
+import { Section } from '../shared/Section';
 
 export type BlogProps = {
   blog: Entries<Post>
@@ -25,7 +25,7 @@ export const Blog: React.FC<BlogProps> = ({ blog }: BlogProps): JSX.Element => {
   dateService.format('Do MMMM YYYY HH:mm:ss');
 
   return (
-    <Fade triggerOnce direction="up">
+    <Reveal direction='up'>
       <Section id="blog" bg="section-dark" title="Blog">
         <Row xs={1} md={2} className="g-4 blog-cards">
           {(blog.entries.length > 0)
@@ -45,7 +45,7 @@ export const Blog: React.FC<BlogProps> = ({ blog }: BlogProps): JSX.Element => {
             )}
         </Row>
       </Section>
-    </Fade>
+    </Reveal>
   );
 };
 
@@ -69,7 +69,7 @@ const BlogSummaryPanel: React.FC<BlogSummaryProps> = ({ post, index }: BlogSumma
 
   return (
     <Col>
-      <Fade triggerOnce direction={index % 2 ? 'right' : 'left'}>
+      <Reveal index={index}>
         <Card key={post.id} bg="dark">
           <Nav navbarScroll>
             <Nav.Link href={`/blog/${post.id}`}>
@@ -109,7 +109,7 @@ const BlogSummaryPanel: React.FC<BlogSummaryProps> = ({ post, index }: BlogSumma
             </small>
           </Card.Footer>
         </Card>
-      </Fade>
+      </Reveal>
     </Col>
   );
 };

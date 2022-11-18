@@ -4,11 +4,9 @@ import {
   Block,
   BLOCKS, Inline, INLINES, MARKS
 } from '@contentful/rich-text-types';
-import Image from 'next/image';
 
 import { useInjection } from 'inversify-react';
 import React, { ReactNode, useEffect, useMemo, useState } from 'react';
-import { Fade } from 'react-awesome-reveal';
 import { Col, Row } from 'react-bootstrap';
 import { obsidian } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
 import readingTime from 'reading-time';
@@ -19,9 +17,10 @@ import { Post } from '../../model/BlogPost';
 import { Entries, getAsset, Includes } from '../../model/Includes';
 import { IDateService } from '../../services/DateService';
 import { SharePanel } from '../nav/SharePanel';
-import { Lanyard } from '../shared/Lanyard';
-import { Section } from '../shared/Section';
 import { DynamicImage } from '../shared/DynamicImage';
+import { Lanyard } from '../shared/Lanyard';
+import { Reveal } from '../shared/Reveal';
+import { Section } from '../shared/Section';
 
 const SyntaxHighlighter = dynamic(() => import('react-syntax-highlighter'), {
   ssr: false
@@ -138,7 +137,7 @@ const PostContent: React.FC<PostProps> = ({ post, includes }: PostProps) => {
   }), [includes]);
 
   return (
-    <Fade triggerOnce direction="left">
+    <Reveal direction='up'>
       <Section id="post" bg="section-light" title={post.title}>
         <h4 className="blog-date">
           {updatedDate}
@@ -165,6 +164,6 @@ const PostContent: React.FC<PostProps> = ({ post, includes }: PostProps) => {
           <Col>{documentToReactComponents(post.content, options)}</Col>
         </Row>
       </Section>
-    </Fade>
+    </Reveal>
   );
 };

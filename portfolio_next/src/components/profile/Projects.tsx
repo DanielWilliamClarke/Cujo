@@ -1,15 +1,15 @@
 import React from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
-import { Fade } from 'react-awesome-reveal';
+import { Col, Container, Row } from 'react-bootstrap';
 
-import { Entries } from '../../model/Includes';
 import { Project } from '../../model/CVModel';
+import { Entries } from '../../model/Includes';
 import { DevIconName } from '../shared/DevIcon';
 import { DynamicImage } from '../shared/DynamicImage';
 import { Lanyard } from '../shared/Lanyard';
 import { Section } from '../shared/Section';
 
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import { Reveal } from '../shared/Reveal';
 
 type ProjectsProps = {
   projects: Entries<Project>
@@ -35,13 +35,13 @@ export const Projects: React.FC<ProjectsProps> = ({ projects }: ProjectsProps): 
 const ProjectSection: React.FC<ProjectProps> = ({ project, index }: ProjectProps): JSX.Element => {
   return (
     <Container className="project-panels">
-        <Fade triggerOnce direction={index % 2 ? 'left' : 'right'}>
+        <Reveal index={index}>
           <div className="centered line" />
           <Row className="project">
             <ProjectImage project={project} index={index} />
             <ProjectContent project={project} index={index} />
           </Row>
-        </Fade>
+        </Reveal>
       </Container>
   );
 };

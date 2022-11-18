@@ -2,15 +2,16 @@ import { useInjection } from 'inversify-react';
 import React, { ChangeEvent, useCallback, useContext, useMemo, useState } from 'react';
 import { Button, Col, Form, Row } from 'react-bootstrap';
 
-import { Fade, Zoom } from 'react-awesome-reveal';
+import { Zoom } from 'react-awesome-reveal';
 
 import { Profile } from '../../model/CVModel';
 import { IContactService } from '../../services/ContactService';
 import { DevIconName } from '../shared/DevIcon';
 import { Section } from '../shared/Section';
-import ThemeContext from '../theme/ThemeContext';
 import { DividerProps } from '../shared/TriangleDivider';
+import ThemeContext from '../theme/ThemeContext';
 
+import { Reveal } from '../shared/Reveal';
 import styles from '../shared/style.module.scss';
 
 type ContactProps = {
@@ -37,7 +38,7 @@ export const Contact: React.FC<ContactProps> = ({ profiles }: ContactProps): JSX
   }, [contactService]);
 
   return (
-    <Fade triggerOnce direction="up">
+    <Reveal direction='up'>
       <Section
         id="contact"
         title="Contact"
@@ -99,6 +100,6 @@ export const Contact: React.FC<ContactProps> = ({ profiles }: ContactProps): JSX
           </Zoom>
         )}
       </Section>
-    </Fade>
+    </Reveal>
   );
 };

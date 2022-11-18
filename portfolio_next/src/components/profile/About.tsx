@@ -1,13 +1,13 @@
+import { Block, Inline, INLINES, MARKS } from '@contentful/rich-text-types';
 import React, { ReactNode, useMemo } from 'react';
-import { Row, Col, Carousel } from 'react-bootstrap';
-import { Fade } from 'react-awesome-reveal';
-import { Block, INLINES, Inline, MARKS } from '@contentful/rich-text-types';
-import { Entry, Media } from '../../model/Includes';
+import { Carousel, Col, Row } from 'react-bootstrap';
 import { About as AboutModel } from '../../model/CVModel';
+import { Entry, Media } from '../../model/Includes';
 import { DynamicImage } from '../shared/DynamicImage';
 import { Section } from '../shared/Section';
 
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import { Reveal } from '../shared/Reveal';
 
 type AboutProps = {
   about: Entry<AboutModel>
@@ -42,7 +42,7 @@ export const About: React.FC<AboutProps> = ({ about }: AboutProps): JSX.Element 
     <Section id="about" title="About">
       <Row className="section-content">
         <Col className="text-column">
-          <Fade className="carousel" triggerOnce direction="left">
+          <Reveal className="carousel" direction="left">
             <Carousel
               indicators
               wrap={true}
@@ -59,22 +59,22 @@ export const About: React.FC<AboutProps> = ({ about }: AboutProps): JSX.Element 
                 </Carousel.Item>
               ))}
             </Carousel>
-          </Fade>
+          </Reveal>
         </Col>
 
         <Col className="text-column">
           <div className="about-section">
-            <Fade triggerOnce direction="right">
+            <Reveal direction="right">
               {documentToReactComponents(about.entry.about, statementOptions)}
-            </Fade>
+            </Reveal>
           </div>
           <div className="about-section">
-            <Fade triggerOnce direction="right" damping={0.01}>
+            <Reveal direction="right" damping={0.01}>
               {documentToReactComponents(
                 about.entry.interests,
                 options
               )}
-            </Fade>
+            </Reveal>
           </div>
         </Col>
       </Row>

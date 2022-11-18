@@ -1,9 +1,9 @@
 import Head from 'next/head';
 import React, { useEffect, useMemo, useState } from 'react';
-import { Fade } from 'react-awesome-reveal';
 
 import { CVProps, Project } from '../../model/CVModel';
 import { SharePanel } from '../nav/SharePanel';
+import { Reveal } from '../shared/Reveal';
 import { About } from './About';
 import { Education } from './Education';
 import { Experience } from './Experience';
@@ -50,14 +50,9 @@ export const Profile: React.FC<CVProps> = ({ cv }: CVProps): JSX.Element => {
             <Technical key='skills' skills={cv.skills} />,
             <Projects key='projects' projects={cv.projects} />
           ].map((element: JSX.Element, index: number) => (
-            <Fade
-              triggerOnce
-              delay={0.5}
-              direction={index % 2 ? 'left' : 'right'}
-              key={index}
-            >
+            <Reveal key={index} index={index}>
               {element}
-            </Fade>
+            </Reveal>
           ))}
         </div>
       </div>

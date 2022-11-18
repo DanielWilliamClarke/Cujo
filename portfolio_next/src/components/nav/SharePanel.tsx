@@ -1,20 +1,10 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
-import { Fade } from 'react-awesome-reveal';
+import { Reveal } from '../shared/Reveal';
 
 import {
-  FacebookShareButton,
-  TwitterShareButton,
-  LinkedinShareButton,
-  WhatsappShareButton,
-  RedditShareButton,
-  EmailShareButton,
-  FacebookIcon,
-  TwitterIcon,
-  LinkedinIcon,
-  WhatsappIcon,
-  RedditIcon,
-  EmailIcon
+  EmailIcon, EmailShareButton,
+  FacebookIcon, FacebookShareButton, LinkedinIcon, LinkedinShareButton, RedditIcon, RedditShareButton, TwitterIcon, TwitterShareButton, WhatsappIcon, WhatsappShareButton
 } from 'react-share';
 
 type ShareProps = {
@@ -51,7 +41,7 @@ export const SharePanel: React.FC<ShareProps> = ({ url, title, body, hashtag }: 
   return (
     <Container className="share-panel">
       {show && (
-        <Fade triggerOnce direction={slim ? 'up' : 'left'}>
+        <Reveal direction={slim ? 'up' : 'left'}>
           <LinkedinShareButton
             url={url}
             title={prepareTitle(title)}
@@ -99,7 +89,7 @@ export const SharePanel: React.FC<ShareProps> = ({ url, title, body, hashtag }: 
           >
             <EmailIcon size={size} />
           </EmailShareButton>
-        </Fade>
+        </Reveal>
       )}
     </Container>
   );

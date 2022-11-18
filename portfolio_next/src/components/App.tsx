@@ -1,5 +1,4 @@
 import React, { Suspense } from 'react';
-import { Fade } from 'react-awesome-reveal';
 
 import { Post } from '../model/BlogPost';
 import { CV as CVModel } from '../model/CVModel';
@@ -47,9 +46,7 @@ export const Portfolio: React.FC<AppProps> = (
 ): JSX.Element => (
   <ThemeProvider>
     <Suspense>
-      <Fade triggerOnce damping={0.01}>
-        <SketchBackstretch cv={cv} />
-      </Fade>
+      <SketchBackstretch cv={cv} />
     </Suspense>
     <NavPanel />
     <div className="app">

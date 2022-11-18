@@ -1,13 +1,13 @@
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { useInjection } from 'inversify-react';
-import React, { useContext, useMemo } from 'react';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import {
   VerticalTimeline,
   VerticalTimelineElement
 } from 'react-vertical-timeline-component';
-import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
-import { Entries, Media } from '../../model/Includes';
 import { Work } from '../../model/CVModel';
+import { Entries, Media } from '../../model/Includes';
 import { IDateService } from '../../services/DateService';
 import { IIconService } from '../../services/IconService';
 import { DynamicImage } from '../shared/DynamicImage';
@@ -16,6 +16,7 @@ import { Section } from '../shared/Section';
 
 import ThemeContext from '../theme/ThemeContext';
 
+import { useWindowSize } from '../shared/Reveal';
 import styles from '../shared/style.module.scss';
 
 type WorkProps = {
@@ -37,9 +38,15 @@ export const Experience: React.FC<WorkProps> = ({ work }: WorkProps): JSX.Elemen
   const { theme } = useContext(ThemeContext);
   const background = useMemo(() => (styles[`${theme}-colorBrand`]), [theme]);
 
+  const size = useWindowSize();
+  const [ shouldAnimate, setShouldAnimate ] = useState(true);
+  useEffect(() => {
+    setShouldAnimate((size?.width ?? 0) > 700);
+  }, [size])
+
   return (
     <Section id="experience" title="Experience">
-      <VerticalTimeline className="timeline">
+      <VerticalTimeline className="timeline" animate={shouldAnimate}>
         {work.entries
           .filter(
             ({ startDate }: Work) =>

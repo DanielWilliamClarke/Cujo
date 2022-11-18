@@ -1,8 +1,7 @@
-import React, { useCallback } from 'react';
-import { Fade } from 'react-awesome-reveal';
-import { Row, Col } from 'react-bootstrap';
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import { useInjection } from 'inversify-react';
+import React, { useCallback } from 'react';
+import { Col, Row } from 'react-bootstrap';
 
 import * as pdfjs from 'pdfjs-dist/legacy/build/pdf.js';
 import pdfjsWorker from 'pdfjs-dist/legacy/build/pdf.worker.entry';
@@ -11,6 +10,7 @@ import { CVProps } from '../../model/CVModel';
 import { IDateService } from '../../services/DateService';
 import { Section } from '../shared/Section';
 
+import { Reveal } from '../shared/Reveal';
 import { CV } from './sections/CV';
 
 // This is quite dumb but works
@@ -57,7 +57,7 @@ const CVPreview: React.FC<CVProps> = ({ cv }: CVProps): JSX.Element => {
   }, []);
 
   return (
-    <Fade triggerOnce direction="up">
+    <Reveal direction="up">
       <Section id="cv" bg="section-light" title="Download my CV">
         <Row>
           <Col>
@@ -66,7 +66,7 @@ const CVPreview: React.FC<CVProps> = ({ cv }: CVProps): JSX.Element => {
         </Row>
         <Row className="section-content">
           <Col className="centered featured">
-            <Fade triggerOnce direction="up" delay={0.2}>
+            <Reveal direction="up" delay={0.2}>
               <PDFDownloadLink
                 document={CV.render(cv, dateService)}
                 fileName={`daniel_william_clarke_cv_${dateService.CurrentTimestamp()}.pdf`}
@@ -86,11 +86,11 @@ const CVPreview: React.FC<CVProps> = ({ cv }: CVProps): JSX.Element => {
                   );
                 }}
               </PDFDownloadLink>
-            </Fade>
+            </Reveal>
           </Col>
         </Row>
       </Section>
-    </Fade>
+    </Reveal>
   );
 };
 
