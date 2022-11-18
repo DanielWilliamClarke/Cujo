@@ -129,6 +129,9 @@ For prod deployment an env file is required with  the following parameters speci
 ```conf
 DOMAIN=localhost
 
+API_DOMAIN=[REDACTED]
+CUJO_SERVICE_URL=[REDACTED]
+
 BLOG_HOST=https://cdn.contentful.com
 ACCESS_TOKEN=[REDACTED]
 SPACE_ID=[REDACTED]
@@ -138,10 +141,6 @@ AUTH_URL=[DATA EXPUNGED]
 AUTHORITY=[DATA EXPUNGED]
 AUDIENCE=[REDACTED]
 SELF_REDIRECT=[REDACTED]
-
-PRERENDER_TOKEN=[REDACTED]
-PRERENDER_API_URL=https://api.prerender.io/recache
-PRERENDER_CACHE_BASE_URL=https://danielclarke.tech
 ```
 
 ## Add Contentful API IPs to /etc/hosts
