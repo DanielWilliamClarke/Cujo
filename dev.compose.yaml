@@ -15,7 +15,7 @@ services:
       # - ./portfolio_razzle:/portfolio
     environment:
       - CUJO_SERVICE_URL=http://service:5001
-      - CUJO_ASSETS_URL=http://portfolio:3001
+      - CUJO_REVALIDATE_SECRET=12345
     networks:
       - cujo
 
