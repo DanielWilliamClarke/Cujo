@@ -51,7 +51,7 @@ impl RevalidateClient {
             .json(&map)
             .send();
 
-        // Ideally just send and forget the recache request
+        // Ideally just send and forget the revalidate request
         // if an error is returned its not critical to return it
         match response.await {
             _ => (),
