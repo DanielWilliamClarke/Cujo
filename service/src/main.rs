@@ -2,7 +2,6 @@
 #![feature(associated_type_defaults)]
 #![feature(async_closure)]
 
-#[macro_use]
 extern crate log;
 
 use std::sync::Mutex;
@@ -19,10 +18,12 @@ mod cache;
 mod cv;
 mod graphql;
 mod rest;
+mod revalidate;
 mod util;
 
 use auth::{Auth0Client, AuthConfig, RedirectClient, RedirectConfig};
 use cache::Cache;
+use revalidate::{RevalidateClient, RevalidateConfig};
 use graphql::{configure_graphql_service, create_schema_with_cache};
 use rest::configure_rest_service;
 use serde::Deserialize;
@@ -46,6 +47,7 @@ async fn main() -> std::io::Result<()> {
 
     let auth_client = Auth0Client::new(AuthConfig::from_env());
     let redirect_client = RedirectClient::new(RedirectConfig::from_env());
+    let revalidate_client = RevalidateClient::new(RevalidateConfig::from_env());
     let contentful_client = ContentfulClient::new(ContentfulConfig::from_env());
 
     let cache = Data::new(Mutex::new(
@@ -65,6 +67,7 @@ async fn main() -> std::io::Result<()> {
             .wrap(Logger::default())
             .app_data(Data::new(auth_client.clone()))
             .app_data(Data::new(redirect_client.clone()))
+            .app_data(Data::new(revalidate_client.clone()))
             .app_data(Data::new(contentful_client.clone()))
             .app_data(Data::new(schema.clone()))
             .app_data(cache.clone())
@@ -77,6 +80,6 @@ async fn main() -> std::io::Result<()> {
         None => server.bind(format!("{}:{}", host, port))?,
     };
 
-    info!("Cujo Server Started 👾");
+    println!("🦀 Cujo Server Started port {}", port);
     server.run().await
 }
