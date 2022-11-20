@@ -2,7 +2,8 @@ import { GetStaticProps } from "next";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
 import { BlockReverseLoading } from "../src/components/shared/BlockReverseLoading";
-import { CujoProps, wrapPage, fetchCujoProps } from "../src/Cujo";
+import { wrapPage } from "../src/Cujo";
+import { CujoProps, fetchCujoProps } from "../src/CujoISR";
 
 const loading = (
     <BlockReverseLoading
