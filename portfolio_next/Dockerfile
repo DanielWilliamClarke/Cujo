@@ -27,6 +27,7 @@ FROM node:18.4.0-alpine AS build
 
 ARG CUJO_SERVICE_URL 
 ENV CUJO_SERVICE_URL $CUJO_SERVICE_URL
+ENV NEXT_SHARP_PATH /cujo/node_modules/sharp
 
 WORKDIR /cujo
 
@@ -40,11 +41,10 @@ FROM node:18.4.0-alpine AS runtime
 
 ARG CUJO_SERVICE_URL 
 ENV CUJO_SERVICE_URL $CUJO_SERVICE_URL
+ENV NODE_ENV production
 ENV PORT 3000
 
 WORKDIR /cujo
-
-ENV NODE_ENV production
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs

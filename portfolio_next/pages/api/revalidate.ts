@@ -13,6 +13,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         return res.status(401).json({ message: 'Invalid' })
     }
 
+    console.log(`Revalidating ${body.path}`);
+
     try {
         await res.revalidate(body.path)
         return res.json({ revalidated: true })
