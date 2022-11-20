@@ -4,7 +4,7 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 import { BlogPost } from '../../src/components/blog/BlogPost';
 import { wrapPage } from '../../src/Cujo';
-import { fetchCujoBlogPaths, fetchCujoProps, CujoProps } from '../../src/CujoISR';
+import { CujoProps, fetchCujoBlogPaths, fetchCujoProps } from '../../src/CujoISR';
 
 export const getStaticPaths: GetStaticPaths = fetchCujoBlogPaths;
 export const getStaticProps: GetStaticProps = fetchCujoProps;

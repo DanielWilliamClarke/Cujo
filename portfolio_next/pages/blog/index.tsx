@@ -3,7 +3,7 @@ import { GetStaticProps } from 'next';
 import { Portfolio } from '../../src/components/App';
 
 import { wrapPage } from '../../src/Cujo';
-import { fetchCujoProps, CujoProps } from '../../src/CujoISR';
+import { CujoProps, fetchCujoProps } from '../../src/CujoISR';
 
 export const getStaticProps: GetStaticProps = fetchCujoProps;
 
