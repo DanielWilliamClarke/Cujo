@@ -15,13 +15,16 @@ export type CujoBlogPaths = {
     blog: Entries<{ id: string }>
 }
 
-export const cujoServiceUrl = `${process.env.CUJO_SERVICE_URL}/graphql`
+
+export const cujoServiceUrl = () => `${process.env.CUJO_SERVICE_URL}/graphql`;
 
 export const fetchCujoProps: GetStaticProps = async () => {
+    console.log(cujoServiceUrl());
+
     const ssrCache = ssrExchange({ isClient: false });
     const client = initUrqlClient(
         {
-            url: cujoServiceUrl,
+            url: cujoServiceUrl(),
             exchanges: [
                 dedupExchange,
                 cacheExchange,
@@ -49,10 +52,12 @@ export const fetchCujoProps: GetStaticProps = async () => {
 };
 
 export const fetchCujoBlogPaths: GetStaticPaths = async () => {
+    console.log(cujoServiceUrl());
+    
     const ssrCache = ssrExchange({ isClient: false });
     const client = initUrqlClient(
         {
-            url: cujoServiceUrl,
+            url: cujoServiceUrl(),
             exchanges: [
                 dedupExchange,
                 cacheExchange,

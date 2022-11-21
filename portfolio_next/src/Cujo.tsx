@@ -37,5 +37,5 @@ const buildPage = (children: (props: CujoProps) => JSX.Element): React.FC => {
 }
 
 export const wrapPage = (children: (props: CujoProps) => JSX.Element) => withUrqlClient(
-  () => ({ url: cujoServiceUrl }),
+  () => ({ url: cujoServiceUrl() }),
 )(buildPage(children));
