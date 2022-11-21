@@ -35,10 +35,12 @@ impl RevalidateClient {
         self.revalidate("/blog".to_string())
             .await;
 
+        println!("total blog posts to revalidate: {}", cache.blog.entries.len());
+
         join_all(
             cache.blog.entries
                 .iter()
-                .map(async move |blog_post| {
+                .map(|blog_post| {
                     self.revalidate(format!("/blog/{}", blog_post.id))
                 })
         ).await;
