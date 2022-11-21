@@ -104,14 +104,17 @@ impl Routes {
     ) -> impl Responder {
         println!("CV Cache regeneration start!!");
 
-        Cache::regenerate(CVReader::new(&contentful_client), async move |cv| {
+        let response = Cache::regenerate(CVReader::new(&contentful_client), async move |cv| {
             let mut locked_cache = cache.lock().unwrap();
             locked_cache.cv = cv;
-
-            revalidate_client.revalidate_portfolio()
-                .await
         })
-        .await
+        .await;
+
+        revalidate_client
+            .revalidate_portfolio()
+            .await;
+
+        response
     }
 
     pub async fn regenerate_blog_cache(
@@ -122,14 +125,17 @@ impl Routes {
     ) -> impl Responder {
         println!("Blog Cache regeneration start!!");
 
-        Cache::regenerate(BlogReader::new(&contentful_client), async move |blog| {
+        let response = Cache::regenerate(BlogReader::new(&contentful_client), async move |blog| {
             let mut locked_cache = cache.lock().unwrap();
             locked_cache.blog = blog;
-
-            revalidate_client.revalidate_blog_post(body.blog_id.clone())
-                .await
         })
-        .await
+        .await;
+
+        revalidate_client
+            .revalidate_blog_post(body.blog_id.clone())
+            .await;
+
+        response
     }
 
     fn extract_header(headers: &HeaderMap, header: &str) -> String {
