@@ -4,7 +4,7 @@
 
 extern crate log;
 
-use std::sync::Mutex;
+use std::sync::RwLock;
 
 use actix_web::{middleware::Logger, web::Data, App, HttpServer, http};
 use contentful::{ContentfulClient, ContentfulConfig};
@@ -50,7 +50,7 @@ async fn main() -> std::io::Result<()> {
     let revalidate_client = RevalidateClient::new(RevalidateConfig::from_env());
     let contentful_client = ContentfulClient::new(ContentfulConfig::from_env());
 
-    let cache = Data::new(Mutex::new(
+    let cache = Data::new(RwLock::new(
         Cache::generate_cache(contentful_client.clone()).await,
     ));
     let schema = create_schema_with_cache(cache.clone());

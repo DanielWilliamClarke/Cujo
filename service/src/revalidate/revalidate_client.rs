@@ -1,12 +1,16 @@
 // src/revalidate/revalidate_client.rs
 
 use std::collections::HashMap;
+use std::sync::RwLockReadGuard;
 
+use futures::future::join_all;
 use reqwest;
 use reqwest::header;
 use serde::Deserialize;
 
+
 use crate::util::FromEnv;
+use crate::cache::Cache;
 
 #[derive(Deserialize, Debug, Clone)]
 pub struct RevalidateConfig {
@@ -25,16 +29,19 @@ impl RevalidateClient {
         RevalidateClient { config }
     }
 
-    pub async fn revalidate_portfolio(&self) {
+    pub async fn portfolio(&self, cache: RwLockReadGuard<'_, Cache>) {
         self.revalidate("/".to_string())
             .await;
         self.revalidate("/blog".to_string())
             .await;
-    }
 
-    pub async fn revalidate_blog_post(&self, blog_id: String) {
-        self.revalidate(format!("/blog/{}", blog_id))
-            .await;
+        join_all(
+            cache.blog.entries
+                .iter()
+                .map(async move |blog_post| {
+                    self.revalidate(format!("/blog/{}", blog_post.id))
+                })
+        ).await;
     }
 
     async fn revalidate(&self, path: String) {

@@ -20,11 +20,11 @@ impl BlogEntries {
 
 #[derive(SimpleObject, Serialize, Deserialize, Debug, Clone)]
 pub struct BlogPost {
-    id: String,
-    title: String,
-    content: Value,
-    excerpt: Option<String>,
-    media: Option<Asset>,
-    tags: Vec<String>,
-    sys: SystemProperties,
+    pub id: String,
+    pub title: String,
+    pub content: Value,
+    pub excerpt: Option<String>,
+    pub media: Option<Asset>,
+    pub tags: Vec<String>,
+    pub sys: SystemProperties,
 }

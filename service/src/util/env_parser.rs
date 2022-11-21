@@ -11,10 +11,10 @@ pub trait FromEnv {
         let self_name = type_name::<Self>();
         match envy::prefixed("").from_env::<Self>() {
             Ok(config) => {
-                println!("🦀: {} config parsed from env!", self_name);
+                println!("{} config parsed from env!", self_name);
                 config
             }
-            Err(err) => panic!("🦀: {} config not parsed! {:#?}", self_name, err),
+            Err(err) => panic!("{} config not parsed! {:#?}", self_name, err),
         }
     }
 }

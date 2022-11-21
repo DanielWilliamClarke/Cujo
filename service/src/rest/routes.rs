@@ -3,7 +3,7 @@ use actix_web::{http::header::HeaderMap, web, HttpRequest, HttpResponse, Respond
 use actix_web_httpauth::middleware::HttpAuthentication;
 use futures::StreamExt;
 use serde::Deserialize;
-use std::sync::Mutex;
+use std::sync::RwLock;
 
 use crate::{
     auth::validator,
@@ -100,40 +100,43 @@ impl Routes {
     pub async fn regenerate_cv_cache(
         contentful_client: web::Data<ContentfulClient>,
         revalidate_client: web::Data<RevalidateClient>,
-        cache: web::Data<Mutex<Cache>>,
+        cache: web::Data<RwLock<Cache>>,
     ) -> impl Responder {
         println!("CV Cache regeneration start!!");
 
+        let revalidate_cache = cache.clone();
+
         let response = Cache::regenerate(CVReader::new(&contentful_client), async move |cv| {
-            let mut locked_cache = cache.lock().unwrap();
+            let mut locked_cache = cache.write().unwrap();
             locked_cache.cv = cv;
         })
         .await;
 
-        revalidate_client
-            .revalidate_portfolio()
-            .await;
-
+        revalidate_client.portfolio(
+            revalidate_cache.read().unwrap()
+        ).await;
+        
         response
     }
 
     pub async fn regenerate_blog_cache(
-        body: web::Json<BlogWebhookBody>,
         contentful_client: web::Data<ContentfulClient>,
         revalidate_client: web::Data<RevalidateClient>,
-        cache: web::Data<Mutex<Cache>>,
+        cache: web::Data<RwLock<Cache>>,
     ) -> impl Responder {
         println!("Blog Cache regeneration start!!");
 
+        let revalidate_cache = cache.clone();
+
         let response = Cache::regenerate(BlogReader::new(&contentful_client), async move |blog| {
-            let mut locked_cache = cache.lock().unwrap();
+            let mut locked_cache = cache.write().unwrap();
             locked_cache.blog = blog;
         })
         .await;
 
-        revalidate_client
-            .revalidate_blog_post(body.blog_id.clone())
-            .await;
+        revalidate_client.portfolio(
+            revalidate_cache.read().unwrap()
+        ).await;
 
         response
     }
