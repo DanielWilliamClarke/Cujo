@@ -1,5 +1,5 @@
 // src/graphql/query.rs
-use std::sync::Mutex;
+use std::sync::RwLock;
 
 use actix_web::web::Data;
 use async_graphql::{Context, Object};
@@ -24,10 +24,10 @@ impl Query {
 }
 
 async fn unwrap_cache(ctx: &Context<'_>) -> Cache {
-    ctx.data::<Data<Mutex<Cache>>>()
+    ctx.data::<Data<RwLock<Cache>>>()
         .ok()
         .unwrap()
-        .lock()
+        .read()
         .unwrap()
         .clone()
 }
