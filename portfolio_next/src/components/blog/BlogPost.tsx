@@ -62,7 +62,7 @@ export const BlogPost: React.FC<BlogProps> = ({ id, blog }: BlogProps): JSX.Elem
           <Head>
             <title>{post.title}</title>
             <meta property="og:title" content={post.title} />
-            <meta property="og:image" content={post.media?.file.url} />
+            <meta property="og:image" content={`https://${post.media?.file.url}`} />
             <meta property="og:description" content={post.excerpt} />
             <meta property="og:url" content={href} />
           </Head>

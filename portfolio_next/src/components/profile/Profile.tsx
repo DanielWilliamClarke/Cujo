@@ -33,7 +33,7 @@ export const Profile: React.FC<CVProps> = ({ cv }: CVProps): JSX.Element => {
         <meta property="og:title" content={cv.about.entry.name} />
         <meta
           property="og:image"
-          content={portfolioProject?.image.file.url}
+          content={`https://${portfolioProject?.image?.file.url}`}
         />
         <meta
           property="og:description"

@@ -203,7 +203,7 @@ docker-compose --env-file <SECRET ENV FILE> -f prod.compose.yaml down (-v)
 
 ## // Todo
 
-- [ ] Find out why all images are loading twice
+- [ ] Display a reading list
 - [ ] Convert all pngs and jpgs to Avifs
 - [ ] Switch all gifs to WebMs
 - [ ] Add Rust code coverage
@@ -211,6 +211,10 @@ docker-compose --env-file <SECRET ENV FILE> -f prod.compose.yaml down (-v)
 
 ## // Done
 
+- [x] Remove Prenderer caching
+- [x] Implement server side rendering and incremental static regeneration with NextJS
+- [x] Swap NGINX and client side rendering for NextJS
+- [x] Find out why all images are loading twice
 - [x] Fixed huge react bundle sizes - it was `react-icons` the whole time
 - [x] Swap React class components for React functional components
 - [x] Use GraphQL client to frontend
