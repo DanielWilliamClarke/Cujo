@@ -315,11 +315,17 @@
       background-color: t($color);
     }
   }
+
+  .swiper-pagination-bullet,
+  .swiper-pagination-bullet-active {
+    @include themed() {
+      background-color: t($color);
+    }
+  }
 }
 
 @mixin alternating-section($side, $bg, $color, $card-color: $col-bg-light) {
   div:nth-child(#{$side}) {
-
     .section {
       @include section-coloring($bg, $color, $card-color);
     }
@@ -331,13 +337,11 @@
 }
 
 .app {
-  .profile {
-    @include alternating-section("odd",
-    $col-bg-light,
-    $col-accent-zing,
-    $col-bg-dark);
-    @include alternating-section("even", $col-bg-dark, $col-sub-brand);
-  }
+  @include alternating-section("odd",
+  $col-bg-light,
+  $col-accent-zing,
+  $col-bg-dark);
+  @include alternating-section("even", $col-bg-dark, $col-sub-brand);
   
   .section-light {
     @include section-coloring($col-bg-light, $col-accent-zing, $col-bg-dark);

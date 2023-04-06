@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, useCallback, useState } from 'react';
+import React, { HTMLAttributes, ReactNode, useCallback, useMemo, useState } from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { Zoom } from 'react-awesome-reveal';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
@@ -9,7 +9,6 @@ import { Skills, Skill } from '../../model/CVModel';
 import { DevIconName } from '../shared/DevIcon';
 import { Section } from '../shared/Section';
 import { ProgressGauge } from '../shared/ProgressGauge';
-
 
 type TechnicalProps = {
   skills: Entry<Skills>
@@ -80,7 +79,7 @@ export const Technical: React.FC<TechnicalProps> = ({ skills }: TechnicalProps):
 
 const SkillsSection: React.FC<SkillsProps> = (
   { skills, summary, search, className = '' }: SkillsProps
-): JSX.Element => {
+) => {
   const gaugeColors = ['#FB6962', '#FB6962', '#FCFC99', '#0CC078', '#0CC078'];
 
   const filterSkills = useCallback((name: string): boolean => {
@@ -89,6 +88,19 @@ const SkillsSection: React.FC<SkillsProps> = (
       : true;
   }, [search]);
 
+  const filteredSkills = useMemo(() => skills
+    .filter(({ name }: Skill) => filterSkills(name))
+    .sort((a: Skill, b: Skill) => b.level - a.level)
+    .map(({ level, icon }: Skill, index: number) => (
+      <ProgressGauge key={index} value={level} colors={gaugeColors}>
+        {(color: string) => <DevIconName icon={icon} color={color} />}
+      </ProgressGauge>
+    )), [search]);
+
+  if (!filteredSkills.length) {
+    return null;
+  }
+
   return (
     <>
       <Row className="section-content">
@@ -96,14 +108,7 @@ const SkillsSection: React.FC<SkillsProps> = (
       </Row>
       <Row className={`skill-items ${className}`}>
         <Zoom triggerOnce cascade damping={0.01} className="col centered">
-          {skills
-            .filter(({ name }: Skill) => filterSkills(name))
-            .sort((a: Skill, b: Skill) => b.level - a.level)
-            .map(({ level, icon }: Skill, index: number) => (
-              <ProgressGauge key={index} value={level} colors={gaugeColors}>
-                {(color: string) => <DevIconName icon={icon} color={color} />}
-              </ProgressGauge>
-            ))}
+          {filteredSkills}
         </Zoom>
       </Row>
       <div className="line centered" />

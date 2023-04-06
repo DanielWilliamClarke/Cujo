@@ -20,7 +20,7 @@ const pdfStyles = StyleSheet.create({
     width: '30px',
     height: '30px',
     borderRadius: '100%',
-    backgroundColor: '#1CAED3',
+    backgroundColor: '#304c89',
     marginRight: '10px',
     display: 'flex',
     justifyContent: 'center',
@@ -92,7 +92,7 @@ export namespace Skills {
             style={{
               width: level * 2,
               height: 5,
-              backgroundColor: '#1CAED3',
+              backgroundColor: '#304c89',
               borderRadius: '100%'
             }}
           ></View>

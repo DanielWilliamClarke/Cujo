@@ -11,7 +11,7 @@ export namespace Heading {
       fontFamily: 'Helvetica'
     },
     header: {
-      backgroundColor: '#1CAED3',
+      backgroundColor: '#304c89',
       width: '100%',
       height: '15%',
       textAlign: 'center'

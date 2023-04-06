@@ -8,6 +8,7 @@ import { About } from './About';
 import { Education } from './Education';
 import { Experience } from './Experience';
 import { Projects } from './Projects';
+import { ReadingList } from './ReadingList';
 import { Technical } from './Technical';
 
 export const Profile: React.FC<CVProps> = ({ cv }: CVProps): JSX.Element => {
@@ -41,21 +42,18 @@ export const Profile: React.FC<CVProps> = ({ cv }: CVProps): JSX.Element => {
         />
         <meta property="og:url" content={href} />
       </Head>
-      <div className="profile">
-        <div>
-          {[
-            <About key='about' about={cv.about} />,
-            <Experience key='work' work={cv.work} />,
-            <Education key='education' education={cv.education} />,
-            <Technical key='skills' skills={cv.skills} />,
-            <Projects key='projects' projects={cv.projects} />
-          ].map((element: JSX.Element, index: number) => (
-            <Reveal key={index} index={index}>
-              {element}
-            </Reveal>
-          ))}
-        </div>
-      </div>
+      {[
+        <About key='about' about={cv.about} />,
+        <Experience key='work' work={cv.work} />,
+        <Education key='education' education={cv.education} />,
+        <Technical key='skills' skills={cv.skills} />,
+        <Projects key='projects' projects={cv.projects} />,
+        <ReadingList key='readingList' readingList={cv.readingList} />
+      ].map((element: JSX.Element, index: number) => (
+        <Reveal key={index} index={index}>
+          {element}
+        </Reveal>
+      ))}
     </>
   );
 };

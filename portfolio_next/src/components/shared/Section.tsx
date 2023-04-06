@@ -10,7 +10,6 @@ type SectionProps = {
   id: string
   title: string
   noSeparator?: boolean
-  bg?: string
   withDivider?: DividerProps
   children?: React.ReactNode
 }

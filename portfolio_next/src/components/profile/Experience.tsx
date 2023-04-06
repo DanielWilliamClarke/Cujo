@@ -1,6 +1,6 @@
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { useInjection } from 'inversify-react';
-import React, { useContext, useEffect, useMemo, useState } from 'react';
+import React, { useContext, useMemo } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import {
   VerticalTimeline,
@@ -13,10 +13,9 @@ import { IIconService } from '../../services/IconService';
 import { DynamicImage } from '../shared/DynamicImage';
 import { Lanyard } from '../shared/Lanyard';
 import { Section } from '../shared/Section';
-
+import { useShouldAnimate } from '../hooks/useShouldAnimate';
 import ThemeContext from '../theme/ThemeContext';
 
-import { useWindowSize } from '../shared/Reveal';
 import styles from '../shared/style.module.scss';
 
 type WorkProps = {
@@ -38,11 +37,7 @@ export const Experience: React.FC<WorkProps> = ({ work }: WorkProps): JSX.Elemen
   const { theme } = useContext(ThemeContext);
   const background = useMemo(() => (styles[`${theme}-colorBrand`]), [theme]);
 
-  const size = useWindowSize();
-  const [ shouldAnimate, setShouldAnimate ] = useState(true);
-  useEffect(() => {
-    setShouldAnimate((size?.width ?? 0) > 700);
-  }, [size])
+  const shouldAnimate = useShouldAnimate();
 
   return (
     <Section id="experience" title="Experience">

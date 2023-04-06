@@ -10,7 +10,7 @@ export namespace Header {
     hr: {
       height: '3px',
       width: '50%',
-      backgroundColor: '#1CAED3',
+      backgroundColor: '#304c89',
       margin: '5px 0'
     }
   });

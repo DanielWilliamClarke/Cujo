@@ -3,9 +3,9 @@ $theme-light: "light";
 
 $themes: (
     dark: ( // Brand $colors
-        col-main-brand: #ffd166,
-        col-sub-brand: #118ab2,
-        col-accent-zing: #ef476f,
+        col-main-brand: #ef3e36,
+        col-sub-brand: #17bebb,
+        col-accent-zing: #ef3e36,
 
         col-accent-high: #06d6a0,
         col-accent-low: #118ab2,
@@ -17,12 +17,12 @@ $themes: (
         col-text-muted: #999,
 
         // background $colours
-        col-shadow: #222,
+        col-shadow: #222222,
         col-bg-light: #1f242c,
-        col-bg-dark: #1d424e,
+        col-bg-dark: #222222,
 
         // gradient $colours
-        col-back-grad-sketch-high: #118ab24d,
+        col-back-grad-sketch-high: #18284844,
         col-back-grad-sketch-low: #18284844,
         col-back-text-shadow: #1d424e,
 
@@ -36,9 +36,9 @@ $themes: (
         work-logo-brightness: 100%
     ),
     light: ( // Brand $colors
-        col-main-brand: #06d6a0,
-        col-sub-brand: #118ab2,
-        col-accent-zing: #f67451,
+        col-main-brand: #ef3e36,
+        col-sub-brand: #17bebb,
+        col-accent-zing: #ef3e36,
 
         col-accent-high: #372248,
         col-accent-low: #171123,

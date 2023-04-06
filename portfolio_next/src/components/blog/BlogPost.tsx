@@ -138,7 +138,7 @@ const PostContent: React.FC<PostProps> = ({ post, includes }: PostProps) => {
 
   return (
     <Reveal direction='up'>
-      <Section id="post" bg="section-light" title={post.title}>
+      <Section id="post" title={post.title}>
         <h4 className="blog-date">
           {updatedDate}
         </h4>

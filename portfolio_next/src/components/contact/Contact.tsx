@@ -25,7 +25,7 @@ export const Contact: React.FC<ContactProps> = ({ profiles }: ContactProps): JSX
 
   const divider = useMemo<DividerProps>(() => ({
     background: styles[`${theme}-colorBrand`],
-    foreground: styles[`${theme}-colorDarkBg`]
+    foreground: styles[`${theme}-colorLightBg`]
   }), [theme]);
 
   const handleSubmit = useCallback(async (event: ChangeEvent<HTMLFormElement>) => {

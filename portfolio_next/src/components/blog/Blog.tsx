@@ -26,7 +26,7 @@ export const Blog: React.FC<BlogProps> = ({ blog }: BlogProps): JSX.Element => {
 
   return (
     <Reveal direction='up'>
-      <Section id="blog" bg="section-dark" title="Blog">
+      <Section id="blog" title="Blog">
         <Row xs={1} md={2} className="g-4 blog-cards">
           {(blog.entries.length > 0)
             ? (

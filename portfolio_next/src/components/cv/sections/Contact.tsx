@@ -16,7 +16,7 @@ export namespace Contact {
       width: '30px',
       height: '30px',
       borderRadius: '100%',
-      backgroundColor: '#1CAED3',
+      backgroundColor: '#304c89',
       marginRight: '10px',
       display: 'flex',
       justifyContent: 'center',

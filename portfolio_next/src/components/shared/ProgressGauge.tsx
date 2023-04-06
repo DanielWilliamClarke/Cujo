@@ -5,7 +5,7 @@ import {
 } from 'react-circular-progressbar';
 import VisibilitySensor from 'react-visibility-sensor';
 import { ProgressProvider } from './ProgressProvider';
-const interpolate = require('color-interpolate');
+import interpolate from 'color-interpolate';
 
 type ProgressGaugeProps = {
   value: number

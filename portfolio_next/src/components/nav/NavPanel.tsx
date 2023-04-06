@@ -20,7 +20,7 @@ export const NavPanel: React.FC = (): JSX.Element => {
 
   const buildMenuItems = useCallback((): string[] => {
     return router.pathname === '/'
-      ? ['about', 'experience', 'education', 'skills', 'projects']
+      ? ['about', 'experience', 'education', 'skills', 'projects', 'books']
       : ['post'];
   }, [router]);
 

@@ -58,7 +58,7 @@ const CVPreview: React.FC<CVProps> = ({ cv }: CVProps): JSX.Element => {
 
   return (
     <Reveal direction="up">
-      <Section id="cv" bg="section-light" title="Download my CV">
+      <Section id="cv" title="Download my CV">
         <Row>
           <Col>
             Please click or tap on the preview below to receive a copy 🙏

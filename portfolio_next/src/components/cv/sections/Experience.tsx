@@ -30,7 +30,7 @@ export namespace Experience {
       marginVertical: 5
     },
     pill: {
-      backgroundColor: '#1CAED3',
+      backgroundColor: '#304c89',
       borderRadius: '100%',
       paddingHorizontal: 5,
       paddingVertical: 2,

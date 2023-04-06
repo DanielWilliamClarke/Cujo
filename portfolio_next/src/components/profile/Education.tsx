@@ -15,8 +15,8 @@ import { Lanyard } from '../shared/Lanyard';
 import { Section } from '../shared/Section';
 import ThemeContext from '../theme/ThemeContext';
 
-import { useWindowSize } from '../shared/Reveal';
 import styles from '../shared/style.module.scss';
+import { useShouldAnimate } from '../hooks/useShouldAnimate';
 
 type EducationProps = {
   education: Entries<EducationModel>
@@ -37,11 +37,7 @@ export const Education: React.FC<EducationProps> = ({ education }: EducationProp
   const { theme } = useContext(ThemeContext);
   const background = useMemo(() => (styles[`${theme}-colorBrand`]), [theme]);
 
-  const size = useWindowSize();
-  const [ shouldAnimate, setShouldAnimate ] = useState(true);
-  useEffect(() => {
-    setShouldAnimate((size?.width ?? 0) > 700);
-  }, [size])
+  const shouldAnimate = useShouldAnimate();
   
   return (
     <Section id="education" title="Education">

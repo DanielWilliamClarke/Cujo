@@ -34,6 +34,7 @@ import { School } from '@styled-icons/material/School';
 import { CatchingPokemon } from '@styled-icons/material/CatchingPokemon';
 import { PaperPlane } from '@styled-icons/boxicons-regular/PaperPlane';
 import { Baby } from '@styled-icons/fa-solid/Baby';
+import { BookPulse } from '@styled-icons/fluentui-system-filled/BookPulse'
 
 export interface IIconService {
   get: (id: string) => StyledIcon | undefined
@@ -61,6 +62,7 @@ export class IconService implements IIconService {
     education: School,
     skills: Bolt,
     projects: Hardware,
+    books: BookPulse,
     blog: Book,
     cv: PaperPlane,
     post: HistoryEdu,
