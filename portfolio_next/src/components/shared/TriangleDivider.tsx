@@ -9,7 +9,7 @@ export const TriangleDivider: React.FC<DividerProps> = ({ background, foreground
   const myStyle: CSSProperties = {
     borderLeftColor: background,
     borderRightColor: background,
-    borderTopColor: foreground
+    // borderTopColor: foreground
   };
 
   return (

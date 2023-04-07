@@ -54,7 +54,7 @@
         width: 100%;
 
         img {
-          border-radius: 6px;
+          border-radius: $border-radius;
           max-height: 350px;
           object-fit: cover;
           width: 100%;
@@ -62,7 +62,7 @@
 
         .overlay {
           background-color: #000;
-          border-radius: 6px;
+          border-radius: $border-radius;
           transition: 0.5s;
         }
 

@@ -69,6 +69,10 @@
   }
 }
 
+.vertical-timeline-element-content-arrow {
+  display: none;
+}
+
 .centered {
   float: none;
   margin-left: auto;
@@ -299,15 +303,17 @@
 
     .vertical-timeline-element-content {
       @include themed() {
+        // border: 5px solid t($color);
+        border-radius: $border-radius;
         background-color: t($card-color);
       }
     }
 
-    .vertical-timeline-element-content-arrow {
-      @include themed() {
-        border-right: 7px solid t($card-color);
-      }
-    }
+    // .vertical-timeline-element-content-arrow {
+    //   @include themed() {
+    //     border-right: 7px solid t($card-color);
+    //   }
+    // }
   }
 
   .bg-portfolio {
@@ -319,8 +325,23 @@
   .swiper-pagination-bullet,
   .swiper-pagination-bullet-active,
   .book-sash {
-    @include themed() {
+    @include themed() { 
       background-color: t($color);
+    }
+  }
+
+  .triangle-divider {
+    div {
+      @include themed() {
+        border-top-color: t($card-color);
+      }
+    }
+  }
+
+  .skills-input,
+  .skill-items {
+    @include themed() {
+      background: ft($theme-dark, $card-color);
     }
   }
 }
@@ -331,6 +352,8 @@
       @include section-coloring($bg, $color, $card-color);
     }
   }
+
+  
 
   .section:nth-child(#{$side}) {
     @include section-coloring($bg, $color, $card-color);

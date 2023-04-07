@@ -35,7 +35,7 @@
 
   iframe,
   img {
-    border-radius: 6px;
+    border-radius: $border-radius;
     height: auto;
     max-width: 100%;
   }
@@ -49,7 +49,7 @@
   }
 
   .code-snippet {
-    border-radius: 6px;
+    border-radius: $border-radius;
     margin: 50px auto;
     width: 75%;
 

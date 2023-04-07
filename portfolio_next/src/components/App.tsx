@@ -55,10 +55,8 @@ export const Portfolio: React.FC<AppProps> = (
       <Suspense>
         <CVPreview cv={cv} />
       </Suspense>
-      <footer id="footer">
-        <Contact profiles={cv.about.entry.profiles} />
-        <Copyright name={cv.about.entry.name} />
-      </footer>
+      <Contact profiles={cv.about.entry.profiles} />
+      <Copyright name={cv.about.entry.name} />
     </div>
   </ThemeProvider>
 );

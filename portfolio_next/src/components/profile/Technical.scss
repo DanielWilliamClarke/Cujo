@@ -3,8 +3,7 @@
 .skills {
   .skill-items {
     align-items: center;
-    background: ft($theme-dark, $col-bg-light);
-    border-radius: 6px;
+    border-radius: $border-radius;
     display: flex;
     font-weight: 500;
     margin-bottom: 30px;
@@ -61,7 +60,7 @@
   }
 
   .skills-input {
-    border-radius: 6px;
+    border-radius: $border-radius;
     font-size: 2em;
     margin: 10px 0;
     text-align: center;
@@ -71,7 +70,7 @@
     @include themed() {
       background: t($col-bg-light);
       border: 1px solid t($col-bg-dark);
-      color: t($col-text-main);
+      color: ft($theme-dark, $col-text-main);
     }
 
     &:focus-within {

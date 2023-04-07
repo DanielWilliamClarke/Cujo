@@ -28,7 +28,7 @@
 
   .box {
     animation: reverse-rotate 3s infinite;
-    border-radius: 3px;
+    border-radius: $border-radius;
     bottom: 0;
     height: 30px;
     left: 0;

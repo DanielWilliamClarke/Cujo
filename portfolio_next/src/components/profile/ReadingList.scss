@@ -28,7 +28,7 @@
         width: auto;
         height: 30em;
         margin: 10px;
-        border-radius: 6px;
+        border-radius: $border-radius;
 
         &:hover {
             transform: scale(1.02);
@@ -52,7 +52,7 @@
             justify-content: center;
             align-items: center;
             rotate: 3deg;
-            border-radius: 6px;
+            border-radius: $border-radius / 2;
             opacity: 90%;
         }
     }
