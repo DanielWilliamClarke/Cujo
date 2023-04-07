@@ -50,7 +50,7 @@ const CVPreview: React.FC<CVProps> = ({ cv }: CVProps): JSX.Element => {
       outputScale !== 1 ? [outputScale, 0, 0, outputScale, 0, 0] : undefined;
 
     page.render({
-      canvasContext: ctx as Object,
+      canvasContext: ctx as any,
       transform,
       viewport
     });
