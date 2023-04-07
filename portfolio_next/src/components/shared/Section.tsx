@@ -21,7 +21,7 @@ export const Section: React.FC<SectionProps> = ({ children, ...props }: SectionP
   return (
     <section
       id={props.id}
-      className={`${props.bg ?? 'section'} ${props.id}`}
+      className={`section ${props.id}`}
     >
       {(props.withDivider != null) && (
         <TriangleDivider {...props.withDivider} />
