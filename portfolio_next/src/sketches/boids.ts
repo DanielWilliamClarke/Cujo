@@ -4,8 +4,6 @@ import { Sketch } from '.';
 import { CV, Skill, Work } from '../model/CVModel';
 import { DateService, IDateService } from '../services/DateService';
 
-const p5v: { sub: (a: p5.Vector, b: p5.Vector) => p5.Vector } = p5.Vector;
-
 type BoidsWord = {
   word: string
   angle: number
@@ -136,7 +134,10 @@ export class Boids implements Sketch {
                 this.p.random(this.p.height)
               ),
               this.p.createVector(),
-              p5.Vector.random2D()
+              this.p.createVector(
+                this.p.random(),
+                this.p.random()
+              )
             )
         )
       );
@@ -265,25 +266,25 @@ class Vehicle {
   }
 
   arrive (target: p5.Vector) {
-    const desired = p5v.sub(target, this.position);
+    const desired = target.copy().sub(this.position);
     const d = desired.mag();
     let speed = this.maxSpeed;
     if (d < this.arriveDistance) {
       speed = this.p.map(d, 0, this.arriveDistance, 0, this.maxSpeed);
     }
     desired.setMag(speed);
-    const steer = p5v.sub(desired, this.velocity);
+    const steer = desired.copy().sub(this.velocity);
     steer.limit(this.maxForce);
     return steer;
   }
 
   flee (target: p5.Vector) {
-    const desired = p5v.sub(target, this.position);
+    const desired = target.copy().sub(this.position);
     const d = desired.mag();
     if (d < this.fleeRadius) {
       desired.setMag(this.maxSpeed);
       desired.mult(-1);
-      const steer = p5v.sub(desired, this.velocity);
+      const steer = desired.copy().sub(this.velocity);
       steer.limit(this.maxForce);
       return steer;
     } else {
