@@ -31,9 +31,9 @@ export const ThemeSetter: React.FC = () => {
   return (
     <div
       className="theme-toggle"
-      onClick={toggle
-      }>
+      onClick={toggle}>
       <Player
+        className="theme-icon"
         onEvent={(event) => {
           if (event === 'load') {
             player.current?.setSeeker(getFrame(theme === ThemeOptions.LIGHT));
@@ -46,10 +46,6 @@ export const ThemeSetter: React.FC = () => {
         loop={false}
         controls={false}
         src={switcher}
-        style={{
-          height: '75px',
-          width: '75px'
-        }}
       />
     </div>
   );

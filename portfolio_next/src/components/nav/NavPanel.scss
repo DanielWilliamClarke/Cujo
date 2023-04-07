@@ -7,6 +7,7 @@
 
   nav {
     display: flex;
+    flex-wrap: nowrap;
   }
 
   .nav-link {
@@ -45,13 +46,23 @@
 @media screen and (max-width: 1024px) {
   .navbar-nav {
     .nav-link {
-      flex-basis: 0;
       font-size: 11px;
     }
   }
 }
 
 @media screen and (max-width: 700px) {
+  nav {
+    flex-wrap: wrap !important;
+  }
+
+  .nav-link {
+    width: 20%;
+    height: 20px;
+    justify-content: center;
+    align-items: center;
+  }
+
   .navbar-nav {
     .nav-link {
       div {
@@ -59,7 +70,10 @@
       }
 
       svg {
-        font-size: calc(25px + 0.25vw);
+        font-size: 15px;
+        width: 20px;
+        position: relative;
+        top: -7px;
       }
     }
   }
