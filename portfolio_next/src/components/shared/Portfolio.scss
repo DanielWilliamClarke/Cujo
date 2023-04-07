@@ -317,7 +317,8 @@
   }
 
   .swiper-pagination-bullet,
-  .swiper-pagination-bullet-active {
+  .swiper-pagination-bullet-active,
+  .book-sash {
     @include themed() {
       background-color: t($color);
     }

@@ -1,5 +1,5 @@
 import { Row } from "react-bootstrap";
-import { Book } from "../../model/CVModel";
+import { Book, BookProgress } from "../../model/CVModel";
 import { Entries } from "../../model/Includes";
 import { DynamicImage } from "../shared/DynamicImage";
 import { Section } from "../shared/Section";
@@ -10,10 +10,17 @@ type ReadingListProps = {
     readingList: Entries<Book>
 }
 
+const progressMapping: Record<BookProgress, string> = {
+    [BookProgress.NOT_STARTED]: 'Not Started 🤞',
+    [BookProgress.PRIORITY]: 'Priority 🔥',
+    [BookProgress.READING]: 'Reading 🦉',
+    [BookProgress.COMPLETED]: 'Finished 🙌',
+}
+
 export const ReadingList: React.FC<ReadingListProps> = ({ readingList }: ReadingListProps) => {
     const props = {
-        slidesPerView:1,
-        spaceBetween:10,
+        slidesPerView: 1,
+        spaceBetween: 10,
         centeredSlides: true,
         breakpoints: {
             1000: {
@@ -25,7 +32,7 @@ export const ReadingList: React.FC<ReadingListProps> = ({ readingList }: Reading
                 spaceBetween: 30,
             },
         },
-        pagination:{
+        pagination: {
             dynamicBullets: true,
         },
         modules: [Pagination]
@@ -42,18 +49,25 @@ export const ReadingList: React.FC<ReadingListProps> = ({ readingList }: Reading
                         readingList.entries
                             .map((book: Book, index: number) => (
                                 <SwiperSlide
-                                 key={index}
+                                    key={index}
                                 >
-                                    <a 
-                                        href={book.amazonLink}
-                                        rel="noopener noreferrer"
-                                        target="_blank"
-                                    >
-                                        <DynamicImage
-                                            image={book.cover}
-                                            className='book-cover'
-                                        />
-                                    </a>
+                                    <div>
+                                        <a
+                                            href={book.amazonLink}
+                                            rel="noopener noreferrer"
+                                            target="_blank"
+                                        >
+                                            <DynamicImage
+                                                image={book.cover}
+                                                className='book-cover'
+                                            />
+                                        </a>
+                                        <div className="book-overlay">
+                                            <div className="book-sash">
+                                                {progressMapping[book.progress]}
+                                            </div>
+                                        </div>
+                                    </div>
                                 </SwiperSlide>
                             ))
                     }
