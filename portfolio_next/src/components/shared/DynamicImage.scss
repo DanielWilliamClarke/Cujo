@@ -1,0 +1,32 @@
+.images {
+    margin: 25px 0;
+
+    .col:after {
+        content: "";
+    }
+
+    .image-item {
+        border-radius: 50%;
+        height: 75px;
+        object-fit: cover;
+        width: 75px;
+    }
+}
+
+@include alternating-section-colouring() using ($bg, $color, $alt-color) {
+    .image-item,
+    img {
+        @include themed() {
+            box-shadow: 0 0 25px t($col-shadow);
+        }
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .images {
+        .col {
+            flex-basis: 0;
+            display: flex !important;
+        }
+    }
+}

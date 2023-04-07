@@ -1,3 +1,6 @@
+@import "../shared/Portfolio.scss";
+@import "../shared/Palette.scss";
+
 .books {
     .row {
         margin: 50px 0;
@@ -46,7 +49,7 @@
         align-items: center;
 
         .book-sash {
-           height: 50px;
+            height: 50px;
             width: 90%;
             display: flex;
             justify-content: center;
@@ -58,10 +61,20 @@
     }
 }
 
+@include alternating-section-colouring() using ($bg, $color, $alt-color) {
+    .swiper-pagination-bullet,
+    .swiper-pagination-bullet-active,
+    .book-sash {
+        @include themed() {
+            background-color: t($color);
+        }
+    }
+}
+
 @media screen and (max-width: 700px) {
     .books {
         .book-cover {
             height: 20em;
         }
-    } 
+    }
 }

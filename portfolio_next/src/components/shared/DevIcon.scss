@@ -1,5 +1,21 @@
+@import "./Portfolio.scss";
+@import "./Palette.scss";
+
 @media screen and (max-width: 700px) {
   .dev-icon {
     text-align: center;
+  }
+}
+
+@include alternating-section-colouring() using ($bg, $color, $alt-color) {
+  .dev-icon {
+    transition: 0.5s;
+
+    &:hover {
+      transform: scale(1.2);
+      @include themed() {
+        color: t($color);
+      }
+    }
   }
 }

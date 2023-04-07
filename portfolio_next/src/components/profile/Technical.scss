@@ -1,3 +1,4 @@
+@import "../shared/Portfolio.scss";
 @import "../shared/Palette.scss";
 
 .skills {
@@ -42,6 +43,7 @@
   }
 
   .skills-small {
+
     .icon-override,
     .icon {
       font-size: 30px;
@@ -75,6 +77,15 @@
 
     &:focus-within {
       width: 100%;
+    }
+  }
+}
+
+@include alternating-section-colouring() using ($bg, $color, $alt-color) {
+  .skills-input,
+  .skill-items {
+    @include themed() {
+      background: ft($theme-dark, $alt-color);
     }
   }
 }

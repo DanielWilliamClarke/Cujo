@@ -1,0 +1,52 @@
+@import "./Palette.scss";
+@import "./Portfolio.scss";
+
+.timeline {
+    .vertical-timeline-element-content-arrow {
+        display: none;
+    }
+
+    .vertical-timeline-element-content {
+        box-shadow: none;
+        transition: 0.5s;
+
+        &:hover {
+            transform: scale(1.02);
+        }
+
+        @include themed() {
+            color: t($col-text-main);
+        }
+    }
+
+    &:before {
+        @include themed() {
+            background: t($col-timeline-line);
+        }
+    }
+}
+
+@include alternating-section-colouring() using ($bg, $color, $alt-color) {
+    .timeline {
+        margin-top: 20px;
+        text-align: left;
+
+        .vertical-timeline-element-icon {
+            @include themed() {
+                background-color: t($color);
+            }
+
+            svg {
+                color: ft($theme-dark, $col-text-main);
+            }
+        }
+
+        .vertical-timeline-element-content {
+            @include themed() {
+                // border: 5px solid t($color);
+                border-radius: $border-radius;
+                background-color: t($alt-color);
+            }
+        }
+    }
+}

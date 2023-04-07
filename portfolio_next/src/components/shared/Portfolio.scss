@@ -1,78 +1,5 @@
 @import "./Palette.scss";
 
-.section,
-.section-light,
-.section-dark {
-  margin: 0 auto;
-  padding: 75px 0;
-  position: relative;
-
-  @include themed() {
-    color: t($col-text-main);
-  }
-
-  .section-title {
-    color: $col-text-title;
-    display: block;
-    font-size: 2.25em;
-    font-weight: 700;
-    margin: 0 0 15px;
-    padding: 0;
-    text-align: center;
-    text-transform: capitalize;
-
-    @include themed() {
-      color: t($col-text-title);
-    }
-  }
-
-  .section-content {
-    margin: 20px 0;
-  }
-
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-weight: 700;
-    text-transform: capitalize;
-
-    @include themed() {
-      color: t($col-text-heading);
-    }
-  }
-
-  h3 {
-    font-size: 1.5em;
-  }
-
-  h4 {
-    font-size: 1em;
-  }
-
-  h5 {
-    font-size: 0.85em;
-  }
-
-  h6 {
-    font-size: 0.75em;
-  }
-
-  p {
-    margin: 0.5rem 0;
-  }
-
-  .section-icon {
-    font-size: calc(20px + 0.25vw);
-    margin-top: 20px;
-    width: calc(20px + .25vw);
-  }
-}
-
-.vertical-timeline-element-content-arrow {
-  display: none;
-}
-
 .centered {
   float: none;
   margin-left: auto;
@@ -119,52 +46,6 @@
   content: "-";
 }
 
-.text-column {
-  text-align: left;
-}
-
-.col-item {
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  padding: 0;
-
-  p {
-    width: 100%;
-  }
-
-  &::after {
-    content: "•";
-  }
-
-  &:last-child::after {
-    content: "";
-  }
-}
-
-.card {
-  transition: 0.5s;
-
-  &:hover {
-    transform: scale(1.02);
-  }
-}
-
-.images {
-  margin: 25px 0;
-
-  .col-item::after {
-    content: "";
-  }
-
-  .image-item {
-    border-radius: 50%;
-    height: 75px;
-    object-fit: cover;
-    width: 75px;
-  }
-}
-
 .carousel-indicators {
   li {
     background-color: #fff;
@@ -194,49 +75,12 @@
   }
 }
 
-.timeline {
-  .vertical-timeline-element-content {
-    box-shadow: none;
-    transition: 0.5s;
-
-    &:hover {
-      transform: scale(1.02);
-    }
-
-    @include themed() {
-      color: t($col-text-main);
-    }
-  }
-
-  &:before {
-    @include themed() {
-      background: t($col-timeline-line);
-    }
-  }
-}
-
-.badge {
-  color: #fff;
-  font-weight: 500;
-  margin: 2px;
-}
-
-@mixin section-coloring($bg, $color, $card-color) {
-  @include themed() {
-    background-color: t($bg);
-  }
- 
+@mixin portfolio-styling($bg, $color, $alt-color) {
   .short-line,
   .line,
   .long-line {
     @include themed() {
       background-color: t($color);
-    }
-  }
-
-  .col-item::after {
-    @include themed() {
-      color: t($color);
     }
   }
 
@@ -256,164 +100,28 @@
       color: t($color);
     }
   }
-
-  .bg-dark {
-    @include themed() {
-      background-color: t($card-color)  !important;
-    }
-  }
-
-  .dev-icon {
-    transition: 0.5s;
-
-    &:hover {
-      transform: scale(1.2);
-      @include themed() {
-        color: t($color);
-      }
-    }
-  }
-
-  .section-icon {
-    @include themed() {
-      color: t($color);
-    }
-  }
-
-  .image-item,
-  img {
-    @include themed() {
-      box-shadow: 0 0 25px t($col-shadow);
-    }
-  }
-
-  .timeline {
-    margin-top: 20px;
-    text-align: left;
-
-    .vertical-timeline-element-icon {
-      @include themed() {
-        background-color: t($color);
-      }
-
-      svg {
-        color: ft($theme-dark, $col-text-main);
-      }
-    }
-
-    .vertical-timeline-element-content {
-      @include themed() {
-        // border: 5px solid t($color);
-        border-radius: $border-radius;
-        background-color: t($card-color);
-      }
-    }
-  }
-
-  .bg-portfolio {
-    @include themed() {
-      background-color: t($color);
-    }
-  }
-
-  .swiper-pagination-bullet,
-  .swiper-pagination-bullet-active,
-  .book-sash {
-    @include themed() { 
-      background-color: t($color);
-    }
-  }
-
-  .triangle-divider {
-    div {
-      @include themed() {
-        border-top-color: t($card-color);
-      }
-    }
-  }
-
-  .skills-input,
-  .skill-items {
-    @include themed() {
-      background: ft($theme-dark, $card-color);
-    }
-  }
 }
 
-@mixin alternating-section($side, $bg, $color, $card-color: $col-bg-light) {
+@mixin coloured-sections($bg, $color, $alt-color, $side) {
   div:nth-child(#{$side}) {
     .section {
-      @include section-coloring($bg, $color, $card-color);
+      @content($bg, $color, $alt-color);
     }
   }
 
   .section:nth-child(#{$side}) {
-    @include section-coloring($bg, $color, $card-color);
+    @content($bg, $color, $alt-color);
   }
 }
 
-.app {
-  @include alternating-section("odd",
-  $col-bg-light,
-  $col-accent-zing,
-  $col-bg-dark);
-  @include alternating-section("even", $col-bg-dark, $col-sub-brand);
-  
-  .section-light {
-    @include section-coloring($col-bg-light, $col-accent-zing, $col-bg-dark);
-  }
-
-  .section-dark {
-    @include section-coloring($col-bg-dark, $col-sub-brand, $col-bg-light);
-  }
-}
-
-@media screen and (max-width: 700px) {
-  .col {
-    flex-basis: revert;
-    width: 100%;
-
-    ul {
-      margin: 20px 0 !important;
-    }
-  }
-
-  .section-dark,
-  .section-light,
-  .section {
-    .container {
-      padding-top: 20px;
-      text-align: left;
+@mixin alternating-section-colouring() {
+  @include coloured-sections($col-bg-light, $col-accent-zing, $col-bg-dark, "odd") 
+    using ($bg, $color, $alt-color) {
+      @content($bg, $color, $alt-color);
     }
 
-    .section-icon {
-      text-align: center !important;
+  @include coloured-sections($col-bg-dark, $col-sub-brand, $col-bg-light, "even") 
+    using ($bg, $color, $alt-color) {
+      @content($bg, $color, $alt-color);
     }
-  }
-
-  .text-column,
-  .section-content {
-    margin: 10px 0;
-  }
-
-  .col-item {
-    display: block;
-  }
-
-  .images {
-    .col {
-      flex-basis: 0;
-    }
-
-    .col-item {
-      display: flex !important;
-    }
-  }
-}
-
-@media screen and (max-width: 770px) {
-  .card-columns {
-    column-count: 1 !important;
-    padding: 10px;
-  }
 }
