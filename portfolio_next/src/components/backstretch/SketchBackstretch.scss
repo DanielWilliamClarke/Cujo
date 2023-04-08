@@ -6,7 +6,7 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  
+
   color: ft($theme-dark, $col-text-main);
   display: flex;
   height: 100vh;
@@ -18,11 +18,9 @@
 
   @include themed() {
     background: t($col-bg-light);
-    background: linear-gradient(
-      0deg,
-      t($col-back-grad-sketch-high),
-      t($col-back-grad-sketch-low) 60%
-    );
+    background: linear-gradient(0deg,
+        t($col-back-grad-sketch-high),
+        t($col-back-grad-sketch-low) 60%);
   }
 
   canvas {
@@ -32,21 +30,39 @@
 
   .backstretch-headline {
     user-select: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     .backstretch-main {
       font-size: calc(30px + 3vw);
+      line-height: calc(30px + 3vw);
       font-weight: 700;
+
       @include themed() {
         text-shadow: 0 0 50px t($col-back-text-shadow);
       }
     }
 
-    .backstretch-tag {
-      font-size: calc(15px + 1vw);
-      font-weight: 400;
+    .backstretch-role {
+      display: flex;
+      align-items: center;
 
-      @include themed() {
-        text-shadow: 0 0 50px t($col-back-text-shadow);
+      .backstretch-tag {
+        font-size: calc(15px + 1vw);    
+        line-height: calc(15px + 1vw);
+
+        font-weight: 400;
+
+        @include themed() {
+          text-shadow: 0 0 50px t($col-back-text-shadow);
+        }
+      }
+
+      .backstretch-logo {
+        img {
+          height: 20px;
+        }
       }
     }
 
@@ -57,11 +73,6 @@
     }
   }
 
-  .backstretch-logo {
-    img {
-      height: 20px;
-    }
-  }
 
   .my-logo {
     height: 7em;
@@ -87,6 +98,12 @@
   .sketch-backstretch {
     .backstretch-main {
       font-size: 50px;
+      padding-bottom: 20px;
+    }
+
+    .backstretch-role,
+    .backstretch-headline {
+      flex-direction: column;
     }
   }
 }

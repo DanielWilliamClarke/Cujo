@@ -8,6 +8,7 @@ import { CVProps, Work } from '../../model/CVModel';
 
 import { ScrollIndicator } from './ScrollIndicator';
 import { DynamicImage } from '../shared/DynamicImage';
+import { Logo } from './Logo';
 
 // This stops any re-renders from creating multiple canvas'
 let rendered = false;
@@ -32,38 +33,42 @@ const SketchBackstretch: React.FC<CVProps> = React.memo(({ cv }: CVProps): JSX.E
   // Similar to componentDidMount and componentDidUpdate:
   const p5Ref = useMemo(() => React.createRef<any>(), []);
   useEffect(() => {
-    if(!rendered) {
+    if (!rendered) {
       new p5(getSketch(cv, currentRole), p5Ref.current);
       rendered = true;
     }
   });
-  
+
   return useMemo(() => (
     <section id="home">
       <Container fluid ref={p5Ref} className="sketch-backstretch">
         <div className="backstretch-headline">
-          <Row className="backstretch-main">
-            <Col>{cv.about.entry.name}</Col>
-          </Row>
-          <div className="centered line"></div>
-          <Row className="backstretch-tag">
-            <Col>{cv.about.entry.label}</Col>
-          </Row>
-          <Row className="backstretch-logo">
-            <Col>
-              <DynamicImage
-                image={currentRole.logo}
-                className="centered image-item work-logo"
-              />
-            </Col>
-          </Row>
+          <Logo />
+          <div className="backstretch-content">
+            <Row className="backstretch-main">
+              <Col>{cv.about.entry.name}</Col>
+            </Row>
+            <div className="backstretch-role">
+              <Row className="backstretch-tag">
+                <Col>{cv.about.entry.label}</Col>
+              </Row>
+              <Row className="backstretch-logo">
+                <Col>
+                  <DynamicImage
+                    image={currentRole.logo}
+                    className="centered image-item work-logo"
+                  />
+                </Col>
+              </Row>
+            </div>
+          </div>
         </div>
       </Container>
       <Container fluid className="scroll-indicator">
         <ScrollIndicator />
       </Container>
     </section>
-    ), [p5Ref, cv.about.entry, currentRole]);
+  ), [p5Ref, cv.about.entry, currentRole]);
 });
 
 SketchBackstretch.displayName = 'SketchBackstretch';
