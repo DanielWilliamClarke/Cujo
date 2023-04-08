@@ -52,28 +52,30 @@
 }
 
 @media screen and (max-width: 700px) {
-  nav {
-    flex-wrap: wrap !important;
-  }
+  .navbar {
+    nav {
+      flex-wrap: wrap !important;
+    }
 
-  .nav-link {
-    width: 20%;
-    height: 20px;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .navbar-nav {
     .nav-link {
-      div {
-        display: none;
-      }
+      width: 20%;
+      height: 20px;
+      justify-content: center;
+      align-items: center;
+    }
 
-      svg {
-        font-size: 15px;
-        width: 20px;
-        position: relative;
-        top: -7px;
+    .navbar-nav {
+      .nav-link {
+        div {
+          display: none;
+        }
+
+        svg {
+          font-size: 15px;
+          width: 20px;
+          position: relative;
+          top: -7px;
+        }
       }
     }
   }
