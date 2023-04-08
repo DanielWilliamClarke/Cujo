@@ -12,9 +12,9 @@ import './styles/global.scss';
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }: AppProps): JSX.Element => {
   return (
-    <div id="#root">
+    <main id="#root">
       <Component {...pageProps} />
-    </div>
+    </main>
   )
 }
 
