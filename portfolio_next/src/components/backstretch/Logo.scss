@@ -62,7 +62,8 @@ $logo-size: 150px;
         position: absolute;
         rotate: 10deg;
         filter: drop-shadow(4px 4px 4px rgb(0 0 0 / 0.4)); 
-        animation: pastel-rgb 5s infinite;
+        animation: pastel-rgb 10s infinite;
+        animation-timing-function: ease-in-out;
     }
 }
 
