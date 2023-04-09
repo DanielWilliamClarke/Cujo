@@ -22,20 +22,20 @@ import { Vultr } from '@styled-icons/simple-icons/Vultr';
 import { Sfml } from '@styled-icons/simple-icons/Sfml';
 
 import { Bolt } from '@styled-icons/material-rounded/Bolt';
-import { Book } from '@styled-icons/material/Book';
-import { Campaign } from '@styled-icons/material/Campaign';
-import { Fingerprint } from '@styled-icons/material/Fingerprint';
-import { Hardware } from '@styled-icons/material/Hardware';
-import { HistoryEdu } from '@styled-icons/material/HistoryEdu';
-import { Home } from '@styled-icons/material/Home';
-import { Loyalty } from '@styled-icons/material/Loyalty';
-import { ReportProblem } from '@styled-icons/material/ReportProblem';
-import { School } from '@styled-icons/material/School';
+import { Pen } from '@styled-icons/boxicons-regular/Pen';
+import { MessageAltDots } from '@styled-icons/boxicons-regular/MessageAltDots';
+import { Fingerprint } from '@styled-icons/boxicons-regular/Fingerprint';
+import { BookHeart } from '@styled-icons/boxicons-regular/BookHeart';
+import { HomeHeart } from '@styled-icons/boxicons-regular/HomeHeart';
+import { Error } from '@styled-icons/boxicons-regular/Error';
+import { School } from '@styled-icons/material-rounded/School';
 import { CatchingPokemon } from '@styled-icons/material/CatchingPokemon';
 import { PaperPlane } from '@styled-icons/boxicons-regular/PaperPlane';
 import { Baby } from '@styled-icons/fa-solid/Baby';
-import { BookPulse } from '@styled-icons/fluentui-system-filled/BookPulse';
+import { BookmarkHeart } from '@styled-icons/boxicons-regular/BookmarkHeart';
 import { Code } from '@styled-icons/material/Code';
+import { StreetView } from '@styled-icons/boxicons-regular/StreetView';
+import { Meteor } from '@styled-icons/boxicons-regular/Meteor';
 
 export interface IIconService {
   get: (id: string) => StyledIcon | undefined
@@ -57,17 +57,17 @@ export type IconWithDefaultState = {
 @injectable()
 export class IconService implements IIconService {
   iconMap: IconMap = {
-    home: Home,
+    home: HomeHeart,
     about: Fingerprint,
-    experience: Loyalty,
+    experience: StreetView,
     education: School,
     skills: Bolt,
-    projects: Hardware,
-    books: BookPulse,
-    blog: Book,
+    projects: Meteor,
+    books: BookmarkHeart,
+    blog: Pen,
     cv: PaperPlane,
-    post: HistoryEdu,
-    contact: Campaign,
+    post: BookHeart,
+    contact: MessageAltDots,
     work: Bolt,
     school: LightBulb,
     baby: Baby,
@@ -97,6 +97,6 @@ export class IconService implements IIconService {
   }
 
   getWithDefault (id: string): StyledIcon {
-    return this.iconMap[id] ?? ReportProblem;
+    return this.iconMap[id] ?? Error;
   }
 }

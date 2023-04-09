@@ -8,6 +8,9 @@
   nav {
     display: flex;
     flex-wrap: nowrap;
+    align-items: center;
+    align-content: center;
+   
   }
 
   .nav-link {
@@ -15,6 +18,7 @@
     line-height: 15px;
     text-align: center;
     transition: 0.5s;
+    margin: 5px 0;
 
     svg,
     .nav-label {
