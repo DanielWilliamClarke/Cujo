@@ -21,7 +21,7 @@ import { Powershell } from '@styled-icons/simple-icons/Powershell';
 import { Vultr } from '@styled-icons/simple-icons/Vultr';
 import { Sfml } from '@styled-icons/simple-icons/Sfml';
 
-import { Bolt } from '@styled-icons/material/Bolt';
+import { Bolt } from '@styled-icons/material-rounded/Bolt';
 import { Book } from '@styled-icons/material/Book';
 import { Campaign } from '@styled-icons/material/Campaign';
 import { Fingerprint } from '@styled-icons/material/Fingerprint';
@@ -34,7 +34,8 @@ import { School } from '@styled-icons/material/School';
 import { CatchingPokemon } from '@styled-icons/material/CatchingPokemon';
 import { PaperPlane } from '@styled-icons/boxicons-regular/PaperPlane';
 import { Baby } from '@styled-icons/fa-solid/Baby';
-import { BookPulse } from '@styled-icons/fluentui-system-filled/BookPulse'
+import { BookPulse } from '@styled-icons/fluentui-system-filled/BookPulse';
+import { Code } from '@styled-icons/material/Code';
 
 export interface IIconService {
   get: (id: string) => StyledIcon | undefined
@@ -70,6 +71,7 @@ export class IconService implements IIconService {
     work: Bolt,
     school: LightBulb,
     baby: Baby,
+    code: Code,
 
     // DevIcon overrides
     DeviantArt: Deviantart,

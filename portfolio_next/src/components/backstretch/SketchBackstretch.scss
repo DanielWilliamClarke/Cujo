@@ -96,6 +96,16 @@
 
 @media screen and (max-width: 850px) {
   .sketch-backstretch {
+    .backstretch-headline {
+      .logo {
+        padding-right: 0px;
+      }
+    }
+
+    .backstretch-logo {
+      padding-top: 10px;
+    }
+
     .backstretch-main {
       font-size: 50px;
       padding-bottom: 20px;
@@ -105,6 +115,10 @@
     .backstretch-headline {
       flex-direction: column;
     }
+  }
+
+  .scroll-indicator {
+    display: none;
   }
 }
 
@@ -116,6 +130,6 @@
 
     .backstretch-tag {
       font-size: 15px;
-    }
+    }   
   }
 }
