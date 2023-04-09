@@ -42,7 +42,7 @@
         width: 100%;
         height: 100%;
         position: absolute;
-        top: 235px;
+        top: 30%;
         left: 0;
         display: flex;
         justify-content: center;
@@ -50,11 +50,11 @@
 
         .book-sash {
             height: 50px;
-            width: 90%;
+            width: 30%;
             display: flex;
             justify-content: center;
             align-items: center;
-            rotate: 3deg;
+            // rotate: 3deg;
             border-radius: $border-radius / 2;
             opacity: 90%;
         }

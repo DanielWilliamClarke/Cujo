@@ -4,7 +4,7 @@ import { Entries } from "../../model/Includes";
 import { DynamicImage } from "../shared/DynamicImage";
 import { Section } from "../shared/Section";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination } from "swiper";
+import { Autoplay, Pagination } from "swiper";
 
 type ReadingListProps = {
     readingList: Entries<Book>
@@ -32,11 +32,27 @@ export const ReadingList: React.FC<ReadingListProps> = ({ readingList }: Reading
                 spaceBetween: 30,
             },
         },
+        rewind: true,
+        autoplay: {
+          delay: 5000,
+          disableOnInteraction: false,
+        },
         pagination: {
             dynamicBullets: true,
         },
-        modules: [Pagination]
+        modules: [Autoplay, Pagination]
     };
+
+    const booksByProgress = readingList.entries
+        .reduce((acc, book: Book) => {
+            if (!acc[book.progress]) {
+                acc[book.progress] = []
+            }
+
+            acc[book.progress].push(book);
+
+            return acc;
+        }, {} as Record<BookProgress, Book[]>);
 
     return (
         <Section id="books" title="Books">
@@ -46,7 +62,9 @@ export const ReadingList: React.FC<ReadingListProps> = ({ readingList }: Reading
                     {...props}
                 >
                     {
-                        readingList.entries
+                            Object.values(booksByProgress)
+                            .flat()
+                            .reverse()
                             .map((book: Book, index: number) => (
                                 <SwiperSlide
                                     key={index}
