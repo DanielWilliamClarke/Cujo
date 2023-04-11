@@ -77,6 +77,7 @@ export class Phylotaxis implements Sketch {
 
       // Draw
       this.p.push();
+      this.p.ambientLight(hu, 150, 255);
       this.p.fill(hu, 150, 255);
       this.p.noStroke();
       this.p.translate(x, y, z);

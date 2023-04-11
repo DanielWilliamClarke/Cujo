@@ -26,6 +26,13 @@ export interface Sketch {
 
 type SketchBuilder = (p: p5) => Sketch;
 
+const safariBrowsers = [
+  'ios',
+  'safari',
+  'ios-webview',
+  'edge-ios',
+]
+
 export const getSketch = (cv: CV, currentRole: Work): (p: p5) => void => {
   const sketches: SketchBuilder[] = [
     (p: p5) => new Conway(p),
@@ -39,8 +46,8 @@ export const getSketch = (cv: CV, currentRole: Work): (p: p5) => void => {
 
   // Boxes is super slow on Safari
   const browser = detect();
-  if (browser?.name !== 'safari') {
-    sketches.push((p: p5) => new Boxes(p));
+  if (!safariBrowsers.includes(browser?.name ?? '')) {
+    // sketches.push((p: p5) => new Boxes(p));
   }
 
   return pauseableSketch(sample(sketches));

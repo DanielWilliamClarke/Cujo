@@ -44,13 +44,13 @@ export class Boxes implements Sketch {
   draw () {
     this.p.background(0);
     // this.p.orbitControl();
-    this.p.lights();
+    // this.p.lights();
     this.p.rotateX(this.ma);
     this.p.rotateY((this.yAngle += 0.001));
 
     const locX = this.p.mouseX - this.p.height / 2;
     const locY = this.p.mouseY - this.p.width / 2;
-    this.p.ambientLight(0, 0, 75);
+    this.p.ambientLight(50);
     this.p.pointLight(0, 0, 100, locX, locY, 255);
 
     for (let z = this.padding; z < this.size - this.padding; z += this.maxW) {
@@ -73,6 +73,7 @@ export class Boxes implements Sketch {
           this.p.map(this.p.sin(c), -1, 1, 75, 90)
         );
 
+        this.p.ambientMaterial(hue, 50, brightness);
         this.p.fill(hue, 60, brightness, this.opacity);
         this.p.translate(x - this.halfSize, 0, z - this.halfSize);
         this.p.box(w, h, w);

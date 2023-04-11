@@ -2,15 +2,19 @@ import p5 from 'p5';
 import { Sketch } from '.';
 
 class HSLA {
-  constructor (
+  constructor(
     public h: number = 255,
     public s: number = 255,
     public b: number = 255,
     public a: number = 255
-  ) {}
+  ) { }
 }
 class Cell {
-  constructor (public color: HSLA = new HSLA(), public phantom?: boolean) {}
+  constructor(
+    public color: HSLA = new HSLA(),
+    public phantom?: boolean,
+    public fresh?: boolean
+  ) { }
 }
 
 type Grid = Array<Array<Cell | undefined>>;
@@ -18,6 +22,33 @@ type Grid = Array<Array<Cell | undefined>>;
 type Neighbours = {
   sum: number
   colors: HSLA[]
+}
+
+export function debounce<T extends any[], I>(
+  immediate: (...args: T) => Promise<void>,
+  onDebounceEnd: (...args: T) => Promise<I>,
+  ms = 0
+) {
+  let timer: NodeJS.Timeout;
+
+  return (...args: T) => {
+    clearTimeout(timer);
+
+    immediate(...args);
+
+    return new Promise<I>((resolve, reject) => {
+      timer = setTimeout(async () => {
+        try {
+          const result = await onDebounceEnd(...args);
+
+          resolve(result);
+        } catch (ex) {
+          // Propagate any errors
+          reject(ex);
+        }
+      }, ms);
+    });
+  };
 }
 
 export class Conway implements Sketch {
@@ -32,13 +63,13 @@ export class Conway implements Sketch {
   private readonly B = [3];
   private readonly S = [2, 3];
 
-  constructor (private readonly p: p5) {}
+  constructor(private readonly p: p5) { }
 
-  preload (): void {}
+  preload(): void { }
 
-  setup () {
+  setup() {
     this.p.frameRate(12);
-    this.p.colorMode(this.p.HSL, 360, 100, 100);
+    this.p.colorMode(this.p.HSL);
     this.p.createCanvas(window.innerWidth, window.innerHeight, this.p.WEBGL);
     this.p.smooth();
     this.p.perspective();
@@ -48,32 +79,45 @@ export class Conway implements Sketch {
     this.grid = this.makeGrid(this.columns, this.rows);
   }
 
-  windowResized (): void {
-    this.setup();
-  }
+  windowResized = debounce(
+    async () => {
+      this.p.resizeCanvas(window.innerWidth, window.innerHeight);
+      this.p.background(0);
+    },
+    async () => {
+      this.columns = Math.ceil(this.p.width / this.resolution);
+      this.rows = Math.ceil(this.p.height / this.resolution);
+      this.grid = this.makeGrid(this.columns, this.rows);
+    },
+    200
+  );
 
-  draw () {
+  draw() {
     // Reset
     this.p.background(0);
-    this.p.lights();
+    // this.p.lights();
 
     const locX = this.p.mouseX - this.p.height / 2;
     const locY = this.p.mouseY - this.p.width / 2;
-    this.p.ambientLight(0, 0, 75);
-    this.p.pointLight(0, 0, 100, locX, locY, 255);
+    this.p.ambientLight(75);
+
+    this.p.pointLight(0, 0, 255, locX, locY, 255);
 
     // Render
     this.iterateGrid((col: number, row: number) => {
       const x = col * this.resolution;
       const y = row * this.resolution;
       const cell = this.grid[col][row];
-      if ((cell != null) && !cell.phantom) {
+      if (cell && !cell.phantom && !cell.fresh) {
         this.p.push();
+        this.p.ambientMaterial(cell.color.h, cell.color.s, cell.color.b);
         this.p.fill(cell.color.h, cell.color.s, cell.color.b, cell.color.a);
         this.p.noStroke();
         this.p.translate(x - this.p.width / 2, y - this.p.height / 2, 0);
         this.p.box(this.boxSize, this.boxSize, this.boxSize);
         this.p.pop();
+
+        cell.fresh = false;
       }
     });
 
@@ -136,8 +180,8 @@ export class Conway implements Sketch {
   private readonly makeGrid = (columns: number, rows: number, empty?: boolean): Grid =>
     new Array(columns).fill(undefined).map(() =>
       new Array(rows).fill(undefined).map(() => {
-        if (!empty && Math.random() > 0.3) {
-          return new Cell(this.randomColor());
+        if (!empty && this.p.random() > 0.3) {
+          return new Cell(this.randomColor(), false, true);
         }
         return undefined;
       })
@@ -153,13 +197,13 @@ export class Conway implements Sketch {
 
     return new HSLA(
       colors.map((c: HSLA) => c.h).reduce((acc, h) => acc + h, 0) /
-        colors.length,
+      colors.length,
       colors.map((c: HSLA) => c.s).reduce((acc, s) => acc + s, 0) /
-        colors.length,
+      colors.length,
       colors.map((c: HSLA) => c.b).reduce((acc, b) => acc + b, 0) /
-        colors.length,
+      colors.length,
       colors.map((c: HSLA) => c.a).reduce((acc, a) => acc + a, 0) /
-        colors.length
+      colors.length
     );
   };
 }
