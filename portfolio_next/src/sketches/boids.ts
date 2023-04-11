@@ -1,8 +1,8 @@
 import p5 from 'p5';
-import { T } from 'styled-icons/fa-solid';
 import { Sketch } from '.';
 import { CV, Skill, Work } from '../model/CVModel';
 import { DateService, IDateService } from '../services/DateService';
+import { anton } from '../components/shared/Font';
 
 type BoidsWord = {
   word: string
@@ -34,7 +34,7 @@ export class Boids implements Sketch {
       ...[
         ...this.cv.skills.entry.favorite.map((skill: Skill) => skill.name),
         ...this.cv.skills.entry.current.map((skill: Skill) => skill.name),
-        ...this.cv.skills.entry.used.map((skill: Skill) => skill.name)
+        // ...this.cv.skills.entry.used.map((skill: Skill) => skill.name)
       ].sort(() => Math.random() - 0.5)
     ].map((word: string, index: number) => ({
       word,
@@ -44,7 +44,8 @@ export class Boids implements Sketch {
 
   private myFont!: p5.Font;
   preload () {
-    this.myFont = this.p.loadFont('./fonts/QuartzoBold-W9lv.otf');
+    anton.className
+    this.myFont = this.p.loadFont('./fonts/Anton-Regular.ttf');
   }
 
   setup () {
