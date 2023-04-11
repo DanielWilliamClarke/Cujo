@@ -1,6 +1,8 @@
 import React from 'react';
 import { Col, Row } from 'react-bootstrap';
 
+import { anton } from '../shared/Font';
+
 type HeadingProps = {
   title: string
   noSeparator?: boolean
@@ -10,7 +12,7 @@ export const Heading: React.FC<HeadingProps> = ({ title, noSeparator }: HeadingP
   return (
     <Row>
       <Col>
-        <h2 className="section-title">{title}</h2>
+        <h2 className={`${anton.className} section-title`}>{title}</h2>
         {!noSeparator && <div className="centered line" />}
       </Col>
     </Row>

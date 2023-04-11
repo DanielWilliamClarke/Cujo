@@ -7,6 +7,8 @@ import { IIconService } from '../../services/IconService';
 
 import { ThemeSetter } from '../theme/ThemeSetter';
 
+import { anton } from '../shared/Font';
+
 export const NavPanel: React.FC = (): JSX.Element => {
   const iconService = useInjection(IIconService.$);
   const [bg, setBg] = useState<string | undefined>(undefined);
@@ -27,39 +29,44 @@ export const NavPanel: React.FC = (): JSX.Element => {
   const menu = useMemo(() => (['home']
     .concat(buildMenuItems())
     .concat(['blog', 'cv', 'contact'])),
-  [buildMenuItems]);
+    [buildMenuItems]);
 
   return (
-      <Navbar
-        bg={bg}
-        sticky="top"
-        variant="dark"
-        className="justify-content-center"
+    <Navbar
+      bg={bg}
+      sticky="top"
+      variant="dark"
+      className="justify-content-center"
+    >
+      <Nav
+        className={anton.className}
+        justify
+        navbarScroll
+        style={{ textTransform: 'capitalize' }}
       >
-        <Nav justify navbarScroll style={{ textTransform: 'capitalize' }}>
-          <Scrollspy
-            items={menu}
-            currentClassName="active"
-            offset={-100}
-            componentTag="nav"
-          >
-            {menu.map((link: string): JSX.Element => {
-              const href =
-                link !== 'home'
-                  ? `${router.pathname}#${link}`
-                  : `/#${link}`;
-              const NavIcon = iconService.getWithDefault(link);
-              return (
-                <Nav.Link href={href} key={href}>
-                  <NavIcon />
-                  <div className="nav-label">{link}</div>
-                </Nav.Link>
-              );
-            })}
-          </Scrollspy>
+        <Scrollspy
+          items={menu}
+          currentClassName="active"
+          offset={-100}
+          componentTag="nav"
+        >
+          {menu.map((link: string): JSX.Element => {
+            const href =
+              link !== 'home'
+                ? `${router.pathname}#${link}`
+                : `/#${link}`;
+            const NavIcon = iconService.getWithDefault(link);
+            return (
+              <Nav.Link href={href} key={href}>
+                <NavIcon />
+                <div className="nav-label">{link}</div>
+              </Nav.Link>
+            );
+          })}
+        </Scrollspy>
 
-          <ThemeSetter/>
-        </Nav>
-      </Navbar>
+        <ThemeSetter />
+      </Nav>
+    </Navbar>
   );
 };

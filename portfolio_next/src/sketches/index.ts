@@ -31,7 +31,7 @@ const safariBrowsers = [
   'safari',
   'ios-webview',
   'edge-ios',
-]
+];
 
 export const getSketch = (cv: CV, currentRole: Work): (p: p5) => void => {
   const sketches: SketchBuilder[] = [

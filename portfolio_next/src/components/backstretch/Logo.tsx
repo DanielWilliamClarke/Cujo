@@ -2,12 +2,7 @@ import { useInjection } from 'inversify-react';
 import React from 'react';
 import { IIconService } from '../../services/IconService';
 
-import { Anton } from '@next/font/google';
-
-const anton = Anton({
-  subsets: ['latin'],
-  weight: ['400']
-});
+import { anton } from '../shared/Font';
 
 export const Logo: React.FC = () => {
     const iconService = useInjection(IIconService.$);
