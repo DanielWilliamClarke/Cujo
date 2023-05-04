@@ -1,9 +1,6 @@
 import { documentToPlainTextString } from '@contentful/rich-text-plain-text-renderer';
-import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
-import {
-  Block,
-  BLOCKS, Inline, INLINES, MARKS
-} from '@contentful/rich-text-types';
+import { CommonNode, documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import { BLOCKS, MARKS, INLINES } from '@contentful/rich-text-types';
 
 import { useInjection } from 'inversify-react';
 import React, { ReactNode, useEffect, useMemo, useState } from 'react';
@@ -103,17 +100,22 @@ const PostContent: React.FC<PostProps> = ({ post, includes }: PostProps) => {
         <div className="long-line centered" />
       ),
       [INLINES.HYPERLINK]: (
-        { data }: Block | Inline,
+        node: CommonNode,
         children: ReactNode
       ) => (
-        <a href={data.uri} target="_blank" rel="noopener noreferrer">
+        <a href={node.data.uri} target="_blank" rel="noopener noreferrer">
           {children}
         </a>
       ),
-      [BLOCKS.PARAGRAPH]: (node: any, children: ReactNode) => (
+      [BLOCKS.PARAGRAPH]: (
+        _: CommonNode,
+        children: ReactNode
+      ) => (
         <div>{children}</div>
       ),
-      [BLOCKS.EMBEDDED_ASSET]: (node: Block | Inline) => {
+      [BLOCKS.EMBEDDED_ASSET]: (
+        node: CommonNode
+      ) => {
         const media = getAsset(
           includes,
           node.data.target.sys.id

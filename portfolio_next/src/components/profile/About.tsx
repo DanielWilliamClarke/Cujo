@@ -1,4 +1,4 @@
-import { Block, Inline, INLINES, MARKS } from '@contentful/rich-text-types';
+import { INLINES, MARKS } from '@contentful/rich-text-types';
 import React, { ReactNode, useMemo } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { About as AboutModel } from '../../model/CVModel';
@@ -8,7 +8,7 @@ import { Section } from '../shared/Section';
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper";
 
-import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import { CommonNode, documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { Reveal } from '../shared/Reveal';
 
 type AboutProps = {
@@ -19,9 +19,9 @@ export const About: React.FC<AboutProps> = ({ about }: AboutProps): JSX.Element 
   const options = useMemo(() => ({
     renderNode: {
       [INLINES.HYPERLINK]: (
-        { data }: Block | Inline,
+        { data }: CommonNode,
         children: ReactNode
-      ): JSX.Element => (
+      ) => (
         <a href={data.uri} target="_blank" rel="noopener noreferrer">
           {children}
         </a>
