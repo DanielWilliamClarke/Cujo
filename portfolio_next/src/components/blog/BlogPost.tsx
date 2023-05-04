@@ -99,13 +99,13 @@ const PostContent: React.FC<PostProps> = ({ post, includes }: PostProps) => {
       )
     },
     renderNode: {
-      [BLOCKS.HR]: (): JSX.Element => (
+      [BLOCKS.HR]: () => (
         <div className="long-line centered" />
       ),
       [INLINES.HYPERLINK]: (
         { data }: Block | Inline,
         children: ReactNode
-      ): JSX.Element => (
+      ) => (
         <a href={data.uri} target="_blank" rel="noopener noreferrer">
           {children}
         </a>
@@ -113,7 +113,7 @@ const PostContent: React.FC<PostProps> = ({ post, includes }: PostProps) => {
       [BLOCKS.PARAGRAPH]: (node: any, children: ReactNode) => (
         <div>{children}</div>
       ),
-      [BLOCKS.EMBEDDED_ASSET]: (node: Block | Inline): JSX.Element | null => {
+      [BLOCKS.EMBEDDED_ASSET]: (node: Block | Inline) => {
         const media = getAsset(
           includes,
           node.data.target.sys.id
