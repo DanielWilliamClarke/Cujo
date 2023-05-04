@@ -8,7 +8,7 @@ export const useShouldAnimate = (minWidth: number = 700) => {
       if (width) {
         setShouldAnimate(width > minWidth);
       }
-    }, [width]);
+    }, [width, minWidth]);
 
     return shouldAnimate;
 };

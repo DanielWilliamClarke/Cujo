@@ -88,14 +88,14 @@ const SkillsSection: React.FC<SkillsProps> = (
       : true;
   }, [search]);
 
-  const filteredSkills = useMemo(() => skills
+  const filteredSkills = skills
     .filter(({ name }: Skill) => filterSkills(name))
     .sort((a: Skill, b: Skill) => b.level - a.level)
     .map(({ level, icon }: Skill, index: number) => (
       <ProgressGauge key={index} value={level} colors={gaugeColors}>
         {(color: string) => <DevIconName icon={icon} color={color} />}
       </ProgressGauge>
-    )), [search]);
+    ));
 
   if (!filteredSkills.length) {
     return null;
