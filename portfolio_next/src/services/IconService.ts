@@ -36,6 +36,7 @@ import { BookmarkHeart } from '@styled-icons/boxicons-regular/BookmarkHeart';
 import { Code } from '@styled-icons/material/Code';
 import { StreetView } from '@styled-icons/boxicons-regular/StreetView';
 import { Meteor } from '@styled-icons/boxicons-regular/Meteor';
+import { Data } from '@styled-icons/boxicons-regular/Data';
 
 export interface IIconService {
   get: (id: string) => StyledIcon | undefined
@@ -88,7 +89,8 @@ export class IconService implements IIconService {
     Magic: WizardsOfTheCoast,
     Vultr,
     MoxField: HatWizard,
-    SFML: Sfml
+    SFML: Sfml,
+    BigQuery: Data
   };
 
   get (id: string): StyledIcon | undefined {
