@@ -3,6 +3,19 @@
 use async_graphql::SimpleObject;
 use chrono::{Utc, DateTime};
 use serde::{Deserialize, Serialize};
+use serde_json::Value;
+
+#[derive(Serialize, Deserialize, Debug, Clone)]
+pub struct Entries<T> {
+    pub entries: Vec<T>,
+    pub includes: Option<Value>,
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone)]
+pub struct Entry<T> {
+    pub entry: T,
+    pub includes: Option<Value>,
+}
 
 #[derive(SimpleObject, Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]

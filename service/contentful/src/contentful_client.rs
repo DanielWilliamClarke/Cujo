@@ -2,22 +2,10 @@
 
 use std::collections::HashMap;
 
-use crate::{http_client, json_util::merge, query_builder::QueryBuilder};
-
 use serde::{de::DeserializeOwned, Deserialize, Serialize};
 use serde_json::Value;
 
-#[derive(Serialize, Deserialize, Debug, Clone)]
-pub struct Entries<T> {
-    pub entries: Vec<T>,
-    pub includes: Option<Value>,
-}
-
-#[derive(Serialize, Deserialize, Debug, Clone)]
-pub struct Entry<T> {
-    pub entry: T,
-    pub includes: Option<Value>,
-}
+use crate::{http_client, json_util::merge, query_builder::QueryBuilder, ContentfulClientErrors, Entries, Entry};
 
 #[derive(Deserialize, Debug, Clone)]
 pub struct ContentfulConfig {
@@ -44,74 +32,70 @@ impl ContentfulClient {
         &self,
         query_builder: Option<QueryBuilder>,
         index: usize,
-    ) -> Result<Option<Entry<T>>, Box<dyn std::error::Error>>
+    ) -> Result<Entry<T>, ContentfulClientErrors>
     where
         T: Serialize + DeserializeOwned + Clone,
     {
         match self.get_entries::<T>(query_builder).await {
-            Ok(Some(Entries { entries, includes })) => Ok(Some(Entry {
+            Ok(Entries { entries, includes }) => Ok(Entry {
                 entry: entries[index].clone(),
                 includes,
-            })),
-            _ => Ok(None),
+            }),
+            Err(err) => Err(err),
         }
     }
 
     pub async fn get_entries<T>(
         &self,
         query_builder: Option<QueryBuilder>,
-    ) -> Result<Option<Entries<T>>, Box<dyn std::error::Error>>
+    ) -> Result<Entries<T>, ContentfulClientErrors>
     where
         T: Serialize + DeserializeOwned,
     {
-        let query_string = match query_builder {
-            Some(builder) => builder.build(),
-            None => "".to_string(),
-        };
-
-        self.get_entries_by_query_string::<T>(query_string.as_str())
-            .await
+        self.get_entries_by_query_string::<T>(query_builder).await
     }
 
     async fn get_entries_by_query_string<T>(
         &self,
-        query_string: &str,
-    ) -> Result<Option<Entries<T>>, Box<dyn std::error::Error>>
+        query_builder: Option<QueryBuilder>,
+    ) -> Result<Entries<T>, ContentfulClientErrors>
     where
         for<'a> T: Serialize + DeserializeOwned,
     {
-        log::debug!("query_string: {:?}", &query_string);
-        let url = self.get_query_string_url(query_string);
+        let url = self.get_query_string_url(query_builder);
 
-        let response = http_client::get::<Value>(&url, &self.config.access_token)
-            .await?
-            .unwrap_or(Value::Null);
-
-        let includes = match response.clone().get("includes") {
-            Some(includes) => Some(includes.clone().to_owned()),
-            None => None,
+        let mut response = match http_client::get::<Value>(&url, &self.config.access_token).await {
+            Ok(response) => match response {
+                Some(response) => response,
+                None => Value::Null,
+            },
+            Err(err) => return Err(err),
         };
 
-        match response.clone().get_mut("items") {
+        let includes = response.get("includes").cloned();
+
+        match response.get_mut("items") {
             Some(items) if items.is_array() => {
                 if let Some(ref includes) = includes {
                     self.resolve_array(items, includes)
                 }
 
-                let entries = serde_json::from_str::<Vec<T>>(items.to_string().as_str())?;
-                Ok(Some(Entries { entries, includes }))
+                match serde_json::from_str::<Vec<T>>(items.to_string().as_str()) {
+                    Ok(entries) => Ok(Entries { entries, includes }),
+                    Err(err) => Err(ContentfulClientErrors::Deserialization(err)),
+                }
             }
-            _ => Ok(None),
+            _ => Err(ContentfulClientErrors::NoEntries),
         }
     }
 
-    fn get_query_string_url(&self, query_string: &str) -> String {
+    fn get_query_string_url(&self, query_builder: Option<QueryBuilder>) -> String {
         format!(
             "{base_url}/{space_id}/environments/{environment}/entries{query_string}",
             base_url = &self.base_url,
             space_id = &self.config.space_id,
             environment = &self.config.environment,
-            query_string = &query_string
+            query_string = &query_builder.unwrap_or_default().to_string()
         )
     }
 
@@ -121,7 +105,7 @@ impl ContentfulClient {
             .unwrap()
             .iter_mut()
             .for_each(|item| match item {
-                Value::Object(_) => self.resolve_object(item, &includes),
+                Value::Object(_) => self.resolve_object(item, includes),
                 Value::Number(_) | Value::String(_) => (),
                 _ => {
                     log::error!("Unimplemented item {}", &item);
@@ -146,8 +130,8 @@ impl ContentfulClient {
                     .unwrap()
                     .iter_mut()
                     .for_each(|(_, field)| match field {
-                        Value::Object(_) => self.resolve_object(field, &includes),
-                        Value::Array(_) => self.resolve_array(field, &includes),
+                        Value::Object(_) => self.resolve_object(field, includes),
+                        Value::Array(_) => self.resolve_array(field, includes),
                         _ => (),
                     });
 
@@ -173,12 +157,12 @@ impl ContentfulClient {
 
         *value = match value["sys"]["linkType"].clone() {
             Value::String(link_type) if link_type == "Entry" => {
-                self.find_item(&link_type, &link_id, &includes, |entry, includes| {
-                    self.resolve_entry(entry, &includes)
+                self.find_item(&link_type, &link_id, includes, |entry, includes| {
+                    self.resolve_entry(entry, includes)
                 })
             }
             Value::String(link_type) if link_type == "Asset" => {
-                self.find_item(&link_type, &link_id, &includes, |asset, _| {
+                self.find_item(&link_type, &link_id, includes, |asset, _| {
                     self.resolve_asset(asset)
                 })
             }
@@ -201,7 +185,7 @@ impl ContentfulClient {
             .as_array()
             .unwrap()
             .iter()
-            .find(|entry| entry["sys"]["id"].to_string() == link_id.to_string());
+            .find(|entry| entry["sys"]["id"] == *link_id);
 
         match item {
             Some(entry) => {

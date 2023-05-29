@@ -5,105 +5,59 @@ use contentful::models::Asset;
 use contentful::{Entries, Entry};
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
+use crate::blog::BlogPost;
+
+#[derive(SimpleObject, Serialize, Deserialize, Debug, Clone)]
+#[graphql(concrete(name = "AboutEntry", params(About)))]
+#[graphql(concrete(name = "SkillsEntry", params(Skills)))]
+pub struct CujoEntry<T> 
+where 
+    T: std::marker::Send + std::marker::Sync + async_graphql::OutputType
+{
+    pub entry: T,
+    pub includes: Option<Value>,
+}
+
+impl<T> From<Entry<T>> for CujoEntry<T> 
+where 
+    T: std::marker::Send + std::marker::Sync + async_graphql::OutputType
+{
+    fn from(entry: Entry<T>) -> Self {
+        CujoEntry { entry: entry.entry, includes: entry.includes }
+    }
+}
+
+#[derive(SimpleObject, Serialize, Deserialize, Debug, Clone)]
+#[graphql(concrete(name = "WorkEntries", params(Work)))]
+#[graphql(concrete(name = "EducationEntries", params(Education)))]
+#[graphql(concrete(name = "ProjectEntries", params(Project)))]
+#[graphql(concrete(name = "BlogEntries", params(BlogPost)))]
+#[graphql(concrete(name = "ReadingListEntries", params(Book)))]
+pub struct CujoEntries<T>
+where 
+    T: std::marker::Send + std::marker::Sync + async_graphql::OutputType
+{
+    pub entries: Vec<T>,
+    pub includes: Option<Value>,
+}
+
+impl<T> From<Entries<T>> for CujoEntries<T>
+where 
+    T: std::marker::Send + std::marker::Sync + async_graphql::OutputType
+{
+    fn from(entries: Entries<T>) -> Self {
+        CujoEntries { entries: entries.entries, includes: entries.includes }
+    }
+}
 
 #[derive(SimpleObject, Serialize, Deserialize, Debug, Clone)]
 pub struct CV {
-    pub about: AboutEntry,
-    pub work: WorkEntries,
-    pub education: EducationEntries,
-    pub skills: SkillsEntry,
-    pub projects: ProjectEntries,
-    pub reading_list: ReadingListEntries
-}
-
-#[derive(SimpleObject, Serialize, Deserialize, Debug, Clone)]
-pub struct AboutEntry {
-    pub entry: About,
-    pub includes: Option<Value>,
-}
-
-impl AboutEntry {
-    pub fn new(item: Entry<About>) -> Self {
-        AboutEntry {
-            entry: item.entry,
-            includes: item.includes,
-        }
-    }
-}
-
-#[derive(SimpleObject, Serialize, Deserialize, Debug, Clone)]
-pub struct WorkEntries {
-    pub entries: Vec<Work>,
-    pub includes: Option<Value>,
-}
-
-impl WorkEntries {
-    pub fn new(item: Entries<Work>) -> Self {
-        WorkEntries {
-            entries: item.entries,
-            includes: item.includes,
-        }
-    }
-}
-
-#[derive(SimpleObject, Serialize, Deserialize, Debug, Clone)]
-pub struct EducationEntries {
-    pub entries: Vec<Education>,
-    pub includes: Option<Value>,
-}
-
-impl EducationEntries {
-    pub fn new(item: Entries<Education>) -> Self {
-        EducationEntries {
-            entries: item.entries,
-            includes: item.includes,
-        }
-    }
-}
-
-#[derive(SimpleObject, Serialize, Deserialize, Debug, Clone)]
-pub struct SkillsEntry {
-    pub entry: Skills,
-    pub includes: Option<Value>,
-}
-
-impl SkillsEntry {
-    pub fn new(item: Entry<Skills>) -> Self {
-        SkillsEntry {
-            entry: item.entry,
-            includes: item.includes,
-        }
-    }
-}
-
-#[derive(SimpleObject, Serialize, Deserialize, Debug, Clone)]
-pub struct ProjectEntries {
-    pub entries: Vec<Project>,
-    pub includes: Option<Value>,
-}
-
-impl ProjectEntries {
-    pub fn new(item: Entries<Project>) -> Self {
-        ProjectEntries {
-            entries: item.entries,
-            includes: item.includes,
-        }
-    }
-}
-
-#[derive(SimpleObject, Serialize, Deserialize, Debug, Clone)]
-pub struct ReadingListEntries {
-    pub entries: Vec<Book>,
-    pub includes: Option<Value>,
-}
-
-impl ReadingListEntries {
-    pub fn new(item: Entries<Book>) -> Self {
-        ReadingListEntries {
-            entries: item.entries,
-            includes: item.includes,
-        }
-    }
+    pub about: CujoEntry<About>,
+    pub work: CujoEntries<Work>,
+    pub education: CujoEntries<Education>,
+    pub skills: CujoEntry<Skills>,
+    pub projects: CujoEntries<Project>,
+    pub reading_list: CujoEntries<Book>
 }
 
 #[derive(SimpleObject, Serialize, Deserialize, Debug, Clone)]

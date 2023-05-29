@@ -4,15 +4,15 @@ use futures::Future;
 use serde::Serialize;
 
 use crate::{
-    blog::{BlogEntries, BlogReader},
-    cv::{CVReader, CV},
+    blog::{BlogReader, BlogPost},
+    cv::{CVReader, CV, CujoEntries},
     util::Reader,
 };
 
 #[derive(Debug, Clone)]
 pub struct Cache {
     pub cv: CV,
-    pub blog: BlogEntries,
+    pub blog: CujoEntries<BlogPost>,
 }
 
 impl Cache {

@@ -2,8 +2,29 @@
 
 use std::collections::HashMap;
 
+#[derive(Default)]
 pub struct QueryBuilder {
     query_string_values: HashMap<String, String>,
+}
+
+impl ToString for QueryBuilder {
+    fn to_string(&self) -> String {
+        let qs = self.query_string_values.iter().enumerate().fold(
+            String::new(),
+            |acc, (index, (key, value))| {
+                let delimiter = match index {
+                    0 => "?",
+                    _ => "&",
+                };
+
+                format!("{acc}{delimiter}{key}={value}")
+            },
+        );
+
+        log::debug!("query_string: {}", &qs);
+
+        qs
+    }
 }
 
 impl QueryBuilder {
@@ -105,31 +126,13 @@ impl QueryBuilder {
     }
 
     pub fn links_to_entry(mut self, id: &str) -> QueryBuilder {
-        self = self.add_field_restriction("links_to_entry".into(), id.into(), "");
+        self = self.add_field_restriction("links_to_entry", id, "");
         self
     }
 
     pub fn links_to_asset(mut self, id: &str) -> QueryBuilder {
-        self = self.add_field_restriction("links_to_asset".into(), id.into(), "");
+        self = self.add_field_restriction("links_to_asset", id, "");
         self
-    }
-
-    pub fn build(&self) -> String {
-        let mut query_string = String::new();
-        let mut has_query = false;
-        for (query_key, query_value) in &self.query_string_values {
-            if has_query {
-                query_string.push_str("&");
-            } else {
-                query_string.push_str("?");
-            }
-            query_string.push_str(query_key);
-            query_string.push_str("=");
-            query_string.push_str(query_value.as_str());
-            has_query = true;
-        }
-
-        query_string
     }
 
     pub fn add_field_restriction(

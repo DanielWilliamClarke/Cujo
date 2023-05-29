@@ -5,9 +5,9 @@ use actix_web::web::Data;
 use async_graphql::{Context, Object};
 
 use crate::{
-    blog::BlogEntries,
+    blog::BlogPost,
     cache::Cache,
-    cv::CV,
+    cv::{CV, CujoEntries},
 };
 
 pub struct Query;
@@ -18,7 +18,7 @@ impl Query {
         unwrap_cache(ctx).await.cv
     }
 
-    async fn blog(&self, ctx: &Context<'_>) -> BlogEntries {
+    async fn blog(&self, ctx: &Context<'_>) -> CujoEntries<BlogPost> {
         unwrap_cache(ctx).await.blog
     }
 }
