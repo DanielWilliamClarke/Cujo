@@ -30,7 +30,7 @@ impl Reader for BlogReader {
         let now = Instant::now();
 
         let results = match self.client.get_entries::<BlogPost>(Some(builder)).await {
-            Ok(results) => Some(results),
+            Ok(results) => Some(results.into()),
             Err(err) => {
                 match err {
                     ContentfulClientErrors::NoEntries => None,
@@ -45,7 +45,7 @@ impl Reader for BlogReader {
         let elapsed = now.elapsed();
 
         println!("BLOG READER - Elapsed: {:.2?}", elapsed);
-        Ok(CujoEntries::from(results.unwrap()))
+        Ok(results.unwrap())
     }
 }
 

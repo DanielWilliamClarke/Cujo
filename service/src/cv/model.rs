@@ -18,12 +18,12 @@ where
     pub includes: Option<Value>,
 }
 
-impl<T> From<Entry<T>> for CujoEntry<T> 
+impl<T> Into<CujoEntry<T>> for Entry<T>
 where 
     T: std::marker::Send + std::marker::Sync + async_graphql::OutputType
 {
-    fn from(entry: Entry<T>) -> Self {
-        CujoEntry { entry: entry.entry, includes: entry.includes }
+    fn into(self) -> CujoEntry<T> {
+        CujoEntry { entry: self.entry, includes: self.includes }
     }
 }
 
@@ -41,12 +41,12 @@ where
     pub includes: Option<Value>,
 }
 
-impl<T> From<Entries<T>> for CujoEntries<T>
+impl<T> Into<CujoEntries<T>> for Entries<T>
 where 
     T: std::marker::Send + std::marker::Sync + async_graphql::OutputType
 {
-    fn from(entries: Entries<T>) -> Self {
-        CujoEntries { entries: entries.entries, includes: entries.includes }
+    fn into(self) -> CujoEntries<T> {
+        CujoEntries { entries: self.entries, includes: self.includes }
     }
 }
 

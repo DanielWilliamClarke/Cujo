@@ -3,15 +3,12 @@
 use std::time::Instant;
 
 use async_trait::async_trait;
-use contentful::{ContentfulClient, Entries, Entry, QueryBuilder, ContentfulClientErrors};
+use contentful::{ContentfulClient, QueryBuilder, ContentfulClientErrors};
 use futures::try_join;
 use serde::{de::DeserializeOwned, Serialize};
 
-use super::{About, Book, Education, Project, Skills, Work, CV};
-use crate::{
-    cv::{CujoEntry, CujoEntries},
-    util::Reader,
-};
+use super::{About, Book, Education, Project, Skills, Work, CV, CujoEntry, CujoEntries};
+use crate::util::Reader;
 
 pub struct CVReader {
     client: Box<ContentfulClient>,
@@ -31,14 +28,14 @@ impl CVReader {
     async fn get_cv_entries<T>(
         &self,
         entries_type: &str,
-    ) -> Result<Option<Entries<T>>, ContentfulClientErrors>
+    ) -> Result<Option<CujoEntries<T>>, ContentfulClientErrors>
     where
-        T: Serialize + DeserializeOwned,
+        T: Serialize + DeserializeOwned + async_graphql::OutputType,
     {
         match self.client
             .get_entries::<T>(self.build_query(entries_type))
             .await {
-                Ok(entries) => Ok(Some(entries)),
+                Ok(entries) => Ok(Some(entries.into())),
                 Err(err) => {
                     match err {
                         ContentfulClientErrors::NoEntries =>  Ok(None),
@@ -55,14 +52,14 @@ impl CVReader {
         &self,
         entries_type: &str,
         index: usize,
-    ) -> Result<Option<Entry<T>>, ContentfulClientErrors>
+    ) -> Result<Option<CujoEntry<T>>, ContentfulClientErrors>
     where
-        T: Serialize + DeserializeOwned + Clone,
+        T: Serialize + DeserializeOwned + Clone + async_graphql::OutputType,
     {
         match self.client
             .get_entry::<T>(self.build_query(entries_type), index)
             .await {
-                Ok(entry) => Ok(Some(entry)),
+                Ok(entry) => Ok(Some(entry.into())),
                 Err(err) => {
                     match err {
                         ContentfulClientErrors::NoEntries => Ok(None),
@@ -105,12 +102,12 @@ impl Reader for CVReader {
 
         println!("CV READER - Elapsed: {:.2?}", elapsed);
         Ok(CV {
-            about: CujoEntry::from(about.unwrap()),
-            work: CujoEntries::from(work.unwrap()),
-            education: CujoEntries::from(education.unwrap()),
-            skills: CujoEntry::from(skills.unwrap()),
-            projects: CujoEntries::from(projects.unwrap()),
-            reading_list: CujoEntries::from(books.unwrap())
+            about: about.unwrap(),
+            work: work.unwrap(),
+            education: education.unwrap(),
+            skills: skills.unwrap(),
+            projects: projects.unwrap(),
+            reading_list: books.unwrap()
         })
     }
 }
