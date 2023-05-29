@@ -1,21 +1,33 @@
-import { AppProps } from 'next/app'
+import { AppProps } from 'next/app';
+import Script from 'next/script';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'react-vertical-timeline-component/style.min.css';
-import 'highlight.js/scss/tomorrow-night-eighties.scss';
 import 'devicon/devicon.min.css';
+import 'highlight.js/scss/tomorrow-night-eighties.scss';
+import 'react-vertical-timeline-component/style.min.css';
 import "swiper/css";
-import "swiper/css/pagination";
 import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 import './styles/global.scss';
 
-const MyApp: React.FC<AppProps> = ({ Component, pageProps }: AppProps): JSX.Element => {
-  return (
-    <main id="#root">
-      <Component {...pageProps} />
-    </main>
-  )
-}
+const MyApp: React.FC<AppProps> = ({ Component, pageProps }: AppProps) => (
+  <main id="#root">
+    <Script
+      src="https://www.googletagmanager.com/gtag/js?id=G-H3X7HD4C7K"
+      strategy="afterInteractive"
+    />
+    <Script id="google-analytics" strategy="afterInteractive">
+      {`
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-H3X7HD4C7K');
+      `}
+    </Script>
+    <Component {...pageProps} />
+  </main>
+);
 
 export default MyApp
