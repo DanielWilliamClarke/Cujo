@@ -41,7 +41,7 @@ impl CVReader {
                         ContentfulClientErrors::NoEntries =>  Ok(None),
                         err => {
                             eprintln!("CV reader error: {}", err);
-                            return Err(err)
+                            Err(err)
                         }
                     }
                 },
@@ -65,7 +65,7 @@ impl CVReader {
                         ContentfulClientErrors::NoEntries => Ok(None),
                         err => {
                             eprintln!("Reading {} entries: {}", entries_type, err);
-                            return Err(err)
+                            Err(err)
                         }
                     }
                 },

@@ -8,7 +8,7 @@
       "type": "lldb",
       "request": "launch",
       "name": "Debug",
-      "program": "${workspaceFolder}/service/target/debug/cujo.exe",
+      "program": "${workspaceFolder}/service/target/debug/cujo",
       "args": [],
       "cwd": "${workspaceFolder}/service"
     }

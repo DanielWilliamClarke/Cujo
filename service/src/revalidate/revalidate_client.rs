@@ -4,7 +4,7 @@ use std::collections::HashMap;
 use std::sync::RwLockReadGuard;
 
 use futures::future::join_all;
-use reqwest;
+
 use reqwest::header;
 use serde::Deserialize;
 

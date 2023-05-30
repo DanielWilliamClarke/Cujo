@@ -50,9 +50,7 @@ pub async fn validator(
     credentials: BearerAuth,
 ) -> Result<ServiceRequest, Error> {
     let config = req
-        .app_data::<Config>()
-        .map(|data| data.clone())
-        .unwrap_or_else(Default::default);
+        .app_data::<Config>().cloned().unwrap_or_default();
 
     let err = Err(AuthenticationError::from(config).into());
     match validate_token(credentials.token()).await {
@@ -77,7 +75,7 @@ async fn validate_token(token: &str) -> Result<bool, ServiceError> {
         Validation::SubjectPresent,
         Validation::NotExpired,
     ];
-    match token_kid(&token) {
+    match token_kid(token) {
         Ok(kid) => {
             let kid = match kid {
                 Some(kid) => kid,
@@ -99,5 +97,5 @@ async fn validate_token(token: &str) -> Result<bool, ServiceError> {
 }
 
 async fn fetch_jwks(uri: &str) -> Result<JWKS, reqwest::Error> {
-    return Ok(reqwest::get(uri).await?.json::<JWKS>().await?);
+    reqwest::get(uri).await?.json::<JWKS>().await
 }

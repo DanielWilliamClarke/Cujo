@@ -48,7 +48,7 @@ async fn main() -> std::io::Result<()> {
     let auth_client = Auth0Client::new(AuthConfig::from_env());
     let redirect_client = RedirectClient::new(RedirectConfig::from_env());
     let revalidate_client = RevalidateClient::new(RevalidateConfig::from_env());
-    let contentful_client = ContentfulClient::new(ContentfulConfig::from_env());
+    let contentful_client = ContentfulClient::from(ContentfulConfig::from_env());
 
     let cache = Data::new(RwLock::new(
         Cache::generate_cache(contentful_client.clone()).await,

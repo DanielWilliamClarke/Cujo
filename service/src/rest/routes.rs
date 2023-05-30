@@ -68,7 +68,7 @@ impl Routes {
                 }
             };
 
-            bytes.extend_from_slice(&item);
+            bytes.extend_from_slice(item);
         }
 
         match redirect_client

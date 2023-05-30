@@ -2,7 +2,7 @@
 
 use std::collections::HashMap;
 
-use reqwest;
+
 use reqwest::Error;
 use serde::Deserialize;
 
@@ -56,6 +56,6 @@ impl Auth0Client {
             .send()
             .await?;
 
-        Ok(response.json().await?)
+        response.json().await
     }
 }
