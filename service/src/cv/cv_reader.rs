@@ -11,16 +11,18 @@ use super::{About, Book, Education, Project, Skills, Work, CV, CujoEntry, CujoEn
 use crate::util::Reader;
 
 pub struct CVReader {
-    client: Box<ContentfulClient>,
+    client: ContentfulClient,
+}
+
+impl From<&ContentfulClient> for CVReader {
+    fn from(client: &ContentfulClient) -> Self {
+        CVReader {
+            client: client.clone(),
+        }
+    }
 }
 
 impl CVReader {
-    pub fn new(client: &ContentfulClient) -> Self {
-        CVReader {
-            client: Box::new(client.to_owned()),
-        }
-    }
-
     fn build_query(&self, entries_type: &str) -> Option<QueryBuilder> {
         Some(QueryBuilder::new().content_type_is(entries_type).include(2))
     }

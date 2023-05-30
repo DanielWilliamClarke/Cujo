@@ -24,11 +24,13 @@ pub struct RevalidateClient {
     config: RevalidateConfig,
 }
 
-impl RevalidateClient {
-    pub fn new(config: RevalidateConfig) -> Self {
+impl From<RevalidateConfig> for RevalidateClient {
+    fn from(config: RevalidateConfig) -> Self {
         RevalidateClient { config }
     }
+}
 
+impl RevalidateClient {
     pub async fn portfolio(&self, cache: RwLockReadGuard<'_, Cache>) {
         self.revalidate("/".to_string())
             .await;

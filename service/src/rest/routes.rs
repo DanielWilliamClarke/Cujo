@@ -106,7 +106,9 @@ impl Routes {
 
         let revalidate_cache = cache.clone();
 
-        let response = Cache::regenerate(CVReader::new(&contentful_client), async move |cv| {
+        let reader = CVReader::from(contentful_client.as_ref());
+
+        let response = Cache::regenerate(reader, async move |cv| {
             let mut locked_cache = cache.write().unwrap();
             locked_cache.cv = cv;
         })
@@ -128,7 +130,9 @@ impl Routes {
 
         let revalidate_cache = cache.clone();
 
-        let response = Cache::regenerate(BlogReader::new(&contentful_client), async move |blog| {
+        let reader = BlogReader::from(contentful_client.get_ref());
+
+        let response = Cache::regenerate(reader, async move |blog| {
             let mut locked_cache = cache.write().unwrap();
             locked_cache.blog = blog;
         })

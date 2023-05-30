@@ -36,11 +36,13 @@ pub struct Auth0Client {
     config: AuthConfig,
 }
 
-impl Auth0Client {
-    pub fn new(config: AuthConfig) -> Self {
+impl From<AuthConfig> for Auth0Client {
+    fn from(config: AuthConfig) -> Self {
         Auth0Client { config }
     }
+}
 
+impl Auth0Client {
     pub async fn authenticate(&self, parameters: AuthParameters) -> Result<AuthToken, Error> {
         let mut map = HashMap::new();
         map.insert("client_id", parameters.id);

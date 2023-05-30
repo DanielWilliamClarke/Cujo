@@ -5,5 +5,5 @@ mod schema;
 mod routes;
 
 pub use query::Query;
-pub use schema::create_schema_with_cache;
+pub use schema::CujoSchema;
 pub use routes::configure_graphql_service;

@@ -4,13 +4,13 @@ use actix_web::{web, HttpResponse, Responder};
 use async_graphql::http::{playground_source, GraphQLPlaygroundConfig};
 use async_graphql_actix_web::{GraphQLRequest, GraphQLResponse};
 
-use super::schema::AppSchema;
+use super::schema::CujoSchema;
 
 struct GraphQL;
 
 impl GraphQL {
-    async fn graphql(schema: web::Data<AppSchema>, req: GraphQLRequest) -> GraphQLResponse {
-        schema.execute(req.into_inner()).await.into()
+    async fn graphql(schema: web::Data<CujoSchema>, req: GraphQLRequest) -> GraphQLResponse {
+        schema.0.execute(req.into_inner()).await.into()
     }
 
     async fn graphql_playground() -> impl Responder {

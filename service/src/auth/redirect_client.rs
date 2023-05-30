@@ -20,11 +20,13 @@ pub struct RedirectClient {
     config: RedirectConfig,
 }
 
-impl RedirectClient {
-    pub fn new(config: RedirectConfig) -> Self {
+impl From<RedirectConfig> for RedirectClient {
+    fn from(config: RedirectConfig) -> Self {
         RedirectClient { config }
     }
+}
 
+impl RedirectClient {
     pub async fn redirect(
         &self,
         endpoint: String,

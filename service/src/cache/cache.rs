@@ -18,11 +18,11 @@ pub struct Cache {
 impl Cache {
     pub async fn generate_cache(client: ContentfulClient) -> Cache {
         Cache {
-            cv: match CVReader::new(&client).get().await {
+            cv: match CVReader::from(&client).get().await {
                 Ok(cv) => cv,
                 Err(err) => panic!("Could not generate cv cache - {}", err),
             },
-            blog: match BlogReader::new(&client).get().await {
+            blog: match BlogReader::from(&client).get().await {
                 Ok(blog) => blog,
                 Err(err) => panic!("Could not generate blog cache - {}", err),
             },

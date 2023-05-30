@@ -24,10 +24,12 @@ mod util;
 use auth::{Auth0Client, AuthConfig, RedirectClient, RedirectConfig};
 use cache::Cache;
 use revalidate::{RevalidateClient, RevalidateConfig};
-use graphql::{configure_graphql_service, create_schema_with_cache};
+use graphql::{configure_graphql_service};
 use rest::configure_rest_service;
 use serde::Deserialize;
 use util::FromEnv;
+
+use crate::graphql::CujoSchema;
 
 #[derive(Deserialize, Debug, Clone)]
 pub struct ServerConfig {
@@ -45,15 +47,15 @@ async fn main() -> std::io::Result<()> {
 
     let ServerConfig { host, port } = ServerConfig::from_env();
 
-    let auth_client = Auth0Client::new(AuthConfig::from_env());
-    let redirect_client = RedirectClient::new(RedirectConfig::from_env());
-    let revalidate_client = RevalidateClient::new(RevalidateConfig::from_env());
+    let auth_client = Auth0Client::from(AuthConfig::from_env());
+    let redirect_client = RedirectClient::from(RedirectConfig::from_env());
+    let revalidate_client = RevalidateClient::from(RevalidateConfig::from_env());
     let contentful_client = ContentfulClient::from(ContentfulConfig::from_env());
 
     let cache = Data::new(RwLock::new(
         Cache::generate_cache(contentful_client.clone()).await,
     ));
-    let schema = create_schema_with_cache(cache.clone());
+    let schema = CujoSchema::from(cache.clone());
 
     let mut server = HttpServer::new(move || {
         let cors = Cors::default()

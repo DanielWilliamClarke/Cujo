@@ -8,13 +8,13 @@ use contentful::{ContentfulClient, QueryBuilder, ContentfulClientErrors};
 use crate::{blog::model::BlogPost, util::Reader, cv::CujoEntries};
 
 pub struct BlogReader {
-    client: Box<ContentfulClient>,
+    client: ContentfulClient,
 }
 
-impl BlogReader {
-    pub fn new(client: &ContentfulClient) -> Self {
+impl From<&ContentfulClient> for BlogReader {
+    fn from(client: &ContentfulClient) -> Self {
         BlogReader {
-            client: Box::new(client.to_owned()),
+            client: client.clone(),
         }
     }
 }
