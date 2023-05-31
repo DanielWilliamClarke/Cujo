@@ -1,5 +1,14 @@
 version: "3.6"
 
+networks:
+  cujo:
+
+volumes:
+  certs:
+  vhost:
+  html:
+  acme:
+
 services:
   watchtower:
     image: containrrr/watchtower
@@ -83,12 +92,3 @@ services:
       - PUBNUB_CHANNEL_NAME=${PUBNUB_CHANNEL_NAME}
     networks:
       - cujo
-
-networks:
-  cujo:
-
-volumes:
-  certs:
-  html:
-  vhostd:
-  acme:
