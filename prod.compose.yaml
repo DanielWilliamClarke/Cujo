@@ -20,10 +20,19 @@ services:
       - "443:443"
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
-      - /etc/nginx/vhost.d
-      - /usr/share/nginx/html
+      - ./docker/vhost:/etc/nginx/vhost.d
+      - ./docker/html:/usr/share/nginx/html
       - ./docker/certs:/etc/nginx/certs:ro
-      - ./nginx:/etc/nginx/conf.d
+      - ./docker/conf:./nginx:/etc/nginx/conf.d
+
+    # volumes:
+    #   - /var/run/docker.sock:/tmp/docker.sock:ro
+    #   - certs:/etc/nginx/certs:ro
+    #   - vhostd:/etc/nginx/vhost.d
+    #   - html:/usr/share/nginx/html
+    #   - acme:/etc/acme.sh
+
+
     networks:
       - cujo
 
@@ -85,3 +94,9 @@ services:
 
 networks:
   cujo:
+
+volumes:
+  certs:
+  html:
+  vhostd:
+  acme:
