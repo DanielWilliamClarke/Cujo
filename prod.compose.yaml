@@ -39,7 +39,7 @@ services:
     image: nginxproxy/acme-companion
     container_name: ssl-companion
     volumes_from: 
-      - nginx-proxy
+      - reverseproxy
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - acme:/etc/acme.sh
