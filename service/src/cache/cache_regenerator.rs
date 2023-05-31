@@ -50,7 +50,7 @@ impl CacheRegenerator {
                 let mut locked_cache = self.cache.write().await;
                 locked_cache.blog = blog;
             },
-            Err(err) => eprintln!("Error reading cv: {}", err),
+            Err(err) => eprintln!("Error reading blog: {}", err),
         };
 
         self.revalidate_client.portfolio(&self.cache).await;

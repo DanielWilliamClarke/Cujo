@@ -40,12 +40,12 @@ struct PubnubMessage {
     payload: PubnubMessagePayload
 }
 
-impl Into<PubnubMessage> for JsonValue {
-    fn into(self) -> PubnubMessage {
-        match serde_json::from_str::<PubnubMessage>(&self.dump()) {
+impl From<JsonValue> for PubnubMessage {
+    fn from(value: JsonValue) -> Self {
+        match serde_json::from_str::<PubnubMessage>(&value.dump()) {
             Ok(value) => value,
             Err(err) => {
-                println!("Error deserialising: {:?} -> {:?}", err, self);
+                println!("Error deserialising: {:?} -> {:?}", err, value);
 
                 PubnubMessage::default()
             },
