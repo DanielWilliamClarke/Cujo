@@ -44,7 +44,7 @@ impl Reader for BlogReader {
 
         let elapsed = now.elapsed();
 
-        println!("BLOG READER - Elapsed: {:.2?}", elapsed);
+        log::info!("⏰ Blog reader success - Elapsed: {:.2?}", elapsed);
         Ok(results.unwrap())
     }
 }

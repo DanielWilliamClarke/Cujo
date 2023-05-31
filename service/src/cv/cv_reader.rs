@@ -102,7 +102,7 @@ impl Reader for CVReader {
 
         let elapsed = now.elapsed();
 
-        println!("CV READER - Elapsed: {:.2?}", elapsed);
+        log::info!("⏰ CV reader success - Elapsed: {:.2?}", elapsed);
         Ok(CV {
             about: about.unwrap(),
             work: work.unwrap(),

@@ -14,6 +14,8 @@ pub struct Cache {
 
 impl Cache {
     pub async fn generate_cache(client: ContentfulClient) -> Cache {
+        log::info!("💫 Generating Cache");
+
         Cache {
             cv: match CVReader::from(&client).get().await {
                 Ok(cv) => cv,

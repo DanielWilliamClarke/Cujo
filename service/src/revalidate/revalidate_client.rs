@@ -37,14 +37,14 @@ impl RevalidateClient {
 
         let cache = cache.read().await;
 
-        println!("total blog posts to revalidate: {}", cache.blog.entries.len());
+        log::info!("📚 Total blog posts to revalidate: {}", cache.blog.entries.len());
         for entry in cache.blog.entries.iter() {
             self.revalidate(format!("/blog/{}", entry.id)).await;
         }
     }
 
     async fn revalidate(&self, path: String) {
-        println!("Revalidating: {}", path);
+        log::info!("✨ Revalidating app path: {}", path);
 
         let mut map = HashMap::new();
         map.insert("secret", self.config.cujo_revalidate_secret.clone());

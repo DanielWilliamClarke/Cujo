@@ -101,11 +101,11 @@ impl PubnubSubscription {
 
         tokio::task::spawn(async move {
             loop {
-                println!("Waiting for Pubnub message on channel {}", channel_name);
+                log::info!("⏰ Waiting for Pubnub message on channel {}", channel_name);
 
                 match stream.next().await {
                     Some(message) => {
-                        println!("Received Pubnub message on channel {} -> {:?}", channel_name, message);
+                        log::info!("📩 Received Pubnub message on channel {} -> {:?}", channel_name, message);
 
                         let message: PubnubMessage = message.json.into();
                         match message.payload.content_type.as_str() {
@@ -113,7 +113,7 @@ impl PubnubSubscription {
                             _ => cache.regenerate_cv_cache().await
                         };
 
-                        println!("Pubnub message consumed for channel {}", channel_name);
+                        log::info!("🥙 Pubnub message consumed for channel {}", channel_name);
                     }
                     None => continue,
                 }

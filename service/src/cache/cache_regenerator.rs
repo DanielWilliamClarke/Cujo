@@ -35,6 +35,8 @@ impl CacheRegenerator {
             Ok(cv) => {
                 let mut locked_cache = self.cache.write().await;
                 locked_cache.cv = cv;
+
+                log::info!("💫 CV cache regenerated");
             },
             Err(err) => eprintln!("Error reading cv: {}", err),
         };
@@ -49,6 +51,8 @@ impl CacheRegenerator {
             Ok(blog) => {
                 let mut locked_cache = self.cache.write().await;
                 locked_cache.blog = blog;
+
+                log::info!("💫 Blog cache regenerated");
             },
             Err(err) => eprintln!("Error reading blog: {}", err),
         };

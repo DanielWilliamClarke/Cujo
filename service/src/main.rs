@@ -44,19 +44,18 @@ async fn main() -> std::io::Result<()> {
     env_logger::init_from_env(env_logger::Env::new().default_filter_or("info"));
 
     let ServerConfig { host, port } = ServerConfig::from_env();
-
-    let revalidate_client = RevalidateClient::from(RevalidateConfig::from_env());
     let contentful_client = ContentfulClient::from(ContentfulConfig::from_env());
 
     let cache = Data::new(Arc::new(RwLock::new(
         Cache::generate_cache(contentful_client.clone()).await
     )));
 
+    let revalidate_client = RevalidateClient::from(RevalidateConfig::from_env());
     let cache_regenerator = CacheRegenerator::from(contentful_client.clone(), revalidate_client.clone(), cache.clone());
     let pubnub_subscription = PubnubSubscription::from(PubnubConfig::from_env(), cache_regenerator);
 
     match pubnub_subscription.subscribe().await {
-        Ok(_) => println!("Pubnub subscription started! ✅"),
+        Ok(_) => log::info!("Pubnub subscription started! ✅"),
         Err(err) => panic!("Unable to subscribe to Pubnub ❌: {}", err)
     };
 
@@ -73,7 +72,6 @@ async fn main() -> std::io::Result<()> {
             .wrap(cors)
             .wrap(Logger::default())
             .app_data(Data::new(schema.clone()))
-            .app_data(cache.clone())
             .configure(configure_graphql_service)
     });
 
@@ -82,6 +80,6 @@ async fn main() -> std::io::Result<()> {
         None => server.bind(format!("{}:{}", host, port))?,
     };
 
-    println!("🦀 Cujo Server Started port {}", port);
+    log::info!("🦀 Cujo Server Started port {} ✅", port);
     server.run().await
 }
