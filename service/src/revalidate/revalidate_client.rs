@@ -3,11 +3,9 @@
 use std::collections::HashMap;
 use std::sync::Arc;
 
-use futures::future::join_all;
-
 use reqwest::header;
 use serde::Deserialize;
-use tokio::sync::Mutex;
+use tokio::sync::RwLock;
 
 use crate::util::FromEnv;
 use crate::cache::Cache;
@@ -31,22 +29,18 @@ impl From<RevalidateConfig> for RevalidateClient {
 }
 
 impl RevalidateClient {
-    pub async fn portfolio(&self, cache: Arc<Mutex<Cache>>) {
+    pub async fn portfolio(&self, cache: &Arc<RwLock<Cache>>) {
         self.revalidate("/".to_string())
             .await;
         self.revalidate("/blog".to_string())
             .await;
 
-        let cache = cache.lock().await;
-        println!("total blog posts to revalidate: {}", cache.blog.entries.len());
+        let cache = cache.read().await;
 
-        join_all(
-            cache.blog.entries
-                .iter()
-                .map(|blog_post| {
-                    self.revalidate(format!("/blog/{}", blog_post.id))
-                })
-        ).await;
+        println!("total blog posts to revalidate: {}", cache.blog.entries.len());
+        for entry in cache.blog.entries.iter() {
+            self.revalidate(format!("/blog/{}", entry.id)).await;
+        }
     }
 
     async fn revalidate(&self, path: String) {

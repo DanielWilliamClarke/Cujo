@@ -24,7 +24,7 @@ use cache::Cache;
 use revalidate::{RevalidateClient, RevalidateConfig};
 use graphql::{configure_graphql_service};
 use serde::Deserialize;
-use tokio::sync::Mutex;
+use tokio::sync::RwLock;
 use util::FromEnv;
 
 use crate::{graphql::CujoSchema, subscription::{PubnubSubscription, PubnubConfig}, cache::CacheRegenerator};
@@ -48,7 +48,7 @@ async fn main() -> std::io::Result<()> {
     let revalidate_client = RevalidateClient::from(RevalidateConfig::from_env());
     let contentful_client = ContentfulClient::from(ContentfulConfig::from_env());
 
-    let cache = Arc::new(Mutex::new(Cache::generate_cache(contentful_client.clone()).await));
+    let cache = Data::new(Arc::new(RwLock::new(Cache::generate_cache(contentful_client.clone()).await)));
 
     let cache_regenerator = CacheRegenerator::from(contentful_client.clone(), revalidate_client.clone(), cache.clone());
     let pubnub_subscription = PubnubSubscription::from(PubnubConfig::from_env(), cache_regenerator);
@@ -58,7 +58,6 @@ async fn main() -> std::io::Result<()> {
         Err(err) => panic!("Unable to subscribe to Pubnub ❌: {}", err)
     };
 
-    let cache = Data::new(cache);
     let schema = CujoSchema::from(cache.clone());
 
     let mut server = HttpServer::new(move || {
