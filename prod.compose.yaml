@@ -23,6 +23,7 @@ services:
       - /etc/nginx/vhost.d
       - /usr/share/nginx/html
       - ./docker/certs:/etc/nginx/certs:ro
+      - ./nginx:/etc/nginx/conf.d
     networks:
       - cujo
 
