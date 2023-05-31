@@ -32,7 +32,7 @@ services:
       - vhost:/etc/nginx/vhost.d
       - html:/usr/share/nginx/html
       - /var/run/docker.sock:/tmp/docker.sock:ro
-      - ./nginx/:/etc/nginx/conf.d/
+      - ./nginx:/etc/nginx/conf.d
     networks:
       - cujo
 
