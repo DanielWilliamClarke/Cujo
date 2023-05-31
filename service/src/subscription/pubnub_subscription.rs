@@ -103,26 +103,17 @@ impl PubnubSubscription {
             loop {
                 println!("Waiting for Pubnub message on channel {}", channel_name);
 
-                let received = stream.next().await;
-
-                println!("Received Pubnub message on channel {} -> {:?}", channel_name, received);
-
-                match received {
+                match stream.next().await {
                     Some(message) => {
-                        let message: PubnubMessage = message.json.into();
+                        println!("Received Pubnub message on channel {} -> {:?}", channel_name, message);
 
+                        let message: PubnubMessage = message.json.into();
                         match message.payload.content_type.as_str() {
-                            "blogPost" => {
-                                cache.regenerate_blog_cache().await;
-                            },
-                            _ => {
-                                cache.regenerate_cv_cache().await;
-                            }
+                            "blogPost" => cache.regenerate_blog_cache().await,
+                            _ => cache.regenerate_cv_cache().await
                         };
 
                         println!("Pubnub message consumed for channel {}", channel_name);
-
-                        continue;
                     }
                     None => continue,
                 }

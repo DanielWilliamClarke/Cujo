@@ -1,26 +1,22 @@
 <p align="center">
   <img src="https://see.fontimg.com/api/renderfont4/owgBd/eyJyIjoiZnMiLCJoIjoyMDAsInciOjEwMDAsImZzIjoyMDAsImZnYyI6IiNGRjEwODciLCJiZ2MiOiIjRkZGRkZGIiwidCI6MX0/Q3Vqbw/roadrage.png"/>
-<p>
+</p>
 
 <p align="center">
-  <img src="https://img.shields.io/website?down_color=red&label=danielclarke.tech&url=https%3A%2F%2Fdanielclarke.tech"/>
+  <img src="https://img.shields.io/website?down_color=red&label=danclarke.dev&url=https%3A%2F%2Fdanclarke.dev"/>
   <img src="https://img.shields.io/circleci/build/github/DanielWilliamClarke/Cujo?label=circleci"/>
-  <img src="https://img.shields.io/mozilla-observatory/grade/danielclarke.tech?publish"/>
+  <img src="https://img.shields.io/mozilla-observatory/grade/danclarke.dev?publish"/>
   <img src="https://img.shields.io/github/commit-activity/w/DanielWilliamClarke/Cujo"/>
   <img src="https://img.shields.io/github/last-commit/DanielWilliamClarke/Cujo"/>
   <img src="https://img.shields.io/github/license/DanielWilliamClarke/Cujo"/>
   <img src="https://img.shields.io/github/languages/count/DanielWilliamClarke/Cujo"/>
   <img src="https://img.shields.io/docker/image-size/dclarkious/cujo-rust?label=Rust%20Image%20Size"/>
   <img src="https://img.shields.io/docker/image-size/dclarkious/cujo-portfolio?label=Portfolio%20Image%20Size"/>
-<p>
+</p>
 
 <p align="center">
   A CV/Portfolio/Blog built in <b>TypeScript</b> using <b>React</b>, <b>React PDF</b> and <b>P5JS</b>. with a Rest / GraphQL backend written in <b>Rust</b> using <b>Contentful</b> for portfolio and blog content.
-<p/>
-
-<p align="center">
- <img src="./portfolio/src/assets/p2_tess.gif"/>
-<p/>
+</p>
 
 ---
 
@@ -132,15 +128,18 @@ DOMAIN=localhost
 API_DOMAIN=[REDACTED]
 CUJO_SERVICE_URL=[REDACTED]
 
+CUJO_SERVICE_URL=[REDACTED]
+CUJO_REVALIDATE_URL=[REDACTED]
+CUJO_REVALIDATE_SECRET=[DATA EXPUNGED]
+
 BLOG_HOST=https://cdn.contentful.com
 ACCESS_TOKEN=[REDACTED]
 SPACE_ID=[REDACTED]
 ENVIRONMENT=master
 
-AUTH_URL=[DATA EXPUNGED]
-AUTHORITY=[DATA EXPUNGED]
-AUDIENCE=[REDACTED]
-SELF_REDIRECT=[REDACTED]
+PUBNUB_PUBLISH_TOKEN=[DATA EXPUNGED]
+PUBNUB_SUBSCRIBE_TOKEN=[DATA EXPUNGED]
+PUBNUB_CHANNEL_NAME=[REDACTED]
 ```
 
 ## Add Contentful API IPs to /etc/hosts
@@ -203,7 +202,6 @@ docker-compose --env-file <SECRET ENV FILE> -f prod.compose.yaml down (-v)
 
 ## // Todo
 
-- [ ] Display a reading list
 - [ ] Convert all pngs and jpgs to Avifs
 - [ ] Switch all gifs to WebMs
 - [ ] Add Rust code coverage
@@ -211,6 +209,8 @@ docker-compose --env-file <SECRET ENV FILE> -f prod.compose.yaml down (-v)
 
 ## // Done
 
+- [x] Display a reading list
+- [x] Remove Auth0 and redirecting with a Message broker queue subscription (Pubnub)
 - [x] Remove Prenderer caching
 - [x] Implement server side rendering and incremental static regeneration with NextJS
 - [x] Swap NGINX and client side rendering for NextJS
@@ -267,20 +267,14 @@ docker-compose --env-file <SECRET ENV FILE> -f prod.compose.yaml down (-v)
 
 ## Urls
 
-- <https://danielclarke.tech> - Portfolio
-- <https://danielclarke.tech/blog> - Blog
-- <https://danielclarke.tech/cv> - Generate, Show and Download Resume
-- <https://danielclarke.tech/api/graphql> - GraphQL API
-- <https://danielclarke.tech/api/graphiql> - GraphQL Playground
-- <https://danielclarke.tech/api/auth/{endpoint}> - Auth API
-- <https://danielclarke.tech/api/regenerate_cv> - CV cache regeneration API
-- <https://danielclarke.tech/api/regenerate_blog> - Blog cache regeneration API
+- <https://danclarke.dev> - Portfolio
+- <https://danclarke.dev/blog> - Blog
+- <https://danclarke.dev/cv> - Generate, Show and Download Resume
 
 ## Third Parties
 
 - <https://www.contentful.com/> - Contentful
-- <https://auth0.com/> - Auth0
-- <https://dashboard.prerender.io/> - Prerender.io
+- <https://www.pubnub.com/> - Pubnub
 
 ## Resources
 
@@ -323,3 +317,4 @@ docker-compose --env-file <SECRET ENV FILE> -f prod.compose.yaml down (-v)
   - for alpine - <https://github.com/Automattic/node-canvas/issues/866>  
 - Nextjs docker file - <https://github.com/vercel/next.js/tree/canary/examples/with-docker>
 - Fix react-pdf issue in nextjs prod build - <https://stackoverflow.com/questions/72081585/created-pdf-doesnt-display-in-production-build-and-dev-build-page-but-locally>
+- Pubnub rust crate - <https://docs.rs/pubnub-hyper/latest/pubnub_hyper/>

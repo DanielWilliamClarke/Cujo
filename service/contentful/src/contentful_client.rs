@@ -84,6 +84,7 @@ impl ContentfulClient {
         match response.get("items") {
             Some(entries) if entries.is_array() => {
                 let entries = if let Some(ref includes) = includes {
+                    
                     IncludesResolver::from(entries).resolve(includes)
                 } else {
                     entries.clone()
