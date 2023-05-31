@@ -270,6 +270,8 @@ docker-compose --env-file <SECRET ENV FILE> -f prod.compose.yaml down (-v)
 - <https://danclarke.dev> - Portfolio
 - <https://danclarke.dev/blog> - Blog
 - <https://danclarke.dev/cv> - Generate, Show and Download Resume
+- <https://api.danclarke.dev/graphql> - GraphQL API
+- <https://api.danclarke.dev/graphiql> - GraphQL Playground
 
 ## Third Parties
 
