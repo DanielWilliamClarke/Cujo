@@ -23,7 +23,7 @@ services:
       - ./docker/vhost:/etc/nginx/vhost.d
       - ./docker/html:/usr/share/nginx/html
       - ./docker/certs:/etc/nginx/certs:ro
-      - ./docker/conf:./nginx:/etc/nginx/conf.d
+      - ./docker/nginx:/etc/nginx/conf.d
 
     # volumes:
     #   - /var/run/docker.sock:/tmp/docker.sock:ro
@@ -32,7 +32,6 @@ services:
     #   - html:/usr/share/nginx/html
     #   - acme:/etc/acme.sh
 
-
     networks:
       - cujo
 
@@ -40,10 +39,11 @@ services:
     image: jrcs/letsencrypt-nginx-proxy-companion
     container_name: ssl-companion
     volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./docker/vhost:/etc/nginx/vhost.d
+      - ./docker/html:/usr/share/nginx/html
       - ./docker/certs:/etc/nginx/certs:rw
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-    volumes_from:
-      - reverseproxy
+      - ./docker/nginx:/etc/nginx/conf.d
     depends_on:
       - reverseproxy
     networks:
