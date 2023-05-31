@@ -32,7 +32,6 @@ services:
       - vhost:/etc/nginx/vhost.d
       - html:/usr/share/nginx/html
       - /var/run/docker.sock:/tmp/docker.sock:ro
-      - ./nginx/cujo_proxy.conf:/etc/nginx/conf.d/cujo_proxy.conf:ro
     networks:
       - cujo
 
