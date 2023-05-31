@@ -2,7 +2,7 @@
 
 use async_trait::async_trait;
 
-#[async_trait(?Send)]
+#[async_trait]
 pub trait Reader {
     type Data;
     type Error = Box<dyn std::error::Error>;

@@ -1,13 +1,13 @@
 // src/revalidate/revalidate_client.rs
 
 use std::collections::HashMap;
-use std::sync::RwLockReadGuard;
+use std::sync::Arc;
 
 use futures::future::join_all;
 
 use reqwest::header;
 use serde::Deserialize;
-
+use tokio::sync::Mutex;
 
 use crate::util::FromEnv;
 use crate::cache::Cache;
@@ -31,12 +31,13 @@ impl From<RevalidateConfig> for RevalidateClient {
 }
 
 impl RevalidateClient {
-    pub async fn portfolio(&self, cache: RwLockReadGuard<'_, Cache>) {
+    pub async fn portfolio(&self, cache: Arc<Mutex<Cache>>) {
         self.revalidate("/".to_string())
             .await;
         self.revalidate("/blog".to_string())
             .await;
 
+        let cache = cache.lock().await;
         println!("total blog posts to revalidate: {}", cache.blog.entries.len());
 
         join_all(

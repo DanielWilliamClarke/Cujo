@@ -19,7 +19,7 @@ impl From<&ContentfulClient> for BlogReader {
     }
 }
 
-#[async_trait(?Send)]
+#[async_trait]
 impl Reader for BlogReader {
     type Data = CujoEntries<BlogPost>;
     type Error = ContentfulClientErrors;

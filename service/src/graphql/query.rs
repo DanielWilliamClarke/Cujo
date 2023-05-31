@@ -1,8 +1,9 @@
 // src/graphql/query.rs
-use std::sync::RwLock;
+use std::sync::Arc;
 
 use actix_web::web::Data;
 use async_graphql::{Context, Object};
+use tokio::sync::Mutex;
 
 use crate::{
     blog::BlogPost,
@@ -24,10 +25,10 @@ impl Query {
 }
 
 async fn unwrap_cache(ctx: &Context<'_>) -> Cache {
-    ctx.data::<Data<RwLock<Cache>>>()
+    ctx.data::<Data<Arc<Mutex<Cache>>>>()
         .ok()
         .unwrap()
-        .read()
-        .unwrap()
+        .lock()
+        .await
         .clone()
 }

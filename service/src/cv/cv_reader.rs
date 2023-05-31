@@ -17,7 +17,7 @@ pub struct CVReader {
 impl From<&ContentfulClient> for CVReader {
     fn from(client: &ContentfulClient) -> Self {
         CVReader {
-            client: client.clone(),
+            client: client.clone()
         }
     }
 }
@@ -75,7 +75,7 @@ impl CVReader {
     }
 }
 
-#[async_trait(?Send)]
+#[async_trait]
 impl Reader for CVReader {
     type Data = CV;
     type Error = ContentfulClientErrors;

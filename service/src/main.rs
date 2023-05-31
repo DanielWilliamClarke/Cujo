@@ -4,7 +4,7 @@
 
 extern crate log;
 
-use std::sync::RwLock;
+use std::sync::Arc;
 
 use actix_web::{middleware::Logger, web::Data, App, HttpServer, http};
 use contentful::{ContentfulClient, ContentfulConfig};
@@ -12,24 +12,22 @@ use dotenv::dotenv;
 use listenfd::ListenFd;
 use actix_cors::Cors;
 
-mod auth;
 mod blog;
 mod cache;
 mod cv;
 mod graphql;
-mod rest;
 mod revalidate;
 mod util;
+mod subscription;
 
-use auth::{Auth0Client, AuthConfig, RedirectClient, RedirectConfig};
 use cache::Cache;
 use revalidate::{RevalidateClient, RevalidateConfig};
 use graphql::{configure_graphql_service};
-use rest::configure_rest_service;
 use serde::Deserialize;
+use tokio::sync::Mutex;
 use util::FromEnv;
 
-use crate::graphql::CujoSchema;
+use crate::{graphql::CujoSchema, subscription::{PubnubSubscription, PubnubConfig}, cache::CacheRegenerator};
 
 #[derive(Deserialize, Debug, Clone)]
 pub struct ServerConfig {
@@ -47,14 +45,20 @@ async fn main() -> std::io::Result<()> {
 
     let ServerConfig { host, port } = ServerConfig::from_env();
 
-    let auth_client = Auth0Client::from(AuthConfig::from_env());
-    let redirect_client = RedirectClient::from(RedirectConfig::from_env());
     let revalidate_client = RevalidateClient::from(RevalidateConfig::from_env());
     let contentful_client = ContentfulClient::from(ContentfulConfig::from_env());
 
-    let cache = Data::new(RwLock::new(
-        Cache::generate_cache(contentful_client.clone()).await,
-    ));
+    let cache = Arc::new(Mutex::new(Cache::generate_cache(contentful_client.clone()).await));
+
+    let cache_regenerator = CacheRegenerator::from(contentful_client.clone(), revalidate_client.clone(), cache.clone());
+    let pubnub_subscription = PubnubSubscription::from(PubnubConfig::from_env(), cache_regenerator);
+
+    match pubnub_subscription.subscribe().await {
+        Ok(_) => println!("Pubnub subscription started! ✅"),
+        Err(err) => panic!("Unable to subscribe to Pubnub ❌: {}", err)
+    };
+
+    let cache = Data::new(cache);
     let schema = CujoSchema::from(cache.clone());
 
     let mut server = HttpServer::new(move || {
@@ -67,13 +71,8 @@ async fn main() -> std::io::Result<()> {
         App::new()
             .wrap(cors)
             .wrap(Logger::default())
-            .app_data(Data::new(auth_client.clone()))
-            .app_data(Data::new(redirect_client.clone()))
-            .app_data(Data::new(revalidate_client.clone()))
-            .app_data(Data::new(contentful_client.clone()))
             .app_data(Data::new(schema.clone()))
             .app_data(cache.clone())
-            .configure(configure_rest_service)
             .configure(configure_graphql_service)
     });
 
