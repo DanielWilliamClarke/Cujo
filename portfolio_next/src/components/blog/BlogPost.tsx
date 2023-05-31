@@ -111,7 +111,7 @@ const PostContent: React.FC<PostProps> = ({ post, includes }: PostProps) => {
         _: CommonNode,
         children: ReactNode
       ) => (
-        <div>{children}</div>
+        <div className='blog-paragraph'>{children}</div>
       ),
       [BLOCKS.EMBEDDED_ASSET]: (
         node: CommonNode
