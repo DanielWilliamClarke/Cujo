@@ -52,7 +52,6 @@ export const Blog: React.FC<BlogProps> = ({ blog }: BlogProps): JSX.Element => {
 const BlogSummaryPanel: React.FC<BlogSummaryProps> = ({ post, index }: BlogSummaryProps): JSX.Element => {
   const iconService = useInjection(IIconService.$);
   const Icon = iconService.getWithDefault('post');
-
   const dateService = useInjection(IDateService.$);
   dateService.format('Do MMMM YYYY HH:mm');
 
