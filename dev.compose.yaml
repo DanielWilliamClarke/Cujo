@@ -6,7 +6,7 @@ services:
     build:
       context: ./portfolio_next
       args: 
-        - CUJO_SERVICE_URL=https://api.danclarke.dev
+        - CUJO_SERVICE_URL=https://gql.danclarke.dev
     depends_on:
       - service
     ports:
