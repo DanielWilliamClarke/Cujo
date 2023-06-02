@@ -141,12 +141,10 @@ const PostContent: React.FC<PostProps> = ({ post, includes }: PostProps) => {
   return (
     <Reveal direction='up'>
       <Section id="post" title={post.title}>
-        <h4 className="blog-date">
-          {updatedDate}
-        </h4>
-
         <Lanyard className="tags" tags={post.tags} />
-
+        <h4 className="blog-date">
+          Last updated {updatedDate}
+        </h4>
         {(post.media != null) && (
           <>
             <Row className="section-content">

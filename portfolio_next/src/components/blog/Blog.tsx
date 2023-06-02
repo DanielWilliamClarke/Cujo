@@ -33,8 +33,8 @@ export const Blog: React.FC<BlogProps> = ({ blog }: BlogProps): JSX.Element => {
               blog.entries
                 .sort(
                   (a: Post, b: Post) =>
-                    dateService.toUnix(b.sys.createdAt.toString()) -
-                    dateService.toUnix(a.sys.createdAt.toString())
+                    dateService.toUnix(b.sys.updatedAt.toString()) -
+                    dateService.toUnix(a.sys.updatedAt.toString())
                 )
                 .map((post: Post, index: number) => (
                   <BlogSummaryPanel post={post} index={index} key={index} />
@@ -93,7 +93,7 @@ const BlogSummaryPanel: React.FC<BlogSummaryProps> = ({ post, index }: BlogSumma
               </Nav.Link>
             </Nav>
             <Card.Text>
-              Published {publishedDate}
+              Last updated {updatedDate}
             </Card.Text>
             <Lanyard tags={post.tags} />
             <Card.Text className="text-muted">
@@ -104,7 +104,7 @@ const BlogSummaryPanel: React.FC<BlogSummaryProps> = ({ post, index }: BlogSumma
 
           <Card.Footer>
             <small className="text-muted">
-              Last updated {updatedDate}
+              Published {publishedDate}
             </small>
           </Card.Footer>
         </Card>
