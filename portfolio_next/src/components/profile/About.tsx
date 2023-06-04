@@ -60,7 +60,7 @@ export const About: React.FC<AboutProps> = ({ about }: AboutProps): JSX.Element 
       <Row className="section-content">
         <Col className="text-column">
           <div className="about-section">
-            <Reveal direction="right">
+            <Reveal direction="left">
               {documentToReactComponents(about.entry.about, statementOptions)}
             </Reveal>
           </div>
