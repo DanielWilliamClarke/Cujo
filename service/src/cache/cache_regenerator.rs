@@ -1,6 +1,5 @@
 use std::sync::Arc;
 
-use actix_web::web::Data;
 use contentful::ContentfulClient;
 use tokio::sync::RwLock;
 
@@ -12,14 +11,14 @@ use super::Cache;
 pub struct CacheRegenerator {
     contentful_client: ContentfulClient,
     revalidate_client: RevalidateClient,
-    cache: Data<Arc<RwLock<Cache>>>,
+    cache: Arc<RwLock<Cache>>,
 }
 
 impl CacheRegenerator {
     pub fn from (
         contentful_client: ContentfulClient,
         revalidate_client: RevalidateClient,
-        cache: Data<Arc<RwLock<Cache>>>
+        cache: Arc<RwLock<Cache>>
     ) -> Self {
         CacheRegenerator {
             contentful_client,

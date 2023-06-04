@@ -23,6 +23,6 @@ impl GraphQL {
 }
 
 pub fn configure_graphql_service(cfg: &mut web::ServiceConfig) {
-    cfg.service(web::resource("/graphql").route(web::post().to(GraphQL::graphql)))
-        .service(web::resource("/graphiql").route(web::get().to(GraphQL::graphql_playground)));
+    cfg.service(web::resource("/").route(web::post().to(GraphQL::graphql)))
+        .service(web::resource("/playground").route(web::get().to(GraphQL::graphql_playground)));
 }

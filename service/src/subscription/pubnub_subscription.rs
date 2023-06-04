@@ -1,4 +1,3 @@
-
 use std::fmt::Display;
 
 use futures::StreamExt;
@@ -20,7 +19,9 @@ impl std::error::Error for PubnubError {}
 impl Display for PubnubError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            PubnubError::TransportBuildError(err) => write!(f, "Pubnub Subscription error - cannot connect: {:?}", err),
+            PubnubError::TransportBuildError(err) => {
+                write!(f, "Pubnub Subscription error - cannot connect: {:?}", err)
+            }
         }
     }
 }
@@ -37,7 +38,7 @@ struct PubnubMessagePayload {
 #[serde(rename_all = "camelCase")]
 struct PubnubMessage {
     // topic: String,
-    payload: PubnubMessagePayload
+    payload: PubnubMessagePayload,
 }
 
 impl From<JsonValue> for PubnubMessage {
@@ -48,7 +49,7 @@ impl From<JsonValue> for PubnubMessage {
                 println!("Error deserialising: {:?} -> {:?}", err, value);
 
                 PubnubMessage::default()
-            },
+            }
         }
     }
 }
@@ -57,28 +58,25 @@ impl From<JsonValue> for PubnubMessage {
 pub struct PubnubConfig {
     pubnub_publish_token: String,
     pubnub_subscribe_token: String,
-    pubnub_channel_name: String
+    pubnub_channel_name: String,
 }
 
-impl FromEnv for PubnubConfig {} 
+impl FromEnv for PubnubConfig {}
 
 pub struct PubnubSubscription {
     config: PubnubConfig,
-    cache_regenerator: CacheRegenerator
+    cache_regenerator: CacheRegenerator,
 }
 
 impl PubnubSubscription {
-    pub fn from (
-        config: PubnubConfig,
-        cache_regenerator: CacheRegenerator
-    ) -> Self {
+    pub fn from(config: PubnubConfig, cache_regenerator: CacheRegenerator) -> Self {
         PubnubSubscription {
             config,
-            cache_regenerator
+            cache_regenerator,
         }
     }
 
-    pub async fn subscribe (&self) -> Result<(), PubnubError> {
+    pub async fn subscribe(&self) -> Result<(), PubnubError> {
         let transport = Hyper::new()
             .publish_key(self.config.pubnub_publish_token.clone())
             .subscribe_key(self.config.pubnub_subscribe_token.clone())
@@ -86,7 +84,7 @@ impl PubnubSubscription {
 
         let transport = match transport {
             Ok(transport) => transport,
-            Err(err) => return Err(PubnubError::TransportBuildError(err))
+            Err(err) => return Err(PubnubError::TransportBuildError(err)),
         };
 
         let mut pubnub = Builder::new()
@@ -105,12 +103,16 @@ impl PubnubSubscription {
 
                 match stream.next().await {
                     Some(message) => {
-                        log::info!("📩 Received Pubnub message on channel {} -> {:?}", channel_name, message);
+                        log::info!(
+                            "📩 Received Pubnub message on channel {} -> {:?}",
+                            channel_name,
+                            message
+                        );
 
                         let message: PubnubMessage = message.json.into();
                         match message.payload.content_type.as_str() {
                             "blogPost" => cache.regenerate_blog_cache().await,
-                            _ => cache.regenerate_cv_cache().await
+                            _ => cache.regenerate_cv_cache().await,
                         };
 
                         log::info!("🥙 Pubnub message consumed for channel {}", channel_name);
@@ -123,4 +125,3 @@ impl PubnubSubscription {
         Ok(())
     }
 }
-

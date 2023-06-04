@@ -65,7 +65,7 @@ export const About: React.FC<AboutProps> = ({ about }: AboutProps): JSX.Element 
             </Reveal>
           </div>
           <div className="about-section">
-            <Reveal direction="right" damping={0.01}>
+            <Reveal direction="left" damping={0.01}>
               {documentToReactComponents(
                 about.entry.interests,
                 options
@@ -75,7 +75,7 @@ export const About: React.FC<AboutProps> = ({ about }: AboutProps): JSX.Element 
         </Col>
 
         <Col className="text-column">
-          <Reveal className="carousel" direction="left">
+          <Reveal className="carousel" direction="right">
             <Swiper
               className="carousel"
                {...carouselProps}

@@ -15,8 +15,7 @@ export type CujoBlogPaths = {
     blog: Entries<{ id: string }>
 }
 
-
-export const cujoServiceUrl = () => `${process.env.CUJO_SERVICE_URL}/graphql`;
+export const cujoServiceUrl = () => `${process.env.CUJO_SERVICE_URL}`;
 
 export const fetchCujoProps: GetStaticProps = async () => {
     console.log(cujoServiceUrl());

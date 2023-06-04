@@ -6,28 +6,32 @@ extern crate log;
 
 use std::sync::Arc;
 
-use actix_web::{middleware::Logger, web::Data, App, HttpServer, http};
+use actix_cors::Cors;
+use actix_web::{http, middleware::Logger, web::Data, App, HttpServer};
 use contentful::{ContentfulClient, ContentfulConfig};
 use dotenv::dotenv;
 use listenfd::ListenFd;
-use actix_cors::Cors;
 
 mod blog;
 mod cache;
 mod cv;
 mod graphql;
 mod revalidate;
-mod util;
 mod subscription;
+mod util;
 
 use cache::Cache;
+use graphql::configure_graphql_service;
 use revalidate::{RevalidateClient, RevalidateConfig};
-use graphql::{configure_graphql_service};
 use serde::Deserialize;
 use tokio::sync::RwLock;
 use util::FromEnv;
 
-use crate::{graphql::CujoSchema, subscription::{PubnubSubscription, PubnubConfig}, cache::CacheRegenerator};
+use crate::{
+    cache::CacheRegenerator,
+    graphql::CujoSchema,
+    subscription::{PubnubConfig, PubnubSubscription},
+};
 
 #[derive(Deserialize, Debug, Clone)]
 pub struct ServerConfig {
@@ -45,33 +49,40 @@ async fn main() -> std::io::Result<()> {
 
     let ServerConfig { host, port } = ServerConfig::from_env();
     let contentful_client = ContentfulClient::from(ContentfulConfig::from_env());
-
-    let cache = Data::new(Arc::new(RwLock::new(
-        Cache::generate_cache(contentful_client.clone()).await
-    )));
-
     let revalidate_client = RevalidateClient::from(RevalidateConfig::from_env());
-    let cache_regenerator = CacheRegenerator::from(contentful_client.clone(), revalidate_client.clone(), cache.clone());
-    let pubnub_subscription = PubnubSubscription::from(PubnubConfig::from_env(), cache_regenerator);
 
+    let cache = Cache::generate_cache(contentful_client.clone()).await;
+    let cache = Arc::new(RwLock::new(cache));
+
+    let cache_regenerator = CacheRegenerator::from(
+        contentful_client.clone(),
+        revalidate_client.clone(),
+        cache.clone(),
+    );
+
+    let pubnub_subscription = PubnubSubscription::from(PubnubConfig::from_env(), cache_regenerator);
     match pubnub_subscription.subscribe().await {
         Ok(_) => log::info!("Pubnub subscription started! ✅"),
-        Err(err) => panic!("Unable to subscribe to Pubnub ❌: {}", err)
+        Err(err) => panic!("Unable to subscribe to Pubnub ❌: {}", err),
     };
-
-    let schema = CujoSchema::from(cache.clone());
 
     let mut server = HttpServer::new(move || {
         let cors = Cors::default()
             .allow_any_origin()
             .allowed_methods(vec!["GET", "POST"])
-            .allowed_headers(vec![http::header::AUTHORIZATION, http::header::ACCEPT, http::header::CONTENT_TYPE])
+            .allowed_headers(vec![
+                http::header::AUTHORIZATION,
+                http::header::ACCEPT,
+                http::header::CONTENT_TYPE,
+            ])
             .max_age(3600);
+
+        let schema = Data::new(CujoSchema::from(Data::new(cache.clone())));
 
         App::new()
             .wrap(cors)
             .wrap(Logger::default())
-            .app_data(Data::new(schema.clone()))
+            .app_data(schema)
             .configure(configure_graphql_service)
     });
 
