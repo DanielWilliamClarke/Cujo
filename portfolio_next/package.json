@@ -47,7 +47,8 @@
     "styled-components": "^5.3.6",
     "styled-icons": "^10.46.0",
     "swiper": "^9.2.0",
-    "urql": "^3.0.3"
+    "urql": "^3.0.3",
+    "weighted": "^1.0.0"
   },
   "devDependencies": {
     "@types/dat.gui": "^0.7.7",
