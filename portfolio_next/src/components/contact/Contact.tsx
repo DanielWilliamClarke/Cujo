@@ -55,7 +55,7 @@ export const Contact: React.FC<ContactProps> = ({ profiles }: ContactProps): JSX
                 target="_blank"
                 key={p.url}
                 onClick={() => {
-                  event("event", {
+                  event("user_engagement", {
                     category: "Contact click-through",
                     label: `Click through to: ${p.url}`
                   });

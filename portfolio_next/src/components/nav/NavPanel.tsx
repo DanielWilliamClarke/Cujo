@@ -12,7 +12,7 @@ import { ThemeSetter } from '../theme/ThemeSetter';
 import { anton } from '../shared/Font';
 
 const emitClickEvent = (section: string) => {
-  event("event", {
+  event("user_engagement", {
     category: "Nav clicked",
     label: section
   });

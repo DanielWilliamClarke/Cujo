@@ -71,7 +71,7 @@ const CVPreview: React.FC<CVProps> = ({ cv }: CVProps): JSX.Element => {
               <PDFDownloadLink
                 document={CV.render(cv, dateService)}
                 fileName={`daniel_william_clarke_cv_${dateService.CurrentTimestamp()}.pdf`}
-                onClick={() => event("event", {
+                onClick={() => event("user_engagement", {
                   category: "CV",
                   label: "Preview CV download",
                 })} 

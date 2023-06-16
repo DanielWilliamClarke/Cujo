@@ -31,7 +31,7 @@ const CVExport: React.FC<CVProps> = ({ cv }: CVProps): JSX.Element => {
       className="export-cv"
       document={CV.render(cv, dateService)}
       fileName={filename}
-      onClick={() => event("event", {
+      onClick={() => event("user_engagement", {
         category: "CV",
         label: "Direct CV download",
       })}

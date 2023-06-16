@@ -22,7 +22,7 @@ type ProjectProps = {
 }
 
 const emitClickEvent = (url: string) => {
-  event("event", {
+  event("user_engagement", {
     category: "Project clicked",
     label: url
   });
