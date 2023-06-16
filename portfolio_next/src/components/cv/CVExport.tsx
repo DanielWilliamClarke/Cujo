@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import { useInjection } from 'inversify-react';
+import { event } from "nextjs-google-analytics";
 
 import * as pdfjs from 'pdfjs-dist/legacy/build/pdf.js';
 import pdfjsWorker from 'pdfjs-dist/legacy/build/pdf.worker.entry';
@@ -30,6 +31,10 @@ const CVExport: React.FC<CVProps> = ({ cv }: CVProps): JSX.Element => {
       className="export-cv"
       document={CV.render(cv, dateService)}
       fileName={filename}
+      onClick={() => event("event", {
+        category: "CV",
+        label: "Direct CV download",
+      })}
     >
       {({ url, blob }) => {
         if (url && blob) {

@@ -3,11 +3,20 @@ import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Nav, Navbar } from 'react-bootstrap';
 import Scrollspy from 'react-scrollspy';
+import { event } from "nextjs-google-analytics";
+
 import { IIconService } from '../../services/IconService';
 
 import { ThemeSetter } from '../theme/ThemeSetter';
 
 import { anton } from '../shared/Font';
+
+const emitClickEvent = (section: string) => {
+  event("event", {
+    category: "Nav clicked",
+    label: section
+  });
+};
 
 export const NavPanel: React.FC = (): JSX.Element => {
   const iconService = useInjection(IIconService.$);
@@ -57,7 +66,11 @@ export const NavPanel: React.FC = (): JSX.Element => {
                 : `/#${link}`;
             const NavIcon = iconService.getWithDefault(link);
             return (
-              <Nav.Link href={href} key={href}>
+              <Nav.Link
+                href={href}
+                key={href}
+                onClick={() => emitClickEvent(link)}
+              >
                 <NavIcon />
                 <div className="nav-label">{link}</div>
               </Nav.Link>

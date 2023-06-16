@@ -1,8 +1,10 @@
-import React, { HTMLAttributes, ReactNode, useCallback, useMemo, useState } from 'react';
+import React, { HTMLAttributes, useCallback, useState } from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { Zoom } from 'react-awesome-reveal';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { Document } from '@contentful/rich-text-types';
+import { event } from "nextjs-google-analytics";
+import { debounce } from "ts-debounce";
 
 import { Entry } from '../../model/Includes';
 import { Skills, Skill } from '../../model/CVModel';
@@ -20,11 +22,20 @@ type SkillsProps = HTMLAttributes<HTMLDivElement> & {
   search: string
 };
 
+const emitSearchEvent = debounce((label: string) => {
+  event("event", {
+    category: "Skill Search",
+    label
+  });
+}, 300);
+
 export const Technical: React.FC<TechnicalProps> = ({ skills }: TechnicalProps): JSX.Element => {
   const [search, setSearch] = useState('');
 
-  const handleSearchInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearch(event.target.value);
+  const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    emitSearchEvent(e.target.value);
+
+    setSearch(e.target.value);
   };
 
   return (

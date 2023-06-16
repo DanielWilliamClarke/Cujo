@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
 import { Reveal } from '../shared/Reveal';
+import { event } from "nextjs-google-analytics";
 
 import {
   EmailIcon, EmailShareButton,
@@ -13,6 +14,13 @@ type ShareProps = {
   body: string
   hashtag: string
 }
+
+const emitClickEvent = (social: string) => {
+  event("event", {
+    category: "Share redirect activation",
+    label: social
+  });
+};
 
 export const SharePanel: React.FC<ShareProps> = ({ url, title, body, hashtag }: ShareProps): JSX.Element => {
   const [show, setShow] = useState(false);
@@ -32,7 +40,7 @@ export const SharePanel: React.FC<ShareProps> = ({ url, title, body, hashtag }: 
   }, []);
 
   const prepareTitle = useCallback((title: string | undefined): string => {
-    const prefix = 'DanielClarke.tech';
+    const prefix = 'danclarke.dev';
     return title ? `${prefix} - ${title}` : prefix;
   }, []);
 
@@ -46,6 +54,7 @@ export const SharePanel: React.FC<ShareProps> = ({ url, title, body, hashtag }: 
             url={url}
             title={prepareTitle(title)}
             summary={sanitize(body)}
+            onClick={() => emitClickEvent("LinkedIn")}
           >
             <LinkedinIcon size={size} />
           </LinkedinShareButton>
@@ -54,6 +63,7 @@ export const SharePanel: React.FC<ShareProps> = ({ url, title, body, hashtag }: 
             url={url}
             quote={prepareTitle(title)}
             hashtag={hashtag}
+            onClick={() => emitClickEvent("Facebook")}
           >
             <FacebookIcon size={size} />
           </FacebookShareButton>
@@ -61,6 +71,7 @@ export const SharePanel: React.FC<ShareProps> = ({ url, title, body, hashtag }: 
           <RedditShareButton
             url={url}
             title={prepareTitle(title)}
+            onClick={() => emitClickEvent("Reddit")}
           >
             <RedditIcon size={size} />
           </RedditShareButton>
@@ -69,6 +80,7 @@ export const SharePanel: React.FC<ShareProps> = ({ url, title, body, hashtag }: 
             url={url}
             title={prepareTitle(title)}
             hashtags={[hashtag]}
+            onClick={() => emitClickEvent("Twitter")}
           >
             <TwitterIcon size={size} />
           </TwitterShareButton>
@@ -77,6 +89,7 @@ export const SharePanel: React.FC<ShareProps> = ({ url, title, body, hashtag }: 
             url={url}
             title={prepareTitle(title)}
             separator=" - "
+            onClick={() => emitClickEvent("Whatsapp")}
           >
             <WhatsappIcon size={size} />
           </WhatsappShareButton>
@@ -86,6 +99,7 @@ export const SharePanel: React.FC<ShareProps> = ({ url, title, body, hashtag }: 
             subject={prepareTitle(title)}
             body={sanitize(body)}
             separator=" - "
+            onClick={() => emitClickEvent("Email")}
           >
             <EmailIcon size={size} />
           </EmailShareButton>

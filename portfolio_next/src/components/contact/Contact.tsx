@@ -1,6 +1,7 @@
 import { useInjection } from 'inversify-react';
 import React, { ChangeEvent, useCallback, useContext, useMemo, useState } from 'react';
 import { Button, Col, Form, Row } from 'react-bootstrap';
+import { event } from "nextjs-google-analytics";
 
 import { Zoom } from 'react-awesome-reveal';
 
@@ -53,6 +54,12 @@ export const Contact: React.FC<ContactProps> = ({ profiles }: ContactProps): JSX
                 rel="noopener noreferrer"
                 target="_blank"
                 key={p.url}
+                onClick={() => {
+                  event("event", {
+                    category: "Contact click-through",
+                    label: `Click through to: ${p.url}`
+                  });
+                }}
               >
                 <DevIconName icon={p.brand} />
               </a>

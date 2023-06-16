@@ -1,5 +1,6 @@
 import React from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
+import { event } from "nextjs-google-analytics";
 
 import { Project } from '../../model/CVModel';
 import { Entries } from '../../model/Includes';
@@ -19,6 +20,13 @@ type ProjectProps = {
   project: Project
   index: number
 }
+
+const emitClickEvent = (url: string) => {
+  event("event", {
+    category: "Project clicked",
+    label: url
+  });
+};
 
 export const Projects: React.FC<ProjectsProps> = ({ projects }: ProjectsProps): JSX.Element => {
   return (
@@ -55,6 +63,7 @@ const ProjectImage: React.FC<ProjectProps> = ({ project }: ProjectProps): JSX.El
             href={project.link}
             rel="noopener noreferrer"
             target="_blank"
+            onClick={() => emitClickEvent(project.link)}
           >
             <DynamicImage
               image={project.image}

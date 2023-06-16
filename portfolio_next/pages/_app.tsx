@@ -1,5 +1,6 @@
 import { AppProps } from 'next/app';
 import Script from 'next/script';
+import { GoogleAnalytics } from "nextjs-google-analytics"
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'devicon/devicon.min.css';
@@ -13,19 +14,7 @@ import './styles/global.scss';
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }: AppProps) => (
   <main id="#root">
-    <Script
-      src="https://www.googletagmanager.com/gtag/js?id=G-H3X7HD4C7K"
-      strategy="afterInteractive"
-    />
-    <Script id="google-analytics" strategy="afterInteractive">
-      {`
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'G-H3X7HD4C7K');
-      `}
-    </Script>
+    <GoogleAnalytics trackPageViews />
     <Component {...pageProps} />
   </main>
 );

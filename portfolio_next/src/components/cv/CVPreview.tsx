@@ -2,6 +2,7 @@ import { PDFDownloadLink } from '@react-pdf/renderer';
 import { useInjection } from 'inversify-react';
 import React, { useCallback } from 'react';
 import { Col, Row } from 'react-bootstrap';
+import { event } from "nextjs-google-analytics";
 
 import * as pdfjs from 'pdfjs-dist/legacy/build/pdf.js';
 import pdfjsWorker from 'pdfjs-dist/legacy/build/pdf.worker.entry';
@@ -70,6 +71,10 @@ const CVPreview: React.FC<CVProps> = ({ cv }: CVProps): JSX.Element => {
               <PDFDownloadLink
                 document={CV.render(cv, dateService)}
                 fileName={`daniel_william_clarke_cv_${dateService.CurrentTimestamp()}.pdf`}
+                onClick={() => event("event", {
+                  category: "CV",
+                  label: "Preview CV download",
+                })} 
               >
                 {({ url }) => {
                   if (!url) {

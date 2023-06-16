@@ -70,7 +70,7 @@ jobs:
           name: Build Docker image
           command: |
             cd portfolio_next
-            docker build -t $DOCKER_REGISTRY/$IMAGE_NAME_PORTFOLIO:latest --build-arg CUJO_SERVICE_URL="$CUJO_SERVICE_URL" .
+            docker build -t $DOCKER_REGISTRY/$IMAGE_NAME_PORTFOLIO:latest --build-arg CUJO_SERVICE_URL="$CUJO_SERVICE_URL" --build-arg NEXT_PUBLIC_GA_MEASUREMENT_ID="$NEXT_PUBLIC_GA_MEASUREMENT_ID" .
       - run:
           name: Publish Docker Image
           command: |

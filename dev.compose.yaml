@@ -15,6 +15,7 @@ services:
     environment:
       - CUJO_SERVICE_URL=http://service:5001
       - CUJO_REVALIDATE_SECRET=12345
+      - NEXT_PUBLIC_GA_MEASUREMENT_ID=G-1234567890
     networks:
       - cujo
 
