@@ -23,7 +23,7 @@ type SkillsProps = HTMLAttributes<HTMLDivElement> & {
 };
 
 const emitSearchEvent = debounce((label: string) => {
-  event("user_engagement", {
+  event("dc_user_event", {
     category: "Skill Search",
     label
   });

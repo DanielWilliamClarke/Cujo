@@ -41,9 +41,9 @@ const CVExport: React.FC<CVProps> = ({ cv }: CVProps): JSX.Element => {
           a.download = filename;
           a.click();
 
-          event("user_engagement", {
-            category: "CV",
-            label: "Direct CV download",
+          event("dc_user_event", {
+            category: "CV download",
+            label: "direct",
           });
 
           setTimeout(() => {

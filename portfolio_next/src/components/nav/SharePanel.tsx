@@ -16,7 +16,7 @@ type ShareProps = {
 }
 
 const emitClickEvent = (social: string) => {
-  event("user_engagement", {
+  event("dc_user_event", {
     category: "Share redirect activation",
     label: social
   });

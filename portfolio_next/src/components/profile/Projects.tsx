@@ -21,10 +21,11 @@ type ProjectProps = {
   index: number
 }
 
-const emitClickEvent = (url: string) => {
-  event("user_engagement", {
-    category: "Project clicked",
-    label: url
+const emitClickEvent = ({name, link}: Project) => {
+  event("dc_user_event", {
+    category: "Project click",
+    label: name,
+    url: link
   });
 };
 
@@ -63,7 +64,7 @@ const ProjectImage: React.FC<ProjectProps> = ({ project }: ProjectProps): JSX.El
             href={project.link}
             rel="noopener noreferrer"
             target="_blank"
-            onClick={() => emitClickEvent(project.link)}
+            onClick={() => emitClickEvent(project)}
           >
             <DynamicImage
               image={project.image}
