@@ -31,10 +31,6 @@ const CVExport: React.FC<CVProps> = ({ cv }: CVProps): JSX.Element => {
       className="export-cv"
       document={CV.render(cv, dateService)}
       fileName={filename}
-      onClick={() => event("user_engagement", {
-        category: "CV",
-        label: "Direct CV download",
-      })}
     >
       {({ url, blob }) => {
         if (url && blob) {
@@ -44,6 +40,11 @@ const CVExport: React.FC<CVProps> = ({ cv }: CVProps): JSX.Element => {
           a.href = url;
           a.download = filename;
           a.click();
+
+          event("user_engagement", {
+            category: "CV",
+            label: "Direct CV download",
+          });
 
           setTimeout(() => {
             window.open(url!, '_self');
