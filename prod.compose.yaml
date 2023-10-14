@@ -76,6 +76,8 @@ services:
     restart: always
     expose:
       - 5001
+     ports:
+      - "5001:5001"
     environment:
       - VIRTUAL_HOST=${API_DOMAIN}
       - VIRTUAL_PORT=5001
