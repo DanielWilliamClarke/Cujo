@@ -12,7 +12,7 @@ export namespace Education {
   const pdfStyles = StyleSheet.create({
     education: {
       fontSize: 10,
-      marginBottom: 10
+      marginVertical: 10,
     },
     institution: {
       fontSize: 12
@@ -30,7 +30,7 @@ export namespace Education {
 
   export const render = (cv: CV): JSX.Element => {
     return (
-      <View>
+      <View wrap={false}>
         {Header.render('education')}
         <View>
           {cv.education.entries

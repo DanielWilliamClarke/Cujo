@@ -38,7 +38,7 @@ const CVExport: React.FC<CVProps> = ({ cv }: CVProps): JSX.Element => {
           document.body.appendChild(a);
           url = URL.createObjectURL(blob);
           a.href = url;
-          a.download = filename;
+          // a.download = filename;
           a.click();
 
           event("dc_user_event", {

@@ -12,6 +12,7 @@ import { Education } from './Education';
 import { Experience } from './Experience';
 import { Outro } from './Outro';
 import { Interests } from './Interests';
+import { Contact } from './Contact';
 
 Font.registerEmojiSource({
   format: 'png',
@@ -33,15 +34,25 @@ export namespace CV {
       flexGrow: 1
     },
     left: {
-      paddingHorizontal: 15,
+      backgroundColor: '#222222',
+      fontSize: '10',
+      color: '#ffffff',
+      paddingLeft: 15,
+      paddingRight: 15,
       paddingVertical: 8,
-      width: '50%'
+      width: '30%'
     },
     right: {
-      paddingHorizontal: 15,
+      paddingLeft: 15,
+      paddingRight: 15,
       paddingVertical: 8,
-      width: '50%',
+      width: '70%',
       backgroundColor: styles.colorOffWhite
+    },
+    outro: {
+      marginHorizontal: 15,
+      position: 'absolute',
+      bottom: 0
     }
   });
 
@@ -58,30 +69,24 @@ export namespace CV {
 
     return (
       <Document>
-        <Page style={pdfStyles.body} size="A4" wrap={false}>
+        <Page style={pdfStyles.body} size="A4">
           {Heading.render(cv, dateService)}
-          {Intro.render(cv)}
           <View style={pdfStyles.contentRow}>
             <View style={pdfStyles.left}>
+              {Contact.render(cv, true)}
               {Skills.render(cv)}
               {Education.render(cv)}
-            </View>
-            <View style={pdfStyles.right}>
-              {Experience.render(experience.slice(0, 2))}
-            </View>
-          </View>
-        </Page>
-        <Page style={pdfStyles.body} size="A4" wrap={false}>
-          <View style={pdfStyles.contentRow}>
-            <View style={pdfStyles.left}>
-              {Experience.render(experience.slice(2, 6), true)}
-            </View>
-            <View style={pdfStyles.right}>
-              {Experience.render(experience.slice(6), true)}
               {Interests.render(cv)}
+              <View style={pdfStyles.outro}>
+                {Outro.render(cv)}
+                {Contact.render(cv)}
+              </View>
+            </View>
+            <View style={pdfStyles.right}>
+              {Intro.render(cv)}
+              {Experience.render(experience)}
             </View>
           </View>
-          {Outro.render(cv)}
         </Page>
       </Document>
     );

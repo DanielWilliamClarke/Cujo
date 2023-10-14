@@ -1,15 +1,16 @@
 import React from 'react';
 import { StyleSheet, View, Text, Image as PdfImage } from '@react-pdf/renderer';
 
-import styles from '../../shared/style.module.scss';
 import { CV as CVModel, Skill } from '../../../model/CVModel';
 import { Header } from './Header';
 import { Media } from '../../../model/Includes';
 
 const pdfStyles = StyleSheet.create({
+  skills: {
+    marginVertical: 10,
+  },
   paragraph: {
     fontSize: 10,
-    marginBottom: '10px'
   },
   skillItem: {
     marginBottom: '5px',
@@ -17,8 +18,8 @@ const pdfStyles = StyleSheet.create({
     flexDirection: 'row'
   },
   skillIcon: {
-    width: '30px',
-    height: '30px',
+    width: '20px',
+    height: '20px',
     borderRadius: '100%',
     backgroundColor: '#304c89',
     marginRight: '10px',
@@ -32,7 +33,7 @@ const pdfStyles = StyleSheet.create({
 export namespace Skills {
   export const render = (cv: CVModel): JSX.Element => {
     return (
-      <View>
+      <View wrap={false} style={pdfStyles.skills}>
         {Header.render('skills')}
         <View>
           <Text style={pdfStyles.paragraph}>
@@ -40,7 +41,9 @@ export namespace Skills {
             website linked above for a complete list!
           </Text>
         </View>
-        {mapSkills(cv.skills.entry.favorite)}
+        <View style={pdfStyles.skills}>
+          {mapSkills(cv.skills.entry.favorite)}
+        </View>
       </View>
     );
   };
@@ -72,7 +75,7 @@ export namespace Skills {
     return (
       <PdfImage
         src={iconImage.file.url}
-        style={{ width: '20px', height: '20px', marginTop: '5px', zIndex: '999999999' }}
+        style={{ width: '10px', height: '10px', marginTop: '5px', zIndex: '999999999' }}
       />
     );
   };
@@ -82,16 +85,16 @@ export namespace Skills {
       <View>
         <View
           style={{
-            width: 200,
-            height: 5,
-            backgroundColor: styles.colorLightBg,
+            width: 100,
+            height: 3,
+            backgroundColor: '#999999',
             borderRadius: '100%'
           }}
         >
           <View
             style={{
-              width: level * 2,
-              height: 5,
+              width: level,
+              height: 3,
               backgroundColor: '#304c89',
               borderRadius: '100%'
             }}

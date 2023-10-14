@@ -10,6 +10,9 @@ import { Header } from './Header';
 
 export namespace Interests {
   const pdfStyles = StyleSheet.create({
+    interests: {
+      marginVertical: 10,
+    },
     paragraph: {
       marginBottom: '10px',
       fontSize: 10
@@ -22,7 +25,7 @@ export namespace Interests {
 
   export const render = (cv: CV): JSX.Element => {
     return (
-      <View>
+      <View wrap={false} style={pdfStyles.interests}>
         {Header.render('interests')}
         {cv.about.entry.interests.content.map((node: Block, index: number) => {
           const line = documentToPlainTextString(node);

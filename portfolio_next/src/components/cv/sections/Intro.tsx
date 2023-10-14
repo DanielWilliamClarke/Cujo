@@ -13,19 +13,14 @@ export namespace Intro {
     intro: {
       display: 'flex',
       flexDirection: 'row',
-      height: '25%',
-      backgroundColor: '#222222',
-      fontSize: '10',
-      color: '#ffffff'
+      fontSize: 10,
+      marginVertical: 10,
     },
     profile: {
       flexDirection: 'column',
-      backgroundColor: '#222222',
-      width: '70%',
-      margin: '15px'
     },
     paragraph: {
-      marginBottom: '20px'
+      marginBottom: '5px'
     }
   });
 
@@ -46,7 +41,6 @@ export namespace Intro {
           {Header.render('profile')}
           {documentToReactComponents(cv.about.entry.about, options)}
         </View>
-        {Contact.render(cv, true)}
       </View>
     );
   };

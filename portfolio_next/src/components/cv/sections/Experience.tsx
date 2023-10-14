@@ -13,7 +13,7 @@ export namespace Experience {
   const pdfStyles = StyleSheet.create({
     experience: {
       fontSize: 10,
-      marginBottom: 12
+      marginVertical: 10,
     },
     company: {
       fontSize: 10
@@ -79,7 +79,7 @@ export namespace Experience {
         {Header.render(`experience ${withContinue ? '(cont)' : ''}`)}
         <View>
           {work.map((work: Work, index: number) => (
-            <View key={index} style={pdfStyles.experience}>
+            <View wrap={false} key={index} style={pdfStyles.experience}>
               <View style={pdfStyles.experienceItem}>
                 <PdfImage
                   src={work.images[0].file.url}
