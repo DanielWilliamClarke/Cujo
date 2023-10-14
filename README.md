@@ -168,10 +168,10 @@ IPs subject to change...
 # Or ...
 
 # Deploy: Dev
-docker-compose -f dev.compose.yaml up
+docker compose -f dev.compose.yaml up
 
 # Deploy: Prod
-docker-compose --env-file <SECRET ENV FILE> -f prod.compose.yaml up
+docker compose --env-file <SECRET ENV FILE> -f prod.compose.yaml up
 ```
 
 ## Redeploy
@@ -194,10 +194,10 @@ docker-compose --env-file <SECRET ENV FILE> -f prod.compose.yaml up
 # Or ...
 
 # Teardown: Dev
-docker-compose -f dev.compose.yaml down (-v)
+docker compose -f dev.compose.yaml down (-v)
 
 # Teardown: Prod
-docker-compose --env-file <SECRET ENV FILE> -f prod.compose.yaml down (-v)
+docker compose --env-file <SECRET ENV FILE> -f prod.compose.yaml down (-v)
 ```
 
 ## // Todo

@@ -11,6 +11,6 @@ COMPOSEFILE=$DEPLOYMENT.compose.yaml
 docker pull $IMAGE
 
 # Tear down image to redeploy
-docker-compose --env-file $ENVFILE -f $COMPOSEFILE stop $SERVICE
+docker compose --env-file $ENVFILE -f $COMPOSEFILE stop $SERVICE
 # up new image
-docker-compose --env-file $ENVFILE -f $COMPOSEFILE up -d $SERVICE
+docker compose --env-file $ENVFILE -f $COMPOSEFILE up -d $SERVICE

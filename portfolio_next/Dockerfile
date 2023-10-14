@@ -1,26 +1,15 @@
 # DEPS --------------------------------///
-FROM node:18.4.0-alpine AS deps
+FROM node:18.4.0 AS deps
 
-RUN apk update && \
-    apk add \
-        --no-cache \
-        build-base \
-        g++ \
-        make \
-        python3 \
-        py3-pip \
-        cairo-dev \
-        jpeg-dev \
-        pango-dev \
-        giflib-dev
 
 # RUN apk update && apk add python3 make gcc g++ .gyp
 
 WORKDIR /cujo
 
-COPY package.json package-lock.json* ./
+COPY package.json package-lock.json ./
 
-RUN npm install --legacy-peer-deps
+RUN npm config set registry https://registry.npmjs.org/
+RUN npm ci --legacy-peer-deps --verbose
 
 # BUILD --------------------------------///
 FROM node:18.4.0-alpine AS build
