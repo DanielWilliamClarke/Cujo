@@ -29,6 +29,4 @@ async-graphql = "5.0.7"
 async-graphql-actix-web = "5.0.7"
 actix-cors = "0.6.4"
 tokio = "1.25.0"
-
-[dependencies.pubnub-hyper]
-git = "https://github.com/pubnub/rust"
+pubnub = "0.3.0"

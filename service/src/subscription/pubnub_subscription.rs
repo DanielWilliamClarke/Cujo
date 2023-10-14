@@ -1,10 +1,9 @@
 use std::fmt::Display;
 
 use futures::StreamExt;
-use pubnub_hyper::core::json::JsonValue;
-use pubnub_hyper::runtime::tokio_global::TokioGlobal;
-use pubnub_hyper::transport::hyper::{Hyper, HyperBuilderError};
-use pubnub_hyper::{core::data::channel, Builder};
+use pubnub::core::PubNubError;
+use pubnub::{Keyset, PubNubClientBuilder};
+use pubnub::dx::subscribe::Update;
 use serde::Deserialize;
 
 use crate::cache::CacheRegenerator;
@@ -12,7 +11,7 @@ use crate::util::FromEnv;
 
 #[derive(Debug)]
 pub enum PubnubError {
-    TransportBuildError(HyperBuilderError),
+    TransportBuildError(PubNubError),
 }
 
 impl std::error::Error for PubnubError {}
@@ -41,19 +40,6 @@ struct PubnubMessage {
     payload: PubnubMessagePayload,
 }
 
-impl From<JsonValue> for PubnubMessage {
-    fn from(value: JsonValue) -> Self {
-        match serde_json::from_str::<PubnubMessage>(&value.dump()) {
-            Ok(value) => value,
-            Err(err) => {
-                println!("Error deserialising: {:?} -> {:?}", err, value);
-
-                PubnubMessage::default()
-            }
-        }
-    }
-}
-
 #[derive(Deserialize, Debug, Clone)]
 pub struct PubnubConfig {
     pubnub_publish_token: String,
@@ -76,48 +62,65 @@ impl PubnubSubscription {
         }
     }
 
-    pub async fn subscribe(&self) -> Result<(), PubnubError> {
-        let transport = Hyper::new()
-            .publish_key(self.config.pubnub_publish_token.clone())
-            .subscribe_key(self.config.pubnub_subscribe_token.clone())
+    pub async fn subscribe (&self) -> Result<(), PubnubError> {
+        let client = PubNubClientBuilder::with_reqwest_transport()
+            .with_keyset(Keyset {
+                subscribe_key: self.config.pubnub_subscribe_token.clone(),
+                publish_key: Some(self.config.pubnub_publish_token.clone()),
+                secret_key: None,
+            })
+            .with_user_id("cujo_service")
             .build();
 
-        let transport = match transport {
-            Ok(transport) => transport,
-            Err(err) => return Err(PubnubError::TransportBuildError(err)),
+        let client = match client {
+            Ok(client) => client,
+            Err(err) => return Err(PubnubError::TransportBuildError(err))
         };
 
-        let mut pubnub = Builder::new()
-            .transport(transport)
-            .runtime(TokioGlobal)
-            .build();
+        let channel_name = self.config.pubnub_channel_name.clone();
 
-        let channel_name: channel::Name = self.config.pubnub_channel_name.parse().unwrap();
-        let mut stream = pubnub.subscribe(channel_name.clone()).await;
+        let subscription = client
+            .subscribe()
+            .channels([channel_name.clone()].to_vec())
+            .heartbeat(10)
+            .execute();
 
+        let subscription = match subscription {
+            Ok(subscription) => subscription,
+            Err(err) => return Err(PubnubError::TransportBuildError(err))
+        };
+   
         let cache = self.cache_regenerator.clone();
 
         tokio::task::spawn(async move {
-            loop {
-                log::info!("⏰ Waiting for Pubnub message on channel {}", channel_name);
+            log::info!("⏰ Waiting for Pubnub message on channel - {}", channel_name);
 
-                match stream.next().await {
-                    Some(message) => {
-                        log::info!(
-                            "📩 Received Pubnub message on channel {} -> {:?}",
-                            channel_name,
-                            message
-                        );
+            let mut message_stream = subscription.message_stream();
+            while let Some(update) = message_stream.next().await {
+                match update {
+                    Update::Message(message) => {
+                        log::info!("📩 Received Pubnub message on channel {} -> {:?}", channel_name, message);
 
-                        let message: PubnubMessage = message.json.into();
-                        match message.payload.content_type.as_str() {
+                        // Deserialize the message payload as you wish
+                        let pubnub_message = match serde_json::from_slice::<PubnubMessage>(&message.data) {
+                            Ok(message) => message,
+                            Err(err) => {
+                                log::error!("❌ Error deserialising: {:?} -> {:?}", err, message);
+
+                                continue;
+                            }
+                        };
+
+                        log::info!("📩 Received Pubnub message on channel {} -> {:?}", channel_name, pubnub_message);
+
+                        match pubnub_message.payload.content_type.as_str() {
                             "blogPost" => cache.regenerate_blog_cache().await,
                             _ => cache.regenerate_cv_cache().await,
                         };
 
                         log::info!("🥙 Pubnub message consumed for channel {}", channel_name);
                     }
-                    None => continue,
+                    _ => {} // Ignore other Update variants
                 }
             }
         });
