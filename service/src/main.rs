@@ -7,7 +7,7 @@ extern crate log;
 use std::sync::Arc;
 
 use actix_cors::Cors;
-use actix_web::{http, middleware::Logger, web::{Data, self}, App, HttpServer, HttpResponse};
+use actix_web::{http, middleware::Logger, web::Data, App, HttpServer};
 use contentful::{ContentfulClient, ContentfulConfig};
 use dotenv::dotenv;
 use listenfd::ListenFd;
@@ -84,7 +84,6 @@ async fn main() -> std::io::Result<()> {
             .wrap(Logger::default())
             .app_data(schema)
             .configure(configure_graphql_service)
-            .default_service(web::to(|| HttpResponse::NotFound()))
     });
 
     server = match ListenFd::from_env().take_tcp_listener(0)? {

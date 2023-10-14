@@ -9,6 +9,10 @@ use super::schema::CujoSchema;
 struct GraphQL;
 
 impl GraphQL {
+    async fn status() -> impl Responder {
+        HttpResponse::Ok().body("Ok")
+    }
+
     async fn graphql(schema: web::Data<CujoSchema>, req: GraphQLRequest) -> GraphQLResponse {
         schema.0.execute(req.into_inner()).await.into()
     }
@@ -24,5 +28,6 @@ impl GraphQL {
 
 pub fn configure_graphql_service(cfg: &mut web::ServiceConfig) {
     cfg.service(web::resource("/").route(web::post().to(GraphQL::graphql)))
-        .service(web::resource("/playground").route(web::get().to(GraphQL::graphql_playground)));
+        .service(web::resource("/playground").route(web::get().to(GraphQL::graphql_playground)))
+        .service(web::resource("/status").route(web::get().to(GraphQL::status)));
 }
