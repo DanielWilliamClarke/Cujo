@@ -13,7 +13,7 @@ export namespace Experience {
   const pdfStyles = StyleSheet.create({
     experience: {
       fontSize: 10,
-      marginVertical: 10,
+      marginVertical: 5,
     },
     company: {
       fontSize: 10
@@ -60,6 +60,12 @@ export namespace Experience {
       [BLOCKS.DOCUMENT]: (_: any, children: ReactNode) => <View>{children}</View>,
       [BLOCKS.PARAGRAPH]: (_: any, children: ReactNode) => (
         <View>{children}</View>
+      ),
+      [BLOCKS.LIST_ITEM]: (_: any, children: ReactNode) => (
+        <View style={{ flexDirection: "row", marginVertical: 4 }}>
+          <Text style={{ marginHorizontal: 8, color: '#304c89' }}>•</Text>
+          <Text style={{ width: '95%' }}>{children}</Text>
+        </View>
       )
     },
     renderText: (text: string): ReactNode => (
