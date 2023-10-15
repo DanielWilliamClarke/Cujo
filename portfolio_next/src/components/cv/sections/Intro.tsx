@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { View, StyleSheet, Text, Document } from '@react-pdf/renderer';
+import { View, StyleSheet, Text } from '@react-pdf/renderer';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { BLOCKS } from '@contentful/rich-text-types';
 
@@ -39,7 +39,8 @@ export namespace Intro {
       <View style={pdfStyles.intro}>
         <View style={pdfStyles.profile}>
           {Header.render('Mission')}
-          {documentToReactComponents(cv.about.entry.about.content[0] as unknown as Document, options)}
+          {/* Only show first paragraph */}
+          {documentToReactComponents(cv.about.entry.about.content[0] as any, options)}
         </View>
       </View>
     );
