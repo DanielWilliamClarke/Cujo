@@ -1,3 +1,5 @@
+/** @jsxImportSource theme-ui */
+
 import React, { Suspense } from 'react';
 
 import { Post } from '../model/BlogPost';
@@ -14,7 +16,7 @@ import { BlockReverseLoading } from './shared/BlockReverseLoading';
 
 const loading = (
   <BlockReverseLoading
-    style={{
+    sx={{
       height: "100vh",
       width: "auto",
     }}

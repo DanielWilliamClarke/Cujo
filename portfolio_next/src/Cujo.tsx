@@ -1,12 +1,14 @@
 
 import { Provider } from 'inversify-react';
 import { withUrqlClient } from 'next-urql';
+import { ThemeUIProvider } from 'theme-ui';
 
 import React from 'react';
 import { useQuery } from 'urql';
 import { CujoProps, cujoServiceUrl } from './CujoISR';
 import { CujoQuery } from './CujoQuery';
 import { container } from './ioc';
+import { theme } from './theme';
 
 type CujoProviderProps = {
   children: (props: CujoProps) => JSX.Element
@@ -21,7 +23,9 @@ const CujoProvider: React.FC<CujoProviderProps> = ({ children }: CujoProviderPro
 
   return (
     <Provider container={container}>
-      {children(data)}
+      <ThemeUIProvider theme={theme}>
+        {children(data)}
+      </ThemeUIProvider>
     </Provider>
   )
 }

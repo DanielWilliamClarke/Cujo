@@ -1,3 +1,5 @@
+/** @jsxImportSource theme-ui */
+
 import { GetStaticProps } from "next";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
@@ -7,7 +9,7 @@ import { CujoProps, fetchCujoProps } from "../src/CujoISR";
 
 const loading = (
     <BlockReverseLoading
-        style={{
+        sx={{
             height: "100vh",
             width: "auto",
         }}
