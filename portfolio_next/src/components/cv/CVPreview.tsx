@@ -13,6 +13,7 @@ import { Section } from '../shared/Section';
 
 import { Reveal } from '../shared/Reveal';
 import { CV } from './sections/CV';
+import { GenericComponentProps } from '../shared/props';
 
 // This is quite dumb but works
 pdfjs.GlobalWorkerOptions.workerSrc = pdfjsWorker;
@@ -58,44 +59,42 @@ const CVPreview: React.FC<CVProps> = ({ cv }: CVProps): JSX.Element => {
   }, []);
 
   return (
-    <Reveal direction="up">
-      <Section id="cv" title="Download my CV">
-        <Row>
-          <Col>
-            Please click or tap on the preview below to receive a copy 🙏
-          </Col>
-        </Row>
-        <Row className="section-content">
-          <Col className="centered featured">
-            <Reveal direction="up" delay={0.2}>
-              <PDFDownloadLink
-                document={CV.render(cv, dateService)}
-                fileName={`daniel_william_clarke_cv_${dateService.CurrentTimestamp()}.pdf`}
-                onClick={() => event("dc_user_event", {
-                  category: "CV download",
-                  label: "Via preview",
-                })} 
-              >
-                {({ url }) => {
-                  if (!url) {
-                    return <></>;
-                  }
+    <Section id="cv" title="Download my CV">
+      <Row>
+        <Col>
+          Please click or tap on the preview below to receive a copy 🙏
+        </Col>
+      </Row>
+      <Row className="section-content">
+        <Col className="centered featured">
+          <Reveal direction="up" delay={0.2}>
+            <PDFDownloadLink
+              document={CV.render(cv, dateService)}
+              fileName={`daniel_william_clarke_cv_${dateService.CurrentTimestamp()}.pdf`}
+              onClick={() => event("dc_user_event", {
+                category: "CV download",
+                label: "Via preview",
+              })}
+            >
+              {({ url }) => {
+                if (!url) {
+                  return <></>;
+                }
 
-                  return (
-                    <canvas
-                      className="pdf-canvas"
-                      ref={async (canvas: HTMLCanvasElement) =>
-                        await renderPDF(url, canvas)
-                      }
-                    />
-                  );
-                }}
-              </PDFDownloadLink>
-            </Reveal>
-          </Col>
-        </Row>
-      </Section>
-    </Reveal>
+                return (
+                  <canvas
+                    className="pdf-canvas"
+                    ref={async (canvas: HTMLCanvasElement) =>
+                      await renderPDF(url, canvas)
+                    }
+                  />
+                );
+              }}
+            </PDFDownloadLink>
+          </Reveal>
+        </Col>
+      </Row>
+    </Section>
   );
 };
 

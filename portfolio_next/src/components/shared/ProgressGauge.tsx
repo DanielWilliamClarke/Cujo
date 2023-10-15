@@ -1,11 +1,33 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import {
   buildStyles,
   CircularProgressbarWithChildren
 } from 'react-circular-progressbar';
 import VisibilitySensor from 'react-visibility-sensor';
-import { ProgressProvider } from './ProgressProvider';
 import interpolate from 'color-interpolate';
+
+type ProgressProps = {
+  valueStart: number
+  valueEnd: number
+  children: (value: number) => JSX.Element
+}
+
+const ProgressProvider: React.FC<ProgressProps> = ({ valueStart, valueEnd, children }: ProgressProps): JSX.Element => {
+  const [value, setValue] = useState(valueStart);
+
+  useEffect(() => {
+    const timeout = window.setTimeout(() => setValue(valueEnd), 0);
+    return () => window.clearTimeout(timeout);
+  });
+
+  useEffect(() => {
+    if (value !== valueEnd) {
+      setValue(valueEnd);
+    }
+  }, [valueEnd, value]);
+
+  return children(value);
+};
 
 type ProgressGaugeProps = {
   value: number

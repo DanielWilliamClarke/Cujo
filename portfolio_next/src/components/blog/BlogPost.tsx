@@ -18,22 +18,23 @@ import { DynamicImage } from '../shared/DynamicImage';
 import { Lanyard } from '../shared/Lanyard';
 import { Reveal } from '../shared/Reveal';
 import { Section } from '../shared/Section';
+import { GenericComponentProps } from '../shared/props';
 
 const SyntaxHighlighter = dynamic(() => import('react-syntax-highlighter'), {
   ssr: false
 })
 
-type BlogProps = {
+type BlogProps = GenericComponentProps & {
   id: string
   blog: Entries<Post>
 }
 
-type PostProps = {
+type PostProps = GenericComponentProps & {
   post: Post
   includes: Includes
 }
 
-export const BlogPost: React.FC<BlogProps> = ({ id, blog }: BlogProps): JSX.Element => {
+export const BlogPost: React.FC<BlogProps> = ({ position, id, blog }: BlogProps): JSX.Element => {
   const dateService = useInjection(IDateService.$);
   dateService.format('Do MMMM YYYY HH:mm:ss');
 
@@ -41,36 +42,16 @@ export const BlogPost: React.FC<BlogProps> = ({ id, blog }: BlogProps): JSX.Elem
     (post: Post) => post.id === id
   ), [blog.entries, id]);
 
-  const [href, setHref] = useState('');
-  useEffect(() => {
-    setHref(window.location.href);
-  }, [])
+  if (!post) {
+    return <></>;
+  }
 
   return (
-    <>
-      {(post != null) && (
-        <>
-          <SharePanel
-            url={href}
-            title={post.title}
-            body={post.excerpt}
-            hashtag="DCTechBlog"
-          />
-          <Head>
-            <title>{post.title}</title>
-            <meta property="og:title" content={post.title} />
-            <meta property="og:image" content={`https://${post.media?.file.url}`} />
-            <meta property="og:description" content={post.excerpt} />
-            <meta property="og:url" content={href} />
-          </Head>
-          <PostContent post={post} includes={blog.includes} />
-        </>
-      )}
-    </>
+    <PostContent position={position} post={post} includes={blog.includes} />
   );
 };
 
-const PostContent: React.FC<PostProps> = ({ post, includes }: PostProps) => {
+const PostContent: React.FC<PostProps> = ({ position, post, includes }: PostProps) => {
   const dateService = useInjection(IDateService.$);
   dateService.format('Do MMMM YYYY HH:mm');
 
@@ -139,31 +120,29 @@ const PostContent: React.FC<PostProps> = ({ post, includes }: PostProps) => {
   }), [includes]);
 
   return (
-    <Reveal direction='up'>
-      <Section id="post" title={post.title}>
-        <Lanyard className="tags" tags={post.tags} />
-        <h4 className="blog-date">
-          Last updated {updatedDate}
-        </h4>
-        {(post.media != null) && (
-          <>
-            <Row className="section-content">
-              <Col className="centered featured">
-                <DynamicImage
-                  image={post.media}
-                />
-              </Col>
-            </Row>
-            <div className="line centered" />
-          </>
-        )}
+    <Section position={position} id="post" title={post.title}>
+      <Lanyard className="tags" tags={post.tags} />
+      <h4 className="blog-date">
+        Last updated {updatedDate}
+      </h4>
+      {(post.media != null) && (
+        <>
+          <Row className="section-content">
+            <Col className="centered featured">
+              <DynamicImage
+                image={post.media}
+              />
+            </Col>
+          </Row>
+          <div className="line centered" />
+        </>
+      )}
 
-        <p className="text-muted">{stats.text}</p>
+      <p className="text-muted">{stats.text}</p>
 
-        <Row className="section-content blog-content">
-          <Col>{documentToReactComponents(post.content, options)}</Col>
-        </Row>
-      </Section>
-    </Reveal>
+      <Row className="section-content blog-content">
+        <Col>{documentToReactComponents(post.content, options)}</Col>
+      </Row>
+    </Section>
   );
 };

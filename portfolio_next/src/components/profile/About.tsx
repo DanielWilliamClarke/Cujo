@@ -1,15 +1,27 @@
+/** @jsxImportSource theme-ui */
+
 import { INLINES, MARKS } from '@contentful/rich-text-types';
-import React, { ReactNode, useMemo } from 'react';
+import React, { ReactNode, Suspense, useMemo } from 'react';
 import { Col, Row } from 'react-bootstrap';
+import { Autoplay, Pagination } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
 import { About as AboutModel } from '../../model/CVModel';
 import { Entry, Media } from '../../model/Includes';
 import { DynamicImage } from '../shared/DynamicImage';
 import { Section } from '../shared/Section';
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination } from "swiper";
 
 import { CommonNode, documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import { GenericComponentProps } from '../shared/props';
 import { Reveal } from '../shared/Reveal';
+
+const textColumnStyle = {
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  paddingX: 20,
+  textAlign: 'left',
+  width: '50%'
+}
 
 type AboutProps = {
   about: Entry<AboutModel>
@@ -50,48 +62,60 @@ export const About: React.FC<AboutProps> = ({ about }: AboutProps): JSX.Element 
       disableOnInteraction: false,
     },
     pagination: {
-        dynamicBullets: true,
+      dynamicBullets: true,
     },
     modules: [Autoplay, Pagination]
   };
 
   return (
-    <Section id="about" title="About">
-      <Row className="section-content">
-        <Col className="text-column">
-          <div className="about-section">
-            <Reveal direction="left">
-              {documentToReactComponents(about.entry.about, statementOptions)}
-            </Reveal>
-          </div>
-          <div className="about-section">
-            <Reveal direction="left" damping={0.01}>
-              {documentToReactComponents(
-                about.entry.interests,
-                options
-              )}
-            </Reveal>
-          </div>
-        </Col>
+    <Reveal direction="up">
+      <Section id="about" title="About">
+        <Row sx={{ marginY: 20 }}>
+          <Col sx={textColumnStyle}>
+            <div sx={{ marginY: 30 }}>
+              <Reveal direction="left">
+                {documentToReactComponents(about.entry.about, statementOptions)}
+              </Reveal>
+            </div>
+            <div sx={{ marginY: 30 }}>
+              <Reveal direction="left" damping={0.01}>
+                {documentToReactComponents(
+                  about.entry.interests,
+                  options
+                )}
+              </Reveal>
+            </div>
+          </Col>
 
-        <Col className="text-column">
-          <Reveal className="carousel" direction="right">
-            <Swiper
-              className="carousel"
-               {...carouselProps}
-            >
-              {about.entry.images.map((media: Media, index: number) => (
-                <SwiperSlide key={index}>
-                  <DynamicImage
-                    image={media}
-                    className="headshot"
-                  />
-                </SwiperSlide>
-              ))}
-            </Swiper>
-          </Reveal>
-        </Col>
-      </Row>
-    </Section>
+          <Col sx={textColumnStyle}>
+            <Reveal direction="right">
+              <Swiper
+                sx={{
+                  alignItems: 'center',
+                  display: 'flex',
+                  justifyContent: 'center'
+                }}
+                {...carouselProps}
+              >
+                {about.entry.images.map((media: Media, index: number) => (
+                  <SwiperSlide key={index}>
+                    <DynamicImage
+                      image={media}
+                      sx={{
+                        objectFit: 'cover',
+                        borderRadius: 12,
+                        height: 700,
+                        maxHeight: '100%',
+                        width: 'auto'
+                      }}
+                    />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </Reveal>
+          </Col>
+        </Row>
+      </Section >
+    </Reveal >
   );
 };

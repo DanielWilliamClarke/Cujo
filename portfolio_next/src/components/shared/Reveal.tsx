@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { Fragment, Suspense, useEffect, useState } from 'react';
 import { Fade, FadeProps } from 'react-awesome-reveal';
 import { useWindowSize } from '../hooks/useWindowSize';
 
@@ -23,17 +23,18 @@ export const Reveal: React.FC<RevealProps> = (
     }, [width, direction, initialDirection])
 
     return (
-        <>
+        <Fragment>
             {width && <Fade
                 triggerOnce
                 delay={0.5}
                 direction={override as any}
                 {...props}
-
                 key={index}
             >
-                {children}
+                <Suspense>
+                    {children}
+                </Suspense>
             </Fade>}
-        </>
+        </Fragment>
     )
 };

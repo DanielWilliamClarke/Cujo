@@ -1,6 +1,6 @@
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { useInjection } from 'inversify-react';
-import React, { useContext, useEffect, useMemo, useState } from 'react';
+import React, { useContext, useMemo } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import {
   VerticalTimeline,
@@ -15,8 +15,9 @@ import { Lanyard } from '../shared/Lanyard';
 import { Section } from '../shared/Section';
 import ThemeContext from '../theme/ThemeContext';
 
-import styles from '../shared/style.module.scss';
 import { useShouldAnimate } from '../hooks/useShouldAnimate';
+import { GenericComponentProps } from '../shared/props';
+import styles from '../shared/style.module.scss';
 
 type EducationProps = {
   education: Entries<EducationModel>
@@ -38,7 +39,7 @@ export const Education: React.FC<EducationProps> = ({ education }: EducationProp
   const background = useMemo(() => (styles[`${theme}-colorBrand`]), [theme]);
 
   const shouldAnimate = useShouldAnimate();
-  
+
   return (
     <Section id="education" title="Education">
       <VerticalTimeline className="timeline" animate={shouldAnimate}>
@@ -61,11 +62,11 @@ export const Education: React.FC<EducationProps> = ({ education }: EducationProp
               <Institution institution={e} />
             </VerticalTimelineElement>
           ))}
-          <VerticalTimelineElement
-            iconStyle={{ background }}
-            contentStyle={{ backgroundColor: 'transparent' }}
-            icon={<BabyIcon />}
-          />
+        <VerticalTimelineElement
+          iconStyle={{ background }}
+          contentStyle={{ backgroundColor: 'transparent' }}
+          icon={<BabyIcon />}
+        />
       </VerticalTimeline>
     </Section>
   );

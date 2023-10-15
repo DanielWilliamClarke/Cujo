@@ -10,12 +10,13 @@ import { Work } from '../../model/CVModel';
 import { Entries, Media } from '../../model/Includes';
 import { IDateService } from '../../services/DateService';
 import { IIconService } from '../../services/IconService';
+import { useShouldAnimate } from '../hooks/useShouldAnimate';
 import { DynamicImage } from '../shared/DynamicImage';
 import { Lanyard } from '../shared/Lanyard';
 import { Section } from '../shared/Section';
-import { useShouldAnimate } from '../hooks/useShouldAnimate';
 import ThemeContext from '../theme/ThemeContext';
 
+import { GenericComponentProps } from '../shared/props';
 import styles from '../shared/style.module.scss';
 
 type WorkProps = {
@@ -67,11 +68,11 @@ export const Experience: React.FC<WorkProps> = ({ work }: WorkProps): JSX.Elemen
               </VerticalTimelineElement>
             )
           )}
-          <VerticalTimelineElement
-            iconStyle={{ background }}
-            contentStyle={{ backgroundColor: 'transparent' }}
-            icon={<EducationIcon />}
-          />
+        <VerticalTimelineElement
+          iconStyle={{ background }}
+          contentStyle={{ backgroundColor: 'transparent' }}
+          icon={<EducationIcon />}
+        />
       </VerticalTimeline>
     </Section>
   );

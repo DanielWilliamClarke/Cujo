@@ -1,16 +1,17 @@
-import React, { HTMLAttributes, useCallback, useState } from 'react';
-import { Row, Col } from 'react-bootstrap';
-import { Zoom } from 'react-awesome-reveal';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { Document } from '@contentful/rich-text-types';
 import { event } from "nextjs-google-analytics";
+import React, { HTMLAttributes, useCallback, useState } from 'react';
+import { Zoom } from 'react-awesome-reveal';
+import { Col, Row } from 'react-bootstrap';
 import { debounce } from "ts-debounce";
 
+import { Skill, Skills } from '../../model/CVModel';
 import { Entry } from '../../model/Includes';
-import { Skills, Skill } from '../../model/CVModel';
 import { DevIconName } from '../shared/DevIcon';
-import { Section } from '../shared/Section';
 import { ProgressGauge } from '../shared/ProgressGauge';
+import { GenericComponentProps } from '../shared/props';
+import { Section } from '../shared/Section';
 
 type TechnicalProps = {
   skills: Entry<Skills>

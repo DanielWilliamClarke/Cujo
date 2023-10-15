@@ -13,6 +13,8 @@ import { ThemeProvider } from './theme/ThemeProvider';
 
 import dynamic from 'next/dynamic';
 import { BlockReverseLoading } from './shared/BlockReverseLoading';
+import { GenericComponentProps } from './shared/props';
+import { PositionProvider } from './shared/PositionContext';
 
 const loading = (
   <BlockReverseLoading
@@ -37,28 +39,44 @@ const CVPreview = dynamic(() => import('./cv/CVPreview'), {
   loading: () => loading
 });
 
+
+
 type AppProps = {
-  cv: CVModel
-  blog: Entries<Post>
-  children?: React.ReactNode
+  cv: CVModel;
+  blog: Entries<Post>;
+  components?: React.FC[];
 }
 
-export const Portfolio: React.FC<AppProps> = (
-  { cv, blog, children }: AppProps
-): JSX.Element => (
-  <ThemeProvider>
-    <Suspense>
-      <SketchBackstretch cv={cv} />
-    </Suspense>
-    <NavPanel />
-    <div className="app">
-      {children}
-      <Blog blog={blog} />
+export const Portfolio: React.FC<AppProps> = ({
+  cv,
+  blog,
+  components = []
+}: AppProps): JSX.Element => {
+  const baseComponents: React.FC[] = [
+    () => (<Blog blog={blog} />),
+    () => (<Suspense><CVPreview cv={cv} /></Suspense>),
+    () => (<Contact profiles={cv.about.entry.profiles} />),
+    () => (<Copyright name={cv.about.entry.name} />),
+  ];
+
+  return (
+    <ThemeProvider>
       <Suspense>
-        <CVPreview cv={cv} />
+        <SketchBackstretch cv={cv} />
       </Suspense>
-      <Contact profiles={cv.about.entry.profiles} />
-      <Copyright name={cv.about.entry.name} />
-    </div>
-  </ThemeProvider>
-);
+      <NavPanel />
+      <div className="app">
+        {
+          [
+            ...components,
+            ...baseComponents
+          ].map((Component: React.FC, index: number) => (
+            <PositionProvider position={index}>
+              <Component key={index} />
+            </PositionProvider>
+          ))
+        }
+      </div>
+    </ThemeProvider >
+  )
+};

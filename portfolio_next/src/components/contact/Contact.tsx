@@ -1,7 +1,7 @@
 import { useInjection } from 'inversify-react';
+import { event } from "nextjs-google-analytics";
 import React, { ChangeEvent, useCallback, useContext, useMemo, useState } from 'react';
 import { Button, Col, Form, Row } from 'react-bootstrap';
-import { event } from "nextjs-google-analytics";
 
 import { Zoom } from 'react-awesome-reveal';
 
@@ -12,6 +12,7 @@ import { Section } from '../shared/Section';
 import { DividerProps } from '../shared/TriangleDivider';
 import ThemeContext from '../theme/ThemeContext';
 
+import { GenericComponentProps } from '../shared/props';
 import { Reveal } from '../shared/Reveal';
 import styles from '../shared/style.module.scss';
 
@@ -39,74 +40,72 @@ export const Contact: React.FC<ContactProps> = ({ profiles }: ContactProps): JSX
   }, [contactService]);
 
   return (
-    <Reveal direction='up'>
-      <Section
-        id="contact"
-        title="Contact"
-        withDivider={divider}
-      >
-        <Row className="section-content socials">
-          {profiles.map(
-            (p: Profile): JSX.Element => (
-              <a
-                className="social-platform"
-                href={p.url}
-                rel="noopener noreferrer"
-                target="_blank"
-                key={p.url}
-                onClick={() => {
-                  event("dc_user_event", {
-                    category: "Contact click-through",
-                    label: `Click through to: ${p.url}`
-                  });
-                }}
-              >
-                <DevIconName icon={p.brand} />
-              </a>
-            )
-          )}
-        </Row>
-
-        <div className="centered long-line" />
-
-        <Row className="section-content">
-          <div className="contact-form centered">
-            <Row className="form-title">
-              <Col>
-                <h3>Get in touch!</h3>
-              </Col>
-            </Row>
-            <Form onSubmit={async () => handleSubmit}>
-              <Form.Group controlId="formEmail">
-                <Form.Control
-                  type="email"
-                  name="email"
-                  className="contact-input"
-                  placeholder="email"
-                />
-              </Form.Group>
-              <Form.Group controlId="formMessage">
-                <Form.Control
-                  as="textarea"
-                  name="message"
-                  rows={5}
-                  className="contact-input"
-                  placeholder="message"
-                />
-              </Form.Group>
-              <Button variant="outline-dark" type="submit">
-                Send
-              </Button>
-            </Form>
-          </div>
-        </Row>
-
-        {status && (
-          <Zoom>
-            <div className="contact-response">Thanks!</div>
-          </Zoom>
+    <Section
+      id="contact"
+      title="Contact"
+      withDivider={divider}
+    >
+      <Row className="section-content socials">
+        {profiles.map(
+          (p: Profile): JSX.Element => (
+            <a
+              className="social-platform"
+              href={p.url}
+              rel="noopener noreferrer"
+              target="_blank"
+              key={p.url}
+              onClick={() => {
+                event("dc_user_event", {
+                  category: "Contact click-through",
+                  label: `Click through to: ${p.url}`
+                });
+              }}
+            >
+              <DevIconName icon={p.brand} />
+            </a>
+          )
         )}
-      </Section>
-    </Reveal>
+      </Row>
+
+      <div className="centered long-line" />
+
+      <Row className="section-content">
+        <div className="contact-form centered">
+          <Row className="form-title">
+            <Col>
+              <h3>Get in touch!</h3>
+            </Col>
+          </Row>
+          <Form onSubmit={async () => handleSubmit}>
+            <Form.Group controlId="formEmail">
+              <Form.Control
+                type="email"
+                name="email"
+                className="contact-input"
+                placeholder="email"
+              />
+            </Form.Group>
+            <Form.Group controlId="formMessage">
+              <Form.Control
+                as="textarea"
+                name="message"
+                rows={5}
+                className="contact-input"
+                placeholder="message"
+              />
+            </Form.Group>
+            <Button variant="outline-dark" type="submit">
+              Send
+            </Button>
+          </Form>
+        </div>
+      </Row>
+
+      {status && (
+        <Zoom>
+          <div className="contact-response">Thanks!</div>
+        </Zoom>
+      )}
+    </Section>
   );
 };

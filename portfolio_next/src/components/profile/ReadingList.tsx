@@ -1,10 +1,11 @@
 import { Row } from "react-bootstrap";
+import { Autoplay, Pagination } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
 import { Book, BookProgress } from "../../model/CVModel";
 import { Entries } from "../../model/Includes";
 import { DynamicImage } from "../shared/DynamicImage";
+import { GenericComponentProps } from "../shared/props";
 import { Section } from "../shared/Section";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination } from "swiper";
 
 type ReadingListProps = {
     readingList: Entries<Book>
@@ -34,8 +35,8 @@ export const ReadingList: React.FC<ReadingListProps> = ({ readingList }: Reading
         },
         rewind: true,
         autoplay: {
-          delay: 5000,
-          disableOnInteraction: false,
+            delay: 5000,
+            disableOnInteraction: false,
         },
         pagination: {
             dynamicBullets: true,
@@ -62,7 +63,7 @@ export const ReadingList: React.FC<ReadingListProps> = ({ readingList }: Reading
                     {...props}
                 >
                     {
-                            Object.values(booksByProgress)
+                        Object.values(booksByProgress)
                             .flat()
                             .reverse()
                             .map((book: Book, index: number) => (

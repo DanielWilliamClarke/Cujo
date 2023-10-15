@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { keyframes } from '@emotion/react'
-import { ClassNameProps } from './props';
+import { GenericComponentProps } from './props';
 
 const reverseRotate = keyframes`
   33% {
@@ -18,7 +18,7 @@ const reverseRotate = keyframes`
   }
 `
 
-type LoadingProps = ClassNameProps & {
+type LoadingProps = GenericComponentProps & {
   box: {
     speed: number
     size: number

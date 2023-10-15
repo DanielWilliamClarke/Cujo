@@ -8,6 +8,7 @@ import { Entries } from '../../model/Includes';
 import { IDateService } from '../../services/DateService';
 import { IIconService } from '../../services/IconService';
 import { Lanyard } from '../shared/Lanyard';
+import { GenericComponentProps } from '../shared/props';
 import { Reveal } from '../shared/Reveal';
 import { Section } from '../shared/Section';
 
@@ -25,27 +26,25 @@ export const Blog: React.FC<BlogProps> = ({ blog }: BlogProps): JSX.Element => {
   dateService.format('Do MMMM YYYY HH:mm:ss');
 
   return (
-    <Reveal direction='up'>
-      <Section id="blog" title="Blog">
-        <Row xs={1} md={2} className="g-4 blog-cards">
-          {(blog.entries.length > 0)
-            ? (
-              blog.entries
-                .sort(
-                  (a: Post, b: Post) =>
-                    dateService.toUnix(b.sys.updatedAt.toString()) -
-                    dateService.toUnix(a.sys.updatedAt.toString())
-                )
-                .map((post: Post, index: number) => (
-                  <BlogSummaryPanel post={post} index={index} key={index} />
-                ))
-            )
-            : (
-              <Col className="blog-placeholder centered">Coming soon</Col>
-            )}
-        </Row>
-      </Section>
-    </Reveal>
+    <Section id="blog" title="Blog">
+      <Row xs={1} md={2} className="g-4 blog-cards">
+        {(blog.entries.length > 0)
+          ? (
+            blog.entries
+              .sort(
+                (a: Post, b: Post) =>
+                  dateService.toUnix(b.sys.updatedAt.toString()) -
+                  dateService.toUnix(a.sys.updatedAt.toString())
+              )
+              .map((post: Post, index: number) => (
+                <BlogSummaryPanel post={post} index={index} key={index} />
+              ))
+          )
+          : (
+            <Col className="blog-placeholder centered">Coming soon</Col>
+          )}
+      </Row>
+    </Section>
   );
 };
 

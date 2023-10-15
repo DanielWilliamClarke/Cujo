@@ -2,9 +2,9 @@
 
 import React from 'react';
 import { Badge } from 'react-bootstrap';
-import { ClassNameProps } from './props';
+import { GenericComponentProps } from './props';
 
-type LanyardProps = ClassNameProps & {
+type LanyardProps = GenericComponentProps & {
   tags: string[]
 };
 

@@ -19,12 +19,4 @@
   }
 }
 
-@include alternating-section-colouring() using ($bg, $color, $alt-color) {
-  .triangle-divider {
-    div {
-      @include themed() {
-        border-top-color: t($alt-color);
-      }
-    }
-  }
-}
+
