@@ -1,16 +1,30 @@
-import React, { HTMLAttributes } from 'react';
-import { Badge } from 'react-bootstrap';
+/** @jsxImportSource theme-ui */
 
-type LanyardProps = HTMLAttributes<HTMLImageElement> & {
+import React from 'react';
+import { Badge } from 'react-bootstrap';
+import { ClassNameProps } from './props';
+
+type LanyardProps = ClassNameProps & {
   tags: string[]
 };
 
 export const Lanyard: React.FC<LanyardProps> = ({ tags, className }: LanyardProps): JSX.Element => {
   return (
-    <div className={`${className} lanyard`}>
+    <div className={className}>
       {tags.map(
         (tag: string): JSX.Element => (
-          <Badge key={tag} bg="portfolio" className="tag">
+          <Badge
+            key={tag}
+            bg="portfolio"
+            sx={{
+              textTransform: 'capitalize',
+              transition: 0.2,
+              '&:hover': {
+                margin: '0 1%',
+                transform: 'scale(1.05)',
+              }
+            }}
+          >
             {tag}
           </Badge>
         )
