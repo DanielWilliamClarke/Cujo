@@ -1,3 +1,5 @@
+/** @jsxImportSource theme-ui */
+
 import p5 from 'p5';
 import React, { useEffect, useMemo } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
@@ -10,6 +12,9 @@ import { ScrollIndicator } from './ScrollIndicator';
 import { DynamicImage } from '../shared/DynamicImage';
 import { Logo } from './Logo';
 import { anton } from '../shared/Font';
+import { Theme } from 'theme-ui';
+import { alpha } from '@theme-ui/color';
+import { centeredStyle } from '../shared/UtilComponents';
 
 // This stops any re-renders from creating multiple canvas'
 let rendered = false;
@@ -42,22 +47,86 @@ const SketchBackstretch: React.FC<CVProps> = React.memo(({ cv }: CVProps): JSX.E
 
   return useMemo(() => (
     <section id="home">
-      <Container className={`${anton.className} sketch-backstretch`} fluid ref={p5Ref}>
-        <div className="backstretch-headline">
-          <Logo />
-          <div className="backstretch-content">
-            <Row className="backstretch-main">
+      <Container
+        className={anton.className}
+        fluid
+        ref={p5Ref}
+        sx={(t: Theme) => ({
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          color: 'text',
+          height: '100vh',
+          textAlign: 'center',
+          transition: '0.5s',
+          marginBottom: -70,
+          background: `linear-gradient(0deg,
+               ${alpha('backGradSketchHigh', 0.6)(t)},
+               ${alpha('backGradSketchLow', 0)(t)})`,
+          opacity: 0.6,
+
+          'canvas': {
+            position: 'absolute',
+            zIndex: -1
+          }
+        })}
+      >
+        <div
+          sx={{
+            userSelect: 'none',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            flexDirection: ['column', 'row', 'row']
+          }}
+        >
+          <Logo
+            sx={{
+              paddingRight: [0, 30, 30]
+            }}
+          />
+          <div>
+            <Row
+              sx={{
+                fontSize: ['50px', 'calc(30px + 3vw)', 'calc(30px + 3vw)'],
+                lineHeight: 'calc(30px + 3vw)',
+                fontWeight: 700,
+                textShadow: '0 0 50px shadow',
+                paddingBottom: [20, 0, 0]
+              }}
+            >
               <Col>{cv.about.entry.name.toLocaleUpperCase()}</Col>
             </Row>
-            <div className="backstretch-role">
-              <Row className="backstretch-tag">
+            <div
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                flexDirection: ['column', 'row', 'row']
+              }}
+            >
+              <Row
+                sx={{
+                  fontSize: 'calc(15px + 1vw)',
+                  lineHeight: 'calc(15px + 1vw)',
+                  fontWeight: 400,
+                  textShadow: '0 0 50px shadow'
+                }}
+              >
                 <Col>{cv.about.entry.label.toLocaleUpperCase()}</Col>
               </Row>
-              <Row className="backstretch-logo">
+              <Row
+                sx={{
+                  height: 20
+                }}
+              >
                 <Col>
                   <DynamicImage
                     image={currentRole.logo}
-                    className="centered image-item work-logo"
+                    sx={{
+                      ...centeredStyle,
+                      height: 20,
+                      paddingTop: [10, 0, 0]
+                    }}
                   />
                 </Col>
               </Row>
@@ -65,10 +134,20 @@ const SketchBackstretch: React.FC<CVProps> = React.memo(({ cv }: CVProps): JSX.E
           </div>
         </div>
       </Container>
-      <Container fluid className="scroll-indicator">
-        <ScrollIndicator />
+      <Container
+        fluid
+        sx={{
+          justifyContent: 'center',
+          display: ['none', 'flex', 'flex']
+        }}
+      >
+        <ScrollIndicator
+          sx={{
+            bottom: '28%'
+          }}
+        />
       </Container>
-    </section>
+    </section >
   ), [p5Ref, cv.about.entry, currentRole]);
 });
 

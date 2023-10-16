@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { keyframes } from '@emotion/react'
 import { ThemeUICSSObject } from 'theme-ui';
+import { GenericComponentProps } from '../shared/props';
 
 const move = keyframes`
   25% {
@@ -54,15 +55,16 @@ const chevronStyle: ThemeUICSSObject = {
   }
 }
 
-export const ScrollIndicator: React.FC = (): JSX.Element => {
+export const ScrollIndicator: React.FC<GenericComponentProps> = ({ className }): JSX.Element => {
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
     window.addEventListener('scroll', () => setVisible(window.scrollY === 0));
   }, []);
-  //className={`indicator-container ${visible ? 'visible' : ''}`}
+
   return (
     <div
+      className={className}
       sx={{
         height: 24,
         width: 24,

@@ -6,6 +6,7 @@ import { IIconService } from '../../services/IconService';
 import { keyframes } from '@emotion/react'
 
 import { anton } from '../shared/Font';
+import { GenericComponentProps } from '../shared/props';
 
 const pastelRgb = keyframes`
     0% {
@@ -53,13 +54,13 @@ const pastelRgb = keyframes`
     }
 `;
 
-export const Logo: React.FC = () => {
+export const Logo: React.FC<GenericComponentProps> = ({ className }) => {
     const iconService = useInjection(IIconService.$);
     const Icon = iconService.getWithDefault("skills");
 
     return (
         <div
-            className={anton.className}
+            className={`${anton.className} ${className}`}
             sx={{
                 fontSize: 150,
                 display: 'flex',
