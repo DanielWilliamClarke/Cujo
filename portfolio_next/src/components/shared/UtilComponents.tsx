@@ -69,7 +69,7 @@ const BaseSymbol: React.FC<SymbolProps> = ({ className, symbol }) => {
             sx={{
                 '&:after': {
                     marginX: 10,
-                    content: symbol,
+                    content: `"${symbol}"`,
                     color: even ? 'accent' : 'secondary'
                 }
             }}

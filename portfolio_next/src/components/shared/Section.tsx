@@ -45,11 +45,12 @@ const headingStyles = {
 
 
 type SectionProps = {
-  id: string
-  title: string
-  noSeparator?: boolean
-  withDivider?: DividerProps
-  children?: React.ReactNode
+  id: string;
+  title?: string;
+  hideIcon?: boolean;
+  noSeparator?: boolean;
+  withDivider?: DividerProps;
+  children?: React.ReactNode;
 }
 
 export const Section: React.FC<SectionProps> = ({
@@ -85,22 +86,26 @@ export const Section: React.FC<SectionProps> = ({
         />
       )}
       <Container>
-        <Heading
-          title={props.title}
-          noSeparator={props.noSeparator}
-        />
+        {props.title && (
+          <Heading
+            title={props.title}
+            noSeparator={props.noSeparator}
+          />
+        )}
         {children}
         <ShortLine centered />
       </Container>
-      <Icon
-        className="centered"
-        sx={{
-          fontSize: 'calc(20px + 0.25vw)',
-          marginTop: 20,
-          width: 'calc(20px + .25vw)',
-          color: even ? 'accent' : 'secondary'
-        }}
-      />
+      {!props.hideIcon && (
+        <Icon
+          className="centered"
+          sx={{
+            fontSize: 'calc(20px + 0.25vw)',
+            marginTop: 20,
+            width: 'calc(20px + .25vw)',
+            color: even ? 'accent' : 'secondary'
+          }}
+        />
+      )}
     </section>
   );
 };

@@ -1,8 +1,11 @@
+/** @jsxImportSource theme-ui */
+
 import { useInjection } from 'inversify-react';
 import React from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import { IDateService } from '../../services/DateService';
-import { GenericComponentProps } from '../shared/props';
+import { Section } from '../shared/Section';
+import { Copyright as CopyrightSymbol, ShortLine } from '../shared/UtilComponents'
 
 type NameProps = {
   name: string
@@ -12,16 +15,22 @@ export const Copyright: React.FC<NameProps> = ({ name }: NameProps): JSX.Element
   const dateService = useInjection(IDateService.$);
 
   return (
-    <section className={`section copyright-footer`}>
+    <Section id='copyright' hideIcon>
       <Container fluid>
-        <Row>
+        <Row
+          sx={{
+            marginY: 10,
+            textAlign: ['center', undefined, undefined]
+          }}
+        >
           <Col>
-            <span className="copyright">Copyright</span>
+            <span>Copyright</span>
+            <CopyrightSymbol s />
             <span>{dateService.CurrentYear()} {name}</span>
           </Col>
         </Row>
-        <div className="centered short-line" />
+        <ShortLine centered />
       </Container>
-    </section>
+    </Section>
   );
 };

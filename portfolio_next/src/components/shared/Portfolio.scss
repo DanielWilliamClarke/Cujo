@@ -38,15 +38,12 @@
   content: "@";
 }
 
-.copyright:after {
-  content: "©";
-}
-
 .dash:after {
   content: "-";
 }
 
 @mixin portfolio-styling($bg, $color, $alt-color) {
+
   .short-line,
   .line,
   .long-line {
@@ -86,13 +83,11 @@
 }
 
 @mixin alternating-section-colouring() {
-  @include coloured-sections($col-bg-light, $col-accent-zing, $col-bg-dark, "odd") 
-    using ($bg, $color, $alt-color) {
-      @content($bg, $color, $alt-color);
-    }
+  @include coloured-sections($col-bg-light, $col-accent-zing, $col-bg-dark, "odd") using ($bg, $color, $alt-color) {
+    @content($bg, $color, $alt-color);
+  }
 
-  @include coloured-sections($col-bg-dark, $col-sub-brand, $col-bg-light, "even") 
-    using ($bg, $color, $alt-color) {
-      @content($bg, $color, $alt-color);
-    }
+  @include coloured-sections($col-bg-dark, $col-sub-brand, $col-bg-light, "even") using ($bg, $color, $alt-color) {
+    @content($bg, $color, $alt-color);
+  }
 }
