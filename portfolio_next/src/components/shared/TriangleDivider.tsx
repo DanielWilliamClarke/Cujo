@@ -1,16 +1,17 @@
 /** @jsxImportSource theme-ui */
 
 import React from 'react';
+import { Theme } from 'theme-ui';
+import { getColor } from '@theme-ui/color';
 
 export type DividerProps = {
   background: string;
-  foreground: string;
+  foreground?: string;
 }
 
 export const TriangleDivider: React.FC<DividerProps> = ({ background, foreground }: DividerProps): JSX.Element => {
   return (
     <div
-      className="triangle-divider"
       sx={{
         height: 0,
         width: '50%',
@@ -23,18 +24,15 @@ export const TriangleDivider: React.FC<DividerProps> = ({ background, foreground
       }}
     >
       <div
-        sx={{
+        sx={(t: Theme) => ({
           height: 0,
           width: 0,
-          borderTopColor: foreground,
-          borderLeftColor: background,
-          borderRightColor: background,
           borderLeft: '2000px solid transparent',
           borderRight: '2000px solid transparent',
-          borderTop: '100px solid',
+          borderTop: `100px solid ${getColor(t, foreground)}`,
           marginLeft: -2000,
           marginTop: -100
-        }}
+        })}
       />
     </div>
   );

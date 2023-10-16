@@ -23,8 +23,8 @@ const colors = {
     backGradSketchLow: '#18284844',
     backTextShadow: '#00000000',
 
-    contextText: '#1f242c',
-    contextInput: '#ccc',
+    contactText: '#1f242c',
+    contactInput: '#ccc',
 
     backOffWhite: '#fdfdfd',
     timelineLine: '#333',
@@ -55,8 +55,8 @@ const colors = {
             backGradSketchLow: '#18284844',
             backTextShadow: '#1d424e',
 
-            contextText: '#1f242c',
-            contextInput: '#ccc',
+            contactText: '#1f242c',
+            contactInput: '#ccc',
 
             backOffWhite: '#fdfdfd',
             timelineLine: '#fff',

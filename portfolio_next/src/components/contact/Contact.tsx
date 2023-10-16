@@ -14,7 +14,8 @@ import { Section } from '../shared/Section';
 import { DividerProps } from '../shared/TriangleDivider';
 import ThemeContext from '../theme/ThemeContext';
 
-import styles from '../shared/style.module.scss';
+import { centeredStyle, LongLine } from '../shared/UtilComponents';
+import { usePositionContext } from '../shared/PositionContext';
 
 type ContactProps = {
   profiles: Profile[]
@@ -24,10 +25,11 @@ export const Contact: React.FC<ContactProps> = ({ profiles }: ContactProps): JSX
   const contactService = useInjection(IContactService.$);
   const { theme } = useContext(ThemeContext);
   const [status, setStatus] = useState(false);
+  const { even } = usePositionContext();
 
   const divider = useMemo<DividerProps>(() => ({
-    background: styles[`${theme}-colorBrand`],
-    foreground: styles[`${theme}-colorLightBg`]
+    background: 'primary',
+    foreground: even ? 'bgLight' : 'bgDark'
   }), [theme]);
 
   const handleSubmit = useCallback(async (event: ChangeEvent<HTMLFormElement>) => {
@@ -44,12 +46,20 @@ export const Contact: React.FC<ContactProps> = ({ profiles }: ContactProps): JSX
       id="contact"
       title="Contact"
       withDivider={divider}
+      coloring={{
+        backgroundColor: 'accent',
+        color: 'contactText'
+      }}
     >
-      <Row className="section-content socials">
+      <Row
+        sx={{
+          marginY: [10, 20, 20],
+          justifyContent: 'center'
+        }}
+      >
         {profiles.map(
           (p: Profile): JSX.Element => (
             <a
-              className="social-platform"
               href={p.url}
               rel="noopener noreferrer"
               target="_blank"
@@ -59,6 +69,24 @@ export const Contact: React.FC<ContactProps> = ({ profiles }: ContactProps): JSX
                   category: "Contact click-through",
                   label: `Click through to: ${p.url}`
                 });
+              }}
+              sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: 175,
+                width: 175,
+                transition: '0.5s',
+                borderRadius: '50%',
+                marginX: 10,
+
+                '&:hover': {
+                  backgroundColor: 'contactText'
+                },
+                '&:link,&:visited': {
+                  textDecoration: 'none',
+                  color: 'contactText'
+                }
               }}
             >
               <DevIconName
@@ -84,13 +112,34 @@ export const Contact: React.FC<ContactProps> = ({ profiles }: ContactProps): JSX
         )}
       </Row>
 
-      <div className="centered long-line" />
+      <LongLine
+        centered
+        sx={{
+          backgroundColor: 'contactText'
+        }}
+      />
 
-      <Row className="section-content">
-        <div className="contact-form centered">
-          <Row className="form-title">
+      <Row
+        sx={{
+          marginY: [10, 20, 20]
+        }}
+      >
+        <div
+          sx={{
+            ...centeredStyle,
+            width: 500,
+          }}
+        >
+          <Row>
             <Col>
-              <h3>Get in touch!</h3>
+              <h3
+                sx={{
+                  color: 'contactText',
+                  textAlign: 'center'
+                }}
+              >
+                Get in touch!
+              </h3>
             </Col>
           </Row>
           <Form onSubmit={async () => handleSubmit}>
@@ -98,8 +147,18 @@ export const Contact: React.FC<ContactProps> = ({ profiles }: ContactProps): JSX
               <Form.Control
                 type="email"
                 name="email"
-                className="contact-input"
                 placeholder="email"
+                sx={{
+                  marginY: 10,
+                  backgroundColor: 'contactText',
+                  color: 'contactInput',
+                  border: '1px solid bgDark',
+
+                  '&:focus': {
+                    backgroundColor: 'contactText',
+                    color: 'contactInput',
+                  }
+                }}
               />
             </Form.Group>
             <Form.Group controlId="formMessage">
@@ -107,11 +166,27 @@ export const Contact: React.FC<ContactProps> = ({ profiles }: ContactProps): JSX
                 as="textarea"
                 name="message"
                 rows={5}
-                className="contact-input"
                 placeholder="message"
+                sx={{
+                  marginY: 10,
+                  backgroundColor: 'contactText',
+                  color: 'contactInput',
+                  border: '1px solid bgDark',
+
+                  '&:focus': {
+                    backgroundColor: 'contactText',
+                    color: 'contactInput',
+                  }
+                }}
               />
             </Form.Group>
-            <Button variant="outline-dark" type="submit">
+            <Button
+              variant="outline-dark"
+              type="submit"
+              sx={{
+                width: '100%'
+              }}
+            >
               Send
             </Button>
           </Form>
@@ -120,7 +195,14 @@ export const Contact: React.FC<ContactProps> = ({ profiles }: ContactProps): JSX
 
       {status && (
         <Zoom>
-          <div className="contact-response">Thanks!</div>
+          <div
+            sx={{
+              paddingBottom: 15,
+              transition: '2s'
+            }}
+          >
+            Thanks!
+          </div>
         </Zoom>
       )}
     </Section>

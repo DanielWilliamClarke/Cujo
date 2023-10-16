@@ -18,10 +18,11 @@ export const centeredStyle: ThemeUICSSObject = {
 }
 
 export type LineProps = GenericComponentProps & {
-    centered: boolean
+    centered: boolean;
+    colorOverride?: string;
 }
 
-const BaseLine: React.FC<LineProps> = ({ className, centered }) => {
+const BaseLine: React.FC<LineProps> = ({ className, centered, colorOverride }) => {
     const { even } = usePositionContext();
 
     return (
@@ -30,7 +31,7 @@ const BaseLine: React.FC<LineProps> = ({ className, centered }) => {
             sx={{
                 ...baseLineStyle,
                 ...(centered && centeredStyle),
-                backgroundColor: even ? 'accent' : 'secondary'
+                backgroundColor: colorOverride ?? (even ? 'accent' : 'secondary')
             }}
         />
     )

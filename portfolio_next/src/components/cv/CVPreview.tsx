@@ -1,3 +1,5 @@
+/** @jsxImportSource theme-ui */
+
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import { useInjection } from 'inversify-react';
 import React, { useCallback } from 'react';
@@ -13,7 +15,7 @@ import { Section } from '../shared/Section';
 
 import { Reveal } from '../shared/Reveal';
 import { CV } from './sections/CV';
-import { GenericComponentProps } from '../shared/props';
+import { centeredStyle } from '../shared/UtilComponents';
 
 // This is quite dumb but works
 pdfjs.GlobalWorkerOptions.workerSrc = pdfjsWorker;
@@ -60,13 +62,25 @@ const CVPreview: React.FC<CVProps> = ({ cv }: CVProps): JSX.Element => {
 
   return (
     <Section id="cv" title="Download my CV">
-      <Row>
+      <Row
+        sx={{
+          marginY: 30
+        }}
+      >
         <Col>
           Please click or tap on the preview below to receive a copy 🙏
         </Col>
       </Row>
-      <Row className="section-content">
-        <Col className="centered featured">
+      <Row
+        sx={{
+          marginY: [10, 20, 20],
+        }}
+      >
+        <Col
+          sx={{
+            ...centeredStyle
+          }}
+        >
           <Reveal direction="up" delay={0.2}>
             <PDFDownloadLink
               document={CV.render(cv, dateService)}
@@ -78,12 +92,20 @@ const CVPreview: React.FC<CVProps> = ({ cv }: CVProps): JSX.Element => {
             >
               {({ url }) => {
                 if (!url) {
-                  return <></>;
+                  return undefined;
                 }
 
                 return (
                   <canvas
-                    className="pdf-canvas"
+                    sx={{
+                      borderRadius: 12,
+                      marginY: 20,
+                      transition: '0.5s',
+                      boxShadow: '0 0 25px shadow',
+                      '&:hover': {
+                        transform: 'scale(1.05)'
+                      }
+                    }}
                     ref={async (canvas: HTMLCanvasElement) =>
                       await renderPDF(url, canvas)
                     }

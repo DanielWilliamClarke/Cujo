@@ -5,16 +5,15 @@ import React from 'react';
 import { Container } from 'react-bootstrap';
 import { IIconService } from '../../services/IconService';
 
-import { Heading } from './Heading';
+import { Heading, SectionColouring } from './Heading';
 import { DividerProps, TriangleDivider } from './TriangleDivider';
 import { usePositionContext } from './PositionContext';
-import { ShortLine } from './UtilComponents';
+import { centeredStyle, ShortLine } from './UtilComponents';
 
 
 const headingBaseStyle = {
   fontWeght: 700,
   textTransform: 'capitalize',
-  color: 'textHeading'
 }
 
 const headingStyles = {
@@ -43,7 +42,6 @@ const headingStyles = {
   }
 };
 
-
 type SectionProps = {
   id: string;
   title?: string;
@@ -51,6 +49,7 @@ type SectionProps = {
   noSeparator?: boolean;
   withDivider?: DividerProps;
   children?: React.ReactNode;
+  coloring?: SectionColouring
 }
 
 export const Section: React.FC<SectionProps> = ({
@@ -62,8 +61,6 @@ export const Section: React.FC<SectionProps> = ({
 
   const { even } = usePositionContext();
 
-  const backgroundColor = even ? 'bgDark' : 'bgLight';
-
   return (
     <section
       id={props.id}
@@ -72,17 +69,16 @@ export const Section: React.FC<SectionProps> = ({
         margin: '0 auto',
         paddingY: 75,
         position: 'relative',
-        color: 'text',
         ...headingStyles,
-        backgroundColor
+        ...(props.coloring ?? {
+          color: 'text',
+          backgroundColor: even ? 'bgDark' : 'bgLight'
+        })
       }}
     >
       {props.withDivider && (
         <TriangleDivider
-          {...{
-            ...props.withDivider,
-            foreground: backgroundColor
-          }}
+          {...props.withDivider}
         />
       )}
       <Container>
@@ -90,19 +86,23 @@ export const Section: React.FC<SectionProps> = ({
           <Heading
             title={props.title}
             noSeparator={props.noSeparator}
+            coloring={props.coloring}
           />
         )}
         {children}
-        <ShortLine centered />
+        <ShortLine
+          centered
+          colorOverride={props.coloring?.color}
+        />
       </Container>
       {!props.hideIcon && (
         <Icon
-          className="centered"
           sx={{
+            ...centeredStyle,
             fontSize: 'calc(20px + 0.25vw)',
             marginTop: 20,
             width: 'calc(20px + .25vw)',
-            color: even ? 'accent' : 'secondary'
+            color: props.coloring?.color ?? (even ? 'accent' : 'secondary')
           }}
         />
       )}

@@ -8,38 +8,42 @@ import { usePositionContext } from './PositionContext';
 import { GenericComponentProps } from './props';
 import { Line } from './UtilComponents';
 
-type HeadingProps = GenericComponentProps & {
+export type SectionColouring = {
+  backgroundColor: string,
+  color: string
+};
+
+type HeadingProps = {
   title: string
   noSeparator?: boolean
+  coloring?: SectionColouring
 }
 
 export const Heading: React.FC<HeadingProps> = ({
-  position = 0,
   title,
-  noSeparator
+  noSeparator,
+  coloring
 }: HeadingProps): JSX.Element => {
-  const { even } = usePositionContext();
-
   return (
     <Row>
       <Col>
         <h2
           className={`${anton.className}`}
           sx={{
-            color: 'textTitle',
             display: 'block',
             fontSize: '2.25em',
             fontWeight: 700,
             margin: '0 0 15px',
             padding: 0,
             textAlign: 'center',
-            textTransform: 'capitalize'
+            textTransform: 'capitalize',
+            color: coloring?.color
           }}
         >
           {title}
         </h2>
         {!noSeparator && (
-          <Line centered />
+          <Line centered colorOverride={coloring?.color} />
         )}
       </Col>
     </Row>
