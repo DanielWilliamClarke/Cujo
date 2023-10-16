@@ -1,40 +1,39 @@
+/** @jsxImportSource theme-ui */
+
 import { documentToPlainTextString } from '@contentful/rich-text-plain-text-renderer';
 import { CommonNode, documentToReactComponents } from '@contentful/rich-text-react-renderer';
-import { BLOCKS, MARKS, INLINES } from '@contentful/rich-text-types';
+import { BLOCKS, INLINES, MARKS } from '@contentful/rich-text-types';
 
 import { useInjection } from 'inversify-react';
-import React, { ReactNode, useEffect, useMemo, useState } from 'react';
+import React, { Fragment, ReactNode, useEffect, useMemo, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { obsidian } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
 import readingTime from 'reading-time';
 
 import dynamic from 'next/dynamic';
-import Head from 'next/head';
 import { Post } from '../../model/BlogPost';
 import { Entries, getAsset, Includes } from '../../model/Includes';
 import { IDateService } from '../../services/DateService';
-import { SharePanel } from '../nav/SharePanel';
 import { DynamicImage } from '../shared/DynamicImage';
 import { Lanyard } from '../shared/Lanyard';
-import { Reveal } from '../shared/Reveal';
 import { Section } from '../shared/Section';
-import { GenericComponentProps } from '../shared/props';
+import { centeredStyle, Line, LongLine } from '../shared/UtilComponents';
 
 const SyntaxHighlighter = dynamic(() => import('react-syntax-highlighter'), {
   ssr: false
 })
 
-type BlogProps = GenericComponentProps & {
+type BlogProps = {
   id: string
   blog: Entries<Post>
 }
 
-type PostProps = GenericComponentProps & {
+type PostProps = {
   post: Post
   includes: Includes
 }
 
-export const BlogPost: React.FC<BlogProps> = ({ position, id, blog }: BlogProps): JSX.Element => {
+export const BlogPost: React.FC<BlogProps> = ({ id, blog }: BlogProps): JSX.Element => {
   const dateService = useInjection(IDateService.$);
   dateService.format('Do MMMM YYYY HH:mm:ss');
 
@@ -47,11 +46,14 @@ export const BlogPost: React.FC<BlogProps> = ({ position, id, blog }: BlogProps)
   }
 
   return (
-    <PostContent position={position} post={post} includes={blog.includes} />
+    <PostContent
+      post={post}
+      includes={blog.includes}
+    />
   );
 };
 
-const PostContent: React.FC<PostProps> = ({ position, post, includes }: PostProps) => {
+const PostContent: React.FC<PostProps> = ({ post, includes }: PostProps) => {
   const dateService = useInjection(IDateService.$);
   dateService.format('Do MMMM YYYY HH:mm');
 
@@ -67,10 +69,15 @@ const PostContent: React.FC<PostProps> = ({ position, post, includes }: PostProp
     renderMark: {
       [MARKS.CODE]: (text: ReactNode): JSX.Element => (
         <SyntaxHighlighter
-          className="code-snippet"
           language="rust"
           style={obsidian}
           showLineNumbers
+          sx={{
+            borderRadius: 12,
+            marginY: 50,
+            width: '100%',
+            boxShadow: '0 0 25px shadow'
+          }}
         >
           {text as string}
         </SyntaxHighlighter>
@@ -78,13 +85,17 @@ const PostContent: React.FC<PostProps> = ({ position, post, includes }: PostProp
     },
     renderNode: {
       [BLOCKS.HR]: () => (
-        <div className="long-line centered" />
+        <LongLine centered />
       ),
       [INLINES.HYPERLINK]: (
         node: CommonNode,
         children: ReactNode
       ) => (
-        <a href={node.data.uri} target="_blank" rel="noopener noreferrer">
+        <a
+          href={node.data.uri}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           {children}
         </a>
       ),
@@ -92,7 +103,13 @@ const PostContent: React.FC<PostProps> = ({ position, post, includes }: PostProp
         _: CommonNode,
         children: ReactNode
       ) => (
-        <div className='blog-paragraph'>{children}</div>
+        <div
+          sx={{
+            paddingBottom: 10,
+          }}
+        >
+          {children}
+        </div>
       ),
       [BLOCKS.EMBEDDED_ASSET]: (
         node: CommonNode
@@ -107,10 +124,24 @@ const PostContent: React.FC<PostProps> = ({ position, post, includes }: PostProp
         }
 
         return (
-          <Row className="section-content">
-            <Col className="centered featured">
+          <Row
+            sx={{
+              marginY: [10, 20, 20]
+            }}
+          >
+            <Col
+              sx={{
+                ...centeredStyle,
+                textAlign: 'center'
+              }}
+            >
               <DynamicImage
                 image={media}
+                sx={{
+                  borderRadius: 12,
+                  height: 'auto',
+                  maxWidth: '100%'
+                }}
               />
             </Col>
           </Row>
@@ -120,29 +151,63 @@ const PostContent: React.FC<PostProps> = ({ position, post, includes }: PostProp
   }), [includes]);
 
   return (
-    <Section position={position} id="post" title={post.title}>
-      <Lanyard className="tags" tags={post.tags} />
-      <h4 className="blog-date">
+    <Section id="post" title={post.title}>
+      <Lanyard tags={post.tags} />
+      <h4
+        sx={{
+          textAlign: 'center'
+        }}
+      >
         Last updated {updatedDate}
       </h4>
       {(post.media != null) && (
-        <>
-          <Row className="section-content">
-            <Col className="centered featured">
+        <Fragment>
+          <Row
+            sx={{
+              marginY: [10, 20, 20]
+            }}
+          >
+            <Col
+              sx={{
+                ...centeredStyle,
+                textAlign: 'center'
+              }}
+            >
               <DynamicImage
                 image={post.media}
+                sx={{
+                  borderRadius: 12,
+                  height: 'auto',
+                  maxWidth: '100%'
+                }}
               />
             </Col>
           </Row>
-          <div className="line centered" />
-        </>
+          <Line centered />
+        </Fragment>
       )}
 
-      <p className="text-muted">{stats.text}</p>
+      <p
+        sx={{
+          marginTop: 10,
+          textAlign: 'center',
+          color: 'muted'
+        }}
+      >
+        {stats.text}
+      </p>
 
-      <Row className="section-content blog-content">
+      <Row
+        sx={{
+          textAlign: 'left',
+          marginY: [10, 20, 20],
+          "h1,h2,h3,h4,h5,h6": {
+            paddingTop: 20
+          }
+        }}
+      >
         <Col>{documentToReactComponents(post.content, options)}</Col>
       </Row>
-    </Section>
+    </Section >
   );
 };

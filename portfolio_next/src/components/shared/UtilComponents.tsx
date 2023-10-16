@@ -8,7 +8,8 @@ import { GenericComponentProps } from './props';
 const baseLineStyle: ThemeUICSSObject = {
     display: 'block',
     height: 1,
-    padding: 0
+    padding: 0,
+    marginY: 10
 }
 
 export const centeredStyle: ThemeUICSSObject = {

@@ -1,3 +1,5 @@
+/** @jsxImportSource theme-ui */
+
 import { documentToPlainTextString } from '@contentful/rich-text-plain-text-renderer';
 import { useInjection } from 'inversify-react';
 import React, { useEffect, useState } from 'react';
@@ -8,9 +10,9 @@ import { Entries } from '../../model/Includes';
 import { IDateService } from '../../services/DateService';
 import { IIconService } from '../../services/IconService';
 import { Lanyard } from '../shared/Lanyard';
-import { GenericComponentProps } from '../shared/props';
 import { Reveal } from '../shared/Reveal';
 import { Section } from '../shared/Section';
+import { centeredStyle } from '../shared/UtilComponents';
 
 export type BlogProps = {
   blog: Entries<Post>
@@ -27,7 +29,14 @@ export const Blog: React.FC<BlogProps> = ({ blog }: BlogProps): JSX.Element => {
 
   return (
     <Section id="blog" title="Blog">
-      <Row xs={1} md={2} className="g-4 blog-cards">
+      <Row
+        xs={1}
+        md={2}
+        className="g-4"
+        sx={{
+          paddingY: 20
+        }}
+      >
         {(blog.entries.length > 0)
           ? (
             blog.entries
@@ -41,7 +50,14 @@ export const Blog: React.FC<BlogProps> = ({ blog }: BlogProps): JSX.Element => {
               ))
           )
           : (
-            <Col className="blog-placeholder centered">Coming soon</Col>
+            <Col
+              sx={{
+                ...centeredStyle,
+                textAlign: 'center'
+              }}
+            >
+              Coming soon
+            </Col>
           )}
       </Row>
     </Section>
@@ -68,26 +84,68 @@ const BlogSummaryPanel: React.FC<BlogSummaryProps> = ({ post, index }: BlogSumma
   return (
     <Col>
       <Reveal index={index}>
-        <Card key={post.id} bg="dark">
+        <Card
+          key={post.id}
+          bg="dark"
+          sx={{
+            border: 0,
+            borderRadius: 12,
+            marginY: 10,
+            textAlign: 'left'
+          }}
+        >
           <Nav navbarScroll>
-            <Nav.Link href={`/blog/${post.id}`}>
+            <Nav.Link
+              href={`/blog/${post.id}`}
+              sx={{
+                width: '100%',
+                padding: 0,
+
+                '&:link,&:visited': {
+                  textDecoration: 'none'
+                }
+              }}
+            >
               {(post.media != null)
                 ? (
                   <Card.Img
                     variant="top"
                     src={post.media.file.url}
                     alt={post.media.description}
+                    sx={{
+                      height: 250,
+                      objectFit: 'cover',
+                      borderTopRightRadius: 12,
+                      borderTopLeftRadius: 12
+                    }}
                   />
                 )
                 : (
-                  <Icon />
+                  <Icon
+                    sx={{
+                      maxHeight: 100,
+                      marginY: 50,
+                      width: '100%',
+                      color: 'muted'
+                    }}
+                  />
                 )}
             </Nav.Link>
           </Nav>
 
           <Card.Body>
             <Nav navbarScroll>
-              <Nav.Link href={`/blog/${post.id}`}>
+              <Nav.Link
+                href={`/blog/${post.id}`}
+                sx={{
+                  width: '100%',
+                  padding: 0,
+
+                  '&:link,&:visited': {
+                    textDecoration: 'none'
+                  }
+                }}
+              >
                 <Card.Title>{post.title}</Card.Title>
               </Nav.Link>
             </Nav>
@@ -101,7 +159,11 @@ const BlogSummaryPanel: React.FC<BlogSummaryProps> = ({ post, index }: BlogSumma
             <small className="text-muted">{stats.text}</small>
           </Card.Body>
 
-          <Card.Footer>
+          <Card.Footer
+            sx={{
+              border: 0
+            }}
+          >
             <small className="text-muted">
               Published {publishedDate}
             </small>
