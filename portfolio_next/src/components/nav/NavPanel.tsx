@@ -133,6 +133,7 @@ export const NavPanel: React.FC = (): JSX.Element => {
                   sx={{
                     margin: 'auto 0',
                     marginLeft: 10,
+
                     '@media screen and (max-width: 950px)': {
                       display: 'none'
                     }

@@ -1,3 +1,5 @@
+/** @jsxImportSource theme-ui */
+
 import React, { useCallback, useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
 import { Reveal } from '../shared/Reveal';
@@ -47,7 +49,29 @@ export const SharePanel: React.FC<ShareProps> = ({ url, title, body, hashtag }: 
   const size: number = 40;
 
   return (
-    <Container className="share-panel">
+    <Container
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        position: 'fixed',
+        top: '40%',
+        left: 0,
+        zIndex: 9999,
+        listStyle: 'none',
+        margin: 0,
+        paddingLeft: 0,
+        transition: '0.5s',
+        width: 40,
+
+        '@media screen and (max-width: 600px)': {
+          flexDirection: 'unset',
+          justifyContent: 'center',
+          padding: 0,
+          top: '97%',
+          width: '100%'
+        }
+      }}
+    >
       {show && (
         <Reveal direction={slim ? 'up' : 'left'}>
           <LinkedinShareButton
