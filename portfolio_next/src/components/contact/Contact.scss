@@ -48,42 +48,19 @@
         @include themed() {
           background-color: #{t($col-contact-text)}cc;
         }
-
-        .dev-icon {
-          transform: scale(1.2);
-          transition-delay: 0.1s;
-
-          @include themed() {
-            color: t($col-main-brand) !important;
-          }
-        }
       }
     }
 
     a {
+
       &:link,
       &:visited {
         text-decoration: none;
+
         @include themed() {
           color: t($col-contact-text);
         }
       }
-    }
-  }
-
-  .dev-icon {
-    width: 100%;
-
-    .icon-override,
-    .icon {
-      font-size: 75px;
-      width: 75px;
-    }
-
-    .icon-name {
-      font-size: 1rem;
-      font-weight: 400;
-      margin: 0.2rem;
     }
   }
 
@@ -113,6 +90,7 @@
 
 @media screen and (max-width: 700px) {
   .contact {
+
     .form-title,
     .contact-response {
       text-align: center;

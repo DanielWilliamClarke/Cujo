@@ -2,16 +2,6 @@
 
 import React from 'react';
 
-// @include alternating-section-colouring() using ($bg, $color, $alt-color) {
-//   .triangle-divider {
-//     div {
-//       @include themed() {
-//         border-top-color: t($alt-color);
-//       }
-//     }
-//   }
-// }
-
 export type DividerProps = {
   background: string;
   foreground: string;
@@ -19,8 +9,8 @@ export type DividerProps = {
 
 export const TriangleDivider: React.FC<DividerProps> = ({ background, foreground }: DividerProps): JSX.Element => {
   return (
-    <div 
-      className="triangle-divider" 
+    <div
+      className="triangle-divider"
       sx={{
         height: 0,
         width: '50%',
@@ -32,7 +22,7 @@ export const TriangleDivider: React.FC<DividerProps> = ({ background, foreground
         boxSizing: 'content-box',
       }}
     >
-      <div 
+      <div
         sx={{
           height: 0,
           width: 0,
@@ -41,7 +31,7 @@ export const TriangleDivider: React.FC<DividerProps> = ({ background, foreground
           borderRightColor: background,
           borderLeft: '2000px solid transparent',
           borderRight: '2000px solid transparent',
-          borderTop: '100px solid transparent',
+          borderTop: '100px solid',
           marginLeft: -2000,
           marginTop: -100
         }}

@@ -17,10 +17,11 @@ type TechnicalProps = {
   skills: Entry<Skills>
 }
 
-type SkillsProps = HTMLAttributes<HTMLDivElement> & {
-  summary: Document
-  skills: Skill[]
-  search: string
+type SkillsProps = {
+  summary: Document;
+  skills: Skill[];
+  search: string;
+  size?: number;
 };
 
 const emitSearchEvent = debounce((label: string) => {
@@ -75,7 +76,7 @@ export const Technical: React.FC<TechnicalProps> = ({ skills }: TechnicalProps):
         skills={skills.entry.used}
         summary={skills.entry.usedSummary}
         search={search}
-        className="skills-small"
+        size={30}
       />
 
       <Row className="section-content">
@@ -90,7 +91,7 @@ export const Technical: React.FC<TechnicalProps> = ({ skills }: TechnicalProps):
 };
 
 const SkillsSection: React.FC<SkillsProps> = (
-  { skills, summary, search, className = '' }: SkillsProps
+  { skills, summary, search, size = 55 }: SkillsProps
 ) => {
   const gaugeColors = ['#FB6962', '#FB6962', '#FCFC99', '#0CC078', '#0CC078'];
 
@@ -105,7 +106,20 @@ const SkillsSection: React.FC<SkillsProps> = (
     .sort((a: Skill, b: Skill) => b.level - a.level)
     .map(({ level, icon }: Skill, index: number) => (
       <ProgressGauge key={index} value={level} colors={gaugeColors}>
-        {(color: string) => <DevIconName icon={icon} color={color} />}
+        {(color: string) => <DevIconName
+          icon={icon}
+          color={color}
+          hoverColor={color}
+          size={size}
+          sx={{
+            width: '100%',
+            textAlign: ['center', undefined, undefined]
+          }}
+          textStyle={{
+            fontSize: '0.6rem',
+            margin: '0.2rem'
+          }}
+        />}
       </ProgressGauge>
     ));
 
@@ -118,7 +132,7 @@ const SkillsSection: React.FC<SkillsProps> = (
       <Row className="section-content">
         <Col>{documentToReactComponents(summary)}</Col>
       </Row>
-      <Row className={`skill-items ${className}`}>
+      <Row className={`skill-items`}>
         <Zoom triggerOnce cascade damping={0.01} className="col centered">
           {filteredSkills}
         </Zoom>

@@ -2,15 +2,13 @@
 
 import { useInjection } from 'inversify-react';
 import React from 'react';
-import { SxProp } from 'theme-ui';
 import { Container } from 'react-bootstrap';
 import { IIconService } from '../../services/IconService';
 
 import { Heading } from './Heading';
-import { GenericComponentProps } from './props';
 import { DividerProps, TriangleDivider } from './TriangleDivider';
-import { BackgroundColor } from 'styled-icons/foundation';
 import { usePositionContext } from './PositionContext';
+import { ShortLine } from './UtilComponents';
 
 
 const headingBaseStyle = {
@@ -63,6 +61,8 @@ export const Section: React.FC<SectionProps> = ({
 
   const { even } = usePositionContext();
 
+  const backgroundColor = even ? 'bgDark' : 'bgLight';
+
   return (
     <section
       id={props.id}
@@ -73,11 +73,16 @@ export const Section: React.FC<SectionProps> = ({
         position: 'relative',
         color: 'text',
         ...headingStyles,
-        backgroundColor: even ? 'bgDark' : 'bgLight'
+        backgroundColor
       }}
     >
       {props.withDivider && (
-        <TriangleDivider {...props.withDivider} />
+        <TriangleDivider
+          {...{
+            ...props.withDivider,
+            foreground: backgroundColor
+          }}
+        />
       )}
       <Container>
         <Heading
@@ -85,11 +90,7 @@ export const Section: React.FC<SectionProps> = ({
           noSeparator={props.noSeparator}
         />
         {children}
-        <div className="centered short-line"
-          sx={{
-            backgroundColor: even ? 'accent' : 'secondary'
-          }}
-        />
+        <ShortLine centered />
       </Container>
       <Icon
         className="centered"

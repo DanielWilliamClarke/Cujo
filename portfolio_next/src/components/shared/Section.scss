@@ -79,6 +79,7 @@
 }
 
 @include alternating-section-colouring() using ($bg, $color, $alt-color) {
+
     // Set the background color of the section here
     @include themed() {
         background-color: t($bg);

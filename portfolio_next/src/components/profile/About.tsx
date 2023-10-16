@@ -1,7 +1,7 @@
 /** @jsxImportSource theme-ui */
 
 import { INLINES, MARKS } from '@contentful/rich-text-types';
-import React, { ReactNode, Suspense, useMemo } from 'react';
+import React, { ReactNode, useMemo } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { Autoplay, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -11,7 +11,6 @@ import { DynamicImage } from '../shared/DynamicImage';
 import { Section } from '../shared/Section';
 
 import { CommonNode, documentToReactComponents } from '@contentful/rich-text-react-renderer';
-import { GenericComponentProps } from '../shared/props';
 import { Reveal } from '../shared/Reveal';
 
 const textColumnStyle = {

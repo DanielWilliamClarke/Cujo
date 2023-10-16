@@ -1,9 +1,9 @@
-import { SxProp } from 'theme-ui';
+import { ThemeUICSSObject } from 'theme-ui';
 
 export type GenericComponentProps = {
     className?: string;
 
-    sx?: SxProp;
+    sx?: ThemeUICSSObject;
 
     position?: number
 }

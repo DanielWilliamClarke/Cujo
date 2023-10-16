@@ -1,3 +1,5 @@
+/** @jsxImportSource theme-ui */
+
 import { useInjection } from 'inversify-react';
 import { event } from "nextjs-google-analytics";
 import React, { ChangeEvent, useCallback, useContext, useMemo, useState } from 'react';
@@ -12,8 +14,6 @@ import { Section } from '../shared/Section';
 import { DividerProps } from '../shared/TriangleDivider';
 import ThemeContext from '../theme/ThemeContext';
 
-import { GenericComponentProps } from '../shared/props';
-import { Reveal } from '../shared/Reveal';
 import styles from '../shared/style.module.scss';
 
 type ContactProps = {
@@ -61,7 +61,24 @@ export const Contact: React.FC<ContactProps> = ({ profiles }: ContactProps): JSX
                 });
               }}
             >
-              <DevIconName icon={p.brand} />
+              <DevIconName
+                icon={p.brand}
+                size={75}
+                color='contactText'
+                hoverColor='primary'
+                sx={{
+                  width: '100%',
+                  '&:hover': {
+                    transform: 'scale(1.2)',
+                    transitionDelay: '0.1s',
+                  }
+                }}
+                textStyle={{
+                  fontSize: '1rem',
+                  fontWeight: 400,
+                  margin: '0.2rem'
+                }}
+              />
             </a>
           )
         )}

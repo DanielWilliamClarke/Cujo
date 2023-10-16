@@ -1,3 +1,5 @@
+/** @jsxImportSource theme-ui */
+
 import { event } from "nextjs-google-analytics";
 import React from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
@@ -10,8 +12,22 @@ import { Lanyard } from '../shared/Lanyard';
 import { Section } from '../shared/Section';
 
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
-import { GenericComponentProps } from '../shared/props';
 import { Reveal } from '../shared/Reveal';
+import { ThemeUICSSObject } from "theme-ui";
+
+const projectOverlayStyle: ThemeUICSSObject = {
+  width: '100%',
+  height: '100%',
+  textAlign: 'center',
+  display: 'flex',
+  alignContent: 'center',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  position: 'absolute',
+  left: 0,
+  top: 0,
+  opacity: 0,
+}
 
 type ProjectsProps = {
   projects: Entries<Project>
@@ -58,21 +74,54 @@ const ProjectSection: React.FC<ProjectProps> = ({ project, index }: ProjectProps
 
 const ProjectImage: React.FC<ProjectProps> = ({ project }: ProjectProps): JSX.Element => {
   return (
-    <Col className="project-image">
+    <Col
+      className="project-image"
+      sx={{
+        '&:hover': {
+          transition: '0.5s',
+          transform: 'scale(1.05)',
+
+          '.overlay': {
+            opacity: 0.7
+          },
+          '.icon': {
+            opacity: 1
+          }
+        }
+      }}
+    >
       {project.image && (
         <a
           className="image-link"
           href={project.link}
           rel="noopener noreferrer"
           target="_blank"
-          onClick={() => emitClickEvent(project)}
+          onClick={() => emitClickEvent(project)} scale
         >
           <DynamicImage
             image={project.image}
             className="centered image-item"
           />
-          <div className="overlay" />
-          <DevIconName icon={project.icon} />
+
+          <div
+            className="overlay"
+            sx={{
+              ...projectOverlayStyle,
+              backgroundColor: 'black',
+              borderRadius: 12,
+            }}
+          />
+
+          <DevIconName
+            className="icon"
+            icon={project.icon}
+            size={75}
+            sx={projectOverlayStyle}
+            textStyle={{
+              fontSize: '1rem',
+              margin: '0.2rem'
+            }}
+          />
         </a>
       )}
     </Col>

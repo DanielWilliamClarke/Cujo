@@ -27,34 +27,7 @@
     }
   }
 
-  .dev-icon {
-    width: 100%;
-
-    .icon-override,
-    .icon {
-      font-size: 55px;
-      width: 55px;
-    }
-
-    .icon-name {
-      font-size: 0.7rem;
-      margin: 0.2rem;
-    }
-  }
-
   .skills-small {
-
-    .icon-override,
-    .icon {
-      font-size: 30px;
-      width: 30px;
-    }
-
-    .icon-name {
-      font-size: 0.6rem;
-      margin: 0.2rem;
-    }
-
     .col {
       max-width: 110px !important;
       min-width: 110px !important;
@@ -82,6 +55,7 @@
 }
 
 @include alternating-section-colouring() using ($bg, $color, $alt-color) {
+
   .skills-input,
   .skill-items {
     @include themed() {
@@ -98,10 +72,6 @@
 
     .col {
       flex-basis: 0;
-    }
-
-    .dev-icon {
-      text-align: center;
     }
 
     .search {

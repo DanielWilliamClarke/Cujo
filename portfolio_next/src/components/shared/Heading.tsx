@@ -6,6 +6,7 @@ import { Col, Row } from 'react-bootstrap';
 import { anton } from '../shared/Font';
 import { usePositionContext } from './PositionContext';
 import { GenericComponentProps } from './props';
+import { Line } from './UtilComponents';
 
 type HeadingProps = GenericComponentProps & {
   title: string
@@ -38,11 +39,7 @@ export const Heading: React.FC<HeadingProps> = ({
           {title}
         </h2>
         {!noSeparator && (
-          <div className="centered line"
-            sx={{
-              backgroundColor: even ? 'accent' : 'secondary'
-            }}
-          />
+          <Line centered />
         )}
       </Col>
     </Row>

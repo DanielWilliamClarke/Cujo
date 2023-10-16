@@ -29,6 +29,8 @@ const colors = {
     backOffWhite: '#fdfdfd',
     timelineLine: '#333',
 
+    black: '#000000',
+
     modes: {
         dark: {
             text: '#eee',
