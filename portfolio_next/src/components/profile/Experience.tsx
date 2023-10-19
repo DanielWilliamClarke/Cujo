@@ -29,6 +29,12 @@ type RoleProps = {
   role: Work
 }
 
+// li::marker {
+//   //     @include themed() {
+//   //       color: t($color);
+//   //     }
+//   //   }
+
 export const Experience: React.FC<WorkProps> = ({ work }: WorkProps): JSX.Element => {
   const dateService = useInjection(IDateService.$);
   dateService.format('MMMM YYYY', 'YYYY-MM-DD');
@@ -162,9 +168,11 @@ const Role: React.FC<RoleProps> = ({ role }: RoleProps): JSX.Element => {
       >
         {role.images.map((image: Media, index: number) => (
           <Col
-            className="col-item"
             key={index}
             sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
               '&:after': {
                 content: '""',
 

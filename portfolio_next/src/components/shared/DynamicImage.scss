@@ -13,15 +13,6 @@
     }
 }
 
-@include alternating-section-colouring() using ($bg, $color, $alt-color) {
-    .image-item,
-    img {
-        @include themed() {
-            box-shadow: 0 0 25px t($col-shadow);
-        }
-    }
-}
-
 @media screen and (max-width: 700px) {
     .images {
         .col {

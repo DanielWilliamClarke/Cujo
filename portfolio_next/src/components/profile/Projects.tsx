@@ -14,6 +14,7 @@ import { Section } from '../shared/Section';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { Reveal } from '../shared/Reveal';
 import { ThemeUICSSObject } from "theme-ui";
+import { centeredStyle, Line } from "../shared/UtilComponents";
 
 const projectOverlayStyle: ThemeUICSSObject = {
   width: '100%',
@@ -52,7 +53,11 @@ export const Projects: React.FC<ProjectsProps> = ({ projects }: ProjectsProps): 
       {projects.entries
         .sort((pA, pB) => pA.rank - pB.rank)
         .map((project: Project, index: number) => (
-          <ProjectSection project={project} index={index} key={index} />
+          <ProjectSection
+            project={project}
+            index={index}
+            key={index}
+          />
         ))}
     </Section>
   );
@@ -60,10 +65,15 @@ export const Projects: React.FC<ProjectsProps> = ({ projects }: ProjectsProps): 
 
 const ProjectSection: React.FC<ProjectProps> = ({ project, index }: ProjectProps): JSX.Element => {
   return (
-    <Container className="project-panels">
+    <Container>
       <Reveal index={index}>
-        <div className="centered line" />
-        <Row className="project">
+        <Line centered />
+        <Row
+          sx={{
+            paddingY: 60,
+            flexDirection: index % 2 === 0 ? 'row-reverse' : 'row'
+          }}
+        >
           <ProjectImage project={project} index={index} />
           <ProjectContent project={project} index={index} />
         </Row>
@@ -75,8 +85,12 @@ const ProjectSection: React.FC<ProjectProps> = ({ project, index }: ProjectProps
 const ProjectImage: React.FC<ProjectProps> = ({ project }: ProjectProps): JSX.Element => {
   return (
     <Col
-      className="project-image"
       sx={{
+        alignContent: 'center',
+        display: 'flex',
+        flexWrap: 'wrap',
+        textAlign: 'left',
+
         '&:hover': {
           transition: '0.5s',
           transform: 'scale(1.05)',
@@ -92,19 +106,32 @@ const ProjectImage: React.FC<ProjectProps> = ({ project }: ProjectProps): JSX.El
     >
       {project.image && (
         <a
-          className="image-link"
           href={project.link}
           rel="noopener noreferrer"
           target="_blank"
-          onClick={() => emitClickEvent(project)} scale
+          onClick={() => emitClickEvent(project)}
+          sx={{
+            color: 'inherit',
+            textDecoration: 'none',
+            display: 'inlineBlock',
+            position: 'relative',
+            transition: '0.5s',
+            width: '100%',
+          }}
         >
           <DynamicImage
             image={project.image}
-            className="centered image-item"
+            sx={{
+              ...centeredStyle,
+              borderRadius: 12,
+              maxHeight: 350,
+              objectFit: 'cover',
+              width: '100%'
+            }}
           />
 
           <div
-            className="overlay"
+            className='overlay'
             sx={{
               ...projectOverlayStyle,
               backgroundColor: 'black',
@@ -130,8 +157,24 @@ const ProjectImage: React.FC<ProjectProps> = ({ project }: ProjectProps): JSX.El
 
 const ProjectContent: React.FC<ProjectProps> = ({ project }: ProjectProps): JSX.Element => {
   return (
-    <Col className="project-content">
-      <div className="content">
+    <Col
+      sx={{
+        alignContent: 'center',
+        display: 'flex',
+        flexWrap: 'wrap',
+        textAlign: 'left',
+
+        '@media screen and (max-width: 700px)': {
+          paddingTop: 30
+        }
+      }}
+    >
+      <div
+        sx={{
+          paddingY: 10,
+          width: '100%'
+        }}
+      >
         <h2>{project.name}</h2>
         <Lanyard tags={project.tags} />
         {documentToReactComponents(project.summary)}

@@ -137,9 +137,11 @@ const Institution: React.FC<InstitutionModel> = ({ institution }: InstitutionMod
       >
         {institution.images.map((image: Media, index: number) => (
           <Col
-            className="col-item"
             key={index}
             sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
               '&:after': {
                 content: '""',
 

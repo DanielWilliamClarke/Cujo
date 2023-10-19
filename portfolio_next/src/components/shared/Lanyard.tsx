@@ -18,6 +18,9 @@ export const Lanyard: React.FC<LanyardProps> = ({ tags }: LanyardProps): JSX.Ele
             key={tag}
             bg="portfolio"
             sx={{
+              margin: 2,
+              fontWeight: 500,
+              color: 'text',
               backgroundColor: even ? 'accent' : 'secondary',
               textTransform: 'capitalize',
               transition: '0.2',

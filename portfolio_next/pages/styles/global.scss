@@ -1,11 +1,25 @@
-@import '../../src/components/profile/Experience.scss';
-@import '../../src/components/profile/Projects.scss';
-@import '../../src/components/profile/ReadingList.scss';
-@import '../../src/components/profile/Technical.scss';
 @import '../../src/components/shared/BootstrapOverride.scss';
 @import '../../src/components/shared/DynamicImage.scss';
-@import '../../src/components/shared/Section.scss';
-@import '../../src/components/shared/Portfolio.scss';
 @import '../../src/components/theme/ThemeSetter.scss';
-@import '../../src/components/App.scss';
-@import '../../src/Cujo.scss';
+
+html {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+        "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+        sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    overflow-x: hidden;
+
+    background-color: #222;
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+        monospace;
+}

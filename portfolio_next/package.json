@@ -48,7 +48,7 @@
     "simplex-noise": "^4.0.1",
     "styled-components": "^5.3.6",
     "styled-icons": "^10.46.0",
-    "swiper": "^9.2.0",
+    "swiper": "^10.3.1",
     "theme-ui": "^0.16.1",
     "ts-debounce": "^4.0.0",
     "urql": "^3.0.3",

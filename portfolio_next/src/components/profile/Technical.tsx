@@ -1,17 +1,23 @@
+/** @jsxImportSource theme-ui */
+
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { Document } from '@contentful/rich-text-types';
 import { event } from "nextjs-google-analytics";
-import React, { HTMLAttributes, useCallback, useState } from 'react';
+import React, { Fragment, useCallback, useState } from 'react';
 import { Zoom } from 'react-awesome-reveal';
 import { Col, Row } from 'react-bootstrap';
+import { Theme } from 'theme-ui';
 import { debounce } from "ts-debounce";
 
 import { Skill, Skills } from '../../model/CVModel';
 import { Entry } from '../../model/Includes';
 import { DevIconName } from '../shared/DevIcon';
+import { usePositionContext } from '../shared/PositionContext';
 import { ProgressGauge } from '../shared/ProgressGauge';
-import { GenericComponentProps } from '../shared/props';
 import { Section } from '../shared/Section';
+import { centeredStyle, Line } from '../shared/UtilComponents';
+import { getColor } from '@theme-ui/color'
+import { GenericComponentProps } from '../shared/props';
 
 type TechnicalProps = {
   skills: Entry<Skills>
@@ -34,6 +40,8 @@ const emitSearchEvent = debounce((label: string) => {
 export const Technical: React.FC<TechnicalProps> = ({ skills }: TechnicalProps): JSX.Element => {
   const [search, setSearch] = useState('');
 
+  const { even } = usePositionContext();
+
   const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     emitSearchEvent(e.target.value);
 
@@ -42,20 +50,51 @@ export const Technical: React.FC<TechnicalProps> = ({ skills }: TechnicalProps):
 
   return (
     <Section id="skills" title="Skills">
-      <Row className="section-content">
+      <Row
+        sx={{
+          marginY: [10, 20, 20]
+        }}
+      >
         <Col>
           {documentToReactComponents(skills.entry.summary)}
         </Col>
       </Row>
 
       <Row>
-        <Col className="section-content centered search">
+        <Col
+          sx={{
+            ...centeredStyle,
+            marginY: [10, 20, 20],
+
+            '@media screen and (max-width: 700px)': {
+              textAlign: 'center'
+            }
+          }}
+        >
           <input
-            className="skills-input"
             type="text"
             value={search}
             onChange={handleSearchInput.bind(this)}
             placeholder="Search"
+            sx={(t: Theme) => ({
+              borderRadius: 12,
+              fontSize: '2em',
+              marginY: 10,
+              textAlign: 'center',
+              transition: '0.5s',
+              width: '50%',
+              backgroundColor: even ? 'bgLight' : 'bgDark',
+              border: `1px solid ${getColor(t, even ? 'bgDark' : 'bgLight')}`,
+              color: 'text',
+
+              '&:focus-within': {
+                width: '100%'
+              },
+
+              '@media screen and (max-width: 700px)': {
+                textAlign: 'center'
+              }
+            })}
           />
         </Col>
       </Row>
@@ -76,12 +115,20 @@ export const Technical: React.FC<TechnicalProps> = ({ skills }: TechnicalProps):
         skills={skills.entry.used}
         summary={skills.entry.usedSummary}
         search={search}
-        size={30}
+        small
       />
 
-      <Row className="section-content">
+      <Row
+        sx={{
+          marginY: [10, 20, 20],
+        }}
+      >
         <Col>
-          <p className="centered">
+          <p
+            sx={{
+              ...centeredStyle
+            }}
+          >
             <i>And many more!</i>
           </p>
         </Col>
@@ -90,9 +137,14 @@ export const Technical: React.FC<TechnicalProps> = ({ skills }: TechnicalProps):
   );
 };
 
-const SkillsSection: React.FC<SkillsProps> = (
-  { skills, summary, search, size = 55 }: SkillsProps
-) => {
+const SkillsSection: React.FC<SkillsProps & { small: boolean }> = ({
+  skills,
+  summary,
+  search,
+  small
+}) => {
+  const { even } = usePositionContext();
+
   const gaugeColors = ['#FB6962', '#FB6962', '#FCFC99', '#0CC078', '#0CC078'];
 
   const filterSkills = useCallback((name: string): boolean => {
@@ -105,21 +157,27 @@ const SkillsSection: React.FC<SkillsProps> = (
     .filter(({ name }: Skill) => filterSkills(name))
     .sort((a: Skill, b: Skill) => b.level - a.level)
     .map(({ level, icon }: Skill, index: number) => (
-      <ProgressGauge key={index} value={level} colors={gaugeColors}>
-        {(color: string) => <DevIconName
-          icon={icon}
-          color={color}
-          hoverColor={color}
-          size={size}
-          sx={{
-            width: '100%',
-            textAlign: ['center', undefined, undefined]
-          }}
-          textStyle={{
-            fontSize: '0.6rem',
-            margin: '0.2rem'
-          }}
-        />}
+      <ProgressGauge
+        key={index}
+        value={level}
+        colors={gaugeColors}
+      >
+        {(color: string) => (
+          <DevIconName
+            icon={icon}
+            color={color}
+            hoverColor={color}
+            size={small ? 25 : 50}
+            sx={{
+              width: '100%',
+              textAlign: ['center', undefined, undefined]
+            }}
+            textStyle={{
+              fontSize: '0.6rem',
+              margin: 0
+            }}
+          />
+        )}
       </ProgressGauge>
     ));
 
@@ -128,16 +186,46 @@ const SkillsSection: React.FC<SkillsProps> = (
   }
 
   return (
-    <>
-      <Row className="section-content">
+    <Fragment>
+      <Row
+        sx={{
+          marginY: [10, 20, 20],
+        }}
+      >
         <Col>{documentToReactComponents(summary)}</Col>
       </Row>
-      <Row className={`skill-items`}>
-        <Zoom triggerOnce cascade damping={0.01} className="col centered">
+      <Row
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          borderRadius: 12,
+          fontWeight: 500,
+          marginBottom: 30,
+          minHeight: 160,
+          padding: 10,
+          color: 'textTitle',
+          backgroundColor: even ? 'bgLight' : 'bgDark',
+        }}
+      >
+        <Zoom
+          triggerOnce
+          cascade
+          damping={0.01}
+          sx={{
+            ...centeredStyle,
+            maxWidth: small ? 100 : 150,
+            minWidth: small ? 100 : 150,
+
+            '@media screen and (max-width: 700px)': {
+              marginY: 20,
+              flexBasis: 0
+            }
+          }}
+        >
           {filteredSkills}
         </Zoom>
       </Row>
-      <div className="line centered" />
-    </>
+      <Line centered />
+    </Fragment>
   );
 };

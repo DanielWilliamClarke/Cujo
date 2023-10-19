@@ -62,7 +62,7 @@ export const DevIconName: React.FC<DevIconProps> = ({
       }}
     >
       {iconComponent}
-      <p sx={textStyle}>{icon.name}</p>
+      <div sx={textStyle}>{icon.name}</div>
     </div>
   );
 };

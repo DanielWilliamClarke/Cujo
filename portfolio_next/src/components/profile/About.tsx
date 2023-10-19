@@ -3,7 +3,7 @@
 import { INLINES, MARKS } from '@contentful/rich-text-types';
 import React, { ReactNode, useMemo } from 'react';
 import { Col, Row } from 'react-bootstrap';
-import { Autoplay, Pagination } from "swiper";
+import { Autoplay, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { About as AboutModel } from '../../model/CVModel';
 import { Entry, Media } from '../../model/Includes';

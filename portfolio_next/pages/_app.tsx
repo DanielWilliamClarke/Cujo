@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'devicon/devicon.min.css';
 import 'highlight.js/scss/tomorrow-night-eighties.scss';
 import 'react-vertical-timeline-component/style.min.css';
+
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";

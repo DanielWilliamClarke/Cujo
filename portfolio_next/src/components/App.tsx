@@ -65,14 +65,19 @@ export const Portfolio: React.FC<AppProps> = ({
         <SketchBackstretch cv={cv} />
       </Suspense>
       <NavPanel />
-      <div className="app">
+      <div
+        sx={{
+          color: 'rgb(15, 16, 36)',
+          textAlign: 'center'
+        }}
+      >
         {
           [
             ...components,
             ...baseComponents
           ].map((Component: React.FC, index: number) => (
-            <PositionProvider position={index}>
-              <Component key={index} />
+            <PositionProvider key={index} position={index}>
+              <Component />
             </PositionProvider>
           ))
         }

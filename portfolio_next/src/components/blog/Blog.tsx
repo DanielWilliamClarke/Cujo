@@ -10,9 +10,12 @@ import { Entries } from '../../model/Includes';
 import { IDateService } from '../../services/DateService';
 import { IIconService } from '../../services/IconService';
 import { Lanyard } from '../shared/Lanyard';
+import { usePositionContext } from '../shared/PositionContext';
 import { Reveal } from '../shared/Reveal';
 import { Section } from '../shared/Section';
 import { centeredStyle } from '../shared/UtilComponents';
+import { getColor } from '@theme-ui/color';
+import { Theme } from 'theme-ui';
 
 export type BlogProps = {
   blog: Entries<Post>
@@ -70,6 +73,8 @@ const BlogSummaryPanel: React.FC<BlogSummaryProps> = ({ post, index }: BlogSumma
   const dateService = useInjection(IDateService.$);
   dateService.format('Do MMMM YYYY HH:mm');
 
+  const { even } = usePositionContext();
+
   const stats = readingTime(documentToPlainTextString(post.content));
 
   const [publishedDate, setPublishedDate] = useState('');
@@ -86,13 +91,20 @@ const BlogSummaryPanel: React.FC<BlogSummaryProps> = ({ post, index }: BlogSumma
       <Reveal index={index}>
         <Card
           key={post.id}
-          bg="dark"
-          sx={{
+          bg='dark'
+          sx={(t: Theme) => ({
             border: 0,
             borderRadius: 12,
             marginY: 10,
-            textAlign: 'left'
-          }}
+            textAlign: 'left',
+            transition: '0.5s',
+            '&.bg-dark': {
+              backgroundColor: `${getColor(t, even ? 'bgLight' : 'bgDark')}  !important`
+            },
+            '&:hover': {
+              transform: 'scale(1.02)'
+            }
+          })}
         >
           <Nav navbarScroll>
             <Nav.Link
@@ -170,6 +182,6 @@ const BlogSummaryPanel: React.FC<BlogSummaryProps> = ({ post, index }: BlogSumma
           </Card.Footer>
         </Card>
       </Reveal>
-    </Col>
+    </Col >
   );
 };
