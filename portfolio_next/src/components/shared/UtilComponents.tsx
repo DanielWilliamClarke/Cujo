@@ -79,28 +79,28 @@ const BaseSymbol: React.FC<SymbolProps> = ({ className, symbol }) => {
     )
 }
 
-export const Dot: React.FC<SymbolProps> = (props) => (
+export const Dot: React.FC<GenericComponentProps> = (props) => (
     <BaseSymbol
         {...props}
         symbol="•"
     />
 );
 
-export const At: React.FC<SymbolProps> = (props) => (
+export const At: React.FC<GenericComponentProps> = (props) => (
     <BaseSymbol
         {...props}
         symbol="@"
     />
 )
 
-export const Copyright: React.FC<SymbolProps> = (props) => (
+export const Copyright: React.FC<GenericComponentProps> = (props) => (
     <BaseSymbol
         {...props}
         symbol="©"
     />
 )
 
-export const Dash: React.FC<SymbolProps> = (props) => (
+export const Dash: React.FC<GenericComponentProps> = (props) => (
     <BaseSymbol
         {...props}
         symbol="-"

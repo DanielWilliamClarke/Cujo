@@ -19,7 +19,12 @@ const textColumnStyle = {
   justifyContent: 'center',
   paddingX: 20,
   textAlign: 'left',
-  width: '50%'
+  width: '50%',
+
+  '@media screen and (max-width: 700px)': {
+    margin: '10px 0',
+    width: '100%'
+  }
 }
 
 type AboutProps = {
@@ -44,7 +49,11 @@ export const About: React.FC<AboutProps> = ({ about }: AboutProps): JSX.Element 
     ...options,
     renderMark: {
       [MARKS.BOLD]: (text: ReactNode): JSX.Element => (
-        <b className="about-focus">
+        <b
+          sx={{
+            fontSize: 18
+          }}
+        >
           {text}
         </b>
       )
@@ -70,6 +79,7 @@ export const About: React.FC<AboutProps> = ({ about }: AboutProps): JSX.Element 
     <Reveal direction="up">
       <Section id="about" title="About">
         <Row sx={{ marginY: 20 }}>
+
           <Col sx={textColumnStyle}>
             <div sx={{ marginY: 30 }}>
               <Reveal direction="left">
@@ -113,8 +123,9 @@ export const About: React.FC<AboutProps> = ({ about }: AboutProps): JSX.Element 
               </Swiper>
             </Reveal>
           </Col>
+
         </Row>
-      </Section >
-    </Reveal >
+      </Section>
+    </Reveal>
   );
 };

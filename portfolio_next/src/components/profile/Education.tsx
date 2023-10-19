@@ -1,6 +1,8 @@
+/** @jsxImportSource theme-ui */
+
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { useInjection } from 'inversify-react';
-import React, { useContext, useMemo } from 'react';
+import React, { Fragment } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import {
   VerticalTimeline,
@@ -13,11 +15,10 @@ import { IIconService } from '../../services/IconService';
 import { DynamicImage } from '../shared/DynamicImage';
 import { Lanyard } from '../shared/Lanyard';
 import { Section } from '../shared/Section';
-import ThemeContext from '../theme/ThemeContext';
 
 import { useShouldAnimate } from '../hooks/useShouldAnimate';
-import { GenericComponentProps } from '../shared/props';
-import styles from '../shared/style.module.scss';
+import { centeredStyle, Dot, ShortLine } from '../shared/UtilComponents';
+import { usePositionContext } from '../shared/PositionContext';
 
 type EducationProps = {
   education: Entries<EducationModel>
@@ -35,14 +36,25 @@ export const Education: React.FC<EducationProps> = ({ education }: EducationProp
   const Icon = iconService.getWithDefault('school');
   const BabyIcon = iconService.getWithDefault('baby');
 
-  const { theme } = useContext(ThemeContext);
-  const background = useMemo(() => (styles[`${theme}-colorBrand`]), [theme]);
+  const { even } = usePositionContext();
 
   const shouldAnimate = useShouldAnimate();
 
   return (
     <Section id="education" title="Education">
-      <VerticalTimeline className="timeline" animate={shouldAnimate}>
+      <VerticalTimeline
+        animate={shouldAnimate}
+        sx={{
+          marginTop: 20,
+          textAlign: 'left',
+          '.vertical-timeline-element-content-arrow': {
+            display: 'none'
+          },
+          '&:before': {
+            backgroundColor: 'timelineLine',
+          }
+        }}
+      >
         {education.entries
           .sort(
             (a, b) =>
@@ -51,21 +63,43 @@ export const Education: React.FC<EducationProps> = ({ education }: EducationProp
           )
           .map((e: EducationModel, index: number) => (
             <VerticalTimelineElement
-              className="vertical-timeline-element--work"
               key={index}
               date={dateService.toRange(
                 e.startDate.toString(),
                 e.endDate.toString()
               )}
               icon={<Icon />}
+              sx={{
+                '.vertical-timeline-element-icon': {
+                  backgroundColor: even ? 'accent' : 'secondary',
+                  color: 'text'
+                },
+                '.vertical-timeline-element-content': {
+                  borderRadius: 12,
+                  backgroundColor: even ? 'bgLight' : 'bgDark',
+                  boxShadow: 'none',
+                  transition: '0.5s',
+
+                  '&:hover': {
+                    transform: 'scale(1.02)'
+                  }
+                }
+              }}
             >
               <Institution institution={e} />
             </VerticalTimelineElement>
           ))}
         <VerticalTimelineElement
-          iconStyle={{ background }}
-          contentStyle={{ backgroundColor: 'transparent' }}
+          contentStyle={{
+            backgroundColor: 'transparent'
+          }}
           icon={<BabyIcon />}
+          sx={{
+            '.vertical-timeline-element-icon': {
+              backgroundColor: even ? 'accent' : 'secondary',
+              color: 'text'
+            }
+          }}
         />
       </VerticalTimeline>
     </Section>
@@ -74,15 +108,19 @@ export const Education: React.FC<EducationProps> = ({ education }: EducationProp
 
 const Institution: React.FC<InstitutionModel> = ({ institution }: InstitutionModel): JSX.Element => {
   return (
-    <>
+    <Fragment>
       {institution.grade !== '' && <Lanyard tags={[institution.grade]} />}
 
-      <Row className="header">
-        <Col className="Qualification-type">
+      <Row
+        sx={{
+          marginTop: 10
+        }}
+      >
+        <Col>
           <h3>{institution.institution}</h3>
           <h4>
             {institution.studyType}
-            <span className="dot" />
+            <Dot />
             {institution.area}
           </h4>
         </Col>
@@ -92,20 +130,43 @@ const Institution: React.FC<InstitutionModel> = ({ institution }: InstitutionMod
         <Col>{documentToReactComponents(institution.summary)}</Col>
       </Row>
 
-      <Row className="images">
+      <Row
+        sx={{
+          marginY: 25
+        }}
+      >
         {institution.images.map((image: Media, index: number) => (
-          <Col className="col-item" key={index}>
+          <Col
+            className="col-item"
+            key={index}
+            sx={{
+              '&:after': {
+                content: '""',
+
+                '@media screen and (max-width: 700px)': {
+                  flexBasis: 0,
+                  display: 'flex'
+                }
+              }
+            }}
+          >
             <a href={institution.link} rel="noopener noreferrer" target="_blank">
               <DynamicImage
                 image={image}
-                className="centered image-item"
+                sx={{
+                  ...centeredStyle,
+                  borderRadius: '50%',
+                  height: 75,
+                  width: 75,
+                  objectFit: 'cover'
+                }}
               />
             </a>
           </Col>
         ))}
       </Row>
 
-      <div className="centered short-line" />
-    </>
+      <ShortLine centered />
+    </Fragment >
   );
 };

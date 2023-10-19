@@ -31,6 +31,8 @@ const colors = {
 
     black: '#000000',
 
+    workLogoBrightness: '25%',
+
     modes: {
         dark: {
             text: '#eee',
@@ -60,6 +62,8 @@ const colors = {
 
             backOffWhite: '#fdfdfd',
             timelineLine: '#fff',
+
+            workLogoBrightness: '100%',
         }
     }
 };

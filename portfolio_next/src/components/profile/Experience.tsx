@@ -1,6 +1,8 @@
+/** @jsxImportSource theme-ui */
+
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { useInjection } from 'inversify-react';
-import React, { useContext, useMemo } from 'react';
+import React, { Fragment } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import {
   VerticalTimeline,
@@ -14,10 +16,10 @@ import { useShouldAnimate } from '../hooks/useShouldAnimate';
 import { DynamicImage } from '../shared/DynamicImage';
 import { Lanyard } from '../shared/Lanyard';
 import { Section } from '../shared/Section';
-import ThemeContext from '../theme/ThemeContext';
 
-import { GenericComponentProps } from '../shared/props';
-import styles from '../shared/style.module.scss';
+import { At, centeredStyle, ShortLine } from '../shared/UtilComponents';
+import { Theme } from 'theme-ui';
+import { usePositionContext } from '../shared/PositionContext';
 
 type WorkProps = {
   work: Entries<Work>
@@ -35,14 +37,25 @@ export const Experience: React.FC<WorkProps> = ({ work }: WorkProps): JSX.Elemen
   const Icon = iconService.getWithDefault('work');
   const EducationIcon = iconService.getWithDefault('education');
 
-  const { theme } = useContext(ThemeContext);
-  const background = useMemo(() => (styles[`${theme}-colorBrand`]), [theme]);
+  const { even } = usePositionContext();
 
   const shouldAnimate = useShouldAnimate();
 
   return (
     <Section id="experience" title="Experience">
-      <VerticalTimeline className="timeline" animate={shouldAnimate}>
+      <VerticalTimeline
+        animate={shouldAnimate}
+        sx={{
+          marginTop: 20,
+          textAlign: 'left',
+          '.vertical-timeline-element-content-arrow': {
+            display: 'none'
+          },
+          '&:before': {
+            backgroundColor: 'timelineLine',
+          }
+        }}
+      >
         {work.entries
           .filter(
             ({ startDate }: Work) =>
@@ -56,22 +69,44 @@ export const Experience: React.FC<WorkProps> = ({ work }: WorkProps): JSX.Elemen
           .map(
             (work: Work, index: number): JSX.Element => (
               <VerticalTimelineElement
-                className="vertical-timeline-element--work"
                 key={index}
                 date={dateService.toRangeWithDuration(
                   work.startDate.toString(),
                   work.endDate?.toString() ?? 'Present'
                 )}
                 icon={<Icon />}
+                sx={{
+                  '.vertical-timeline-element-icon': {
+                    backgroundColor: even ? 'accent' : 'secondary',
+                    color: 'text'
+                  },
+                  '.vertical-timeline-element-content': {
+                    borderRadius: 12,
+                    backgroundColor: even ? 'bgLight' : 'bgDark',
+                    boxShadow: 'none',
+                    transition: '0.5s',
+
+                    '&:hover': {
+                      transform: 'scale(1.02)'
+                    }
+                  }
+                }}
               >
                 <Role role={work} />
               </VerticalTimelineElement>
             )
           )}
         <VerticalTimelineElement
-          iconStyle={{ background }}
-          contentStyle={{ backgroundColor: 'transparent' }}
+          contentStyle={{
+            backgroundColor: 'transparent'
+          }}
           icon={<EducationIcon />}
+          sx={{
+            '.vertical-timeline-element-icon': {
+              backgroundColor: even ? 'accent' : 'secondary',
+              color: 'text'
+            }
+          }}
         />
       </VerticalTimeline>
     </Section>
@@ -80,13 +115,18 @@ export const Experience: React.FC<WorkProps> = ({ work }: WorkProps): JSX.Elemen
 
 const Role: React.FC<RoleProps> = ({ role }: RoleProps): JSX.Element => {
   return (
-    <>
+    <Fragment>
       <Lanyard tags={[role.company, ...role.highlights]} />
 
-      <Row className="header">
-        <Col className="headline">
+      <Row
+        sx={{
+          marginTop: 10
+        }}
+      >
+        <Col>
           <h3>
-            <span className="at">{role.position}</span>
+            <span>{role.position}</span>
+            <At />
             <span>
               <a
                 title={role.company}
@@ -96,7 +136,12 @@ const Role: React.FC<RoleProps> = ({ role }: RoleProps): JSX.Element => {
               >
                 <DynamicImage
                   image={role.logo}
-                  className="centered image-item work-logo"
+                  sx={(t: Theme) => ({
+                    ...centeredStyle,
+                    height: 20,
+                    maxWidth: 75,
+                    filter: `brightness(${t?.colors?.workLogoBrightness})`
+                  })}
                 />
               </a>
             </span>
@@ -110,18 +155,41 @@ const Role: React.FC<RoleProps> = ({ role }: RoleProps): JSX.Element => {
         </Col>
       </Row>
 
-      <Row className="images">
+      <Row
+        sx={{
+          marginY: 25
+        }}
+      >
         {role.images.map((image: Media, index: number) => (
-          <Col className="col-item" key={index}>
+          <Col
+            className="col-item"
+            key={index}
+            sx={{
+              '&:after': {
+                content: '""',
+
+                '@media screen and (max-width: 700px)': {
+                  flexBasis: 0,
+                  display: 'flex'
+                }
+              }
+            }}
+          >
             <DynamicImage
               image={image}
-              className="centered image-item"
+              sx={{
+                ...centeredStyle,
+                borderRadius: '50%',
+                height: 75,
+                width: 75,
+                objectFit: 'cover'
+              }}
             />
           </Col>
         ))}
       </Row>
 
-      <div className="centered short-line" />
-    </>
+      <ShortLine centered />
+    </Fragment>
   );
 };
