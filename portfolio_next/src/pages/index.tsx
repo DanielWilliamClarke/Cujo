@@ -30,11 +30,13 @@ export default wrapPage(({ cv, blog }: CujoProps): JSX.Element => {
     [cv],
   );
 
+  const title = `${cv.about.entry.name} Portfolio`;
+
   return (
     <Fragment>
       <Head>
-        <title>{cv.about.entry.name}</title>
-        <meta property="og:title" content={cv.about.entry.name} />
+        <title>{title}</title>
+        <meta property="og:title" content={title} />
         <meta
           property="og:image"
           content={`https://${portfolioProject?.image?.file.url}`}
@@ -44,9 +46,9 @@ export default wrapPage(({ cv, blog }: CujoProps): JSX.Element => {
       </Head>
       <SharePanel
         url={href}
-        title={`${cv.about.entry.name} Portfolio`}
+        title={title}
         body={cv.about.entry.label}
-        hashtag="DCTechPortfolio"
+        hashtag="DanClarkeDevPortfolio"
       />
       <Portfolio cv={cv} blog={blog}>
         {[

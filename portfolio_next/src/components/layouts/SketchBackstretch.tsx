@@ -56,6 +56,7 @@ const SketchBackstretch: React.FC<CVProps> = React.memo(
             sx={(t: Theme) => ({
               height: '100vh',
               marginBottom: -70,
+              padding: 0,
               background: `linear-gradient(0deg,
                ${alpha('backGradSketchHigh', 0.6)(t)},
                ${alpha('backGradSketchLow', 0)(t)})`,

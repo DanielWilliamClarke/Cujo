@@ -35,24 +35,24 @@ export default wrapPage(({ cv, blog }: CujoProps): JSX.Element => {
   return (
     <Fragment>
       {post && (
-        <SharePanel
-          url={href}
-          title={post.title}
-          body={post.excerpt}
-          hashtag="DCTechBlog"
-        />
-      )}
-      {post && (
-        <Head>
-          <title>{post.title}</title>
-          <meta property="og:title" content={post.title} />
-          <meta
-            property="og:image"
-            content={`https://${post.media?.file.url}`}
+        <Fragment>
+          <Head>
+            <title>{post.title}</title>
+            <meta property="og:title" content={post.title} />
+            <meta
+              property="og:image"
+              content={`https://${post.media?.file.url}`}
+            />
+            <meta property="og:description" content={post.excerpt} />
+            <meta property="og:url" content={href} />
+          </Head>
+          <SharePanel
+            url={href}
+            title={post.title}
+            body={post.excerpt}
+            hashtag="DanClarkeDevBlog"
           />
-          <meta property="og:description" content={post.excerpt} />
-          <meta property="og:url" content={href} />
-        </Head>
+        </Fragment>
       )}
       <Portfolio cv={cv} blog={blog}>
         {[<BlogPost id={pid as string} blog={blog} key="blogPost" />]}
