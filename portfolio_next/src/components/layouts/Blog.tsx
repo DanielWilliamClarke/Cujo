@@ -1,21 +1,24 @@
 /** @jsxImportSource theme-ui */
-
-import { Lanyard } from '@Common/Lanyard';
-import { Reveal } from '@Common/Reveal';
-import { Section } from '@Common/Section';
-import { centeredStyle } from '@Common/UtilComponents';
 import { documentToPlainTextString } from '@contentful/rich-text-plain-text-renderer';
-import { usePositionContext } from '@Hooks/PositionContext';
-import { Post } from '@Models/BlogPost';
-import { Entries } from '@Models/Includes';
-import { IDateService } from '@Services/DateService';
-import { IIconService } from '@Services/IconService';
 import { getColor } from '@theme-ui/color';
 import { useInjection } from 'inversify-react';
 import React, { useEffect, useState } from 'react';
 import { Card, Col, Nav, Row } from 'react-bootstrap';
 import readingTime from 'reading-time';
 import { Theme } from 'theme-ui';
+
+import { Post } from '@Models/BlogPost';
+import { Entries } from '@Models/Includes';
+
+import { usePositionContext } from '@Hooks/PositionContext';
+
+import { IDateService } from '@Services/DateService';
+import { IIconService } from '@Services/IconService';
+
+import { Lanyard } from '@Common/Lanyard';
+import { Reveal } from '@Common/Reveal';
+import { Section } from '@Common/Section';
+import { centeredStyle } from '@Common/UtilComponents';
 
 export type BlogProps = {
   blog: Entries<Post>;

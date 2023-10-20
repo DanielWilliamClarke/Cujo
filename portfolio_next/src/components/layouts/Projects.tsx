@@ -1,20 +1,19 @@
 /** @jsxImportSource theme-ui */
-
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { event } from 'nextjs-google-analytics';
 import React from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
+import { ThemeUICSSObject } from 'theme-ui';
+
+import { Project } from '@Models/CVModel';
+import { Entries } from '@Models/Includes';
 
 import { DevIconName } from '@Common/DevIcon';
 import { DynamicImage } from '@Common/DynamicImage';
 import { Lanyard } from '@Common/Lanyard';
-import { Section } from '@Common/Section';
-import { Project } from '@Models/CVModel';
-import { Entries } from '@Models/Includes';
-
 import { Reveal } from '@Common/Reveal';
-import { centeredStyle, Line } from '@Common/UtilComponents';
-import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
-import { ThemeUICSSObject } from 'theme-ui';
+import { Section } from '@Common/Section';
+import { Line, centeredStyle } from '@Common/UtilComponents';
 
 const projectOverlayStyle: ThemeUICSSObject = {
   width: '100%',

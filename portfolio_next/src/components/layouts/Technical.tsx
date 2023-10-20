@@ -1,7 +1,7 @@
 /** @jsxImportSource theme-ui */
-
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { Document } from '@contentful/rich-text-types';
+import { getColor } from '@theme-ui/color';
 import { event } from 'nextjs-google-analytics';
 import React, { Fragment, useCallback, useState } from 'react';
 import { Zoom } from 'react-awesome-reveal';
@@ -9,14 +9,15 @@ import { Col, Row } from 'react-bootstrap';
 import { Theme } from 'theme-ui';
 import { debounce } from 'ts-debounce';
 
+import { Skill, Skills } from '@Models/CVModel';
+import { Entry } from '@Models/Includes';
+
+import { usePositionContext } from '@Hooks/PositionContext';
+
 import { DevIconName } from '@Common/DevIcon';
 import { ProgressGauge } from '@Common/ProgressGauge';
 import { Section } from '@Common/Section';
-import { centeredStyle, Line } from '@Common/UtilComponents';
-import { usePositionContext } from '@Hooks/PositionContext';
-import { Skill, Skills } from '@Models/CVModel';
-import { Entry } from '@Models/Includes';
-import { getColor } from '@theme-ui/color';
+import { Line, centeredStyle } from '@Common/UtilComponents';
 
 type TechnicalProps = {
   skills: Entry<Skills>;

@@ -1,11 +1,14 @@
 /** @jsxImportSource theme-ui */
-
-import { usePositionContext } from '@Hooks/PositionContext';
-import { DevIcon } from '@Models/CVModel';
-import { IIconService } from '@Services/IconService';
 import { useInjection } from 'inversify-react';
 import React, { useMemo } from 'react';
 import { ThemeUIStyleObject } from 'theme-ui';
+
+import { DevIcon } from '@Models/CVModel';
+
+import { usePositionContext } from '@Hooks/PositionContext';
+
+import { IIconService } from '@Services/IconService';
+
 import { GenericComponentProps } from './props';
 
 type DevIconProps = GenericComponentProps & {

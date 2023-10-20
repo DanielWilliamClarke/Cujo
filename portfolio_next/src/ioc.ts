@@ -3,7 +3,7 @@ import 'reflect-metadata';
 
 import { ContactService, IContactService } from '@Services/ContactService';
 import { DateService, IDateService } from '@Services/DateService';
-import { IconService, IIconService } from '@Services/IconService';
+import { IIconService, IconService } from '@Services/IconService';
 
 export const container = new Container();
 

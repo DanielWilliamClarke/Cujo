@@ -1,14 +1,15 @@
 /** @jsxImportSource theme-ui */
+import { useInjection } from 'inversify-react';
+import React from 'react';
+import { Col, Container, Row } from 'react-bootstrap';
+
+import { IDateService } from '@Services/DateService';
 
 import { Section } from '@Common/Section';
 import {
   Copyright as CopyrightSymbol,
   ShortLine,
 } from '@Common/UtilComponents';
-import { IDateService } from '@Services/DateService';
-import { useInjection } from 'inversify-react';
-import React from 'react';
-import { Col, Container, Row } from 'react-bootstrap';
 
 type NameProps = {
   name: string;

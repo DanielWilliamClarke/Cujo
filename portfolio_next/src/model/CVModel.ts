@@ -1,4 +1,5 @@
 import { Document } from '@contentful/rich-text-types';
+
 import { Entries, Entry, Media } from './Includes';
 
 export type CVProps = {

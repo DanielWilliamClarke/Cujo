@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+
 import ThemeContext, { initialThemeState } from './ThemeContext';
 
 type ThemeProviderProps = {

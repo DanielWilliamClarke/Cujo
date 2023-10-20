@@ -1,12 +1,12 @@
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import { useInjection } from 'inversify-react';
 import { event } from 'nextjs-google-analytics';
-import React, { useEffect } from 'react';
-
 import * as pdfjs from 'pdfjs-dist/legacy/build/pdf.js';
 import pdfjsWorker from 'pdfjs-dist/legacy/build/pdf.worker.entry';
+import React, { useEffect } from 'react';
 
 import { CVProps } from '@Models/CVModel';
+
 import { IDateService } from '@Services/DateService';
 
 import { CV } from '@Cv/CV';

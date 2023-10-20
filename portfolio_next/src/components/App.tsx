@@ -1,19 +1,21 @@
 /** @jsxImportSource theme-ui */
-
+import dynamic from 'next/dynamic';
 import React, { ReactNode, Suspense } from 'react';
+
+import { Post } from '@Models/BlogPost';
+import { CV as CVModel } from '@Models/CVModel';
+import { Entries } from '@Models/Includes';
+
+import { PositionProvider } from '@Hooks/PositionContext';
+
+import { BlockReverseLoading } from '@Common/BlockReverseLoading';
 
 import { Blog } from '@Layouts/Blog';
 import { Contact } from '@Layouts/Contact';
 import { Copyright } from '@Layouts/Copyright';
 import { NavPanel } from '@Layouts/NavPanel';
-import { Post } from '@Models/BlogPost';
-import { CV as CVModel } from '@Models/CVModel';
-import { Entries } from '@Models/Includes';
-import { ThemeProvider } from './theme/ThemeProvider';
 
-import { BlockReverseLoading } from '@Common/BlockReverseLoading';
-import { PositionProvider } from '@Hooks/PositionContext';
-import dynamic from 'next/dynamic';
+import { ThemeProvider } from './theme/ThemeProvider';
 
 const loading = (
   <BlockReverseLoading

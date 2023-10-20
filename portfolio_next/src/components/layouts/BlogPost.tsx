@@ -1,13 +1,12 @@
 /** @jsxImportSource theme-ui */
-
 import { documentToPlainTextString } from '@contentful/rich-text-plain-text-renderer';
 import {
   CommonNode,
   documentToReactComponents,
 } from '@contentful/rich-text-react-renderer';
 import { BLOCKS, INLINES, MARKS } from '@contentful/rich-text-types';
-
 import { useInjection } from 'inversify-react';
+import dynamic from 'next/dynamic';
 import React, {
   Fragment,
   ReactNode,
@@ -19,14 +18,15 @@ import { Col, Row } from 'react-bootstrap';
 import { obsidian } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
 import readingTime from 'reading-time';
 
+import { Post } from '@Models/BlogPost';
+import { Entries, Includes, getAsset } from '@Models/Includes';
+
+import { IDateService } from '@Services/DateService';
+
 import { DynamicImage } from '@Common/DynamicImage';
 import { Lanyard } from '@Common/Lanyard';
 import { Section } from '@Common/Section';
-import { centeredStyle, Line, LongLine } from '@Common/UtilComponents';
-import { Post } from '@Models/BlogPost';
-import { Entries, getAsset, Includes } from '@Models/Includes';
-import { IDateService } from '@Services/DateService';
-import dynamic from 'next/dynamic';
+import { Line, LongLine, centeredStyle } from '@Common/UtilComponents';
 
 const SyntaxHighlighter = dynamic(() => import('react-syntax-highlighter'), {
   ssr: false,

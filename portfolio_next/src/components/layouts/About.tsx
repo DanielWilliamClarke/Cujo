@@ -1,20 +1,20 @@
 /** @jsxImportSource theme-ui */
-
-import { DynamicImage } from '@Common/DynamicImage';
-import { Section } from '@Common/Section';
+import {
+  CommonNode,
+  documentToReactComponents,
+} from '@contentful/rich-text-react-renderer';
 import { INLINES, MARKS } from '@contentful/rich-text-types';
-import { About as AboutModel } from '@Models/CVModel';
-import { Entry, Media } from '@Models/Includes';
 import React, { ReactNode, useMemo } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { Autoplay, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
+import { About as AboutModel } from '@Models/CVModel';
+import { Entry, Media } from '@Models/Includes';
+
+import { DynamicImage } from '@Common/DynamicImage';
 import { Reveal } from '@Common/Reveal';
-import {
-  CommonNode,
-  documentToReactComponents,
-} from '@contentful/rich-text-react-renderer';
+import { Section } from '@Common/Section';
 
 const textColumnStyle = {
   display: 'flex',

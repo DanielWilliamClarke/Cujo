@@ -1,8 +1,8 @@
 import interpolate from 'color-interpolate';
 import React, { useEffect, useMemo, useState } from 'react';
 import {
-  buildStyles,
   CircularProgressbarWithChildren,
+  buildStyles,
 } from 'react-circular-progressbar';
 import VisibilitySensor from 'react-visibility-sensor';
 

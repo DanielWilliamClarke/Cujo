@@ -1,20 +1,22 @@
 /** @jsxImportSource theme-ui */
-
-import { CVProps, Work } from '@Models/CVModel';
-import { IDateService } from '@Services/DateService';
-import { getSketch } from '@Sketches/index';
+import { alpha } from '@theme-ui/color';
 import { useInjection } from 'inversify-react';
 import p5 from 'p5';
 import React, { useEffect, useMemo } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
+import { Theme } from 'theme-ui';
+
+import { CVProps, Work } from '@Models/CVModel';
+
+import { IDateService } from '@Services/DateService';
+
+import { getSketch } from '@Sketches/index';
 
 import { DynamicImage } from '@Common/DynamicImage';
 import { anton } from '@Common/Font';
 import { Logo } from '@Common/Logo';
 import { ScrollIndicator } from '@Common/ScrollIndicator';
 import { centeredStyle } from '@Common/UtilComponents';
-import { alpha } from '@theme-ui/color';
-import { Theme } from 'theme-ui';
 
 // This stops any re-renders from creating multiple canvas'
 let rendered = false;

@@ -1,4 +1,5 @@
 import p5 from 'p5';
+
 import { Sketch } from '.';
 
 // Adapted from https://codepen.io/atzedent/pen/qByYwNd

@@ -3,9 +3,9 @@ import { BLOCKS } from '@contentful/rich-text-types';
 import { StyleSheet, Text, View } from '@react-pdf/renderer';
 import { ReactNode } from 'react';
 
-import { Header } from './Header';
-
 import { CV } from '@Models/CVModel';
+
+import { Header } from './Header';
 
 export namespace Intro {
   const pdfStyles = StyleSheet.create({

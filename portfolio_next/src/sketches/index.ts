@@ -4,7 +4,6 @@ import weighted from 'weighted';
 
 import { CV, Work } from '../model/CVModel';
 // import { conway3D } from "./conway_3d"
-
 import { Boids } from './boids';
 import { Conway } from './conway';
 import { Grid } from './grid';

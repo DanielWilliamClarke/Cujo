@@ -1,8 +1,8 @@
 import dat from 'dat.gui';
 import p5 from 'p5';
-import { Sketch } from '.';
+import { NoiseFunction3D, createNoise3D } from 'simplex-noise';
 
-import { createNoise3D, NoiseFunction3D } from 'simplex-noise';
+import { Sketch } from '.';
 
 class HSLA {
   constructor(

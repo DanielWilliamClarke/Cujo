@@ -1,4 +1,5 @@
 import { Document } from '@contentful/rich-text-types';
+
 import { Media } from './Includes';
 
 export type Post = {

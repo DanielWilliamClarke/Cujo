@@ -1,4 +1,5 @@
 import p5 from 'p5';
+
 import { Sketch } from '.';
 
 export const pauseableSketch = (

@@ -4,5 +4,19 @@
   "semi": true,
   "singleQuote": true,
 
-  "plugins": ["prettier-plugin-organize-imports"]
+  "importOrder": [
+    "^@Cujo/(.*)$",
+    "^@Models/(.*)$",
+    "^@Hooks/(.*)$",
+    "^@Services/(.*)$",
+    "^@Sketches/(.*)$",
+    "^@Cv/(.*)$",
+    "^@Common/(.*)$",
+    "^@Layouts/(.*)$",
+    "^[./]"
+  ],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true,
+
+  "plugins": ["@trivago/prettier-plugin-sort-imports"]
 }

@@ -1,5 +1,4 @@
 /** @jsxImportSource theme-ui */
-
 import { getColor } from '@theme-ui/color';
 import { useInjection } from 'inversify-react';
 import { useRouter } from 'next/router';
@@ -7,13 +6,12 @@ import { event } from 'nextjs-google-analytics';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Nav, Navbar } from 'react-bootstrap';
 import Scrollspy from 'react-scrollspy';
+import { Theme } from 'theme-ui';
 
 import { IIconService } from '@Services/IconService';
 
 // import { ThemeSetter } from '../theme/ThemeSetter';
-
 import { anton } from '@Common/Font';
-import { Theme } from 'theme-ui';
 
 const emitClickEvent = (section: string) => {
   event('dc_user_event', {

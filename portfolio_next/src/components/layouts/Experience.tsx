@@ -1,14 +1,5 @@
 /** @jsxImportSource theme-ui */
-
-import { DynamicImage } from '@Common/DynamicImage';
-import { Lanyard } from '@Common/Lanyard';
-import { Section } from '@Common/Section';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
-import { useShouldAnimate } from '@Hooks/useShouldAnimate';
-import { Work } from '@Models/CVModel';
-import { Entries, Media } from '@Models/Includes';
-import { IDateService } from '@Services/DateService';
-import { IIconService } from '@Services/IconService';
 import { useInjection } from 'inversify-react';
 import React, { Fragment } from 'react';
 import { Col, Row } from 'react-bootstrap';
@@ -16,10 +7,21 @@ import {
   VerticalTimeline,
   VerticalTimelineElement,
 } from 'react-vertical-timeline-component';
-
-import { At, centeredStyle, ShortLine } from '@Common/UtilComponents';
-import { usePositionContext } from '@Hooks/PositionContext';
 import { Theme } from 'theme-ui';
+
+import { Work } from '@Models/CVModel';
+import { Entries, Media } from '@Models/Includes';
+
+import { usePositionContext } from '@Hooks/PositionContext';
+import { useShouldAnimate } from '@Hooks/useShouldAnimate';
+
+import { IDateService } from '@Services/DateService';
+import { IIconService } from '@Services/IconService';
+
+import { DynamicImage } from '@Common/DynamicImage';
+import { Lanyard } from '@Common/Lanyard';
+import { Section } from '@Common/Section';
+import { At, ShortLine, centeredStyle } from '@Common/UtilComponents';
 
 type WorkProps = {
   work: Entries<Work>;

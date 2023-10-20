@@ -1,21 +1,21 @@
 /** @jsxImportSource theme-ui */
-
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import { useInjection } from 'inversify-react';
 import { event } from 'nextjs-google-analytics';
+import * as pdfjs from 'pdfjs-dist/legacy/build/pdf.js';
+import pdfjsWorker from 'pdfjs-dist/legacy/build/pdf.worker.entry';
 import React, { useCallback } from 'react';
 import { Col, Row } from 'react-bootstrap';
 
-import * as pdfjs from 'pdfjs-dist/legacy/build/pdf.js';
-import pdfjsWorker from 'pdfjs-dist/legacy/build/pdf.worker.entry';
-
-import { Section } from '@Common/Section';
 import { CVProps } from '@Models/CVModel';
+
 import { IDateService } from '@Services/DateService';
 
-import { Reveal } from '@Common/Reveal';
-import { centeredStyle } from '@Common/UtilComponents';
 import { CV } from '@Cv/CV';
+
+import { Reveal } from '@Common/Reveal';
+import { Section } from '@Common/Section';
+import { centeredStyle } from '@Common/UtilComponents';
 
 // This is quite dumb but works
 pdfjs.GlobalWorkerOptions.workerSrc = pdfjsWorker;

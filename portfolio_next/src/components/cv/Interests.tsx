@@ -1,10 +1,9 @@
+import { documentToPlainTextString } from '@contentful/rich-text-plain-text-renderer';
+import { Block } from '@contentful/rich-text-types';
 import { StyleSheet, Text, View } from '@react-pdf/renderer';
 
-import { documentToPlainTextString } from '@contentful/rich-text-plain-text-renderer';
-
-import { Block } from '@contentful/rich-text-types';
-
 import { CV } from '@Models/CVModel';
+
 import { Header } from './Header';
 
 export namespace Interests {

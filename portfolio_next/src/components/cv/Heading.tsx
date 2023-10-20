@@ -1,7 +1,8 @@
 import { StyleSheet, Text, View } from '@react-pdf/renderer';
-import { IDateService } from '@Services/DateService';
 
 import { CV, Work } from '@Models/CVModel';
+
+import { IDateService } from '@Services/DateService';
 
 export namespace Heading {
   const pdfStyles = StyleSheet.create({

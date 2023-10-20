@@ -1,6 +1,7 @@
-import { useWindowSize } from '@Hooks/useWindowSize';
 import { Fragment, Suspense, useEffect, useState } from 'react';
 import { Fade, FadeProps } from 'react-awesome-reveal';
+
+import { useWindowSize } from '@Hooks/useWindowSize';
 
 type RevealProps = FadeProps & {
   children?: React.ReactNode;

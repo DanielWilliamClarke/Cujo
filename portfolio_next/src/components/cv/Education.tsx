@@ -1,9 +1,12 @@
-import { CV, Education as EducationModel } from '@Models/CVModel';
 import { StyleSheet, Text, View } from '@react-pdf/renderer';
+
+import { CV, Education as EducationModel } from '@Models/CVModel';
+
 import { DateService, IDateService } from '@Services/DateService';
-2;
 
 import { Header } from './Header';
+
+2;
 
 export namespace Education {
   const pdfStyles = StyleSheet.create({

@@ -1,4 +1,5 @@
 import p5 from 'p5';
+
 import { Sketch } from '.';
 import { Ease } from './easing';
 import { Vector4D } from './matrix_utils';

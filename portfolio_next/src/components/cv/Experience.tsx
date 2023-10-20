@@ -4,6 +4,7 @@ import { Image as PdfImage, StyleSheet, Text, View } from '@react-pdf/renderer';
 import { ReactNode } from 'react';
 
 import { Work } from '@Models/CVModel';
+
 import { DateService, IDateService } from '@Services/DateService';
 
 import { Header } from './Header';

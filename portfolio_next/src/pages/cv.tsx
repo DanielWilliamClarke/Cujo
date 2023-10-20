@@ -1,11 +1,12 @@
 /** @jsxImportSource theme-ui */
-
-import { BlockReverseLoading } from '@Common/BlockReverseLoading';
-import { wrapPage } from '@Cujo/Cujo';
-import { CujoProps, fetchCujoProps } from '@Cujo/CujoISR';
 import { GetStaticProps } from 'next';
 import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
+
+import { wrapPage } from '@Cujo/Cujo';
+import { CujoProps, fetchCujoProps } from '@Cujo/CujoISR';
+
+import { BlockReverseLoading } from '@Common/BlockReverseLoading';
 
 const loading = (
   <BlockReverseLoading

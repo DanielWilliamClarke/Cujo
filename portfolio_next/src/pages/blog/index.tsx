@@ -1,8 +1,8 @@
-import { Portfolio } from '@Cujo/components/App';
 import { GetStaticProps } from 'next';
 
 import { wrapPage } from '@Cujo/Cujo';
 import { CujoProps, fetchCujoProps } from '@Cujo/CujoISR';
+import { Portfolio } from '@Cujo/components/App';
 
 export const getStaticProps: GetStaticProps = fetchCujoProps;
 

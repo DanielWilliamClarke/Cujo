@@ -1,5 +1,6 @@
 import p5 from 'p5';
-import { sample, Sketch } from '.';
+
+import { Sketch, sample } from '.';
 import { MatrixUtils, Vector4D } from './matrix_utils';
 
 type RotationGenerator = (angle: number) => number[][];

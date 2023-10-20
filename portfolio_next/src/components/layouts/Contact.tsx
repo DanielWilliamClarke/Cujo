@@ -1,5 +1,4 @@
 /** @jsxImportSource theme-ui */
-
 import { useInjection } from 'inversify-react';
 import { event } from 'nextjs-google-analytics';
 import React, {
@@ -9,19 +8,21 @@ import React, {
   useMemo,
   useState,
 } from 'react';
+import { Zoom } from 'react-awesome-reveal';
 import { Button, Col, Form, Row } from 'react-bootstrap';
 
-import { Zoom } from 'react-awesome-reveal';
+import { Profile } from '@Models/CVModel';
+
+import { usePositionContext } from '@Hooks/PositionContext';
+
+import { IContactService } from '@Services/ContactService';
 
 import { DevIconName } from '@Common/DevIcon';
 import { Section } from '@Common/Section';
 import { DividerProps } from '@Common/TriangleDivider';
-import { Profile } from '@Models/CVModel';
-import { IContactService } from '@Services/ContactService';
-import ThemeContext from '../theme/ThemeContext';
+import { LongLine, centeredStyle } from '@Common/UtilComponents';
 
-import { centeredStyle, LongLine } from '@Common/UtilComponents';
-import { usePositionContext } from '@Hooks/PositionContext';
+import ThemeContext from '../theme/ThemeContext';
 
 type ContactProps = {
   profiles: Profile[];

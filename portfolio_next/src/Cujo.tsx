@@ -1,9 +1,9 @@
 import { Provider } from 'inversify-react';
 import { withUrqlClient } from 'next-urql';
-import { ThemeUIProvider } from 'theme-ui';
-
 import React from 'react';
+import { ThemeUIProvider } from 'theme-ui';
 import { useQuery } from 'urql';
+
 import { CujoProps, cujoServiceUrl } from './CujoISR';
 import { CujoQuery } from './CujoQuery';
 import { container } from './ioc';
