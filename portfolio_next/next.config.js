@@ -13,9 +13,7 @@ const nextConfig = {
     return config;
   },
   images: {
-    domains: [
-      "images.ctfassets.net",
-    ],
+    domains: ['images.ctfassets.net'],
     remotePatterns: [
       {
         protocol: 'https',
@@ -23,7 +21,6 @@ const nextConfig = {
       },
     ],
   },
-
-}
+};
 
 module.exports = nextConfig;

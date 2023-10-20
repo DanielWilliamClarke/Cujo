@@ -1,196 +1,196 @@
-import { gql } from "urql";
+import { gql } from 'urql';
 
 export const CujoQuery = gql`
-query CujoQuery {
-  cv {
-    about {
-      ...About
-    }
-    work {
-      ...Work
-    }
-    education {
-      ...Education
-    }
-    skills {
-      ...Skills
-    }
-    projects {
-      ...Project
-    }
-    readingList { 
-      ...ReadingList
-    }
-  }
-  blog {
-    ...Blog
-  }
-}
-
-fragment About on AboutEntry {
-  entry {
-    name
-    label
-    phone
-    email
-    website
-    about
-    interests
-    images {
-      ...ImageUrl
-    }
-    profiles {
-      url
-      brand {
-        ...DevIcon
+  query CujoQuery {
+    cv {
+      about {
+        ...About
+      }
+      work {
+        ...Work
+      }
+      education {
+        ...Education
+      }
+      skills {
+        ...Skills
+      }
+      projects {
+        ...Project
+      }
+      readingList {
+        ...ReadingList
       }
     }
-  }
-  includes
-}
-
-fragment Work on WorkEntries {
-  entries {
-    position
-    company
-    website
-    startDate
-    endDate
-    highlights
-    summary
-    logo {
-      ...ImageUrl
-    }
-    images {
-      ...ImageUrl
-    }
-    hideFromCv
-  }
-  includes
-}
-
-fragment Education on EducationEntries {
-  entries {
-    institution
-    link
-    area
-    studyType
-    startDate
-    endDate
-    grade
-    summary
-    images {
-      ...ImageUrl
+    blog {
+      ...Blog
     }
   }
-  includes
-}
 
-fragment Skills on SkillsEntry {
-  entry {
-    summary
-    currentSummary
-    current {
-      ...Skill
+  fragment About on AboutEntry {
+    entry {
+      name
+      label
+      phone
+      email
+      website
+      about
+      interests
+      images {
+        ...ImageUrl
+      }
+      profiles {
+        url
+        brand {
+          ...DevIcon
+        }
+      }
     }
-    favoriteSummary
-    favorite {
-      ...Skill
-    }
-    usedSummary
-    used {
-      ...Skill
-    }
+    includes
   }
-  includes
-}
 
-fragment Skill on Skill {
-  name
-  level
-  icon {
-    ...DevIcon
+  fragment Work on WorkEntries {
+    entries {
+      position
+      company
+      website
+      startDate
+      endDate
+      highlights
+      summary
+      logo {
+        ...ImageUrl
+      }
+      images {
+        ...ImageUrl
+      }
+      hideFromCv
+    }
+    includes
   }
-}
 
-fragment Project on ProjectEntries {
-  entries {
-    rank
+  fragment Education on EducationEntries {
+    entries {
+      institution
+      link
+      area
+      studyType
+      startDate
+      endDate
+      grade
+      summary
+      images {
+        ...ImageUrl
+      }
+    }
+    includes
+  }
+
+  fragment Skills on SkillsEntry {
+    entry {
+      summary
+      currentSummary
+      current {
+        ...Skill
+      }
+      favoriteSummary
+      favorite {
+        ...Skill
+      }
+      usedSummary
+      used {
+        ...Skill
+      }
+    }
+    includes
+  }
+
+  fragment Skill on Skill {
     name
-    link
-    image {
-      ...ImageUrl
-    }
-    summary
-    tags
+    level
     icon {
       ...DevIcon
     }
   }
-  includes
-}
 
-fragment ReadingList on ReadingListEntries {
-  entries {
-    title
-    progress
-    author
-    amazonLink
-    cover {
-      ...ImageUrl
-    }
-  }
-  includes
-}
-
-fragment Blog on BlogEntries {
-  entries {
-    id
-    title
-    content
-    excerpt
-    media {
-      ...ImageUrl
-    }
-    tags
-    sys {
-      id
-      revision
-      createdAt
-      updatedAt
-    }
-  }
-  includes
-}
-
-fragment ImageUrl on Asset {
-  description
-  file {
-    url
-    details {
+  fragment Project on ProjectEntries {
+    entries {
+      rank
+      name
+      link
       image {
-        height
-        width
+        ...ImageUrl
+      }
+      summary
+      tags
+      icon {
+        ...DevIcon
+      }
+    }
+    includes
+  }
+
+  fragment ReadingList on ReadingListEntries {
+    entries {
+      title
+      progress
+      author
+      amazonLink
+      cover {
+        ...ImageUrl
+      }
+    }
+    includes
+  }
+
+  fragment Blog on BlogEntries {
+    entries {
+      id
+      title
+      content
+      excerpt
+      media {
+        ...ImageUrl
+      }
+      tags
+      sys {
+        id
+        revision
+        createdAt
+        updatedAt
+      }
+    }
+    includes
+  }
+
+  fragment ImageUrl on Asset {
+    description
+    file {
+      url
+      details {
+        image {
+          height
+          width
+        }
       }
     }
   }
-}
 
-fragment DevIcon on DevIcon {
-  name
-  icon
-  iconImage {
-     ...ImageUrl
-  }
-}
-`
-
-export const CujoBlogPathsQuery = gql`
-query CujoBlogPaths {
-  blog {
-    entries {
-      id
+  fragment DevIcon on DevIcon {
+    name
+    icon
+    iconImage {
+      ...ImageUrl
     }
   }
-}
-`
+`;
+
+export const CujoBlogPathsQuery = gql`
+  query CujoBlogPaths {
+    blog {
+      entries {
+        id
+      }
+    }
+  }
+`;

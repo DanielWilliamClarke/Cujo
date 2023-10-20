@@ -1,4 +1,5 @@
 import p5 from 'p5';
+
 import { Sketch } from '.';
 import { Ease } from './easing';
 
@@ -21,11 +22,11 @@ export class Boxes implements Sketch {
   private opacity: number = 0;
   private opacityProgress: number = 0;
 
-  constructor (private readonly p: p5) {}
+  constructor(private readonly p: p5) {}
 
-  preload (): void {}
+  preload(): void {}
 
-  setup () {
+  setup() {
     this.p.frameRate(60);
     this.p.createCanvas(window.innerWidth, window.innerHeight, this.p.WEBGL);
     this.p.colorMode(this.p.HSB);
@@ -37,11 +38,11 @@ export class Boxes implements Sketch {
     this.p.perspective();
   }
 
-  windowResized () {
+  windowResized() {
     this.p.resizeCanvas(window.innerWidth, window.innerHeight);
   }
 
-  draw () {
+  draw() {
     this.p.background(0);
     // this.p.orbitControl();
     // this.p.lights();
@@ -61,16 +62,16 @@ export class Boxes implements Sketch {
         const offset = this.p.map(d, 0, this.maxD, -this.p.PI, this.p.PI);
         const a = this.angle + offset;
         const h = this.p.floor(
-          this.p.map(this.p.sin(a), -1, 1, this.minH, this.maxH)
+          this.p.map(this.p.sin(a), -1, 1, this.minH, this.maxH),
         );
         const w = this.p.floor(
-          this.p.map(this.p.sin(a), -1, 1, this.minW, this.maxW)
+          this.p.map(this.p.sin(a), -1, 1, this.minW, this.maxW),
         );
 
         const c = this.colorAngle + offset;
         const hue = this.p.floor(this.p.map(this.p.sin(c), -1, 1, 0, 360));
         const brightness = this.p.floor(
-          this.p.map(this.p.sin(c), -1, 1, 75, 90)
+          this.p.map(this.p.sin(c), -1, 1, 75, 90),
         );
 
         this.p.ambientMaterial(hue, 50, brightness);

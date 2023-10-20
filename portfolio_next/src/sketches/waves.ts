@@ -1,15 +1,15 @@
 import dat from 'dat.gui';
 import p5 from 'p5';
+import { NoiseFunction3D, createNoise3D } from 'simplex-noise';
+
 import { Sketch } from '.';
 
-import { createNoise3D, NoiseFunction3D } from 'simplex-noise';
-
 class HSLA {
-  constructor (
+  constructor(
     public h: number = 0,
     public s: number = 0,
     public b: number = 0,
-    public a: number = 0
+    public a: number = 0,
   ) {}
 }
 
@@ -17,18 +17,18 @@ class Particle {
   public pastX: number = 0;
   public pastY: number = 0;
 
-  constructor (
+  constructor(
     public x: number = 0,
     public y: number = 0,
-    public color: HSLA = new HSLA()
+    public color: HSLA = new HSLA(),
   ) {}
 
-  init (
+  init(
     hueBase: number,
     screenWidth: number,
     screenHeight: number,
     centerX: number,
-    centerY: number
+    centerY: number,
   ): void {
     this.x = this.pastX = screenWidth * Math.random();
     this.y = this.pastY = screenHeight * Math.random();
@@ -39,21 +39,21 @@ class Particle {
     this.color.a = 0.95;
   }
 
-  persistPosition (): void {
+  persistPosition(): void {
     this.pastX = this.x;
     this.pastY = this.y;
   }
 
-  integratePosition (x: number, y: number): void {
+  integratePosition(x: number, y: number): void {
     this.x += x;
     this.y += y;
   }
 }
 
 class NoiseGenerator {
-  constructor (private noise3D: NoiseFunction3D) {}
+  constructor(private noise3D: NoiseFunction3D) {}
 
-  getNoise (x: number, y: number, z: number): number {
+  getNoise(x: number, y: number, z: number): number {
     const octaves = 12;
     const fallout = 0.3;
     let amp = 1;
@@ -70,7 +70,7 @@ class NoiseGenerator {
     return sum;
   }
 
-  refresh (noise3D: NoiseFunction3D) {
+  refresh(noise3D: NoiseFunction3D) {
     this.noise3D = noise3D;
   }
 }
@@ -95,22 +95,22 @@ export class Waves implements Sketch {
   private readonly parameters = {
     base: 200,
     step: 9,
-    bearing: 14
+    bearing: 14,
   };
 
-  constructor (
+  constructor(
     private readonly p: p5,
     private readonly noiseGenerator: NoiseGenerator = new NoiseGenerator(
-      createNoise3D()
+      createNoise3D(),
     ),
-    private readonly gui: dat.GUI = new dat.GUI()
+    private readonly gui: dat.GUI = new dat.GUI(),
   ) {
     // this.setupDatGui();
   }
 
-  preload (): void {}
+  preload(): void {}
 
-  setup () {
+  setup() {
     this.p.frameRate(60);
     this.p.colorMode(this.p.HSB, 100);
 
@@ -129,13 +129,13 @@ export class Waves implements Sketch {
         this.screenWidth,
         this.screenHeight,
         this.centerX,
-        this.centerY
+        this.centerY,
       );
       this.particles.push(p);
     }
   }
 
-  windowResized () {
+  windowResized() {
     this.p.resizeCanvas(window.innerWidth, window.innerHeight);
     this.screenWidth = this.p.width = window.innerWidth;
     this.screenHeight = this.p.height = window.innerHeight;
@@ -144,7 +144,7 @@ export class Waves implements Sketch {
     this.noiseGenerator.refresh(createNoise3D());
   }
 
-  draw () {
+  draw() {
     const elapsedTime = this.p.millis();
     const r = Math.abs(elapsedTime % this.clearIn);
     if (r <= 1000) {
@@ -154,7 +154,7 @@ export class Waves implements Sketch {
     const fluff = this.p.constrain(
       this.p.map(this.p.sin(this.fluffOff), -1, 1, 0, 3),
       0.5,
-      2.5
+      2.5,
     );
     this.fluffOff += this.fluffInc;
 
@@ -167,12 +167,12 @@ export class Waves implements Sketch {
         this.noiseGenerator.getNoise(
           (particle.x / this.parameters.base) * fluff,
           (particle.y / this.parameters.base) * fluff,
-          this.zOff
+          this.zOff,
         );
 
       particle.integratePosition(
         Math.cos(angle) * this.parameters.step,
-        Math.sin(angle) * this.parameters.step
+        Math.sin(angle) * this.parameters.step,
       );
 
       if (particle.color.a < 1) {
@@ -184,13 +184,13 @@ export class Waves implements Sketch {
         particle.color.h,
         particle.color.s,
         particle.color.b,
-        particle.color.a
+        particle.color.a,
       );
       this.p.stroke(
         particle.color.h,
         particle.color.s,
         particle.color.b,
-        particle.color.a
+        particle.color.a,
       );
       this.p.line(particle.pastX, particle.pastY, particle.x, particle.y);
 
@@ -205,7 +205,7 @@ export class Waves implements Sketch {
           this.screenWidth,
           this.screenHeight,
           this.centerX,
-          this.centerY
+          this.centerY,
         );
       }
     });
@@ -214,7 +214,7 @@ export class Waves implements Sketch {
     this.hueBase += 0.1;
   }
 
-  private setupDatGui () {
+  private setupDatGui() {
     this.gui.remember(this.parameters);
     this.gui
       .add(this.parameters, 'base')

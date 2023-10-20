@@ -1,78 +1,78 @@
 export type Entries<T> = {
-  entries: T[]
-  includes: Includes
-}
+  entries: T[];
+  includes: Includes;
+};
 
 export type Entry<T> = {
-  entry: T
-  includes: Includes
-}
+  entry: T;
+  includes: Includes;
+};
 
 export type Includes = {
-  Asset?: Asset[]
-  Entry?: RefEntry[]
-}
+  Asset?: Asset[];
+  Entry?: RefEntry[];
+};
 
 export type Asset = {
-  fields: Media
-  metadata: Metadata
-  sys: Sys
-}
+  fields: Media;
+  metadata: Metadata;
+  sys: Sys;
+};
 
 export type RefEntry = {
-  fields: any
-  metadata: Metadata
-  sys: Sys
-}
+  fields: any;
+  metadata: Metadata;
+  sys: Sys;
+};
 
 export type Media = {
-  description: string
-  file: File
-  title: string
-}
+  description: string;
+  file: File;
+  title: string;
+};
 
 export type File = {
-  contentType: string
-  details: Details
-  fileName: string
-  url: string
-}
+  contentType: string;
+  details: Details;
+  fileName: string;
+  url: string;
+};
 
 export type Details = {
-  image: Image
-  size: number
-}
+  image: Image;
+  size: number;
+};
 
 export type Image = {
-  height: number
-  width: number
-}
+  height: number;
+  width: number;
+};
 
 export type Metadata = {
-  tags: any[]
-}
+  tags: any[];
+};
 
 export type Sys = {
-  createdAt: Date
-  environment: ContentType
-  id: string
-  locale: Locale
-  revision: number
-  space: ContentType
-  type: SysType
-  updatedAt: Date
-  contentType?: ContentType
-}
+  createdAt: Date;
+  environment: ContentType;
+  id: string;
+  locale: Locale;
+  revision: number;
+  space: ContentType;
+  type: SysType;
+  updatedAt: Date;
+  contentType?: ContentType;
+};
 
 export type ContentType = {
-  sys: ContentTypeSys
-}
+  sys: ContentTypeSys;
+};
 
 export type ContentTypeSys = {
-  id: string
-  linkType: LinkType
-  type: ContentTypeSysType
-}
+  id: string;
+  linkType: LinkType;
+  type: ContentTypeSysType;
+};
 
 export enum LinkType {
   ContentType = 'ContentType',
@@ -94,7 +94,5 @@ export enum SysType {
   Entry = 'Entry',
 }
 
-export const getAsset =
-  (includes: Includes, id: string): Media | undefined =>
-    includes.Asset?.find((asset: Asset) => asset.sys.id === id)
-      ?.fields;
+export const getAsset = (includes: Includes, id: string): Media | undefined =>
+  includes.Asset?.find((asset: Asset) => asset.sys.id === id)?.fields;

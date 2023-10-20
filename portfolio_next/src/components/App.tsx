@@ -1,24 +1,25 @@
 /** @jsxImportSource theme-ui */
-
-import React, { Suspense } from 'react';
-
-import { Post } from '../model/BlogPost';
-import { CV as CVModel } from '../model/CVModel';
-import { Entries } from '../model/Includes';
-import { Copyright } from './backstretch/Copyright';
-import { Blog } from './blog/Blog';
-import { Contact } from './contact/Contact';
-import { NavPanel } from './nav/NavPanel';
-import { ThemeProvider } from './theme/ThemeProvider';
-
 import dynamic from 'next/dynamic';
-import { BlockReverseLoading } from './shared/BlockReverseLoading';
+import React, { Fragment, ReactNode, Suspense } from 'react';
+
+import { Post } from '@Models/BlogPost';
+import { CV as CVModel } from '@Models/CVModel';
+import { Entries } from '@Models/Includes';
+
+import { PositionProvider } from '@Hooks/PositionContext';
+
+import { BlockReverseLoading } from '@Common/BlockReverseLoading';
+
+import { Blog } from '@Layouts/Blog';
+import { Contact } from '@Layouts/Contact';
+import { Copyright } from '@Layouts/Copyright';
+import { NavPanel } from '@Layouts/NavPanel';
 
 const loading = (
   <BlockReverseLoading
     sx={{
-      height: "100vh",
-      width: "auto",
+      height: '100vh',
+      width: 'auto',
     }}
     box={{
       speed: 3,
@@ -27,38 +28,55 @@ const loading = (
   />
 );
 
-const SketchBackstretch = dynamic(() => import('./backstretch/SketchBackstretch'), {
+const SketchBackstretch = dynamic(() => import('@Layouts/SketchBackstretch'), {
   ssr: false,
-  loading: () => loading
+  loading: () => loading,
 });
 
-const CVPreview = dynamic(() => import('./cv/CVPreview'), {
+const CVPreview = dynamic(() => import('@Layouts/CVPreview'), {
   ssr: false,
-  loading: () => loading
+  loading: () => loading,
 });
 
 type AppProps = {
-  cv: CVModel
-  blog: Entries<Post>
-  children?: React.ReactNode
-}
+  cv: CVModel;
+  blog: Entries<Post>;
+  children?: ReactNode[];
+};
 
-export const Portfolio: React.FC<AppProps> = (
-  { cv, blog, children }: AppProps
-): JSX.Element => (
-  <ThemeProvider>
+export const Portfolio: React.FC<AppProps> = ({
+  cv,
+  blog,
+  children = [],
+}: AppProps): JSX.Element => {
+  const defaultChildren: ReactNode[] = [
+    <Blog blog={blog} />,
     <Suspense>
-      <SketchBackstretch cv={cv} />
-    </Suspense>
-    <NavPanel />
-    <div className="app">
-      {children}
-      <Blog blog={blog} />
+      <CVPreview cv={cv} />
+    </Suspense>,
+    <Contact profiles={cv.about.entry.profiles} />,
+    <Copyright name={cv.about.entry.name} />,
+  ];
+
+  return (
+    <Fragment>
       <Suspense>
-        <CVPreview cv={cv} />
+        <SketchBackstretch cv={cv} />
       </Suspense>
-      <Contact profiles={cv.about.entry.profiles} />
-      <Copyright name={cv.about.entry.name} />
-    </div>
-  </ThemeProvider>
-);
+      <NavPanel />
+      <div
+        sx={{
+          textAlign: 'center',
+        }}
+      >
+        {[...children, ...defaultChildren].map(
+          (children: ReactNode, index: number) => (
+            <PositionProvider key={index} position={index}>
+              {children}
+            </PositionProvider>
+          ),
+        )}
+      </div>
+    </Fragment>
+  );
+};
