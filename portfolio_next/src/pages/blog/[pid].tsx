@@ -1,4 +1,3 @@
-import { id } from 'inversify';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
@@ -25,7 +24,7 @@ export default wrapPage(({ cv, blog }: CujoProps): JSX.Element => {
 
   const post = useMemo(
     () => blog.entries.find(({ id }: Post) => id === pid),
-    [blog.entries, id],
+    [blog.entries, pid],
   );
 
   const [href, setHref] = useState('');
@@ -56,7 +55,7 @@ export default wrapPage(({ cv, blog }: CujoProps): JSX.Element => {
         </Head>
       )}
       <Portfolio cv={cv} blog={blog}>
-        {[<BlogPost id={pid as string} blog={blog} />]}
+        {[<BlogPost id={pid as string} blog={blog} key="blogPost" />]}
       </Portfolio>
     </Fragment>
   );

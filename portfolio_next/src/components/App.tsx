@@ -50,12 +50,12 @@ export const Portfolio: React.FC<AppProps> = ({
   children = [],
 }: AppProps): JSX.Element => {
   const defaultChildren: ReactNode[] = [
-    <Blog blog={blog} />,
-    <Suspense>
+    <Blog blog={blog} key="blog" />,
+    <Suspense key="cv">
       <CVPreview cv={cv} />
     </Suspense>,
-    <Contact profiles={cv.about.entry.profiles} />,
-    <Copyright name={cv.about.entry.name} />,
+    <Contact profiles={cv.about.entry.profiles} key="contact" />,
+    <Copyright name={cv.about.entry.name} key="copyright" />,
   ];
 
   return (

@@ -44,7 +44,7 @@ export const DevIconName: React.FC<DevIconProps> = ({
     } else {
       return <span className={`devicon-${icon.icon}`} sx={iconStyle} />;
     }
-  }, [iconService, icon]);
+  }, [iconService, icon, size]);
 
   return (
     <div

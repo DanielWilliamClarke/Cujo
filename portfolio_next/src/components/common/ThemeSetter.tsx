@@ -38,7 +38,7 @@ export const ThemeSetter: React.FC = () => {
       }}
     >
       <Player
-        onEvent={(event) => {
+        onEvent={(event: string) => {
           if (event === 'load') {
             player.current?.setSeeker(getFrame(mode === 'light'));
           }

@@ -93,7 +93,7 @@ const CVPreview: React.FC<CVProps> = ({ cv }: CVProps): JSX.Element => {
                 })
               }
             >
-              {({ url }) => {
+              {({ url }: { url?: string }) => {
                 if (!url) {
                   return undefined;
                 }
