@@ -6,7 +6,8 @@
     "dev": "CUJO_SERVICE_URL=https://gql.danclarke.dev CUJO_REVALIDATE_SECRET=1234 next dev",
     "build": "CUJO_SERVICE_URL=https://gql.danclarke.dev next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "format": "prettier --write './src/**/*.{ts,tsx}'"
   },
   "dependencies": {
     "@contentful/rich-text-plain-text-renderer": "^15.12.1",

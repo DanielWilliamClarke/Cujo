@@ -1,8 +1,7 @@
 /* eslint-disable  @typescript-eslint/no-unused-vars */
-import 'reflect-metadata';
-
 import { injectable, interfaces } from 'inversify';
 import moment from 'moment';
+import 'reflect-metadata';
 import util from 'util';
 
 export interface IDateService {

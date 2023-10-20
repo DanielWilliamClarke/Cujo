@@ -1,26 +1,5 @@
 /* eslint-disable  @typescript-eslint/no-unused-vars */
-import 'reflect-metadata';
-
-import { StyledIcon } from '@styled-icons/styled-icon';
-import { injectable, interfaces } from 'inversify';
-
 import { Deviantart } from '@styled-icons/boxicons-logos/Deviantart';
-import { WizardsOfTheCoast } from '@styled-icons/fa-brands/WizardsOfTheCoast';
-import { HatWizard } from '@styled-icons/fa-solid/HatWizard';
-import { LightBulb } from '@styled-icons/heroicons-outline/LightBulb';
-
-import { Androidstudio } from '@styled-icons/simple-icons/Androidstudio';
-import { Azuredevops } from '@styled-icons/simple-icons/Azuredevops';
-import { Cmake } from '@styled-icons/simple-icons/Cmake';
-import { Contentful } from '@styled-icons/simple-icons/Contentful';
-import { Notion } from '@styled-icons/simple-icons/Notion';
-import { P5dotjs } from '@styled-icons/simple-icons/P5dotjs';
-import { Powershell } from '@styled-icons/simple-icons/Powershell';
-import { Reactivex } from '@styled-icons/simple-icons/Reactivex';
-import { Sfml } from '@styled-icons/simple-icons/Sfml';
-import { Vultr } from '@styled-icons/simple-icons/Vultr';
-import { Xcode } from '@styled-icons/simple-icons/Xcode';
-
 import { BookHeart } from '@styled-icons/boxicons-regular/BookHeart';
 import { BookmarkHeart } from '@styled-icons/boxicons-regular/BookmarkHeart';
 import { Data } from '@styled-icons/boxicons-regular/Data';
@@ -32,11 +11,28 @@ import { Meteor } from '@styled-icons/boxicons-regular/Meteor';
 import { PaperPlane } from '@styled-icons/boxicons-regular/PaperPlane';
 import { Pen } from '@styled-icons/boxicons-regular/Pen';
 import { StreetView } from '@styled-icons/boxicons-regular/StreetView';
+import { WizardsOfTheCoast } from '@styled-icons/fa-brands/WizardsOfTheCoast';
 import { Baby } from '@styled-icons/fa-solid/Baby';
+import { HatWizard } from '@styled-icons/fa-solid/HatWizard';
+import { LightBulb } from '@styled-icons/heroicons-outline/LightBulb';
 import { Bolt } from '@styled-icons/material-rounded/Bolt';
 import { School } from '@styled-icons/material-rounded/School';
 import { CatchingPokemon } from '@styled-icons/material/CatchingPokemon';
 import { Code } from '@styled-icons/material/Code';
+import { Androidstudio } from '@styled-icons/simple-icons/Androidstudio';
+import { Azuredevops } from '@styled-icons/simple-icons/Azuredevops';
+import { Cmake } from '@styled-icons/simple-icons/Cmake';
+import { Contentful } from '@styled-icons/simple-icons/Contentful';
+import { Notion } from '@styled-icons/simple-icons/Notion';
+import { P5dotjs } from '@styled-icons/simple-icons/P5dotjs';
+import { Powershell } from '@styled-icons/simple-icons/Powershell';
+import { Reactivex } from '@styled-icons/simple-icons/Reactivex';
+import { Sfml } from '@styled-icons/simple-icons/Sfml';
+import { Vultr } from '@styled-icons/simple-icons/Vultr';
+import { Xcode } from '@styled-icons/simple-icons/Xcode';
+import { StyledIcon } from '@styled-icons/styled-icon';
+import { injectable, interfaces } from 'inversify';
+import 'reflect-metadata';
 
 export interface IIconService {
   get: (id: string) => StyledIcon | undefined;

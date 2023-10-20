@@ -1,8 +1,7 @@
 /* eslint-disable  @typescript-eslint/no-unused-vars */
-import 'reflect-metadata';
-
 import axios, { AxiosResponse } from 'axios';
 import { injectable, interfaces } from 'inversify';
+import 'reflect-metadata';
 
 export interface IContactService {
   submit: (data: FormData) => Promise<boolean>;
