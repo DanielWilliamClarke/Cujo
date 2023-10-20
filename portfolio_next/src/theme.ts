@@ -33,6 +33,9 @@ const colors = {
 
   workLogoBrightness: '25%',
 
+  techBgLight: '#1f242c',
+  techBgDark: '#171a20',
+
   modes: {
     dark: {
       text: '#eee',

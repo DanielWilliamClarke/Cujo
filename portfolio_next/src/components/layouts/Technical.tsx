@@ -83,8 +83,11 @@ export const Technical: React.FC<TechnicalProps> = ({
               textAlign: 'center',
               transition: '0.5s',
               width: '50%',
-              backgroundColor: even ? 'bgLight' : 'bgDark',
-              border: `1px solid ${getColor(t, even ? 'bgDark' : 'bgLight')}`,
+              backgroundColor: even ? 'techBgLight' : 'techBgDark',
+              border: `1px solid ${getColor(
+                t,
+                even ? 'techBgDark' : 'techBgLight',
+              )}`,
               color: 'text',
 
               '&:focus-within': {
@@ -203,7 +206,7 @@ const SkillsSection: React.FC<SkillsProps & { small: boolean }> = ({
           minHeight: 160,
           padding: 10,
           color: 'textTitle',
-          backgroundColor: even ? 'bgLight' : 'bgDark',
+          backgroundColor: even ? 'techBgLight' : 'techBgDark',
         }}
       >
         <Zoom

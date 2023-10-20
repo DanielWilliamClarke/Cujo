@@ -1,13 +1,7 @@
 /** @jsxImportSource theme-ui */
 import { useInjection } from 'inversify-react';
 import { event } from 'nextjs-google-analytics';
-import React, {
-  ChangeEvent,
-  useCallback,
-  useContext,
-  useMemo,
-  useState,
-} from 'react';
+import React, { ChangeEvent, useCallback, useState } from 'react';
 import { Zoom } from 'react-awesome-reveal';
 import { Button, Col, Form, Row } from 'react-bootstrap';
 
@@ -19,10 +13,7 @@ import { IContactService } from '@Services/ContactService';
 
 import { DevIconName } from '@Common/DevIcon';
 import { Section } from '@Common/Section';
-import { DividerProps } from '@Common/TriangleDivider';
 import { LongLine, centeredStyle } from '@Common/UtilComponents';
-
-import ThemeContext from '../theme/ThemeContext';
 
 type ContactProps = {
   profiles: Profile[];
@@ -32,17 +23,8 @@ export const Contact: React.FC<ContactProps> = ({
   profiles,
 }: ContactProps): JSX.Element => {
   const contactService = useInjection(IContactService.$);
-  const { theme } = useContext(ThemeContext);
   const [status, setStatus] = useState(false);
   const { even } = usePositionContext();
-
-  const divider = useMemo<DividerProps>(
-    () => ({
-      background: 'primary',
-      foreground: even ? 'bgLight' : 'bgDark',
-    }),
-    [theme],
-  );
 
   const handleSubmit = useCallback(
     async (event: ChangeEvent<HTMLFormElement>) => {
@@ -58,7 +40,10 @@ export const Contact: React.FC<ContactProps> = ({
     <Section
       id="contact"
       title="Contact"
-      withDivider={divider}
+      withDivider={{
+        background: 'primary',
+        foreground: even ? 'bgLight' : 'bgDark',
+      }}
       coloring={{
         backgroundColor: 'accent',
         color: 'contactText',

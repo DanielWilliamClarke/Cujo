@@ -10,8 +10,8 @@ import { Theme } from 'theme-ui';
 
 import { IIconService } from '@Services/IconService';
 
-// import { ThemeSetter } from '../theme/ThemeSetter';
 import { anton } from '@Common/Font';
+import { ThemeSetter } from '@Common/ThemeSetter';
 
 const emitClickEvent = (section: string) => {
   event('dc_user_event', {
@@ -87,7 +87,7 @@ export const NavPanel: React.FC = (): JSX.Element => {
                 onClick={() => emitClickEvent(link)}
                 sx={(t: Theme) => ({
                   display: 'flex',
-                  lineHeight: 15,
+                  lineHeight: '15px',
                   textAlign: 'center',
                   transition: '0.5s',
                   margin: '5px 0',
@@ -142,7 +142,7 @@ export const NavPanel: React.FC = (): JSX.Element => {
           })}
         </Scrollspy>
 
-        {/* <ThemeSetter /> */}
+        <ThemeSetter />
       </Nav>
     </Navbar>
   );

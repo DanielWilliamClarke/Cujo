@@ -37,7 +37,6 @@ export const Copyright: React.FC<NameProps> = ({
             </span>
           </Col>
         </Row>
-        <ShortLine centered />
       </Container>
     </Section>
   );

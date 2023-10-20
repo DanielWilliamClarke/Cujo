@@ -1,6 +1,6 @@
 /** @jsxImportSource theme-ui */
 import dynamic from 'next/dynamic';
-import React, { ReactNode, Suspense } from 'react';
+import React, { Fragment, ReactNode, Suspense } from 'react';
 
 import { Post } from '@Models/BlogPost';
 import { CV as CVModel } from '@Models/CVModel';
@@ -14,8 +14,6 @@ import { Blog } from '@Layouts/Blog';
 import { Contact } from '@Layouts/Contact';
 import { Copyright } from '@Layouts/Copyright';
 import { NavPanel } from '@Layouts/NavPanel';
-
-import { ThemeProvider } from './theme/ThemeProvider';
 
 const loading = (
   <BlockReverseLoading
@@ -61,7 +59,7 @@ export const Portfolio: React.FC<AppProps> = ({
   ];
 
   return (
-    <ThemeProvider>
+    <Fragment>
       <Suspense>
         <SketchBackstretch cv={cv} />
       </Suspense>
@@ -79,6 +77,6 @@ export const Portfolio: React.FC<AppProps> = ({
           ),
         )}
       </div>
-    </ThemeProvider>
+    </Fragment>
   );
 };
