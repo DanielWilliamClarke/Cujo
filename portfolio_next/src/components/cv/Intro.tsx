@@ -5,7 +5,7 @@ import { BLOCKS } from '@contentful/rich-text-types';
 
 import { Header } from './Header';
 
-import { CV } from '../../model/CVModel';
+import { CV } from '@Models/CVModel';
 
 export namespace Intro {
   const pdfStyles = StyleSheet.create({

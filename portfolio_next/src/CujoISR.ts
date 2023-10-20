@@ -2,9 +2,9 @@ import { GetStaticProps, GetStaticPaths } from "next";
 import { initUrqlClient } from "next-urql";
 import { ssrExchange, dedupExchange, cacheExchange, fetchExchange } from "urql";
 import { CujoQuery, CujoBlogPathsQuery } from "./CujoQuery";
-import { Post } from "./model/BlogPost";
-import { CV } from "./model/CVModel";
-import { Entries } from "./model/Includes";
+import { Post } from "@Models/BlogPost";
+import { CV } from "@Models/CVModel";
+import { Entries } from "@Models/Includes";
 
 export type CujoProps = {
     cv: CV
@@ -52,7 +52,7 @@ export const fetchCujoProps: GetStaticProps = async () => {
 
 export const fetchCujoBlogPaths: GetStaticPaths = async () => {
     console.log(cujoServiceUrl());
-    
+
     const ssrCache = ssrExchange({ isClient: false });
     const client = initUrqlClient(
         {

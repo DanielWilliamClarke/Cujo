@@ -3,8 +3,8 @@ import { View, StyleSheet, Text, Image as PdfImage } from '@react-pdf/renderer';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { BLOCKS } from '@contentful/rich-text-types';
 
-import { DateService, IDateService } from '../../services/DateService';
-import { Work } from '../../model/CVModel';
+import { DateService, IDateService } from '@Services/DateService';
+import { Work } from '@Models/CVModel';
 
 import { Header } from './Header';
 

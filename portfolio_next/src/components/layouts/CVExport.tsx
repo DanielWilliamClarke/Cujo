@@ -6,10 +6,10 @@ import { event } from "nextjs-google-analytics";
 import * as pdfjs from 'pdfjs-dist/legacy/build/pdf.js';
 import pdfjsWorker from 'pdfjs-dist/legacy/build/pdf.worker.entry';
 
-import { CVProps } from '../model/CVModel';
-import { IDateService } from '../services/DateService';
+import { CVProps } from '@Models/CVModel';
+import { IDateService } from '@Services/DateService';
 
-import { CV } from './cv/CV';
+import { CV } from '@Cv/CV';
 
 // This is quite dumb but works
 pdfjs.GlobalWorkerOptions.workerSrc = pdfjsWorker;

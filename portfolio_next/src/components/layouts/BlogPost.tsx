@@ -11,13 +11,13 @@ import { obsidian } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
 import readingTime from 'reading-time';
 
 import dynamic from 'next/dynamic';
-import { Post } from '../model/BlogPost';
-import { Entries, getAsset, Includes } from '../model/Includes';
-import { IDateService } from '../services/DateService';
-import { DynamicImage } from './DynamicImage';
-import { Lanyard } from './Lanyard';
-import { Section } from './Section';
-import { centeredStyle, Line, LongLine } from './UtilComponents';
+import { Post } from '@Models/BlogPost';
+import { Entries, getAsset, Includes } from '@Models/Includes';
+import { IDateService } from '@Services/DateService';
+import { DynamicImage } from '@Common/DynamicImage';
+import { Lanyard } from '@Common/Lanyard';
+import { Section } from '@Common/Section';
+import { centeredStyle, Line, LongLine } from '@Common/UtilComponents';
 
 const SyntaxHighlighter = dynamic(() => import('react-syntax-highlighter'), {
   ssr: false

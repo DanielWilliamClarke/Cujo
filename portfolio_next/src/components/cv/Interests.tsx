@@ -5,7 +5,7 @@ import { documentToPlainTextString } from '@contentful/rich-text-plain-text-rend
 
 import { Block } from '@contentful/rich-text-types';
 
-import { CV } from '../../model/CVModel';
+import { CV } from '@Models/CVModel';
 import { Header } from './Header';
 
 export namespace Interests {

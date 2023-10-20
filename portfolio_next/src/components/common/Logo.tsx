@@ -2,7 +2,7 @@
 
 import { useInjection } from 'inversify-react';
 import React from 'react';
-import { IIconService } from '../services/IconService';
+import { IIconService } from '@Services/IconService';
 import { keyframes } from '@emotion/react'
 
 import { anton } from './Font';

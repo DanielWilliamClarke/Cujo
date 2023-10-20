@@ -1,7 +1,7 @@
 import NextImage from 'next/image';
 import React, { HTMLAttributes, useEffect, useState } from 'react';
 
-import { Media } from '../model/Includes';
+import { Media } from '@Models/Includes';
 
 type ImageProps = HTMLAttributes<HTMLImageElement> & {
   image: Media
@@ -9,7 +9,7 @@ type ImageProps = HTMLAttributes<HTMLImageElement> & {
 
 namespace ImageLocator {
   export const buildImageUri = (image: string): any => {
-    return isUrl(image) ? urlWithProtocol(image) : require(`../assets/${image}`).default;
+    return isUrl(image) ? urlWithProtocol(image) : require(`../../assets/${image}`).default;
   };
 
   const urlWithProtocol = (image: string) => `https:${image}`;

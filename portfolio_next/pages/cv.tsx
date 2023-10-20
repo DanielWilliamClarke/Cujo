@@ -3,9 +3,9 @@
 import { GetStaticProps } from "next";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
-import { BlockReverseLoading } from "../src/components/BlockReverseLoading";
-import { wrapPage } from "../src/Cujo";
-import { CujoProps, fetchCujoProps } from "../src/CujoISR";
+import { BlockReverseLoading } from "@Common/BlockReverseLoading";
+import { wrapPage } from "@Cujo/Cujo";
+import { CujoProps, fetchCujoProps } from "@Cujo/CujoISR";
 
 const loading = (
     <BlockReverseLoading
@@ -20,7 +20,7 @@ const loading = (
     />
 );
 
-const CVExport = dynamic(() => import("../src/components/CVExport"), {
+const CVExport = dynamic(() => import("@Layouts/CVExport"), {
     ssr: false,
     loading: () => loading
 })

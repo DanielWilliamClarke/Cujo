@@ -5,13 +5,13 @@ import React, { ReactNode, useMemo } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { Autoplay, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { About as AboutModel } from '../model/CVModel';
-import { Entry, Media } from '../model/Includes';
-import { DynamicImage } from './DynamicImage';
-import { Section } from './Section';
+import { About as AboutModel } from '@Models/CVModel';
+import { Entry, Media } from '@Models/Includes';
+import { DynamicImage } from '@Common/DynamicImage';
+import { Section } from '@Common/Section';
 
 import { CommonNode, documentToReactComponents } from '@contentful/rich-text-react-renderer';
-import { Reveal } from './Reveal';
+import { Reveal } from '@Common/Reveal';
 
 const textColumnStyle = {
   display: 'flex',

@@ -3,11 +3,11 @@
 import { Row } from "react-bootstrap";
 import { Autoplay, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Book, BookProgress } from "../model/CVModel";
-import { Entries } from "../model/Includes";
-import { DynamicImage } from "./DynamicImage";
-import { usePositionContext } from "./hooks/PositionContext";
-import { Section } from "./Section";
+import { Book, BookProgress } from "@Models/CVModel";
+import { Entries } from "@Models/Includes";
+import { DynamicImage } from "@Common/DynamicImage";
+import { usePositionContext } from "@Hooks/PositionContext";
+import { Section } from "@Common/Section";
 
 const props = {
   slidesPerView: 1,

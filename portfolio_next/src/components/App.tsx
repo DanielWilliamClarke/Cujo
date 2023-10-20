@@ -2,18 +2,18 @@
 
 import React, { ReactNode, Suspense } from 'react';
 
-import { Post } from '../model/BlogPost';
-import { CV as CVModel } from '../model/CVModel';
-import { Entries } from '../model/Includes';
-import { Copyright } from './Copyright';
-import { Blog } from './Blog';
-import { Contact } from './Contact';
-import { NavPanel } from './NavPanel';
+import { Post } from '@Models/BlogPost';
+import { CV as CVModel } from '@Models/CVModel';
+import { Entries } from '@Models/Includes';
+import { Copyright } from '@Layouts/Copyright';
+import { Blog } from '@Layouts/Blog';
+import { Contact } from '@Layouts/Contact';
+import { NavPanel } from '@Layouts/NavPanel';
 import { ThemeProvider } from './theme/ThemeProvider';
 
 import dynamic from 'next/dynamic';
-import { BlockReverseLoading } from './BlockReverseLoading';
-import { PositionProvider } from './hooks/PositionContext';
+import { BlockReverseLoading } from '@Common/BlockReverseLoading';
+import { PositionProvider } from '@Hooks/PositionContext';
 
 const loading = (
   <BlockReverseLoading
@@ -28,12 +28,12 @@ const loading = (
   />
 );
 
-const SketchBackstretch = dynamic(() => import('./SketchBackstretch'), {
+const SketchBackstretch = dynamic(() => import('@Layouts/SketchBackstretch'), {
   ssr: false,
   loading: () => loading
 });
 
-const CVPreview = dynamic(() => import('./CVPreview'), {
+const CVPreview = dynamic(() => import('@Layouts/CVPreview'), {
   ssr: false,
   loading: () => loading
 });
