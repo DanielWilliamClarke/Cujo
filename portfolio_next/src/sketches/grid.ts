@@ -1,7 +1,7 @@
-import p5 from "p5";
-import { Vector4D } from "./matrix_utils";
-import { Ease } from "./easing";
-import { Sketch } from ".";
+import p5 from 'p5';
+import { Vector4D } from './matrix_utils';
+import { Ease } from './easing';
+import { Sketch } from '.';
 
 class GridUtil {
   static getSquareGrid(
@@ -84,8 +84,8 @@ export class Grid implements Sketch {
     this.totalX = Math.ceil(this.screenWidth / 2 / this.scale);
     this.totalY = Math.ceil(this.screenHeight / 2 / this.scale);
 
-    const canvas = document.getElementById("defaultCanvas0") as any;
-    this.ctx = canvas.getContext("2d");
+    const canvas = document.getElementById('defaultCanvas0') as any;
+    this.ctx = canvas.getContext('2d');
 
     this.shapes = GridUtil.getSquareGrid(this.totalX, this.totalY, this.scale);
     this.hexPoints = GridUtil.getPolygonPoints(360, 4);
@@ -105,12 +105,12 @@ export class Grid implements Sketch {
     this.t += this.timeScale;
 
     this.ctx.save();
-    this.ctx.fillStyle = "rgba(0,0,0,0.05)";
+    this.ctx.fillStyle = 'rgba(0,0,0,0.05)';
     this.ctx.fillRect(0, 0, this.screenWidth, this.screenHeight);
 
     this.ctx.translate(this.screenWidth / 2, this.screenHeight / 2);
 
-    this.ctx.lineCap = "sqaure";
+    this.ctx.lineCap = 'sqaure';
 
     this.shapes.forEach((shape: Vector4D): void => {
       const scaledT = Ease.easeInOutQuad(

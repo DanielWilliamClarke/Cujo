@@ -1,7 +1,7 @@
-import NextImage from "next/image";
-import React, { HTMLAttributes, useEffect, useState } from "react";
+import NextImage from 'next/image';
+import React, { HTMLAttributes, useEffect, useState } from 'react';
 
-import { Media } from "@Models/Includes";
+import { Media } from '@Models/Includes';
 
 type ImageProps = HTMLAttributes<HTMLImageElement> & {
   image: Media;
@@ -17,7 +17,7 @@ namespace ImageLocator {
   const urlWithProtocol = (image: string) => `https:${image}`;
 
   const isUrl = (image: string): boolean => {
-    if (image.startsWith("//images.")) {
+    if (image.startsWith('//images.')) {
       image = urlWithProtocol(image);
     }
 
@@ -28,7 +28,7 @@ namespace ImageLocator {
       return false;
     }
 
-    return ["http:", "https:"].includes(url.protocol);
+    return ['http:', 'https:'].includes(url.protocol);
   };
 }
 
@@ -44,11 +44,11 @@ export const DynamicImage: React.FC<ImageProps> = ({
       if (uri) {
         const handleLoad = (): void => {
           setLoaded(uri);
-          image.removeEventListener("load", handleLoad);
+          image.removeEventListener('load', handleLoad);
           resolve(true);
         };
         const image = new Image();
-        image.addEventListener("load", handleLoad.bind(this));
+        image.addEventListener('load', handleLoad.bind(this));
         image.src = uri;
       }
     });

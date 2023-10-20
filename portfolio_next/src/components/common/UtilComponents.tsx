@@ -1,20 +1,20 @@
 /** @jsxImportSource theme-ui */
 
-import React from "react";
-import { ThemeUICSSObject } from "theme-ui";
-import { usePositionContext } from "@Hooks/PositionContext";
-import { GenericComponentProps } from "./props";
+import React from 'react';
+import { ThemeUICSSObject } from 'theme-ui';
+import { usePositionContext } from '@Hooks/PositionContext';
+import { GenericComponentProps } from './props';
 
 const baseLineStyle: ThemeUICSSObject = {
-  display: "block",
+  display: 'block',
   height: 1,
   padding: 0,
   marginY: 10,
 };
 
 export const centeredStyle: ThemeUICSSObject = {
-  float: "none",
-  marginX: "auto",
+  float: 'none',
+  marginX: 'auto',
 };
 
 export type LineProps = GenericComponentProps & {
@@ -35,7 +35,7 @@ const BaseLine: React.FC<LineProps> = ({
       sx={{
         ...baseLineStyle,
         ...(centered && centeredStyle),
-        backgroundColor: colorOverride ?? (even ? "accent" : "secondary"),
+        backgroundColor: colorOverride ?? (even ? 'accent' : 'secondary'),
       }}
     />
   );
@@ -50,7 +50,7 @@ export const ShortLine: React.FC<LineProps> = (props) => (
 );
 
 export const LongLine: React.FC<LineProps> = (props) => (
-  <BaseLine {...props} sx={{ width: "75%" }} />
+  <BaseLine {...props} sx={{ width: '75%' }} />
 );
 
 export type SymbolProps = GenericComponentProps & {
@@ -64,10 +64,10 @@ const BaseSymbol: React.FC<SymbolProps> = ({ className, symbol }) => {
     <span
       className={className}
       sx={{
-        "&:after": {
+        '&:after': {
           marginX: 10,
           content: `"${symbol}"`,
-          color: even ? "accent" : "secondary",
+          color: even ? 'accent' : 'secondary',
         },
       }}
     />

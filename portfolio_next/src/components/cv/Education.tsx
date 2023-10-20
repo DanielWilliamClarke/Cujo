@@ -1,10 +1,10 @@
-import React from "react";
-import { View, StyleSheet, Text } from "@react-pdf/renderer";
+import React from 'react';
+import { View, StyleSheet, Text } from '@react-pdf/renderer';
 2;
-import { DateService, IDateService } from "@Services/DateService";
-import { CV, Education as EducationModel } from "@Models/CVModel";
+import { DateService, IDateService } from '@Services/DateService';
+import { CV, Education as EducationModel } from '@Models/CVModel';
 
-import { Header } from "./Header";
+import { Header } from './Header';
 
 export namespace Education {
   const pdfStyles = StyleSheet.create({
@@ -16,20 +16,20 @@ export namespace Education {
       fontSize: 12,
     },
     dates: {
-      color: "#999999",
+      color: '#999999',
     },
   });
 
   const dateService: IDateService = (() => {
     const service = new DateService();
-    service.format("MMMM YYYY", "YYYY-MM-DD");
+    service.format('MMMM YYYY', 'YYYY-MM-DD');
     return service;
   })();
 
   export const render = (cv: CV): JSX.Element => {
     return (
       <View wrap={false}>
-        {Header.render("education")}
+        {Header.render('education')}
         <View>
           {cv.education.entries
             .sort(
@@ -48,11 +48,11 @@ export namespace Education {
                 <Text
                   style={[
                     pdfStyles.institution,
-                    { fontFamily: "Helvetica-Bold" },
+                    { fontFamily: 'Helvetica-Bold' },
                   ]}
                 >
-                  {education.area}{" "}
-                  {education.grade ? `| ${education.grade}` : ""}
+                  {education.area}{' '}
+                  {education.grade ? `| ${education.grade}` : ''}
                 </Text>
                 <Text>{education.institution}</Text>
               </View>

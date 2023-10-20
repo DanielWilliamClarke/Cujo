@@ -1,8 +1,8 @@
-import dat from "dat.gui";
-import p5 from "p5";
-import { Sketch } from ".";
+import dat from 'dat.gui';
+import p5 from 'p5';
+import { Sketch } from '.';
 
-import { createNoise3D, NoiseFunction3D } from "simplex-noise";
+import { createNoise3D, NoiseFunction3D } from 'simplex-noise';
 
 class HSLA {
   constructor(
@@ -217,13 +217,13 @@ export class Waves implements Sketch {
   private setupDatGui() {
     this.gui.remember(this.parameters);
     this.gui
-      .add(this.parameters, "base")
+      .add(this.parameters, 'base')
       .min(100)
       .max(1000)
       .step(100)
       .onFinishChange(() => this.p.background(0));
     this.gui
-      .add(this.parameters, "step")
+      .add(this.parameters, 'step')
       .min(5)
       .max(20)
       .step(1)
@@ -235,7 +235,7 @@ export class Waves implements Sketch {
     //   .step(0.05)
     //   .onFinishChange(() => this.p.background(0));
     this.gui
-      .add(this.parameters, "bearing")
+      .add(this.parameters, 'bearing')
       .min(0)
       .max(100)
       .step(1)

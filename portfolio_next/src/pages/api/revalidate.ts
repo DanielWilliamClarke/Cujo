@@ -1,16 +1,16 @@
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextApiRequest, NextApiResponse } from 'next';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const requestMethod = req.method;
   // Force POST request
-  if (requestMethod !== "POST") {
-    return res.status(401).json({ message: "Invalid" });
+  if (requestMethod !== 'POST') {
+    return res.status(401).json({ message: 'Invalid' });
   }
 
   const body = req.body;
   // Check for secret to confirm this is a valid request
   if (body.secret !== process.env.CUJO_REVALIDATE_SECRET) {
-    return res.status(401).json({ message: "Invalid" });
+    return res.status(401).json({ message: 'Invalid' });
   }
 
   console.log(`Revalidating ${body.path}`);
@@ -20,7 +20,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     return res.json({ revalidated: true });
   } catch (err) {
     console.error(err);
-    return res.status(500).json({ message: "Error revalidating" });
+    return res.status(500).json({ message: 'Error revalidating' });
   }
 };
 

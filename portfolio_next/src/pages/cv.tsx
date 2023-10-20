@@ -1,17 +1,17 @@
 /** @jsxImportSource theme-ui */
 
-import { GetStaticProps } from "next";
-import dynamic from "next/dynamic";
-import { Suspense } from "react";
-import { BlockReverseLoading } from "@Common/BlockReverseLoading";
-import { wrapPage } from "@Cujo/Cujo";
-import { CujoProps, fetchCujoProps } from "@Cujo/CujoISR";
+import { GetStaticProps } from 'next';
+import dynamic from 'next/dynamic';
+import { Suspense } from 'react';
+import { BlockReverseLoading } from '@Common/BlockReverseLoading';
+import { wrapPage } from '@Cujo/Cujo';
+import { CujoProps, fetchCujoProps } from '@Cujo/CujoISR';
 
 const loading = (
   <BlockReverseLoading
     sx={{
-      height: "100vh",
-      width: "auto",
+      height: '100vh',
+      width: 'auto',
     }}
     box={{
       speed: 3,
@@ -20,7 +20,7 @@ const loading = (
   />
 );
 
-const CVExport = dynamic(() => import("@Layouts/CVExport"), {
+const CVExport = dynamic(() => import('@Layouts/CVExport'), {
   ssr: false,
   loading: () => loading,
 });

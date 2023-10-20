@@ -1,10 +1,10 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from 'react';
 import {
   buildStyles,
   CircularProgressbarWithChildren,
-} from "react-circular-progressbar";
-import VisibilitySensor from "react-visibility-sensor";
-import interpolate from "color-interpolate";
+} from 'react-circular-progressbar';
+import VisibilitySensor from 'react-visibility-sensor';
+import interpolate from 'color-interpolate';
 
 type ProgressProps = {
   valueStart: number;
@@ -57,9 +57,9 @@ export const ProgressGauge: React.FC<ProgressGaugeProps> = ({
                 value={value}
                 circleRatio={0.75}
                 styles={buildStyles({
-                  strokeLinecap: "round",
+                  strokeLinecap: 'round',
                   rotation: 1 / 2 + 1 / 8,
-                  trailColor: "#eeeeee55",
+                  trailColor: '#eeeeee55',
                   pathColor: color,
                   pathTransitionDuration: 2.0,
                 })}

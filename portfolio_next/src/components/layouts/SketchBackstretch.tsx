@@ -1,20 +1,20 @@
 /** @jsxImportSource theme-ui */
 
-import p5 from "p5";
-import React, { useEffect, useMemo } from "react";
-import { Container, Row, Col } from "react-bootstrap";
-import { useInjection } from "inversify-react";
-import { IDateService } from "@Services/DateService";
-import { getSketch } from "@Sketches/index";
-import { CVProps, Work } from "@Models/CVModel";
+import p5 from 'p5';
+import React, { useEffect, useMemo } from 'react';
+import { Container, Row, Col } from 'react-bootstrap';
+import { useInjection } from 'inversify-react';
+import { IDateService } from '@Services/DateService';
+import { getSketch } from '@Sketches/index';
+import { CVProps, Work } from '@Models/CVModel';
 
-import { ScrollIndicator } from "@Common/ScrollIndicator";
-import { DynamicImage } from "@Common/DynamicImage";
-import { Logo } from "@Common/Logo";
-import { anton } from "@Common/Font";
-import { Theme } from "theme-ui";
-import { alpha } from "@theme-ui/color";
-import { centeredStyle } from "@Common/UtilComponents";
+import { ScrollIndicator } from '@Common/ScrollIndicator';
+import { DynamicImage } from '@Common/DynamicImage';
+import { Logo } from '@Common/Logo';
+import { anton } from '@Common/Font';
+import { Theme } from 'theme-ui';
+import { alpha } from '@theme-ui/color';
+import { centeredStyle } from '@Common/UtilComponents';
 
 // This stops any re-renders from creating multiple canvas'
 let rendered = false;
@@ -22,7 +22,7 @@ let rendered = false;
 const SketchBackstretch: React.FC<CVProps> = React.memo(
   ({ cv }: CVProps): JSX.Element => {
     const dateService = useInjection(IDateService.$);
-    dateService.format("MMMM YYYY", "YYYY-MM-DD");
+    dateService.format('MMMM YYYY', 'YYYY-MM-DD');
 
     const currentRole = useMemo(() => {
       return cv.work.entries
@@ -53,32 +53,32 @@ const SketchBackstretch: React.FC<CVProps> = React.memo(
             fluid
             ref={p5Ref}
             sx={(t: Theme) => ({
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              color: "text",
-              height: "100vh",
-              textAlign: "center",
-              transition: "0.5s",
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              color: 'text',
+              height: '100vh',
+              textAlign: 'center',
+              transition: '0.5s',
               marginBottom: -70,
               background: `linear-gradient(0deg,
-               ${alpha("backGradSketchHigh", 0.6)(t)},
-               ${alpha("backGradSketchLow", 0)(t)})`,
+               ${alpha('backGradSketchHigh', 0.6)(t)},
+               ${alpha('backGradSketchLow', 0)(t)})`,
               opacity: 0.6,
 
               canvas: {
-                position: "absolute",
+                position: 'absolute',
                 zIndex: -1,
               },
             })}
           >
             <div
               sx={{
-                userSelect: "none",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                flexDirection: ["column", "row", "row"],
+                userSelect: 'none',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                flexDirection: ['column', 'row', 'row'],
               }}
             >
               <Logo
@@ -89,10 +89,10 @@ const SketchBackstretch: React.FC<CVProps> = React.memo(
               <div>
                 <Row
                   sx={{
-                    fontSize: ["50px", "calc(30px + 3vw)", "calc(30px + 3vw)"],
-                    lineHeight: "calc(30px + 3vw)",
+                    fontSize: ['50px', 'calc(30px + 3vw)', 'calc(30px + 3vw)'],
+                    lineHeight: 'calc(30px + 3vw)',
                     fontWeight: 700,
-                    textShadow: "0 0 50px shadow",
+                    textShadow: '0 0 50px shadow',
                     paddingBottom: [20, 0, 0],
                   }}
                 >
@@ -100,17 +100,17 @@ const SketchBackstretch: React.FC<CVProps> = React.memo(
                 </Row>
                 <div
                   sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    flexDirection: ["column", "row", "row"],
+                    display: 'flex',
+                    alignItems: 'center',
+                    flexDirection: ['column', 'row', 'row'],
                   }}
                 >
                   <Row
                     sx={{
-                      fontSize: "calc(15px + 1vw)",
-                      lineHeight: "calc(15px + 1vw)",
+                      fontSize: 'calc(15px + 1vw)',
+                      lineHeight: 'calc(15px + 1vw)',
                       fontWeight: 400,
-                      textShadow: "0 0 50px shadow",
+                      textShadow: '0 0 50px shadow',
                     }}
                   >
                     <Col>{cv.about.entry.label.toLocaleUpperCase()}</Col>
@@ -138,13 +138,13 @@ const SketchBackstretch: React.FC<CVProps> = React.memo(
           <Container
             fluid
             sx={{
-              justifyContent: "center",
-              display: ["none", "flex", "flex"],
+              justifyContent: 'center',
+              display: ['none', 'flex', 'flex'],
             }}
           >
             <ScrollIndicator
               sx={{
-                bottom: "28%",
+                bottom: '28%',
               }}
             />
           </Container>
@@ -155,6 +155,6 @@ const SketchBackstretch: React.FC<CVProps> = React.memo(
   },
 );
 
-SketchBackstretch.displayName = "SketchBackstretch";
+SketchBackstretch.displayName = 'SketchBackstretch';
 
 export default SketchBackstretch;

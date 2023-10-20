@@ -1,12 +1,12 @@
 /** @jsxImportSource theme-ui */
 
-import React, { useMemo } from "react";
-import { useInjection } from "inversify-react";
-import { DevIcon } from "@Models/CVModel";
-import { IIconService } from "@Services/IconService";
-import { usePositionContext } from "@Hooks/PositionContext";
-import { GenericComponentProps } from "./props";
-import { ThemeUIStyleObject } from "theme-ui";
+import React, { useMemo } from 'react';
+import { useInjection } from 'inversify-react';
+import { DevIcon } from '@Models/CVModel';
+import { IIconService } from '@Services/IconService';
+import { usePositionContext } from '@Hooks/PositionContext';
+import { GenericComponentProps } from './props';
+import { ThemeUIStyleObject } from 'theme-ui';
 
 type DevIconProps = GenericComponentProps & {
   icon: DevIcon;
@@ -32,7 +32,7 @@ export const DevIconName: React.FC<DevIconProps> = ({
     const iconStyle: ThemeUIStyleObject = {
       fontSize: size,
       width: size,
-      marginX: "auto",
+      marginX: 'auto',
     };
 
     const Icon = iconService.get(icon.name);
@@ -47,12 +47,12 @@ export const DevIconName: React.FC<DevIconProps> = ({
     <div
       className={className}
       sx={{
-        textAlign: ["center", undefined, undefined],
+        textAlign: ['center', undefined, undefined],
         color,
-        transition: "0.5s",
-        "&:hover": {
-          transform: "scale(1.2)",
-          color: hoverColor ?? (even ? "accent" : "secondary"),
+        transition: '0.5s',
+        '&:hover': {
+          transform: 'scale(1.2)',
+          color: hoverColor ?? (even ? 'accent' : 'secondary'),
         },
       }}
     >

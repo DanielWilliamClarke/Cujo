@@ -1,14 +1,14 @@
 /** @jsxImportSource theme-ui */
 
-import { useInjection } from "inversify-react";
-import React from "react";
-import { Col, Container, Row } from "react-bootstrap";
-import { IDateService } from "@Services/DateService";
-import { Section } from "@Common/Section";
+import { useInjection } from 'inversify-react';
+import React from 'react';
+import { Col, Container, Row } from 'react-bootstrap';
+import { IDateService } from '@Services/DateService';
+import { Section } from '@Common/Section';
 import {
   Copyright as CopyrightSymbol,
   ShortLine,
-} from "@Common/UtilComponents";
+} from '@Common/UtilComponents';
 
 type NameProps = {
   name: string;
@@ -25,7 +25,7 @@ export const Copyright: React.FC<NameProps> = ({
         <Row
           sx={{
             marginY: 10,
-            textAlign: ["center", undefined, undefined],
+            textAlign: ['center', undefined, undefined],
           }}
         >
           <Col>

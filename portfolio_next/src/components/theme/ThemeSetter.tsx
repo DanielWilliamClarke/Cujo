@@ -1,13 +1,13 @@
-import React, { useContext, useRef } from "react";
-import { Player } from "@lottiefiles/react-lottie-player";
+import React, { useContext, useRef } from 'react';
+import { Player } from '@lottiefiles/react-lottie-player';
 
-import switcher from "../../assets/theme_toggle.json";
+import switcher from '../../assets/theme_toggle.json';
 
-import ThemeContext from "./ThemeContext";
+import ThemeContext from './ThemeContext';
 
 enum ThemeOptions {
-  LIGHT = "light",
-  DARK = "dark",
+  LIGHT = 'light',
+  DARK = 'dark',
 }
 
 export const ThemeSetter: React.FC = () => {
@@ -32,7 +32,7 @@ export const ThemeSetter: React.FC = () => {
       <Player
         className="theme-icon"
         onEvent={(event) => {
-          if (event === "load") {
+          if (event === 'load') {
             player.current?.setSeeker(getFrame(theme === ThemeOptions.LIGHT));
           }
         }}

@@ -1,5 +1,5 @@
-import p5 from "p5";
-import * as dat from "dat.gui";
+import p5 from 'p5';
+import * as dat from 'dat.gui';
 
 class HSLA {
   constructor(
@@ -33,20 +33,20 @@ export function conway3D(p: p5): void {
 
   const gui = new dat.GUI();
   gui.remember(parameters);
-  gui.add(parameters, "chance").min(0.0001).max(0.05).step(0.0001);
+  gui.add(parameters, 'chance').min(0.0001).max(0.05).step(0.0001);
   gui
-    .add(parameters, "cubeSize")
+    .add(parameters, 'cubeSize')
     .min(100)
     .max(window.innerHeight)
     .step(10)
     .onFinishChange(() => reset());
   gui
-    .add(parameters, "resolution")
+    .add(parameters, 'resolution')
     .min(5)
     .max(30)
     .step(2)
     .onFinishChange(() => reset());
-  gui.add(parameters, "spin").min(0).max(0.5).step(0.01);
+  gui.add(parameters, 'spin').min(0).max(0.5).step(0.01);
   gui.close();
 
   let cubeSize = 0;

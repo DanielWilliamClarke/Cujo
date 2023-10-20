@@ -1,6 +1,6 @@
-import p5 from "p5";
-import { Sketch, sample } from ".";
-import { Vector4D, MatrixUtils } from "./matrix_utils";
+import p5 from 'p5';
+import { Sketch, sample } from '.';
+import { Vector4D, MatrixUtils } from './matrix_utils';
 
 type RotationGenerator = (angle: number) => number[][];
 
@@ -87,8 +87,8 @@ export class Hypercube implements Sketch {
     );
 
     // transparency ordering workaround
-    const canvas = document.getElementById("defaultCanvas0") as any;
-    this.ctx = canvas.getContext("webgl");
+    const canvas = document.getElementById('defaultCanvas0') as any;
+    this.ctx = canvas.getContext('webgl');
     this.ctx.disable(this.ctx.DEPTH_TEST);
 
     // Generate 4D points

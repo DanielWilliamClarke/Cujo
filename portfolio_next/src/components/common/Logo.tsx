@@ -1,12 +1,12 @@
 /** @jsxImportSource theme-ui */
 
-import { useInjection } from "inversify-react";
-import React from "react";
-import { IIconService } from "@Services/IconService";
-import { keyframes } from "@emotion/react";
+import { useInjection } from 'inversify-react';
+import React from 'react';
+import { IIconService } from '@Services/IconService';
+import { keyframes } from '@emotion/react';
 
-import { anton } from "./Font";
-import { GenericComponentProps } from "./props";
+import { anton } from './Font';
+import { GenericComponentProps } from './props';
 
 const pastelRgb = keyframes`
     0% {
@@ -56,16 +56,16 @@ const pastelRgb = keyframes`
 
 export const Logo: React.FC<GenericComponentProps> = ({ className }) => {
   const iconService = useInjection(IIconService.$);
-  const Icon = iconService.getWithDefault("skills");
+  const Icon = iconService.getWithDefault('skills');
 
   return (
     <div
       className={`${anton.className} ${className}`}
       sx={{
         fontSize: 150,
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
         paddingRight: 30,
       }}
     >
@@ -73,11 +73,11 @@ export const Logo: React.FC<GenericComponentProps> = ({ className }) => {
       <Icon
         sx={{
           width: 150 + 30,
-          position: "absolute",
-          rotate: "10deg",
-          filter: "drop-shadow(4px 4px 4px rgb(0 0 0 / 0.4))",
+          position: 'absolute',
+          rotate: '10deg',
+          filter: 'drop-shadow(4px 4px 4px rgb(0 0 0 / 0.4))',
           animation: `${pastelRgb} 10s infinite`,
-          animationTimingFunction: "ease-in-out",
+          animationTimingFunction: 'ease-in-out',
         }}
       />
     </div>

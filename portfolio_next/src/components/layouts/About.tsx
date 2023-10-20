@@ -1,32 +1,32 @@
 /** @jsxImportSource theme-ui */
 
-import { INLINES, MARKS } from "@contentful/rich-text-types";
-import React, { ReactNode, useMemo } from "react";
-import { Col, Row } from "react-bootstrap";
-import { Autoplay, Pagination } from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { About as AboutModel } from "@Models/CVModel";
-import { Entry, Media } from "@Models/Includes";
-import { DynamicImage } from "@Common/DynamicImage";
-import { Section } from "@Common/Section";
+import { INLINES, MARKS } from '@contentful/rich-text-types';
+import React, { ReactNode, useMemo } from 'react';
+import { Col, Row } from 'react-bootstrap';
+import { Autoplay, Pagination } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { About as AboutModel } from '@Models/CVModel';
+import { Entry, Media } from '@Models/Includes';
+import { DynamicImage } from '@Common/DynamicImage';
+import { Section } from '@Common/Section';
 
 import {
   CommonNode,
   documentToReactComponents,
-} from "@contentful/rich-text-react-renderer";
-import { Reveal } from "@Common/Reveal";
+} from '@contentful/rich-text-react-renderer';
+import { Reveal } from '@Common/Reveal';
 
 const textColumnStyle = {
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "center",
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
   paddingX: 20,
-  textAlign: "left",
-  width: "50%",
+  textAlign: 'left',
+  width: '50%',
 
-  "@media screen and (max-width: 700px)": {
-    margin: "10px 0",
-    width: "100%",
+  '@media screen and (max-width: 700px)': {
+    margin: '10px 0',
+    width: '100%',
   },
 };
 
@@ -104,9 +104,9 @@ export const About: React.FC<AboutProps> = ({
             <Reveal direction="right">
               <Swiper
                 sx={{
-                  alignItems: "center",
-                  display: "flex",
-                  justifyContent: "center",
+                  alignItems: 'center',
+                  display: 'flex',
+                  justifyContent: 'center',
                 }}
                 {...carouselProps}
               >
@@ -115,11 +115,11 @@ export const About: React.FC<AboutProps> = ({
                     <DynamicImage
                       image={media}
                       sx={{
-                        objectFit: "cover",
+                        objectFit: 'cover',
                         borderRadius: 12,
                         height: 700,
-                        maxHeight: "100%",
-                        width: "auto",
+                        maxHeight: '100%',
+                        width: 'auto',
                       }}
                     />
                   </SwiperSlide>

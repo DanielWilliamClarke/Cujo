@@ -1,25 +1,25 @@
-import React, { ReactNode } from "react";
-import { View, StyleSheet, Text } from "@react-pdf/renderer";
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import { BLOCKS } from "@contentful/rich-text-types";
+import React, { ReactNode } from 'react';
+import { View, StyleSheet, Text } from '@react-pdf/renderer';
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import { BLOCKS } from '@contentful/rich-text-types';
 
-import { Header } from "./Header";
+import { Header } from './Header';
 
-import { CV } from "@Models/CVModel";
+import { CV } from '@Models/CVModel';
 
 export namespace Intro {
   const pdfStyles = StyleSheet.create({
     intro: {
-      display: "flex",
-      flexDirection: "row",
+      display: 'flex',
+      flexDirection: 'row',
       fontSize: 10,
       marginVertical: 10,
     },
     profile: {
-      flexDirection: "column",
+      flexDirection: 'column',
     },
     paragraph: {
-      marginBottom: "5px",
+      marginBottom: '5px',
     },
   });
 
@@ -41,7 +41,7 @@ export namespace Intro {
     return (
       <View style={pdfStyles.intro}>
         <View style={pdfStyles.profile}>
-          {Header.render("Mission")}
+          {Header.render('Mission')}
           {/* Only show first paragraph */}
           {documentToReactComponents(
             cv.about.entry.about.content[0] as any,

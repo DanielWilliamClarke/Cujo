@@ -1,10 +1,10 @@
 /** @jsxImportSource theme-ui */
 
-import React from "react";
-import { Col, Row } from "react-bootstrap";
+import React from 'react';
+import { Col, Row } from 'react-bootstrap';
 
-import { anton } from "./Font";
-import { Line } from "./UtilComponents";
+import { anton } from './Font';
+import { Line } from './UtilComponents';
 
 export type SectionColouring = {
   backgroundColor: string;
@@ -28,13 +28,13 @@ export const Heading: React.FC<HeadingProps> = ({
         <h2
           className={`${anton.className}`}
           sx={{
-            display: "block",
-            fontSize: "2.25em",
+            display: 'block',
+            fontSize: '2.25em',
             fontWeight: 700,
-            margin: "0 0 15px",
+            margin: '0 0 15px',
             padding: 0,
-            textAlign: "center",
-            textTransform: "capitalize",
+            textAlign: 'center',
+            textTransform: 'capitalize',
             color: coloring?.color,
           }}
         >

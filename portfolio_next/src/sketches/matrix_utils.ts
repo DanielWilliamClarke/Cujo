@@ -1,4 +1,4 @@
-import p5 from "p5";
+import p5 from 'p5';
 
 export class Vector4D extends p5.Vector {
   constructor(
@@ -86,7 +86,7 @@ export class MatrixUtils {
     const rowsB = b.length;
 
     if (colsA !== rowsB) {
-      console.error("Columns of A must match rows of B");
+      console.error('Columns of A must match rows of B');
       return null;
     }
 
@@ -107,12 +107,12 @@ export class MatrixUtils {
   LogMatrix(m: number[][]): void {
     const cols = m[0].length;
     const rows = m.length;
-    console.log(rows + "x" + cols);
-    console.log("----------------");
-    let s = "";
+    console.log(rows + 'x' + cols);
+    console.log('----------------');
+    let s = '';
     for (let i = 0; i < rows; i++) {
       for (let j = 0; j < cols; j++) {
-        s += m[i][j] + " ";
+        s += m[i][j] + ' ';
       }
       console.log(s);
     }

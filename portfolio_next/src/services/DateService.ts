@@ -1,9 +1,9 @@
 /* eslint-disable  @typescript-eslint/no-unused-vars */
-import "reflect-metadata";
+import 'reflect-metadata';
 
-import { injectable, interfaces } from "inversify";
-import moment from "moment";
-import util from "util";
+import { injectable, interfaces } from 'inversify';
+import moment from 'moment';
+import util from 'util';
 
 export interface IDateService {
   format: (o: string, i?: string) => IDateService;
@@ -18,7 +18,7 @@ export interface IDateService {
 
 export namespace IDateService {
   export const $: interfaces.ServiceIdentifier<IDateService> =
-    Symbol("IDateService");
+    Symbol('IDateService');
 }
 
 @injectable()
@@ -37,7 +37,7 @@ export class DateService implements IDateService {
   }
 
   toSentence(date: string): string {
-    if (date === "Present") {
+    if (date === 'Present') {
       return date;
     }
     return moment(date, this.inFormat).format(this.outFormat);
@@ -65,7 +65,7 @@ export class DateService implements IDateService {
 
   private toDuration(start: string, end: string): string {
     let endMoment = moment(end, this.inFormat);
-    if (end === "Present") {
+    if (end === 'Present') {
       endMoment = moment();
     }
     const difference = moment.duration(
@@ -75,12 +75,12 @@ export class DateService implements IDateService {
     const months = difference.months() + 1; // we want to ceiling of months not floor
 
     const yearFormat = years
-      ? util.format("%d year%s", years, years === 1 ? "" : "s")
-      : "";
+      ? util.format('%d year%s', years, years === 1 ? '' : 's')
+      : '';
     const monthFormat = months
-      ? util.format("%d month%s", months, months === 1 ? "" : "s")
-      : "";
-    const spacing = yearFormat !== "" ? " " : "";
+      ? util.format('%d month%s', months, months === 1 ? '' : 's')
+      : '';
+    const spacing = yearFormat !== '' ? ' ' : '';
 
     return `(${yearFormat}${spacing}${monthFormat})`;
   }

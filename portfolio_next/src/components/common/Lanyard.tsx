@@ -1,8 +1,8 @@
 /** @jsxImportSource theme-ui */
 
-import React from "react";
-import { Badge } from "react-bootstrap";
-import { usePositionContext } from "@Hooks/PositionContext";
+import React from 'react';
+import { Badge } from 'react-bootstrap';
+import { usePositionContext } from '@Hooks/PositionContext';
 
 type LanyardProps = {
   tags: string[];
@@ -22,13 +22,13 @@ export const Lanyard: React.FC<LanyardProps> = ({
             sx={{
               marginX: 1,
               fontWeight: 500,
-              color: "text",
-              backgroundColor: even ? "accent" : "secondary",
-              textTransform: "capitalize",
-              transition: "0.2",
-              "&:hover": {
-                margin: "0 1%",
-                transform: "scale(1.05)",
+              color: 'text',
+              backgroundColor: even ? 'accent' : 'secondary',
+              textTransform: 'capitalize',
+              transition: '0.2',
+              '&:hover': {
+                margin: '0 1%',
+                transform: 'scale(1.05)',
               },
             }}
           >

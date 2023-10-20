@@ -1,27 +1,27 @@
 /** @jsxImportSource theme-ui */
 
-import { useInjection } from "inversify-react";
-import { event } from "nextjs-google-analytics";
+import { useInjection } from 'inversify-react';
+import { event } from 'nextjs-google-analytics';
 import React, {
   ChangeEvent,
   useCallback,
   useContext,
   useMemo,
   useState,
-} from "react";
-import { Button, Col, Form, Row } from "react-bootstrap";
+} from 'react';
+import { Button, Col, Form, Row } from 'react-bootstrap';
 
-import { Zoom } from "react-awesome-reveal";
+import { Zoom } from 'react-awesome-reveal';
 
-import { Profile } from "@Models/CVModel";
-import { IContactService } from "@Services/ContactService";
-import { DevIconName } from "@Common/DevIcon";
-import { Section } from "@Common/Section";
-import { DividerProps } from "@Common/TriangleDivider";
-import ThemeContext from "../theme/ThemeContext";
+import { Profile } from '@Models/CVModel';
+import { IContactService } from '@Services/ContactService';
+import { DevIconName } from '@Common/DevIcon';
+import { Section } from '@Common/Section';
+import { DividerProps } from '@Common/TriangleDivider';
+import ThemeContext from '../theme/ThemeContext';
 
-import { centeredStyle, LongLine } from "@Common/UtilComponents";
-import { usePositionContext } from "@Hooks/PositionContext";
+import { centeredStyle, LongLine } from '@Common/UtilComponents';
+import { usePositionContext } from '@Hooks/PositionContext';
 
 type ContactProps = {
   profiles: Profile[];
@@ -37,8 +37,8 @@ export const Contact: React.FC<ContactProps> = ({
 
   const divider = useMemo<DividerProps>(
     () => ({
-      background: "primary",
-      foreground: even ? "bgLight" : "bgDark",
+      background: 'primary',
+      foreground: even ? 'bgLight' : 'bgDark',
     }),
     [theme],
   );
@@ -59,14 +59,14 @@ export const Contact: React.FC<ContactProps> = ({
       title="Contact"
       withDivider={divider}
       coloring={{
-        backgroundColor: "accent",
-        color: "contactText",
+        backgroundColor: 'accent',
+        color: 'contactText',
       }}
     >
       <Row
         sx={{
           marginY: [10, 20, 20],
-          justifyContent: "center",
+          justifyContent: 'center',
         }}
       >
         {profiles.map(
@@ -77,27 +77,27 @@ export const Contact: React.FC<ContactProps> = ({
               target="_blank"
               key={p.url}
               onClick={() => {
-                event("dc_user_event", {
-                  category: "Contact click-through",
+                event('dc_user_event', {
+                  category: 'Contact click-through',
                   label: `Click through to: ${p.url}`,
                 });
               }}
               sx={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
                 height: 175,
                 width: 175,
-                transition: "0.5s",
-                borderRadius: "50%",
+                transition: '0.5s',
+                borderRadius: '50%',
                 marginX: 10,
 
-                "&:hover": {
-                  backgroundColor: "contactText",
+                '&:hover': {
+                  backgroundColor: 'contactText',
                 },
-                "&:link,&:visited": {
-                  textDecoration: "none",
-                  color: "contactText",
+                '&:link,&:visited': {
+                  textDecoration: 'none',
+                  color: 'contactText',
                 },
               }}
             >
@@ -107,16 +107,16 @@ export const Contact: React.FC<ContactProps> = ({
                 color="contactText"
                 hoverColor="primary"
                 sx={{
-                  width: "100%",
-                  "&:hover": {
-                    transform: "scale(1.2)",
-                    transitionDelay: "0.1s",
+                  width: '100%',
+                  '&:hover': {
+                    transform: 'scale(1.2)',
+                    transitionDelay: '0.1s',
                   },
                 }}
                 textStyle={{
-                  fontSize: "1rem",
+                  fontSize: '1rem',
                   fontWeight: 400,
-                  margin: "0.2rem",
+                  margin: '0.2rem',
                 }}
               />
             </a>
@@ -127,7 +127,7 @@ export const Contact: React.FC<ContactProps> = ({
       <LongLine
         centered
         sx={{
-          backgroundColor: "contactText",
+          backgroundColor: 'contactText',
         }}
       />
 
@@ -146,8 +146,8 @@ export const Contact: React.FC<ContactProps> = ({
             <Col>
               <h3
                 sx={{
-                  color: "contactText",
-                  textAlign: "center",
+                  color: 'contactText',
+                  textAlign: 'center',
                 }}
               >
                 Get in touch!
@@ -162,13 +162,13 @@ export const Contact: React.FC<ContactProps> = ({
                 placeholder="email"
                 sx={{
                   marginY: 10,
-                  backgroundColor: "contactText",
-                  color: "contactInput",
-                  border: "1px solid bgDark",
+                  backgroundColor: 'contactText',
+                  color: 'contactInput',
+                  border: '1px solid bgDark',
 
-                  "&:focus": {
-                    backgroundColor: "contactText",
-                    color: "contactInput",
+                  '&:focus': {
+                    backgroundColor: 'contactText',
+                    color: 'contactInput',
                   },
                 }}
               />
@@ -181,13 +181,13 @@ export const Contact: React.FC<ContactProps> = ({
                 placeholder="message"
                 sx={{
                   marginY: 10,
-                  backgroundColor: "contactText",
-                  color: "contactInput",
-                  border: "1px solid bgDark",
+                  backgroundColor: 'contactText',
+                  color: 'contactInput',
+                  border: '1px solid bgDark',
 
-                  "&:focus": {
-                    backgroundColor: "contactText",
-                    color: "contactInput",
+                  '&:focus': {
+                    backgroundColor: 'contactText',
+                    color: 'contactInput',
                   },
                 }}
               />
@@ -196,7 +196,7 @@ export const Contact: React.FC<ContactProps> = ({
               variant="outline-dark"
               type="submit"
               sx={{
-                width: "100%",
+                width: '100%',
               }}
             >
               Send
@@ -210,7 +210,7 @@ export const Contact: React.FC<ContactProps> = ({
           <div
             sx={{
               paddingBottom: 15,
-              transition: "2s",
+              transition: '2s',
             }}
           >
             Thanks!

@@ -1,9 +1,9 @@
-import "reflect-metadata";
-import { Container } from "inversify";
+import 'reflect-metadata';
+import { Container } from 'inversify';
 
-import { ContactService, IContactService } from "@Services/ContactService";
-import { IDateService, DateService } from "@Services/DateService";
-import { IconService, IIconService } from "@Services/IconService";
+import { ContactService, IContactService } from '@Services/ContactService';
+import { IDateService, DateService } from '@Services/DateService';
+import { IconService, IIconService } from '@Services/IconService';
 
 export const container = new Container();
 

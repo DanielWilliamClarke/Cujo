@@ -1,15 +1,15 @@
-import { Portfolio } from "@Cujo/components/App";
+import { Portfolio } from '@Cujo/components/App';
 
-import { GetStaticPaths, GetStaticProps } from "next";
-import { useRouter } from "next/router";
-import { BlogPost } from "@Layouts/BlogPost";
-import { wrapPage } from "@Cujo/Cujo";
-import { CujoProps, fetchCujoBlogPaths, fetchCujoProps } from "../../CujoISR";
-import { Fragment, useEffect, useMemo, useState } from "react";
-import Head from "next/head";
-import { SharePanel } from "@Common/SharePanel";
-import { id } from "inversify";
-import { Post } from "@Models/BlogPost";
+import { GetStaticPaths, GetStaticProps } from 'next';
+import { useRouter } from 'next/router';
+import { BlogPost } from '@Layouts/BlogPost';
+import { wrapPage } from '@Cujo/Cujo';
+import { CujoProps, fetchCujoBlogPaths, fetchCujoProps } from '../../CujoISR';
+import { Fragment, useEffect, useMemo, useState } from 'react';
+import Head from 'next/head';
+import { SharePanel } from '@Common/SharePanel';
+import { id } from 'inversify';
+import { Post } from '@Models/BlogPost';
 
 export const getStaticPaths: GetStaticPaths = fetchCujoBlogPaths;
 export const getStaticProps: GetStaticProps = fetchCujoProps;
@@ -24,7 +24,7 @@ export default wrapPage(({ cv, blog }: CujoProps): JSX.Element => {
     [blog.entries, id],
   );
 
-  const [href, setHref] = useState("");
+  const [href, setHref] = useState('');
   useEffect(() => {
     setHref(window.location.href);
   }, []);

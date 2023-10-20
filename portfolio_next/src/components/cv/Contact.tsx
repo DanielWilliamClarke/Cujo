@@ -1,69 +1,69 @@
-import React from "react";
-import { View, StyleSheet, Text, Image as PdfImage } from "@react-pdf/renderer";
-import { CV } from "@Models/CVModel";
+import React from 'react';
+import { View, StyleSheet, Text, Image as PdfImage } from '@react-pdf/renderer';
+import { CV } from '@Models/CVModel';
 
-import { Header } from "./Header";
+import { Header } from './Header';
 
 export namespace Contact {
   const pdfStyles = StyleSheet.create({
     contact: {
       marginVertical: 10,
-      fontSize: "10",
+      fontSize: '10',
     },
     contactIcon: {
-      width: "20px",
-      height: "20px",
-      borderRadius: "100%",
-      backgroundColor: "#304c89",
-      marginRight: "10px",
-      display: "flex",
-      justifyContent: "center",
-      alignContent: "center",
-      flexDirection: "row",
+      width: '20px',
+      height: '20px',
+      borderRadius: '100%',
+      backgroundColor: '#304c89',
+      marginRight: '10px',
+      display: 'flex',
+      justifyContent: 'center',
+      alignContent: 'center',
+      flexDirection: 'row',
     },
     contactItem: {
-      marginBottom: "5px",
-      display: "flex",
-      flexDirection: "row",
+      marginBottom: '5px',
+      display: 'flex',
+      flexDirection: 'row',
     },
     contactValue: {
-      color: "#999999",
+      color: '#999999',
     },
   });
 
   export const render = (cv: CV, withHeader?: boolean): JSX.Element => {
     const githubProfile = cv.about.entry.profiles.find(
-      ({ brand }) => brand.name === "Github",
+      ({ brand }) => brand.name === 'Github',
     );
 
     return (
       <View wrap={false} style={pdfStyles.contact}>
-        {withHeader && Header.render("contact")}
+        {withHeader && Header.render('contact')}
         {createContactItem(
-          "Phone",
+          'Phone',
           cv.about.entry.phone,
-          createIconUrl("phone_in_talk"),
+          createIconUrl('phone_in_talk'),
         )}
         {createContactItem(
-          "Email",
+          'Email',
           cv.about.entry.email,
-          createIconUrl("email"),
+          createIconUrl('email'),
         )}
         {createContactItem(
-          "Website",
+          'Website',
           cv.about.entry.website,
-          createIconUrl("link"),
+          createIconUrl('link'),
         )}
         {githubProfile &&
           createContactItem(
-            "Github",
+            'Github',
             githubProfile.url,
-            githubProfile.brand.iconImage?.file.url ?? createIconUrl("link"),
+            githubProfile.brand.iconImage?.file.url ?? createIconUrl('link'),
           )}
         {createContactItem(
-          "Address",
-          "Crawley, UK".toUpperCase(),
-          createIconUrl("house"),
+          'Address',
+          'Crawley, UK'.toUpperCase(),
+          createIconUrl('house'),
         )}
       </View>
     );
@@ -82,11 +82,11 @@ export namespace Contact {
         <View style={pdfStyles.contactIcon}>
           <PdfImage
             src={iconUrl}
-            style={{ width: "10px", height: "10px", marginTop: "5px" }}
+            style={{ width: '10px', height: '10px', marginTop: '5px' }}
           />
         </View>
         <View wrap>
-          <Text style={{ fontFamily: "Helvetica-Bold" }}>
+          <Text style={{ fontFamily: 'Helvetica-Bold' }}>
             {title.toUpperCase()}
           </Text>
           <Text style={pdfStyles.contactValue}>{value}</Text>

@@ -1,13 +1,13 @@
 /** @jsxImportSource theme-ui */
 
-import { Row } from "react-bootstrap";
-import { Autoplay, Pagination } from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Book, BookProgress } from "@Models/CVModel";
-import { Entries } from "@Models/Includes";
-import { DynamicImage } from "@Common/DynamicImage";
-import { usePositionContext } from "@Hooks/PositionContext";
-import { Section } from "@Common/Section";
+import { Row } from 'react-bootstrap';
+import { Autoplay, Pagination } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Book, BookProgress } from '@Models/CVModel';
+import { Entries } from '@Models/Includes';
+import { DynamicImage } from '@Common/DynamicImage';
+import { usePositionContext } from '@Hooks/PositionContext';
+import { Section } from '@Common/Section';
 
 const props = {
   slidesPerView: 1,
@@ -35,10 +35,10 @@ const props = {
 };
 
 const progressMapping: Record<BookProgress, string> = {
-  [BookProgress.NOT_STARTED]: "Not Started 🤞",
-  [BookProgress.PRIORITY]: "Priority 🔥",
-  [BookProgress.READING]: "Reading 🦉",
-  [BookProgress.COMPLETED]: "Finished 🙌",
+  [BookProgress.NOT_STARTED]: 'Not Started 🤞',
+  [BookProgress.PRIORITY]: 'Priority 🔥',
+  [BookProgress.READING]: 'Reading 🦉',
+  [BookProgress.COMPLETED]: 'Finished 🙌',
 };
 
 type ReadingListProps = {
@@ -65,19 +65,19 @@ export const ReadingList: React.FC<ReadingListProps> = ({
     <Section id="books" title="Books">
       <Row
         sx={{
-          margin: "50px 0",
+          margin: '50px 0',
         }}
       >
         <Swiper
           className="mySwiper"
           sx={{
-            width: "100%",
-            height: "100%",
+            width: '100%',
+            height: '100%',
             paddingY: 20,
-            transition: "0.5s",
+            transition: '0.5s',
 
-            ".swiper-wrapper": {
-              display: "flex",
+            '.swiper-wrapper': {
+              display: 'flex',
             },
           }}
           {...props}
@@ -104,23 +104,23 @@ const BookCover: React.FC<BookCoverProps> = ({ book }) => {
   return (
     <SwiperSlide
       sx={{
-        textAlign: "center",
+        textAlign: 'center',
         fontSize: 18,
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
       }}
     >
       <div
         data-id="book-cover"
         sx={{
-          "&:hover": {
-            transition: "0.5s",
-            transform: "scale(1.02)",
+          '&:hover': {
+            transition: '0.5s',
+            transform: 'scale(1.02)',
           },
 
-          "@media screen and (max-width: 700px)": {
-            height: "20em",
+          '@media screen and (max-width: 700px)': {
+            height: '20em',
           },
         }}
       >
@@ -128,8 +128,8 @@ const BookCover: React.FC<BookCoverProps> = ({ book }) => {
           <DynamicImage
             image={book.cover}
             sx={{
-              width: "auto",
-              height: "30em",
+              width: 'auto',
+              height: '30em',
               margin: 10,
               borderRadius: 12,
             }}
@@ -138,28 +138,28 @@ const BookCover: React.FC<BookCoverProps> = ({ book }) => {
         <div
           data-id="book-overlay"
           sx={{
-            width: "100%",
-            height: "100%",
-            position: "absolute",
-            top: "30%",
+            width: '100%',
+            height: '100%',
+            position: 'absolute',
+            top: '30%',
             left: 0,
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
           }}
         >
           <div
             data-id="book-sash"
             sx={{
               height: 50,
-              width: "30%",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
+              width: '30%',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
               borderRadius: 6,
-              opacity: "90%",
+              opacity: '90%',
 
-              backgroundColor: even ? "accent" : "secondary",
+              backgroundColor: even ? 'accent' : 'secondary',
             }}
           >
             {progressMapping[book.progress]}
@@ -171,4 +171,4 @@ const BookCover: React.FC<BookCoverProps> = ({ book }) => {
 };
 
 // https://github.com/nolimits4web/swiper/issues/4413
-BookCover.displayName = "SwiperSlide";
+BookCover.displayName = 'SwiperSlide';

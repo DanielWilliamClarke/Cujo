@@ -1,10 +1,10 @@
-import { GetStaticProps, GetStaticPaths } from "next";
-import { initUrqlClient } from "next-urql";
-import { ssrExchange, dedupExchange, cacheExchange, fetchExchange } from "urql";
-import { CujoQuery, CujoBlogPathsQuery } from "./CujoQuery";
-import { Post } from "@Models/BlogPost";
-import { CV } from "@Models/CVModel";
-import { Entries } from "@Models/Includes";
+import { GetStaticProps, GetStaticPaths } from 'next';
+import { initUrqlClient } from 'next-urql';
+import { ssrExchange, dedupExchange, cacheExchange, fetchExchange } from 'urql';
+import { CujoQuery, CujoBlogPathsQuery } from './CujoQuery';
+import { Post } from '@Models/BlogPost';
+import { CV } from '@Models/CVModel';
+import { Entries } from '@Models/Includes';
 
 export type CujoProps = {
   cv: CV;
@@ -30,7 +30,7 @@ export const fetchCujoProps: GetStaticProps = async () => {
   );
 
   if (!client) {
-    throw new Error("Client could not be initialised");
+    throw new Error('Client could not be initialised');
   }
 
   await client.query(CujoQuery, {}).toPromise();
@@ -55,7 +55,7 @@ export const fetchCujoBlogPaths: GetStaticPaths = async () => {
   );
 
   if (!client) {
-    throw new Error("Client could not be initialised");
+    throw new Error('Client could not be initialised');
   }
 
   const { data, error } = await client
@@ -69,6 +69,6 @@ export const fetchCujoBlogPaths: GetStaticPaths = async () => {
   const { entries } = data.blog;
   return {
     paths: entries.map(({ id: pid }) => ({ params: { pid } })),
-    fallback: "blocking",
+    fallback: 'blocking',
   };
 };

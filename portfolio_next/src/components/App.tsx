@@ -1,25 +1,25 @@
 /** @jsxImportSource theme-ui */
 
-import React, { ReactNode, Suspense } from "react";
+import React, { ReactNode, Suspense } from 'react';
 
-import { Post } from "@Models/BlogPost";
-import { CV as CVModel } from "@Models/CVModel";
-import { Entries } from "@Models/Includes";
-import { Copyright } from "@Layouts/Copyright";
-import { Blog } from "@Layouts/Blog";
-import { Contact } from "@Layouts/Contact";
-import { NavPanel } from "@Layouts/NavPanel";
-import { ThemeProvider } from "./theme/ThemeProvider";
+import { Post } from '@Models/BlogPost';
+import { CV as CVModel } from '@Models/CVModel';
+import { Entries } from '@Models/Includes';
+import { Copyright } from '@Layouts/Copyright';
+import { Blog } from '@Layouts/Blog';
+import { Contact } from '@Layouts/Contact';
+import { NavPanel } from '@Layouts/NavPanel';
+import { ThemeProvider } from './theme/ThemeProvider';
 
-import dynamic from "next/dynamic";
-import { BlockReverseLoading } from "@Common/BlockReverseLoading";
-import { PositionProvider } from "@Hooks/PositionContext";
+import dynamic from 'next/dynamic';
+import { BlockReverseLoading } from '@Common/BlockReverseLoading';
+import { PositionProvider } from '@Hooks/PositionContext';
 
 const loading = (
   <BlockReverseLoading
     sx={{
-      height: "100vh",
-      width: "auto",
+      height: '100vh',
+      width: 'auto',
     }}
     box={{
       speed: 3,
@@ -28,12 +28,12 @@ const loading = (
   />
 );
 
-const SketchBackstretch = dynamic(() => import("@Layouts/SketchBackstretch"), {
+const SketchBackstretch = dynamic(() => import('@Layouts/SketchBackstretch'), {
   ssr: false,
   loading: () => loading,
 });
 
-const CVPreview = dynamic(() => import("@Layouts/CVPreview"), {
+const CVPreview = dynamic(() => import('@Layouts/CVPreview'), {
   ssr: false,
   loading: () => loading,
 });
@@ -66,7 +66,7 @@ export const Portfolio: React.FC<AppProps> = ({
       <NavPanel />
       <div
         sx={{
-          textAlign: "center",
+          textAlign: 'center',
         }}
       >
         {[...children, ...defaultChildren].map(

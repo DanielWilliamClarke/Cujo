@@ -1,19 +1,19 @@
-import { detect } from "detect-browser";
-import p5 from "p5";
-import weighted from "weighted";
+import { detect } from 'detect-browser';
+import p5 from 'p5';
+import weighted from 'weighted';
 
-import { CV, Work } from "../model/CVModel";
+import { CV, Work } from '../model/CVModel';
 // import { conway3D } from "./conway_3d"
 
-import { Boids } from "./boids";
-import { Conway } from "./conway";
-import { Grid } from "./grid";
-import { Hex } from "./hex";
-import { Hypercube } from "./hypercube";
-import { pauseableSketch } from "./pauseable_sketch";
-import { Phylotaxis } from "./phylotaxis";
-import { Sealife } from "./sealife";
-import { Waves } from "./waves";
+import { Boids } from './boids';
+import { Conway } from './conway';
+import { Grid } from './grid';
+import { Hex } from './hex';
+import { Hypercube } from './hypercube';
+import { pauseableSketch } from './pauseable_sketch';
+import { Phylotaxis } from './phylotaxis';
+import { Sealife } from './sealife';
+import { Waves } from './waves';
 
 export const sample = <T>(array: T[]): T => {
   return array[Math.floor(Math.random() * array.length)];
@@ -33,7 +33,7 @@ type WeightedSketchBuilder = {
   weight: number;
 };
 
-const safariBrowsers = ["ios", "safari", "ios-webview", "edge-ios"];
+const safariBrowsers = ['ios', 'safari', 'ios-webview', 'edge-ios'];
 
 export const getSketch = (cv: CV, currentRole: Work): ((p: p5) => void) => {
   const sketches: WeightedSketchBuilder[] = [
@@ -52,7 +52,7 @@ export const getSketch = (cv: CV, currentRole: Work): ((p: p5) => void) => {
 
   // Boxes is super slow on Safari
   const browser = detect();
-  if (!safariBrowsers.includes(browser?.name ?? "")) {
+  if (!safariBrowsers.includes(browser?.name ?? '')) {
     // sketches.push({ builder: (p: p5) => new Boxes(p), weight: 0.2 });
   }
 

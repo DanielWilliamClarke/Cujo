@@ -1,8 +1,8 @@
-import p5 from "p5";
-import { Sketch } from ".";
-import { CV, Skill, Work } from "@Models/CVModel";
-import { DateService, IDateService } from "@Services/DateService";
-import { anton } from "@Common/Font";
+import p5 from 'p5';
+import { Sketch } from '.';
+import { CV, Skill, Work } from '@Models/CVModel';
+import { DateService, IDateService } from '@Services/DateService';
+import { anton } from '@Common/Font';
 
 type BoidsWord = {
   word: string;
@@ -25,11 +25,11 @@ export class Boids implements Sketch {
     private readonly dateService: IDateService = new DateService(),
     private readonly noiseGenerator: NoiseGenerator = new NoiseGenerator(p),
   ) {
-    this.dateService.format("MMMM YYYY", "YYYY-MM-DD");
+    this.dateService.format('MMMM YYYY', 'YYYY-MM-DD');
 
     this.words = [
-      ...this.cv.about.entry.name.split(" "),
-      ...currentRole.position.split(" "),
+      ...this.cv.about.entry.name.split(' '),
+      ...currentRole.position.split(' '),
       this.currentRole.company,
       ...[
         ...this.cv.skills.entry.favorite.map((skill: Skill) => skill.name),
@@ -45,7 +45,7 @@ export class Boids implements Sketch {
   private myFont!: p5.Font;
   preload() {
     anton.className;
-    this.myFont = this.p.loadFont("./fonts/Anton-Regular.ttf");
+    this.myFont = this.p.loadFont('./fonts/Anton-Regular.ttf');
   }
 
   setup() {

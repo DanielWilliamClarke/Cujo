@@ -1,6 +1,6 @@
-import { Anton } from "@next/font/google";
+import { Anton } from '@next/font/google';
 
 export const anton = Anton({
-  subsets: ["latin"],
-  weight: ["400"],
+  subsets: ['latin'],
+  weight: ['400'],
 });

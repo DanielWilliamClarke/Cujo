@@ -1,24 +1,24 @@
 /** @jsxImportSource theme-ui */
 
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import { useInjection } from "inversify-react";
-import React, { Fragment } from "react";
-import { Col, Row } from "react-bootstrap";
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import { useInjection } from 'inversify-react';
+import React, { Fragment } from 'react';
+import { Col, Row } from 'react-bootstrap';
 import {
   VerticalTimeline,
   VerticalTimelineElement,
-} from "react-vertical-timeline-component";
-import { Education as EducationModel } from "@Models/CVModel";
-import { Entries, Media } from "@Models/Includes";
-import { IDateService } from "@Services/DateService";
-import { IIconService } from "@Services/IconService";
-import { DynamicImage } from "@Common/DynamicImage";
-import { Lanyard } from "@Common/Lanyard";
-import { Section } from "@Common/Section";
+} from 'react-vertical-timeline-component';
+import { Education as EducationModel } from '@Models/CVModel';
+import { Entries, Media } from '@Models/Includes';
+import { IDateService } from '@Services/DateService';
+import { IIconService } from '@Services/IconService';
+import { DynamicImage } from '@Common/DynamicImage';
+import { Lanyard } from '@Common/Lanyard';
+import { Section } from '@Common/Section';
 
-import { useShouldAnimate } from "@Hooks/useShouldAnimate";
-import { centeredStyle, Dot, ShortLine } from "@Common/UtilComponents";
-import { usePositionContext } from "@Hooks/PositionContext";
+import { useShouldAnimate } from '@Hooks/useShouldAnimate';
+import { centeredStyle, Dot, ShortLine } from '@Common/UtilComponents';
+import { usePositionContext } from '@Hooks/PositionContext';
 
 type EducationProps = {
   education: Entries<EducationModel>;
@@ -32,11 +32,11 @@ export const Education: React.FC<EducationProps> = ({
   education,
 }: EducationProps): JSX.Element => {
   const dateService = useInjection(IDateService.$);
-  dateService.format("MMMM YYYY", "YYYY-MM-DD");
+  dateService.format('MMMM YYYY', 'YYYY-MM-DD');
 
   const iconService = useInjection(IIconService.$);
-  const Icon = iconService.getWithDefault("school");
-  const BabyIcon = iconService.getWithDefault("baby");
+  const Icon = iconService.getWithDefault('school');
+  const BabyIcon = iconService.getWithDefault('baby');
 
   const { even } = usePositionContext();
 
@@ -48,12 +48,12 @@ export const Education: React.FC<EducationProps> = ({
         animate={shouldAnimate}
         sx={{
           marginTop: 20,
-          textAlign: "left",
-          ".vertical-timeline-element-content-arrow": {
-            display: "none",
+          textAlign: 'left',
+          '.vertical-timeline-element-content-arrow': {
+            display: 'none',
           },
-          "&:before": {
-            backgroundColor: "timelineLine",
+          '&:before': {
+            backgroundColor: 'timelineLine',
           },
         }}
       >
@@ -72,18 +72,18 @@ export const Education: React.FC<EducationProps> = ({
               )}
               icon={<Icon />}
               sx={{
-                ".vertical-timeline-element-icon": {
-                  backgroundColor: even ? "accent" : "secondary",
-                  color: "text",
+                '.vertical-timeline-element-icon': {
+                  backgroundColor: even ? 'accent' : 'secondary',
+                  color: 'text',
                 },
-                ".vertical-timeline-element-content": {
+                '.vertical-timeline-element-content': {
                   borderRadius: 12,
-                  backgroundColor: even ? "bgLight" : "bgDark",
-                  boxShadow: "none",
-                  transition: "0.5s",
+                  backgroundColor: even ? 'bgLight' : 'bgDark',
+                  boxShadow: 'none',
+                  transition: '0.5s',
 
-                  "&:hover": {
-                    transform: "scale(1.02)",
+                  '&:hover': {
+                    transform: 'scale(1.02)',
                   },
                 },
               }}
@@ -93,13 +93,13 @@ export const Education: React.FC<EducationProps> = ({
           ))}
         <VerticalTimelineElement
           contentStyle={{
-            backgroundColor: "transparent",
+            backgroundColor: 'transparent',
           }}
           icon={<BabyIcon />}
           sx={{
-            ".vertical-timeline-element-icon": {
-              backgroundColor: even ? "accent" : "secondary",
-              color: "text",
+            '.vertical-timeline-element-icon': {
+              backgroundColor: even ? 'accent' : 'secondary',
+              color: 'text',
             },
           }}
         />
@@ -113,7 +113,7 @@ const Institution: React.FC<InstitutionModel> = ({
 }: InstitutionModel): JSX.Element => {
   return (
     <Fragment>
-      {institution.grade !== "" && <Lanyard tags={[institution.grade]} />}
+      {institution.grade !== '' && <Lanyard tags={[institution.grade]} />}
 
       <Row
         sx={{
@@ -143,15 +143,15 @@ const Institution: React.FC<InstitutionModel> = ({
           <Col
             key={index}
             sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              "&:after": {
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              '&:after': {
                 content: '""',
 
-                "@media screen and (max-width: 700px)": {
+                '@media screen and (max-width: 700px)': {
                   flexBasis: 0,
-                  display: "flex",
+                  display: 'flex',
                 },
               },
             }}
@@ -165,10 +165,10 @@ const Institution: React.FC<InstitutionModel> = ({
                 image={image}
                 sx={{
                   ...centeredStyle,
-                  borderRadius: "50%",
+                  borderRadius: '50%',
                   height: 75,
                   width: 75,
-                  objectFit: "cover",
+                  objectFit: 'cover',
                 }}
               />
             </a>

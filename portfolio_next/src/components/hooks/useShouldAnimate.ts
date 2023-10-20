@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { useWindowSize } from "./useWindowSize";
+import { useState, useEffect } from 'react';
+import { useWindowSize } from './useWindowSize';
 
 export const useShouldAnimate = (minWidth: number = 700) => {
   const { width } = useWindowSize();

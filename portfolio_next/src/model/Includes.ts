@@ -75,23 +75,23 @@ export type ContentTypeSys = {
 };
 
 export enum LinkType {
-  ContentType = "ContentType",
-  Entry = "Entry",
-  Environment = "Environment",
-  Space = "Space",
+  ContentType = 'ContentType',
+  Entry = 'Entry',
+  Environment = 'Environment',
+  Space = 'Space',
 }
 
 export enum ContentTypeSysType {
-  Link = "Link",
+  Link = 'Link',
 }
 
 export enum Locale {
-  EnUS = "en-US",
+  EnUS = 'en-US',
 }
 
 export enum SysType {
-  Asset = "Asset",
-  Entry = "Entry",
+  Asset = 'Asset',
+  Entry = 'Entry',
 }
 
 export const getAsset = (includes: Includes, id: string): Media | undefined =>

@@ -1,21 +1,21 @@
 /** @jsxImportSource theme-ui */
 
-import { documentToPlainTextString } from "@contentful/rich-text-plain-text-renderer";
-import { useInjection } from "inversify-react";
-import React, { useEffect, useState } from "react";
-import { Card, Col, Nav, Row } from "react-bootstrap";
-import readingTime from "reading-time";
-import { Post } from "@Models/BlogPost";
-import { Entries } from "@Models/Includes";
-import { IDateService } from "@Services/DateService";
-import { IIconService } from "@Services/IconService";
-import { Lanyard } from "@Common/Lanyard";
-import { usePositionContext } from "@Hooks/PositionContext";
-import { Reveal } from "@Common/Reveal";
-import { Section } from "@Common/Section";
-import { centeredStyle } from "@Common/UtilComponents";
-import { getColor } from "@theme-ui/color";
-import { Theme } from "theme-ui";
+import { documentToPlainTextString } from '@contentful/rich-text-plain-text-renderer';
+import { useInjection } from 'inversify-react';
+import React, { useEffect, useState } from 'react';
+import { Card, Col, Nav, Row } from 'react-bootstrap';
+import readingTime from 'reading-time';
+import { Post } from '@Models/BlogPost';
+import { Entries } from '@Models/Includes';
+import { IDateService } from '@Services/DateService';
+import { IIconService } from '@Services/IconService';
+import { Lanyard } from '@Common/Lanyard';
+import { usePositionContext } from '@Hooks/PositionContext';
+import { Reveal } from '@Common/Reveal';
+import { Section } from '@Common/Section';
+import { centeredStyle } from '@Common/UtilComponents';
+import { getColor } from '@theme-ui/color';
+import { Theme } from 'theme-ui';
 
 export type BlogProps = {
   blog: Entries<Post>;
@@ -28,7 +28,7 @@ export type BlogSummaryProps = {
 
 export const Blog: React.FC<BlogProps> = ({ blog }: BlogProps): JSX.Element => {
   const dateService = useInjection(IDateService.$);
-  dateService.format("Do MMMM YYYY HH:mm:ss");
+  dateService.format('Do MMMM YYYY HH:mm:ss');
 
   return (
     <Section id="blog" title="Blog">
@@ -54,7 +54,7 @@ export const Blog: React.FC<BlogProps> = ({ blog }: BlogProps): JSX.Element => {
           <Col
             sx={{
               ...centeredStyle,
-              textAlign: "center",
+              textAlign: 'center',
             }}
           >
             Coming soon
@@ -70,16 +70,16 @@ const BlogSummaryPanel: React.FC<BlogSummaryProps> = ({
   index,
 }: BlogSummaryProps): JSX.Element => {
   const iconService = useInjection(IIconService.$);
-  const Icon = iconService.getWithDefault("post");
+  const Icon = iconService.getWithDefault('post');
   const dateService = useInjection(IDateService.$);
-  dateService.format("Do MMMM YYYY HH:mm");
+  dateService.format('Do MMMM YYYY HH:mm');
 
   const { even } = usePositionContext();
 
   const stats = readingTime(documentToPlainTextString(post.content));
 
-  const [publishedDate, setPublishedDate] = useState("");
-  const [updatedDate, setUpdatedDate] = useState("");
+  const [publishedDate, setPublishedDate] = useState('');
+  const [updatedDate, setUpdatedDate] = useState('');
 
   // Render date strings on the client as they fail during ISR
   useEffect(() => {
@@ -97,16 +97,16 @@ const BlogSummaryPanel: React.FC<BlogSummaryProps> = ({
             border: 0,
             borderRadius: 12,
             marginY: 10,
-            textAlign: "left",
-            transition: "0.5s",
-            "&.bg-dark": {
+            textAlign: 'left',
+            transition: '0.5s',
+            '&.bg-dark': {
               backgroundColor: `${getColor(
                 t,
-                even ? "bgLight" : "bgDark",
+                even ? 'bgLight' : 'bgDark',
               )}  !important`,
             },
-            "&:hover": {
-              transform: "scale(1.02)",
+            '&:hover': {
+              transform: 'scale(1.02)',
             },
           })}
         >
@@ -114,11 +114,11 @@ const BlogSummaryPanel: React.FC<BlogSummaryProps> = ({
             <Nav.Link
               href={`/blog/${post.id}`}
               sx={{
-                width: "100%",
+                width: '100%',
                 padding: 0,
 
-                "&:link,&:visited": {
-                  textDecoration: "none",
+                '&:link,&:visited': {
+                  textDecoration: 'none',
                 },
               }}
             >
@@ -129,7 +129,7 @@ const BlogSummaryPanel: React.FC<BlogSummaryProps> = ({
                   alt={post.media.description}
                   sx={{
                     height: 250,
-                    objectFit: "cover",
+                    objectFit: 'cover',
                     borderTopRightRadius: 12,
                     borderTopLeftRadius: 12,
                   }}
@@ -139,8 +139,8 @@ const BlogSummaryPanel: React.FC<BlogSummaryProps> = ({
                   sx={{
                     maxHeight: 100,
                     marginY: 50,
-                    width: "100%",
-                    color: "muted",
+                    width: '100%',
+                    color: 'muted',
                   }}
                 />
               )}
@@ -152,11 +152,11 @@ const BlogSummaryPanel: React.FC<BlogSummaryProps> = ({
               <Nav.Link
                 href={`/blog/${post.id}`}
                 sx={{
-                  width: "100%",
+                  width: '100%',
                   padding: 0,
 
-                  "&:link,&:visited": {
-                    textDecoration: "none",
+                  '&:link,&:visited': {
+                    textDecoration: 'none',
                   },
                 }}
               >

@@ -1,9 +1,9 @@
-import React from "react";
-import { StyleSheet, View, Text, Image as PdfImage } from "@react-pdf/renderer";
+import React from 'react';
+import { StyleSheet, View, Text, Image as PdfImage } from '@react-pdf/renderer';
 
-import { CV as CVModel, Skill } from "@Models/CVModel";
-import { Header } from "./Header";
-import { Media } from "@Models/Includes";
+import { CV as CVModel, Skill } from '@Models/CVModel';
+import { Header } from './Header';
+import { Media } from '@Models/Includes';
 
 const pdfStyles = StyleSheet.create({
   skills: {
@@ -13,20 +13,20 @@ const pdfStyles = StyleSheet.create({
     fontSize: 10,
   },
   skillItem: {
-    marginBottom: "5px",
-    display: "flex",
-    flexDirection: "row",
+    marginBottom: '5px',
+    display: 'flex',
+    flexDirection: 'row',
   },
   skillIcon: {
-    width: "20px",
-    height: "20px",
-    borderRadius: "100%",
-    backgroundColor: "#304c89",
-    marginRight: "10px",
-    display: "flex",
-    justifyContent: "center",
-    alignContent: "center",
-    flexDirection: "row",
+    width: '20px',
+    height: '20px',
+    borderRadius: '100%',
+    backgroundColor: '#304c89',
+    marginRight: '10px',
+    display: 'flex',
+    justifyContent: 'center',
+    alignContent: 'center',
+    flexDirection: 'row',
   },
 });
 
@@ -34,7 +34,7 @@ export namespace Skills {
   export const render = (cv: CVModel): JSX.Element => {
     return (
       <View wrap={false} style={pdfStyles.skills}>
-        {Header.render("skills")}
+        {Header.render('skills')}
         <View>
           <Text style={pdfStyles.paragraph}>
             Below are a collection of my most used skills, please view my
@@ -57,9 +57,9 @@ export namespace Skills {
         <View>
           <Text
             style={{
-              fontFamily: "Helvetica-Bold",
-              marginTop: "5px",
-              marginBottom: "2px",
+              fontFamily: 'Helvetica-Bold',
+              marginTop: '5px',
+              marginBottom: '2px',
               fontSize: 10,
             }}
           >
@@ -76,10 +76,10 @@ export namespace Skills {
       <PdfImage
         src={iconImage.file.url}
         style={{
-          width: "10px",
-          height: "10px",
-          marginTop: "5px",
-          zIndex: "999999999",
+          width: '10px',
+          height: '10px',
+          marginTop: '5px',
+          zIndex: '999999999',
         }}
       />
     );
@@ -92,16 +92,16 @@ export namespace Skills {
           style={{
             width: 100,
             height: 3,
-            backgroundColor: "#999999",
-            borderRadius: "100%",
+            backgroundColor: '#999999',
+            borderRadius: '100%',
           }}
         >
           <View
             style={{
               width: level,
               height: 3,
-              backgroundColor: "#304c89",
-              borderRadius: "100%",
+              backgroundColor: '#304c89',
+              borderRadius: '100%',
             }}
           ></View>
         </View>

@@ -1,9 +1,9 @@
 /** @jsxImportSource theme-ui */
 
-import React, { useEffect, useState } from "react";
-import { keyframes } from "@emotion/react";
-import { ThemeUICSSObject } from "theme-ui";
-import { GenericComponentProps } from "./props";
+import React, { useEffect, useState } from 'react';
+import { keyframes } from '@emotion/react';
+import { ThemeUICSSObject } from 'theme-ui';
+import { GenericComponentProps } from './props';
 
 const move = keyframes`
   25% {
@@ -31,27 +31,27 @@ const chevronStyle: ThemeUICSSObject = {
   height: 8,
   width: 28,
   opacity: 0,
-  position: "absolute",
-  transform: "scale3d(0.5, 0.5, 0.5)",
+  position: 'absolute',
+  transform: 'scale3d(0.5, 0.5, 0.5)',
 
-  "&:before,&:after": {
+  '&:before,&:after': {
     content: '" "',
-    height: "100%",
-    position: "absolute",
+    height: '100%',
+    position: 'absolute',
     top: 0,
-    width: "51%",
-    backgroundColor: "primary",
+    width: '51%',
+    backgroundColor: 'primary',
   },
 
-  "&:before": {
+  '&:before': {
     left: 0,
-    transform: "skew(0deg, 33deg)",
+    transform: 'skew(0deg, 33deg)',
   },
 
-  "&:after": {
+  '&:after': {
     right: 0,
-    transform: "skew(0deg, -33deg)",
-    width: "50%",
+    transform: 'skew(0deg, -33deg)',
+    width: '50%',
   },
 };
 
@@ -61,7 +61,7 @@ export const ScrollIndicator: React.FC<GenericComponentProps> = ({
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
-    window.addEventListener("scroll", () => setVisible(window.scrollY === 0));
+    window.addEventListener('scroll', () => setVisible(window.scrollY === 0));
   }, []);
 
   return (
@@ -71,8 +71,8 @@ export const ScrollIndicator: React.FC<GenericComponentProps> = ({
         height: 24,
         width: 24,
         opacity: visible ? 1 : 0,
-        position: "absolute",
-        transition: "opacity 1s ease-in-out",
+        position: 'absolute',
+        transition: 'opacity 1s ease-in-out',
       }}
     >
       <div

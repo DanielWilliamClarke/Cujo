@@ -1,34 +1,34 @@
 /** @jsxImportSource theme-ui */
 
-import { documentToPlainTextString } from "@contentful/rich-text-plain-text-renderer";
+import { documentToPlainTextString } from '@contentful/rich-text-plain-text-renderer';
 import {
   CommonNode,
   documentToReactComponents,
-} from "@contentful/rich-text-react-renderer";
-import { BLOCKS, INLINES, MARKS } from "@contentful/rich-text-types";
+} from '@contentful/rich-text-react-renderer';
+import { BLOCKS, INLINES, MARKS } from '@contentful/rich-text-types';
 
-import { useInjection } from "inversify-react";
+import { useInjection } from 'inversify-react';
 import React, {
   Fragment,
   ReactNode,
   useEffect,
   useMemo,
   useState,
-} from "react";
-import { Col, Row } from "react-bootstrap";
-import { obsidian } from "react-syntax-highlighter/dist/cjs/styles/hljs";
-import readingTime from "reading-time";
+} from 'react';
+import { Col, Row } from 'react-bootstrap';
+import { obsidian } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
+import readingTime from 'reading-time';
 
-import dynamic from "next/dynamic";
-import { Post } from "@Models/BlogPost";
-import { Entries, getAsset, Includes } from "@Models/Includes";
-import { IDateService } from "@Services/DateService";
-import { DynamicImage } from "@Common/DynamicImage";
-import { Lanyard } from "@Common/Lanyard";
-import { Section } from "@Common/Section";
-import { centeredStyle, Line, LongLine } from "@Common/UtilComponents";
+import dynamic from 'next/dynamic';
+import { Post } from '@Models/BlogPost';
+import { Entries, getAsset, Includes } from '@Models/Includes';
+import { IDateService } from '@Services/DateService';
+import { DynamicImage } from '@Common/DynamicImage';
+import { Lanyard } from '@Common/Lanyard';
+import { Section } from '@Common/Section';
+import { centeredStyle, Line, LongLine } from '@Common/UtilComponents';
 
-const SyntaxHighlighter = dynamic(() => import("react-syntax-highlighter"), {
+const SyntaxHighlighter = dynamic(() => import('react-syntax-highlighter'), {
   ssr: false,
 });
 
@@ -47,7 +47,7 @@ export const BlogPost: React.FC<BlogProps> = ({
   blog,
 }: BlogProps): JSX.Element => {
   const dateService = useInjection(IDateService.$);
-  dateService.format("Do MMMM YYYY HH:mm:ss");
+  dateService.format('Do MMMM YYYY HH:mm:ss');
 
   const post = useMemo(
     () => blog.entries.find((post: Post) => post.id === id),
@@ -63,12 +63,12 @@ export const BlogPost: React.FC<BlogProps> = ({
 
 const PostContent: React.FC<PostProps> = ({ post, includes }: PostProps) => {
   const dateService = useInjection(IDateService.$);
-  dateService.format("Do MMMM YYYY HH:mm");
+  dateService.format('Do MMMM YYYY HH:mm');
 
   const stats = readingTime(documentToPlainTextString(post.content));
 
   // Render date strings on the client as they fail during ISR
-  const [updatedDate, setUpdatedDate] = useState("");
+  const [updatedDate, setUpdatedDate] = useState('');
   useEffect(() => {
     setUpdatedDate(dateService.toSentence(post.sys.updatedAt.toString()));
   }, [post.sys, dateService]);
@@ -84,8 +84,8 @@ const PostContent: React.FC<PostProps> = ({ post, includes }: PostProps) => {
             sx={{
               borderRadius: 12,
               marginY: 50,
-              width: "100%",
-              boxShadow: "0 0 25px shadow",
+              width: '100%',
+              boxShadow: '0 0 25px shadow',
             }}
           >
             {text as string}
@@ -124,15 +124,15 @@ const PostContent: React.FC<PostProps> = ({ post, includes }: PostProps) => {
               <Col
                 sx={{
                   ...centeredStyle,
-                  textAlign: "center",
+                  textAlign: 'center',
                 }}
               >
                 <DynamicImage
                   image={media}
                   sx={{
                     borderRadius: 12,
-                    height: "auto",
-                    maxWidth: "100%",
+                    height: 'auto',
+                    maxWidth: '100%',
                   }}
                 />
               </Col>
@@ -149,7 +149,7 @@ const PostContent: React.FC<PostProps> = ({ post, includes }: PostProps) => {
       <Lanyard tags={post.tags} />
       <h4
         sx={{
-          textAlign: "center",
+          textAlign: 'center',
         }}
       >
         Last updated {updatedDate}
@@ -164,15 +164,15 @@ const PostContent: React.FC<PostProps> = ({ post, includes }: PostProps) => {
             <Col
               sx={{
                 ...centeredStyle,
-                textAlign: "center",
+                textAlign: 'center',
               }}
             >
               <DynamicImage
                 image={post.media}
                 sx={{
                   borderRadius: 12,
-                  height: "auto",
-                  maxWidth: "100%",
+                  height: 'auto',
+                  maxWidth: '100%',
                 }}
               />
             </Col>
@@ -184,8 +184,8 @@ const PostContent: React.FC<PostProps> = ({ post, includes }: PostProps) => {
       <p
         sx={{
           marginTop: 10,
-          textAlign: "center",
-          color: "muted",
+          textAlign: 'center',
+          color: 'muted',
         }}
       >
         {stats.text}
@@ -193,9 +193,9 @@ const PostContent: React.FC<PostProps> = ({ post, includes }: PostProps) => {
 
       <Row
         sx={{
-          textAlign: "left",
+          textAlign: 'left',
           marginY: [10, 20, 20],
-          "h1,h2,h3,h4,h5,h6": {
+          'h1,h2,h3,h4,h5,h6': {
             paddingTop: 20,
           },
         }}

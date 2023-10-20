@@ -1,5 +1,5 @@
-import p5 from "p5";
-import { Sketch } from ".";
+import p5 from 'p5';
+import { Sketch } from '.';
 
 class HSLA {
   constructor(
@@ -163,8 +163,8 @@ export class Hex implements Sketch {
     this.p.createCanvas(window.innerWidth, window.innerHeight);
     this.p.background(0);
 
-    const canvas = document.getElementById("defaultCanvas0") as any;
-    this.ctx = canvas.getContext("2d");
+    const canvas = document.getElementById('defaultCanvas0') as any;
+    this.ctx = canvas.getContext('2d');
 
     this.screenWidth = this.p.width = window.innerWidth;
     this.screenHeight = this.p.height = window.innerHeight;
@@ -187,11 +187,11 @@ export class Hex implements Sketch {
   draw() {
     ++TICK;
 
-    this.ctx.globalCompositeOperation = "source-over";
+    this.ctx.globalCompositeOperation = 'source-over';
     this.ctx.shadowBlur = 0;
     this.ctx.fillStyle = `rgba(0,0,0,${options.repaintAlpha})`;
     this.ctx.fillRect(0, 0, this.screenWidth, this.screenHeight);
-    this.ctx.globalCompositeOperation = "lighter";
+    this.ctx.globalCompositeOperation = 'lighter';
 
     if (
       this.lines.length < options.count &&

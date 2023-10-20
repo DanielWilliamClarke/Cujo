@@ -1,5 +1,5 @@
-import p5 from "p5";
-import { Sketch } from ".";
+import p5 from 'p5';
+import { Sketch } from '.';
 
 class HSLA {
   constructor(

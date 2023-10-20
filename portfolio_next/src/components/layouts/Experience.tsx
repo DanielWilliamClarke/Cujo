@@ -1,25 +1,25 @@
 /** @jsxImportSource theme-ui */
 
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import { useInjection } from "inversify-react";
-import React, { Fragment } from "react";
-import { Col, Row } from "react-bootstrap";
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import { useInjection } from 'inversify-react';
+import React, { Fragment } from 'react';
+import { Col, Row } from 'react-bootstrap';
 import {
   VerticalTimeline,
   VerticalTimelineElement,
-} from "react-vertical-timeline-component";
-import { Work } from "@Models/CVModel";
-import { Entries, Media } from "@Models/Includes";
-import { IDateService } from "@Services/DateService";
-import { IIconService } from "@Services/IconService";
-import { useShouldAnimate } from "@Hooks/useShouldAnimate";
-import { DynamicImage } from "@Common/DynamicImage";
-import { Lanyard } from "@Common/Lanyard";
-import { Section } from "@Common/Section";
+} from 'react-vertical-timeline-component';
+import { Work } from '@Models/CVModel';
+import { Entries, Media } from '@Models/Includes';
+import { IDateService } from '@Services/DateService';
+import { IIconService } from '@Services/IconService';
+import { useShouldAnimate } from '@Hooks/useShouldAnimate';
+import { DynamicImage } from '@Common/DynamicImage';
+import { Lanyard } from '@Common/Lanyard';
+import { Section } from '@Common/Section';
 
-import { At, centeredStyle, ShortLine } from "@Common/UtilComponents";
-import { Theme } from "theme-ui";
-import { usePositionContext } from "@Hooks/PositionContext";
+import { At, centeredStyle, ShortLine } from '@Common/UtilComponents';
+import { Theme } from 'theme-ui';
+import { usePositionContext } from '@Hooks/PositionContext';
 
 type WorkProps = {
   work: Entries<Work>;
@@ -39,11 +39,11 @@ export const Experience: React.FC<WorkProps> = ({
   work,
 }: WorkProps): JSX.Element => {
   const dateService = useInjection(IDateService.$);
-  dateService.format("MMMM YYYY", "YYYY-MM-DD");
+  dateService.format('MMMM YYYY', 'YYYY-MM-DD');
 
   const iconService = useInjection(IIconService.$);
-  const Icon = iconService.getWithDefault("work");
-  const EducationIcon = iconService.getWithDefault("education");
+  const Icon = iconService.getWithDefault('work');
+  const EducationIcon = iconService.getWithDefault('education');
 
   const { even } = usePositionContext();
 
@@ -55,12 +55,12 @@ export const Experience: React.FC<WorkProps> = ({
         animate={shouldAnimate}
         sx={{
           marginTop: 20,
-          textAlign: "left",
-          ".vertical-timeline-element-content-arrow": {
-            display: "none",
+          textAlign: 'left',
+          '.vertical-timeline-element-content-arrow': {
+            display: 'none',
           },
-          "&:before": {
-            backgroundColor: "timelineLine",
+          '&:before': {
+            backgroundColor: 'timelineLine',
           },
         }}
       >
@@ -80,22 +80,22 @@ export const Experience: React.FC<WorkProps> = ({
                 key={index}
                 date={dateService.toRangeWithDuration(
                   work.startDate.toString(),
-                  work.endDate?.toString() ?? "Present",
+                  work.endDate?.toString() ?? 'Present',
                 )}
                 icon={<Icon />}
                 sx={{
-                  ".vertical-timeline-element-icon": {
-                    backgroundColor: even ? "accent" : "secondary",
-                    color: "text",
+                  '.vertical-timeline-element-icon': {
+                    backgroundColor: even ? 'accent' : 'secondary',
+                    color: 'text',
                   },
-                  ".vertical-timeline-element-content": {
+                  '.vertical-timeline-element-content': {
                     borderRadius: 12,
-                    backgroundColor: even ? "bgLight" : "bgDark",
-                    boxShadow: "none",
-                    transition: "0.5s",
+                    backgroundColor: even ? 'bgLight' : 'bgDark',
+                    boxShadow: 'none',
+                    transition: '0.5s',
 
-                    "&:hover": {
-                      transform: "scale(1.02)",
+                    '&:hover': {
+                      transform: 'scale(1.02)',
                     },
                   },
                 }}
@@ -106,13 +106,13 @@ export const Experience: React.FC<WorkProps> = ({
           )}
         <VerticalTimelineElement
           contentStyle={{
-            backgroundColor: "transparent",
+            backgroundColor: 'transparent',
           }}
           icon={<EducationIcon />}
           sx={{
-            ".vertical-timeline-element-icon": {
-              backgroundColor: even ? "accent" : "secondary",
-              color: "text",
+            '.vertical-timeline-element-icon': {
+              backgroundColor: even ? 'accent' : 'secondary',
+              color: 'text',
             },
           }}
         />
@@ -170,15 +170,15 @@ const Role: React.FC<RoleProps> = ({ role }: RoleProps): JSX.Element => {
           <Col
             key={index}
             sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              "&:after": {
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              '&:after': {
                 content: '""',
 
-                "@media screen and (max-width: 700px)": {
+                '@media screen and (max-width: 700px)': {
                   flexBasis: 0,
-                  display: "flex",
+                  display: 'flex',
                 },
               },
             }}
@@ -187,10 +187,10 @@ const Role: React.FC<RoleProps> = ({ role }: RoleProps): JSX.Element => {
               image={image}
               sx={{
                 ...centeredStyle,
-                borderRadius: "50%",
+                borderRadius: '50%',
                 height: 75,
                 width: 75,
-                objectFit: "cover",
+                objectFit: 'cover',
               }}
             />
           </Col>

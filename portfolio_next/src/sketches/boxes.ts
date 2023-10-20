@@ -1,6 +1,6 @@
-import p5 from "p5";
-import { Sketch } from ".";
-import { Ease } from "./easing";
+import p5 from 'p5';
+import { Sketch } from '.';
+import { Ease } from './easing';
 
 export class Boxes implements Sketch {
   private readonly minW: number = 32;

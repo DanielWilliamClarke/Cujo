@@ -1,5 +1,5 @@
-import { Entries, Entry, Media } from "./Includes";
-import { Document } from "@contentful/rich-text-types";
+import { Entries, Entry, Media } from './Includes';
+import { Document } from '@contentful/rich-text-types';
 
 export type CVProps = {
   cv: CV;
@@ -78,10 +78,10 @@ export type Project = {
 };
 
 export enum BookProgress {
-  PRIORITY = "PRIORITY",
-  NOT_STARTED = "NOT_STARTED",
-  READING = "READING",
-  COMPLETED = "COMPLETED",
+  PRIORITY = 'PRIORITY',
+  NOT_STARTED = 'NOT_STARTED',
+  READING = 'READING',
+  COMPLETED = 'COMPLETED',
 }
 
 export type Book = {

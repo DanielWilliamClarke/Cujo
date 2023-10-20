@@ -1,5 +1,5 @@
-import p5 from "p5";
-import { Sketch, sample } from ".";
+import p5 from 'p5';
+import { Sketch, sample } from '.';
 
 export class Phylotaxis implements Sketch {
   private n = 0;
