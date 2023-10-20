@@ -1,6 +1,6 @@
 /** @jsxImportSource theme-ui */
 
-import React, { Suspense } from 'react';
+import React, { ReactNode, Suspense } from 'react';
 
 import { Post } from '../model/BlogPost';
 import { CV as CVModel } from '../model/CVModel';
@@ -38,24 +38,22 @@ const CVPreview = dynamic(() => import('./CVPreview'), {
   loading: () => loading
 });
 
-
-
 type AppProps = {
   cv: CVModel;
   blog: Entries<Post>;
-  components?: React.FC[];
+  children?: ReactNode[];
 }
 
 export const Portfolio: React.FC<AppProps> = ({
   cv,
   blog,
-  components = []
+  children = []
 }: AppProps): JSX.Element => {
-  const baseComponents: React.FC[] = [
-    () => (<Blog blog={blog} />),
-    () => (<Suspense><CVPreview cv={cv} /></Suspense>),
-    () => (<Contact profiles={cv.about.entry.profiles} />),
-    () => (<Copyright name={cv.about.entry.name} />),
+  const defaultChildren: ReactNode[] = [
+    <Blog blog={blog} />,
+    <Suspense><CVPreview cv={cv} /></Suspense>,
+    <Contact profiles={cv.about.entry.profiles} />,
+    <Copyright name={cv.about.entry.name} />,
   ];
 
   return (
@@ -67,11 +65,11 @@ export const Portfolio: React.FC<AppProps> = ({
       <div>
         {
           [
-            ...components,
-            ...baseComponents
-          ].map((Component: React.FC, index: number) => (
+            ...children,
+            ...defaultChildren
+          ].map((children: ReactNode, index: number) => (
             <PositionProvider key={index} position={index}>
-              <Component />
+              {children}
             </PositionProvider>
           ))
         }

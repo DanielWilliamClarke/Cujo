@@ -23,9 +23,10 @@ export default wrapPage(({ cv, blog }: CujoProps): JSX.Element => {
         setHref(window.location.href);
     }, [])
 
-    const portfolioProject = useMemo(() => cv.projects.entries.find(
-        ({ rank }: Project) => rank === 2
-    ), [cv]);
+    const portfolioProject = useMemo(
+        () => cv.projects.entries.find(({ rank }: Project) => rank === 2),
+        [cv]
+    );
 
     return (
         <Fragment>
@@ -51,15 +52,16 @@ export default wrapPage(({ cv, blog }: CujoProps): JSX.Element => {
             <Portfolio
                 cv={cv}
                 blog={blog}
-                components={[
-                    () => (<About key='about' about={cv.about} />),
-                    () => (<Experience key='work' work={cv.work} />),
-                    () => (<Education key='education' education={cv.education} />),
-                    () => (<Technical key='skills' skills={cv.skills} />),
-                    () => (<Projects key='projects' projects={cv.projects} />),
-                    () => (<ReadingList key='readingList' readingList={cv.readingList} />),
+            >
+                {[
+                    <About key='about' about={cv.about} />,
+                    <Experience key='work' work={cv.work} />,
+                    <Education key='education' education={cv.education} />,
+                    <Technical key='skills' skills={cv.skills} />,
+                    <Projects key='projects' projects={cv.projects} />,
+                    <ReadingList key='readingList' readingList={cv.readingList} />
                 ]}
-            />
+            </Portfolio>
         </Fragment>
     );
 })

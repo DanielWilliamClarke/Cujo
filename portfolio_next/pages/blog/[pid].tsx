@@ -2,12 +2,12 @@ import { Portfolio } from '../../src/components/App';
 
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
-import { BlogPost } from '../../src/components/blog/BlogPost';
+import { BlogPost } from '../../src/components/BlogPost';
 import { wrapPage } from '../../src/Cujo';
 import { CujoProps, fetchCujoBlogPaths, fetchCujoProps } from '../../src/CujoISR';
 import { Fragment, useEffect, useMemo, useState } from 'react';
 import Head from 'next/head';
-import { SharePanel } from '../../src/components/nav/SharePanel';
+import { SharePanel } from '../../src/components/SharePanel';
 import { id } from 'inversify';
 import { Post } from '../../src/model/BlogPost';
 
@@ -48,11 +48,9 @@ export default wrapPage(({ cv, blog }: CujoProps): JSX.Element => {
             <Portfolio
                 cv={cv}
                 blog={blog}
-                components={[
-                    () => <BlogPost id={pid as string} blog={blog} />,
-                ]}
-            />
+            >
+                {[<BlogPost id={pid as string} blog={blog} />]}
+            </Portfolio>
         </Fragment>
-
     );
 });
