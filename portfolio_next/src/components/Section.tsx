@@ -99,6 +99,7 @@ export const Section: React.FC<SectionProps> = ({
         <Icon
           sx={{
             ...centeredStyle,
+            display: 'block !important',
             fontSize: 'calc(20px + 0.25vw)',
             marginTop: 20,
             width: 'calc(20px + .25vw)',
