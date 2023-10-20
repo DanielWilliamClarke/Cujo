@@ -4,7 +4,7 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 import { BlogPost } from '@Layouts/BlogPost';
 import { wrapPage } from '@Cujo/Cujo';
-import { CujoProps, fetchCujoBlogPaths, fetchCujoProps } from '../../src/CujoISR';
+import { CujoProps, fetchCujoBlogPaths, fetchCujoProps } from '../../CujoISR';
 import { Fragment, useEffect, useMemo, useState } from 'react';
 import Head from 'next/head';
 import { SharePanel } from '@Common/SharePanel';
