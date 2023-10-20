@@ -74,6 +74,10 @@ export const Section: React.FC<SectionProps> = ({
           color: 'text',
           backgroundColor: even ? 'bgDark' : 'bgLight',
         }),
+
+        'li::marker': {
+          color: even ? 'accent' : 'secondary',
+        },
       }}
     >
       {props.withDivider && <TriangleDivider {...props.withDivider} />}
