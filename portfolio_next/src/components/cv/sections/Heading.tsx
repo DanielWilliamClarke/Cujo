@@ -2,7 +2,6 @@ import React from 'react';
 import { View, StyleSheet, Text } from '@react-pdf/renderer';
 import { IDateService } from '../../../services/DateService';
 
-import styles from '../../shared/style.module.scss';
 import { CV, Work } from '../../../model/CVModel';
 
 export namespace Heading {
@@ -43,7 +42,7 @@ export namespace Heading {
   });
 
   export const render = (cv: CV, dateService: IDateService): JSX.Element => {
-    const colors = [styles.colorLightBg, styles.colorLightBg, '#ffffff'];
+    const colors = ['#1f242c', '#1f242c', '#ffffff'];
     const nameParts = cv.about.entry.name
       .split(' ')
       .map((name: string, index: number) => ({ name, color: colors[index] }));

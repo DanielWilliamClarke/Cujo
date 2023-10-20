@@ -2,7 +2,6 @@ import React from 'react';
 import { View, StyleSheet, Text, Image as PdfImage } from '@react-pdf/renderer';
 import { CV } from '../../../model/CVModel';
 
-import styles from '../../shared/style.module.scss';
 import { Header } from './Header';
 
 export namespace Contact {
@@ -28,12 +27,12 @@ export namespace Contact {
       flexDirection: 'row'
     },
     contactValue: {
-      color: styles.colorMuted
+      color: '#999999'
     }
   });
 
   export const render = (cv: CV, withHeader?: boolean): JSX.Element => {
-    const githubProfile = cv.about.entry.profiles.find(({brand}) => brand.name === 'Github');
+    const githubProfile = cv.about.entry.profiles.find(({ brand }) => brand.name === 'Github');
 
     return (
       <View wrap={false} style={pdfStyles.contact}>

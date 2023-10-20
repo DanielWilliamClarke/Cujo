@@ -65,12 +65,7 @@ export const Portfolio: React.FC<AppProps> = ({
         <SketchBackstretch cv={cv} />
       </Suspense>
       <NavPanel />
-      <div
-        sx={{
-          color: 'rgb(15, 16, 36)',
-          textAlign: 'center'
-        }}
-      >
+      <div>
         {
           [
             ...components,

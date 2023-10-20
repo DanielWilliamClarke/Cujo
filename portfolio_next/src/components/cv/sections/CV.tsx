@@ -2,7 +2,6 @@ import React from 'react';
 import { Document, StyleSheet, Page, View, Font } from '@react-pdf/renderer';
 import { IDateService } from '../../../services/DateService';
 
-import styles from '../../shared/style.module.scss';
 import { CV as CVModel, Work } from '../../../model/CVModel';
 
 import { Heading } from './Heading';
@@ -47,7 +46,7 @@ export namespace CV {
       paddingRight: 15,
       paddingVertical: 8,
       width: '70%',
-      backgroundColor: styles.colorOffWhite
+      backgroundColor: '#fdfdfd'
     },
     outro: {
       marginHorizontal: 15,

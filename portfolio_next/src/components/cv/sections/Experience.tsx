@@ -6,7 +6,6 @@ import { BLOCKS } from '@contentful/rich-text-types';
 import { DateService, IDateService } from '../../../services/DateService';
 import { Work } from '../../../model/CVModel';
 
-import styles from '../../shared/style.module.scss';
 import { Header } from './Header';
 
 export namespace Experience {
@@ -22,7 +21,7 @@ export namespace Experience {
       fontSize: 11
     },
     dates: {
-      color: styles.colorMuted
+      color: '#999999'
     },
     lanyard: {
       display: 'flex',

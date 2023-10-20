@@ -6,8 +6,6 @@ import { CV, Education as EducationModel } from '../../../model/CVModel';
 
 import { Header } from './Header';
 
-import styles from '../../shared/style.module.scss';
-
 export namespace Education {
   const pdfStyles = StyleSheet.create({
     education: {
@@ -18,7 +16,7 @@ export namespace Education {
       fontSize: 12
     },
     dates: {
-      color: styles.colorMuted
+      color: '#999999'
     }
   });
 

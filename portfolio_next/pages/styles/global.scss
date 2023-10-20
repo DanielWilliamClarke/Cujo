@@ -1,5 +1,3 @@
-@import '../../src/components/shared/BootstrapOverride.scss';
-@import '../../src/components/shared/DynamicImage.scss';
 @import '../../src/components/theme/ThemeSetter.scss';
 
 html {
@@ -23,3 +21,20 @@ code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
         monospace;
 }
+
+@media screen and (max-width: 700px) {
+    .col {
+        flex-basis: revert;
+        width: 100%;
+
+        ul {
+            margin: 20px 0 !important;
+        }
+    }
+}
+
+//   li::marker {
+//     @include themed() {
+//       color: t($color);
+//     }
+//   }
