@@ -1,9 +1,9 @@
-import { ThemeUICSSObject } from 'theme-ui';
+import { ThemeUICSSObject } from "theme-ui";
 
 export type GenericComponentProps = {
-    className?: string;
+  className?: string;
 
-    sx?: ThemeUICSSObject;
+  sx?: ThemeUICSSObject;
 
-    position?: number
-}
+  position?: number;
+};

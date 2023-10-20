@@ -1,26 +1,26 @@
 /** @jsxImportSource theme-ui */
 
-import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
-import { Document } from '@contentful/rich-text-types';
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import { Document } from "@contentful/rich-text-types";
 import { event } from "nextjs-google-analytics";
-import React, { Fragment, useCallback, useState } from 'react';
-import { Zoom } from 'react-awesome-reveal';
-import { Col, Row } from 'react-bootstrap';
-import { Theme } from 'theme-ui';
+import React, { Fragment, useCallback, useState } from "react";
+import { Zoom } from "react-awesome-reveal";
+import { Col, Row } from "react-bootstrap";
+import { Theme } from "theme-ui";
 import { debounce } from "ts-debounce";
 
-import { Skill, Skills } from '@Models/CVModel';
-import { Entry } from '@Models/Includes';
-import { DevIconName } from '@Common/DevIcon';
-import { usePositionContext } from '@Hooks/PositionContext';
-import { ProgressGauge } from '@Common/ProgressGauge';
-import { Section } from '@Common/Section';
-import { centeredStyle, Line } from '@Common/UtilComponents';
-import { getColor } from '@theme-ui/color'
+import { Skill, Skills } from "@Models/CVModel";
+import { Entry } from "@Models/Includes";
+import { DevIconName } from "@Common/DevIcon";
+import { usePositionContext } from "@Hooks/PositionContext";
+import { ProgressGauge } from "@Common/ProgressGauge";
+import { Section } from "@Common/Section";
+import { centeredStyle, Line } from "@Common/UtilComponents";
+import { getColor } from "@theme-ui/color";
 
 type TechnicalProps = {
-  skills: Entry<Skills>
-}
+  skills: Entry<Skills>;
+};
 
 type SkillsProps = {
   summary: Document;
@@ -32,12 +32,14 @@ type SkillsProps = {
 const emitSearchEvent = debounce((label: string) => {
   event("dc_user_event", {
     category: "Skill Search",
-    label
+    label,
   });
 }, 300);
 
-export const Technical: React.FC<TechnicalProps> = ({ skills }: TechnicalProps): JSX.Element => {
-  const [search, setSearch] = useState('');
+export const Technical: React.FC<TechnicalProps> = ({
+  skills,
+}: TechnicalProps): JSX.Element => {
+  const [search, setSearch] = useState("");
 
   const { even } = usePositionContext();
 
@@ -51,12 +53,10 @@ export const Technical: React.FC<TechnicalProps> = ({ skills }: TechnicalProps):
     <Section id="skills" title="Skills">
       <Row
         sx={{
-          marginY: [10, 20, 20]
+          marginY: [10, 20, 20],
         }}
       >
-        <Col>
-          {documentToReactComponents(skills.entry.summary)}
-        </Col>
+        <Col>{documentToReactComponents(skills.entry.summary)}</Col>
       </Row>
 
       <Row>
@@ -65,9 +65,9 @@ export const Technical: React.FC<TechnicalProps> = ({ skills }: TechnicalProps):
             ...centeredStyle,
             marginY: [10, 20, 20],
 
-            '@media screen and (max-width: 700px)': {
-              textAlign: 'center'
-            }
+            "@media screen and (max-width: 700px)": {
+              textAlign: "center",
+            },
           }}
         >
           <input
@@ -77,22 +77,22 @@ export const Technical: React.FC<TechnicalProps> = ({ skills }: TechnicalProps):
             placeholder="Search"
             sx={(t: Theme) => ({
               borderRadius: 12,
-              fontSize: '2em',
+              fontSize: "2em",
               marginY: 10,
-              textAlign: 'center',
-              transition: '0.5s',
-              width: '50%',
-              backgroundColor: even ? 'bgLight' : 'bgDark',
-              border: `1px solid ${getColor(t, even ? 'bgDark' : 'bgLight')}`,
-              color: 'text',
+              textAlign: "center",
+              transition: "0.5s",
+              width: "50%",
+              backgroundColor: even ? "bgLight" : "bgDark",
+              border: `1px solid ${getColor(t, even ? "bgDark" : "bgLight")}`,
+              color: "text",
 
-              '&:focus-within': {
-                width: '100%'
+              "&:focus-within": {
+                width: "100%",
               },
 
-              '@media screen and (max-width: 700px)': {
-                textAlign: 'center'
-              }
+              "@media screen and (max-width: 700px)": {
+                textAlign: "center",
+              },
             })}
           />
         </Col>
@@ -125,7 +125,7 @@ export const Technical: React.FC<TechnicalProps> = ({ skills }: TechnicalProps):
         <Col>
           <p
             sx={{
-              ...centeredStyle
+              ...centeredStyle,
             }}
           >
             <i>And many more!</i>
@@ -140,27 +140,26 @@ const SkillsSection: React.FC<SkillsProps & { small: boolean }> = ({
   skills,
   summary,
   search,
-  small
+  small,
 }) => {
   const { even } = usePositionContext();
 
-  const gaugeColors = ['#FB6962', '#FB6962', '#FCFC99', '#0CC078', '#0CC078'];
+  const gaugeColors = ["#FB6962", "#FB6962", "#FCFC99", "#0CC078", "#0CC078"];
 
-  const filterSkills = useCallback((name: string): boolean => {
-    return search.length
-      ? name.toLowerCase().includes(search.toLowerCase())
-      : true;
-  }, [search]);
+  const filterSkills = useCallback(
+    (name: string): boolean => {
+      return search.length
+        ? name.toLowerCase().includes(search.toLowerCase())
+        : true;
+    },
+    [search],
+  );
 
   const filteredSkills = skills
     .filter(({ name }: Skill) => filterSkills(name))
     .sort((a: Skill, b: Skill) => b.level - a.level)
     .map(({ level, icon }: Skill, index: number) => (
-      <ProgressGauge
-        key={index}
-        value={level}
-        colors={gaugeColors}
-      >
+      <ProgressGauge key={index} value={level} colors={gaugeColors}>
         {(color: string) => (
           <DevIconName
             icon={icon}
@@ -168,12 +167,12 @@ const SkillsSection: React.FC<SkillsProps & { small: boolean }> = ({
             hoverColor={color}
             size={small ? 25 : 50}
             sx={{
-              width: '100%',
-              textAlign: ['center', undefined, undefined]
+              width: "100%",
+              textAlign: ["center", undefined, undefined],
             }}
             textStyle={{
-              fontSize: '0.6rem',
-              margin: 0
+              fontSize: "0.6rem",
+              margin: 0,
             }}
           />
         )}
@@ -195,15 +194,15 @@ const SkillsSection: React.FC<SkillsProps & { small: boolean }> = ({
       </Row>
       <Row
         sx={{
-          display: 'flex',
-          alignItems: 'center',
+          display: "flex",
+          alignItems: "center",
           borderRadius: 12,
           fontWeight: 500,
           marginBottom: 30,
           minHeight: 160,
           padding: 10,
-          color: 'textTitle',
-          backgroundColor: even ? 'bgLight' : 'bgDark',
+          color: "textTitle",
+          backgroundColor: even ? "bgLight" : "bgDark",
         }}
       >
         <Zoom
@@ -215,10 +214,10 @@ const SkillsSection: React.FC<SkillsProps & { small: boolean }> = ({
             maxWidth: small ? 100 : 150,
             minWidth: small ? 100 : 150,
 
-            '@media screen and (max-width: 700px)': {
+            "@media screen and (max-width: 700px)": {
               marginY: 20,
-              flexBasis: 0
-            }
+              flexBasis: 0,
+            },
           }}
         >
           {filteredSkills}

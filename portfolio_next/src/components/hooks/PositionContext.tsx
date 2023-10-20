@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
+import React, { useContext } from "react";
 
 export const initialPositionState = {
-    position: 0,
-    even: true,
+  position: 0,
+  even: true,
 };
 
 const PositionContext = React.createContext(initialPositionState);
@@ -10,16 +10,16 @@ const PositionContext = React.createContext(initialPositionState);
 export const usePositionContext = () => useContext(PositionContext);
 
 type PositionProviderProps = {
-    position: number;
-    even: boolean;
-    children?: React.ReactNode
+  position: number;
+  even: boolean;
+  children?: React.ReactNode;
 };
 
 export const PositionProvider: React.FC<PositionProviderProps> = ({
-    position,
-    children
+  position,
+  children,
 }) => (
-    <PositionContext.Provider value={{ position, even: position % 2 === 0 }}>
-        {children}
-    </PositionContext.Provider>
-)
+  <PositionContext.Provider value={{ position, even: position % 2 === 0 }}>
+    {children}
+  </PositionContext.Provider>
+);

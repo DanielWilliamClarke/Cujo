@@ -1,34 +1,34 @@
 /** @jsxImportSource theme-ui */
 
-import { documentToPlainTextString } from '@contentful/rich-text-plain-text-renderer';
-import { useInjection } from 'inversify-react';
-import React, { useEffect, useState } from 'react';
-import { Card, Col, Nav, Row } from 'react-bootstrap';
-import readingTime from 'reading-time';
-import { Post } from '@Models/BlogPost';
-import { Entries } from '@Models/Includes';
-import { IDateService } from '@Services/DateService';
-import { IIconService } from '@Services/IconService';
-import { Lanyard } from '@Common/Lanyard';
-import { usePositionContext } from '@Hooks/PositionContext';
-import { Reveal } from '@Common/Reveal';
-import { Section } from '@Common/Section';
-import { centeredStyle } from '@Common/UtilComponents';
-import { getColor } from '@theme-ui/color';
-import { Theme } from 'theme-ui';
+import { documentToPlainTextString } from "@contentful/rich-text-plain-text-renderer";
+import { useInjection } from "inversify-react";
+import React, { useEffect, useState } from "react";
+import { Card, Col, Nav, Row } from "react-bootstrap";
+import readingTime from "reading-time";
+import { Post } from "@Models/BlogPost";
+import { Entries } from "@Models/Includes";
+import { IDateService } from "@Services/DateService";
+import { IIconService } from "@Services/IconService";
+import { Lanyard } from "@Common/Lanyard";
+import { usePositionContext } from "@Hooks/PositionContext";
+import { Reveal } from "@Common/Reveal";
+import { Section } from "@Common/Section";
+import { centeredStyle } from "@Common/UtilComponents";
+import { getColor } from "@theme-ui/color";
+import { Theme } from "theme-ui";
 
 export type BlogProps = {
-  blog: Entries<Post>
-}
+  blog: Entries<Post>;
+};
 
 export type BlogSummaryProps = {
-  post: Post
-  index: number
-}
+  post: Post;
+  index: number;
+};
 
 export const Blog: React.FC<BlogProps> = ({ blog }: BlogProps): JSX.Element => {
   const dateService = useInjection(IDateService.$);
-  dateService.format('Do MMMM YYYY HH:mm:ss');
+  dateService.format("Do MMMM YYYY HH:mm:ss");
 
   return (
     <Section id="blog" title="Blog">
@@ -37,53 +37,54 @@ export const Blog: React.FC<BlogProps> = ({ blog }: BlogProps): JSX.Element => {
         md={2}
         className="g-4"
         sx={{
-          paddingY: 20
+          paddingY: 20,
         }}
       >
-        {(blog.entries.length > 0)
-          ? (
-            blog.entries
-              .sort(
-                (a: Post, b: Post) =>
-                  dateService.toUnix(b.sys.updatedAt.toString()) -
-                  dateService.toUnix(a.sys.updatedAt.toString())
-              )
-              .map((post: Post, index: number) => (
-                <BlogSummaryPanel post={post} index={index} key={index} />
-              ))
-          )
-          : (
-            <Col
-              sx={{
-                ...centeredStyle,
-                textAlign: 'center'
-              }}
-            >
-              Coming soon
-            </Col>
-          )}
+        {blog.entries.length > 0 ? (
+          blog.entries
+            .sort(
+              (a: Post, b: Post) =>
+                dateService.toUnix(b.sys.updatedAt.toString()) -
+                dateService.toUnix(a.sys.updatedAt.toString()),
+            )
+            .map((post: Post, index: number) => (
+              <BlogSummaryPanel post={post} index={index} key={index} />
+            ))
+        ) : (
+          <Col
+            sx={{
+              ...centeredStyle,
+              textAlign: "center",
+            }}
+          >
+            Coming soon
+          </Col>
+        )}
       </Row>
     </Section>
   );
 };
 
-const BlogSummaryPanel: React.FC<BlogSummaryProps> = ({ post, index }: BlogSummaryProps): JSX.Element => {
+const BlogSummaryPanel: React.FC<BlogSummaryProps> = ({
+  post,
+  index,
+}: BlogSummaryProps): JSX.Element => {
   const iconService = useInjection(IIconService.$);
-  const Icon = iconService.getWithDefault('post');
+  const Icon = iconService.getWithDefault("post");
   const dateService = useInjection(IDateService.$);
-  dateService.format('Do MMMM YYYY HH:mm');
+  dateService.format("Do MMMM YYYY HH:mm");
 
   const { even } = usePositionContext();
 
   const stats = readingTime(documentToPlainTextString(post.content));
 
-  const [publishedDate, setPublishedDate] = useState('');
-  const [updatedDate, setUpdatedDate] = useState('');
+  const [publishedDate, setPublishedDate] = useState("");
+  const [updatedDate, setUpdatedDate] = useState("");
 
   // Render date strings on the client as they fail during ISR
   useEffect(() => {
-    setPublishedDate(dateService.toSentence(post.sys.createdAt.toString()))
-    setUpdatedDate(dateService.toSentence(post.sys.updatedAt.toString()))
+    setPublishedDate(dateService.toSentence(post.sys.createdAt.toString()));
+    setUpdatedDate(dateService.toSentence(post.sys.updatedAt.toString()));
   }, [post.sys, dateService]);
 
   return (
@@ -91,57 +92,58 @@ const BlogSummaryPanel: React.FC<BlogSummaryProps> = ({ post, index }: BlogSumma
       <Reveal index={index}>
         <Card
           key={post.id}
-          bg='dark'
+          bg="dark"
           sx={(t: Theme) => ({
             border: 0,
             borderRadius: 12,
             marginY: 10,
-            textAlign: 'left',
-            transition: '0.5s',
-            '&.bg-dark': {
-              backgroundColor: `${getColor(t, even ? 'bgLight' : 'bgDark')}  !important`
+            textAlign: "left",
+            transition: "0.5s",
+            "&.bg-dark": {
+              backgroundColor: `${getColor(
+                t,
+                even ? "bgLight" : "bgDark",
+              )}  !important`,
             },
-            '&:hover': {
-              transform: 'scale(1.02)'
-            }
+            "&:hover": {
+              transform: "scale(1.02)",
+            },
           })}
         >
           <Nav navbarScroll>
             <Nav.Link
               href={`/blog/${post.id}`}
               sx={{
-                width: '100%',
+                width: "100%",
                 padding: 0,
 
-                '&:link,&:visited': {
-                  textDecoration: 'none'
-                }
+                "&:link,&:visited": {
+                  textDecoration: "none",
+                },
               }}
             >
-              {(post.media != null)
-                ? (
-                  <Card.Img
-                    variant="top"
-                    src={post.media.file.url}
-                    alt={post.media.description}
-                    sx={{
-                      height: 250,
-                      objectFit: 'cover',
-                      borderTopRightRadius: 12,
-                      borderTopLeftRadius: 12
-                    }}
-                  />
-                )
-                : (
-                  <Icon
-                    sx={{
-                      maxHeight: 100,
-                      marginY: 50,
-                      width: '100%',
-                      color: 'muted'
-                    }}
-                  />
-                )}
+              {post.media != null ? (
+                <Card.Img
+                  variant="top"
+                  src={post.media.file.url}
+                  alt={post.media.description}
+                  sx={{
+                    height: 250,
+                    objectFit: "cover",
+                    borderTopRightRadius: 12,
+                    borderTopLeftRadius: 12,
+                  }}
+                />
+              ) : (
+                <Icon
+                  sx={{
+                    maxHeight: 100,
+                    marginY: 50,
+                    width: "100%",
+                    color: "muted",
+                  }}
+                />
+              )}
             </Nav.Link>
           </Nav>
 
@@ -150,38 +152,32 @@ const BlogSummaryPanel: React.FC<BlogSummaryProps> = ({ post, index }: BlogSumma
               <Nav.Link
                 href={`/blog/${post.id}`}
                 sx={{
-                  width: '100%',
+                  width: "100%",
                   padding: 0,
 
-                  '&:link,&:visited': {
-                    textDecoration: 'none'
-                  }
+                  "&:link,&:visited": {
+                    textDecoration: "none",
+                  },
                 }}
               >
                 <Card.Title>{post.title}</Card.Title>
               </Nav.Link>
             </Nav>
-            <Card.Text>
-              Last updated {updatedDate}
-            </Card.Text>
+            <Card.Text>Last updated {updatedDate}</Card.Text>
             <Lanyard tags={post.tags} />
-            <Card.Text className="text-muted">
-              {post.excerpt}
-            </Card.Text>
+            <Card.Text className="text-muted">{post.excerpt}</Card.Text>
             <small className="text-muted">{stats.text}</small>
           </Card.Body>
 
           <Card.Footer
             sx={{
-              border: 0
+              border: 0,
             }}
           >
-            <small className="text-muted">
-              Published {publishedDate}
-            </small>
+            <small className="text-muted">Published {publishedDate}</small>
           </Card.Footer>
         </Card>
       </Reveal>
-    </Col >
+    </Col>
   );
 };

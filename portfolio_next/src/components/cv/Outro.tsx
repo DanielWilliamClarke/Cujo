@@ -1,6 +1,6 @@
-import React from 'react';
-import { View, StyleSheet, Text } from '@react-pdf/renderer';
-import { CV } from '@Models/CVModel';
+import React from "react";
+import { View, StyleSheet, Text } from "@react-pdf/renderer";
+import { CV } from "@Models/CVModel";
 
 export namespace Outro {
   const pdfStyles = StyleSheet.create({

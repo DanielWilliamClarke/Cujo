@@ -2,11 +2,7 @@
   "compilerOptions": {
     "experimentalDecorators": true,
     "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -25,42 +21,17 @@
       }
     ],
     "paths": {
-      "@Cujo/*": [
-        "./src/*"
-      ],
-      "@Common/*": [
-        "./src/components/common/*"
-      ],
-      "@Layouts/*": [
-        "./src/components/layouts/*"
-      ],
-      "@Cv/*": [
-        "./src/components/cv/*"
-      ],
-      "@Hooks/*": [
-        "./src/components/hooks/*"
-      ],
-      "@Sketches/*": [
-        "./src/sketches/*"
-      ],
-      "@Services/*": [
-        "./src/services/*"
-      ],
-      "@Models/*": [
-        "./src/model/*"
-      ],
-      "@Assets/*": [
-        "./src/assets/*"
-      ],
-    },
+      "@Cujo/*": ["./src/*"],
+      "@Common/*": ["./src/components/common/*"],
+      "@Layouts/*": ["./src/components/layouts/*"],
+      "@Cv/*": ["./src/components/cv/*"],
+      "@Hooks/*": ["./src/components/hooks/*"],
+      "@Sketches/*": ["./src/sketches/*"],
+      "@Services/*": ["./src/services/*"],
+      "@Models/*": ["./src/model/*"],
+      "@Assets/*": ["./src/assets/*"]
+    }
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
 }

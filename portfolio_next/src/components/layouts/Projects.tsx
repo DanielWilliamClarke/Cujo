@@ -1,69 +1,70 @@
 /** @jsxImportSource theme-ui */
 
 import { event } from "nextjs-google-analytics";
-import React from 'react';
-import { Col, Container, Row } from 'react-bootstrap';
+import React from "react";
+import { Col, Container, Row } from "react-bootstrap";
 
-import { Project } from '@Models/CVModel';
-import { Entries } from '@Models/Includes';
-import { DevIconName } from '@Common/DevIcon';
-import { DynamicImage } from '@Common/DynamicImage';
-import { Lanyard } from '@Common/Lanyard';
-import { Section } from '@Common/Section';
+import { Project } from "@Models/CVModel";
+import { Entries } from "@Models/Includes";
+import { DevIconName } from "@Common/DevIcon";
+import { DynamicImage } from "@Common/DynamicImage";
+import { Lanyard } from "@Common/Lanyard";
+import { Section } from "@Common/Section";
 
-import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
-import { Reveal } from '@Common/Reveal';
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import { Reveal } from "@Common/Reveal";
 import { ThemeUICSSObject } from "theme-ui";
 import { centeredStyle, Line } from "@Common/UtilComponents";
 
 const projectOverlayStyle: ThemeUICSSObject = {
-  width: '100%',
-  height: '100%',
-  textAlign: 'center',
-  display: 'flex',
-  alignContent: 'center',
-  flexDirection: 'column',
-  justifyContent: 'center',
-  position: 'absolute',
+  width: "100%",
+  height: "100%",
+  textAlign: "center",
+  display: "flex",
+  alignContent: "center",
+  flexDirection: "column",
+  justifyContent: "center",
+  position: "absolute",
   left: 0,
   top: 0,
   opacity: 0,
-}
+};
 
 type ProjectsProps = {
-  projects: Entries<Project>
-}
+  projects: Entries<Project>;
+};
 
 type ProjectProps = {
-  project: Project
-  index: number
-}
+  project: Project;
+  index: number;
+};
 
 const emitClickEvent = ({ name, link }: Project) => {
   event("dc_user_event", {
     category: "Project click",
     label: name,
-    url: link
+    url: link,
   });
 };
 
-export const Projects: React.FC<ProjectsProps> = ({ projects }: ProjectsProps): JSX.Element => {
+export const Projects: React.FC<ProjectsProps> = ({
+  projects,
+}: ProjectsProps): JSX.Element => {
   return (
     <Section id="projects" title="Projects" noSeparator>
       {projects.entries
         .sort((pA, pB) => pA.rank - pB.rank)
         .map((project: Project, index: number) => (
-          <ProjectSection
-            project={project}
-            index={index}
-            key={index}
-          />
+          <ProjectSection project={project} index={index} key={index} />
         ))}
     </Section>
   );
 };
 
-const ProjectSection: React.FC<ProjectProps> = ({ project, index }: ProjectProps): JSX.Element => {
+const ProjectSection: React.FC<ProjectProps> = ({
+  project,
+  index,
+}: ProjectProps): JSX.Element => {
   return (
     <Container>
       <Reveal index={index}>
@@ -71,7 +72,7 @@ const ProjectSection: React.FC<ProjectProps> = ({ project, index }: ProjectProps
         <Row
           sx={{
             paddingY: 60,
-            flexDirection: index % 2 === 0 ? 'row-reverse' : 'row'
+            flexDirection: index % 2 === 0 ? "row-reverse" : "row",
           }}
         >
           <ProjectImage project={project} index={index} />
@@ -82,26 +83,28 @@ const ProjectSection: React.FC<ProjectProps> = ({ project, index }: ProjectProps
   );
 };
 
-const ProjectImage: React.FC<ProjectProps> = ({ project }: ProjectProps): JSX.Element => {
+const ProjectImage: React.FC<ProjectProps> = ({
+  project,
+}: ProjectProps): JSX.Element => {
   return (
     <Col
       sx={{
-        alignContent: 'center',
-        display: 'flex',
-        flexWrap: 'wrap',
-        textAlign: 'left',
+        alignContent: "center",
+        display: "flex",
+        flexWrap: "wrap",
+        textAlign: "left",
 
-        '&:hover': {
-          transition: '0.5s',
-          transform: 'scale(1.05)',
+        "&:hover": {
+          transition: "0.5s",
+          transform: "scale(1.05)",
 
-          '.overlay': {
-            opacity: 0.7
+          ".overlay": {
+            opacity: 0.7,
           },
-          '.icon': {
-            opacity: 1
-          }
-        }
+          ".icon": {
+            opacity: 1,
+          },
+        },
       }}
     >
       {project.image && (
@@ -111,12 +114,12 @@ const ProjectImage: React.FC<ProjectProps> = ({ project }: ProjectProps): JSX.El
           target="_blank"
           onClick={() => emitClickEvent(project)}
           sx={{
-            color: 'inherit',
-            textDecoration: 'none',
-            display: 'inlineBlock',
-            position: 'relative',
-            transition: '0.5s',
-            width: '100%',
+            color: "inherit",
+            textDecoration: "none",
+            display: "inlineBlock",
+            position: "relative",
+            transition: "0.5s",
+            width: "100%",
           }}
         >
           <DynamicImage
@@ -125,16 +128,16 @@ const ProjectImage: React.FC<ProjectProps> = ({ project }: ProjectProps): JSX.El
               ...centeredStyle,
               borderRadius: 12,
               maxHeight: 350,
-              objectFit: 'cover',
-              width: '100%'
+              objectFit: "cover",
+              width: "100%",
             }}
           />
 
           <div
-            className='overlay'
+            className="overlay"
             sx={{
               ...projectOverlayStyle,
-              backgroundColor: 'black',
+              backgroundColor: "black",
               borderRadius: 12,
             }}
           />
@@ -145,8 +148,8 @@ const ProjectImage: React.FC<ProjectProps> = ({ project }: ProjectProps): JSX.El
             size={75}
             sx={projectOverlayStyle}
             textStyle={{
-              fontSize: '1rem',
-              margin: '0.2rem'
+              fontSize: "1rem",
+              margin: "0.2rem",
             }}
           />
         </a>
@@ -155,24 +158,26 @@ const ProjectImage: React.FC<ProjectProps> = ({ project }: ProjectProps): JSX.El
   );
 };
 
-const ProjectContent: React.FC<ProjectProps> = ({ project }: ProjectProps): JSX.Element => {
+const ProjectContent: React.FC<ProjectProps> = ({
+  project,
+}: ProjectProps): JSX.Element => {
   return (
     <Col
       sx={{
-        alignContent: 'center',
-        display: 'flex',
-        flexWrap: 'wrap',
-        textAlign: 'left',
+        alignContent: "center",
+        display: "flex",
+        flexWrap: "wrap",
+        textAlign: "left",
 
-        '@media screen and (max-width: 700px)': {
-          paddingTop: 30
-        }
+        "@media screen and (max-width: 700px)": {
+          paddingTop: 30,
+        },
       }}
     >
       <div
         sx={{
           paddingY: 10,
-          width: '100%'
+          width: "100%",
         }}
       >
         <h2>{project.name}</h2>

@@ -1,64 +1,72 @@
 /** @jsxImportSource theme-ui */
 
-import { INLINES, MARKS } from '@contentful/rich-text-types';
-import React, { ReactNode, useMemo } from 'react';
-import { Col, Row } from 'react-bootstrap';
+import { INLINES, MARKS } from "@contentful/rich-text-types";
+import React, { ReactNode, useMemo } from "react";
+import { Col, Row } from "react-bootstrap";
 import { Autoplay, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { About as AboutModel } from '@Models/CVModel';
-import { Entry, Media } from '@Models/Includes';
-import { DynamicImage } from '@Common/DynamicImage';
-import { Section } from '@Common/Section';
+import { About as AboutModel } from "@Models/CVModel";
+import { Entry, Media } from "@Models/Includes";
+import { DynamicImage } from "@Common/DynamicImage";
+import { Section } from "@Common/Section";
 
-import { CommonNode, documentToReactComponents } from '@contentful/rich-text-react-renderer';
-import { Reveal } from '@Common/Reveal';
+import {
+  CommonNode,
+  documentToReactComponents,
+} from "@contentful/rich-text-react-renderer";
+import { Reveal } from "@Common/Reveal";
 
 const textColumnStyle = {
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'center',
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
   paddingX: 20,
-  textAlign: 'left',
-  width: '50%',
+  textAlign: "left",
+  width: "50%",
 
-  '@media screen and (max-width: 700px)': {
-    margin: '10px 0',
-    width: '100%'
-  }
-}
+  "@media screen and (max-width: 700px)": {
+    margin: "10px 0",
+    width: "100%",
+  },
+};
 
 type AboutProps = {
-  about: Entry<AboutModel>
-}
+  about: Entry<AboutModel>;
+};
 
-export const About: React.FC<AboutProps> = ({ about }: AboutProps): JSX.Element => {
-  const options = useMemo(() => ({
-    renderNode: {
-      [INLINES.HYPERLINK]: (
-        { data }: CommonNode,
-        children: ReactNode
-      ) => (
-        <a href={data.uri} target="_blank" rel="noopener noreferrer">
-          {children}
-        </a>
-      )
-    }
-  }), []);
+export const About: React.FC<AboutProps> = ({
+  about,
+}: AboutProps): JSX.Element => {
+  const options = useMemo(
+    () => ({
+      renderNode: {
+        [INLINES.HYPERLINK]: ({ data }: CommonNode, children: ReactNode) => (
+          <a href={data.uri} target="_blank" rel="noopener noreferrer">
+            {children}
+          </a>
+        ),
+      },
+    }),
+    [],
+  );
 
-  const statementOptions = useMemo(() => ({
-    ...options,
-    renderMark: {
-      [MARKS.BOLD]: (text: ReactNode): JSX.Element => (
-        <b
-          sx={{
-            fontSize: 18
-          }}
-        >
-          {text}
-        </b>
-      )
-    }
-  }), [options]);
+  const statementOptions = useMemo(
+    () => ({
+      ...options,
+      renderMark: {
+        [MARKS.BOLD]: (text: ReactNode): JSX.Element => (
+          <b
+            sx={{
+              fontSize: 18,
+            }}
+          >
+            {text}
+          </b>
+        ),
+      },
+    }),
+    [options],
+  );
 
   const carouselProps = {
     slidesPerView: 1,
@@ -72,14 +80,13 @@ export const About: React.FC<AboutProps> = ({ about }: AboutProps): JSX.Element 
     pagination: {
       dynamicBullets: true,
     },
-    modules: [Autoplay, Pagination]
+    modules: [Autoplay, Pagination],
   };
 
   return (
     <Reveal direction="up">
       <Section id="about" title="About">
         <Row sx={{ marginY: 20 }}>
-
           <Col sx={textColumnStyle}>
             <div sx={{ marginY: 30 }}>
               <Reveal direction="left">
@@ -88,10 +95,7 @@ export const About: React.FC<AboutProps> = ({ about }: AboutProps): JSX.Element 
             </div>
             <div sx={{ marginY: 30 }}>
               <Reveal direction="left" damping={0.01}>
-                {documentToReactComponents(
-                  about.entry.interests,
-                  options
-                )}
+                {documentToReactComponents(about.entry.interests, options)}
               </Reveal>
             </div>
           </Col>
@@ -100,9 +104,9 @@ export const About: React.FC<AboutProps> = ({ about }: AboutProps): JSX.Element 
             <Reveal direction="right">
               <Swiper
                 sx={{
-                  alignItems: 'center',
-                  display: 'flex',
-                  justifyContent: 'center'
+                  alignItems: "center",
+                  display: "flex",
+                  justifyContent: "center",
                 }}
                 {...carouselProps}
               >
@@ -111,11 +115,11 @@ export const About: React.FC<AboutProps> = ({ about }: AboutProps): JSX.Element 
                     <DynamicImage
                       image={media}
                       sx={{
-                        objectFit: 'cover',
+                        objectFit: "cover",
                         borderRadius: 12,
                         height: 700,
-                        maxHeight: '100%',
-                        width: 'auto'
+                        maxHeight: "100%",
+                        width: "auto",
                       }}
                     />
                   </SwiperSlide>
@@ -123,7 +127,6 @@ export const About: React.FC<AboutProps> = ({ about }: AboutProps): JSX.Element 
               </Swiper>
             </Reveal>
           </Col>
-
         </Row>
       </Section>
     </Reveal>

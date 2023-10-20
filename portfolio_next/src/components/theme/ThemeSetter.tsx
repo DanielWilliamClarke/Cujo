@@ -1,22 +1,21 @@
+import React, { useContext, useRef } from "react";
+import { Player } from "@lottiefiles/react-lottie-player";
 
-import React, { useContext, useRef } from 'react';
-import { Player } from '@lottiefiles/react-lottie-player';
+import switcher from "../../assets/theme_toggle.json";
 
-import switcher from '../../assets/theme_toggle.json';
-
-import ThemeContext from './ThemeContext';
+import ThemeContext from "./ThemeContext";
 
 enum ThemeOptions {
-  LIGHT = 'light',
-  DARK = 'dark'
+  LIGHT = "light",
+  DARK = "dark",
 }
 
 export const ThemeSetter: React.FC = () => {
   const { theme, setTheme } = useContext(ThemeContext);
   const player = useRef<Player>(null);
 
-  const getFrame = (isLight: boolean) => isLight ? 0 : 134;
-  const getDirection = (isLight: boolean) => isLight ? 1 : -1;
+  const getFrame = (isLight: boolean) => (isLight ? 0 : 134);
+  const getDirection = (isLight: boolean) => (isLight ? 1 : -1);
 
   const toggle = () => {
     const isLight = theme === ThemeOptions.LIGHT;
@@ -29,13 +28,11 @@ export const ThemeSetter: React.FC = () => {
   };
 
   return (
-    <div
-      className="theme-toggle"
-      onClick={toggle}>
+    <div className="theme-toggle" onClick={toggle}>
       <Player
         className="theme-icon"
         onEvent={(event) => {
-          if (event === 'load') {
+          if (event === "load") {
             player.current?.setSeeker(getFrame(theme === ThemeOptions.LIGHT));
           }
         }}

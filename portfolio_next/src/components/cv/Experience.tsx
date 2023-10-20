@@ -1,12 +1,12 @@
-import React, { ReactNode } from 'react';
-import { View, StyleSheet, Text, Image as PdfImage } from '@react-pdf/renderer';
-import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
-import { BLOCKS } from '@contentful/rich-text-types';
+import React, { ReactNode } from "react";
+import { View, StyleSheet, Text, Image as PdfImage } from "@react-pdf/renderer";
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import { BLOCKS } from "@contentful/rich-text-types";
 
-import { DateService, IDateService } from '@Services/DateService';
-import { Work } from '@Models/CVModel';
+import { DateService, IDateService } from "@Services/DateService";
+import { Work } from "@Models/CVModel";
 
-import { Header } from './Header';
+import { Header } from "./Header";
 
 export namespace Experience {
   const pdfStyles = StyleSheet.create({
@@ -15,73 +15,76 @@ export namespace Experience {
       marginVertical: 5,
     },
     company: {
-      fontSize: 10
+      fontSize: 10,
     },
     role: {
-      fontSize: 11
+      fontSize: 11,
     },
     dates: {
-      color: '#999999'
+      color: "#999999",
     },
     lanyard: {
-      display: 'flex',
-      flexDirection: 'row',
-      marginVertical: 5
+      display: "flex",
+      flexDirection: "row",
+      marginVertical: 5,
     },
     pill: {
-      backgroundColor: '#304c89',
-      borderRadius: '100%',
+      backgroundColor: "#304c89",
+      borderRadius: "100%",
       paddingHorizontal: 5,
       paddingVertical: 2,
       marginRight: 3,
       marginVertical: 3,
-      color: '#ffffff'
+      color: "#ffffff",
     },
     experienceItem: {
-      marginBottom: '5px',
-      display: 'flex',
-      flexDirection: 'row'
+      marginBottom: "5px",
+      display: "flex",
+      flexDirection: "row",
     },
     experienceIcon: {
-      width: '30px',
-      height: '30px',
-      borderRadius: '100%',
-      marginRight: '10px',
-      display: 'flex',
-      justifyContent: 'center',
-      alignContent: 'center',
-      flexDirection: 'row'
-    }
+      width: "30px",
+      height: "30px",
+      borderRadius: "100%",
+      marginRight: "10px",
+      display: "flex",
+      justifyContent: "center",
+      alignContent: "center",
+      flexDirection: "row",
+    },
   });
 
   const options = {
     renderNode: {
-      [BLOCKS.DOCUMENT]: (_: any, children: ReactNode) => <View>{children}</View>,
+      [BLOCKS.DOCUMENT]: (_: any, children: ReactNode) => (
+        <View>{children}</View>
+      ),
       [BLOCKS.PARAGRAPH]: (_: any, children: ReactNode) => (
         <View>{children}</View>
       ),
       [BLOCKS.LIST_ITEM]: (_: any, children: ReactNode) => (
         <View style={{ flexDirection: "row", marginVertical: 4 }}>
-          <Text style={{ marginHorizontal: 8, color: '#304c89' }}>•</Text>
-          <Text style={{ width: '95%' }}>{children}</Text>
+          <Text style={{ marginHorizontal: 8, color: "#304c89" }}>•</Text>
+          <Text style={{ width: "95%" }}>{children}</Text>
         </View>
-      )
+      ),
     },
-    renderText: (text: string): ReactNode => (
-      <Text>{text.trim()}</Text>
-    )
+    renderText: (text: string): ReactNode => <Text>{text.trim()}</Text>,
   };
 
   const dateService: IDateService = (() => {
     const service = new DateService();
-    service.format('MMMM YYYY', 'YYYY-MM-DD');
+    service.format("MMMM YYYY", "YYYY-MM-DD");
     return service;
   })();
 
-  export const render = (work: Work[], withContinue: boolean = false): JSX.Element => {
+  export const render = (
+    work: Work[],
+    withContinue: boolean = false,
+  ): JSX.Element => {
     return (
       <View>
-        {Header.render(`experience ${withContinue ? '(cont)' : ''}`)}
+        {Header.render(`experience ${withContinue ? "(cont)" : ""}`)}
         <View>
           {work.map((work: Work, index: number) => (
             <View wrap={false} key={index} style={pdfStyles.experience}>
@@ -94,19 +97,19 @@ export namespace Experience {
                   <Text style={pdfStyles.dates}>
                     {dateService.toRangeWithDuration(
                       work.startDate.toString(),
-                      work.endDate?.toString() ?? 'Present'
+                      work.endDate?.toString() ?? "Present",
                     )}
                   </Text>
                   <Text
                     style={[
                       pdfStyles.company,
-                      { fontFamily: 'Helvetica-Bold' }
+                      { fontFamily: "Helvetica-Bold" },
                     ]}
                   >
                     {work.company}
                   </Text>
                   <Text
-                    style={[pdfStyles.role, { fontFamily: 'Helvetica-Bold' }]}
+                    style={[pdfStyles.role, { fontFamily: "Helvetica-Bold" }]}
                   >
                     {work.position}
                   </Text>

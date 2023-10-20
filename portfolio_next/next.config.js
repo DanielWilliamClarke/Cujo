@@ -1,29 +1,26 @@
 /** @type {import('next').NextConfig} */
 
 const nextConfig = {
-  output: 'standalone',
+  output: "standalone",
   reactStrictMode: false,
   swcMinify: false,
   webpack: (config) => {
     config.module.rules.push({
       test: /\.(graphql|gql)$/,
       exclude: /node_modules/,
-      loader: 'graphql-tag/loader',
+      loader: "graphql-tag/loader",
     });
     return config;
   },
   images: {
-    domains: [
-      "images.ctfassets.net",
-    ],
+    domains: ["images.ctfassets.net"],
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 'images.ctfassets.net',
+        protocol: "https",
+        hostname: "images.ctfassets.net",
       },
     ],
   },
-
-}
+};
 
 module.exports = nextConfig;

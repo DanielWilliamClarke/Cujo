@@ -1,33 +1,33 @@
-import p5 from 'p5';
-import { Sketch } from '.';
+import p5 from "p5";
+import { Sketch } from ".";
 
 class HSLA {
   constructor(
     public h: number = 255,
     public s: number = 255,
     public b: number = 255,
-    public a: number = 255
-  ) { }
+    public a: number = 255,
+  ) {}
 }
 class Cell {
   constructor(
     public color: HSLA = new HSLA(),
     public phantom?: boolean,
-    public fresh?: boolean
-  ) { }
+    public fresh?: boolean,
+  ) {}
 }
 
 type Grid = Array<Array<Cell | undefined>>;
 
 type Neighbours = {
-  sum: number
-  colors: HSLA[]
-}
+  sum: number;
+  colors: HSLA[];
+};
 
 export function debounce<T extends any[], I>(
   immediate: (...args: T) => Promise<void>,
   onDebounceEnd: (...args: T) => Promise<I>,
-  ms = 0
+  ms = 0,
 ) {
   let timer: NodeJS.Timeout;
 
@@ -63,9 +63,9 @@ export class Conway implements Sketch {
   private readonly B = [3];
   private readonly S = [2, 3];
 
-  constructor(private readonly p: p5) { }
+  constructor(private readonly p: p5) {}
 
-  preload(): void { }
+  preload(): void {}
 
   setup() {
     this.p.frameRate(12);
@@ -89,7 +89,7 @@ export class Conway implements Sketch {
       this.rows = Math.ceil(this.p.height / this.resolution);
       this.grid = this.makeGrid(this.columns, this.rows);
     },
-    200
+    200,
   );
 
   draw() {
@@ -132,9 +132,9 @@ export class Conway implements Sketch {
 
       const state = this.grid[col][row];
       const neighbours = this.countNeighbours(this.grid, col, row);
-      if ((state == null) && this.B.includes(neighbours.sum)) {
+      if (state == null && this.B.includes(neighbours.sum)) {
         next[col][row] = new Cell(this.averageColor(neighbours.colors));
-      } else if ((state != null) && !this.S.includes(neighbours.sum)) {
+      } else if (state != null && !this.S.includes(neighbours.sum)) {
         next[col][row] = undefined;
       } else {
         next[col][row] = state;
@@ -143,10 +143,14 @@ export class Conway implements Sketch {
     this.grid = next;
   }
 
-  private readonly countNeighbours = (grid: Grid, x: number, y: number): Neighbours => {
+  private readonly countNeighbours = (
+    grid: Grid,
+    x: number,
+    y: number,
+  ): Neighbours => {
     const neighbours: Neighbours = {
       sum: 0,
-      colors: []
+      colors: [],
     };
 
     for (let i = -1; i < 2; i++) {
@@ -162,13 +166,13 @@ export class Conway implements Sketch {
       }
     }
 
-    neighbours.sum -= (grid[x][y] != null) ? 1 : 0;
+    neighbours.sum -= grid[x][y] != null ? 1 : 0;
 
     return neighbours;
   };
 
   private readonly iterateGrid = (
-    delegate: (col: number, row: number) => void
+    delegate: (col: number, row: number) => void,
   ): void => {
     for (let col = 0; col < this.columns; col++) {
       for (let row = 0; row < this.rows; row++) {
@@ -177,14 +181,18 @@ export class Conway implements Sketch {
     }
   };
 
-  private readonly makeGrid = (columns: number, rows: number, empty?: boolean): Grid =>
+  private readonly makeGrid = (
+    columns: number,
+    rows: number,
+    empty?: boolean,
+  ): Grid =>
     new Array(columns).fill(undefined).map(() =>
       new Array(rows).fill(undefined).map(() => {
         if (!empty && this.p.random() > 0.3) {
           return new Cell(this.randomColor(), false, true);
         }
         return undefined;
-      })
+      }),
     );
 
   private readonly randomColor = (): HSLA =>
@@ -197,13 +205,13 @@ export class Conway implements Sketch {
 
     return new HSLA(
       colors.map((c: HSLA) => c.h).reduce((acc, h) => acc + h, 0) /
-      colors.length,
+        colors.length,
       colors.map((c: HSLA) => c.s).reduce((acc, s) => acc + s, 0) /
-      colors.length,
+        colors.length,
       colors.map((c: HSLA) => c.b).reduce((acc, b) => acc + b, 0) /
-      colors.length,
+        colors.length,
       colors.map((c: HSLA) => c.a).reduce((acc, a) => acc + a, 0) /
-      colors.length
+        colors.length,
     );
   };
 }

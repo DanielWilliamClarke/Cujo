@@ -1,5 +1,5 @@
-import p5 from 'p5';
-import { Sketch, sample } from '.';
+import p5 from "p5";
+import { Sketch, sample } from ".";
 
 export class Phylotaxis implements Sketch {
   private n = 0;
@@ -21,14 +21,14 @@ export class Phylotaxis implements Sketch {
     (input: number): number => 137.6,
     (input: number): number => 137.5,
     (input: number): number => 180,
-    (input: number): number => 99.5
+    (input: number): number => 99.5,
   ];
 
-  constructor (private readonly p: p5) {}
+  constructor(private readonly p: p5) {}
 
-  preload (): void {}
+  preload(): void {}
 
-  setup () {
+  setup() {
     this.p.frameRate(144);
     this.p.colorMode(this.p.HSB);
     this.p.angleMode(this.p.DEGREES);
@@ -38,11 +38,11 @@ export class Phylotaxis implements Sketch {
     this.selectedGenerator = sample(this.magicAngleGenerators);
   }
 
-  windowResized () {
+  windowResized() {
     this.p.resizeCanvas(window.innerWidth, window.innerHeight);
   }
 
-  draw () {
+  draw() {
     this.p.background(0);
     // this.p.orbitControl();
 

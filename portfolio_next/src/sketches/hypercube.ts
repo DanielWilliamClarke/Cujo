@@ -1,6 +1,6 @@
-import p5 from 'p5';
-import { Sketch, sample } from '.';
-import { Vector4D, MatrixUtils } from './matrix_utils';
+import p5 from "p5";
+import { Sketch, sample } from ".";
+import { Vector4D, MatrixUtils } from "./matrix_utils";
 
 type RotationGenerator = (angle: number) => number[][];
 
@@ -19,7 +19,7 @@ export class Hypercube implements Sketch {
       [this.p.cos(angle), -this.p.sin(angle), 0, 0],
       [this.p.sin(angle), this.p.cos(angle), 0, 0],
       [0, 0, 1, 0],
-      [0, 0, 0, 1]
+      [0, 0, 0, 1],
     ],
 
     (angle: number) => [
@@ -27,7 +27,7 @@ export class Hypercube implements Sketch {
       [this.p.cos(angle), 0, -this.p.sin(angle), 0],
       [0, 1, 0, 0],
       [this.p.sin(angle), 0, this.p.cos(angle), 0],
-      [0, 0, 0, 1]
+      [0, 0, 0, 1],
     ],
 
     (angle: number) => [
@@ -35,8 +35,8 @@ export class Hypercube implements Sketch {
       [1, 0, 0, 0],
       [0, this.p.cos(angle), -this.p.sin(angle), 0],
       [0, this.p.sin(angle), this.p.cos(angle), 0],
-      [0, 0, 0, 1]
-    ]
+      [0, 0, 0, 1],
+    ],
   ];
 
   private readonly generators4d: RotationGenerator[] = [
@@ -45,7 +45,7 @@ export class Hypercube implements Sketch {
       [this.p.cos(angle), 0, 0, -this.p.sin(angle)],
       [0, 1, 0, 0],
       [0, 0, 1, 0],
-      [this.p.sin(angle), 0, 0, this.p.cos(angle)]
+      [this.p.sin(angle), 0, 0, this.p.cos(angle)],
     ],
 
     (angle: number) => [
@@ -53,7 +53,7 @@ export class Hypercube implements Sketch {
       [1, 0, 0, 0],
       [0, this.p.cos(angle), 0, -this.p.sin(angle)],
       [0, 0, 1, 0],
-      [0, this.p.sin(angle), 0, this.p.cos(angle)]
+      [0, this.p.sin(angle), 0, this.p.cos(angle)],
     ],
 
     (angle: number) => [
@@ -61,20 +61,20 @@ export class Hypercube implements Sketch {
       [1, 0, 0, 0],
       [0, 1, 0, 0],
       [0, 0, this.p.cos(angle), -this.p.sin(angle)],
-      [0, 0, this.p.sin(angle), this.p.cos(angle)]
-    ]
+      [0, 0, this.p.sin(angle), this.p.cos(angle)],
+    ],
   ];
 
   private readonly currentRotations: RotationGenerator[] = [
     sample(this.generators3d),
-    sample(this.generators4d)
+    sample(this.generators4d),
   ];
 
-  constructor (private readonly p: p5) {}
+  constructor(private readonly p: p5) {}
 
-  preload (): void {}
+  preload(): void {}
 
-  setup () {
+  setup() {
     this.p.createCanvas(this.p.windowWidth, this.p.windowHeight, this.p.WEBGL);
     this.p.colorMode(this.p.HSB);
     this.p.ortho(
@@ -83,12 +83,12 @@ export class Hypercube implements Sketch {
       window.innerHeight,
       -window.innerHeight,
       -1000,
-      10000
+      10000,
     );
 
     // transparency ordering workaround
-    const canvas = document.getElementById('defaultCanvas0') as any;
-    this.ctx = canvas.getContext('webgl');
+    const canvas = document.getElementById("defaultCanvas0") as any;
+    this.ctx = canvas.getContext("webgl");
     this.ctx.disable(this.ctx.DEPTH_TEST);
 
     // Generate 4D points
@@ -101,7 +101,7 @@ export class Hypercube implements Sketch {
     }
   }
 
-  windowResized () {
+  windowResized() {
     this.p.resizeCanvas(window.innerWidth, window.innerHeight);
     this.p.ortho(
       -window.innerWidth,
@@ -109,11 +109,11 @@ export class Hypercube implements Sketch {
       window.innerHeight,
       -window.innerHeight,
       -1000,
-      10000
+      10000,
     );
   }
 
-  draw () {
+  draw() {
     this.p.background(0);
     this.p.rotateX(35.264);
     this.p.rotateY(-this.p.QUARTER_PI);
@@ -128,7 +128,7 @@ export class Hypercube implements Sketch {
           .reduce(
             (point: Vector4D, rotation: number[][]): Vector4D =>
               this.matrixUtils.Matmul(rotation, point) as Vector4D,
-            point
+            point,
           );
 
         // Project point
@@ -136,14 +136,14 @@ export class Hypercube implements Sketch {
         const projection = [
           [w, 0, 0, 0],
           [0, w, 0, 0],
-          [0, 0, w, 0]
+          [0, 0, w, 0],
         ];
         const projected = this.matrixUtils.Matmul(
           projection,
-          rotatedPoint
+          rotatedPoint,
         ) as Vector4D;
         return projected.multiply(500).To3D(this.p);
-      }
+      },
     );
 
     // Draw each cube
@@ -156,17 +156,17 @@ export class Hypercube implements Sketch {
       [...this.getEvenPoints(projected3d, 0, 16, 1)],
       [
         ...this.getEvenPoints(projected3d, 0, 16, 0, 4),
-        ...this.getEvenPoints(projected3d, 0, 16, 1, 4)
+        ...this.getEvenPoints(projected3d, 0, 16, 1, 4),
       ],
       [
         ...this.getEvenPoints(projected3d, 0, 16, 2, 4),
-        ...this.getEvenPoints(projected3d, 0, 16, 3, 4)
-      ]
+        ...this.getEvenPoints(projected3d, 0, 16, 3, 4),
+      ],
     ].forEach((cube: p5.Vector[], index: number): void =>
       this.drawCube(
         cube,
-        this.p.map(this.p.sin(this.colorAngle + index), -1, 1, 0, 360)
-      )
+        this.p.map(this.p.sin(this.colorAngle + index), -1, 1, 0, 360),
+      ),
     );
 
     this.angle += 0.01;
@@ -197,7 +197,7 @@ export class Hypercube implements Sketch {
     start: number,
     end: number,
     offset: number = 0,
-    step: number = 2
+    step: number = 2,
   ) => {
     const result = [];
     for (let i = start; i < end; i += step) {

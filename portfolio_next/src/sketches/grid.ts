@@ -1,13 +1,13 @@
-import p5 from 'p5';
-import { Vector4D } from './matrix_utils';
-import { Ease } from './easing';
-import { Sketch } from '.';
+import p5 from "p5";
+import { Vector4D } from "./matrix_utils";
+import { Ease } from "./easing";
+import { Sketch } from ".";
 
 class GridUtil {
-  static getSquareGrid (
+  static getSquareGrid(
     totalX: number,
     totalY: number,
-    scale: number
+    scale: number,
   ): Vector4D[] {
     const vectors: Array<[number, number]> = [];
     for (let x = -totalX; x <= totalX; x++) {
@@ -22,7 +22,7 @@ class GridUtil {
     });
   }
 
-  static getPolygonPoints (num: number, poly: number): p5.Vector[] {
+  static getPolygonPoints(num: number, poly: number): p5.Vector[] {
     const points: p5.Vector[] = [];
     for (let j = 0; j < poly; j++) {
       for (let i = 0; i < num / poly; i++) {
@@ -69,11 +69,11 @@ export class Grid implements Sketch {
 
   private ctx: any;
 
-  constructor (private readonly p: p5) {}
+  constructor(private readonly p: p5) {}
 
-  preload (): void {}
+  preload(): void {}
 
-  setup () {
+  setup() {
     this.p.frameRate(60);
     this.p.colorMode(this.p.HSB, 100);
     this.p.createCanvas(window.innerWidth, window.innerHeight);
@@ -84,37 +84,37 @@ export class Grid implements Sketch {
     this.totalX = Math.ceil(this.screenWidth / 2 / this.scale);
     this.totalY = Math.ceil(this.screenHeight / 2 / this.scale);
 
-    const canvas = document.getElementById('defaultCanvas0') as any;
-    this.ctx = canvas.getContext('2d');
+    const canvas = document.getElementById("defaultCanvas0") as any;
+    this.ctx = canvas.getContext("2d");
 
     this.shapes = GridUtil.getSquareGrid(this.totalX, this.totalY, this.scale);
     this.hexPoints = GridUtil.getPolygonPoints(360, 4);
 
     this.maxDist = this.shapes.reduce(
       (max: number, { z }: Vector4D) => Math.max(z, max),
-      0
+      0,
     );
     this.size = Math.floor((this.scale * Math.sqrt(2)) / 2);
   }
 
-  windowResized (): void {
+  windowResized(): void {
     this.setup();
   }
 
-  draw () {
+  draw() {
     this.t += this.timeScale;
 
     this.ctx.save();
-    this.ctx.fillStyle = 'rgba(0,0,0,0.05)';
+    this.ctx.fillStyle = "rgba(0,0,0,0.05)";
     this.ctx.fillRect(0, 0, this.screenWidth, this.screenHeight);
 
     this.ctx.translate(this.screenWidth / 2, this.screenHeight / 2);
 
-    this.ctx.lineCap = 'sqaure';
+    this.ctx.lineCap = "sqaure";
 
     this.shapes.forEach((shape: Vector4D): void => {
       const scaledT = Ease.easeInOutQuad(
-        Math.abs((this.t - shape.z / this.maxDist) % 1)
+        Math.abs((this.t - shape.z / this.maxDist) % 1),
       );
 
       const x = shape.x;
@@ -129,10 +129,10 @@ export class Grid implements Sketch {
       this.ctx.translate(-x, -y);
 
       const start = Math.floor(
-        this.p.map(scaledT, 0, 1, 0, this.hexPoints.length - 1)
+        this.p.map(scaledT, 0, 1, 0, this.hexPoints.length - 1),
       );
       const end = Math.ceil(
-        this.p.map(scaledT, 0, 1, start + 1, this.hexPoints.length - 1)
+        this.p.map(scaledT, 0, 1, start + 1, this.hexPoints.length - 1),
       );
 
       this.ctx.strokeStyle = `hsl(${360 * scaledT}, 80%, 60%)`;
@@ -141,7 +141,7 @@ export class Grid implements Sketch {
       this.ctx.beginPath();
       this.ctx.moveTo(
         this.hexPoints[start].x * this.size,
-        this.hexPoints[start].y * this.size
+        this.hexPoints[start].y * this.size,
       );
 
       Array(end - start + 1)
@@ -151,7 +151,7 @@ export class Grid implements Sketch {
           const index = end === this.hexPoints.length - 1 ? 0 : i;
           this.ctx.lineTo(
             this.hexPoints[index].x * this.size,
-            this.hexPoints[index].y * this.size
+            this.hexPoints[index].y * this.size,
           );
         });
 

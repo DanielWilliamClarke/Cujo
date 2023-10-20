@@ -1,8 +1,8 @@
 /** @jsxImportSource theme-ui */
 
-import React from 'react';
-import { keyframes } from '@emotion/react'
-import { GenericComponentProps } from './props';
+import React from "react";
+import { keyframes } from "@emotion/react";
+import { GenericComponentProps } from "./props";
 
 const reverseRotate = keyframes`
   33% {
@@ -16,21 +16,24 @@ const reverseRotate = keyframes`
   100% {
     transform: rotateX(-180deg) rotateZ(-180deg);
   }
-`
+`;
 
 type LoadingProps = GenericComponentProps & {
   box: {
-    speed: number
-    size: number
-  }
-}
+    speed: number;
+    size: number;
+  };
+};
 
-export const BlockReverseLoading: React.FC<LoadingProps> = ({ className, box }: LoadingProps): JSX.Element => {
+export const BlockReverseLoading: React.FC<LoadingProps> = ({
+  className,
+  box,
+}: LoadingProps): JSX.Element => {
   return (
     <div
       className={className}
       sx={{
-        position: 'relative',
+        position: "relative",
         bottom: 0,
         right: 0,
         top: 0,
@@ -44,15 +47,15 @@ export const BlockReverseLoading: React.FC<LoadingProps> = ({ className, box }: 
           height: box.size,
           animationDuration: box.speed,
           borderRadius: 12,
-          margin: 'auto',
-          position: 'absolute',
+          margin: "auto",
+          position: "absolute",
           bottom: 0,
           right: 0,
           top: 0,
           left: 0,
           animation: `${reverseRotate} 3s infinite`,
-          transform: 'rotate(0)',
-          backgroundColor: 'accent'
+          transform: "rotate(0)",
+          backgroundColor: "accent",
         }}
       />
     </div>
