@@ -1,7 +1,7 @@
 /** @jsxImportSource theme-ui */
 
-import React from 'react';
 import { keyframes } from '@emotion/react';
+import React from 'react';
 import { GenericComponentProps } from './props';
 
 const reverseRotate = keyframes`

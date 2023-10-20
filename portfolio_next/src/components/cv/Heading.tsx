@@ -1,5 +1,4 @@
-import React from 'react';
-import { View, StyleSheet, Text } from '@react-pdf/renderer';
+import { StyleSheet, Text, View } from '@react-pdf/renderer';
 import { IDateService } from '@Services/DateService';
 
 import { CV, Work } from '@Models/CVModel';

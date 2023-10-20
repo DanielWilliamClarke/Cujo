@@ -1,8 +1,8 @@
 /** @jsxImportSource theme-ui */
 
+import { usePositionContext } from '@Hooks/PositionContext';
 import React from 'react';
 import { Badge } from 'react-bootstrap';
-import { usePositionContext } from '@Hooks/PositionContext';
 
 type LanyardProps = {
   tags: string[];

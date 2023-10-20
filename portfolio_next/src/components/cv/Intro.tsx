@@ -1,7 +1,7 @@
-import React, { ReactNode } from 'react';
-import { View, StyleSheet, Text } from '@react-pdf/renderer';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { BLOCKS } from '@contentful/rich-text-types';
+import { StyleSheet, Text, View } from '@react-pdf/renderer';
+import { ReactNode } from 'react';
 
 import { Header } from './Header';
 

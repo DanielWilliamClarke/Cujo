@@ -1,10 +1,10 @@
+import interpolate from 'color-interpolate';
 import React, { useEffect, useMemo, useState } from 'react';
 import {
   buildStyles,
   CircularProgressbarWithChildren,
 } from 'react-circular-progressbar';
 import VisibilitySensor from 'react-visibility-sensor';
-import interpolate from 'color-interpolate';
 
 type ProgressProps = {
   valueStart: number;

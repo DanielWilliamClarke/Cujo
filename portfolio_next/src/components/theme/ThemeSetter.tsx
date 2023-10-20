@@ -1,5 +1,5 @@
-import React, { useContext, useRef } from 'react';
 import { Player } from '@lottiefiles/react-lottie-player';
+import React, { useContext, useRef } from 'react';
 
 import switcher from '../../assets/theme_toggle.json';
 

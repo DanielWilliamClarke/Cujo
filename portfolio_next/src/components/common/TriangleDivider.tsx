@@ -1,8 +1,8 @@
 /** @jsxImportSource theme-ui */
 
+import { getColor } from '@theme-ui/color';
 import React from 'react';
 import { Theme } from 'theme-ui';
-import { getColor } from '@theme-ui/color';
 
 export type DividerProps = {
   background: string;

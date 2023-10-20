@@ -19,14 +19,14 @@ import { Col, Row } from 'react-bootstrap';
 import { obsidian } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
 import readingTime from 'reading-time';
 
-import dynamic from 'next/dynamic';
-import { Post } from '@Models/BlogPost';
-import { Entries, getAsset, Includes } from '@Models/Includes';
-import { IDateService } from '@Services/DateService';
 import { DynamicImage } from '@Common/DynamicImage';
 import { Lanyard } from '@Common/Lanyard';
 import { Section } from '@Common/Section';
 import { centeredStyle, Line, LongLine } from '@Common/UtilComponents';
+import { Post } from '@Models/BlogPost';
+import { Entries, getAsset, Includes } from '@Models/Includes';
+import { IDateService } from '@Services/DateService';
+import dynamic from 'next/dynamic';
 
 const SyntaxHighlighter = dynamic(() => import('react-syntax-highlighter'), {
   ssr: false,

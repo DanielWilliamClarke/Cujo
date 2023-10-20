@@ -1,9 +1,9 @@
 /** @jsxImportSource theme-ui */
 
+import { keyframes } from '@emotion/react';
+import { IIconService } from '@Services/IconService';
 import { useInjection } from 'inversify-react';
 import React from 'react';
-import { IIconService } from '@Services/IconService';
-import { keyframes } from '@emotion/react';
 
 import { anton } from './Font';
 import { GenericComponentProps } from './props';

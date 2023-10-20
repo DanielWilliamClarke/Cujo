@@ -1,13 +1,13 @@
 /** @jsxImportSource theme-ui */
 
+import { IIconService } from '@Services/IconService';
 import { useInjection } from 'inversify-react';
 import React from 'react';
 import { Container } from 'react-bootstrap';
-import { IIconService } from '@Services/IconService';
 
+import { usePositionContext } from '@Hooks/PositionContext';
 import { Heading, SectionColouring } from './Heading';
 import { DividerProps, TriangleDivider } from './TriangleDivider';
-import { usePositionContext } from '@Hooks/PositionContext';
 import { centeredStyle, ShortLine } from './UtilComponents';
 
 const headingBaseStyle = {

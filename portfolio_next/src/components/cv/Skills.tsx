@@ -1,9 +1,8 @@
-import React from 'react';
-import { StyleSheet, View, Text, Image as PdfImage } from '@react-pdf/renderer';
+import { Image as PdfImage, StyleSheet, Text, View } from '@react-pdf/renderer';
 
 import { CV as CVModel, Skill } from '@Models/CVModel';
-import { Header } from './Header';
 import { Media } from '@Models/Includes';
+import { Header } from './Header';
 
 const pdfStyles = StyleSheet.create({
   skills: {

@@ -2,17 +2,17 @@ import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import { Fragment, useEffect, useMemo, useState } from 'react';
 
-import { Portfolio } from '@Cujo/components/App';
 import { SharePanel } from '@Common/SharePanel';
+import { Portfolio } from '@Cujo/components/App';
 import { About } from '@Layouts/About';
 import { Education } from '@Layouts/Education';
 import { Experience } from '@Layouts/Experience';
 
+import { wrapPage } from '@Cujo/Cujo';
+import { CujoProps, fetchCujoProps } from '@Cujo/CujoISR';
 import { Projects } from '@Layouts/Projects';
 import { ReadingList } from '@Layouts/ReadingList';
 import { Technical } from '@Layouts/Technical';
-import { wrapPage } from '@Cujo/Cujo';
-import { CujoProps, fetchCujoProps } from '@Cujo/CujoISR';
 import { Project } from '@Models/CVModel';
 
 export const getStaticProps: GetStaticProps = fetchCujoProps;

@@ -13,11 +13,11 @@ import { Button, Col, Form, Row } from 'react-bootstrap';
 
 import { Zoom } from 'react-awesome-reveal';
 
-import { Profile } from '@Models/CVModel';
-import { IContactService } from '@Services/ContactService';
 import { DevIconName } from '@Common/DevIcon';
 import { Section } from '@Common/Section';
 import { DividerProps } from '@Common/TriangleDivider';
+import { Profile } from '@Models/CVModel';
+import { IContactService } from '@Services/ContactService';
 import ThemeContext from '../theme/ThemeContext';
 
 import { centeredStyle, LongLine } from '@Common/UtilComponents';

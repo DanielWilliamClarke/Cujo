@@ -1,15 +1,15 @@
 import { Portfolio } from '@Cujo/components/App';
 
-import { GetStaticPaths, GetStaticProps } from 'next';
-import { useRouter } from 'next/router';
-import { BlogPost } from '@Layouts/BlogPost';
-import { wrapPage } from '@Cujo/Cujo';
-import { CujoProps, fetchCujoBlogPaths, fetchCujoProps } from '../../CujoISR';
-import { Fragment, useEffect, useMemo, useState } from 'react';
-import Head from 'next/head';
 import { SharePanel } from '@Common/SharePanel';
-import { id } from 'inversify';
+import { wrapPage } from '@Cujo/Cujo';
+import { BlogPost } from '@Layouts/BlogPost';
 import { Post } from '@Models/BlogPost';
+import { id } from 'inversify';
+import { GetStaticPaths, GetStaticProps } from 'next';
+import Head from 'next/head';
+import { useRouter } from 'next/router';
+import { Fragment, useEffect, useMemo, useState } from 'react';
+import { CujoProps, fetchCujoBlogPaths, fetchCujoProps } from '../../CujoISR';
 
 export const getStaticPaths: GetStaticPaths = fetchCujoBlogPaths;
 export const getStaticProps: GetStaticProps = fetchCujoProps;

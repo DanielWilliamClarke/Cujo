@@ -1,17 +1,16 @@
-import React from 'react';
-import { Document, StyleSheet, Page, View, Font } from '@react-pdf/renderer';
+import { Document, Font, Page, StyleSheet, View } from '@react-pdf/renderer';
 import { IDateService } from '@Services/DateService';
 
 import { CV as CVModel, Work } from '@Models/CVModel';
 
-import { Heading } from './Heading';
-import { Intro } from './Intro';
-import { Skills } from './Skills';
+import { Contact } from './Contact';
 import { Education } from './Education';
 import { Experience } from './Experience';
-import { Outro } from './Outro';
+import { Heading } from './Heading';
 import { Interests } from './Interests';
-import { Contact } from './Contact';
+import { Intro } from './Intro';
+import { Outro } from './Outro';
+import { Skills } from './Skills';
 
 Font.registerEmojiSource({
   format: 'png',

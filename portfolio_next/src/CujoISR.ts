@@ -1,10 +1,10 @@
-import { GetStaticProps, GetStaticPaths } from 'next';
-import { initUrqlClient } from 'next-urql';
-import { ssrExchange, dedupExchange, cacheExchange, fetchExchange } from 'urql';
-import { CujoQuery, CujoBlogPathsQuery } from './CujoQuery';
 import { Post } from '@Models/BlogPost';
 import { CV } from '@Models/CVModel';
 import { Entries } from '@Models/Includes';
+import { GetStaticPaths, GetStaticProps } from 'next';
+import { initUrqlClient } from 'next-urql';
+import { cacheExchange, dedupExchange, fetchExchange, ssrExchange } from 'urql';
+import { CujoBlogPathsQuery, CujoQuery } from './CujoQuery';
 
 export type CujoProps = {
   cv: CV;

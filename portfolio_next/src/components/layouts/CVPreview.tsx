@@ -2,20 +2,20 @@
 
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import { useInjection } from 'inversify-react';
+import { event } from 'nextjs-google-analytics';
 import React, { useCallback } from 'react';
 import { Col, Row } from 'react-bootstrap';
-import { event } from 'nextjs-google-analytics';
 
 import * as pdfjs from 'pdfjs-dist/legacy/build/pdf.js';
 import pdfjsWorker from 'pdfjs-dist/legacy/build/pdf.worker.entry';
 
+import { Section } from '@Common/Section';
 import { CVProps } from '@Models/CVModel';
 import { IDateService } from '@Services/DateService';
-import { Section } from '@Common/Section';
 
 import { Reveal } from '@Common/Reveal';
-import { CV } from '@Cv/CV';
 import { centeredStyle } from '@Common/UtilComponents';
+import { CV } from '@Cv/CV';
 
 // This is quite dumb but works
 pdfjs.GlobalWorkerOptions.workerSrc = pdfjsWorker;

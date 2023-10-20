@@ -1,7 +1,7 @@
 /** @jsxImportSource theme-ui */
 
-import React, { useEffect, useState } from 'react';
 import { keyframes } from '@emotion/react';
+import React, { useEffect, useState } from 'react';
 import { ThemeUICSSObject } from 'theme-ui';
 import { GenericComponentProps } from './props';
 

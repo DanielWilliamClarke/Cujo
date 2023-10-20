@@ -1,9 +1,9 @@
 /** @jsxImportSource theme-ui */
 
+import { event } from 'nextjs-google-analytics';
 import React, { useCallback, useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
 import { Reveal } from './Reveal';
-import { event } from 'nextjs-google-analytics';
 
 import {
   EmailIcon,

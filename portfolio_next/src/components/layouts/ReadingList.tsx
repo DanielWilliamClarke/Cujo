@@ -1,13 +1,13 @@
 /** @jsxImportSource theme-ui */
 
+import { DynamicImage } from '@Common/DynamicImage';
+import { Section } from '@Common/Section';
+import { usePositionContext } from '@Hooks/PositionContext';
+import { Book, BookProgress } from '@Models/CVModel';
+import { Entries } from '@Models/Includes';
 import { Row } from 'react-bootstrap';
 import { Autoplay, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Book, BookProgress } from '@Models/CVModel';
-import { Entries } from '@Models/Includes';
-import { DynamicImage } from '@Common/DynamicImage';
-import { usePositionContext } from '@Hooks/PositionContext';
-import { Section } from '@Common/Section';
 
 const props = {
   slidesPerView: 1,

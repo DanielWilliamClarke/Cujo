@@ -2,18 +2,18 @@
 
 import React, { ReactNode, Suspense } from 'react';
 
+import { Blog } from '@Layouts/Blog';
+import { Contact } from '@Layouts/Contact';
+import { Copyright } from '@Layouts/Copyright';
+import { NavPanel } from '@Layouts/NavPanel';
 import { Post } from '@Models/BlogPost';
 import { CV as CVModel } from '@Models/CVModel';
 import { Entries } from '@Models/Includes';
-import { Copyright } from '@Layouts/Copyright';
-import { Blog } from '@Layouts/Blog';
-import { Contact } from '@Layouts/Contact';
-import { NavPanel } from '@Layouts/NavPanel';
 import { ThemeProvider } from './theme/ThemeProvider';
 
-import dynamic from 'next/dynamic';
 import { BlockReverseLoading } from '@Common/BlockReverseLoading';
 import { PositionProvider } from '@Hooks/PositionContext';
+import dynamic from 'next/dynamic';
 
 const loading = (
   <BlockReverseLoading

@@ -1,10 +1,10 @@
-import React, { ReactNode } from 'react';
-import { View, StyleSheet, Text, Image as PdfImage } from '@react-pdf/renderer';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { BLOCKS } from '@contentful/rich-text-types';
+import { Image as PdfImage, StyleSheet, Text, View } from '@react-pdf/renderer';
+import { ReactNode } from 'react';
 
-import { DateService, IDateService } from '@Services/DateService';
 import { Work } from '@Models/CVModel';
+import { DateService, IDateService } from '@Services/DateService';
 
 import { Header } from './Header';
 

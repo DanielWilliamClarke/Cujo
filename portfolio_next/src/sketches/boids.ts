@@ -1,8 +1,8 @@
-import p5 from 'p5';
-import { Sketch } from '.';
+import { anton } from '@Common/Font';
 import { CV, Skill, Work } from '@Models/CVModel';
 import { DateService, IDateService } from '@Services/DateService';
-import { anton } from '@Common/Font';
+import p5 from 'p5';
+import { Sketch } from '.';
 
 type BoidsWord = {
   word: string;

@@ -9,13 +9,13 @@ import { Col, Row } from 'react-bootstrap';
 import { Theme } from 'theme-ui';
 import { debounce } from 'ts-debounce';
 
-import { Skill, Skills } from '@Models/CVModel';
-import { Entry } from '@Models/Includes';
 import { DevIconName } from '@Common/DevIcon';
-import { usePositionContext } from '@Hooks/PositionContext';
 import { ProgressGauge } from '@Common/ProgressGauge';
 import { Section } from '@Common/Section';
 import { centeredStyle, Line } from '@Common/UtilComponents';
+import { usePositionContext } from '@Hooks/PositionContext';
+import { Skill, Skills } from '@Models/CVModel';
+import { Entry } from '@Models/Includes';
 import { getColor } from '@theme-ui/color';
 
 type TechnicalProps = {
