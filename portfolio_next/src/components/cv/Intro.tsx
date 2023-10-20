@@ -13,7 +13,6 @@ export namespace Intro {
       display: 'flex',
       flexDirection: 'row',
       fontSize: 10,
-      marginVertical: 10,
     },
     profile: {
       flexDirection: 'column',

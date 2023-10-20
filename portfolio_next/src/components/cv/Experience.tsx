@@ -13,7 +13,7 @@ export namespace Experience {
   const pdfStyles = StyleSheet.create({
     experience: {
       fontSize: 10,
-      marginVertical: 5,
+      marginVertical: 8,
     },
     company: {
       fontSize: 10,

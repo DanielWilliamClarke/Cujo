@@ -7,7 +7,7 @@ import { Header } from './Header';
 export namespace Contact {
   const pdfStyles = StyleSheet.create({
     contact: {
-      marginVertical: 10,
+      marginVertical: 7,
       fontSize: '10',
     },
     contactIcon: {

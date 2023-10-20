@@ -64,7 +64,6 @@ export const Section: React.FC<SectionProps> = ({
   return (
     <section
       id={props.id}
-      className={props.id}
       sx={{
         margin: '0 auto',
         paddingY: 75,
