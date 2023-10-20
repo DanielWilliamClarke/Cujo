@@ -9,13 +9,13 @@ import { event } from "nextjs-google-analytics";
 import * as pdfjs from 'pdfjs-dist/legacy/build/pdf.js';
 import pdfjsWorker from 'pdfjs-dist/legacy/build/pdf.worker.entry';
 
-import { CVProps } from '../../model/CVModel';
-import { IDateService } from '../../services/DateService';
-import { Section } from '../shared/Section';
+import { CVProps } from '../model/CVModel';
+import { IDateService } from '../services/DateService';
+import { Section } from './Section';
 
-import { Reveal } from '../shared/Reveal';
-import { CV } from './sections/CV';
-import { centeredStyle } from '../shared/UtilComponents';
+import { Reveal } from './Reveal';
+import { CV } from './cv/CV';
+import { centeredStyle } from './UtilComponents';
 
 // This is quite dumb but works
 pdfjs.GlobalWorkerOptions.workerSrc = pdfjsWorker;

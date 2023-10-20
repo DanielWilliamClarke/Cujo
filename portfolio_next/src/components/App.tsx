@@ -33,7 +33,7 @@ const SketchBackstretch = dynamic(() => import('./SketchBackstretch'), {
   loading: () => loading
 });
 
-const CVPreview = dynamic(() => import('./cv/CVPreview'), {
+const CVPreview = dynamic(() => import('./CVPreview'), {
   ssr: false,
   loading: () => loading
 });

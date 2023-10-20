@@ -3,14 +3,14 @@ import Head from 'next/head';
 import { Fragment, useEffect, useMemo, useState } from 'react';
 
 import { Portfolio } from '../src/components/App';
-import { SharePanel } from '../src/components/nav/SharePanel';
+import { SharePanel } from '../src/components/SharePanel';
 import { About } from '../src/components/About';
-import { Education } from '../src/components/profile/Education';
-import { Experience } from '../src/components/profile/Experience';
+import { Education } from '../src/components/Education';
+import { Experience } from '../src/components/Experience';
 
-import { Projects } from '../src/components/profile/Projects';
-import { ReadingList } from '../src/components/profile/ReadingList';
-import { Technical } from '../src/components/profile/Technical';
+import { Projects } from '../src/components/Projects';
+import { ReadingList } from '../src/components/ReadingList';
+import { Technical } from '../src/components/Technical';
 import { wrapPage } from '../src/Cujo';
 import { CujoProps, fetchCujoProps } from '../src/CujoISR';
 import { Project } from '../src/model/CVModel';

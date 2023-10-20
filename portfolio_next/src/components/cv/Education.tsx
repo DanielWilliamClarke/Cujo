@@ -1,8 +1,8 @@
 import React from 'react';
 import { View, StyleSheet, Text } from '@react-pdf/renderer';
 
-import { DateService, IDateService } from '../../../services/DateService';
-import { CV, Education as EducationModel } from '../../../model/CVModel';
+import { DateService, IDateService } from '../../services/DateService';
+import { CV, Education as EducationModel } from '../../model/CVModel';
 
 import { Header } from './Header';
 

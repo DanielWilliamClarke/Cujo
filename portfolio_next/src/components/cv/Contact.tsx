@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, Text, Image as PdfImage } from '@react-pdf/renderer';
-import { CV } from '../../../model/CVModel';
+import { CV } from '../../model/CVModel';
 
 import { Header } from './Header';
 

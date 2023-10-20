@@ -9,7 +9,7 @@ type ImageProps = HTMLAttributes<HTMLImageElement> & {
 
 namespace ImageLocator {
   export const buildImageUri = (image: string): any => {
-    return isUrl(image) ? urlWithProtocol(image) : require(`../../assets/${image}`).default;
+    return isUrl(image) ? urlWithProtocol(image) : require(`../assets/${image}`).default;
   };
 
   const urlWithProtocol = (image: string) => `https:${image}`;

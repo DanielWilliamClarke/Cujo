@@ -2,7 +2,7 @@ import p5 from 'p5';
 import { Sketch } from '.';
 import { CV, Skill, Work } from '../model/CVModel';
 import { DateService, IDateService } from '../services/DateService';
-import { anton } from '../components/shared/Font';
+import { anton } from '../components/Font';
 
 type BoidsWord = {
   word: string
@@ -18,7 +18,7 @@ export class Boids implements Sketch {
 
   private readonly words: BoidsWord[];
 
-  constructor (
+  constructor(
     private readonly p: p5,
     private readonly cv: CV,
     private readonly currentRole: Work,
@@ -43,12 +43,12 @@ export class Boids implements Sketch {
   }
 
   private myFont!: p5.Font;
-  preload () {
+  preload() {
     anton.className
     this.myFont = this.p.loadFont('./fonts/Anton-Regular.ttf');
   }
 
-  setup () {
+  setup() {
     this.p.frameRate(60);
     this.p.createCanvas(window.innerWidth, window.innerHeight, this.p.WEBGL);
     // this.p.setRe
@@ -68,11 +68,11 @@ export class Boids implements Sketch {
     }, 3000);
   }
 
-  windowResized () {
+  windowResized() {
     this.p.resizeCanvas(window.innerWidth, window.innerHeight);
   }
 
-  draw () {
+  draw() {
     this.p.background(0);
     this.p.rotateX(120);
 
@@ -178,12 +178,12 @@ export class Boids implements Sketch {
 }
 
 class HSLA {
-  constructor (
+  constructor(
     public h: number = 255,
     public s: number = 255,
     public b: number = 255,
     public a: number = 255
-  ) {}
+  ) { }
 }
 
 class Vehicle {
@@ -193,16 +193,16 @@ class Vehicle {
   private readonly maxSpeed: number = 20;
   private readonly maxForce: number = 4;
 
-  constructor (
+  constructor(
     private readonly p: p5,
     private radius: number,
     private target: p5.Vector,
     private readonly position: p5.Vector,
     private readonly acceleration: p5.Vector,
     private readonly velocity: p5.Vector
-  ) {}
+  ) { }
 
-  copy () {
+  copy() {
     return new Vehicle(
       this.p,
       this.radius,
@@ -213,14 +213,14 @@ class Vehicle {
     );
   }
 
-  update () {
+  update() {
     this.position.add(this.velocity);
     this.velocity.add(this.acceleration);
     this.acceleration.mult(0);
     return this;
   }
 
-  show (point: p5.Vector = this.position, color: HSLA = this.color) {
+  show(point: p5.Vector = this.position, color: HSLA = this.color) {
     this.p.push();
 
     this.p.translate(point.x - this.p.width / 2, point.y - this.p.height / 2);
@@ -232,7 +232,7 @@ class Vehicle {
     this.p.pop();
   }
 
-  behaviors (agitator: p5.Vector) {
+  behaviors(agitator: p5.Vector) {
     const arrive = this.arrive(this.target);
     const flee = this.flee(agitator);
 
@@ -250,23 +250,23 @@ class Vehicle {
     return this;
   }
 
-  setTarget (t: p5.Vector) {
+  setTarget(t: p5.Vector) {
     this.target = t;
   }
 
-  setColor (c: HSLA) {
+  setColor(c: HSLA) {
     this.color = c;
   }
 
-  setSize (s: number) {
+  setSize(s: number) {
     this.radius = s;
   }
 
-  applyForce (f: p5.Vector) {
+  applyForce(f: p5.Vector) {
     this.acceleration.add(f);
   }
 
-  arrive (target: p5.Vector) {
+  arrive(target: p5.Vector) {
     const desired = target.copy().sub(this.position);
     const d = desired.mag();
     let speed = this.maxSpeed;
@@ -279,7 +279,7 @@ class Vehicle {
     return steer;
   }
 
-  flee (target: p5.Vector) {
+  flee(target: p5.Vector) {
     const desired = target.copy().sub(this.position);
     const d = desired.mag();
     if (d < this.fleeRadius) {
@@ -295,13 +295,13 @@ class Vehicle {
 }
 
 class NoiseGenerator {
-  constructor (
+  constructor(
     private readonly p: p5,
     private xoff: number = 0,
     private yoff: number = 0
-  ) {}
+  ) { }
 
-  getCoord (): p5.Vector {
+  getCoord(): p5.Vector {
     this.xoff += 0.00001;
     this.yoff += 0.00001;
     return this.p.createVector(

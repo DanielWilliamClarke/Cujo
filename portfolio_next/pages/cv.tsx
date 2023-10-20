@@ -20,7 +20,7 @@ const loading = (
     />
 );
 
-const CVExport = dynamic(() => import("../src/components/cv/CVExport"), {
+const CVExport = dynamic(() => import("../src/components/CVExport"), {
     ssr: false,
     loading: () => loading
 })
