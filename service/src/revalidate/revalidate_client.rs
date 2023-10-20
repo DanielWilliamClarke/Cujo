@@ -32,6 +32,8 @@ impl RevalidateClient {
     pub async fn portfolio(&self, cache: &Arc<RwLock<Cache>>) {
         self.revalidate("/".to_string())
             .await;
+        self.revalidate("/cv".to_string())
+            .await;
         self.revalidate("/blog".to_string())
             .await;
 
