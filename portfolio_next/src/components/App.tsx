@@ -62,7 +62,11 @@ export const Portfolio: React.FC<AppProps> = ({
         <SketchBackstretch cv={cv} />
       </Suspense>
       <NavPanel />
-      <div>
+      <div
+        sx={{
+          textAlign: 'center'
+        }}
+      >
         {
           [
             ...children,
