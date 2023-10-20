@@ -19,6 +19,7 @@ const colors = {
   bgLight: '#f2efe6',
   bgDark: '#fffcf2',
 
+  backStretchText: '#eeeeee',
   backGradSketchHigh: '#118ab24d',
   backGradSketchLow: '#18284844',
   backTextShadow: '#00000000',

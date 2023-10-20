@@ -51,17 +51,10 @@ const SketchBackstretch: React.FC<CVProps> = React.memo(
       () => (
         <section id="home">
           <Container
-            className={anton.className}
             fluid
             ref={p5Ref}
             sx={(t: Theme) => ({
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              color: 'text',
               height: '100vh',
-              textAlign: 'center',
-              transition: '0.5s',
               marginBottom: -70,
               background: `linear-gradient(0deg,
                ${alpha('backGradSketchHigh', 0.6)(t)},
@@ -73,67 +66,81 @@ const SketchBackstretch: React.FC<CVProps> = React.memo(
                 zIndex: -1,
               },
             })}
+          />
+          <Container
+            fluid
+            className={anton.className}
+            sx={{
+              textAlign: 'center',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              height: '100vh',
+              width: '100%',
+              color: 'backStretchText',
+              position: 'absolute',
+              top: 0,
+              userSelect: 'none',
+              flexDirection: ['column', 'row', 'row'],
+              transition: '0.5s',
+              marginBottom: -70,
+            }}
           >
-            <div
+            <Logo
               sx={{
-                userSelect: 'none',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                flexDirection: ['column', 'row', 'row'],
+                paddingRight: [0, 30, 30],
               }}
-            >
-              <Logo
+            />
+            <div>
+              <Row
                 sx={{
-                  paddingRight: [0, 30, 30],
+                  fontSize: 'calc(30px + 3vw)',
+                  lineHeight: 'calc(30px + 3vw)',
+                  fontWeight: 700,
+                  textShadow: '0 0 50px shadow',
+                  paddingBottom: [20, 0, 0],
+
+                  '@media screen and (max-width: 700px)': {
+                    fontSize: 50,
+                    lineHeight: 'calc(40px + 3vw)',
+                  },
                 }}
-              />
-              <div>
+              >
+                <Col>{cv.about.entry.name.toLocaleUpperCase()}</Col>
+              </Row>
+              <div
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  flexDirection: ['column', 'row', 'row'],
+                }}
+              >
                 <Row
                   sx={{
-                    fontSize: ['50px', 'calc(30px + 3vw)', 'calc(30px + 3vw)'],
-                    lineHeight: 'calc(30px + 3vw)',
-                    fontWeight: 700,
+                    fontSize: 'calc(15px + 1vw)',
+                    lineHeight: 'calc(15px + 1vw)',
+                    fontWeight: 400,
                     textShadow: '0 0 50px shadow',
-                    paddingBottom: [20, 0, 0],
                   }}
                 >
-                  <Col>{cv.about.entry.name.toLocaleUpperCase()}</Col>
+                  <Col>{cv.about.entry.label.toLocaleUpperCase()}</Col>
                 </Row>
-                <div
+                <Row
                   sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    flexDirection: ['column', 'row', 'row'],
+                    height: 20,
                   }}
                 >
-                  <Row
-                    sx={{
-                      fontSize: 'calc(15px + 1vw)',
-                      lineHeight: 'calc(15px + 1vw)',
-                      fontWeight: 400,
-                      textShadow: '0 0 50px shadow',
-                    }}
-                  >
-                    <Col>{cv.about.entry.label.toLocaleUpperCase()}</Col>
-                  </Row>
-                  <Row
-                    sx={{
-                      height: 20,
-                    }}
-                  >
-                    <Col>
-                      <DynamicImage
-                        image={currentRole.logo}
-                        sx={{
-                          ...centeredStyle,
-                          height: 20,
-                          paddingTop: [10, 0, 0],
-                        }}
-                      />
-                    </Col>
-                  </Row>
-                </div>
+                  <Col>
+                    <DynamicImage
+                      image={currentRole.logo}
+                      sx={{
+                        ...centeredStyle,
+                        height: 20,
+                        paddingTop: [10, 0, 0],
+                      }}
+                    />
+                  </Col>
+                </Row>
               </div>
             </div>
           </Container>
