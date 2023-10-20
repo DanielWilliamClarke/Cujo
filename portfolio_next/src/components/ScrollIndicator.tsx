@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { keyframes } from '@emotion/react'
 import { ThemeUICSSObject } from 'theme-ui';
-import { GenericComponentProps } from '../shared/props';
+import { GenericComponentProps } from './props';
 
 const move = keyframes`
   25% {

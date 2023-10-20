@@ -5,16 +5,15 @@ import React, { Suspense } from 'react';
 import { Post } from '../model/BlogPost';
 import { CV as CVModel } from '../model/CVModel';
 import { Entries } from '../model/Includes';
-import { Copyright } from './backstretch/Copyright';
-import { Blog } from './blog/Blog';
-import { Contact } from './contact/Contact';
-import { NavPanel } from './nav/NavPanel';
+import { Copyright } from './Copyright';
+import { Blog } from './Blog';
+import { Contact } from './Contact';
+import { NavPanel } from './NavPanel';
 import { ThemeProvider } from './theme/ThemeProvider';
 
 import dynamic from 'next/dynamic';
-import { BlockReverseLoading } from './shared/BlockReverseLoading';
-import { GenericComponentProps } from './shared/props';
-import { PositionProvider } from './shared/PositionContext';
+import { BlockReverseLoading } from './BlockReverseLoading';
+import { PositionProvider } from './hooks/PositionContext';
 
 const loading = (
   <BlockReverseLoading
@@ -29,7 +28,7 @@ const loading = (
   />
 );
 
-const SketchBackstretch = dynamic(() => import('./backstretch/SketchBackstretch'), {
+const SketchBackstretch = dynamic(() => import('./SketchBackstretch'), {
   ssr: false,
   loading: () => loading
 });

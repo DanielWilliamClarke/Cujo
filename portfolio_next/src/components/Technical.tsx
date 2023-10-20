@@ -9,15 +9,14 @@ import { Col, Row } from 'react-bootstrap';
 import { Theme } from 'theme-ui';
 import { debounce } from "ts-debounce";
 
-import { Skill, Skills } from '../../model/CVModel';
-import { Entry } from '../../model/Includes';
-import { DevIconName } from '../shared/DevIcon';
-import { usePositionContext } from '../shared/PositionContext';
-import { ProgressGauge } from '../shared/ProgressGauge';
-import { Section } from '../shared/Section';
-import { centeredStyle, Line } from '../shared/UtilComponents';
+import { Skill, Skills } from '../model/CVModel';
+import { Entry } from '../model/Includes';
+import { DevIconName } from './DevIcon';
+import { usePositionContext } from './hooks/PositionContext';
+import { ProgressGauge } from './ProgressGauge';
+import { Section } from './Section';
+import { centeredStyle, Line } from './UtilComponents';
 import { getColor } from '@theme-ui/color'
-import { GenericComponentProps } from '../shared/props';
 
 type TechnicalProps = {
   skills: Entry<Skills>

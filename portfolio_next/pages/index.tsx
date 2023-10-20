@@ -4,7 +4,7 @@ import { Fragment, useEffect, useMemo, useState } from 'react';
 
 import { Portfolio } from '../src/components/App';
 import { SharePanel } from '../src/components/nav/SharePanel';
-import { About } from '../src/components/profile/About';
+import { About } from '../src/components/About';
 import { Education } from '../src/components/profile/Education';
 import { Experience } from '../src/components/profile/Experience';
 

@@ -8,17 +8,17 @@ import {
   VerticalTimeline,
   VerticalTimelineElement
 } from 'react-vertical-timeline-component';
-import { Education as EducationModel } from '../../model/CVModel';
-import { Entries, Media } from '../../model/Includes';
-import { IDateService } from '../../services/DateService';
-import { IIconService } from '../../services/IconService';
-import { DynamicImage } from '../shared/DynamicImage';
-import { Lanyard } from '../shared/Lanyard';
-import { Section } from '../shared/Section';
+import { Education as EducationModel } from '../model/CVModel';
+import { Entries, Media } from '../model/Includes';
+import { IDateService } from '../services/DateService';
+import { IIconService } from '../services/IconService';
+import { DynamicImage } from './DynamicImage';
+import { Lanyard } from './Lanyard';
+import { Section } from './Section';
 
-import { useShouldAnimate } from '../hooks/useShouldAnimate';
-import { centeredStyle, Dot, ShortLine } from '../shared/UtilComponents';
-import { usePositionContext } from '../shared/PositionContext';
+import { useShouldAnimate } from './hooks/useShouldAnimate';
+import { centeredStyle, Dot, ShortLine } from './UtilComponents';
+import { usePositionContext } from './hooks/PositionContext';
 
 type EducationProps = {
   education: Entries<EducationModel>

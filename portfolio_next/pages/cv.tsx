@@ -3,7 +3,7 @@
 import { GetStaticProps } from "next";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
-import { BlockReverseLoading } from "../src/components/shared/BlockReverseLoading";
+import { BlockReverseLoading } from "../src/components/BlockReverseLoading";
 import { wrapPage } from "../src/Cujo";
 import { CujoProps, fetchCujoProps } from "../src/CujoISR";
 

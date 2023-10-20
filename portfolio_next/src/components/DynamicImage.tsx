@@ -1,7 +1,7 @@
 import NextImage from 'next/image';
 import React, { HTMLAttributes, useEffect, useState } from 'react';
 
-import { Media } from '../../model/Includes';
+import { Media } from '../model/Includes';
 
 type ImageProps = HTMLAttributes<HTMLImageElement> & {
   image: Media
@@ -53,7 +53,7 @@ export const DynamicImage: React.FC<ImageProps> =
     if (!loaded) {
       return null;
     }
-    
+
     return (
       <NextImage
         src={loaded}

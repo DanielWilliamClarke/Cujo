@@ -3,9 +3,7 @@
 import React from 'react';
 import { Col, Row } from 'react-bootstrap';
 
-import { anton } from '../shared/Font';
-import { usePositionContext } from './PositionContext';
-import { GenericComponentProps } from './props';
+import { anton } from './Font';
 import { Line } from './UtilComponents';
 
 export type SectionColouring = {

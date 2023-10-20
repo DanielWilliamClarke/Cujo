@@ -8,18 +8,18 @@ import {
   VerticalTimeline,
   VerticalTimelineElement
 } from 'react-vertical-timeline-component';
-import { Work } from '../../model/CVModel';
-import { Entries, Media } from '../../model/Includes';
-import { IDateService } from '../../services/DateService';
-import { IIconService } from '../../services/IconService';
-import { useShouldAnimate } from '../hooks/useShouldAnimate';
-import { DynamicImage } from '../shared/DynamicImage';
-import { Lanyard } from '../shared/Lanyard';
-import { Section } from '../shared/Section';
+import { Work } from '../model/CVModel';
+import { Entries, Media } from '../model/Includes';
+import { IDateService } from '../services/DateService';
+import { IIconService } from '../services/IconService';
+import { useShouldAnimate } from './hooks/useShouldAnimate';
+import { DynamicImage } from './DynamicImage';
+import { Lanyard } from './Lanyard';
+import { Section } from './Section';
 
-import { At, centeredStyle, ShortLine } from '../shared/UtilComponents';
+import { At, centeredStyle, ShortLine } from './UtilComponents';
 import { Theme } from 'theme-ui';
-import { usePositionContext } from '../shared/PositionContext';
+import { usePositionContext } from './hooks/PositionContext';
 
 type WorkProps = {
   work: Entries<Work>

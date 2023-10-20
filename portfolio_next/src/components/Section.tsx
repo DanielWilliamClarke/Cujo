@@ -3,11 +3,11 @@
 import { useInjection } from 'inversify-react';
 import React from 'react';
 import { Container } from 'react-bootstrap';
-import { IIconService } from '../../services/IconService';
+import { IIconService } from '../services/IconService';
 
 import { Heading, SectionColouring } from './Heading';
 import { DividerProps, TriangleDivider } from './TriangleDivider';
-import { usePositionContext } from './PositionContext';
+import { usePositionContext } from './hooks/PositionContext';
 import { centeredStyle, ShortLine } from './UtilComponents';
 
 

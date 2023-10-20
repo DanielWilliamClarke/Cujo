@@ -4,17 +4,17 @@ import p5 from 'p5';
 import React, { useEffect, useMemo } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { useInjection } from 'inversify-react';
-import { IDateService } from '../../services/DateService';
-import { getSketch } from '../../sketches';
-import { CVProps, Work } from '../../model/CVModel';
+import { IDateService } from '../services/DateService';
+import { getSketch } from '../sketches';
+import { CVProps, Work } from '../model/CVModel';
 
 import { ScrollIndicator } from './ScrollIndicator';
-import { DynamicImage } from '../shared/DynamicImage';
+import { DynamicImage } from './DynamicImage';
 import { Logo } from './Logo';
-import { anton } from '../shared/Font';
+import { anton } from './Font';
 import { Theme } from 'theme-ui';
 import { alpha } from '@theme-ui/color';
-import { centeredStyle } from '../shared/UtilComponents';
+import { centeredStyle } from './UtilComponents';
 
 // This stops any re-renders from creating multiple canvas'
 let rendered = false;

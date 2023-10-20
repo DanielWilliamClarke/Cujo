@@ -2,7 +2,7 @@
 
 import React, { useCallback, useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
-import { Reveal } from '../shared/Reveal';
+import { Reveal } from './Reveal';
 import { event } from "nextjs-google-analytics";
 
 import {

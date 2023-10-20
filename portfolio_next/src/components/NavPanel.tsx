@@ -8,11 +8,11 @@ import Scrollspy from 'react-scrollspy';
 import { event } from "nextjs-google-analytics";
 import { getColor } from '@theme-ui/color';
 
-import { IIconService } from '../../services/IconService';
+import { IIconService } from '../services/IconService';
 
 // import { ThemeSetter } from '../theme/ThemeSetter';
 
-import { anton } from '../shared/Font';
+import { anton } from './Font';
 import { Theme } from 'theme-ui';
 
 const emitClickEvent = (section: string) => {

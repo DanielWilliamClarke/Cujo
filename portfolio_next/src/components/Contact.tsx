@@ -7,15 +7,15 @@ import { Button, Col, Form, Row } from 'react-bootstrap';
 
 import { Zoom } from 'react-awesome-reveal';
 
-import { Profile } from '../../model/CVModel';
-import { IContactService } from '../../services/ContactService';
-import { DevIconName } from '../shared/DevIcon';
-import { Section } from '../shared/Section';
-import { DividerProps } from '../shared/TriangleDivider';
-import ThemeContext from '../theme/ThemeContext';
+import { Profile } from '../model/CVModel';
+import { IContactService } from '../services/ContactService';
+import { DevIconName } from './DevIcon';
+import { Section } from './Section';
+import { DividerProps } from './TriangleDivider';
+import ThemeContext from './theme/ThemeContext';
 
-import { centeredStyle, LongLine } from '../shared/UtilComponents';
-import { usePositionContext } from '../shared/PositionContext';
+import { centeredStyle, LongLine } from './UtilComponents';
+import { usePositionContext } from './hooks/PositionContext';
 
 type ContactProps = {
   profiles: Profile[]

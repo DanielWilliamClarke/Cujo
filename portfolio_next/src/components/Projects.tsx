@@ -4,17 +4,17 @@ import { event } from "nextjs-google-analytics";
 import React from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 
-import { Project } from '../../model/CVModel';
-import { Entries } from '../../model/Includes';
-import { DevIconName } from '../shared/DevIcon';
-import { DynamicImage } from '../shared/DynamicImage';
-import { Lanyard } from '../shared/Lanyard';
-import { Section } from '../shared/Section';
+import { Project } from '../model/CVModel';
+import { Entries } from '../model/Includes';
+import { DevIconName } from './DevIcon';
+import { DynamicImage } from './DynamicImage';
+import { Lanyard } from './Lanyard';
+import { Section } from './Section';
 
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
-import { Reveal } from '../shared/Reveal';
+import { Reveal } from './Reveal';
 import { ThemeUICSSObject } from "theme-ui";
-import { centeredStyle, Line } from "../shared/UtilComponents";
+import { centeredStyle, Line } from "./UtilComponents";
 
 const projectOverlayStyle: ThemeUICSSObject = {
   width: '100%',

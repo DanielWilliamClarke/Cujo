@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Badge } from 'react-bootstrap';
-import { usePositionContext } from './PositionContext';
+import { usePositionContext } from './hooks/PositionContext';
 
 type LanyardProps = {
   tags: string[]

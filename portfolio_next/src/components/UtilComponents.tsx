@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { ThemeUICSSObject } from 'theme-ui';
-import { usePositionContext } from './PositionContext';
+import { usePositionContext } from './hooks/PositionContext';
 import { GenericComponentProps } from './props';
 
 const baseLineStyle: ThemeUICSSObject = {

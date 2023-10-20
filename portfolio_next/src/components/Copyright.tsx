@@ -3,9 +3,9 @@
 import { useInjection } from 'inversify-react';
 import React from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
-import { IDateService } from '../../services/DateService';
-import { Section } from '../shared/Section';
-import { Copyright as CopyrightSymbol, ShortLine } from '../shared/UtilComponents'
+import { IDateService } from '../services/DateService';
+import { Section } from './Section';
+import { Copyright as CopyrightSymbol, ShortLine } from './UtilComponents'
 
 type NameProps = {
   name: string

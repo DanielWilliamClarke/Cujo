@@ -2,11 +2,11 @@
 
 import { useInjection } from 'inversify-react';
 import React from 'react';
-import { IIconService } from '../../services/IconService';
+import { IIconService } from '../services/IconService';
 import { keyframes } from '@emotion/react'
 
-import { anton } from '../shared/Font';
-import { GenericComponentProps } from '../shared/props';
+import { anton } from './Font';
+import { GenericComponentProps } from './props';
 
 const pastelRgb = keyframes`
     0% {

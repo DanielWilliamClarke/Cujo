@@ -2,9 +2,9 @@
 
 import React, { useMemo } from 'react';
 import { useInjection } from 'inversify-react';
-import { DevIcon } from '../../model/CVModel';
-import { IIconService } from '../../services/IconService';
-import { usePositionContext } from './PositionContext';
+import { DevIcon } from '../model/CVModel';
+import { IIconService } from '../services/IconService';
+import { usePositionContext } from './hooks/PositionContext';
 import { GenericComponentProps } from './props';
 import { ThemeUIStyleObject } from 'theme-ui';
 
