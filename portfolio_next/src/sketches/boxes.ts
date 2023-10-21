@@ -1,7 +1,6 @@
 import p5 from 'p5';
 
 import { Sketch } from '.';
-import { Ease } from './easing';
 
 export class Boxes implements Sketch {
   private readonly minW: number = 32;
@@ -19,8 +18,7 @@ export class Boxes implements Sketch {
   private colorAngle: number = 0;
   private maxD: number = 0;
 
-  private opacity: number = 0;
-  private opacityProgress: number = 0;
+  private opacity: number = 1;
 
   constructor(private readonly p: p5) {}
 
@@ -84,9 +82,5 @@ export class Boxes implements Sketch {
 
     this.angle -= 0.01;
     this.colorAngle -= 0.005;
-
-    // easeOutCubic
-    this.opacityProgress += 0.01;
-    this.opacity = Ease.easeInOutCubic(this.opacityProgress);
   }
 }
