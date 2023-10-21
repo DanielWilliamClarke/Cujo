@@ -139,7 +139,7 @@ export const Contact: React.FC<ContactProps> = ({
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId="contact">
               <Form.Control
-                autocomplete="off"
+                autoComplete="off"
                 type="email"
                 name="email"
                 placeholder="email"
