@@ -13,6 +13,8 @@ export class Hypercube implements Sketch {
   private angle: number = 0;
   private colorAngle: number = 0;
   private ctx: any = null;
+  
+  private canvas: any;
 
   private readonly generators3d: RotationGenerator[] = [
     (angle: number) => [
@@ -88,10 +90,8 @@ export class Hypercube implements Sketch {
     );
 
     // transparency ordering workaround
-    const canvas = document.getElementById('defaultCanvas0') as any;
-    this.ctx = canvas.getContext('webgl');
-    this.ctx.disable(this.ctx.DEPTH_TEST);
-
+    this.canvas = document.getElementById('defaultCanvas0') as any;
+ 
     // Generate 4D points
     for (let i = 0; i < 16; i++) {
       const x = i & 1 ? -1 : 1;
@@ -115,6 +115,11 @@ export class Hypercube implements Sketch {
   }
 
   draw() {
+    this.ctx = this.canvas.getContext('webgl');
+    if (this.ctx) {
+      this.ctx.disable(this.ctx.DEPTH_TEST);
+    }
+  
     this.p.background(0);
     this.p.rotateX(35.264);
     this.p.rotateY(-this.p.QUARTER_PI);
