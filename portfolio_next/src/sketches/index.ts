@@ -1,10 +1,10 @@
-import { detect } from 'detect-browser';
 import p5 from 'p5';
 import weighted from 'weighted';
 
 import { CV, Work } from '../model/CVModel';
 // import { conway3D } from "./conway_3d"
 import { Boids } from './boids';
+import { Boxes } from './boxes';
 import { Conway } from './conway';
 import { Grid } from './grid';
 import { Hex } from './hex';
@@ -43,17 +43,12 @@ export const getSketch = (cv: CV, currentRole: Work): ((p: p5) => void) => {
     { builder: (p: p5) => new Phylotaxis(p), weight: 0.05 },
     { builder: (p: p5) => new Hex(p), weight: 0.05 },
     { builder: (p: p5) => new Boids(p, cv, currentRole), weight: 0.05 },
+    { builder: (p: p5) => new Boxes(p), weight: 0.2 },
     { builder: (p: p5) => new Waves(p), weight: 0.01 },
   ];
 
   const weights = sketches.map(({ weight }) => weight);
   const builders = sketches.map(({ builder }) => builder);
-
-  // Boxes is super slow on Safari
-  const browser = detect();
-  if (!safariBrowsers.includes(browser?.name ?? '')) {
-    // sketches.push({ builder: (p: p5) => new Boxes(p), weight: 0.2 });
-  }
 
   return pauseableSketch(weighted.select(builders, weights));
 };
