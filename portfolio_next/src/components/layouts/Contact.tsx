@@ -1,7 +1,7 @@
 /** @jsxImportSource theme-ui */
 import { useInjection } from 'inversify-react';
 import { event } from 'nextjs-google-analytics';
-import React, { ChangeEvent, useCallback, useState } from 'react';
+import React, { ChangeEvent, Suspense, useCallback, useState } from 'react';
 import { Zoom } from 'react-awesome-reveal';
 import { Button, Col, Form, Row } from 'react-bootstrap';
 
@@ -23,17 +23,14 @@ export const Contact: React.FC<ContactProps> = ({
   profiles,
 }: ContactProps): JSX.Element => {
   const contactService = useInjection(IContactService.$);
-  const [status, setStatus] = useState(false);
+  const [status, setStatus] = useState<string | undefined>(undefined);
   const { even } = usePositionContext();
 
-  const handleSubmit = useCallback(
-    async (event: ChangeEvent<HTMLFormElement>) => {
-      event.preventDefault();
-      const status = await contactService.submit(new FormData(event.target));
-      setStatus(status);
-    },
-    [contactService],
-  );
+  const handleSubmit = async (event: ChangeEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const status = await contactService.submit(new FormData(event.target));
+    setStatus(status);
+  };
 
   return (
     <Section
@@ -140,8 +137,9 @@ export const Contact: React.FC<ContactProps> = ({
             </Col>
           </Row>
           <Form onSubmit={handleSubmit}>
-            <Form.Group controlId="formEmail">
+            <Form.Group controlId="contact">
               <Form.Control
+                autocomplete="off"
                 type="email"
                 name="email"
                 placeholder="email"
@@ -157,8 +155,6 @@ export const Contact: React.FC<ContactProps> = ({
                   },
                 }}
               />
-            </Form.Group>
-            <Form.Group controlId="formMessage">
               <Form.Control
                 as="textarea"
                 name="message"
@@ -192,14 +188,17 @@ export const Contact: React.FC<ContactProps> = ({
 
       {status && (
         <Zoom>
-          <div
-            sx={{
-              paddingBottom: 15,
-              transition: '2s',
-            }}
-          >
-            Thanks!
-          </div>
+          <Suspense>
+            <div
+              sx={{
+                paddingBottom: 15,
+                transition: '2s',
+                textTransform: 'capitalize',
+              }}
+            >
+              {status}
+            </div>
+          </Suspense>
         </Zoom>
       )}
     </Section>
