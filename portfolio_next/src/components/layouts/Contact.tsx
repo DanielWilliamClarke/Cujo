@@ -140,7 +140,7 @@ export const Contact: React.FC<ContactProps> = ({
               </h3>
             </Col>
           </Row>
-          <Form onSubmit={async () => handleSubmit}>
+          <Form onSubmit={handleSubmit}>
             <Form.Group controlId="formEmail">
               <Form.Control
                 type="email"
