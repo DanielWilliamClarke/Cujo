@@ -30,7 +30,6 @@ export const Contact: React.FC<ContactProps> = ({
     async (event: ChangeEvent<HTMLFormElement>) => {
       event.preventDefault();
       const status = await contactService.submit(new FormData(event.target));
-      event.target.reset();
       setStatus(status);
     },
     [contactService],
