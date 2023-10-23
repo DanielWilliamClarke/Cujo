@@ -10,6 +10,7 @@ import { usePositionContext } from '@Hooks/PositionContext';
 import { IIconService } from '@Services/IconService';
 
 import { GenericComponentProps } from './props';
+import { DynamicImage } from './DynamicImage';
 
 type DevIconProps = GenericComponentProps & {
   icon: DevIcon;
@@ -17,6 +18,7 @@ type DevIconProps = GenericComponentProps & {
   color?: string;
   hoverColor?: string;
   textStyle?: ThemeUIStyleObject;
+  hideText?: boolean
 };
 
 export const DevIconName: React.FC<DevIconProps> = ({
@@ -26,12 +28,26 @@ export const DevIconName: React.FC<DevIconProps> = ({
   hoverColor,
   size,
   textStyle,
+  hideText = false 
 }: DevIconProps): JSX.Element => {
   const iconService = useInjection(IIconService.$);
 
   const { even } = usePositionContext();
 
   const iconComponent = useMemo(() => {
+    if (icon.icon === 'override' && icon.iconImage) {
+      return (
+        <DynamicImage
+          image={icon.iconImage}
+          sx={{
+            width: size * 2,
+            height: size * 2,
+            marginX: 'auto',
+          }}
+        />
+      )
+    }
+
     const iconStyle: ThemeUIStyleObject = {
       fontSize: size,
       width: size,
@@ -60,7 +76,7 @@ export const DevIconName: React.FC<DevIconProps> = ({
       }}
     >
       {iconComponent}
-      <div sx={textStyle}>{icon.name}</div>
+      {!hideText && <div sx={textStyle}>{icon.name}</div>}
     </div>
   );
 };

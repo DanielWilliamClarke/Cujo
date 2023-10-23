@@ -52,7 +52,7 @@ export const Projects: React.FC<ProjectsProps> = ({
   return (
     <Section id="projects" title="Projects" noSeparator>
       {projects.entries
-        .sort((pA, pB) => pA.rank - pB.rank)
+        .sort((pA, pB) => pB.rank - pA.rank)
         .map((project: Project, index: number) => (
           <ProjectSection project={project} index={index} key={index} />
         ))}
@@ -146,10 +146,7 @@ const ProjectImage: React.FC<ProjectProps> = ({
             icon={project.icon}
             size={75}
             sx={projectOverlayStyle}
-            textStyle={{
-              fontSize: '1rem',
-              margin: '0.2rem',
-            }}
+            hideText
           />
         </a>
       )}
