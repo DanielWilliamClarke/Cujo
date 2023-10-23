@@ -77,17 +77,16 @@ export class Grid implements Sketch {
   setup() {
     this.p.frameRate(60);
     this.p.colorMode(this.p.HSB, 100);
-    this.p.createCanvas(window.innerWidth, window.innerHeight);
+
+    const renderer: any = this.p.createCanvas(window.innerWidth, window.innerHeight);
+    this.ctx = renderer.drawingContext;
 
     this.screenWidth = this.p.width = window.innerWidth;
     this.screenHeight = this.p.height = window.innerHeight;
 
     this.totalX = Math.ceil(this.screenWidth / 2 / this.scale);
     this.totalY = Math.ceil(this.screenHeight / 2 / this.scale);
-
-    const canvas = document.getElementById('defaultCanvas0') as any;
-    this.ctx = canvas.getContext('2d');
-
+    
     this.shapes = GridUtil.getSquareGrid(this.totalX, this.totalY, this.scale);
     this.hexPoints = GridUtil.getPolygonPoints(360, 4);
 

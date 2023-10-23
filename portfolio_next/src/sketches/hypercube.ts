@@ -68,8 +68,10 @@ export class Hypercube implements Sketch {
     ],
   ];
 
-  private readonly currentRotations: RotationGenerator[] = [
+  private currentRotations: RotationGenerator[] = [
     sample(this.generators3d),
+    sample(this.generators3d),
+    sample(this.generators4d),
     sample(this.generators4d),
   ];
 
@@ -78,7 +80,9 @@ export class Hypercube implements Sketch {
   preload(): void {}
 
   setup() {
-    this.p.createCanvas(this.p.windowWidth, this.p.windowHeight, this.p.WEBGL);
+    const renderer: any = this.p.createCanvas(this.p.windowWidth, this.p.windowHeight, this.p.WEBGL);
+    renderer.drawingContext.disable(renderer.drawingContext.DEPTH_TEST);
+
     this.p.colorMode(this.p.HSB);
     this.p.ortho(
       -window.innerWidth,
@@ -115,11 +119,6 @@ export class Hypercube implements Sketch {
   }
 
   draw() {
-    this.ctx = this.canvas.getContext('webgl');
-    if (this.ctx) {
-      this.ctx.disable(this.ctx.DEPTH_TEST);
-    }
-  
     this.p.background(0);
     this.p.rotateX(35.264);
     this.p.rotateY(-this.p.QUARTER_PI);
@@ -175,7 +174,7 @@ export class Hypercube implements Sketch {
       ),
     );
 
-    this.angle += 0.01;
+    this.angle += 0.005;
     this.colorAngle += 0.05;
   }
 
