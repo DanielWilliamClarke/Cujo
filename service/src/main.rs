@@ -62,7 +62,7 @@ async fn main() -> std::io::Result<()> {
 
     let pubnub_subscription = PubnubSubscription::from(PubnubConfig::from_env(), cache_regenerator);
     match pubnub_subscription.subscribe().await {
-        Ok(_) => log::info!("Pubnub subscription started! ✅"),
+        Ok(_) => log::info!("Pubnub subscription thread started! ✅"),
         Err(err) => panic!("Unable to subscribe to Pubnub ❌: {}", err),
     };
 

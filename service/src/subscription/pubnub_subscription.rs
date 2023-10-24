@@ -1,9 +1,11 @@
 use std::fmt::Display;
+use std::{thread, time};
 
 use futures::StreamExt;
 use pubnub::core::PubNubError;
-use pubnub::{Keyset, PubNubClientBuilder};
 use pubnub::dx::subscribe::Update;
+use pubnub::subscribe::Presence;
+use pubnub::{Keyset, PubNubClientBuilder};
 use serde::Deserialize;
 
 use crate::cache::CacheRegenerator;
@@ -28,15 +30,12 @@ impl Display for PubnubError {
 #[derive(Deserialize, Debug, Clone, Default)]
 #[serde(rename_all = "camelCase")]
 struct PubnubMessagePayload {
-    // entity_id: String,
     content_type: String,
-    // environment: String
 }
 
 #[derive(Deserialize, Debug, Clone, Default)]
 #[serde(rename_all = "camelCase")]
 struct PubnubMessage {
-    // topic: String,
     payload: PubnubMessagePayload,
 }
 
@@ -62,7 +61,10 @@ impl PubnubSubscription {
         }
     }
 
-    pub async fn subscribe (&self) -> Result<(), PubnubError> {
+    pub async fn subscribe(&self) -> Result<(), PubnubError> {
+        let channel_name = self.config.pubnub_channel_name.clone();
+        let cache = self.cache_regenerator.clone();
+
         let client = PubNubClientBuilder::with_reqwest_transport()
             .with_keyset(Keyset {
                 subscribe_key: self.config.pubnub_subscribe_token.clone(),
@@ -74,54 +76,112 @@ impl PubnubSubscription {
 
         let client = match client {
             Ok(client) => client,
-            Err(err) => return Err(PubnubError::TransportBuildError(err))
+            Err(err) => return Err(PubnubError::TransportBuildError(err)),
         };
 
-        let channel_name = self.config.pubnub_channel_name.clone();
-
-        let subscription = client
-            .subscribe()
-            .channels([channel_name.clone()].to_vec())
-            .heartbeat(10)
-            .execute();
-
-        let subscription = match subscription {
-            Ok(subscription) => subscription,
-            Err(err) => return Err(PubnubError::TransportBuildError(err))
-        };
-   
-        let cache = self.cache_regenerator.clone();
+        log::info!("🙌 Pubnub client initialised - ✅");
 
         tokio::task::spawn(async move {
-            log::info!("⏰ Waiting for Pubnub message on channel - {}", channel_name);
+            loop {
+                log::info!("📫 Subscribing to Pubnub channel - {}", channel_name);
 
-            let mut message_stream = subscription.message_stream();
-            while let Some(update) = message_stream.next().await {
-                match update {
-                    Update::Message(message) => {
-                        log::info!("📩 Received Pubnub message on channel {} -> {:?}", channel_name, message);
+                let subscription = client
+                    .subscribe()
+                    .channels([channel_name.clone()].to_vec())
+                    .heartbeat(10)
+                    .execute();
 
-                        // Deserialize the message payload as you wish
-                        let pubnub_message = match serde_json::from_slice::<PubnubMessage>(&message.data) {
-                            Ok(message) => message,
-                            Err(err) => {
-                                log::error!("❌ Error deserialising: {:?} -> {:?}", err, message);
+                let subscription = match subscription {
+                    Ok(subscription) => subscription,
+                    Err(err) => {
+                        let thirty_seconds = time::Duration::from_secs(30);
 
-                                continue;
-                            }
-                        };
+                        log::error!(
+                            "😰 Unable to subscribe to Pubnub channel: retrying in {:?}s - {} -> {:?} ❌",
+                            thirty_seconds,
+                            channel_name,
+                            err
+                        );
 
-                        log::info!("📩 Received Pubnub message on channel {} -> {:?}", channel_name, pubnub_message);
+                        thread::sleep(thirty_seconds);
 
-                        match pubnub_message.payload.content_type.as_str() {
-                            "blogPost" => cache.regenerate_blog_cache().await,
-                            _ => cache.regenerate_cv_cache().await,
-                        };
-
-                        log::info!("🥙 Pubnub message consumed for channel {}", channel_name);
+                        continue;
                     }
-                    _ => {} // Ignore other Update variants
+                };
+
+                log::info!(
+                    "⏰ Pubnub subscription connected, wating for message on channel - {} - ✅",
+                    channel_name
+                );
+
+                let mut message_stream = subscription.message_stream();
+                while let Some(update) = message_stream.next().await {
+                    match update {
+                        Update::Presence(Presence::Leave {
+                            timestamp,
+                            channel,
+                            subscription,
+                            ..
+                        }) => {
+                            log::warn!(
+                                "💨 Pubnub subcription presence leave detected {} - Channel {}, subscription {}",
+                                timestamp,
+                                channel,
+                                subscription
+                            );
+                        }
+                        Update::Presence(Presence::Timeout {
+                            timestamp,
+                            channel,
+                            subscription,
+                            ..
+                        }) => {
+                            log::warn!(
+                                "⌛️ Pubnub subcription presence timeout detected {} - Channel {}, subscription {}",
+                                timestamp,
+                                channel,
+                                subscription
+                            );
+                        }
+                        Update::Message(message) => {
+                            log::info!("📩 Received Pubnub message on channel {}", channel_name);
+
+                            // Deserialize the message payload as you wish
+                            let pubnub_message =
+                                match serde_json::from_slice::<PubnubMessage>(&message.data) {
+                                    Ok(message) => message,
+                                    Err(err) => {
+                                        log::error!(
+                                            "❌ Error deserialising: {:?} -> {:?}",
+                                            err,
+                                            message
+                                        );
+
+                                        continue;
+                                    }
+                                };
+
+                            log::info!(
+                                "🔖 Deserialised Pubnub message on channel {} -> {:?}",
+                                channel_name,
+                                pubnub_message
+                            );
+
+                            match pubnub_message.payload.content_type.as_str() {
+                                "blogPost" => cache.regenerate_blog_cache().await,
+                                _ => cache.regenerate_cv_cache().await,
+                            };
+
+                            log::info!("🥙 Pubnub message consumed for channel {}", channel_name);
+                        }
+                        _ => {} // Ignore other Update variants
+                    }
                 }
+
+                log::warn!(
+                    "😱 Assuming Pubnub subcription has been severed: Reconnecting to {}",
+                    channel_name
+                );
             }
         });
 
