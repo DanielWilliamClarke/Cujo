@@ -1,7 +1,5 @@
 import { StyleSheet, Text, View } from '@react-pdf/renderer';
 
-import { CV } from '@Models/CVModel';
-
 export namespace Outro {
   const pdfStyles = StyleSheet.create({
     outro: {
@@ -9,7 +7,7 @@ export namespace Outro {
     },
   });
 
-  export const render = (cv: CV): JSX.Element => {
+  export const render = (): JSX.Element => {
     return (
       <View style={pdfStyles.outro}>
         <Text>References available on request.</Text>

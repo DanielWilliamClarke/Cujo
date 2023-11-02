@@ -9,12 +9,12 @@ import { Col, Row } from 'react-bootstrap';
 import { Autoplay, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-import { About as AboutModel } from '@Models/CVModel';
-import { Entry, Media } from '@Models/Includes';
+import { Media } from '@Models/Includes';
 
 import { DynamicImage } from '@Common/DynamicImage';
 import { Reveal } from '@Common/Reveal';
 import { Section } from '@Common/Section';
+import { useAppContext } from '../hooks/AppContext';
 
 const textColumnStyle = {
   display: 'flex',
@@ -30,13 +30,9 @@ const textColumnStyle = {
   },
 };
 
-type AboutProps = {
-  about: Entry<AboutModel>;
-};
+export const About: React.FC = (): JSX.Element => {
+  const { cv: { about } } = useAppContext();
 
-export const About: React.FC<AboutProps> = ({
-  about,
-}: AboutProps): JSX.Element => {
   const options = useMemo(
     () => ({
       renderNode: {

@@ -32,8 +32,6 @@ type WeightedSketchBuilder = {
   weight: number;
 };
 
-const safariBrowsers = ['ios', 'safari', 'ios-webview', 'edge-ios'];
-
 export const getSketch = (cv: CV, currentRole: Work): ((p: p5) => void) => {
   const sketches: WeightedSketchBuilder[] = [
     { builder: (p: p5) => new Conway(p), weight: 0.22 },

@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
 
 import { wrapPage } from '@Cujo/Cujo';
-import { CujoProps, fetchCujoProps } from '@Cujo/CujoISR';
+import { fetchCujoProps } from '@Cujo/CujoISR';
 
 import { BlockReverseLoading } from '@Common/BlockReverseLoading';
 
@@ -28,10 +28,8 @@ const CVExport = dynamic(() => import('@Layouts/CVExport'), {
 
 export const getStaticProps: GetStaticProps = fetchCujoProps;
 
-export default wrapPage(
-  ({ cv }: CujoProps): JSX.Element => (
-    <Suspense>
-      <CVExport cv={cv} />
-    </Suspense>
-  ),
-);
+export default wrapPage((): JSX.Element => (
+  <Suspense>
+    <CVExport />
+  </Suspense>
+));

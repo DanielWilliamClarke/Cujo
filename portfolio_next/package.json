@@ -71,6 +71,7 @@
     "@typescript-eslint/parser": "^5.42.1",
     "eslint": "8.27.0",
     "eslint-config-next": "13.0.3",
+    "eslint-plugin-unused-imports": "^3.0.0",
     "graphql": "^16.6.0",
     "graphql-tag": "^2.12.6",
     "prettier": "3.0.3",

@@ -2,10 +2,6 @@
 import dynamic from 'next/dynamic';
 import React, { Fragment, ReactNode, Suspense } from 'react';
 
-import { Post } from '@Models/BlogPost';
-import { CV as CVModel } from '@Models/CVModel';
-import { Entries } from '@Models/Includes';
-
 import { PositionProvider } from '@Hooks/PositionContext';
 
 import { BlockReverseLoading } from '@Common/BlockReverseLoading';
@@ -14,6 +10,8 @@ import { Blog } from '@Layouts/Blog';
 import { Contact } from '@Layouts/Contact';
 import { Copyright } from '@Layouts/Copyright';
 import { NavPanel } from '@Layouts/NavPanel';
+
+import { useAppContext } from './hooks/AppContext';
 
 const loading = (
   <BlockReverseLoading
@@ -39,29 +37,27 @@ const CVPreview = dynamic(() => import('@Layouts/CVPreview'), {
 });
 
 type AppProps = {
-  cv: CVModel;
-  blog: Entries<Post>;
   children?: ReactNode[];
 };
 
 export const Portfolio: React.FC<AppProps> = ({
-  cv,
-  blog,
   children = [],
 }: AppProps): JSX.Element => {
+  const { cv, blog } = useAppContext();
+
   const defaultChildren: ReactNode[] = [
-    <Blog blog={blog} key="blog" />,
+    <Blog key="blog" />,
     <Suspense key="cv">
-      <CVPreview cv={cv} />
+      <CVPreview />
     </Suspense>,
-    <Contact profiles={cv.about.entry.profiles} key="contact" />,
-    <Copyright name={cv.about.entry.name} key="copyright" />,
+    <Contact key="contact" />,
+    <Copyright key="copyright" />,
   ];
 
   return (
     <Fragment>
       <Suspense>
-        <SketchBackstretch cv={cv} />
+        <SketchBackstretch />
       </Suspense>
       <NavPanel />
       <div

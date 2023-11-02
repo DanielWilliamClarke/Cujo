@@ -5,16 +5,17 @@ import * as pdfjs from 'pdfjs-dist/legacy/build/pdf.js';
 import pdfjsWorker from 'pdfjs-dist/legacy/build/pdf.worker.entry';
 import React, { useEffect } from 'react';
 
-import { CVProps } from '@Models/CVModel';
-
 import { IDateService } from '@Services/DateService';
 
 import { CV } from '@Cv/CV';
+import { useAppContext } from '../hooks/AppContext';
 
 // This is quite dumb but works
 pdfjs.GlobalWorkerOptions.workerSrc = pdfjsWorker;
 
-const CVExport: React.FC<CVProps> = ({ cv }: CVProps): JSX.Element => {
+const CVExport: React.FC = (): JSX.Element => {
+  const { cv } = useAppContext();
+
   const dateService = useInjection(IDateService.$);
   dateService.format('DD-MM-YYYYTHH:mm:ss');
   const filename = `daniel_william_clarke_cv_${dateService.CurrentTimestamp()}.pdf`;

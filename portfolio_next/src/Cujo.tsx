@@ -1,20 +1,21 @@
 import { Provider } from 'inversify-react';
-import { withUrqlClient } from 'next-urql';
+import { NextUrqlClientConfig, withUrqlClient } from 'next-urql';
 import React from 'react';
 import { ThemeUIProvider } from 'theme-ui';
 import { useQuery } from 'urql';
 
 import { CujoProps, cujoServiceUrl } from './CujoISR';
 import { CujoQuery } from './CujoQuery';
+import { AppContextProvider } from './components/hooks/AppContext';
 import { container } from './ioc';
 import { theme } from './theme';
 
 type CujoProviderProps = {
-  children: (props: CujoProps) => JSX.Element;
+  Component: React.FC
 };
 
 const CujoProvider: React.FC<CujoProviderProps> = ({
-  children,
+  Component,
 }: CujoProviderProps): JSX.Element => {
   const [{ data, error }] = useQuery<CujoProps>({ query: CujoQuery });
 
@@ -24,16 +25,21 @@ const CujoProvider: React.FC<CujoProviderProps> = ({
 
   return (
     <Provider container={container}>
-      <ThemeUIProvider theme={theme}>{children(data)}</ThemeUIProvider>
+      <ThemeUIProvider theme={theme}>
+        <AppContextProvider cv={data.cv} blog={data.blog}>
+          <Component />
+        </AppContextProvider>
+      </ThemeUIProvider>
     </Provider>
   );
 };
 
-const buildPage = (children: (props: CujoProps) => JSX.Element): React.FC => {
-  const Cujo: React.FC = () => <CujoProvider>{children}</CujoProvider>;
+export const wrapPage = (Component: React.FC) => {
+  const urqlConfigBuilder: NextUrqlClientConfig = () => ({ url: cujoServiceUrl() });
 
-  return Cujo;
+  const wrapper = withUrqlClient(urqlConfigBuilder);
+
+  const Cujo = () => <CujoProvider Component={Component} />;
+
+  return wrapper(Cujo);
 };
-
-export const wrapPage = (children: (props: CujoProps) => JSX.Element) =>
-  withUrqlClient(() => ({ url: cujoServiceUrl() }))(buildPage(children));

@@ -6,7 +6,7 @@ import React, { useEffect, useMemo } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import { Theme } from 'theme-ui';
 
-import { CVProps, Work } from '@Models/CVModel';
+import { Work } from '@Models/CVModel';
 
 import { IDateService } from '@Services/DateService';
 
@@ -17,12 +17,15 @@ import { anton } from '@Common/Font';
 import { Logo } from '@Common/Logo';
 import { ScrollIndicator } from '@Common/ScrollIndicator';
 import { centeredStyle } from '@Common/UtilComponents';
+import { useAppContext } from '../hooks/AppContext';
 
 // This stops any re-renders from creating multiple canvas'
 let rendered = false;
 
-const SketchBackstretch: React.FC<CVProps> = React.memo(
-  ({ cv }: CVProps): JSX.Element => {
+const SketchBackstretch: React.FC = React.memo(
+  (): JSX.Element => {
+    const { cv } = useAppContext();
+
     const dateService = useInjection(IDateService.$);
     dateService.format('MMMM YYYY', 'YYYY-MM-DD');
 

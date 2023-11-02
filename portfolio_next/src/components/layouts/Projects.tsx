@@ -6,7 +6,6 @@ import { Col, Container, Row } from 'react-bootstrap';
 import { ThemeUICSSObject } from 'theme-ui';
 
 import { Project } from '@Models/CVModel';
-import { Entries } from '@Models/Includes';
 
 import { DevIconName } from '@Common/DevIcon';
 import { DynamicImage } from '@Common/DynamicImage';
@@ -14,6 +13,7 @@ import { Lanyard } from '@Common/Lanyard';
 import { Reveal } from '@Common/Reveal';
 import { Section } from '@Common/Section';
 import { Line, centeredStyle } from '@Common/UtilComponents';
+import { useAppContext } from '../hooks/AppContext';
 
 const projectOverlayStyle: ThemeUICSSObject = {
   width: '100%',
@@ -29,15 +29,6 @@ const projectOverlayStyle: ThemeUICSSObject = {
   opacity: 0,
 };
 
-type ProjectsProps = {
-  projects: Entries<Project>;
-};
-
-type ProjectProps = {
-  project: Project;
-  index: number;
-};
-
 const emitClickEvent = ({ name, link }: Project) => {
   event('dc_user_event', {
     category: 'Project click',
@@ -46,9 +37,9 @@ const emitClickEvent = ({ name, link }: Project) => {
   });
 };
 
-export const Projects: React.FC<ProjectsProps> = ({
-  projects,
-}: ProjectsProps): JSX.Element => {
+export const Projects: React.FC = (): JSX.Element => {
+  const { cv: { projects } } = useAppContext();
+
   return (
     <Section id="projects" title="Projects" noSeparator>
       {projects.entries
@@ -58,6 +49,11 @@ export const Projects: React.FC<ProjectsProps> = ({
         ))}
     </Section>
   );
+};
+
+type ProjectProps = {
+  project: Project;
+  index: number;
 };
 
 const ProjectSection: React.FC<ProjectProps> = ({

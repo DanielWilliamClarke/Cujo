@@ -9,7 +9,6 @@ export type DividerProps = {
 };
 
 export const TriangleDivider: React.FC<DividerProps> = ({
-  background,
   foreground,
 }: DividerProps): JSX.Element => {
   return (

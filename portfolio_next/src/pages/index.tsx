@@ -3,7 +3,7 @@ import Head from 'next/head';
 import { Fragment, useEffect, useMemo, useState } from 'react';
 
 import { wrapPage } from '@Cujo/Cujo';
-import { CujoProps, fetchCujoProps } from '@Cujo/CujoISR';
+import { fetchCujoProps } from '@Cujo/CujoISR';
 import { Portfolio } from '@Cujo/components/App';
 
 import { Project } from '@Models/CVModel';
@@ -16,10 +16,13 @@ import { Experience } from '@Layouts/Experience';
 import { Projects } from '@Layouts/Projects';
 import { ReadingList } from '@Layouts/ReadingList';
 import { Technical } from '@Layouts/Technical';
+import { useAppContext } from '@Cujo/components/hooks/AppContext';
 
 export const getStaticProps: GetStaticProps = fetchCujoProps;
 
-export default wrapPage(({ cv, blog }: CujoProps): JSX.Element => {
+export default wrapPage((): JSX.Element => {
+  const { cv } = useAppContext();
+
   const [href, setHref] = useState('');
   useEffect(() => {
     setHref(window.location.href);
@@ -50,14 +53,14 @@ export default wrapPage(({ cv, blog }: CujoProps): JSX.Element => {
         body={cv.about.entry.label}
         hashtag="DanClarkeDevPortfolio"
       />
-      <Portfolio cv={cv} blog={blog}>
+      <Portfolio>
         {[
-          <About key="about" about={cv.about} />,
-          <Experience key="work" work={cv.work} />,
-          <Education key="education" education={cv.education} />,
-          <Technical key="skills" skills={cv.skills} />,
-          <Projects key="projects" projects={cv.projects} />,
-          <ReadingList key="readingList" readingList={cv.readingList} />,
+          <About key="about" />,
+          <Experience key="work" />,
+          <Education key="education" />,
+          <Technical key="skills" />,
+          <Projects key="projects" />,
+          <ReadingList key="readingList" />,
         ]}
       </Portfolio>
     </Fragment>

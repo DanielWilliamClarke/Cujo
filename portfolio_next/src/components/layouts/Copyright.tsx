@@ -6,18 +6,19 @@ import { Col, Container, Row } from 'react-bootstrap';
 import { IDateService } from '@Services/DateService';
 
 import { Section } from '@Common/Section';
-import {
-  Copyright as CopyrightSymbol,
-  ShortLine,
-} from '@Common/UtilComponents';
+import { Copyright as CopyrightSymbol } from '@Common/UtilComponents';
 
-type NameProps = {
-  name: string;
-};
+import { useAppContext } from '../hooks/AppContext';
 
-export const Copyright: React.FC<NameProps> = ({
-  name,
-}: NameProps): JSX.Element => {
+export const Copyright: React.FC = (): JSX.Element => {
+  const {
+    cv: {
+      about: {
+        entry: { name },
+      },
+    },
+  } = useAppContext();
+
   const dateService = useInjection(IDateService.$);
 
   return (

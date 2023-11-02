@@ -5,6 +5,7 @@ import { Fragment, useEffect, useMemo, useState } from 'react';
 
 import { wrapPage } from '@Cujo/Cujo';
 import { Portfolio } from '@Cujo/components/App';
+import { useAppContext } from '@Cujo/components/hooks/AppContext';
 
 import { Post } from '@Models/BlogPost';
 
@@ -12,12 +13,14 @@ import { SharePanel } from '@Common/SharePanel';
 
 import { BlogPost } from '@Layouts/BlogPost';
 
-import { CujoProps, fetchCujoBlogPaths, fetchCujoProps } from '../../CujoISR';
+import { fetchCujoBlogPaths, fetchCujoProps } from '../../CujoISR';
 
 export const getStaticPaths: GetStaticPaths = fetchCujoBlogPaths;
 export const getStaticProps: GetStaticProps = fetchCujoProps;
 
-export default wrapPage(({ cv, blog }: CujoProps): JSX.Element => {
+export default wrapPage((): JSX.Element => {
+  const { blog } = useAppContext();
+
   const {
     query: { pid },
   } = useRouter();
@@ -54,9 +57,7 @@ export default wrapPage(({ cv, blog }: CujoProps): JSX.Element => {
           />
         </Fragment>
       )}
-      <Portfolio cv={cv} blog={blog}>
-        {[<BlogPost id={pid as string} blog={blog} key="blogPost" />]}
-      </Portfolio>
+      <Portfolio>{[<BlogPost key="blogPost" id={pid as string} />]}</Portfolio>
     </Fragment>
   );
 });

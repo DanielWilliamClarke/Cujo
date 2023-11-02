@@ -1,7 +1,7 @@
 /** @jsxImportSource theme-ui */
 import { useInjection } from 'inversify-react';
 import { event } from 'nextjs-google-analytics';
-import React, { ChangeEvent, Suspense, useCallback, useState } from 'react';
+import React, { ChangeEvent, Suspense, useState } from 'react';
 import { Zoom } from 'react-awesome-reveal';
 import { Button, Col, Form, Row } from 'react-bootstrap';
 
@@ -15,13 +15,17 @@ import { DevIconName } from '@Common/DevIcon';
 import { Section } from '@Common/Section';
 import { LongLine, centeredStyle } from '@Common/UtilComponents';
 
-type ContactProps = {
-  profiles: Profile[];
-};
+import { useAppContext } from '../hooks/AppContext';
 
-export const Contact: React.FC<ContactProps> = ({
-  profiles,
-}: ContactProps): JSX.Element => {
+export const Contact: React.FC = (): JSX.Element => {
+  const {
+    cv: {
+      about: {
+        entry: { profiles },
+      },
+    },
+  } = useAppContext();
+
   const contactService = useInjection(IContactService.$);
   const [status, setStatus] = useState<string | undefined>(undefined);
   const { even } = usePositionContext();

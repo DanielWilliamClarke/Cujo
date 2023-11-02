@@ -9,8 +9,7 @@ import { Col, Row } from 'react-bootstrap';
 import { Theme } from 'theme-ui';
 import { debounce } from 'ts-debounce';
 
-import { Skill, Skills } from '@Models/CVModel';
-import { Entry } from '@Models/Includes';
+import { Skill } from '@Models/CVModel';
 
 import { usePositionContext } from '@Hooks/PositionContext';
 
@@ -18,10 +17,7 @@ import { DevIconName } from '@Common/DevIcon';
 import { ProgressGauge } from '@Common/ProgressGauge';
 import { Section } from '@Common/Section';
 import { Line, centeredStyle } from '@Common/UtilComponents';
-
-type TechnicalProps = {
-  skills: Entry<Skills>;
-};
+import { useAppContext } from '../hooks/AppContext';
 
 type SkillsProps = {
   summary: Document;
@@ -37,12 +33,11 @@ const emitSearchEvent = debounce((label: string) => {
   });
 }, 300);
 
-export const Technical: React.FC<TechnicalProps> = ({
-  skills,
-}: TechnicalProps): JSX.Element => {
-  const [search, setSearch] = useState('');
-
+export const Technical: React.FC = (): JSX.Element => {
+  const { cv: { skills } } = useAppContext();
   const { even } = usePositionContext();
+
+  const [search, setSearch] = useState('');
 
   const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     emitSearchEvent(e.target.value);

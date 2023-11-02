@@ -9,7 +9,7 @@ import {
 } from 'react-vertical-timeline-component';
 
 import { Education as EducationModel } from '@Models/CVModel';
-import { Entries, Media } from '@Models/Includes';
+import { Media } from '@Models/Includes';
 
 import { usePositionContext } from '@Hooks/PositionContext';
 import { useShouldAnimate } from '@Hooks/useShouldAnimate';
@@ -21,18 +21,11 @@ import { DynamicImage } from '@Common/DynamicImage';
 import { Lanyard } from '@Common/Lanyard';
 import { Section } from '@Common/Section';
 import { Dot, ShortLine, centeredStyle } from '@Common/UtilComponents';
+import { useAppContext } from '../hooks/AppContext';
 
-type EducationProps = {
-  education: Entries<EducationModel>;
-};
+export const Education: React.FC = (): JSX.Element => {
+  const { cv: { education } } = useAppContext();
 
-type InstitutionModel = {
-  institution: EducationModel;
-};
-
-export const Education: React.FC<EducationProps> = ({
-  education,
-}: EducationProps): JSX.Element => {
   const dateService = useInjection(IDateService.$);
   dateService.format('MMMM YYYY', 'YYYY-MM-DD');
 
@@ -108,6 +101,10 @@ export const Education: React.FC<EducationProps> = ({
       </VerticalTimeline>
     </Section>
   );
+};
+
+type InstitutionModel = {
+  institution: EducationModel;
 };
 
 const Institution: React.FC<InstitutionModel> = ({

@@ -8,7 +8,6 @@ import readingTime from 'reading-time';
 import { Theme } from 'theme-ui';
 
 import { Post } from '@Models/BlogPost';
-import { Entries } from '@Models/Includes';
 
 import { usePositionContext } from '@Hooks/PositionContext';
 
@@ -19,17 +18,11 @@ import { Lanyard } from '@Common/Lanyard';
 import { Reveal } from '@Common/Reveal';
 import { Section } from '@Common/Section';
 import { centeredStyle } from '@Common/UtilComponents';
+import { useAppContext } from '../hooks/AppContext';
 
-export type BlogProps = {
-  blog: Entries<Post>;
-};
+export const Blog: React.FC = (): JSX.Element => {
+  const { blog } = useAppContext();
 
-export type BlogSummaryProps = {
-  post: Post;
-  index: number;
-};
-
-export const Blog: React.FC<BlogProps> = ({ blog }: BlogProps): JSX.Element => {
   const dateService = useInjection(IDateService.$);
   dateService.format('Do MMMM YYYY HH:mm:ss');
 
@@ -66,6 +59,11 @@ export const Blog: React.FC<BlogProps> = ({ blog }: BlogProps): JSX.Element => {
       </Row>
     </Section>
   );
+};
+
+type BlogSummaryProps = {
+  post: Post;
+  index: number;
 };
 
 const BlogSummaryPanel: React.FC<BlogSummaryProps> = ({

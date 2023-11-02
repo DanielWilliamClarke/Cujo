@@ -19,10 +19,10 @@ export class Phylotaxis implements Sketch {
       ma = this.p.map(ma, -1, 1, 137.3, 137.6);
       return ma;
     },
-    (input: number): number => 137.6,
-    (input: number): number => 137.5,
-    (input: number): number => 180,
-    (input: number): number => 99.5,
+    (): number => 137.6,
+    (): number => 137.5,
+    (): number => 180,
+    (): number => 99.5,
   ];
 
   constructor(private readonly p: p5) {}

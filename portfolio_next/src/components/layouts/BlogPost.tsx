@@ -19,7 +19,7 @@ import { obsidian } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
 import readingTime from 'reading-time';
 
 import { Post } from '@Models/BlogPost';
-import { Entries, Includes, getAsset } from '@Models/Includes';
+import { Includes, getAsset } from '@Models/Includes';
 
 import { IDateService } from '@Services/DateService';
 
@@ -27,6 +27,7 @@ import { DynamicImage } from '@Common/DynamicImage';
 import { Lanyard } from '@Common/Lanyard';
 import { Section } from '@Common/Section';
 import { Line, LongLine, centeredStyle } from '@Common/UtilComponents';
+import { useAppContext } from '../hooks/AppContext';
 
 const SyntaxHighlighter = dynamic(() => import('react-syntax-highlighter'), {
   ssr: false,
@@ -34,18 +35,11 @@ const SyntaxHighlighter = dynamic(() => import('react-syntax-highlighter'), {
 
 type BlogProps = {
   id: string;
-  blog: Entries<Post>;
 };
 
-type PostProps = {
-  post: Post;
-  includes: Includes;
-};
-
-export const BlogPost: React.FC<BlogProps> = ({
-  id,
-  blog,
-}: BlogProps): JSX.Element => {
+export const BlogPost: React.FC<BlogProps> = ({ id }): JSX.Element => {
+  const { blog } = useAppContext();
+  
   const dateService = useInjection(IDateService.$);
   dateService.format('Do MMMM YYYY HH:mm:ss');
 
@@ -61,7 +55,12 @@ export const BlogPost: React.FC<BlogProps> = ({
   return <PostContent post={post} includes={blog.includes} />;
 };
 
-const PostContent: React.FC<PostProps> = ({ post, includes }: PostProps) => {
+type PostContentProps = {
+  post: Post;
+  includes: Includes;
+};
+
+const PostContent: React.FC<PostContentProps> = ({ post, includes }) => {
   const dateService = useInjection(IDateService.$);
   dateService.format('Do MMMM YYYY HH:mm');
 

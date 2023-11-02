@@ -3,14 +3,17 @@ import Head from 'next/head';
 import { Fragment, useEffect, useState } from 'react';
 
 import { wrapPage } from '@Cujo/Cujo';
-import { CujoProps, fetchCujoProps } from '@Cujo/CujoISR';
+import { fetchCujoProps } from '@Cujo/CujoISR';
 import { Portfolio } from '@Cujo/components/App';
 
 import { SharePanel } from '@Common/SharePanel';
+import { useAppContext } from '@Cujo/components/hooks/AppContext';
 
 export const getStaticProps: GetStaticProps = fetchCujoProps;
 
-export default wrapPage(({ cv, blog }: CujoProps): JSX.Element => {
+export default wrapPage((): JSX.Element => {
+  const {cv, blog} = useAppContext();
+  
   const [href, setHref] = useState('');
   useEffect(() => {
     setHref(window.location.href);
@@ -36,7 +39,7 @@ export default wrapPage(({ cv, blog }: CujoProps): JSX.Element => {
         body={cv.about.entry.label}
         hashtag="DanClarkeDevBlog"
       />
-      <Portfolio cv={cv} blog={blog} />
+      <Portfolio />
     </Fragment>
   );
 });

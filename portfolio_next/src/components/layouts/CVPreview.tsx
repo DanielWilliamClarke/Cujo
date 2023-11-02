@@ -7,7 +7,6 @@ import pdfjsWorker from 'pdfjs-dist/legacy/build/pdf.worker.entry';
 import React, { useCallback } from 'react';
 import { Col, Row } from 'react-bootstrap';
 
-import { CVProps } from '@Models/CVModel';
 
 import { IDateService } from '@Services/DateService';
 
@@ -16,11 +15,14 @@ import { CV } from '@Cv/CV';
 import { Reveal } from '@Common/Reveal';
 import { Section } from '@Common/Section';
 import { centeredStyle } from '@Common/UtilComponents';
+import { useAppContext } from '../hooks/AppContext';
 
 // This is quite dumb but works
 pdfjs.GlobalWorkerOptions.workerSrc = pdfjsWorker;
 
-const CVPreview: React.FC<CVProps> = ({ cv }: CVProps): JSX.Element => {
+const CVPreview: React.FC = (): JSX.Element => {
+  const { cv } = useAppContext();
+
   const dateService = useInjection(IDateService.$);
 
   const renderPDF = useCallback(

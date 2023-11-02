@@ -4,12 +4,12 @@ import { Autoplay, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import { Book, BookProgress } from '@Models/CVModel';
-import { Entries } from '@Models/Includes';
 
 import { usePositionContext } from '@Hooks/PositionContext';
 
 import { DynamicImage } from '@Common/DynamicImage';
 import { Section } from '@Common/Section';
+import { useAppContext } from '../hooks/AppContext';
 
 const props = {
   slidesPerView: 1,
@@ -43,13 +43,9 @@ const progressMapping: Record<BookProgress, string> = {
   [BookProgress.COMPLETED]: 'Finished 🙌',
 };
 
-type ReadingListProps = {
-  readingList: Entries<Book>;
-};
+export const ReadingList: React.FC = () => {
+  const { cv: { readingList } } = useAppContext();
 
-export const ReadingList: React.FC<ReadingListProps> = ({
-  readingList,
-}: ReadingListProps) => {
   const booksByProgress = readingList.entries.reduce(
     (acc, book: Book) => {
       if (!acc[book.progress]) {
