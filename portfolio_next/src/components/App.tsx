@@ -11,8 +11,6 @@ import { Contact } from '@Layouts/Contact';
 import { Copyright } from '@Layouts/Copyright';
 import { NavPanel } from '@Layouts/NavPanel';
 
-import { useAppContext } from './hooks/AppContext';
-
 const loading = (
   <BlockReverseLoading
     sx={{
@@ -43,7 +41,6 @@ type AppProps = {
 export const Portfolio: React.FC<AppProps> = ({
   children = [],
 }: AppProps): JSX.Element => {
-  const { cv, blog } = useAppContext();
 
   const defaultChildren: ReactNode[] = [
     <Blog key="blog" />,
