@@ -78,7 +78,7 @@ export namespace CV {
               {Education.render(cv)}
               {Interests.render(cv)}
               <View style={pdfStyles.outro}>
-                {Outro.render(cv)}
+                {Outro.render()}
                 {Contact.render(cv)}
               </View>
             </View>
