@@ -27,6 +27,7 @@ import { DynamicImage } from '@Common/DynamicImage';
 import { Lanyard } from '@Common/Lanyard';
 import { Section } from '@Common/Section';
 import { Line, LongLine, centeredStyle } from '@Common/UtilComponents';
+
 import { useAppContext } from '../hooks/AppContext';
 
 const SyntaxHighlighter = dynamic(() => import('react-syntax-highlighter'), {
@@ -39,7 +40,7 @@ type BlogProps = {
 
 export const BlogPost: React.FC<BlogProps> = ({ id }): JSX.Element => {
   const { blog } = useAppContext();
-  
+
   const dateService = useInjection(IDateService.$);
   dateService.format('Do MMMM YYYY HH:mm:ss');
 
@@ -199,7 +200,11 @@ const PostContent: React.FC<PostContentProps> = ({ post, includes }) => {
           },
         }}
       >
-        <Col>{documentToReactComponents(post.content, options)}</Col>
+        <Col
+         className="blogPost"
+        >
+          {documentToReactComponents(post.content, options)}
+        </Col>
       </Row>
     </Section>
   );
