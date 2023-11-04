@@ -20,6 +20,14 @@ code {
     monospace;
 }
 
+// theme ui not playing ball
+.blogPost {
+  & > div:first-of-type::first-letter {
+    initial-letter: 3;
+    padding-right: 10px;
+  }
+}
+
 @media screen and (max-width: 700px) {
   .col {
     flex-basis: revert;
