@@ -20,11 +20,15 @@ code {
     monospace;
 }
 
-// theme ui not playing ball
-.blogPost {
-  & > div:first-of-type::first-letter {
-    initial-letter: 3;
-    padding-right: 10px;
+// Apply following css only on non firefox browsers
+@supports not( -moz-appearance:none ){
+  // theme ui not playing ball
+  .blogPost {
+    & > div:first-of-type::first-letter {
+      -webkit-initial-letter: 3;
+      initial-letter: 3;
+      padding-right: 10px;
+    }
   }
 }
 
