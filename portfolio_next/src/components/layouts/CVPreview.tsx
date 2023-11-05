@@ -7,14 +7,14 @@ import pdfjsWorker from 'pdfjs-dist/legacy/build/pdf.worker.entry';
 import React, { useCallback } from 'react';
 import { Col, Row } from 'react-bootstrap';
 
-
 import { IDateService } from '@Services/DateService';
 
-import { CV } from '@Cv/CV';
+import { CVPdf } from '@Cv/index';
 
 import { Reveal } from '@Common/Reveal';
 import { Section } from '@Common/Section';
 import { centeredStyle } from '@Common/UtilComponents';
+
 import { useAppContext } from '../hooks/AppContext';
 
 // This is quite dumb but works
@@ -86,7 +86,7 @@ const CVPreview: React.FC = (): JSX.Element => {
         >
           <Reveal direction="up" delay={0.2}>
             <PDFDownloadLink
-              document={CV.render(cv, dateService)}
+              document={<CVPdf cv={cv} />}
               fileName={`daniel_william_clarke_cv_${dateService.CurrentTimestamp()}.pdf`}
               onClick={() =>
                 event('dc_user_event', {

@@ -9,6 +9,7 @@ import { usePositionContext } from '@Hooks/PositionContext';
 
 import { DynamicImage } from '@Common/DynamicImage';
 import { Section } from '@Common/Section';
+
 import { useAppContext } from '../hooks/AppContext';
 
 const props = {
@@ -44,7 +45,9 @@ const progressMapping: Record<BookProgress, string> = {
 };
 
 export const ReadingList: React.FC = () => {
-  const { cv: { readingList } } = useAppContext();
+  const {
+    cv: { readingList },
+  } = useAppContext();
 
   const booksByProgress = readingList.entries.reduce(
     (acc, book: Book) => {

@@ -14,6 +14,7 @@ import { Media } from '@Models/Includes';
 import { DynamicImage } from '@Common/DynamicImage';
 import { Reveal } from '@Common/Reveal';
 import { Section } from '@Common/Section';
+
 import { useAppContext } from '../hooks/AppContext';
 
 const textColumnStyle = {
@@ -31,7 +32,9 @@ const textColumnStyle = {
 };
 
 export const About: React.FC = (): JSX.Element => {
-  const { cv: { about } } = useAppContext();
+  const {
+    cv: { about },
+  } = useAppContext();
 
   const options = useMemo(
     () => ({

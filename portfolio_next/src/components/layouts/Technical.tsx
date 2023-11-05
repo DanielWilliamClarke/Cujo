@@ -17,6 +17,7 @@ import { DevIconName } from '@Common/DevIcon';
 import { ProgressGauge } from '@Common/ProgressGauge';
 import { Section } from '@Common/Section';
 import { Line, centeredStyle } from '@Common/UtilComponents';
+
 import { useAppContext } from '../hooks/AppContext';
 
 type SkillsProps = {
@@ -34,7 +35,9 @@ const emitSearchEvent = debounce((label: string) => {
 }, 300);
 
 export const Technical: React.FC = (): JSX.Element => {
-  const { cv: { skills } } = useAppContext();
+  const {
+    cv: { skills },
+  } = useAppContext();
   const { even } = usePositionContext();
 
   const [search, setSearch] = useState('');

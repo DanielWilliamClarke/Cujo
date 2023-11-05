@@ -1,66 +1,62 @@
 import { StyleSheet, Text, View } from '@react-pdf/renderer';
+import { useInjection } from 'inversify-react';
 
-import { CV, Education as EducationModel } from '@Models/CVModel';
+import { Education as EducationModel } from '@Models/CVModel';
 
-import { DateService, IDateService } from '@Services/DateService';
+import { IDateService } from '@Services/DateService';
 
+import { useAppContext } from '../hooks/AppContext';
 import { Header } from './Header';
 
-2;
+const pdfStyles = StyleSheet.create({
+  education: {
+    fontSize: 10,
+    marginVertical: 10,
+  },
+  institution: {
+    fontSize: 12,
+  },
+  dates: {
+    color: '#999999',
+  },
+});
 
-export namespace Education {
-  const pdfStyles = StyleSheet.create({
-    education: {
-      fontSize: 10,
-      marginVertical: 10,
-    },
-    institution: {
-      fontSize: 12,
-    },
-    dates: {
-      color: '#999999',
-    },
-  });
+export const Education: React.FC = (): JSX.Element => {
+  const { cv } = useAppContext();
 
-  const dateService: IDateService = (() => {
-    const service = new DateService();
-    service.format('MMMM YYYY', 'YYYY-MM-DD');
-    return service;
-  })();
+  const dateService = useInjection(IDateService.$);
+  dateService.format('Do MMMM YYYY HH:mm');
 
-  export const render = (cv: CV): JSX.Element => {
-    return (
-      <View wrap={false}>
-        {Header.render('education')}
-        <View>
-          {cv.education.entries
-            .sort(
-              (a, b) =>
-                dateService.toUnix(b.startDate.toString()) -
-                dateService.toUnix(a.startDate.toString()),
-            )
-            .map((education: EducationModel, index: number) => (
-              <View key={index} style={pdfStyles.education}>
-                <Text style={pdfStyles.dates}>
-                  {dateService.toRange(
-                    education.startDate.toString(),
-                    education.endDate.toString(),
-                  )}
-                </Text>
-                <Text
-                  style={[
-                    pdfStyles.institution,
-                    { fontFamily: 'Helvetica-Bold' },
-                  ]}
-                >
-                  {education.area}{' '}
-                  {education.grade ? `| ${education.grade}` : ''}
-                </Text>
-                <Text>{education.institution}</Text>
-              </View>
-            ))}
-        </View>
+  return (
+    <View wrap={false}>
+      <Header header="education" />
+      <View>
+        {cv.education.entries
+          .sort(
+            (a, b) =>
+              dateService.toUnix(b.startDate.toString()) -
+              dateService.toUnix(a.startDate.toString()),
+          )
+          .map((education: EducationModel, index: number) => (
+            <View key={index} style={pdfStyles.education}>
+              <Text style={pdfStyles.dates}>
+                {dateService.toRange(
+                  education.startDate.toString(),
+                  education.endDate.toString(),
+                )}
+              </Text>
+              <Text
+                style={[
+                  pdfStyles.institution,
+                  { fontFamily: 'Helvetica-Bold' },
+                ]}
+              >
+                {education.area} {education.grade ? `| ${education.grade}` : ''}
+              </Text>
+              <Text>{education.institution}</Text>
+            </View>
+          ))}
       </View>
-    );
-  };
-}
+    </View>
+  );
+};

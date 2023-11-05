@@ -22,10 +22,13 @@ import { DynamicImage } from '@Common/DynamicImage';
 import { Lanyard } from '@Common/Lanyard';
 import { Section } from '@Common/Section';
 import { At, ShortLine, centeredStyle } from '@Common/UtilComponents';
+
 import { useAppContext } from '../hooks/AppContext';
 
 export const Experience: React.FC = (): JSX.Element => {
-  const { cv: { work } } = useAppContext();
+  const {
+    cv: { work },
+  } = useAppContext();
 
   const dateService = useInjection(IDateService.$);
   dateService.format('MMMM YYYY', 'YYYY-MM-DD');

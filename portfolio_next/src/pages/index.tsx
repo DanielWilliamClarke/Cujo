@@ -5,6 +5,7 @@ import { Fragment, useEffect, useMemo, useState } from 'react';
 import { wrapPage } from '@Cujo/Cujo';
 import { fetchCujoProps } from '@Cujo/CujoISR';
 import { Portfolio } from '@Cujo/components/App';
+import { useAppContext } from '@Cujo/components/hooks/AppContext';
 
 import { Project } from '@Models/CVModel';
 
@@ -16,7 +17,6 @@ import { Experience } from '@Layouts/Experience';
 import { Projects } from '@Layouts/Projects';
 import { ReadingList } from '@Layouts/ReadingList';
 import { Technical } from '@Layouts/Technical';
-import { useAppContext } from '@Cujo/components/hooks/AppContext';
 
 export const getStaticProps: GetStaticProps = fetchCujoProps;
 

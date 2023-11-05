@@ -9,8 +9,8 @@ import { usePositionContext } from '@Hooks/PositionContext';
 
 import { IIconService } from '@Services/IconService';
 
-import { GenericComponentProps } from './props';
 import { DynamicImage } from './DynamicImage';
+import { GenericComponentProps } from './props';
 
 type DevIconProps = GenericComponentProps & {
   icon: DevIcon;
@@ -18,7 +18,7 @@ type DevIconProps = GenericComponentProps & {
   color?: string;
   hoverColor?: string;
   textStyle?: ThemeUIStyleObject;
-  hideText?: boolean
+  hideText?: boolean;
 };
 
 export const DevIconName: React.FC<DevIconProps> = ({
@@ -28,7 +28,7 @@ export const DevIconName: React.FC<DevIconProps> = ({
   hoverColor,
   size,
   textStyle,
-  hideText = false 
+  hideText = false,
 }: DevIconProps): JSX.Element => {
   const iconService = useInjection(IIconService.$);
 
@@ -45,7 +45,7 @@ export const DevIconName: React.FC<DevIconProps> = ({
             marginX: 'auto',
           }}
         />
-      )
+      );
     }
 
     const iconStyle: ThemeUIStyleObject = {

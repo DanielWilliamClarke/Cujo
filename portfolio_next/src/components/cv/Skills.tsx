@@ -1,13 +1,15 @@
 import { Image as PdfImage, StyleSheet, Text, View } from '@react-pdf/renderer';
 
-import { CV as CVModel, Skill } from '@Models/CVModel';
+import { Skill } from '@Models/CVModel';
 import { Media } from '@Models/Includes';
+
+import { useAppContext } from '@Hooks/AppContext';
 
 import { Header } from './Header';
 
 const pdfStyles = StyleSheet.create({
   skills: {
-    marginVertical: 10,
+    marginVertical: 8,
   },
   paragraph: {
     fontSize: 10,
@@ -30,82 +32,82 @@ const pdfStyles = StyleSheet.create({
   },
 });
 
-export namespace Skills {
-  export const render = (cv: CVModel): JSX.Element => {
-    return (
-      <View wrap={false} style={pdfStyles.skills}>
-        {Header.render('skills')}
-        <View>
-          <Text style={pdfStyles.paragraph}>
-            Below are a collection of my most used skills, please view my
-            website linked above for a complete list!
-          </Text>
-        </View>
-        <View style={pdfStyles.skills}>
-          {mapSkills(cv.skills.entry.favorite)}
-        </View>
-      </View>
-    );
-  };
+export const Skills: React.FC = (): JSX.Element => {
+  const { cv } = useAppContext();
 
-  const mapSkills = (skills: Skill[]): JSX.Element[] => {
-    return skills.map((skill: Skill, index: number) => (
-      <View key={index} style={pdfStyles.skillItem}>
-        <View style={pdfStyles.skillIcon}>
-          {createDevicon(skill.icon.iconImage!)}
-        </View>
-        <View>
-          <Text
-            style={{
-              fontFamily: 'Helvetica-Bold',
-              marginTop: '5px',
-              marginBottom: '2px',
-              fontSize: 10,
-            }}
-          >
-            {skill.name.toUpperCase()}
-          </Text>
-          {createBar(skill.level)}
-        </View>
-      </View>
-    ));
-  };
-
-  const createDevicon = (iconImage: Media): JSX.Element => {
-    return (
-      <PdfImage
-        src={iconImage.file.url}
-        style={{
-          width: '10px',
-          height: '10px',
-          marginTop: '5px',
-          zIndex: '999999999',
-        }}
-      />
-    );
-  };
-
-  const createBar = (level: number): JSX.Element => {
-    return (
+  return (
+    <View wrap={false} style={pdfStyles.skills}>
+      <Header header="skills" />
       <View>
-        <View
-          style={{
-            width: 100,
-            height: 3,
-            backgroundColor: '#999999',
-            borderRadius: '100%',
-          }}
-        >
-          <View
-            style={{
-              width: level,
-              height: 3,
-              backgroundColor: '#304c89',
-              borderRadius: '100%',
-            }}
-          ></View>
-        </View>
+        <Text style={pdfStyles.paragraph}>
+          Below are a collection of my most used skills, please view my website
+          linked above for a complete list!
+        </Text>
       </View>
-    );
-  };
-}
+      <View style={pdfStyles.skills}>
+        {cv.skills.entry.favorite.map((skill: Skill, index: number) => (
+          <View key={index} style={pdfStyles.skillItem}>
+            <View style={pdfStyles.skillIcon}>
+              <DevIcon iconImage={skill.icon.iconImage!} />
+            </View>
+            <View>
+              <Text
+                style={{
+                  fontFamily: 'Helvetica-Bold',
+                  marginTop: '5px',
+                  marginBottom: '2px',
+                  fontSize: 10,
+                }}
+              >
+                {skill.name.toUpperCase()}
+              </Text>
+              <Bar level={skill.level} />
+            </View>
+          </View>
+        ))}
+      </View>
+    </View>
+  );
+};
+
+type DevIconProps = {
+  iconImage: Media;
+};
+
+const DevIcon: React.FC<DevIconProps> = ({ iconImage }): JSX.Element => (
+  <PdfImage
+    src={iconImage.file.url}
+    style={{
+      width: '10px',
+      height: '10px',
+      marginTop: '5px',
+      zIndex: '999999999',
+    }}
+  />
+);
+
+type BarProps = {
+  level: number;
+};
+
+const Bar: React.FC<BarProps> = ({ level }): JSX.Element => (
+  <View>
+    <View
+      style={{
+        width: 100,
+        height: 3,
+        backgroundColor: '#999999',
+        borderRadius: '100%',
+      }}
+    >
+      <View
+        style={{
+          width: level,
+          height: 3,
+          backgroundColor: '#304c89',
+          borderRadius: '100%',
+        }}
+      ></View>
+    </View>
+  </View>
+);
