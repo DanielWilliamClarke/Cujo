@@ -1,8 +1,8 @@
+import React, { useContext } from 'react';
 
 import { Post } from '@Cujo/model/BlogPost';
 import { CV } from '@Cujo/model/CVModel';
 import { Entries } from '@Cujo/model/Includes';
-import React, { useContext } from 'react';
 
 export const initialPositionState = {
   cv: {} as CV,
@@ -24,7 +24,5 @@ export const AppContextProvider: React.FC<AppContextProviderProps> = ({
   blog,
   children,
 }) => (
-  <AppContext.Provider value={{ cv, blog }}>
-    {children}
-  </AppContext.Provider>
+  <AppContext.Provider value={{ cv, blog }}>{children}</AppContext.Provider>
 );

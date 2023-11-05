@@ -28,8 +28,10 @@ const CVExport = dynamic(() => import('@Layouts/CVExport'), {
 
 export const getStaticProps: GetStaticProps = fetchCujoProps;
 
-export default wrapPage((): JSX.Element => (
-  <Suspense>
-    <CVExport />
-  </Suspense>
-));
+export default wrapPage(
+  (): JSX.Element => (
+    <Suspense>
+      <CVExport />
+    </Suspense>
+  ),
+);

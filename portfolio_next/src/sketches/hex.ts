@@ -159,7 +159,10 @@ export class Hex implements Sketch {
   preload(): void {}
 
   setup() {
-    const renderer: any = this.p.createCanvas(window.innerWidth, window.innerHeight);
+    const renderer: any = this.p.createCanvas(
+      window.innerWidth,
+      window.innerHeight,
+    );
     this.ctx = renderer.drawingContext;
 
     this.p.frameRate(60);

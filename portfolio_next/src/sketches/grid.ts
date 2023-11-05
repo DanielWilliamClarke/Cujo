@@ -78,7 +78,10 @@ export class Grid implements Sketch {
     this.p.frameRate(60);
     this.p.colorMode(this.p.HSB, 100);
 
-    const renderer: any = this.p.createCanvas(window.innerWidth, window.innerHeight);
+    const renderer: any = this.p.createCanvas(
+      window.innerWidth,
+      window.innerHeight,
+    );
     this.ctx = renderer.drawingContext;
 
     this.screenWidth = this.p.width = window.innerWidth;
@@ -86,7 +89,7 @@ export class Grid implements Sketch {
 
     this.totalX = Math.ceil(this.screenWidth / 2 / this.scale);
     this.totalY = Math.ceil(this.screenHeight / 2 / this.scale);
-    
+
     this.shapes = GridUtil.getSquareGrid(this.totalX, this.totalY, this.scale);
     this.hexPoints = GridUtil.getPolygonPoints(360, 4);
 

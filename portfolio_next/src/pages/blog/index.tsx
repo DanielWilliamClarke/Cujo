@@ -5,15 +5,15 @@ import { Fragment, useEffect, useState } from 'react';
 import { wrapPage } from '@Cujo/Cujo';
 import { fetchCujoProps } from '@Cujo/CujoISR';
 import { Portfolio } from '@Cujo/components/App';
+import { useAppContext } from '@Cujo/components/hooks/AppContext';
 
 import { SharePanel } from '@Common/SharePanel';
-import { useAppContext } from '@Cujo/components/hooks/AppContext';
 
 export const getStaticProps: GetStaticProps = fetchCujoProps;
 
 export default wrapPage((): JSX.Element => {
-  const {cv, blog} = useAppContext();
-  
+  const { cv, blog } = useAppContext();
+
   const [href, setHref] = useState('');
   useEffect(() => {
     setHref(window.location.href);

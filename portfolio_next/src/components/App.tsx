@@ -41,7 +41,6 @@ type AppProps = {
 export const Portfolio: React.FC<AppProps> = ({
   children = [],
 }: AppProps): JSX.Element => {
-
   const defaultChildren: ReactNode[] = [
     <Blog key="blog" />,
     <Suspense key="cv">

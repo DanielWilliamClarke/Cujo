@@ -11,7 +11,7 @@ import { container } from './ioc';
 import { theme } from './theme';
 
 type CujoProviderProps = {
-  Component: React.FC
+  Component: React.FC;
 };
 
 const CujoProvider: React.FC<CujoProviderProps> = ({
@@ -35,7 +35,9 @@ const CujoProvider: React.FC<CujoProviderProps> = ({
 };
 
 export const wrapPage = (Component: React.FC) => {
-  const urqlConfigBuilder: NextUrqlClientConfig = () => ({ url: cujoServiceUrl() });
+  const urqlConfigBuilder: NextUrqlClientConfig = () => ({
+    url: cujoServiceUrl(),
+  });
 
   const wrapper = withUrqlClient(urqlConfigBuilder);
 

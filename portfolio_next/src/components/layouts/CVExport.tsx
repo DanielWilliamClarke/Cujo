@@ -7,7 +7,7 @@ import React, { useEffect } from 'react';
 
 import { IDateService } from '@Services/DateService';
 
-import { CV } from '@Cv/CV';
+import { CVPdf } from '../cv';
 import { useAppContext } from '../hooks/AppContext';
 
 // This is quite dumb but works
@@ -30,7 +30,7 @@ const CVExport: React.FC = (): JSX.Element => {
   return (
     <PDFDownloadLink
       className="export-cv"
-      document={CV.render(cv, dateService)}
+      document={<CVPdf cv={cv} />}
       fileName={filename}
     >
       {({ url, blob }) => {

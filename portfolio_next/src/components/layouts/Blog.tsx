@@ -18,6 +18,7 @@ import { Lanyard } from '@Common/Lanyard';
 import { Reveal } from '@Common/Reveal';
 import { Section } from '@Common/Section';
 import { centeredStyle } from '@Common/UtilComponents';
+
 import { useAppContext } from '../hooks/AppContext';
 
 export const Blog: React.FC = (): JSX.Element => {

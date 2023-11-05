@@ -21,10 +21,13 @@ import { DynamicImage } from '@Common/DynamicImage';
 import { Lanyard } from '@Common/Lanyard';
 import { Section } from '@Common/Section';
 import { Dot, ShortLine, centeredStyle } from '@Common/UtilComponents';
+
 import { useAppContext } from '../hooks/AppContext';
 
 export const Education: React.FC = (): JSX.Element => {
-  const { cv: { education } } = useAppContext();
+  const {
+    cv: { education },
+  } = useAppContext();
 
   const dateService = useInjection(IDateService.$);
   dateService.format('MMMM YYYY', 'YYYY-MM-DD');

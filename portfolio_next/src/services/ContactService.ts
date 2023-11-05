@@ -29,12 +29,12 @@ export class ContactService implements IContactService {
       if (response.status === 200 && response.data.ok) {
         return 'Thanks for your message!';
       }
-        
-      return 'Your message was not sent, please try again!'
+
+      return 'Your message was not sent, please try again!';
     } catch (ex) {
       const { response } = ex as AxiosError<any>;
 
-      const [ error ] = response?.data?.errors || [];
+      const [error] = response?.data?.errors || [];
       if (!error) {
         return response?.data.error;
       }

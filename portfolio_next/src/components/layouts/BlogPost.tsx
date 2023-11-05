@@ -200,9 +200,7 @@ const PostContent: React.FC<PostContentProps> = ({ post, includes }) => {
           },
         }}
       >
-        <Col
-         className="blogPost"
-        >
+        <Col className="blogPost">
           {documentToReactComponents(post.content, options)}
         </Col>
       </Row>

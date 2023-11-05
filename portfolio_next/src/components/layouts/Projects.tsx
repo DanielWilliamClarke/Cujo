@@ -13,6 +13,7 @@ import { Lanyard } from '@Common/Lanyard';
 import { Reveal } from '@Common/Reveal';
 import { Section } from '@Common/Section';
 import { Line, centeredStyle } from '@Common/UtilComponents';
+
 import { useAppContext } from '../hooks/AppContext';
 
 const projectOverlayStyle: ThemeUICSSObject = {
@@ -38,7 +39,9 @@ const emitClickEvent = ({ name, link }: Project) => {
 };
 
 export const Projects: React.FC = (): JSX.Element => {
-  const { cv: { projects } } = useAppContext();
+  const {
+    cv: { projects },
+  } = useAppContext();
 
   return (
     <Section id="projects" title="Projects" noSeparator>
