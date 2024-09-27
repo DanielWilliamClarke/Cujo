@@ -102,9 +102,9 @@ services:
     command: [ "/bin/sh", "-c", "while true; do sleep 86400; docker restart service; done" ]
     restart: unless-stopped
 
-  ui:
+  thesauceforge-ui:
     image: dclarkious/the-sauce-forge-ui:latest
-    container_name: sf_ui
+    container_name: thesauceforge-ui
     restart: always
     depends_on:
       - reverseproxy
