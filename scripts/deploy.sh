@@ -7,4 +7,4 @@ ENVFILE=/opt/Cujo/.env
 COMPOSEFILE=$DEPLOYMENT.compose.yaml
 
 # Deploy
-docker compose --env-file $ENVFILE -f $COMPOSEFILE up $BG
+docker-compose --env-file $ENVFILE -f $COMPOSEFILE up $BG
