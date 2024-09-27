@@ -28,7 +28,7 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - certs:/etc/nginx/certs 
+      - certs:/etc/nginx/certs
       - vhost:/etc/nginx/vhost.d
       - html:/usr/share/nginx/html
       - /var/run/docker.sock:/tmp/docker.sock:ro
@@ -38,7 +38,7 @@ services:
   ssl-companion:
     image: nginxproxy/acme-companion
     container_name: ssl-companion
-    volumes_from: 
+    volumes_from:
       - reverseproxy
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
@@ -86,7 +86,6 @@ services:
       - RUST_LOG=${RUST_LOG}
       - CUJO_REVALIDATE_URL=${CUJO_REVALIDATE_URL}
       - CUJO_REVALIDATE_SECRET=${CUJO_REVALIDATE_SECRET}
-      - BLOG_HOST=${BLOG_HOST}
       - ACCESS_TOKEN=${ACCESS_TOKEN}
       - SPACE_ID=${SPACE_ID}
       - ENVIRONMENT=${ENVIRONMENT}
@@ -95,3 +94,30 @@ services:
       - PUBNUB_CHANNEL_NAME=${PUBNUB_CHANNEL_NAME}
     networks:
       - cujo
+
+  restarter:
+    image: docker:cli
+    volumes: [ "/var/run/docker.sock:/var/run/docker.sock" ]
+    command: [ "/bin/sh", "-c", "while true; do sleep 86400; docker restart service; done" ]
+    restart: unless-stopped
+
+  ui:
+    image: dclarkious/the-sauce-forge-ui:latest
+    container_name: sf_ui
+    restart: always
+    depends_on:
+      - reverseproxy
+    expose:
+      - 3002
+    environment:
+      - VIRTUAL_HOST=${SAUCE_FORGE_DOMAIN}
+      - VIRTUAL_PORT=3002
+      - LETSENCRYPT_HOST=${SAUCE_FORGE_DOMAIN}
+      - LETSENCRYPT_EMAIL=dc@${DOMAIN}
+      - SAUCE_FORGE_REVALIDATE_SECRET=${SAUCE_FORGE_REVALIDATE_SECRET}
+      - CONTENTFUL_ACCESS_TOKEN=${SAUCE_FORGE_CONTENTFUL_ACCESS_TOKEN}
+      - CONTENTFUL_SPACE_ID=${SAUCE_FORGE_CONTENTFUL_SPACE_ID}
+      - NEXT_PUBLIC_GOOGLE_EMBED_MAPS_API=${SAUCE_FORGE_NEXT_PUBLIC_GOOGLE_EMBED_MAPS_API}
+      - NEXT_PUBLIC_GA_MEASUREMENT_ID=${SAUCE_FORGE_NEXT_PUBLIC_GA_MEASUREMENT_ID}
+    networks:
+      - thesauceforge
