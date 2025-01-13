@@ -131,6 +131,7 @@ const SketchBackstretch: React.FC = React.memo((): JSX.Element => {
               </Row>
               <Row
                 sx={{
+                  paddingLeft: 10,
                   height: 20,
                 }}
               >
