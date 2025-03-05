@@ -1,5 +1,8 @@
 export type { TypeBlogPost, TypeBlogPostFields } from "./TypeBlogPost";
-export type { TypeBlogPostSection, TypeBlogPostSectionFields } from "./TypeBlogPostSection";
+export type {
+  TypeBlogPostSection,
+  TypeBlogPostSectionFields,
+} from "./TypeBlogPostSection";
 export type { TypeDevIcons, TypeDevIconsFields } from "./TypeDevIcons";
 export type { TypeEducation, TypeEducationFields } from "./TypeEducation";
 export type { TypeInterests, TypeInterestsFields } from "./TypeInterests";
