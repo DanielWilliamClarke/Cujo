@@ -1,19 +1,16 @@
-import p5 from 'p5';
-import {Sketch} from "@/sketches/index";
+import p5 from "p5";
+import { Sketch } from "@/sketches/index";
 
 class HSLA {
   constructor(
     public h: number = 255,
     public s: number = 255,
     public b: number = 255,
-    public a: number = 255,
+    public a: number = 255
   ) {}
 }
 class Cell {
-  constructor(
-    public color: HSLA = new HSLA(),
-    public phantom?: boolean,
-  ) {}
+  constructor(public color: HSLA = new HSLA(), public phantom?: boolean) {}
 }
 
 type Grid = Array<Array<Array<Cell | undefined>>>;
@@ -24,7 +21,6 @@ type Neighbours = {
 };
 
 export class Conway3D implements Sketch {
-
   private parameters = {
     chance: 0.0095,
     resolution: 10,
@@ -68,11 +64,11 @@ export class Conway3D implements Sketch {
     this.grid = this.makeGrid(this.columns, this.rows, this.depths, 0.07);
   }
 
-  reset () {
+  reset() {
     this.loop();
   }
 
-  setup () {
+  setup() {
     this.loop();
   }
 
@@ -108,7 +104,11 @@ export class Conway3D implements Sketch {
         this.p.push();
         this.p.fill(cell.color.h, cell.color.s, cell.color.b, cell.color.a);
         this.p.noStroke();
-        this.p.translate(x - this.cubeSize / 2, y - this.cubeSize / 2, z - this.cubeSize / 2);
+        this.p.translate(
+          x - this.cubeSize / 2,
+          y - this.cubeSize / 2,
+          z - this.cubeSize / 2
+        );
         this.p.box(this.boxSize, this.boxSize, this.boxSize);
         this.p.pop();
       }
@@ -134,13 +134,13 @@ export class Conway3D implements Sketch {
       }
     });
     this.grid = next;
-  };
+  }
 
-  private countNeighbours (
+  private countNeighbours(
     grid: Grid,
     x: number,
     y: number,
-    z: number,
+    z: number
   ): Neighbours {
     const neighbours: Neighbours = {
       sum: this.grid[x][y][z] != null ? -1 : 0,
@@ -168,10 +168,10 @@ export class Conway3D implements Sketch {
     }
 
     return neighbours;
-  };
+  }
 
   private iterateGrid = (
-    delegate: (col: number, row: number, dep: number) => void,
+    delegate: (col: number, row: number, dep: number) => void
   ): void => {
     for (let col = 0; col < this.columns; col++) {
       for (let row = 0; row < this.rows; row++) {
@@ -182,29 +182,29 @@ export class Conway3D implements Sketch {
     }
   };
 
-  private makeGrid (
+  private makeGrid(
     columns: number,
     rows: number,
     depths: number,
-    probability: number,
+    probability: number
   ): Grid {
-    return  new Array(columns).fill(undefined).map(() =>
+    return new Array(columns).fill(undefined).map(() =>
       new Array(rows).fill(undefined).map(() =>
         new Array(depths).fill(undefined).map(() => {
           if (Math.random() < probability) {
             return new Cell(this.randomColor());
           }
           return undefined;
-        }),
-      ),
+        })
+      )
     );
   }
 
-  private randomColor (): HSLA {
+  private randomColor(): HSLA {
     return new HSLA(this.p.random(100, 360), 90, 60, 0.8);
   }
 
-  private averageColor (colors: HSLA[]): HSLA {
+  private averageColor(colors: HSLA[]): HSLA {
     if (colors.length === 1) {
       return colors[0];
     }
@@ -217,17 +217,17 @@ export class Conway3D implements Sketch {
       colors.map((c: HSLA) => c.b).reduce((acc, b) => acc + b, 0) /
         colors.length,
       colors.map((c: HSLA) => c.a).reduce((acc, a) => acc + a, 0) /
-        colors.length,
+        colors.length
     );
-  };
+  }
 
-  private outOfBounds (index: number, min: number, max: number): boolean {
+  private outOfBounds(index: number, min: number, max: number): boolean {
     return index < min || index >= max;
   }
 
-  private allDead (): boolean {
+  private allDead(): boolean {
     return this.grid.every((row) =>
-        row.every((depth) => depth.every((cell) => cell == null || cell.phantom)),
+      row.every((depth) => depth.every((cell) => cell == null || cell.phantom))
     );
   }
 }

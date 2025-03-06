@@ -1,6 +1,6 @@
-import p5 from 'p5';
+import p5 from "p5";
 
-import { Sketch } from './index';
+import { Sketch } from "./index";
 
 // Adapted from https://codepen.io/atzedent/pen/qByYwNd
 // Integrated with p5js using https://www.youtube.com/watch?v=r5YkU5Xu4_E
@@ -15,8 +15,8 @@ export class Sealife implements Sketch {
 
   preload() {
     this.shader = this.p.loadShader(
-      'shaders/sealife.vert',
-      'shaders/sealife.frag',
+      "shaders/sealife.vert",
+      "shaders/sealife.frag"
     );
   }
 
@@ -44,16 +44,16 @@ export class Sealife implements Sketch {
     ];
     const resolution = [this.p.width, this.p.height];
 
-    this.shader.setUniform('time', t);
-    this.shader.setUniform('touch', touches);
-    this.shader.setUniform('pointerCount', 0);
-    this.shader.setUniform('resolution', resolution);
+    this.shader.setUniform("time", t);
+    this.shader.setUniform("touch", touches);
+    this.shader.setUniform("pointerCount", 0);
+    this.shader.setUniform("resolution", resolution);
 
     this.p.rect(
       -this.p.width / 2,
       -this.p.height / 2,
       this.p.width,
-      this.p.height,
+      this.p.height
     );
 
     this.xAngle += 0.001;

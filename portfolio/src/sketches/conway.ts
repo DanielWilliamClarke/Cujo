@@ -1,20 +1,20 @@
-import p5 from 'p5';
+import p5 from "p5";
 
-import { Sketch } from './index';
+import { Sketch } from "./index";
 
 class HSLA {
   constructor(
     public h: number = 255,
     public s: number = 255,
     public b: number = 255,
-    public a: number = 255,
+    public a: number = 255
   ) {}
 }
 class Cell {
   constructor(
     public color: HSLA = new HSLA(),
     public phantom?: boolean,
-    public fresh?: boolean,
+    public fresh?: boolean
   ) {}
 }
 
@@ -28,7 +28,7 @@ type Neighbours = {
 export function debounce<T extends any[], I>(
   immediate: (...args: T) => Promise<void>,
   onDebounceEnd: (...args: T) => Promise<I>,
-  ms = 0,
+  ms = 0
 ) {
   let timer: NodeJS.Timeout;
 
@@ -55,7 +55,7 @@ export function debounce<T extends any[], I>(
 export class Conway implements Sketch {
   private readonly chance = 0.0001;
 
-  private readonly resolution = 10;
+  private readonly resolution = 8;
   private readonly boxSize = this.resolution - 1;
   private rows = 0;
   private columns = 0;
@@ -90,7 +90,7 @@ export class Conway implements Sketch {
       this.rows = Math.ceil(this.p.height / this.resolution);
       this.grid = this.makeGrid(this.columns, this.rows);
     },
-    200,
+    200
   );
 
   draw() {
@@ -147,7 +147,7 @@ export class Conway implements Sketch {
   private readonly countNeighbours = (
     grid: Grid,
     x: number,
-    y: number,
+    y: number
   ): Neighbours => {
     const neighbours: Neighbours = {
       sum: 0,
@@ -173,7 +173,7 @@ export class Conway implements Sketch {
   };
 
   private readonly iterateGrid = (
-    delegate: (col: number, row: number) => void,
+    delegate: (col: number, row: number) => void
   ): void => {
     for (let col = 0; col < this.columns; col++) {
       for (let row = 0; row < this.rows; row++) {
@@ -185,7 +185,7 @@ export class Conway implements Sketch {
   private readonly makeGrid = (
     columns: number,
     rows: number,
-    empty?: boolean,
+    empty?: boolean
   ): Grid =>
     new Array(columns).fill(undefined).map(() =>
       new Array(rows).fill(undefined).map(() => {
@@ -193,7 +193,7 @@ export class Conway implements Sketch {
           return new Cell(this.randomColor(), false, true);
         }
         return undefined;
-      }),
+      })
     );
 
   private readonly randomColor = (): HSLA =>
@@ -212,7 +212,7 @@ export class Conway implements Sketch {
       colors.map((c: HSLA) => c.b).reduce((acc, b) => acc + b, 0) /
         colors.length,
       colors.map((c: HSLA) => c.a).reduce((acc, a) => acc + a, 0) /
-        colors.length,
+        colors.length
     );
   };
 }

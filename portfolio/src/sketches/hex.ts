@@ -1,13 +1,13 @@
-import p5 from 'p5';
+import p5 from "p5";
 
-import { Sketch } from './index';
+import { Sketch } from "./index";
 
 class HSLA {
   constructor(
     public h: number = 0,
     public s: number = 0,
     public b: number = 0,
-    public a: number = 1,
+    public a: number = 1
   ) {}
 
   toString() {
@@ -53,7 +53,7 @@ class HexLine {
     public color: HSLA = new HSLA(),
     public cumulativeTime: number = 0,
     public time: number = 0,
-    public targetTime: number = 0,
+    public targetTime: number = 0
   ) {
     this.reset();
   }
@@ -122,7 +122,7 @@ class HexLine {
       centerX + (this.x + x) * options.len,
       centerY + (this.y + y) * options.len,
       2,
-      2,
+      2
     );
 
     if (Math.random() < options.sparkChance) {
@@ -136,7 +136,7 @@ class HexLine {
           Math.random() * options.sparkDist * (Math.random() < 0.5 ? 1 : -1) -
           options.sparkSize / 2,
         2,
-        2,
+        2
       );
     }
   }
@@ -161,7 +161,7 @@ export class Hex implements Sketch {
   setup() {
     const renderer: any = this.p.createCanvas(
       window.innerWidth,
-      window.innerHeight,
+      window.innerHeight
     );
     this.ctx = renderer.drawingContext;
 
@@ -190,11 +190,11 @@ export class Hex implements Sketch {
   draw() {
     ++TICK;
 
-    this.ctx.globalCompositeOperation = 'source-over';
+    this.ctx.globalCompositeOperation = "source-over";
     this.ctx.shadowBlur = 0;
     this.ctx.fillStyle = `rgba(0,0,0,${options.repaintAlpha})`;
     this.ctx.fillRect(0, 0, this.screenWidth, this.screenHeight);
-    this.ctx.globalCompositeOperation = 'lighter';
+    this.ctx.globalCompositeOperation = "lighter";
 
     if (
       this.lines.length < options.count &&
@@ -204,7 +204,7 @@ export class Hex implements Sketch {
     }
 
     this.lines.forEach((line: HexLine) =>
-      line.step(this.p, this.ctx, this.centerX, this.centerY),
+      line.step(this.p, this.ctx, this.centerX, this.centerY)
     );
   }
 }

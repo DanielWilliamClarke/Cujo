@@ -1,11 +1,11 @@
-import p5 from 'p5';
+import p5 from "p5";
 
 export class Vector4D extends p5.Vector {
   constructor(
     public x: number = 0,
     public y: number = 0,
     public z: number = 0,
-    public w: number = 0,
+    public w: number = 0
   ) {
     super();
   }
@@ -71,7 +71,7 @@ export class MatrixUtils {
 
   Matmul(
     a: number[][],
-    b: number[][] | p5.Vector | Vector4D,
+    b: number[][] | p5.Vector | Vector4D
   ): number[][] | p5.Vector | Vector4D | null {
     if (b instanceof Vector4D) {
       return this.Matmulvec4(a, b);
@@ -86,7 +86,7 @@ export class MatrixUtils {
     const rowsB = b.length;
 
     if (colsA !== rowsB) {
-      console.error('Columns of A must match rows of B');
+      console.error("Columns of A must match rows of B");
       return null;
     }
 
@@ -107,12 +107,12 @@ export class MatrixUtils {
   LogMatrix(m: number[][]): void {
     const cols = m[0].length;
     const rows = m.length;
-    console.log(rows + 'x' + cols);
-    console.log('----------------');
-    let s = '';
+    console.log(rows + "x" + cols);
+    console.log("----------------");
+    let s = "";
     for (let i = 0; i < rows; i++) {
       for (let j = 0; j < cols; j++) {
-        s += m[i][j] + ' ';
+        s += m[i][j] + " ";
       }
       console.log(s);
     }

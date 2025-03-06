@@ -1,14 +1,14 @@
-import p5 from 'p5';
+import p5 from "p5";
 
-import { Sketch } from './index';
-import { Ease } from './easing';
-import { Vector4D } from './matrix_utils';
+import { Sketch } from "./index";
+import { Ease } from "./easing";
+import { Vector4D } from "./matrix_utils";
 
 class GridUtil {
   static getSquareGrid(
     totalX: number,
     totalY: number,
-    scale: number,
+    scale: number
   ): Vector4D[] {
     const vectors: Array<[number, number]> = [];
     for (let x = -totalX; x <= totalX; x++) {
@@ -80,7 +80,7 @@ export class Grid implements Sketch {
 
     const renderer: any = this.p.createCanvas(
       window.innerWidth,
-      window.innerHeight,
+      window.innerHeight
     );
     this.ctx = renderer.drawingContext;
 
@@ -95,7 +95,7 @@ export class Grid implements Sketch {
 
     this.maxDist = this.shapes.reduce(
       (max: number, { z }: Vector4D) => Math.max(z, max),
-      0,
+      0
     );
     this.size = Math.floor((this.scale * Math.sqrt(2)) / 2);
   }
@@ -108,16 +108,16 @@ export class Grid implements Sketch {
     this.t += this.timeScale;
 
     this.ctx.save();
-    this.ctx.fillStyle = 'rgba(0,0,0,0.05)';
+    this.ctx.fillStyle = "rgba(0,0,0,0.05)";
     this.ctx.fillRect(0, 0, this.screenWidth, this.screenHeight);
 
     this.ctx.translate(this.screenWidth / 2, this.screenHeight / 2);
 
-    this.ctx.lineCap = 'sqaure';
+    this.ctx.lineCap = "sqaure";
 
     this.shapes.forEach((shape: Vector4D): void => {
       const scaledT = Ease.easeInOutQuad(
-        Math.abs((this.t - shape.z / this.maxDist) % 1),
+        Math.abs((this.t - shape.z / this.maxDist) % 1)
       );
 
       const x = shape.x;
@@ -132,10 +132,10 @@ export class Grid implements Sketch {
       this.ctx.translate(-x, -y);
 
       const start = Math.floor(
-        this.p.map(scaledT, 0, 1, 0, this.hexPoints.length - 1),
+        this.p.map(scaledT, 0, 1, 0, this.hexPoints.length - 1)
       );
       const end = Math.ceil(
-        this.p.map(scaledT, 0, 1, start + 1, this.hexPoints.length - 1),
+        this.p.map(scaledT, 0, 1, start + 1, this.hexPoints.length - 1)
       );
 
       this.ctx.strokeStyle = `hsl(${360 * scaledT}, 80%, 60%)`;
@@ -144,7 +144,7 @@ export class Grid implements Sketch {
       this.ctx.beginPath();
       this.ctx.moveTo(
         this.hexPoints[start].x * this.size,
-        this.hexPoints[start].y * this.size,
+        this.hexPoints[start].y * this.size
       );
 
       Array(end - start + 1)
@@ -154,7 +154,7 @@ export class Grid implements Sketch {
           const index = end === this.hexPoints.length - 1 ? 0 : i;
           this.ctx.lineTo(
             this.hexPoints[index].x * this.size,
-            this.hexPoints[index].y * this.size,
+            this.hexPoints[index].y * this.size
           );
         });
 

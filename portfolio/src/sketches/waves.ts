@@ -1,15 +1,14 @@
+import p5 from "p5";
+import { NoiseFunction3D, createNoise3D } from "simplex-noise";
 
-import p5 from 'p5';
-import { NoiseFunction3D, createNoise3D } from 'simplex-noise';
-
-import { Sketch } from './index';
+import { Sketch } from "./index";
 
 class HSLA {
   constructor(
     public h: number = 0,
     public s: number = 0,
     public b: number = 0,
-    public a: number = 0,
+    public a: number = 0
   ) {}
 }
 
@@ -20,7 +19,7 @@ class Particle {
   constructor(
     public x: number = 0,
     public y: number = 0,
-    public color: HSLA = new HSLA(),
+    public color: HSLA = new HSLA()
   ) {}
 
   init(
@@ -28,7 +27,7 @@ class Particle {
     screenWidth: number,
     screenHeight: number,
     centerX: number,
-    centerY: number,
+    centerY: number
   ): void {
     this.x = this.pastX = screenWidth * Math.random();
     this.y = this.pastY = screenHeight * Math.random();
@@ -101,8 +100,8 @@ export class Waves implements Sketch {
   constructor(
     private readonly p: p5,
     private readonly noiseGenerator: NoiseGenerator = new NoiseGenerator(
-      createNoise3D(),
-    ),
+      createNoise3D()
+    )
   ) {
     // this.setupDatGui();
   }
@@ -128,7 +127,7 @@ export class Waves implements Sketch {
         this.screenWidth,
         this.screenHeight,
         this.centerX,
-        this.centerY,
+        this.centerY
       );
       this.particles.push(p);
     }
@@ -153,7 +152,7 @@ export class Waves implements Sketch {
     const fluff = this.p.constrain(
       this.p.map(this.p.sin(this.fluffOff), -1, 1, 0, 3),
       0.5,
-      2.5,
+      2.5
     );
     this.fluffOff += this.fluffInc;
 
@@ -166,12 +165,12 @@ export class Waves implements Sketch {
         this.noiseGenerator.getNoise(
           (particle.x / this.parameters.base) * fluff,
           (particle.y / this.parameters.base) * fluff,
-          this.zOff,
+          this.zOff
         );
 
       particle.integratePosition(
         Math.cos(angle) * this.parameters.step,
-        Math.sin(angle) * this.parameters.step,
+        Math.sin(angle) * this.parameters.step
       );
 
       if (particle.color.a < 1) {
@@ -183,13 +182,13 @@ export class Waves implements Sketch {
         particle.color.h,
         particle.color.s,
         particle.color.b,
-        particle.color.a,
+        particle.color.a
       );
       this.p.stroke(
         particle.color.h,
         particle.color.s,
         particle.color.b,
-        particle.color.a,
+        particle.color.a
       );
       this.p.line(particle.pastX, particle.pastY, particle.x, particle.y);
 
@@ -204,7 +203,7 @@ export class Waves implements Sketch {
           this.screenWidth,
           this.screenHeight,
           this.centerX,
-          this.centerY,
+          this.centerY
         );
       }
     });

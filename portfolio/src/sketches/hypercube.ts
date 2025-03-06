@@ -1,7 +1,7 @@
-import p5 from 'p5';
+import p5 from "p5";
 
-import { Sketch, sample } from './index';
-import { MatrixUtils, Vector4D } from './matrix_utils';
+import { Sketch, sample } from "./index";
+import { MatrixUtils, Vector4D } from "./matrix_utils";
 
 type RotationGenerator = (angle: number) => number[][];
 
@@ -82,7 +82,7 @@ export class Hypercube implements Sketch {
     const renderer: any = this.p.createCanvas(
       this.p.windowWidth,
       this.p.windowHeight,
-      this.p.WEBGL,
+      this.p.WEBGL
     );
     renderer.drawingContext.disable(renderer.drawingContext.DEPTH_TEST);
 
@@ -93,11 +93,11 @@ export class Hypercube implements Sketch {
       window.innerHeight,
       -window.innerHeight,
       -1000,
-      10000,
+      10000
     );
 
     // transparency ordering workaround
-    this.canvas = document.getElementById('defaultCanvas0') as any;
+    this.canvas = document.getElementById("defaultCanvas0") as any;
 
     // Generate 4D points
     for (let i = 0; i < 16; i++) {
@@ -117,7 +117,7 @@ export class Hypercube implements Sketch {
       window.innerHeight,
       -window.innerHeight,
       -1000,
-      10000,
+      10000
     );
   }
 
@@ -136,7 +136,7 @@ export class Hypercube implements Sketch {
           .reduce(
             (point: Vector4D, rotation: number[][]): Vector4D =>
               this.matrixUtils.Matmul(rotation, point) as Vector4D,
-            point,
+            point
           );
 
         // Project point
@@ -148,10 +148,10 @@ export class Hypercube implements Sketch {
         ];
         const projected = this.matrixUtils.Matmul(
           projection,
-          rotatedPoint,
+          rotatedPoint
         ) as Vector4D;
         return projected.multiply(500).To3D(this.p);
-      },
+      }
     );
 
     // Draw each cube
@@ -173,8 +173,8 @@ export class Hypercube implements Sketch {
     ].forEach((cube: p5.Vector[], index: number): void =>
       this.drawCube(
         cube,
-        this.p.map(this.p.sin(this.colorAngle + index), -1, 1, 0, 360),
-      ),
+        this.p.map(this.p.sin(this.colorAngle + index), -1, 1, 0, 360)
+      )
     );
 
     this.angle += 0.005;
@@ -205,7 +205,7 @@ export class Hypercube implements Sketch {
     start: number,
     end: number,
     offset: number = 0,
-    step: number = 2,
+    step: number = 2
   ) => {
     const result = [];
     for (let i = start; i < end; i += step) {

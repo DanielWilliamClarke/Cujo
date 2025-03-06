@@ -1,12 +1,12 @@
-import p5 from 'p5';
+import p5 from "p5";
 
-import { CV, Skill, Work } from '@Models/CVModel';
+import { CV, Skill, Work } from "@Models/CVModel";
 
-import { DateService, IDateService } from '@Services/DateService';
+import { DateService, IDateService } from "@Services/DateService";
 
-import { anton } from '@Common/Font';
+import { anton } from "@Common/Font";
 
-import { Sketch } from './index';
+import { Sketch } from "./index";
 
 type BoidsWord = {
   word: string;
@@ -27,13 +27,13 @@ export class Boids implements Sketch {
     private readonly cv: CV,
     private readonly currentRole: Work,
     private readonly dateService: IDateService = new DateService(),
-    private readonly noiseGenerator: NoiseGenerator = new NoiseGenerator(p),
+    private readonly noiseGenerator: NoiseGenerator = new NoiseGenerator(p)
   ) {
-    this.dateService.format('MMMM YYYY', 'YYYY-MM-DD');
+    this.dateService.format("MMMM YYYY", "YYYY-MM-DD");
 
     this.words = [
-      ...this.cv.about.entry.name.split(' '),
-      ...currentRole.position.split(' '),
+      ...this.cv.about.entry.name.split(" "),
+      ...currentRole.position.split(" "),
       this.currentRole.company,
       ...[
         ...this.cv.skills.entry.favorite.map((skill: Skill) => skill.name),
@@ -49,7 +49,7 @@ export class Boids implements Sketch {
   private myFont!: p5.Font;
   preload() {
     anton.className;
-    this.myFont = this.p.loadFont('./fonts/Anton-Regular.ttf');
+    this.myFont = this.p.loadFont("./fonts/Anton-Regular.ttf");
   }
 
   setup() {
@@ -84,7 +84,7 @@ export class Boids implements Sketch {
     this.p.scale(0.2);
 
     this.vehicles.forEach((v: Vehicle) =>
-      v.behaviors(this.noiseGenerator.getCoord()).update().show(),
+      v.behaviors(this.noiseGenerator.getCoord()).update().show()
     );
   }
 
@@ -92,7 +92,7 @@ export class Boids implements Sketch {
     const fontSize = this.getFontSizeTextInBounds(
       newText,
       this.p.width * 3,
-      this.p.height * 3,
+      this.p.height * 3
     );
     const bounds = this.myFont.textBounds(newText, 0, 0, fontSize) as {
       w: number;
@@ -110,7 +110,7 @@ export class Boids implements Sketch {
   private readonly getFontSizeTextInBounds = (
     text: string,
     boundsWidth: number,
-    boundsHeight: number,
+    boundsHeight: number
   ): number => {
     let fontSize = 1;
     let bounds = { w: 0, h: 0 };
@@ -126,7 +126,7 @@ export class Boids implements Sketch {
 
   private readonly migrateToNewPoints = (
     points: p5.Vector[],
-    angle: number,
+    angle: number
   ) => {
     if (this.vehicles.length === 0) {
       // FIRST TIME CREATION
@@ -139,12 +139,12 @@ export class Boids implements Sketch {
               this.p.createVector(point.x, point.y),
               this.p.createVector(
                 this.p.random(this.p.width),
-                this.p.random(this.p.height),
+                this.p.random(this.p.height)
               ),
               this.p.createVector(),
-              this.p.createVector(this.p.random(), this.p.random()),
-            ),
-        ),
+              this.p.createVector(this.p.random(), this.p.random())
+            )
+        )
       );
     } else {
       const difference = points.length - this.vehicles.length;
@@ -155,7 +155,7 @@ export class Boids implements Sketch {
           this.vehicles.splice(
             randomIndex,
             0,
-            this.vehicles[randomIndex].copy(),
+            this.vehicles[randomIndex].copy()
           );
         }
       } else if (difference < 0) {
@@ -186,7 +186,7 @@ class HSLA {
     public h: number = 255,
     public s: number = 255,
     public b: number = 255,
-    public a: number = 255,
+    public a: number = 255
   ) {}
 }
 
@@ -203,7 +203,7 @@ class Vehicle {
     private target: p5.Vector,
     private readonly position: p5.Vector,
     private readonly acceleration: p5.Vector,
-    private readonly velocity: p5.Vector,
+    private readonly velocity: p5.Vector
   ) {}
 
   copy() {
@@ -213,7 +213,7 @@ class Vehicle {
       this.target.copy(),
       this.position.copy(),
       this.acceleration.copy(),
-      this.velocity.copy(),
+      this.velocity.copy()
     );
   }
 
@@ -302,7 +302,7 @@ class NoiseGenerator {
   constructor(
     private readonly p: p5,
     private xoff: number = 0,
-    private yoff: number = 0,
+    private yoff: number = 0
   ) {}
 
   getCoord(): p5.Vector {
@@ -310,7 +310,7 @@ class NoiseGenerator {
     this.yoff += 0.00001;
     return this.p.createVector(
       this.p.noise(this.xoff) * this.p.width,
-      this.p.height / 2 + this.p.sin(this.yoff) * (this.p.height / 4),
+      this.p.height / 2 + this.p.sin(this.yoff) * (this.p.height / 4)
     );
   }
 }

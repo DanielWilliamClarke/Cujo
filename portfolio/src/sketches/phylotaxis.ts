@@ -1,6 +1,6 @@
-import p5 from 'p5';
+import p5 from "p5";
 
-import { Sketch, sample } from './index';
+import { Sketch, sample } from "./index";
 
 export class Phylotaxis implements Sketch {
   private n = 0;

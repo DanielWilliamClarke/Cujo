@@ -1,17 +1,17 @@
-import p5 from 'p5';
-import weighted from 'weighted';
+import p5 from "p5";
+import weighted from "weighted";
 
-import { Conway3D } from "./conway_3d"
-import { Boids } from './boids';
-import { Boxes } from './boxes';
-import { Conway } from './conway';
-import { Grid } from './grid';
-import { Hex } from './hex';
-import { Hypercube } from './hypercube';
-import { pauseableSketch } from './pauseable_sketch';
-import { Phylotaxis } from './phylotaxis';
-import { Sealife } from './sealife';
-import { Waves } from './waves';
+import { Conway3D } from "./conway_3d";
+import { Boids } from "./boids";
+import { Boxes } from "./boxes";
+import { Conway } from "./conway";
+import { Grid } from "./grid";
+import { Hex } from "./hex";
+import { Hypercube } from "./hypercube";
+import { pauseableSketch } from "./pauseable_sketch";
+import { Phylotaxis } from "./phylotaxis";
+import { Sealife } from "./sealife";
+import { Waves } from "./waves";
 
 export const sample = <T>(array: T[]): T => {
   return array[Math.floor(Math.random() * array.length)];
