@@ -32,7 +32,7 @@ class Particle {
     this.x = this.pastX = screenWidth * Math.random();
     this.y = this.pastY = screenHeight * Math.random();
     this.color.h =
-      Math.atan2(this.y - centerY, this.x - centerX) * (180 / Math.PI) + 50;
+      Math.sin( this.x - centerX) * (180 / Math.PI) + 100;
     this.color.s = 100;
     this.color.b = 100;
     this.color.a = 0.95;
@@ -53,7 +53,7 @@ class NoiseGenerator {
   constructor(private noise3D: NoiseFunction3D) {}
 
   getNoise(x: number, y: number, z: number): number {
-    const octaves = 12;
+    const octaves = 3;
     const fallout = 0.3;
     let amp = 1;
     let f = 1;
@@ -94,17 +94,13 @@ export class Waves implements Sketch {
   private readonly parameters = {
     base: 200,
     step: 9,
-    bearing: 14,
+    bearing: 10,
   };
 
   constructor(
     private readonly p: p5,
-    private readonly noiseGenerator: NoiseGenerator = new NoiseGenerator(
-      createNoise3D()
-    )
-  ) {
-    // this.setupDatGui();
-  }
+    private readonly noiseGenerator: NoiseGenerator = new NoiseGenerator(createNoise3D())
+  ) {}
 
   preload(): void {}
 
