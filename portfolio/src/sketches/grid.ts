@@ -91,7 +91,7 @@ export class Grid implements Sketch {
     this.totalY = Math.ceil(this.screenHeight / 2 / this.scale);
 
     this.shapes = GridUtil.getSquareGrid(this.totalX, this.totalY, this.scale);
-    this.hexPoints = GridUtil.getPolygonPoints(360, 6);
+    this.hexPoints = GridUtil.getPolygonPoints(360, 5);
 
     this.maxDist = this.shapes.reduce(
       (max: number, { z }: Vector4D) => Math.max(z, max),
@@ -127,7 +127,7 @@ export class Grid implements Sketch {
 
       this.p.scale(i * 0.5);
       // this.ctx.translate(x, y);
-      this.ctx.rotate(-33);
+      this.ctx.rotate(-31);
       this.ctx.translate(-x, -y);
 
       const start = Math.floor(
