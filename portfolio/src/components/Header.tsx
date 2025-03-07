@@ -1,7 +1,13 @@
 import { getAbout } from "@/lib/caches/about";
-import { SketchHeader } from "@/components/SketchHeader";
+
 import { buildImageUri } from "@/lib/image";
 import Image from "next/image";
+import dynamic from "next/dynamic";
+
+const SketchHeader = dynamic(() => import('@/components/SketchHeader'), {
+    ssr: false
+})
+
 
 export default async function Header() {
   const about = await getAbout();

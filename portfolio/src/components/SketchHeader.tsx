@@ -7,7 +7,7 @@ import React, { useMemo, useEffect, createRef } from "react";
 // This stops any re-renders from creating multiple canvas'
 let rendered = false;
 
-export const SketchHeader: React.FC = () => {
+const SketchHeader: React.FC = () => {
   const p5Ref = useMemo(() => createRef<any>(), []);
 
   useEffect(() => {
@@ -19,3 +19,5 @@ export const SketchHeader: React.FC = () => {
 
   return <div ref={p5Ref} className="w-full h-full" />;
 };
+
+export default SketchHeader;

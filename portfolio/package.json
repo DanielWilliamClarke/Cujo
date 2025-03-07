@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-    "dev": "pnpm clear-cache && next dev",
+    "dev": "source .env && pnpm clear-cache && next dev",
     "build": "next build",
     "start": "NODE_OPTIONS='-r newrelic' next start",
     "lint": "next lint",

@@ -20,15 +20,15 @@ let TICK = 0;
 const edges = 6;
 
 const options = {
-  len: 25,
-  count: 50,
+  len: 50,
+  count: 40,
   baseTime: 10,
   addedTime: 10,
   dieChance: 0.05,
-  spawnChance: 2,
+  spawnChance: 4,
   sparkChance: 0.05,
   sparkDist: 10,
-  sparkSize: 2,
+  sparkSize: 10,
   color: new HSLA(),
   baseLight: 35,
   addedLight: 10, // [50-10,50+10]
@@ -36,7 +36,7 @@ const options = {
   baseLightInputMultiplier: 0.01,
   addedLightInputMultiplier: 0.01,
   repaintAlpha: 0.05,
-  hueChange: 5,
+  hueChange: 10,
 };
 
 class HexLine {
