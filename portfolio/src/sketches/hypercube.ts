@@ -68,10 +68,11 @@ export class Hypercube implements Sketch {
   ];
 
   private currentRotations: RotationGenerator[] = [
-    sample(this.generators3d),
-    sample(this.generators3d),
-    sample(this.generators4d),
-    sample(this.generators4d),
+    this.generators4d[1],
+    // sample(this.generators3d),
+    // sample(this.generators3d),
+    // sample(this.generators4d),
+    // sample(this.generators4d),
   ];
 
   constructor(private readonly p: p5) {}
@@ -188,9 +189,9 @@ export class Hypercube implements Sketch {
   };
 
   private readonly drawCube = (points: p5.Vector[], hue: number): void => {
-    this.p.fill(hue, 100, 100, 0.05);
+    this.p.fill(hue, hue, hue, 0.01);
     this.p.stroke(hue, 100, 100);
-    this.p.strokeWeight(2);
+    this.p.strokeWeight(5);
 
     this.drawSquare(points[0], points[1], points[3], points[2]);
     this.drawSquare(points[0], points[1], points[5], points[4]);
