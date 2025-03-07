@@ -21,7 +21,7 @@ const edges = 6;
 
 const options = {
   len: 50,
-  count: 40,
+  count: 30,
   baseTime: 10,
   addedTime: 10,
   dieChance: 0.05,
