@@ -125,7 +125,7 @@ export class Grid implements Sketch {
 
       this.ctx.save();
 
-      this.p.scale(i * 0.5);
+      this.p.scale(i * 0.3);
       // this.ctx.translate(x, y);
       this.ctx.rotate(-31);
       this.ctx.translate(-x, -y);
