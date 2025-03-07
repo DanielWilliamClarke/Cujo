@@ -5,6 +5,7 @@ export interface TypeInterestsFields {
   name: EntryFields.Symbol;
   label: EntryFields.Symbol;
   email: EntryFields.Symbol;
+  logos: Asset[];
   phone?: EntryFields.Symbol;
   website: EntryFields.Symbol;
   about: EntryFields.RichText;

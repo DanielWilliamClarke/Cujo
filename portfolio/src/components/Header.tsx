@@ -1,5 +1,7 @@
 import { getAbout } from "@/lib/caches/about";
 import { SketchHeader } from "@/components/SketchHeader";
+import { buildImageUri } from "@/lib/image";
+import Image from "next/image";
 
 export default async function Header() {
   const about = await getAbout();
@@ -9,14 +11,26 @@ export default async function Header() {
       <SketchHeader />
       <div className="absolute top-0 w-full h-full flex justify-center items-center">
         <div
-          className="p-12 bg-gray-950 text-center w-full font-[family-name:var(--font-argentum)]"
+          className="p-8 bg-gray-950 text-center w-full font-[family-name:var(--font-argentum)]"
           style={{
-            background: `rgba(0,0,0,0.3)`,
+            background: `rgba(0,0,0,0.5)`,
             backdropFilter: "blur(3px)",
           }}
         >
           <div className="text-7xl">{about.name.toLocaleUpperCase()}</div>
           <div className="text-3xl">{about.label.toLocaleUpperCase()}</div>
+          <div className="flex justify-center gap-8 pt-4">
+            {about.logos.map((logo, index) => (
+              <div className="relative h-10 w-36" key={index}>
+                <Image
+                  src={buildImageUri(logo.fields.file?.url as string)}
+                  className="object-contain"
+                  alt={(logo.fields.description as string) ?? "Header logo"}
+                  fill
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>

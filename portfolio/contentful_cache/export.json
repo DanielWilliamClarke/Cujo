@@ -1069,7 +1069,7 @@
         "id": "interests",
         "type": "ContentType",
         "createdAt": "2022-03-31T11:09:24.984Z",
-        "updatedAt": "2022-03-31T11:21:29.972Z",
+        "updatedAt": "2025-03-07T00:01:14.197Z",
         "environment": {
           "sys": {
             "id": "master",
@@ -1077,8 +1077,8 @@
             "linkType": "Environment"
           }
         },
-        "publishedVersion": 27,
-        "publishedAt": "2022-03-31T11:21:29.972Z",
+        "publishedVersion": 29,
+        "publishedAt": "2025-03-07T00:01:14.197Z",
         "firstPublishedAt": "2022-03-31T11:09:25.181Z",
         "createdBy": {
           "sys": {
@@ -1094,8 +1094,8 @@
             "id": "1pwBZBSMGYpASsIAzVhBfr"
           }
         },
-        "publishedCounter": 14,
-        "version": 28,
+        "publishedCounter": 15,
+        "version": 30,
         "publishedBy": {
           "sys": {
             "type": "Link",
@@ -1145,6 +1145,21 @@
           ],
           "disabled": false,
           "omitted": false
+        },
+        {
+          "id": "logos",
+          "name": "Logos",
+          "type": "Array",
+          "localized": false,
+          "required": false,
+          "validations": [],
+          "disabled": false,
+          "omitted": false,
+          "items": {
+            "type": "Link",
+            "validations": [],
+            "linkType": "Asset"
+          }
         },
         {
           "id": "phone",
@@ -2236,7 +2251,7 @@
             "linkType": "Space"
           }
         },
-        "version": 28,
+        "version": 30,
         "createdAt": "2022-03-31T11:09:25.286Z",
         "createdBy": {
           "sys": {
@@ -2245,7 +2260,7 @@
             "linkType": "User"
           }
         },
-        "updatedAt": "2022-03-31T11:21:30.682Z",
+        "updatedAt": "2025-03-07T00:01:14.876Z",
         "updatedBy": {
           "sys": {
             "id": "1pwBZBSMGYpASsIAzVhBfr",
@@ -2282,6 +2297,11 @@
         {
           "fieldId": "email",
           "widgetId": "singleLine",
+          "widgetNamespace": "builtin"
+        },
+        {
+          "fieldId": "logos",
+          "widgetId": "assetLinksEditor",
           "widgetNamespace": "builtin"
         },
         {
@@ -10536,7 +10556,7 @@
         "id": "4gRyMPm0NGOWhmjJasM14N",
         "type": "Entry",
         "createdAt": "2022-03-31T11:09:31.636Z",
-        "updatedAt": "2025-03-05T21:05:09.855Z",
+        "updatedAt": "2025-03-07T00:03:24.030Z",
         "environment": {
           "sys": {
             "id": "master",
@@ -10544,8 +10564,8 @@
             "linkType": "Environment"
           }
         },
-        "publishedVersion": 672,
-        "publishedAt": "2025-01-10T10:41:32.855Z",
+        "publishedVersion": 679,
+        "publishedAt": "2025-03-07T00:03:24.030Z",
         "firstPublishedAt": "2022-03-31T12:47:19.163Z",
         "createdBy": {
           "sys": {
@@ -10561,8 +10581,8 @@
             "id": "1pwBZBSMGYpASsIAzVhBfr"
           }
         },
-        "publishedCounter": 207,
-        "version": 674,
+        "publishedCounter": 209,
+        "version": 680,
         "publishedBy": {
           "sys": {
             "type": "Link",
@@ -10572,7 +10592,7 @@
         },
         "fieldStatus": {
           "*": {
-            "en-US": "changed"
+            "en-US": "published"
           }
         },
         "automationTags": [],
@@ -10587,13 +10607,31 @@
       },
       "fields": {
         "name": {
-          "en-US": "Daniel William Clarke"
+          "en-US": "Dan Clarke"
         },
         "label": {
-          "en-US": "Senior software engineer"
+          "en-US": "Senior Software Engineer"
         },
         "email": {
           "en-US": "clarkit@gmail.com"
+        },
+        "logos": {
+          "en-US": [
+            {
+              "sys": {
+                "type": "Link",
+                "linkType": "Asset",
+                "id": "7Aiq8rv0oTn042hEQhFk4N"
+              }
+            },
+            {
+              "sys": {
+                "type": "Link",
+                "linkType": "Asset",
+                "id": "2lTP72ooyBv6SOd8pFiAA3"
+              }
+            }
+          ]
         },
         "phone": {
           "en-US": "07411259330"
@@ -10603,34 +10641,34 @@
         },
         "about": {
           "en-US": {
-            "nodeType": "document",
             "data": {},
             "content": [
               {
-                "nodeType": "paragraph",
                 "data": {},
                 "content": [
                   {
-                    "nodeType": "text",
-                    "value": "I’m a Senior Full-Stack Software Engineer with over a decade of experience, and a fledgling business owner, combining technical expertise and leadership skills honed while guiding teams of up to seven engineers. I specialize in cloud computing, microservices, asynchronous architecture, and observability. My career has spanned a diverse range of projects, from cloud-based software and engaging games to intricate simulations and user-centric websites. Currently, I hold the position of Senior Software Engineer at Loveholidays, the fastest-growing travel agency in the UK, applying my skills to a new and exciting domain 🛫. ",
+                    "data": {},
                     "marks": [],
-                    "data": {}
+                    "value": "I’m a Senior Full-Stack Software Engineer with over a decade of experience, and a fledgling business owner, combining technical expertise and leadership skills honed while guiding teams of up to seven engineers. I specialize in cloud computing, microservices, asynchronous architecture, and observability. My career has spanned a diverse range of projects, from cloud-based software and engaging games to intricate simulations and user-centric websites. Currently, I hold the position of Senior Software Engineer at Loveholidays, the fastest-growing travel agency in the UK, applying my skills to a new and exciting domain 🛫. ",
+                    "nodeType": "text"
                   }
-                ]
+                ],
+                "nodeType": "paragraph"
               },
               {
-                "nodeType": "paragraph",
                 "data": {},
                 "content": [
                   {
-                    "nodeType": "text",
-                    "value": "Alongside my full-time role, I run The Sauce Forge, my side business where I channel my passion for crafting unique hot sauces and related products. I’ve built the entire brand from the ground up, utilizing Next.js, Contentful, and Stripe to power a seamless website and checkout experience. Navigating business setup, FSA regulations, and crafting a product line from homegrown ingredients is a challenge I embrace with enthusiasm. My journey with The Sauce Forge is not just about creating great flavors, but also about applying my engineering skills to build a customer-centric, innovative brand.",
+                    "data": {},
                     "marks": [],
-                    "data": {}
+                    "value": "Alongside my full-time role, I run The Sauce Forge, my side business where I channel my passion for crafting unique hot sauces and related products. I’ve built the entire brand from the ground up, utilizing Next.js, Contentful, and Stripe to power a seamless website and checkout experience. Navigating business setup, FSA regulations, and crafting a product line from homegrown ingredients is a challenge I embrace with enthusiasm. My journey with The Sauce Forge is not just about creating great flavors, but also about applying my engineering skills to build a customer-centric, innovative brand.",
+                    "nodeType": "text"
                   }
-                ]
+                ],
+                "nodeType": "paragraph"
               }
-            ]
+            ],
+            "nodeType": "document"
           }
         },
         "interests": {
@@ -36951,6 +36989,86 @@
             },
             "fileName": "Logo_hat (1).png",
             "contentType": "image/png"
+          }
+        }
+      }
+    },
+    {
+      "metadata": {
+        "tags": [],
+        "concepts": []
+      },
+      "sys": {
+        "space": {
+          "sys": {
+            "type": "Link",
+            "linkType": "Space",
+            "id": "ouj3yibxj44w"
+          }
+        },
+        "id": "2lTP72ooyBv6SOd8pFiAA3",
+        "type": "Asset",
+        "createdAt": "2025-03-07T00:02:56.120Z",
+        "updatedAt": "2025-03-07T00:03:17.424Z",
+        "environment": {
+          "sys": {
+            "id": "master",
+            "type": "Link",
+            "linkType": "Environment"
+          }
+        },
+        "publishedVersion": 4,
+        "publishedAt": "2025-03-07T00:03:17.424Z",
+        "firstPublishedAt": "2025-03-07T00:03:17.424Z",
+        "createdBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "1pwBZBSMGYpASsIAzVhBfr"
+          }
+        },
+        "updatedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "1pwBZBSMGYpASsIAzVhBfr"
+          }
+        },
+        "publishedCounter": 1,
+        "version": 5,
+        "publishedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "1pwBZBSMGYpASsIAzVhBfr"
+          }
+        },
+        "fieldStatus": {
+          "*": {
+            "en-US": "published"
+          }
+        },
+        "urn": "crn:contentful:::content:spaces/ouj3yibxj44w/environments/master/assets/2lTP72ooyBv6SOd8pFiAA3"
+      },
+      "fields": {
+        "title": {
+          "en-US": "tsf svg"
+        },
+        "description": {
+          "en-US": ""
+        },
+        "file": {
+          "en-US": {
+            "url": "//images.ctfassets.net/ouj3yibxj44w/2lTP72ooyBv6SOd8pFiAA3/af1a534ba0f0f3685143d671e6ba822f/The_sauce_forge_text.svg",
+            "details": {
+              "size": 77325,
+              "image": {
+                "width": 1791,
+                "height": 409
+              }
+            },
+            "fileName": "The sauce forge text.svg",
+            "contentType": "image/svg+xml"
           }
         }
       }
