@@ -33,16 +33,16 @@ type WeightedSketchBuilder = {
 
 export const getSketch = (): ((p: p5) => void) => {
   const sketches: WeightedSketchBuilder[] = [
-    { builder: (p: p5) => new Conway(p), weight: 0.22 },
+    // { builder: (p: p5) => new Conway(p), weight: 0.22 },
     // { builder: (p: p5) => new Conway3D(p), weight: 0.22 },
     // { builder: (p: p5) => new Sealife(p), weight: 0.21 },
-    { builder: (p: p5) => new Hypercube(p), weight: 0.21 },
+    //{ builder: (p: p5) => new Hypercube(p), weight: 0.21 },
     { builder: (p: p5) => new Grid(p), weight: 0.21 },
-    { builder: (p: p5) => new Phylotaxis(p), weight: 0.05 },
-    { builder: (p: p5) => new Hex(p), weight: 0.05 },
+   // { builder: (p: p5) => new Phylotaxis(p), weight: 0.05 },
+   // { builder: (p: p5) => new Hex(p), weight: 0.05 },
     // { builder: (p: p5) => new Boids(p, cv, currentRole), weight: 0.05 },
-    { builder: (p: p5) => new Boxes(p), weight: 0.2 },
-    { builder: (p: p5) => new Waves(p), weight: 0.01 },
+   // { builder: (p: p5) => new Boxes(p), weight: 0.2 },
+   // { builder: (p: p5) => new Waves(p), weight: 0.01 },
   ];
 
   const weights = sketches.map(({ weight }) => weight);

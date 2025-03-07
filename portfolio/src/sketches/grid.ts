@@ -8,7 +8,7 @@ class GridUtil {
   static getSquareGrid(
     totalX: number,
     totalY: number,
-    scale: number
+    scale: number,
   ): Vector4D[] {
     const vectors: Array<[number, number]> = [];
     for (let x = -totalX; x <= totalX; x++) {
@@ -61,7 +61,7 @@ export class Grid implements Sketch {
   private readonly scale = 150;
   private totalX = 0;
   private totalY = 0;
-  private readonly lineWidth = 10;
+  private readonly lineWidth = 12;
 
   private shapes: Vector4D[] = [];
   private hexPoints: p5.Vector[] = [];
@@ -91,7 +91,7 @@ export class Grid implements Sketch {
     this.totalY = Math.ceil(this.screenHeight / 2 / this.scale);
 
     this.shapes = GridUtil.getSquareGrid(this.totalX, this.totalY, this.scale);
-    this.hexPoints = GridUtil.getPolygonPoints(360, 4);
+    this.hexPoints = GridUtil.getPolygonPoints(360, 6);
 
     this.maxDist = this.shapes.reduce(
       (max: number, { z }: Vector4D) => Math.max(z, max),
@@ -113,9 +113,7 @@ export class Grid implements Sketch {
 
     this.ctx.translate(this.screenWidth / 2, this.screenHeight / 2);
 
-    this.ctx.lineCap = "sqaure";
-
-    this.shapes.forEach((shape: Vector4D): void => {
+    this.shapes.forEach((shape: Vector4D, i): void => {
       const scaledT = Ease.easeInOutQuad(
         Math.abs((this.t - shape.z / this.maxDist) % 1)
       );
@@ -127,8 +125,9 @@ export class Grid implements Sketch {
 
       this.ctx.save();
 
-      this.ctx.translate(x, y);
-      this.ctx.rotate(Math.PI / 2);
+      this.p.scale(i * 0.5);
+      // this.ctx.translate(x, y);
+      this.ctx.rotate(-33);
       this.ctx.translate(-x, -y);
 
       const start = Math.floor(
@@ -157,6 +156,7 @@ export class Grid implements Sketch {
             this.hexPoints[index].y * this.size
           );
         });
+
 
       this.ctx.stroke();
       this.ctx.restore();

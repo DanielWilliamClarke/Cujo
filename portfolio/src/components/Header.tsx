@@ -11,10 +11,10 @@ export default async function Header() {
       <SketchHeader />
       <div className="absolute top-0 w-full h-full flex justify-center items-center">
         <div
-          className="p-8 bg-gray-950 text-center w-full font-[family-name:var(--font-argentum)]"
+          className="flex flex-col justify-center w-full h-full bg-gray-950 text-center p-8 font-[family-name:var(--font-argentum)]"
           style={{
-            background: `rgba(0,0,0,0.5)`,
-            backdropFilter: "blur(3px)",
+            background: `rgba(0,0,0,0.2)`,
+            backdropFilter: "blur(2px) saturate(300%)",
           }}
         >
           <div className="text-7xl">{about.name.toLocaleUpperCase()}</div>
