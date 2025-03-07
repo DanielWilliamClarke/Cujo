@@ -178,7 +178,7 @@ export class Hypercube implements Sketch {
       )
     );
 
-    this.angle += 0.005;
+    this.angle += 0.02;
     this.colorAngle += 0.05;
   }
 
