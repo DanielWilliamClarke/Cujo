@@ -31,8 +31,7 @@ class Particle {
   ): void {
     this.x = this.pastX = screenWidth * Math.random();
     this.y = this.pastY = screenHeight * Math.random();
-    this.color.h =
-      Math.sin( this.x - centerX) * (180 / Math.PI) + 100;
+    this.color.h = Math.sin(this.x - centerX) * (180 / Math.PI) + 100;
     this.color.s = 100;
     this.color.b = 100;
     this.color.a = 0.95;
@@ -99,7 +98,9 @@ export class Waves implements Sketch {
 
   constructor(
     private readonly p: p5,
-    private readonly noiseGenerator: NoiseGenerator = new NoiseGenerator(createNoise3D())
+    private readonly noiseGenerator: NoiseGenerator = new NoiseGenerator(
+      createNoise3D()
+    )
   ) {}
 
   preload(): void {}

@@ -8,7 +8,7 @@ class GridUtil {
   static getSquareGrid(
     totalX: number,
     totalY: number,
-    scale: number,
+    scale: number
   ): Vector4D[] {
     const vectors: Array<[number, number]> = [];
     for (let x = -totalX; x <= totalX; x++) {
@@ -156,7 +156,6 @@ export class Grid implements Sketch {
             this.hexPoints[index].y * this.size
           );
         });
-
 
       this.ctx.stroke();
       this.ctx.restore();
