@@ -8,13 +8,14 @@ import {
 import { client } from "@/lib/contentful_client";
 
 export const getExperience = unstable_cache(
-  async (): Promise<TypeWorkFields> => {
+  async (): Promise<TypeWorkFields[]> => {
     const entries = await client.getEntries<TypeWork>({
       content_type: "work",
       include: 5,
+      order: "-fields.startDate",
     });
-    return entries.items[0].fields;
+    return entries.items.map(({ fields }) => fields);
   },
-  ["about"],
-  { tags: ["about"] }
+  ["work"],
+  { tags: ["work"] }
 );

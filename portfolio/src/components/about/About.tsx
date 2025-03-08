@@ -6,6 +6,7 @@ import {
   documentToReactComponents,
 } from "@contentful/rich-text-react-renderer";
 import { ImageGrid } from "@/components/about/ImageGrid";
+import { SmallHeader } from "@/components/header/SmallHeader";
 
 const options = {
   renderNode: {
@@ -33,13 +34,9 @@ export default async function About() {
         <ImageGrid images={images} />
       </div>
       <div className="md:w-2/3 gap-8 pt-8">
-        <div
-          className="text-3xl w-1/2 mb-8 font-[family-name:var(--font-argentum)]
-             bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500
-              bg-[length:100%_5px] bg-no-repeat bg-bottom"
-        >
+        <SmallHeader className="text-3xl w-1/2" text="Experience">
           About Me
-        </div>
+        </SmallHeader>
         <div className="rounded-xl bg-gray-900 p-8 flex flex-col gap-y-4">
           <div className="flex flex-col gap-y-4">
             {documentToReactComponents(about, statementOptions)}
