@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import Header from "@/components/Header";
+import Header from "@/components/header/Header";
+import { ReactNode } from "react";
 
 const argentum = localFont({
   src: "./fonts/argentum-sans.black.woff",
@@ -17,7 +18,7 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) {
   return (
     <html lang="en">

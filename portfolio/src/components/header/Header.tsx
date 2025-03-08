@@ -4,7 +4,7 @@ import { buildImageUri } from "@/lib/image";
 import Image from "next/image";
 import dynamic from "next/dynamic";
 
-const SketchHeader = dynamic(() => import("@/components/SketchHeader"), {
+const SketchHeader = dynamic(() => import("@/components/header/SketchHeader"), {
   ssr: false,
 });
 
@@ -12,7 +12,7 @@ export default async function Header() {
   const about = await getAbout();
 
   return (
-    <div className="w-full h-full">
+    <div className="w-full h-full min-h-screen">
       <SketchHeader />
       <div className="absolute top-0 w-full h-full flex justify-center items-center">
         <div
