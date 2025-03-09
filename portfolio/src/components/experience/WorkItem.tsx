@@ -11,7 +11,7 @@ import Image from "next/image";
 import { buildImageUri } from "@/lib/image";
 import React, { ReactNode } from "react";
 import { Block, BLOCKS, Inline } from "@contentful/rich-text-types";
-import {FadeSlide} from "@/components/ui/FadeSlide";
+import { FadeSlide } from "@/components/ui/FadeSlide";
 
 const options = {
   renderNode: {
@@ -47,7 +47,13 @@ export const WorkItem: React.FC<WorkItemProps> = ({ experience }) => {
           <p className="text-m">
             {formatDuration(experience.startDate, experience.endDate)}
           </p>
-          <p className="text-3xl">{experience.company}</p>
+          <a
+            href={experience.website}
+            target="_blank"
+            className="text-3xl hover:underline"
+          >
+            {experience.company} ↬
+          </a>
           <p className="text-2xl">{experience.position}</p>
         </SmallHeader>
 
