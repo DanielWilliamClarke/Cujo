@@ -3,6 +3,10 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Header from "@/components/header/Header";
 import { ReactNode } from "react";
+import localizedFormat from "dayjs/plugin/localizedFormat";
+import dayjs from "dayjs";
+
+dayjs.extend(localizedFormat);
 
 const argentum = localFont({
   src: "./fonts/argentum-sans.black.woff",

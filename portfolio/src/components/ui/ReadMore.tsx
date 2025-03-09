@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 
-const MINIMUM_CHARACTER_COUNT = 600;
+const MINIMUM_CHARACTER_COUNT = 400;
 
 interface ExpandableContentProps extends React.PropsWithChildren {
   shownHeight?: number[];
@@ -12,7 +12,7 @@ interface ExpandableContentProps extends React.PropsWithChildren {
   expanded?: boolean;
 }
 
-export const ExpandableContent: React.FC<ExpandableContentProps> = ({
+export const ReadMore: React.FC<ExpandableContentProps> = ({
   children,
   shownHeights = "max-h-[200px] md:max-h-[300px]",
   characterCount,

@@ -29,8 +29,8 @@ export default async function About() {
   const { about, interests, images } = await getAbout();
 
   return (
-    <div className="flex flex-col-reverse md:flex-row justify-center items-center gap-8  min-h-screen">
-      <div className="w-full md:w-1/3 pt-8">
+    <div className="flex flex-col-reverse md:flex-row justify-center items-center gap-8 min-h-screen sm:mb-20 mb-12">
+      <div className="w-full md:w-1/3 pt-8 ">
         <ImageGrid images={images} />
       </div>
       <div className="md:w-2/3 gap-8 pt-8">
