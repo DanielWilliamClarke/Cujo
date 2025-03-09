@@ -1,6 +1,6 @@
 import { getExperience } from "@/lib/caches/experience";
 import { SmallHeader } from "@/components/header/SmallHeader";
-import { WorkRail } from "@/components/experience/WorkRail";
+import { Rail } from "@/components/ui/Rail";
 import { WorkItem } from "@/components/experience/WorkItem";
 
 export default async function Experience() {
@@ -13,11 +13,11 @@ export default async function Experience() {
           My Experience
         </SmallHeader>
         <div>
-          <WorkRail>
+          <Rail>
             {experience.map((experience, index) => (
               <WorkItem key={index} experience={experience} />
             ))}
-          </WorkRail>
+          </Rail>
         </div>
       </div>
     </div>

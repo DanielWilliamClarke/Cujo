@@ -1,11 +1,11 @@
 import React, { ReactNode } from "react";
 
-type WorkRailProps = {
+type RailProps = {
   className?: string;
   children: ReactNode;
 };
 
-export const WorkRail: React.FC<WorkRailProps> = ({ className, children }) => {
+export const Rail: React.FC<RailProps> = ({ className, children }) => {
   return (
     <div className="flex justify-center pb-6">
       <div

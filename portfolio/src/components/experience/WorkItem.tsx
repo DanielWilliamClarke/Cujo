@@ -12,6 +12,7 @@ import { buildImageUri } from "@/lib/image";
 import { motion } from "framer-motion";
 import React, { ReactNode } from "react";
 import { Block, BLOCKS, Inline } from "@contentful/rich-text-types";
+import {FadeSlide} from "@/components/ui/FadeSlide";
 
 const options = {
   renderNode: {
@@ -36,12 +37,11 @@ type WorkItemProps = {
 
 export const WorkItem: React.FC<WorkItemProps> = ({ experience }) => {
   return (
-    <motion.div
+    <FadeSlide
       className="flex flex-col flex-shrink-0 w-full md:w-4/5 lg:w-1/2 pt-8"
-      initial={{ opacity: 0, y: 25 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }} // Triggers when 20% of element is visible
-      transition={{ duration: 0.8, ease: "easeOut" }}
+      y={50}
+      opacity={0}
+      duration={0.8}
     >
       <div>
         <SmallHeader className="mb-8 pb-4 gap-x-2">
@@ -81,6 +81,6 @@ export const WorkItem: React.FC<WorkItemProps> = ({ experience }) => {
           </div>
         </div>
       </div>
-    </motion.div>
+    </FadeSlide>
   );
 };
