@@ -34,7 +34,6 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "cf-content-types-generator": "^2.15.5",
-
     "contentful-cli": "^3.3.11",
     "eslint": "^8",
     "eslint-config-next": "14.2.24",

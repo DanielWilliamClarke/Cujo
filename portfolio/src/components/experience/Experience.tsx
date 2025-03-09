@@ -1,11 +1,7 @@
 import { getExperience } from "@/lib/caches/experience";
 import { SmallHeader } from "@/components/header/SmallHeader";
-import { Block, BLOCKS, Inline } from "@contentful/rich-text-types";
-import { ReactNode } from "react";
 import { WorkRail } from "@/components/experience/WorkRail";
-import {WorkItem} from "@/components/experience/WorkItem";
-
-
+import { WorkItem } from "@/components/experience/WorkItem";
 
 export default async function Experience() {
   const experience = await getExperience();
@@ -19,10 +15,7 @@ export default async function Experience() {
         <div>
           <WorkRail>
             {experience.map((experience, index) => (
-              <WorkItem
-                  key={index}
-                  experience={experience}
-              />
+              <WorkItem key={index} experience={experience} />
             ))}
           </WorkRail>
         </div>
