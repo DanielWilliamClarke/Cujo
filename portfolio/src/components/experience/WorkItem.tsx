@@ -9,7 +9,6 @@ import { documentToPlainTextString } from "@contentful/rich-text-plain-text-rend
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import Image from "next/image";
 import { buildImageUri } from "@/lib/image";
-import { motion } from "framer-motion";
 import React, { ReactNode } from "react";
 import { Block, BLOCKS, Inline } from "@contentful/rich-text-types";
 import {FadeSlide} from "@/components/ui/FadeSlide";
@@ -44,12 +43,12 @@ export const WorkItem: React.FC<WorkItemProps> = ({ experience }) => {
       duration={0.8}
     >
       <div>
-        <SmallHeader className="mb-8 pb-4 gap-x-2">
-          <div className="text-m">
+        <SmallHeader className="mb-8 pb-2 gap-x-2">
+          <p className="text-m">
             {formatDuration(experience.startDate, experience.endDate)}
-          </div>
-          <div className="text-3xl">{experience.company}</div>
-          <div className="text-2xl">{experience.position}</div>
+          </p>
+          <p className="text-3xl">{experience.company}</p>
+          <p className="text-2xl">{experience.position}</p>
         </SmallHeader>
 
         <div className="rounded bg-gray-900 p-6 flex flex-col gap-y-4">
