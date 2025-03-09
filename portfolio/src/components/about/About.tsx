@@ -34,10 +34,10 @@ export default async function About() {
         <ImageGrid images={images} />
       </div>
       <div className="md:w-2/3 gap-8 pt-8">
-        <SmallHeader className="text-3xl w-1/2" text="Experience">
+        <SmallHeader className="text-3xl w-1/2 mb-8" text="Experience">
           About Me
         </SmallHeader>
-        <div className="rounded-xl bg-gray-900 p-8 flex flex-col gap-y-4">
+        <div className="rounded bg-gray-900 p-8 flex flex-col gap-y-4">
           <div className="flex flex-col gap-y-4">
             {documentToReactComponents(about, statementOptions)}
           </div>

@@ -45,7 +45,7 @@ export const ImageGrid: React.FC<ImageGridProps> = ({ images }) => {
           >
             <Image
               src={buildImageUri(image.fields.file?.url as string)}
-              className="object-cover rounded-lg"
+              className="object-cover rounded"
               alt={(image.fields.description as string) ?? "About image"}
               fill
             />
