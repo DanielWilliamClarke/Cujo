@@ -37,7 +37,7 @@ type WorkItemProps = {
 export const WorkItem: React.FC<WorkItemProps> = ({ experience }) => {
   return (
     <FadeSlide
-      className="flex flex-col flex-shrink-0 w-full md:w-4/5 lg:w-1/2 pt-8"
+      className="flex flex-col flex-shrink-0 w-11/12 md:w-4/5 lg:w-1/2 pt-8"
       y={50}
       opacity={0}
       duration={0.8}
@@ -64,14 +64,9 @@ export const WorkItem: React.FC<WorkItemProps> = ({ experience }) => {
           />
 
           <div className="flex flex-col items-center justify-between h-fit">
-            <ReadMore
-              className="mb-8"
-              characterCount={
-                documentToPlainTextString(experience.summary).length
-              }
-            >
+            <div className="mb-8">
               {documentToReactComponents(experience.summary, options)}
-            </ReadMore>
+            </div>
 
             <div className="relative h-12 w-24 flex items-end">
               <Image

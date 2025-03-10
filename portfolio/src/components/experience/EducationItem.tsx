@@ -36,7 +36,7 @@ export const EducationItem: React.FC<EducationItemProps> = ({ education }) => {
   return (
     <FadeSlide
       className="flex flex-col flex-shrink-0 w-full md:w-4/5 lg:w-1/2 pt-8"
-      y={50}
+      y={25}
       opacity={0}
       duration={0.8}
     >
@@ -62,14 +62,9 @@ export const EducationItem: React.FC<EducationItemProps> = ({ education }) => {
           />
 
           <div className="flex flex-col justify-between h-fit">
-            <ReadMore
-              className="mb-8"
-              characterCount={
-                documentToPlainTextString(education.summary).length
-              }
-            >
+            <div className="mb-8">
               {documentToReactComponents(education.summary, options)}
-            </ReadMore>
+            </div>
           </div>
         </div>
       </div>

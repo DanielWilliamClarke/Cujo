@@ -13,7 +13,7 @@ type FadeSlideProps = {
 
 export const FadeSlide: React.FC<FadeSlideProps> = ({
   children,
-  className,
+  className = "",
   x = 0,
   y = 0,
   duration = 0.5,
@@ -25,7 +25,7 @@ export const FadeSlide: React.FC<FadeSlideProps> = ({
       className={className}
       initial={{ opacity, y, x }}
       whileInView={{ opacity: 1, y: 0, x: 0 }}
-      viewport={{ once: true, amount: 0.2 }} // Triggers when 20% of element is visible
+      viewport={{ once: true, amount: 0.1 }}
       transition={{ duration, ease }}
     >
       {children}
