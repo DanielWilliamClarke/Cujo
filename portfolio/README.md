@@ -35,5 +35,10 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
+Inspiration:
+https://codervai.vercel.app
+https://www.ghazikhan.in
 
+packages to use:
 Skills globe: https://www.npmjs.com/package/react-icon-cloud/v/2.0.4
+https://www.npmjs.com/package/react-github-calendar
