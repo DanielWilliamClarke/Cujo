@@ -38,6 +38,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 Inspiration:
 https://codervai.vercel.app
 https://www.ghazikhan.in
+https://christiansaldana.com/#skills
 
 packages to use:
 Skills globe: https://www.npmjs.com/package/react-icon-cloud/v/2.0.4
