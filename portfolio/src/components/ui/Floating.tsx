@@ -38,7 +38,7 @@ export const Floating: React.FC<FloatingProps> = ({
         float: {
           y: [-floatY, floatY],
           x: [-floatX, floatX],
-          rotate: 0,
+          rotate: 0.4,
           transition: {
             delay,
             duration: speed,

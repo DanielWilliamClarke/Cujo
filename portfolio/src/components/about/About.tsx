@@ -7,6 +7,7 @@ import {
 } from "@contentful/rich-text-react-renderer";
 import { ImageGrid } from "@/components/about/ImageGrid";
 import { SmallHeader } from "@/components/header/SmallHeader";
+import { CloudBackground } from "@/components/ui/CloudBackground";
 
 const options = {
   renderNode: {
@@ -37,14 +38,14 @@ export default async function About() {
         <SmallHeader className="text-3xl w-1/2 mb-8" text="Experience">
           About Me
         </SmallHeader>
-        <div className="rounded bg-gray-900 p-8 flex flex-col gap-y-4">
+        <CloudBackground className="flex-col bg-gray-900 gap-y-4">
           <div className="flex flex-col gap-y-4">
             {documentToReactComponents(about, statementOptions)}
           </div>
           <div className="flex flex-col gap-y-1">
             {documentToReactComponents(interests, options)}
           </div>
-        </div>
+        </CloudBackground>
       </div>
     </div>
   );

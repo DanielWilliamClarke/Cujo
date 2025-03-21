@@ -57,7 +57,7 @@ export const WorkItem: React.FC<WorkItemProps> = ({ experience }) => {
           <p className="text-2xl">{experience.position}</p>
         </SmallHeader>
 
-        <div className="rounded bg-gray-900 p-6 flex flex-col gap-y-4">
+        <div className="rounded bg-gray-900 bg-opacity-40 p-6 flex flex-col gap-y-4">
           <Lanyard
             className="font-[family-name:var(--font-argentum)]"
             tags={experience.highlights ?? []}

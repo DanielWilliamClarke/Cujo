@@ -4,7 +4,7 @@ import Experience from "@/components/experience/Experience";
 export default async function Home() {
   return (
     <div className="flex justify-center">
-      <div className="px-4 w-full md:w-4/5">
+      <div className="px-8 md:mx-12 w-full lg:max-w-[90%]">
         <About />
         <Experience />
       </div>

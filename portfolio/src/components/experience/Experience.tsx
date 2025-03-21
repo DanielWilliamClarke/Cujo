@@ -4,6 +4,7 @@ import { Rail } from "@/components/ui/Rail";
 import { WorkItem } from "@/components/experience/WorkItem";
 import { EducationItem } from "@/components/experience/EducationItem";
 import { getEducation } from "@/lib/caches/education";
+import { CloudBackground } from "@/components/ui/CloudBackground";
 
 export default async function Experience() {
   const experience = await getExperience();
@@ -15,14 +16,16 @@ export default async function Experience() {
         <SmallHeader className="text-3xl w-1/2 mb-8" text="Experience">
           My Experience
         </SmallHeader>
-        <Rail>
-          {experience.map((experience, index) => (
-            <WorkItem key={index} experience={experience} />
-          ))}
-          {education.map((education, index) => (
-            <EducationItem key={index} education={education} />
-          ))}
-        </Rail>
+        <CloudBackground className="w-full flex flex-col">
+          <Rail>
+            {experience.map((experience, index) => (
+              <WorkItem key={index} experience={experience} />
+            ))}
+            {education.map((education, index) => (
+              <EducationItem key={index} education={education} />
+            ))}
+          </Rail>
+        </CloudBackground>
       </div>
     </div>
   );
