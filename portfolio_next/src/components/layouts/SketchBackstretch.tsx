@@ -12,11 +12,9 @@ import { IDateService } from '@Services/DateService';
 
 import { getSketch } from '@Sketches/index';
 
-import { DynamicImage } from '@Common/DynamicImage';
 import { anton } from '@Common/Font';
 import { Logo } from '@Common/Logo';
 import { ScrollIndicator } from '@Common/ScrollIndicator';
-import { centeredStyle } from '@Common/UtilComponents';
 
 import { useAppContext } from '../hooks/AppContext';
 
@@ -147,7 +145,7 @@ const SketchBackstretch: React.FC = React.memo((): JSX.Element => {
         </Container>
       </section>
     ),
-    [p5Ref, cv.about.entry, currentRole],
+    [p5Ref, cv.about.entry],
   );
 });
 
