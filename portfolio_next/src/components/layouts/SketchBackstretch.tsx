@@ -129,23 +129,6 @@ const SketchBackstretch: React.FC = React.memo((): JSX.Element => {
               >
                 <Col>{cv.about.entry.label.toLocaleUpperCase()}</Col>
               </Row>
-              <Row
-                sx={{
-                  paddingLeft: 12,
-                  height: 20,
-                }}
-              >
-                <Col>
-                  <DynamicImage
-                    image={currentRole.logo}
-                    sx={{
-                      ...centeredStyle,
-                      height: 20,
-                      paddingTop: [10, 0, 0],
-                    }}
-                  />
-                </Col>
-              </Row>
             </div>
           </div>
         </Container>
